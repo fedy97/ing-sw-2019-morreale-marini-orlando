@@ -19,20 +19,32 @@ public class Model {
     /**
      * 
      */
-    public Table table;
+    private Table table;
 
     /**
      * 
      */
-    public GameState gameState;
+    private GameState gameState;
 
     /**
      * 
      */
-    public ArrayList<Player> players;
+    private ArrayList<Player> players;
 
+    public Table getTable() {
+        // TODO
+        return null;
+    }
 
+    public GameState getGameState() {
+        // TODO
+        return null;
+    }
 
+    public ArrayList<Player> getPlayers() {
+        // TODO
+        return null;
+    }
 
     /**
      * 
