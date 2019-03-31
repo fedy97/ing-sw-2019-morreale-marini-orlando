@@ -1,6 +1,9 @@
 package it.polimi.se2019.model;
 
 import java.util.*;
+import it.polimi.se2019.model.board.*;
+import it.polimi.se2019.model.player.*;
+import it.polimi.se2019.model.enumeration.*;
 
 /**
  * 
@@ -92,32 +95,32 @@ public class Model {
      * @param int 
      * @param bool
      */
-    public void setSuspendedPlayer(void int, void bool) {
+    public void setSuspendedPlayer(int a, boolean b) {
         // TODO implement here
     }
 
     /**
      * @return
      */
-    public bool checkEnoughWeapons() {
+    public boolean checkEnoughWeapons() {
         // TODO implement here
-        return null;
+        return true;
     }
 
     /**
      * @return
      */
-    public bool checkEnoughPowerups() {
+    public boolean checkEnoughPowerups() {
         // TODO implement here
-        return null;
+        return true;
     }
 
     /**
      * @return
      */
-    public bool checkEnoughAmmos() {
+    public boolean checkEnoughAmmos() {
         // TODO implement here
-        return null;
+        return true;
     }
 
     /**
