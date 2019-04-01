@@ -5,30 +5,20 @@ import it.polimi.se2019.model.board.*;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.enumeration.*;
 
-/**
- * 
- */
+
 public class Model {
 
-    /**
-     * Default constructor
-     */
+
     public Model() {
     }
 
-    /**
-     * 
-     */
+
     private Table table;
 
-    /**
-     * 
-     */
+
     private GameState gameState;
 
-    /**
-     * 
-     */
+
     private ArrayList<Player> players;
 
     public Table getTable() {
@@ -46,100 +36,84 @@ public class Model {
         return null;
     }
 
-    /**
-     * 
-     */
+
     public void setupGame() {
-        // TODO implement here
+        // TODO
     }
 
-    /**
-     * 
-     */
+
     public void startGame() {
-        // TODO implement here
+        // TODO
     }
 
-    /**
-     * 
-     */
+
     public void setFigureToPlayer() {
-        // TODO implement here
+        // TODO
     }
 
-    /**
-     * 
-     */
+
     public void setPlayerToPlatform() {
-        // TODO implement here
+        // TODO
     }
 
-    /**
-     * 
-     */
+
     public void endTurn() {
-        // TODO implement here
+        // TODO
     }
 
-    /**
+    /*
      * @return
      */
     public Player getCurrentPlayer() {
-        // TODO implement here
+        // TODO
         return null;
     }
 
-    /**
-     * 
-     */
+
     public void timesUp() {
-        // TODO implement here
+        // TODO
     }
 
-    /**
-     * 
-     */
+
     public void runningOutTime() {
-        // TODO implement here
+        // TODO
     }
 
-    /**
+    /*
      * @param int 
      * @param bool
      */
     public void setSuspendedPlayer(int a, boolean b) {
-        // TODO implement here
+        // TODO
     }
 
-    /**
+    /*
      * @return
      */
     public boolean checkEnoughWeapons() {
-        // TODO implement here
+        // TODO
         return true;
     }
 
-    /**
+    /*
      * @return
      */
     public boolean checkEnoughPowerups() {
-        // TODO implement here
+        // TODO
         return true;
     }
 
-    /**
+    /*
      * @return
      */
     public boolean checkEnoughAmmos() {
-        // TODO implement here
+        // TODO
         return true;
     }
 
-    /**
-     * 
-     */
+
     public void checkLegalMove() {
-        // TODO implement here
+        // TODO
     }
 
 }

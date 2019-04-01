@@ -5,60 +5,38 @@ import it.polimi.se2019.model.enumeration.*;
 import it.polimi.se2019.model.card.powerups.*;
 import it.polimi.se2019.model.card.WeaponCard;
 
-/**
- * 
- */
+
 public class Player {
 
-    /**
-     * Default constructor
-     */
+
     public Player() {
     }
 
-    /**
-     * 
-     */
+
     private int idPlayer;
 
-    /**
-     * 
-     */
+
     private int currentScore;
 
-    /**
-     * 
-     */
+
     private PlayerBoard playerBoard;
 
-    /**
-     * 
-     */
+
     private String playerName;
 
-    /**
-     * 
-     */
+
     private int numberOfDeaths;
 
-    /**
-     * 
-     */
+
     private ArrayList<PowerUpCard> powerUpCards;
 
-    /**
-     * 
-     */
+
     private ArrayList<WeaponCard> weaponCards;
 
-    /**
-     * 
-     */
+
     private HealthState healthState;
 
-    /**
-     * 
-     */
+
     private Color playerColor;
 
 
@@ -67,148 +45,142 @@ public class Player {
 
 
 
-    /**
+    /*
      * @return
      */
     public int getIdPlayer() {
-        // TODO implement here
+        // TODO
         return 0;
     }
 
-    /**
+    /*
      * @return
      */
     public int getCurrentScore() {
-        // TODO implement here
+        // TODO
         return 0;
     }
 
-    /**
+    /*
      * @return
      */
     public String getPlayerName() {
-        // TODO implement here
+        // TODO
         return "";
     }
 
-    /**
+    /*
      * @return
      */
     public PlayerBoard getPlayerBoard() {
-        // TODO implement here
+        // TODO
         return null;
     }
 
-    /**
+    /*
      * @return
      */
     public int getNumberOfDeaths() {
-        // TODO implement here
+        // TODO
         return 0;
     }
 
-    /**
+    /*
      * @return
      */
     public ArrayList<PowerUpCard> getPowerUpCards() {
-        // TODO implement here
+        // TODO
         return null;
     }
 
-    /**
+    /*
      * @return
      */
     public ArrayList<WeaponCard> getWeaponCards() {
-        // TODO implement here
+        // TODO
         return null;
     }
 
-    /**
+    /*
      * @return
      */
     public Color getPlayerColor() {
-        // TODO implement here
+        // TODO
         return null;
     }
 
-    /**
+    /*
      * @param point
      */
     public void addPoint(int point) {
-        // TODO implement here
+        // TODO
     }
 
-    /**
-     * 
-     */
+
     public void addDeath() {
-        // TODO implement here
+        // TODO
     }
 
-    /**
+    /*
      * @param card
      */
     public void addPowerAppCard(PowerUpCard card) {
-        // TODO implement here
+        // TODO
     }
 
-    /**
+    /*
      * @param card
      */
     public void addWeaponCard(WeaponCard card) {
-        // TODO implement here
+        // TODO
     }
 
-    /**
+    /*
      * @param newHealthState
      */
     public void changeHealthState(HealthState newHealthState) {
-        // TODO implement here
+        // TODO
     }
 
-    /**
+    /*
      * @return
      */
     public HealthState getHealthState() {
-        // TODO implement here
+        // TODO
         return null;
     }
 
-    /**
+    /*
      * @param dir
      */
     public void move(Orientation dir) {
-        // TODO implement here
+        // TODO
     }
 
-    /**
+    /*
      * @param player 
      * @param val; int
      */
     public void tag(Player player, int val) {
-        // TODO implement here
+        // TODO
     }
 
-    /**
+    /*
      * @param player 
      * @param val
      */
     public void damage(Player player, int val) {
-        // TODO implement here
+        // TODO
     }
 
-    /**
-     * 
-     */
+
     public void grab() {
-        // TODO implement here
+        // TODO
     }
 
-    /**
-     * 
-     */
+
     public void shoot() {
-        // TODO implement here
+        // TODO
     }
 
 }
