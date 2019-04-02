@@ -8,42 +8,33 @@ import it.polimi.se2019.model.player.*;
 
 public class Table {
 
+    private ArrayList<WeaponCard> availableWeapons;
+    private Deck powerupsDeck;
+    private Deck ammosDeck;
+    private Deck weaponsDeck;
+    private SkullsBoard skullsBoard;
+    private GameField gameField;
+    private ScoreBoard scoreBoard;
+    private int winner;
+    private ArrayList<Player> players;
 
     public Table() {
     }
 
+    public void setAvailableWeapons(ArrayList<WeaponCard> availableWeapons) {
+        this.availableWeapons = availableWeapons;
+    }
 
-    private ArrayList<WeaponCard> weaponsAvailable;
+    /*
+     * @param int
+     */
+    public void setWinner(int idPlayer) {
+        // TODO
+    }
 
-
-    private Deck powerupsDeck;
-
-
-    private Deck ammosDeck;
-
-
-    private Deck weaponsDeck;
-
-
-    private SkullsBoard skullsBoard;
-
-
-    private GameField field;
-
-
-    private ScoreBoard scoreBoard;
-
-
-    private int winner;
-
-
-    private ArrayList<Integer> players;
-
-
-
-
-
-
+    public void setNewPlayer() {
+        // TODO
+    }
 
     /*
      * @return
@@ -102,13 +93,6 @@ public class Table {
     }
 
     /*
-     * @param int
-     */
-    public void setWinner(int idPlayer) {
-        // TODO
-    }
-
-    /*
      * @return
      */
     public int getWinner() {
@@ -133,9 +117,5 @@ public class Table {
         return null;
     }
 
-
-    public void setNewPlayer() {
-        // TODO
-    }
 
 }

@@ -8,18 +8,12 @@ import it.polimi.se2019.model.enumeration.*;
 
 public class Model {
 
+    private Table table;
+    private GameState gameState;
+    private ArrayList<Player> players;
 
     public Model() {
     }
-
-
-    private Table table;
-
-
-    private GameState gameState;
-
-
-    private ArrayList<Player> players;
 
     public Table getTable() {
         // TODO

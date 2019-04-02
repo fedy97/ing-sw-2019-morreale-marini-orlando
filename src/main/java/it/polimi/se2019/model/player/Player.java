@@ -9,41 +9,34 @@ import it.polimi.se2019.model.card.WeaponCard;
 public class Player {
 
 
+    private int idPlayer;
+    private int currentScore;
+    private PlayerBoard playerBoard;
+    private String playerName;
+    private int numberOfDeaths;
+    private ArrayList<PowerUpCard> powerUpCards;
+    private ArrayList<WeaponCard> weaponCards;
+    private HealthState healthState;
+    private Color playerColor;
+
     public Player() {
     }
 
+    public void setCurrentScore(int currentScore) {
+        this.currentScore = currentScore;
+    }
 
-    private int idPlayer;
+    public void setPowerUpCards(ArrayList<PowerUpCard> powerUpCards) {
+        this.powerUpCards = powerUpCards;
+    }
 
+    public void setWeaponCards(ArrayList<WeaponCard> weaponCards) {
+        this.weaponCards = weaponCards;
+    }
 
-    private int currentScore;
-
-
-    private PlayerBoard playerBoard;
-
-
-    private String playerName;
-
-
-    private int numberOfDeaths;
-
-
-    private ArrayList<PowerUpCard> powerUpCards;
-
-
-    private ArrayList<WeaponCard> weaponCards;
-
-
-    private HealthState healthState;
-
-
-    private Color playerColor;
-
-
-
-
-
-
+    public void setHealthState(HealthState healthState) {
+        this.healthState = healthState;
+    }
 
     /*
      * @return

@@ -1,22 +1,12 @@
 package it.polimi.se2019.model.card;
-
 import java.util.*;
-
 
 public class Deck {
 
+    private ArrayList<Card> elements;
 
     public Deck() {
     }
-
-
-    private int size;
-
-
-    private Set<Card> elements;
-
-
-
 
     /*
      * @return
