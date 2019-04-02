@@ -57,7 +57,7 @@ public class Platform {
     /*
      * @return
      */
-    public boolean checkIfIsGenerationSpot() {
+    public boolean isGenerationSpot() {
         // TODO
         return true;
     }
@@ -65,7 +65,7 @@ public class Platform {
     /*
      * @return
      */
-    public boolean checkIfHasDoor() {
+    public boolean hasDoor() {
         // TODO
         return true;
     }
@@ -114,7 +114,7 @@ public class Platform {
     /*
      * @param int
      */
-    public void setPlayerInPlatform(int idPlayer) {
+    public void setPlayer(int idPlayer) {
         // TODO
     }
 

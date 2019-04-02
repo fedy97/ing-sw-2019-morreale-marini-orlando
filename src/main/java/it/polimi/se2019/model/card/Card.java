@@ -2,35 +2,54 @@ package it.polimi.se2019.model.card;
 
 import java.awt.*;
 
+/**
+ * A generic class representing a card
+ *
+ * @author Gabriel Raul Marini
+ */
+
 
 public abstract class Card {
 
+    protected String name;
+    protected Image bgImage;
 
+    /***
+     * Instantiate an anonymous card
+     *
+     */
     public Card() {
     }
 
-
-    protected String name;
-
-
-    protected Image bgImage;
-
-
-
-    /*
-     * @return
+    /**
+     * Instantiate a card with a specified name and a given background image
      */
-    public String getName() {
-        // TODO
-        return "";
+    public Card(String name, Image img) {
+        this.name = name;
+        this.bgImage = img;
     }
 
-    /*
-     * @return
+    /**
+     * @return the name of the card
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Set the bgImage of the card with the image specified
+     *
+     * @param image background image of the card
+     */
+    public void setBgImage(Image image) {
+        this.bgImage = image;
+    }
+
+    /**
+     * @return the reference to the background image of the card
      */
     public Image getBgImage() {
-        // TODO
-        return null;
+        return bgImage;
     }
 
 }
