@@ -1,62 +1,63 @@
 package it.polimi.se2019.model.player;
 
-import it.polimi.se2019.model.enumeration.*;
+import it.polimi.se2019.model.enumeration.AmmoCube;
 
-
+/**
+ * Class that manages the ammunition owned by the player
+ * @author Simone Orlando
+ */
 public class AmmoBox {
 
-
-    public AmmoBox() {
-    }
-
-
     private int redAmmos;
-
-
     private int blueAmmos;
-
-
     private int yellowAmmos;
 
+    /**
+     * Class constructor that initializes the number of ammunition to two for each color
+     */
+    public AmmoBox() {
 
-    /*
-     * @return
+    }
+
+    /**
+     * Get the current number of red ammunition the player has
+     * @return The number of red ammunition
      */
     public int getRedAmmos() {
-        // TODO
-        return 0;
+        return redAmmos;
     }
 
-    /*
-     * @return
+    /**
+     * Get the current number of blue ammunition the player has
+     * @return The number of blue ammunition
      */
     public int getBlueAmmos() {
-        // TODO
-        return 0;
+        return blueAmmos;
     }
 
-    /*
-     * @return
+    /**
+     * Get the current number of yellow ammunition the player has
+     * @return The number of yellow ammunition
      */
     public int getYellowAmmos() {
-        // TODO
-        return 0;
+        return yellowAmmos;
     }
 
-    /*
-     * @param type 
-     * @param num
-     */
-    public void removeAmmos(AmmoCube type, int num) {
-        // TODO
-    }
-
-    /*
-     * @param type 
-     * @param num
+    /**
+     * Add ammunition to those already owned by the player
+     * @param type The color of the ammunition to add
+     * @param num The number of ammunition to add
      */
     public void addAmmos(AmmoCube type, int num) {
-        // TODO
+
     }
 
+    /**
+     * Remove ammo from the player's box
+     * @param type The color of the ammunition to remove
+     * @param num The number of ammunition to remove
+     */
+    public void removeAmmos(AmmoCube type, int num) {
+
+    }
 }
