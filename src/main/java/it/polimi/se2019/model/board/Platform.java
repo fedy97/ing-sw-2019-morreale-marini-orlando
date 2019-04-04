@@ -1,121 +1,95 @@
 package it.polimi.se2019.model.board;
 
 import java.util.*;
-import it.polimi.se2019.model.enumeration.*;
 
+import it.polimi.se2019.model.card.Card;
+import it.polimi.se2019.model.enumeration.Orientation;
+import it.polimi.se2019.model.enumeration.Character;
 
+/**
+ * @author Federico Morreale
+ */
 public class Platform {
 
+    private int[] platformPosition;
+    private boolean isGenerationSpot;
+    private boolean hasDoor;
+    private ArrayList<Orientation> doorLocation;
+    private boolean hasAmmoCard;
+    private Card platformAmmoCard;
+    private ArrayList<Character> playersOnThePlatform;
+    private ArrayList<Orientation> wallLocation;
 
     public Platform() {
     }
 
-
-    private int idPlatform;
-
-
-    private Color platformColor;
-
-
-    private boolean isGenerationSpot;
-
-
-    private boolean hasDoor;
-
-
-    private ArrayList<Orientation> doorLocation;
-
-
-    private boolean hasAmmoCard;
-
-
-    private int platformAmmoCard;
-
-
-    private ArrayList<Integer> playersOnThePlatform;
-
-
-    private ArrayList<Orientation> wallLocation;
-
-
-    /*
-     * @return
+    /**
+     * @return the position x,y of the platform in the gameField
      */
-    public int getIdPlatform() {
-        // TODO
-        return 0;
+    public int[] getPlatformPosition() {
+        return platformPosition;
     }
 
-    /*
-     * @return
+    /**
+     * @return true if the platform is a generation spot
      */
-    public Color getPlatformColor() {
-        // TODO
-        return null;
+    public boolean isGenerationSpot() {
+        return isGenerationSpot;
     }
 
-    /*
-     * @return
+    /**
+     * @return true if the platform has a door
      */
-    public boolean checkIfIsGenerationSpot() {
-        // TODO
-        return true;
+    public boolean HasDoor() {
+        return hasDoor;
     }
 
-    /*
-     * @return
-     */
-    public boolean checkIfHasDoor() {
-        // TODO
-        return true;
-    }
-
-    /*
-     * @return
+    /**
+     * @return the Orientations where the doors are located
      */
     public ArrayList<Orientation> getDoorLocation() {
-        // TODO
-        return null;
+        return doorLocation;
     }
 
-    /*
-     * @return
+    /**
+     * @return true if the platform has the AmmoCard
      */
-    public boolean checkIfHasAmmoCard() {
-        // TODO
-        return true;
+    public boolean HasAmmoCard() {
+        return hasAmmoCard;
     }
 
-
-    /*
-     * @return
+    /**
+     * @return the AmmoCard on the platform
      */
-    public ArrayList<Integer> getPlayersOnThePlatform() {
-        // TODO
-        return null;
+    public Card getPlatformAmmoCard() {
+        return platformAmmoCard;
     }
 
-    /*
-     * @return
+    /**
+     * @return players standing on (this) platform
+     */
+    public ArrayList<Character> getPlayersOnThePlatform() {
+        return playersOnThePlatform;
+    }
+
+    /**
+     * @return the Orientations where the wall is located
      */
     public ArrayList<Orientation> getWallLocation() {
-        // TODO
-        return null;
+        return wallLocation;
     }
 
-    /*
-     * @return
+    /**
+     * @param platformAmmoCard when a AmmoCard is grabbed, a new one is set on the platform
      */
-    public int getPlatformAmmoCard() {
-        // TODO
-        return 0;
+    public void setPlatformAmmoCard(Card platformAmmoCard) {
+        this.platformAmmoCard = platformAmmoCard;
     }
 
-    /*
-     * @param int
+    /**
+     * @param character after a move, a new character is set on the platform
      */
-    public void setPlayerInPlatform(int idPlayer) {
-        // TODO
-    }
+    public void setPlayerOnPlatform(Character character) {
 
+    }
 }

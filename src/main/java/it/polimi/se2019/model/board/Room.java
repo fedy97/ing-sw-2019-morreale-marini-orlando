@@ -1,86 +1,32 @@
 package it.polimi.se2019.model.board;
 
 import java.util.*;
-import it.polimi.se2019.model.enumeration.*;
 
-
+/**
+ * @author Federico Morreale
+ */
 public class Room {
 
+    private ArrayList<int[]> platformsInRoom;
+    private boolean hasGenerationSpot;
 
     public Room() {
     }
 
-
-    private int idRoom;
-
-
-    private Color roomColor;
-
-
-    private ArrayList<Integer> platformsInRoom;
-
-
-    private ArrayList<Integer> playersInRoom;
-
-
-    private boolean hasGenerationSpot;
-
-
-
-    /*
-     * @return
+    /**
+     * @return the list of platforms in the room
      */
-    public int getIdRoom() {
-        // TODO
-        return 0;
-    }
-
-    /*
-     * @return
-     */
-    public Color getRoomColor() {
+    public ArrayList<int[]> getPlatformsInRoom() {
         // TODO
         return null;
     }
 
-    /*
-     * @return
+    /**
+     * @return true if the room contains a platform with a generation spot
      */
-    public ArrayList<Integer> getPlatformsInRoom() {
-        // TODO
-        return null;
-    }
-
-    /*
-     * @return
-     */
-    public ArrayList<Integer> getPlayersInRoom() {
-        // TODO
-        return null;
-    }
-
-    /*
-     * @return
-     */
-    public boolean checkIfHasGenerationSpot() {
+    public boolean hasGenerationSpot() {
         // TODO
         return true;
-    }
-
-    /*
-     * @param int 
-     * @return
-     */
-    public Platform getPlatform(int idPlatform) {
-        // TODO
-        return null;
-    }
-
-    /*
-     * @param int
-     */
-    public void setPlayerInRoom(int idPlayer) {
-        // TODO
     }
 
 }
