@@ -6,19 +6,16 @@ import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.enumeration.*;
 
 
-public class Model {
+public class GameManager {
 
     private Table table;
     private GameState gameState;
     private ArrayList<Player> players;
+    private Map<Character, Player> characterPlayer;
 
-    public Model() {
+    public GameManager() {
     }
 
-    public Table getTable() {
-        // TODO
-        return null;
-    }
 
     public GameState getGameState() {
         // TODO
@@ -40,27 +37,23 @@ public class Model {
         // TODO
     }
 
-
-    public void setFigureToPlayer() {
-        // TODO
+    /**
+     *
+     * @param character
+     * @param player
+     */
+    public void setCharacterToPlayer(Character character, Player player) {
+        //TODO
     }
 
 
-    public void setPlayerToPlatform() {
+    public void setPlayerToPlatform(Player player, Platform platform) {
         // TODO
     }
 
 
     public void endTurn() {
         // TODO
-    }
-
-    /*
-     * @return
-     */
-    public Player getCurrentPlayer() {
-        // TODO
-        return null;
     }
 
 
@@ -73,41 +66,20 @@ public class Model {
         // TODO
     }
 
-    /*
-     * @param int 
-     * @param bool
+    /**
+     * @return the player that has the right to perform the actions
      */
-    public void setSuspendedPlayer(int a, boolean b) {
+    public Player getCurrentPlayer() {
         // TODO
+        return null;
     }
 
-    /*
-     * @return
+
+
+    /**
+     * @param player the player to be suspended
      */
-    public boolean checkEnoughWeapons() {
-        // TODO
-        return true;
-    }
-
-    /*
-     * @return
-     */
-    public boolean checkEnoughPowerups() {
-        // TODO
-        return true;
-    }
-
-    /*
-     * @return
-     */
-    public boolean checkEnoughAmmos() {
-        // TODO
-        return true;
-    }
-
-
-    public void checkLegalMove() {
+    public void setSuspendedPlayer(Player player) {
         // TODO
     }
-
 }

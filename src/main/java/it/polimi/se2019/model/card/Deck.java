@@ -8,7 +8,7 @@ import java.util.*;
  * @author Gabriel Raul Marini
  */
 
-public class Deck {
+public class Deck<Card>{
 
     private ArrayList<Card> elements;
 
