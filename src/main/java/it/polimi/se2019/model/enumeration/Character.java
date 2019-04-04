@@ -19,7 +19,7 @@ public enum Character {
     private final Color color;
 
     /**
-     * @param name of the player, initially is set to the default name of the character associated
+     * @param color of the character, once is set won't change anymore
      */
     Character(final Color color) {
         this.color = color;
