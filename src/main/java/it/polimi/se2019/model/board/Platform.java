@@ -4,7 +4,6 @@ import java.util.*;
 
 import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.enumeration.Orientation;
-import it.polimi.se2019.model.enumeration.Character;
 
 /**
  * @author Federico Morreale

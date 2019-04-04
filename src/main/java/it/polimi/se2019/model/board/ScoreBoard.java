@@ -2,8 +2,6 @@ package it.polimi.se2019.model.board;
 
 import java.util.*;
 
-import it.polimi.se2019.model.enumeration.Character;
-
 /**
  * @author Federico Morreale
  */

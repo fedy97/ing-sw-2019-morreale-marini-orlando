@@ -2,7 +2,7 @@ package it.polimi.se2019.model.board;
 
 import java.util.*;
 
-import it.polimi.se2019.model.card.weapons.WeaponCard;
+import it.polimi.se2019.model.card.WeaponCard;
 
 /**
  * @author Federico Morreale
