@@ -3,6 +3,8 @@ package it.polimi.se2019.model.board;
 import java.util.*;
 
 /**
+ * ScoreBoard keeps track of the scores of the players
+ *
  * @author Federico Morreale
  */
 public class ScoreBoard {
@@ -15,7 +17,7 @@ public class ScoreBoard {
     /**
      * @return the ranking of Character ordered by points
      */
-    public ArrayList<Character> getRanking() {
+    public Map<Character, Integer> getRanking() {
         // TODO
         return null;
     }

@@ -3,6 +3,9 @@ package it.polimi.se2019.model.board;
 import java.util.*;
 
 /**
+ * SkullsBoard keeps track of the remaining skulls and all the marks
+ * a player gets when someone is killed.
+ *
  * @author Federico Morreale
  */
 public class SkullsBoard {

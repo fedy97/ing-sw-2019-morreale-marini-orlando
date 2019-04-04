@@ -6,6 +6,8 @@ import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.enumeration.Orientation;
 
 /**
+ * Platform contains info about doors, walls, players, generation spot and ammo card
+ *
  * @author Federico Morreale
  */
 public class Platform {

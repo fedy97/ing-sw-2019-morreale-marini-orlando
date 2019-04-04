@@ -3,6 +3,8 @@ package it.polimi.se2019.model.board;
 import java.util.*;
 
 /**
+ * Room contains all the platform in it plus the info about generation spot
+ *
  * @author Federico Morreale
  */
 public class Room {

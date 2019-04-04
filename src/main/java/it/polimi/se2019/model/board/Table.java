@@ -5,6 +5,8 @@ import java.util.*;
 import it.polimi.se2019.model.card.WeaponCard;
 
 /**
+ * Table is the rappresentation of all the objects in the game.
+ *
  * @author Federico Morreale
  */
 public class Table {
