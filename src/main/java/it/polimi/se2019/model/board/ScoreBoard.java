@@ -1,31 +1,32 @@
 package it.polimi.se2019.model.board;
 
 import java.util.*;
-import it.polimi.se2019.model.player.*;
 
-
+/**
+ * ScoreBoard keeps track of the scores of the players
+ *
+ * @author Federico Morreale
+ */
 public class ScoreBoard {
 
+    private Map<Character, Integer> scoreBoard;
 
     public ScoreBoard() {
     }
 
-
-    private HashMap<Integer,Integer> board;
-
-
-    /*
-     * @return
+    /**
+     * @return the ranking of Character ordered by points
      */
-    public ArrayList<Player> getRanking() {
+    public Map<Character, Integer> getRanking() {
         // TODO
         return null;
     }
 
-    /*
-     * @param Player
+    /**
+     * @param character to set the points
+     * @param quantity  of points to set to the player
      */
-    public void setScoreToPlayer(Player player) {
+    public void setScoreToPlayer(Character character, int quantity) {
         // TODO
     }
 

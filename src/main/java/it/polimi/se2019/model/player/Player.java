@@ -1,179 +1,172 @@
 package it.polimi.se2019.model.player;
 
-import java.util.*;
-import it.polimi.se2019.model.enumeration.*;
-import it.polimi.se2019.model.card.powerups.*;
+import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.WeaponCard;
+import it.polimi.se2019.model.card.powerups.PowerUpCard;
+import it.polimi.se2019.model.enumeration.Character;
+import java.util.ArrayList;
 
 
+/**
+ * Class that manages all the information about the player during the game
+ * such as his character, his position, his score, the cards he holds,
+ * the number of deaths, the damage and the marks taken and his ammunition.
+ * @author Simone Orlando
+ */
 public class Player {
 
-
-    private int idPlayer;
+    private Character character;
+    private Platform currentPlatform;
     private int currentScore;
     private PlayerBoard playerBoard;
-    private String playerName;
-    private int numberOfDeaths;
+    private int numOfDeaths;
     private ArrayList<PowerUpCard> powerUpCards;
     private ArrayList<WeaponCard> weaponCards;
-    private HealthState healthState;
-    private Color playerColor;
+    private int frenzyModeType;
 
-    public Player() {
+
+    /**
+     * Class constructor that initializes data structures that will be used
+     * to store all the related game information concerning the player
+     * @param character Character chosen by the player at the start of the game
+     */
+    public Player(Character character) {
+
     }
 
-    public void setCurrentScore(int currentScore) {
-        this.currentScore = currentScore;
+    /**
+     * Get the player character
+     * @return Character chosen by the player at the start of the game
+     */
+    public Character getCharacter() {
+        return character;
     }
 
-    public void setPowerUpCards(ArrayList<PowerUpCard> powerUpCards) {
-        this.powerUpCards = powerUpCards;
+    /**
+     * Get the platform where the player is located(his position)
+     * @return Current platform where the player is located
+     */
+    public Platform getCurrentPlatform() {
+        return currentPlatform;
     }
 
-    public void setWeaponCards(ArrayList<WeaponCard> weaponCards) {
-        this.weaponCards = weaponCards;
-    }
-
-    public void setHealthState(HealthState healthState) {
-        this.healthState = healthState;
-    }
-
-    /*
+    /**
+     *
      * @return
      */
-    public int getIdPlayer() {
-        // TODO
-        return 0;
+    public int getFrenzyModeType() {
+        return frenzyModeType;
     }
 
-    /*
-     * @return
+    /**
+     * Get the player's current score
+     * @return Player's current score
      */
     public int getCurrentScore() {
-        // TODO
-        return 0;
+        return currentScore;
     }
 
-    /*
-     * @return
-     */
-    public String getPlayerName() {
-        // TODO
-        return "";
-    }
-
-    /*
-     * @return
+    /**
+     * Get the player's board
+     * @return Player's board
      */
     public PlayerBoard getPlayerBoard() {
-        // TODO
-        return null;
+        return playerBoard;
     }
 
-    /*
-     * @return
-     */
-    public int getNumberOfDeaths() {
-        // TODO
-        return 0;
-    }
-
-    /*
-     * @return
+    /**
+     * Get the power up cards owned by the player
+     * @return List containing the player's power up cards
      */
     public ArrayList<PowerUpCard> getPowerUpCards() {
-        // TODO
-        return null;
+        return powerUpCards;
     }
 
-    /*
-     * @return
+    /**
+     * Get the weapon cards owned by the player
+     * @return List containing the player's weapon cards
      */
     public ArrayList<WeaponCard> getWeaponCards() {
-        // TODO
-        return null;
+        return weaponCards;
     }
 
-    /*
-     * @return
+    /**
+     * Get the current number of times the player died during the game
+     * @return Current number of deaths
      */
-    public Color getPlayerColor() {
-        // TODO
-        return null;
+    public int getNumOfDeaths() {
+        return numOfDeaths;
     }
 
-    /*
-     * @param point
+    /**
+     * Change the player's position by moving him to a new platform
+     * @param newPlatform The new platform where the player wants to go
+     */
+    public void changePlatform(Platform newPlatform) {
+        currentPlatform = newPlatform;
+    }
+
+    /**
+     * Add points to those already scored by the player
+     * @param point Points to add
+     *
      */
     public void addPoint(int point) {
-        // TODO
+        currentScore = currentScore + point;
     }
 
-
-    public void addDeath() {
-        // TODO
-    }
-
-    /*
-     * @param card
+    /**
+     * Increases by one the number of times the player died during the game
      */
-    public void addPowerAppCard(PowerUpCard card) {
-        // TODO
+    public void addDeath() {
+        numOfDeaths = numOfDeaths + 1;
     }
 
-    /*
-     * @param card
+    /**
+     * Set the number of times the player has died to zero
+     */
+    public void resetDeaths() {
+        numOfDeaths = 0;
+    }
+
+    /**
+     * Add a power up card to those already owned by the player
+     * @param card The card drawn
+     */
+    public void addPowerUpCard(PowerUpCard card) {
+
+    }
+
+    /**
+     * Eliminates a power up card from those owned by the player
+     * @param card The power up card that must be eliminated
+     */
+    public void removePowerUpCard(PowerUpCard card) {
+
+    }
+
+    /**
+     * Add a weapon card to those already owned by the player
+     * @param card The card drawn
      */
     public void addWeaponCard(WeaponCard card) {
-        // TODO
+
     }
 
-    /*
-     * @param newHealthState
+    /**
+     * Eliminates a weapon card from those owned by the player
+     * @param card The weapon card that must be eliminated
      */
-    public void changeHealthState(HealthState newHealthState) {
-        // TODO
+    public void removeWeaponCard(WeaponCard card) {
+
     }
 
-    /*
-     * @return
+    /**
+     *
+     * @param type
      */
-    public HealthState getHealthState() {
-        // TODO
-        return null;
-    }
-
-    /*
-     * @param dir
-     */
-    public void move(Orientation dir) {
-        // TODO
-    }
-
-    /*
-     * @param player 
-     * @param val; int
-     */
-    public void tag(Player player, int val) {
-        // TODO
-    }
-
-    /*
-     * @param player 
-     * @param val
-     */
-    public void damage(Player player, int val) {
-        // TODO
-    }
-
-
-    public void grab() {
-        // TODO
-    }
-
-
-    public void shoot() {
-        // TODO
+    public void setFrenzyModeType(int type) {
+        frenzyModeType = type;
     }
 
 }

@@ -2,120 +2,50 @@ package it.polimi.se2019.model.board;
 
 import java.util.*;
 
-import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.WeaponCard;
-import it.polimi.se2019.model.player.*;
 
+/**
+ * Table is the rappresentation of all the objects in the game.
+ *
+ * @author Federico Morreale
+ */
 public class Table {
 
-    private ArrayList<WeaponCard> availableWeapons;
-    private Deck powerupsDeck;
-    private Deck ammosDeck;
-    private Deck weaponsDeck;
+    private WeaponCard[][] weaponsAvailable;
     private SkullsBoard skullsBoard;
     private GameField gameField;
     private ScoreBoard scoreBoard;
-    private int winner;
-    private ArrayList<Player> players;
 
     public Table() {
+
     }
 
-    public void setAvailableWeapons(ArrayList<WeaponCard> availableWeapons) {
-        this.availableWeapons = availableWeapons;
-    }
-
-    /*
-     * @param int
+    /**
+     * @return a matrix [3][3] of available weapons(3 max) in the 3 generation spots
      */
-    public void setWinner(int idPlayer) {
-        // TODO
+    public WeaponCard[][] getWeaponsAvailable() {
+        return weaponsAvailable;
     }
 
-    public void setNewPlayer() {
-        // TODO
-    }
-
-    /*
-     * @return
-     */
-    public ScoreBoard getScoreBoard() {
-        // TODO
-        return null;
-    }
-
-    /*
-     * @return
-     */
-    public GameField getGameField() {
-        // TODO
-        return null;
-    }
-
-    /*
-     * @return
-     */
-    public void getAvailableWeapons() {
-        // TODO
-        return;
-    }
-
-    /*
-     * @return
-     */
-    public void getPowerupsDeck() {
-        // TODO
-        return;
-    }
-
-    /*
-     * @return
-     */
-    public void getAmmosDeck() {
-        // TODO
-        return;
-    }
-
-    /*
-     * @return
-     */
-    public void getWeaponsDeck() {
-        // TODO
-        return;
-    }
-
-    /*
-     * @return
+    /**
+     * @return the skullBoard
      */
     public SkullsBoard getSkullsBoard() {
-        // TODO
-        return null;
+        return skullsBoard;
     }
 
-    /*
-     * @return
+    /**
+     * @return the gameField
      */
-    public int getWinner() {
-        // TODO
-        return 0;
+    public GameField getGameField() {
+        return gameField;
     }
 
-    /*
-     * @param int 
-     * @return
+    /**
+     * @return the scoreBoard
      */
-    public Player getPlayer(int idPlayer) {
-        // TODO
-        return null;
+    public ScoreBoard getScoreBoard() {
+        return scoreBoard;
     }
-
-    /*
-     * @return
-     */
-    public ArrayList<Integer> getPlayers() {
-        // TODO
-        return null;
-    }
-
 
 }
