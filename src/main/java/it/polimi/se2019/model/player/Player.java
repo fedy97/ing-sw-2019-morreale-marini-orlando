@@ -1,7 +1,7 @@
 package it.polimi.se2019.model.player;
 
 import it.polimi.se2019.model.board.Platform;
-import it.polimi.se2019.model.card.WeaponCard;
+import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.enumeration.Character;
 import java.util.ArrayList;

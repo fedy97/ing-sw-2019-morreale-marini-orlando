@@ -2,6 +2,7 @@ package it.polimi.se2019.model;
 
 import java.util.*;
 import it.polimi.se2019.model.board.*;
+import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.enumeration.*;
 

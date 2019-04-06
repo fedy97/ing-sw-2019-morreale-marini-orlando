@@ -1,8 +1,6 @@
 package it.polimi.se2019.model.board;
 
-import java.util.*;
-
-import it.polimi.se2019.model.card.WeaponCard;
+import it.polimi.se2019.model.card.weapons.WeaponCard;
 
 /**
  * Table is the rappresentation of all the objects in the game.

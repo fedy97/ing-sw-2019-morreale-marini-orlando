@@ -1,5 +1,6 @@
-package it.polimi.se2019.model.card;
+package it.polimi.se2019.model.card.weapons;
 
+import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.enumeration.*;
 
 
