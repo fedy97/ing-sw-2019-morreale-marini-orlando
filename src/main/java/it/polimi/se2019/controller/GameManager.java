@@ -1,6 +1,7 @@
 package it.polimi.se2019.controller;
 
 import java.util.*;
+
 import it.polimi.se2019.model.board.*;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.*;
@@ -35,7 +36,6 @@ public class GameManager {
     }
 
     /**
-     *
      * @param character
      * @param player
      */
@@ -70,8 +70,6 @@ public class GameManager {
         // TODO
         return null;
     }
-
-
 
     /**
      * @param player the player to be suspended
