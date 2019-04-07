@@ -15,17 +15,13 @@ public class GameManager {
     private Map<Character, Player> characterPlayer;
 
     public GameManager() {
+        //TODO
     }
 
-
-    public GameState getGameState() {
-        // TODO
-        return null;
-    }
 
     public ArrayList<Player> getPlayers() {
         // TODO
-        return null;
+        return players;
     }
 
 
@@ -82,5 +78,33 @@ public class GameManager {
      */
     public void setSuspendedPlayer(Player player) {
         // TODO
+    }
+
+    public Table getTable() {
+        return table;
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
+    public Map<Character, Player> getCharacterPlayer() {
+        return characterPlayer;
+    }
+
+    public void setCharacterPlayer(Map<Character, Player> characterPlayer) {
+        this.characterPlayer = characterPlayer;
     }
 }
