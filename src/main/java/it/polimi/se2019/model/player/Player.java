@@ -30,8 +30,15 @@ public class Player {
      * to store all the related game information concerning the player
      * @param character Character chosen by the player at the start of the game
      */
-    public Player(Character character) {
-
+    public Player(Character character, Platform startPlatform) {
+        this.character = character;
+        this.currentPlatform = startPlatform;
+        currentScore = 0;
+        playerBoard = new PlayerBoard();
+        numOfDeaths = 0;
+        powerUpCards = new ArrayList<>();
+        weaponCards = new ArrayList<>();
+        frenzyModeType = 0;
     }
 
     /**
@@ -134,7 +141,8 @@ public class Player {
      * @param card The card drawn
      */
     public void addPowerUpCard(PowerUpCard card) {
-
+        if (powerUpCards.size() < 3)
+            powerUpCards.add(card);
     }
 
     /**
@@ -142,7 +150,7 @@ public class Player {
      * @param card The power up card that must be eliminated
      */
     public void removePowerUpCard(PowerUpCard card) {
-
+        powerUpCards.remove(card);
     }
 
     /**
@@ -150,7 +158,8 @@ public class Player {
      * @param card The card drawn
      */
     public void addWeaponCard(WeaponCard card) {
-
+        if (weaponCards.size() < 3)
+            weaponCards.add(card);
     }
 
     /**
@@ -158,7 +167,7 @@ public class Player {
      * @param card The weapon card that must be eliminated
      */
     public void removeWeaponCard(WeaponCard card) {
-
+        weaponCards.remove(card);
     }
 
     /**

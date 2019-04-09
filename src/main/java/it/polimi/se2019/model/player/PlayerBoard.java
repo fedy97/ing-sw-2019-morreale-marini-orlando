@@ -1,6 +1,5 @@
 package it.polimi.se2019.model.player;
 
-import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.Character;
 import java.util.ArrayList;
 
@@ -11,7 +10,6 @@ import java.util.ArrayList;
  */
 public class PlayerBoard {
 
-    private ArrayList<Integer> pointsObtainable;
     private ArrayList<Character> damageLine;
     private ArrayList<Character> revengeMarks;
     private AmmoBox ammoBox;
@@ -20,7 +18,9 @@ public class PlayerBoard {
      * Class constructor that initializes the data structures it uses
      */
     public PlayerBoard() {
-
+        damageLine = new ArrayList<>();
+        revengeMarks = new ArrayList<>();
+        ammoBox = new AmmoBox();
     }
 
     /**
@@ -47,13 +47,6 @@ public class PlayerBoard {
         return damageLine;
     }
 
-    /**
-     * Get a list containing the points that will be distributed among the players once the player is killed
-     * @return
-     */
-    public ArrayList<Integer> getPointsObtainable() {
-        return pointsObtainable;
-    }
 
     /**
      * Add damage to the player
@@ -61,22 +54,24 @@ public class PlayerBoard {
      * @param value The number of damages to be inflicted
      */
     public void addDamage(Character character, int value) {
-
+        if (damageLine.size() + value > 12) {
+            for (int i = 0; i < 12 - damageLine.size(); i++) {
+                damageLine.add(character);
+            }
+        }
+        else {
+            for (int i = 0; i < value; i++) {
+                damageLine.add(character);
+            }
+        }
     }
 
-    /**
-     * Change the points obtainable at the death of the player
-     * @param pointsObtainable New list of points obtainable
-     */
-    public void setPointsObtainable(ArrayList<Integer> pointsObtainable) {
-
-    }
 
     /**
      * Remove all damage suffered by the player
      */
     public void resetDamageLine() {
-
+        damageLine.clear();
     }
 
     /**
@@ -85,7 +80,22 @@ public class PlayerBoard {
      * @param value The number of marks to be added
      */
     public void addRevengeMark(Character character, int value) {
+        int counter = 0;
+        for (Character c: revengeMarks) {
+            if (c == character)
+                counter++;
+        }
 
+        if (counter + value < 3) {
+            for (int i = 0; i < value ; i++) {
+                revengeMarks.add(character);
+            }
+        }
+        else {
+            for (int i = 0; i < 3 - counter ; i++) {
+                revengeMarks.add(character);
+            }
+        }
     }
 
     /**
@@ -93,7 +103,10 @@ public class PlayerBoard {
      * @param character The character of the player whose marks are to be removed
      */
     public void removeRevengeMarks(Character character) {
-
+        for (Character c: revengeMarks) {
+            if (c == character)
+                revengeMarks.remove(c);
+        }
     }
 
 }
