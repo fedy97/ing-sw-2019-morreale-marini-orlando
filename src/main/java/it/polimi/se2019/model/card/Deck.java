@@ -20,7 +20,7 @@ public class Deck<Card> extends ArrayList<Card> {
      * @param initSize maximum size allowed according to the type of deck
      * @throws IllegalArgumentException initial size has to be >= 0
      */
-    public Deck(int initSize){
+    public Deck(int initSize) {
         super(initSize);
         initialSize = initSize;
     }
@@ -74,5 +74,4 @@ public class Deck<Card> extends ArrayList<Card> {
     public void mix() {
         Collections.shuffle(this);
     }
-
 }
