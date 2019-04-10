@@ -37,6 +37,10 @@ public class GameField {
      * @return the Room in which the platform is located
      */
     public Room getRoom(int[] position) {
+        Platform p = field[position[0]][position[1]];
+        for (Room r : rooms) {
+            if (r.getPlatformsInRoom().contains(p)) return r;
+        }
         return null;
     }
 
@@ -45,7 +49,7 @@ public class GameField {
      * @return the Platform object having that position
      */
     public Platform getPlatform(int[] position) {
-        return null;
+        return field[position[0]][position[1]];
     }
 
 }

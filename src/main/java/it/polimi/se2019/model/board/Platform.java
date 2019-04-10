@@ -93,16 +93,16 @@ public class Platform {
     }
 
     /**
-     * @param platformAmmoCard when a AmmoCard is grabbed, a new one is set on the platform
+     * @param platformAmmoCard to be set on the platform, when a AmmoCard is grabbed
      */
     public void setPlatformAmmoCard(AmmoCard platformAmmoCard) {
         this.platformAmmoCard = platformAmmoCard;
     }
 
     /**
-     * @param character after a move, a new character is set on the platform
+     * @param character to be set on the platform after his move
      */
     public void setPlayerOnPlatform(Character character) {
-
+        playersOnThePlatform.add(character);
     }
 }

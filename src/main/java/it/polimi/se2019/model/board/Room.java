@@ -24,7 +24,7 @@ public class Room {
      * @return the list of platforms in the room
      */
     public ArrayList<Platform> getPlatformsInRoom() {
-        return null;
+        return platformsInRoom;
     }
 
     /**

@@ -11,16 +11,16 @@ import java.util.Map;
  */
 public class Table {
 
-    private Map<Platform, WeaponCard[]> weaponsAvailable;
+    private Map<Platform, WeaponCard[]> availableWeapons;
     private SkullsBoard skullsBoard;
-    private GameField field;
+    private GameField gameField;
     private ScoreBoard scoreBoard;
 
-    public Table(Map<Platform, WeaponCard[]> weaponsAvailable,
-                 SkullsBoard skullsBoard, GameField field, ScoreBoard scoreBoard) {
-        this.weaponsAvailable = weaponsAvailable;
+    public Table(Map<Platform, WeaponCard[]> availableWeapons,
+                 SkullsBoard skullsBoard, GameField gameField, ScoreBoard scoreBoard) {
+        this.availableWeapons = availableWeapons;
         this.skullsBoard = skullsBoard;
-        this.field = field;
+        this.gameField = gameField;
         this.scoreBoard = scoreBoard;
 
     }
@@ -29,7 +29,7 @@ public class Table {
      * @return a map of available weapons(3 max) in each generation spot
      */
     public Map<Platform, WeaponCard[]> getAllAvailableWeapons() {
-        return weaponsAvailable;
+        return availableWeapons;
     }
 
     /**
@@ -37,7 +37,7 @@ public class Table {
      * @return a array of weapon cards in a specified generation spot
      */
     public WeaponCard[] getPlatformAvailableWeapons(Platform generationSpot) {
-        return weaponsAvailable.get(generationSpot);
+        return availableWeapons.get(generationSpot);
     }
 
     /**
@@ -46,15 +46,15 @@ public class Table {
      * @return old available weapons, null if wrong generation spot
      */
     public WeaponCard[] setPlatformAvailableWeapons(Platform generationSpot, WeaponCard[] weaponsToSet) {
-        WeaponCard[] newWeapons = new WeaponCard[weaponsAvailable.get(generationSpot).length + weaponsToSet.length];
-        for (int i = 0; i < weaponsAvailable.get(generationSpot).length; i++) {
-            newWeapons[i] = weaponsAvailable.get(generationSpot)[i];
+        WeaponCard[] newWeapons = new WeaponCard[availableWeapons.get(generationSpot).length + weaponsToSet.length];
+        for (int i = 0; i < availableWeapons.get(generationSpot).length; i++) {
+            newWeapons[i] = availableWeapons.get(generationSpot)[i];
         }
         int j = 0;
-        for (int i = weaponsAvailable.get(generationSpot).length; i < newWeapons.length; i++) {
+        for (int i = availableWeapons.get(generationSpot).length; i < newWeapons.length; i++) {
             newWeapons[i] = weaponsToSet[j++];
         }
-        return weaponsAvailable.replace(generationSpot, newWeapons);
+        return availableWeapons.replace(generationSpot, newWeapons);
     }
 
     public SkullsBoard getSkullsBoard() {
@@ -62,7 +62,7 @@ public class Table {
     }
 
     public GameField getGameField() {
-        return field;
+        return gameField;
     }
 
     public ScoreBoard getScoreBoard() {
