@@ -3,23 +3,27 @@ package it.polimi.se2019.model.board;
 import java.util.*;
 
 /**
- * Room contains all the platform in it plus the info about generation spot
+ * Room containing all the platform in it plus the info about generation spot
  *
  * @author Federico Morreale
  */
 public class Room {
 
-    private ArrayList<int[]> platformsInRoom;
+    private ArrayList<Platform> platformsInRoom;
     private boolean hasGenerationSpot;
 
-    public Room() {
+    public Room(ArrayList<Platform> platformsInRoom) {
+        this.platformsInRoom = platformsInRoom;
+        this.hasGenerationSpot = false;
+        for (Platform p : platformsInRoom) {
+            if (p.isGenerationSpot()) this.hasGenerationSpot = true;
+        }
     }
 
     /**
      * @return the list of platforms in the room
      */
-    public ArrayList<int[]> getPlatformsInRoom() {
-        // TODO
+    public ArrayList<Platform> getPlatformsInRoom() {
         return null;
     }
 
@@ -27,8 +31,7 @@ public class Room {
      * @return true if the room contains a platform with a generation spot
      */
     public boolean hasGenerationSpot() {
-        // TODO
-        return true;
+        return hasGenerationSpot;
     }
 
 }

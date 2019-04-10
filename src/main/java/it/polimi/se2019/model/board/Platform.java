@@ -2,11 +2,12 @@ package it.polimi.se2019.model.board;
 
 import java.util.*;
 
-import it.polimi.se2019.model.card.Card;
+import it.polimi.se2019.model.card.AmmoCard;
+import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.enumeration.Orientation;
 
 /**
- * Platform contains info about doors, walls, players, generation spot and ammo card
+ * Platform containing info about doors, walls, players, generation spot and ammo card
  *
  * @author Federico Morreale
  */
@@ -17,11 +18,22 @@ public class Platform {
     private boolean hasDoor;
     private ArrayList<Orientation> doorLocation;
     private boolean hasAmmoCard;
-    private Card platformAmmoCard;
+    private AmmoCard platformAmmoCard;
     private ArrayList<Character> playersOnThePlatform;
     private ArrayList<Orientation> wallLocation;
 
-    public Platform() {
+    public Platform(int[] platformPosition, boolean isGenerationSpot,
+                    ArrayList<Orientation> doorLocation, AmmoCard platformAmmoCard,
+                    ArrayList<Character> playersOnThePlatform, ArrayList<Orientation> wallLocation) {
+        this.platformPosition = platformPosition;
+        this.isGenerationSpot = isGenerationSpot;
+        this.doorLocation = doorLocation;
+        this.platformAmmoCard = platformAmmoCard;
+        this.playersOnThePlatform = playersOnThePlatform;
+        this.wallLocation = wallLocation;
+        this.hasDoor = doorLocation.isEmpty() ? false : true;
+        this.hasAmmoCard = platformAmmoCard == null ? false : true;
+
     }
 
     /**
@@ -62,7 +74,7 @@ public class Platform {
     /**
      * @return the AmmoCard on the platform
      */
-    public Card getPlatformAmmoCard() {
+    public AmmoCard getPlatformAmmoCard() {
         return platformAmmoCard;
     }
 
@@ -83,7 +95,7 @@ public class Platform {
     /**
      * @param platformAmmoCard when a AmmoCard is grabbed, a new one is set on the platform
      */
-    public void setPlatformAmmoCard(Card platformAmmoCard) {
+    public void setPlatformAmmoCard(AmmoCard platformAmmoCard) {
         this.platformAmmoCard = platformAmmoCard;
     }
 

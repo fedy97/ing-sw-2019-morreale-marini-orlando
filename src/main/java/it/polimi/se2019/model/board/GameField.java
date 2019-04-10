@@ -11,9 +11,11 @@ import java.util.*;
 public class GameField {
 
     private Room[] rooms;
-    private Platform[][] gameField;
+    private Platform[][] field;
 
-    public GameField() {
+    public GameField(Room[] rooms, Platform[][] field) {
+        this.rooms = rooms;
+        this.field = field;
     }
 
     /**
@@ -26,8 +28,8 @@ public class GameField {
     /**
      * @return the gameField
      */
-    public Platform[][] getGameField() {
-        return gameField;
+    public Platform[][] getField() {
+        return field;
     }
 
     /**
