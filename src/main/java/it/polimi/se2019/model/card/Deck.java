@@ -1,8 +1,10 @@
 package it.polimi.se2019.model.card;
 
 import it.polimi.se2019.exceptions.InvalidDeckException;
+import it.polimi.se2019.exceptions.NoCardException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * A generic class representing a deck of cards
@@ -18,7 +20,6 @@ public class Deck<Card> extends ArrayList<Card> {
      * Instantiate a deck with a maximum size allowed
      *
      * @param initSize maximum size allowed according to the type of deck
-     * @throws IllegalArgumentException initial size has to be >= 0
      */
     public Deck(int initSize) {
         super(initSize);
@@ -28,7 +29,9 @@ public class Deck<Card> extends ArrayList<Card> {
     /**
      * @return the top card of the deck
      */
-    public Card drawCard() {
+    public Card drawCard() throws NoCardException {
+        if(size()==0)
+            throw new NoCardException();
         return remove(size() - 1);
     }
 
@@ -46,11 +49,9 @@ public class Deck<Card> extends ArrayList<Card> {
      * @throws NullPointerException if card reference is inconsistent with the definition adopted
      * @throws InvalidDeckException thrown if trying to add a card to a full deck
      */
-    public void addCard(Card card) throws NullPointerException, InvalidDeckException {
+    public void addCard(Card card) throws InvalidDeckException {
         if (size() + 1 > initialSize)
             throw new InvalidDeckException("Deck is already full, you're doing something wrong!");
-        if (card == null)
-            throw new NullPointerException("Card cannot be null!");
         this.add(card);
     }
 
@@ -59,12 +60,10 @@ public class Deck<Card> extends ArrayList<Card> {
      * @throws NullPointerException if cards are null
      * @throws InvalidDeckException if collection reference is null or has no elements
      */
-    public void addCards(ArrayList<Card> cards) throws NullPointerException, InvalidDeckException {
-        if (cards == null || cards.size() == 0 || (cards.size() + size()) > initialSize)
+    public void addCards(ArrayList<Card> cards) throws InvalidDeckException {
+        if (cards.size() == 0 || (cards.size() + size()) > initialSize)
             throw new InvalidDeckException("Collection of cards cannot be added to the deck, check the maximum allowed " +
                     "size of the deck or if collection is null or empty!");
-        for (Card c : cards)
-            if (c == null) throw new NullPointerException("Cards cannot be null!");
         addAll(cards);
     }
 
@@ -74,4 +73,5 @@ public class Deck<Card> extends ArrayList<Card> {
     public void mix() {
         Collections.shuffle(this);
     }
+
 }

@@ -4,16 +4,18 @@ import java.util.*;
 
 /**
  * GameField is a matrix of Platform (3x4) in which characters can move.
- * It contains also the information about the rooms in a array.
+ * It contains also the information about the rooms in an array.
  *
  * @author Federico Morreale
  */
 public class GameField {
 
     private Room[] rooms;
-    private Platform[][] gameField;
+    private Platform[][] field;
 
-    public GameField() {
+    public GameField(Room[] rooms, Platform[][] field) {
+        this.rooms = rooms;
+        this.field = field;
     }
 
     /**
@@ -26,8 +28,8 @@ public class GameField {
     /**
      * @return the gameField
      */
-    public Platform[][] getGameField() {
-        return gameField;
+    public Platform[][] getField() {
+        return field;
     }
 
     /**
@@ -35,6 +37,10 @@ public class GameField {
      * @return the Room in which the platform is located
      */
     public Room getRoom(int[] position) {
+        Platform p = field[position[0]][position[1]];
+        for (Room r : rooms) {
+            if (r.getPlatformsInRoom().contains(p)) return r;
+        }
         return null;
     }
 
@@ -43,7 +49,7 @@ public class GameField {
      * @return the Platform object having that position
      */
     public Platform getPlatform(int[] position) {
-        return null;
+        return field[position[0]][position[1]];
     }
 
 }
