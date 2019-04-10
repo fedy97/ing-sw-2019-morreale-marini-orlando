@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * GameField is a matrix of Platform (3x4) in which characters can move.
- * It contains also the information about the rooms in a array.
+ * It contains also the information about the rooms in an array.
  *
  * @author Federico Morreale
  */

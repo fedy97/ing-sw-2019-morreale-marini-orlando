@@ -3,7 +3,6 @@ package it.polimi.se2019.model.card;
 import it.polimi.se2019.exceptions.InvalidCardException;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 
-import java.util.*;
 
 /**
  * A class representing an AmmoCard the player can use to grab cubes and PowerUp cards
