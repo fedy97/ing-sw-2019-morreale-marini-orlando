@@ -54,8 +54,9 @@ public class PlayerBoard {
      * @param value The number of damages to be inflicted
      */
     public void addDamage(Character character, int value) {
-        if (damageLine.size() + value > 12) {
-            for (int i = 0; i < 12 - damageLine.size(); i++) {
+        int oldSize = damageLine.size();
+        if (oldSize + value > 12) {
+            for (int i = 0; i < 12 - oldSize; i++) {
                 damageLine.add(character);
             }
         }
@@ -103,9 +104,8 @@ public class PlayerBoard {
      * @param character The character of the player whose marks are to be removed
      */
     public void removeRevengeMarks(Character character) {
-        for (Character c: revengeMarks) {
-            if (c == character)
-                revengeMarks.remove(c);
+        while (revengeMarks.contains(character)) {
+            revengeMarks.remove(character);
         }
     }
 
