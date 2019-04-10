@@ -16,7 +16,9 @@ public class AmmoBox {
      * Class constructor that initializes the number of ammunition to two for each color
      */
     public AmmoBox() {
-
+        redAmmos = 1;
+        blueAmmos = 1;
+        yellowAmmos = 1;
     }
 
     /**
@@ -49,7 +51,24 @@ public class AmmoBox {
      * @param num The number of ammunition to add
      */
     public void addAmmos(AmmoCube type, int num) {
-
+        if (type == AmmoCube.RED) {
+            if (redAmmos + num > 3)
+                redAmmos = 3;
+            else
+                redAmmos = redAmmos + num;
+        }
+        else if (type == AmmoCube.BLUE) {
+            if (blueAmmos + num > 3)
+                blueAmmos = 3;
+            else
+                blueAmmos = blueAmmos + num;
+        }
+        else {
+            if (yellowAmmos + num > 3)
+                yellowAmmos = 3;
+            else
+                yellowAmmos = yellowAmmos + num;
+        }
     }
 
     /**
@@ -58,6 +77,23 @@ public class AmmoBox {
      * @param num The number of ammunition to remove
      */
     public void removeAmmos(AmmoCube type, int num) {
-
+        if (type == AmmoCube.RED) {
+            if (redAmmos - num < 0)
+                redAmmos = 0;
+            else
+                redAmmos = redAmmos - num;
+        }
+        else if (type == AmmoCube.BLUE) {
+            if (blueAmmos - num < 0)
+                blueAmmos = 0;
+            else
+                blueAmmos = blueAmmos - num;
+        }
+        else {
+            if (yellowAmmos - num < 0)
+                yellowAmmos = 0;
+            else
+                yellowAmmos = yellowAmmos - num;
+        }
     }
 }

@@ -1,7 +1,7 @@
 package it.polimi.se2019.exceptions;
 
 public class InvalidCardException extends Exception {
-    InvalidCardException(String message) {
+    public InvalidCardException(String message) {
         super(message);
     }
 }
