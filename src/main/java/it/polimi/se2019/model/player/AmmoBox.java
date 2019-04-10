@@ -49,8 +49,14 @@ public class AmmoBox {
      * Add ammunition to those already owned by the player
      * @param type The color of the ammunition to add
      * @param num The number of ammunition to add
+     * @throws IllegalArgumentException if num is less than zero
+     * @throws NullPointerException if AmmoCube reference is null
      */
-    public void addAmmos(AmmoCube type, int num) {
+    public void addAmmos(AmmoCube type, int num) throws IllegalArgumentException, NullPointerException{
+        if (num < 0)
+            throw new IllegalArgumentException("Num should be greater than zero!");
+        if (type == null)
+            throw new NullPointerException("Type cannot be null!");
         if (type == AmmoCube.RED) {
             if (redAmmos + num > 3)
                 redAmmos = 3;
@@ -75,8 +81,14 @@ public class AmmoBox {
      * Remove ammo from the player's box
      * @param type The color of the ammunition to remove
      * @param num The number of ammunition to remove
+     * @throws IllegalArgumentException if num is less than zero
+     * @throws NullPointerException if AmmoCube reference is null
      */
-    public void removeAmmos(AmmoCube type, int num) {
+    public void removeAmmos(AmmoCube type, int num) throws IllegalArgumentException, NullPointerException{
+        if (num < 0)
+            throw new IllegalArgumentException("Num should be greater than zero!");
+        if (type == null)
+            throw new NullPointerException("Type cannot be null!");
         if (type == AmmoCube.RED) {
             if (redAmmos - num < 0)
                 redAmmos = 0;

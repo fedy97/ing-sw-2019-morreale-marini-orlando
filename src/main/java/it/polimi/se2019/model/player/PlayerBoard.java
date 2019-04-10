@@ -52,8 +52,14 @@ public class PlayerBoard {
      * Add damage to the player
      * @param character The character of player who deals the damage
      * @param value The number of damages to be inflicted
+     * @throws IllegalArgumentException if value is less than zero
+     * @throws NullPointerException if character reference is null
      */
-    public void addDamage(Character character, int value) {
+    public void addDamage(Character character, int value) throws IllegalArgumentException, NullPointerException{
+        if (value < 0)
+            throw new IllegalArgumentException("Value should be greater than zero!");
+        if (character == null)
+            throw new NullPointerException("Character cannot be null!");
         int oldSize = damageLine.size();
         if (oldSize + value > 12) {
             for (int i = 0; i < 12 - oldSize; i++) {
@@ -79,8 +85,14 @@ public class PlayerBoard {
      * Add marks to the player
      * @param character The character of player who marks
      * @param value The number of marks to be added
+     * @throws IllegalArgumentException if value is less than zero
+     * @throws NullPointerException if character reference is null
      */
-    public void addRevengeMark(Character character, int value) {
+    public void addRevengeMark(Character character, int value) throws IllegalArgumentException, NullPointerException {
+        if (value < 0)
+            throw new IllegalArgumentException("Value should be greater than zero!");
+        if(character == null)
+            throw new NullPointerException("Character cannot be null!");
         int counter = 0;
         for (Character c: revengeMarks) {
             if (c == character)
@@ -102,8 +114,11 @@ public class PlayerBoard {
     /**
      * Remove all marks received from a player
      * @param character The character of the player whose marks are to be removed
+     * @throws NullPointerException if character reference is null
      */
-    public void removeRevengeMarks(Character character) {
+    public void removeRevengeMarks(Character character) throws NullPointerException{
+        if (character == null)
+            throw new NullPointerException("Character cannot be null!");
         while (revengeMarks.contains(character)) {
             revengeMarks.remove(character);
         }

@@ -16,7 +16,5 @@ public class App {
     //commento inutile pt.3 morre
     public static void main(String[] args) {
         System.out.println("Hello World!");
-
-
     }
 }

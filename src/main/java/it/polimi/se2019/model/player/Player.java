@@ -1,5 +1,6 @@
 package it.polimi.se2019.model.player;
 
+import it.polimi.se2019.exceptions.MissingCardException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
@@ -29,8 +30,11 @@ public class Player {
      * Class constructor that initializes data structures that will be used
      * to store all the related game information concerning the player
      * @param character Character chosen by the player at the start of the game
+     * @throws NullPointerException if character or startPlatform are null
      */
-    public Player(Character character, Platform startPlatform) {
+    public Player(Character character, Platform startPlatform) throws NullPointerException{
+        if (character == null || startPlatform == null)
+            throw new NullPointerException("Character and startPlatform can not be null!");
         this.character = character;
         this.currentPlatform = startPlatform;
         currentScore = 0;
@@ -108,17 +112,22 @@ public class Player {
     /**
      * Change the player's position by moving him to a new platform
      * @param newPlatform The new platform where the player wants to go
+     * @throws NullPointerException if newPlatform reference is null
      */
-    public void changePlatform(Platform newPlatform) {
+    public void changePlatform(Platform newPlatform) throws NullPointerException {
+        if (newPlatform == null)
+            throw new NullPointerException("NewPlatform can not be null!");
         currentPlatform = newPlatform;
     }
 
     /**
      * Add points to those already scored by the player
      * @param point Points to add
-     *
+     * @throws IllegalArgumentException if point is less than zero
      */
-    public void addPoint(int point) {
+    public void addPoint(int point) throws IllegalArgumentException{
+        if (point < 0)
+            throw new IllegalArgumentException("Point should be greater than zero!");
         currentScore = currentScore + point;
     }
 
@@ -139,8 +148,11 @@ public class Player {
     /**
      * Add a power up card to those already owned by the player
      * @param card The card drawn
+     * @throws NullPointerException if card reference is null
      */
-    public void addPowerUpCard(PowerUpCard card) {
+    public void addPowerUpCard(PowerUpCard card) throws NullPointerException{
+        if (card == null)
+            throw new NullPointerException("Card can not be null!");
         if (powerUpCards.size() < 3)
             powerUpCards.add(card);
     }
@@ -148,16 +160,25 @@ public class Player {
     /**
      * Eliminates a power up card from those owned by the player
      * @param card The power up card that must be eliminated
+     * @throws NullPointerException if card reference is null
+     * @throws MissingCardException if powerUpCards does not contain card
      */
-    public void removePowerUpCard(PowerUpCard card) {
+    public void removePowerUpCard(PowerUpCard card) throws NullPointerException, MissingCardException{
+        if (card == null)
+            throw new NullPointerException("Card can not be null!");
+        if (!powerUpCards.contains(card))
+            throw new MissingCardException("PowerUpCards does not contain this card!");
         powerUpCards.remove(card);
     }
 
     /**
      * Add a weapon card to those already owned by the player
      * @param card The card drawn
+     * @throws NullPointerException if card reference is null
      */
-    public void addWeaponCard(WeaponCard card) {
+    public void addWeaponCard(WeaponCard card) throws NullPointerException{
+        if (card == null)
+            throw new NullPointerException("Card can not be null!");
         if (weaponCards.size() < 3)
             weaponCards.add(card);
     }
@@ -165,8 +186,14 @@ public class Player {
     /**
      * Eliminates a weapon card from those owned by the player
      * @param card The weapon card that must be eliminated
+     * @throws NullPointerException if card reference is null
+     * @throws MissingCardException if weaponCards does not contain card
      */
-    public void removeWeaponCard(WeaponCard card) {
+    public void removeWeaponCard(WeaponCard card) throws NullPointerException, MissingCardException {
+        if (card == null)
+            throw new NullPointerException("Card can not be null!");
+        if (!weaponCards.contains(card))
+            throw new MissingCardException("WeaponCards does not contain this card!");
         weaponCards.remove(card);
     }
 
