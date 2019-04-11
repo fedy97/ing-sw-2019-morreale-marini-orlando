@@ -90,7 +90,9 @@ public class Player {
      * @return List containing the player's power up cards
      */
     public ArrayList<PowerUpCard> getPowerUpCards() {
-        return powerUpCards;
+        ArrayList<PowerUpCard> temp = new ArrayList<>();
+        temp.addAll(powerUpCards);
+        return temp;
     }
 
     /**
@@ -98,7 +100,9 @@ public class Player {
      * @return List containing the player's weapon cards
      */
     public ArrayList<WeaponCard> getWeaponCards() {
-        return weaponCards;
+        ArrayList<WeaponCard> temp = new ArrayList<>();
+        temp.addAll(weaponCards);
+        return temp;
     }
 
     /**

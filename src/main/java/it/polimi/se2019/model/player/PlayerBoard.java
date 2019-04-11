@@ -36,7 +36,9 @@ public class PlayerBoard {
      * @return
      */
     public ArrayList<Character> getRevengeMarks() {
-        return revengeMarks;
+        ArrayList<Character> temp = new ArrayList<>();
+        temp.addAll(revengeMarks);
+        return temp;
     }
 
     /**
@@ -44,7 +46,9 @@ public class PlayerBoard {
      * @return
      */
     public ArrayList<Character> getDamageLine() {
-        return damageLine;
+        ArrayList<Character> temp = new ArrayList<>();
+        temp.addAll(damageLine);
+        return temp;
     }
 
 
