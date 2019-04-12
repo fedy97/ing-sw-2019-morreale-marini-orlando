@@ -34,7 +34,7 @@ public class Table {
 
     /**
      * @param generationSpot in which the weapons can be grabbed
-     * @return a array of weapon cards in a specified generation spot
+     * @return an array of weapon cards in a specified generation spot
      */
     public WeaponCard[] getPlatformAvailableWeapons(Platform generationSpot) {
         return availableWeapons.get(generationSpot);

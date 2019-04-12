@@ -13,6 +13,9 @@ public class ScoreBoard {
 
     private Map<Character, Integer> scoreBoard;
 
+    /**
+     * initialize the scoreboard with zero points
+     */
     public ScoreBoard() {
         this.scoreBoard = new EnumMap<Character, Integer>(Character.class);
         for (Character c : this.scoreBoard.keySet()) {
