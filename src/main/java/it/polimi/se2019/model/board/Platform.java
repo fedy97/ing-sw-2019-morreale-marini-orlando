@@ -13,6 +13,8 @@ import it.polimi.se2019.model.enumeration.Orientation;
  */
 public class Platform {
 
+    private Room platformRoom;
+    private Map<Orientation, Platform> adjacentPlatforms;
     private int[] platformPosition;
     private boolean isGenerationSpot;
     private boolean hasDoor;
@@ -20,17 +22,21 @@ public class Platform {
     private boolean hasAmmoCard;
     private AmmoCard platformAmmoCard;
     private ArrayList<Character> playersOnThePlatform;
-    private ArrayList<Orientation> wallLocation;
 
-    public Platform(int[] platformPosition, boolean isGenerationSpot,
-                    ArrayList<Orientation> doorLocation, AmmoCard platformAmmoCard,
-                    ArrayList<Character> playersOnThePlatform, ArrayList<Orientation> wallLocation) {
+    public Platform(int[] platformPosition, boolean isGenerationSpot, AmmoCard platformAmmoCard, Map<Orientation, Platform> adjacentPlatforms,
+                    Room platformRoom) {
         this.platformPosition = platformPosition;
         this.isGenerationSpot = isGenerationSpot;
-        this.doorLocation = doorLocation;
         this.platformAmmoCard = platformAmmoCard;
-        this.playersOnThePlatform = playersOnThePlatform;
-        this.wallLocation = wallLocation;
+        this.playersOnThePlatform = new ArrayList<>();
+        this.adjacentPlatforms = adjacentPlatforms;
+        this.platformRoom = platformRoom;
+
+        for (Map.Entry<Orientation, Platform> entry : adjacentPlatforms.entrySet()) {
+            if (entry.getValue().getPlatformRoom() != this.getPlatformRoom())
+                this.doorLocation.add(entry.getKey());
+        }
+
         this.hasDoor = doorLocation.isEmpty() ? false : true;
         this.hasAmmoCard = platformAmmoCard == null ? false : true;
 
@@ -43,17 +49,11 @@ public class Platform {
         return platformPosition;
     }
 
-    /**
-     * @return true if the platform is a generation spot
-     */
     public boolean isGenerationSpot() {
         return isGenerationSpot;
     }
 
-    /**
-     * @return true if the platform has a door
-     */
-    public boolean HasDoor() {
+    public boolean hasDoor() {
         return hasDoor;
     }
 
@@ -64,18 +64,23 @@ public class Platform {
         return doorLocation;
     }
 
-    /**
-     * @return true if the platform has the AmmoCard
-     */
-    public boolean HasAmmoCard() {
+    public boolean hasAmmoCard() {
         return hasAmmoCard;
     }
 
-    /**
-     * @return the AmmoCard on the platform
-     */
     public AmmoCard getPlatformAmmoCard() {
         return platformAmmoCard;
+    }
+
+    public Room getPlatformRoom() {
+        return platformRoom;
+    }
+
+    /**
+     * @return a map of the platforms that are next to (this), null if there's a wall
+     */
+    public Map<Orientation, Platform> getAdjacentPlatforms() {
+        return adjacentPlatforms;
     }
 
     /**
@@ -83,13 +88,6 @@ public class Platform {
      */
     public ArrayList<Character> getPlayersOnThePlatform() {
         return playersOnThePlatform;
-    }
-
-    /**
-     * @return the Orientations where the wall is located
-     */
-    public ArrayList<Orientation> getWallLocation() {
-        return wallLocation;
     }
 
     /**
