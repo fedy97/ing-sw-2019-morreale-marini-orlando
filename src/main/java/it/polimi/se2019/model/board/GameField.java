@@ -1,5 +1,9 @@
 package it.polimi.se2019.model.board;
 
+import it.polimi.se2019.exceptions.InvalidNumOfRoomsException;
+import it.polimi.se2019.exceptions.InvalidPositionException;
+import it.polimi.se2019.utils.HandyFunctions;
+
 import java.util.*;
 
 /**
@@ -10,10 +14,12 @@ import java.util.*;
  */
 public class GameField {
 
-    private Room[] rooms;
+    private ArrayList<Room> rooms;
     private Platform[][] field;
 
-    public GameField(Room[] rooms, Platform[][] field) {
+    public GameField(ArrayList<Room> rooms, Platform[][] field) throws InvalidNumOfRoomsException {
+        if (rooms.size() < 5)
+            throw new InvalidNumOfRoomsException();
         this.rooms = rooms;
         this.field = field;
     }
@@ -21,7 +27,7 @@ public class GameField {
     /**
      * @return rooms in the gameField
      */
-    public Room[] getRooms() {
+    public List<Room> getRooms() {
         return rooms;
     }
 
@@ -36,7 +42,9 @@ public class GameField {
      * @param position of one platform in the room
      * @return the Room in which the platform is located
      */
-    public Room getRoom(int[] position) {
+    public Room getRoom(int[] position) throws InvalidPositionException {
+        if (!HandyFunctions.isValidPosition(position))
+            throw new InvalidPositionException();
         Platform p = field[position[0]][position[1]];
         for (Room r : rooms) {
             if (r.getPlatformsInRoom().contains(p)) return r;
@@ -48,7 +56,9 @@ public class GameField {
      * @param position of the platform
      * @return the Platform object having that position
      */
-    public Platform getPlatform(int[] position) {
+    public Platform getPlatform(int[] position) throws InvalidPositionException {
+        if (!HandyFunctions.isValidPosition(position))
+            throw new InvalidPositionException();
         return field[position[0]][position[1]];
     }
 

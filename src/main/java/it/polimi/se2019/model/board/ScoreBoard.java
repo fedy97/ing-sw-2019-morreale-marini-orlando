@@ -1,6 +1,10 @@
 package it.polimi.se2019.model.board;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
+import it.polimi.se2019.exceptions.InvalidCharacterException;
+import it.polimi.se2019.exceptions.InvalidQuantityException;
 import it.polimi.se2019.model.enumeration.Character;
+import it.polimi.se2019.utils.HandyFunctions;
 
 import java.util.*;
 
@@ -17,7 +21,7 @@ public class ScoreBoard {
      * initialize the scoreboard with zero points
      */
     public ScoreBoard() {
-        this.scoreBoard = new EnumMap<Character, Integer>(Character.class);
+        this.scoreBoard = new EnumMap<>(Character.class);
         for (Character c : this.scoreBoard.keySet()) {
             this.scoreBoard.put(c, 0);
         }
@@ -27,7 +31,9 @@ public class ScoreBoard {
      * @param character in order to see his current score
      * @return the score of a selected player
      */
-    public Integer getScorePlayer(Character character) {
+    public Integer getScorePlayer(Character character) throws InvalidCharacterException {
+        if (!HandyFunctions.characterExist(character))
+            throw new InvalidCharacterException();
         return scoreBoard.get(character);
     }
 
@@ -37,10 +43,13 @@ public class ScoreBoard {
     /**
      * @param character to set the points
      * @param quantity  of points to set to the player
-     * @return the old score of the player, null if the player does not exist
      */
-    public Integer setScoreToPlayer(Character character, int quantity) {
-        return scoreBoard.replace(character, scoreBoard.get(character) + quantity);
+    public void setScoreToPlayer(Character character, int quantity) throws InvalidQuantityException, InvalidCharacterException {
+        if (quantity < 1)
+            throw new InvalidQuantityException("the score to set to the player must be > 0");
+        if (!HandyFunctions.characterExist(character))
+            throw new InvalidCharacterException();
+        scoreBoard.replace(character, scoreBoard.get(character) + quantity);
     }
 
 }

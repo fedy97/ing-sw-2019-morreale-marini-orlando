@@ -1,6 +1,9 @@
 package it.polimi.se2019.model.board;
 
+import it.polimi.se2019.exceptions.InvalidCharacterException;
+import it.polimi.se2019.exceptions.InvalidQuantityException;
 import it.polimi.se2019.model.enumeration.Character;
+import it.polimi.se2019.utils.HandyFunctions;
 
 import java.util.*;
 
@@ -21,8 +24,10 @@ public class SkullsBoard {
      *        depending on how much the players want to game to last,
      *        it has to be in the [1,8] range
      */
-    public SkullsBoard(int totalSkulls) {
+    public SkullsBoard(int totalSkulls) throws InvalidQuantityException {
         this.killMarks = new EnumMap<>(Character.class);
+        if (totalSkulls > 8 || totalSkulls < 1)
+            throw new InvalidQuantityException("number of skulls must be between 1 and 8");
         this.totalSkulls = totalSkulls;
         this.currentSkulls = totalSkulls;
     }
@@ -52,7 +57,9 @@ public class SkullsBoard {
      * @param character to get the killmarks
      * @return the number of killmarks of the selected character
      */
-    public Integer getKillMarksPlayer(Character character) {
+    public Integer getKillMarksPlayer(Character character) throws InvalidCharacterException {
+        if (!HandyFunctions.characterExist(character))
+            throw new InvalidCharacterException();
         return killMarks.get(character);
     }
 
@@ -61,7 +68,11 @@ public class SkullsBoard {
      * @param quantity  depending on the kind of death(either kill 1 or overkill 2)
      * @return either old value of the character's kill marks or null if the player does not exist
      */
-    public Integer addKillMarks(Character character, int quantity) {
+    public Integer addKillMarks(Character character, int quantity) throws InvalidCharacterException, InvalidQuantityException {
+        if (!HandyFunctions.characterExist(character))
+            throw new InvalidCharacterException();
+        if (quantity > 2 || quantity < 1)
+            throw new InvalidQuantityException("you cannot add more than 2 or less than 1 marks");
         return killMarks.replace(character, killMarks.get(character) + quantity);
     }
 }

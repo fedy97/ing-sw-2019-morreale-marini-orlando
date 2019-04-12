@@ -1,5 +1,7 @@
 package it.polimi.se2019.model.board;
 
+import it.polimi.se2019.exceptions.InvalidRoomException;
+
 import java.util.*;
 
 /**
@@ -12,7 +14,9 @@ public class Room {
     private ArrayList<Platform> platformsInRoom;
     private boolean hasGenerationSpot;
 
-    public Room(ArrayList<Platform> platformsInRoom) {
+    public Room(ArrayList<Platform> platformsInRoom) throws InvalidRoomException {
+        if (platformsInRoom.isEmpty())
+            throw new InvalidRoomException();
         this.platformsInRoom = platformsInRoom;
         this.hasGenerationSpot = false;
         for (Platform p : platformsInRoom) {
@@ -23,7 +27,7 @@ public class Room {
     /**
      * @return the list of platforms in the room
      */
-    public ArrayList<Platform> getPlatformsInRoom() {
+    public List<Platform> getPlatformsInRoom() {
         return platformsInRoom;
     }
 
