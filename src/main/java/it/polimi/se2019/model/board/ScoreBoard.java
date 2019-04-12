@@ -1,6 +1,5 @@
 package it.polimi.se2019.model.board;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import it.polimi.se2019.exceptions.InvalidCharacterException;
 import it.polimi.se2019.exceptions.InvalidQuantityException;
 import it.polimi.se2019.model.enumeration.Character;
