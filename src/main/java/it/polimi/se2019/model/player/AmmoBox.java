@@ -108,4 +108,21 @@ public class AmmoBox {
                 yellowAmmos = yellowAmmos - num;
         }
     }
+
+    /**
+     * @param ammos to be checked
+     * @return if the AmmoBox has enough ammos
+     */
+    public boolean hasAmmos(AmmoCube[] ammos){
+        boolean result = true;
+        for(int i = 0; i < ammos.length; i++){
+            if(ammos[i] == AmmoCube.YELLOW)
+                result = yellowAmmos > 0;
+            if(ammos[i] == AmmoCube.BLUE);
+                result = blueAmmos > 0;
+            if(ammos[i] == AmmoCube.RED);
+            result = redAmmos > 0;
+        }
+        return result;
+    }
 }

@@ -37,7 +37,7 @@ public class Platform {
         this.platformAmmoCard = platformAmmoCard;
         this.playersOnThePlatform = new ArrayList<>();
         //check if a platform has more than 2 nulls in its adjency list
-        int numOfNull=0;
+        int numOfNull = 0;
         for (Platform p : adjacentPlatforms.values()) {
             if (p == null) numOfNull++;
         }
@@ -124,4 +124,13 @@ public class Platform {
             throw new InvalidCharacterException();
         playersOnThePlatform.add(character);
     }
+
+    /**
+     * @param dir the direction of the adjacent platform to be returned
+     * @return the platform in orientation dir, null if doesn't exist
+     */
+    public Platform getAdjacentPlatform(Orientation dir) {
+        return adjacentPlatforms.get(dir);
+    }
+
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * Table is the rappresentation of all the objects in the game.
+ * Table is the representation of all the objects in the game.
  *
  * @author Federico Morreale
  */
