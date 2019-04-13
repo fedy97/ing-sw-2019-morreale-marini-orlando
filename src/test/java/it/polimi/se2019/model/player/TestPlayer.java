@@ -18,9 +18,9 @@ public class TestPlayer {
 
     /**
      *
-     */
+     *
     @Test(expected = IllegalArgumentException.class)
     public void addPoints()throws IllegalArgumentException{
         //TODO
-    }
+    }*/
 }
