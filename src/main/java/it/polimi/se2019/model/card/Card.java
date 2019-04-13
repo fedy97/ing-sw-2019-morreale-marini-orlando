@@ -37,6 +37,15 @@ public abstract class Card {
     }
 
     /**
+     * Set the name of the card
+     *
+     * @param name of the card
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
      * Set the bgImage of the card with the image specified
      *
      * @param image background image of the card

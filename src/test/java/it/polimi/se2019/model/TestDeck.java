@@ -3,10 +3,13 @@ package it.polimi.se2019.model;
 
 import it.polimi.se2019.exceptions.InvalidDeckException;
 import it.polimi.se2019.exceptions.NoCardException;
+import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.*;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -55,7 +58,7 @@ public class TestDeck {
     }
 
     /**
-     * Test the behavior of addCard() verifying if it is correctly added to the deck
+     * Test the behavior of addCard() verifying if the card is correctly added to the deck
      *
      * @throws InvalidDeckException id trying to add cards to a full deck
      */
@@ -90,6 +93,50 @@ public class TestDeck {
         deck.addCard(t1);
         deck.addCard(t2);
 
+    }
+
+    /**
+     * Test the behavior of addCards() verifying if the set of cards is properly
+     * added to the deck
+     *
+     * @throws InvalidDeckException if trying to add cards that exceed the maximum size of the deck
+     *                              or if the adding deck is empty
+     */
+    @Test(expected = InvalidDeckException.class)
+    public void testAddCards() throws InvalidDeckException {
+        Deck deck = new Deck(5);
+        PowerUpCard p = null;
+
+        Teleporter t1 = new Teleporter(AmmoCube.YELLOW);
+        Teleporter t2 = new Teleporter(AmmoCube.YELLOW);
+
+        try {
+            deck.addCard(t1);
+            deck.addCard(t2);
+        } catch (InvalidDeckException e) {
+            fail();
+        }
+
+        ArrayList<PowerUpCard> cards = new ArrayList<>();
+        cards.add(new Teleporter(AmmoCube.YELLOW));
+        cards.add(new TagbackGrenade(AmmoCube.RED));
+
+        deck.addCards(cards);
+        assertTrue(deck.containsAll(cards));
+
+        /*
+            Test if InvalidDeckException is thrown when trying to add more cards than
+            expected
+         */
+        try {
+            deck.addCards(cards);
+            fail();
+        } catch (InvalidDeckException e) {}
+
+        /*
+            Test if InvalidDeckException is thrown when trying to add no cards
+         */
+        deck.addCards(new ArrayList<>());
     }
 
     /**
