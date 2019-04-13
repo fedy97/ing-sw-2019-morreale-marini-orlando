@@ -5,6 +5,7 @@ public final class Whisper extends WeaponCard {
 
 
     public Whisper() {
+
     }
 
 }

@@ -5,6 +5,7 @@ import it.polimi.se2019.model.enumeration.*;
 
 /**
  * A class representing the weapons of the game
+ *
  * @author Gabriel Raul Marini
  */
 
@@ -14,8 +15,15 @@ public abstract class WeaponCard extends Card {
     private boolean loaded;
 
     /**
+     * Creates an anonymous weapon
+     */
+    public WeaponCard() {
+    }
+
+    /**
      * Creates a loaded weapon with the costs specified
-     * @param paidCost consisting of an AmmoCube the player don't have to pay when he grabs the weapon
+     *
+     * @param paidCost  consisting of an AmmoCube the player don't have to pay when he grabs the weapon
      * @param extraCost consisting of one or two AmmoCubes the player pay when he grabs the weapon
      */
     public WeaponCard(AmmoCube paidCost, AmmoCube[] extraCost) {
