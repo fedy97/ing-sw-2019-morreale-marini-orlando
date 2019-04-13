@@ -22,6 +22,10 @@ public class Room {
         for (Platform p : platformsInRoom) {
             if (p.isGenerationSpot()) this.hasGenerationSpot = true;
         }
+        //set the reference of the room to each platform in the arraylist
+        for (Platform p : platformsInRoom) {
+            p.setPlatformRoom(this);
+        }
     }
 
     /**

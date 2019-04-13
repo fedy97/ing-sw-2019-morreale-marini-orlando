@@ -28,8 +28,8 @@ public class Platform {
     private AmmoCard platformAmmoCard;
     private ArrayList<Character> playersOnThePlatform;
 
-    public Platform(int[] platformPosition, boolean isGenerationSpot, AmmoCard platformAmmoCard, Map<Orientation, Platform> adjacentPlatforms,
-                    Room platformRoom) throws InvalidCardException, InvalidRoomException, InvalidAdjcentPlatformsException {
+    public Platform(int[] platformPosition, boolean isGenerationSpot, AmmoCard platformAmmoCard, Map<Orientation, Platform> adjacentPlatforms)
+            throws InvalidCardException, InvalidAdjcentPlatformsException {
         this.platformPosition = platformPosition;
         this.isGenerationSpot = isGenerationSpot;
         if (platformAmmoCard == null && !isGenerationSpot)
@@ -43,9 +43,6 @@ public class Platform {
         }
         if (numOfNull >= 2) throw new InvalidAdjcentPlatformsException();
         this.adjacentPlatforms = adjacentPlatforms;
-        if (platformRoom == null)
-            throw new InvalidRoomException();
-        this.platformRoom = platformRoom;
         //build the arraylist of doors of the platform, knowing the adjacent platforms
         this.doorLocation = new ArrayList<>();
         for (Map.Entry<Orientation, Platform> entry : adjacentPlatforms.entrySet()) {
@@ -103,6 +100,10 @@ public class Platform {
      */
     public List<Character> getPlayersOnThePlatform() {
         return playersOnThePlatform;
+    }
+
+    public void setPlatformRoom(Room platformRoom) {
+        this.platformRoom = platformRoom;
     }
 
     /**
