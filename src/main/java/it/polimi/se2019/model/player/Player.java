@@ -1,5 +1,6 @@
 package it.polimi.se2019.model.player;
 
+import it.polimi.se2019.exceptions.MaxWeaponException;
 import it.polimi.se2019.exceptions.MissingCardException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
@@ -201,12 +202,15 @@ public class Player {
      *
      * @param card The card drawn
      * @throws NullPointerException if card reference is null
+     * @throws MaxWeaponException when the player has already three weapons
      */
-    public void addWeaponCard(WeaponCard card) throws NullPointerException {
+    public void addWeaponCard(WeaponCard card) throws NullPointerException, MaxWeaponException {
         if (card == null)
             throw new NullPointerException("Card can not be null!");
         if (weaponCards.size() < 3)
             weaponCards.add(card);
+        else
+            throw new MaxWeaponException("The player has already three weapons!");
     }
 
     /**
