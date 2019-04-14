@@ -2,10 +2,8 @@ package it.polimi.se2019.model.board;
 
 import java.util.*;
 
-import it.polimi.se2019.exceptions.InvalidAdjcentPlatformsException;
 import it.polimi.se2019.exceptions.InvalidCardException;
 import it.polimi.se2019.exceptions.InvalidCharacterException;
-import it.polimi.se2019.exceptions.InvalidRoomException;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.enumeration.Orientation;
@@ -28,21 +26,14 @@ public class Platform {
     private AmmoCard platformAmmoCard;
     private ArrayList<Character> playersOnThePlatform;
 
-    public Platform(int[] platformPosition, boolean isGenerationSpot, AmmoCard platformAmmoCard, Map<Orientation, Platform> adjacentPlatforms)
-            throws InvalidCardException, InvalidAdjcentPlatformsException {
+    public Platform(int[] platformPosition, boolean isGenerationSpot, AmmoCard platformAmmoCard)
+            throws InvalidCardException {
         this.platformPosition = platformPosition;
         this.isGenerationSpot = isGenerationSpot;
         if (platformAmmoCard == null && !isGenerationSpot)
             throw new InvalidCardException("starting ammo card cannot be null");
         this.platformAmmoCard = platformAmmoCard;
         this.playersOnThePlatform = new ArrayList<>();
-        //check if a platform has more than 2 nulls in its adjency list
-        int numOfNull = 0;
-        for (Platform p : adjacentPlatforms.values()) {
-            if (p == null) numOfNull++;
-        }
-        if (numOfNull >= 2) throw new InvalidAdjcentPlatformsException();
-        this.adjacentPlatforms = adjacentPlatforms;
         //build the arraylist of doors of the platform, knowing the adjacent platforms
         this.doorLocation = new ArrayList<>();
         for (Map.Entry<Orientation, Platform> entry : adjacentPlatforms.entrySet()) {
@@ -126,12 +117,16 @@ public class Platform {
         playersOnThePlatform.add(character);
     }
 
+    public void setAdjacentPlatforms(Map<Orientation, Platform> adjacentPlatforms) {
+        this.adjacentPlatforms = adjacentPlatforms;
+    }
+
     /**
-     * @param dir the direction of the adjacent platform to be returned
+     * @param direction of the adjacent platform to be returned
      * @return the platform in orientation dir, null if doesn't exist
      */
-    public Platform getAdjacentPlatform(Orientation dir) {
-        return adjacentPlatforms.get(dir);
+    public Platform getAdjacentPlatform(Orientation direction) {
+        return adjacentPlatforms.get(direction);
     }
 
 }
