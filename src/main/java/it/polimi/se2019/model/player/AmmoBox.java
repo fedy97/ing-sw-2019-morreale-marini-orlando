@@ -4,6 +4,7 @@ import it.polimi.se2019.model.enumeration.AmmoCube;
 
 /**
  * Class that manages the ammunition owned by the player
+ *
  * @author Simone Orlando
  */
 public class AmmoBox {
@@ -23,6 +24,7 @@ public class AmmoBox {
 
     /**
      * Get the current number of red ammunition the player has
+     *
      * @return The number of red ammunition
      */
     public int getRedAmmos() {
@@ -31,6 +33,7 @@ public class AmmoBox {
 
     /**
      * Get the current number of blue ammunition the player has
+     *
      * @return The number of blue ammunition
      */
     public int getBlueAmmos() {
@@ -39,6 +42,7 @@ public class AmmoBox {
 
     /**
      * Get the current number of yellow ammunition the player has
+     *
      * @return The number of yellow ammunition
      */
     public int getYellowAmmos() {
@@ -47,12 +51,13 @@ public class AmmoBox {
 
     /**
      * Add ammunition to those already owned by the player
+     *
      * @param type The color of the ammunition to add
-     * @param num The number of ammunition to add
+     * @param num  The number of ammunition to add
      * @throws IllegalArgumentException if num is less than zero
-     * @throws NullPointerException if AmmoCube reference is null
+     * @throws NullPointerException     if AmmoCube reference is null
      */
-    public void addAmmos(AmmoCube type, int num) throws IllegalArgumentException, NullPointerException{
+    public void addAmmos(AmmoCube type, int num) throws IllegalArgumentException, NullPointerException {
         if (num < 0)
             throw new IllegalArgumentException("Num should be greater than zero!");
         if (type == null)
@@ -62,14 +67,12 @@ public class AmmoBox {
                 redAmmos = 3;
             else
                 redAmmos = redAmmos + num;
-        }
-        else if (type == AmmoCube.BLUE) {
+        } else if (type == AmmoCube.BLUE) {
             if (blueAmmos + num > 3)
                 blueAmmos = 3;
             else
                 blueAmmos = blueAmmos + num;
-        }
-        else {
+        } else {
             if (yellowAmmos + num > 3)
                 yellowAmmos = 3;
             else
@@ -79,12 +82,13 @@ public class AmmoBox {
 
     /**
      * Remove ammo from the player's box
+     *
      * @param type The color of the ammunition to remove
-     * @param num The number of ammunition to remove
+     * @param num  The number of ammunition to remove
      * @throws IllegalArgumentException if num is less than zero
-     * @throws NullPointerException if AmmoCube reference is null
+     * @throws NullPointerException     if AmmoCube reference is null
      */
-    public void removeAmmos(AmmoCube type, int num) throws IllegalArgumentException, NullPointerException{
+    public void removeAmmos(AmmoCube type, int num) throws IllegalArgumentException, NullPointerException {
         if (num < 0)
             throw new IllegalArgumentException("Num should be greater than zero!");
         if (type == null)
@@ -94,14 +98,12 @@ public class AmmoBox {
                 redAmmos = 0;
             else
                 redAmmos = redAmmos - num;
-        }
-        else if (type == AmmoCube.BLUE) {
+        } else if (type == AmmoCube.BLUE) {
             if (blueAmmos - num < 0)
                 blueAmmos = 0;
             else
                 blueAmmos = blueAmmos - num;
-        }
-        else {
+        } else {
             if (yellowAmmos - num < 0)
                 yellowAmmos = 0;
             else
@@ -110,19 +112,26 @@ public class AmmoBox {
     }
 
     /**
+     * Method used to check if the player has enough ammos to perform actions
+     *
      * @param ammos to be checked
      * @return if the AmmoBox has enough ammos
      */
-    public boolean hasAmmos(AmmoCube[] ammos){
-        boolean result = true;
-        for(int i = 0; i < ammos.length; i++){
-            if(ammos[i] == AmmoCube.YELLOW)
-                result = yellowAmmos > 0;
-            if(ammos[i] == AmmoCube.BLUE);
-                result = blueAmmos > 0;
-            if(ammos[i] == AmmoCube.RED);
-            result = redAmmos > 0;
+    public boolean hasAmmos(AmmoCube[] ammos) {
+        int red, blue, yellow;
+        red = 0;
+        blue = 0;
+        yellow = 0;
+
+        for (int i = 0; i < ammos.length; i++) {
+            if (ammos[i] == AmmoCube.YELLOW)
+                yellow++;
+            if (ammos[i] == AmmoCube.BLUE)
+                blue++;
+            if (ammos[i] == AmmoCube.RED)
+                red++;
         }
-        return result;
+
+        return blueAmmos >= blue && redAmmos >= red && yellowAmmos >= yellow;
     }
 }
