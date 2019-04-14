@@ -1,6 +1,7 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.exceptions.InsufficientAmmoException;
+import it.polimi.se2019.exceptions.MaxWeaponException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
@@ -94,9 +95,17 @@ public class PlayerManager {
     }
 
     /**
-     * @param weapon
+     * @param weapon to be bought
+     * @throws InsufficientAmmoException when the player hasn't enough ammos to buy the weapon
+     * @throws MaxWeaponException        when the player has already three weapons, he can choose to discard one
+     *                                   or not buying the current one
      */
-    public void buyWeapon(WeaponCard weapon) {
+    public void buyWeapon(WeaponCard weapon) throws InsufficientAmmoException, MaxWeaponException {
+        AmmoBox box = currentPlayer.getPlayerBoard().getAmmoBox();
+        if (box.hasAmmos(weapon.getTotalCost())) {
+            currentPlayer.addWeaponCard(weapon);
+        } else
+            throw new InsufficientAmmoException("Player hasn't enough ammos to buy the weapon");
 
     }
 
@@ -115,7 +124,7 @@ public class PlayerManager {
     public void reload(ArrayList<WeaponCard> weapons) throws InsufficientAmmoException {
         AmmoBox box = currentPlayer.getPlayerBoard().getAmmoBox();
         for (WeaponCard weaponCard : weapons) {
-            if(box.hasAmmos(new AmmoCube[]{weaponCard.getPaidCost()}) && box.hasAmmos(weaponCard.getExtraCost()))
+            if (box.hasAmmos(weaponCard.getTotalCost()))
                 weaponCard.reload();
             else
                 throw new InsufficientAmmoException("CurrentPlayer hasn't enough ammos to recharhe the weapons");
@@ -123,10 +132,10 @@ public class PlayerManager {
     }
 
     /**
-     * @param player
+     * @param player to be managed by the class
      */
     public void setCurrentPlayer(Player player) {
-
+        currentPlayer = player;
     }
 
 }

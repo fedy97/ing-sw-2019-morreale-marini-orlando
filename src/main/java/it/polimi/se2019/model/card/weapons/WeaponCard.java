@@ -55,6 +55,16 @@ public abstract class WeaponCard extends Card {
     }
 
     /**
+     * @return the total cost of the weapon (used to calculate the reload cost of the weapon)
+     */
+    public AmmoCube[] getTotalCost() {
+        AmmoCube[] ammoCubes = new AmmoCube[extraCost.length + 1];
+        ammoCubes[0] = paidCost;
+        System.arraycopy(extraCost, 0, ammoCubes, 1, extraCost.length);
+        return ammoCubes;
+    }
+
+    /**
      * @return if the weapon is loaded and able to fire
      */
     public boolean isLoaded() {
