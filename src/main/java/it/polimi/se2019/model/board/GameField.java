@@ -20,9 +20,16 @@ public class GameField {
     private ArrayList<Room> rooms;
     private Platform[][] field;
 
+    /**
+     * @param rooms of the field, 5 or 6
+     * @param field where the 11 or 12 platforms are located
+     * @throws InvalidNumOfRoomsException if the rooms are not 5 or 6
+     * @throws InvalidFieldException if there is more than 1 platform equal to null or the matrix is not 3x4
+     * @throws InvalidAdjacentPlatformsException if the adjacency list has more than 2 nulls
+     */
     public GameField(ArrayList<Room> rooms, Platform[][] field) throws InvalidNumOfRoomsException, InvalidFieldException,
             InvalidAdjacentPlatformsException {
-        if (rooms.size() < 5)
+        if (rooms.size() != 5 && rooms.size() != 6)
             throw new InvalidNumOfRoomsException();
         this.rooms = rooms;
         if (field.length != 4 || field[0].length != 3 || !hasMoreThan2Nulls())
@@ -55,6 +62,7 @@ public class GameField {
     /**
      * @param position of one platform in the room
      * @return the Room in which the platform is located
+     * @throws InvalidPositionException if position is out of the matrix
      */
     public Room getRoom(int[] position) throws InvalidPositionException {
         if (!HandyFunctions.isValidPosition(position))
@@ -69,6 +77,7 @@ public class GameField {
     /**
      * @param position of the platform
      * @return the Platform object having that position
+     * @throws InvalidPositionException if position is out of the matrix
      */
     public Platform getPlatform(int[] position) throws InvalidPositionException {
         if (!HandyFunctions.isValidPosition(position))

@@ -29,6 +29,7 @@ public class ScoreBoard {
     /**
      * @param character in order to see his current score
      * @return the score of a selected player
+     * @throws InvalidCharacterException if the character does not exist
      */
     public Integer getScorePlayer(Character character) throws InvalidCharacterException {
         if (!HandyFunctions.characterExist(character))
@@ -42,6 +43,8 @@ public class ScoreBoard {
     /**
      * @param character to set the points
      * @param quantity  of points to set to the player
+     * @throws InvalidCharacterException if the character does not exist
+     * @throws InvalidQuantityException if the quantity is < 1
      */
     public void setScoreToPlayer(Character character, int quantity) throws InvalidQuantityException, InvalidCharacterException {
         if (quantity < 1)

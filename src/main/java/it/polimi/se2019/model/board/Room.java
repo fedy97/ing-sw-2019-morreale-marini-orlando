@@ -14,6 +14,10 @@ public class Room {
     private ArrayList<Platform> platformsInRoom;
     private boolean hasGenerationSpot;
 
+    /**
+     * @param platformsInRoom
+     * @throws InvalidRoomException if there is no platform in the room
+     */
     public Room(ArrayList<Platform> platformsInRoom) throws InvalidRoomException {
         if (platformsInRoom.isEmpty())
             throw new InvalidRoomException();

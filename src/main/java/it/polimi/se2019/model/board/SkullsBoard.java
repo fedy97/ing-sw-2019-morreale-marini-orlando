@@ -21,8 +21,9 @@ public class SkullsBoard {
 
     /**
      * @param totalSkulls is the number set at the beginning of a game,
-     *        depending on how much the players want to game to last,
-     *        it has to be in the [1,8] range
+     *                    depending on how much the players want to game to last,
+     *                    it has to be in the [1,8] range
+     * @throws InvalidQuantityException if the skulls set is < 1 or > 8
      */
     public SkullsBoard(int totalSkulls) throws InvalidQuantityException {
         this.killMarks = new EnumMap<>(Character.class);
@@ -49,13 +50,14 @@ public class SkullsBoard {
     /**
      * @return a map of killmarks per character
      */
-    public Map<Character,Integer> getKillMarks() {
+    public Map<Character, Integer> getKillMarks() {
         return killMarks;
     }
 
     /**
      * @param character to get the killmarks
      * @return the number of killmarks of the selected character
+     * @throws InvalidCharacterException if the character does not exist
      */
     public Integer getKillMarksPlayer(Character character) throws InvalidCharacterException {
         if (!HandyFunctions.characterExist(character))
@@ -67,6 +69,8 @@ public class SkullsBoard {
      * @param character that killed someone
      * @param quantity  depending on the kind of death(either kill 1 or overkill 2)
      * @return either old value of the character's kill marks or null if the player does not exist
+     * @throws InvalidCharacterException if the character does not exist
+     * @throws InvalidQuantityException if trying to add more than 2 or less than 1 skulls
      */
     public Integer addKillMarks(Character character, int quantity) throws InvalidCharacterException, InvalidQuantityException {
         if (!HandyFunctions.characterExist(character))

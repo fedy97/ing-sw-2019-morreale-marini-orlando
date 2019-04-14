@@ -26,6 +26,12 @@ public class Platform {
     private AmmoCard platformAmmoCard;
     private ArrayList<Character> playersOnThePlatform;
 
+    /**
+     * @param platformPosition
+     * @param isGenerationSpot
+     * @param platformAmmoCard
+     * @throws InvalidCardException if the starting ammo card of the platform is null
+     */
     public Platform(int[] platformPosition, boolean isGenerationSpot, AmmoCard platformAmmoCard)
             throws InvalidCardException {
         this.platformPosition = platformPosition;
@@ -99,6 +105,7 @@ public class Platform {
 
     /**
      * @param platformAmmoCard to be set on the platform, when a AmmoCard is grabbed
+     * @throws InvalidCardException if a ammocard is set to a generation spot or the ammocard is null
      */
     public void setPlatformAmmoCard(AmmoCard platformAmmoCard) throws InvalidCardException {
         if (platformAmmoCard == null)
@@ -110,6 +117,7 @@ public class Platform {
 
     /**
      * @param character to be set on the platform after his move
+     * @throws InvalidCharacterException if the character does not exist
      */
     public void setPlayerOnPlatform(Character character) throws InvalidCharacterException {
         if (!HandyFunctions.characterExist(character))
