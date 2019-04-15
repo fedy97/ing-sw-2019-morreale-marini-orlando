@@ -60,7 +60,7 @@ public class SkullsBoard {
      * @throws InvalidCharacterException if the character does not exist
      */
     public Integer getKillMarksPlayer(Character character) throws InvalidCharacterException {
-        if (!HandyFunctions.characterExist(character))
+        if (!HandyFunctions.characterExists(character))
             throw new InvalidCharacterException();
         return killMarks.get(character);
     }
@@ -70,10 +70,10 @@ public class SkullsBoard {
      * @param quantity  depending on the kind of death(either kill 1 or overkill 2)
      * @return either old value of the character's kill marks or null if the player does not exist
      * @throws InvalidCharacterException if the character does not exist
-     * @throws InvalidQuantityException if trying to add more than 2 or less than 1 skulls
+     * @throws InvalidQuantityException  if trying to add more than 2 or less than 1 skulls
      */
     public Integer addKillMarks(Character character, int quantity) throws InvalidCharacterException, InvalidQuantityException {
-        if (!HandyFunctions.characterExist(character))
+        if (!HandyFunctions.characterExists(character))
             throw new InvalidCharacterException();
         if (quantity > 2 || quantity < 1)
             throw new InvalidQuantityException("you cannot add more than 2 or less than 1 marks");

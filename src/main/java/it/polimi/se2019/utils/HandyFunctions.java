@@ -9,7 +9,7 @@ public class HandyFunctions {
      * @param character to check
      * @return true if character is in the enum Character
      */
-    public static boolean characterExist(Character character) {
+    public static boolean characterExists(Character character) {
         boolean canBeAdded = false;
         for (Character c : Character.values()) {
             if (c.equals(character)) canBeAdded = true;

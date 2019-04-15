@@ -23,8 +23,8 @@ public class GameField {
     /**
      * @param rooms of the field, 5 or 6
      * @param field where the 11 or 12 platforms are located
-     * @throws InvalidNumOfRoomsException if the rooms are not 5 or 6
-     * @throws InvalidFieldException if there is more than 1 platform equal to null or the matrix is not 3x4
+     * @throws InvalidNumOfRoomsException        if the rooms are not 5 or 6
+     * @throws InvalidFieldException             if there is more than 1 platform equal to null or the matrix is not 3x4
      * @throws InvalidAdjacentPlatformsException if the adjacency list has more than 2 nulls
      */
     public GameField(ArrayList<Room> rooms, Platform[][] field) throws InvalidNumOfRoomsException, InvalidFieldException,

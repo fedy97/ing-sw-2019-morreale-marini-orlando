@@ -1,5 +1,7 @@
 package it.polimi.se2019.model.enumeration;
 
+import it.polimi.se2019.exceptions.InvalidNameException;
+
 import java.awt.*;
 
 /**
@@ -42,7 +44,9 @@ public enum Character {
     /**
      * @param playerName to link to the character
      */
-    public void setPlayerName(String playerName) {
+    public void setPlayerName(String playerName) throws InvalidNameException {
+        if (playerName == "")
+            throw new InvalidNameException();
         this.playerName = playerName;
     }
 

@@ -4,6 +4,7 @@ import java.util.*;
 
 import it.polimi.se2019.exceptions.InvalidCardException;
 import it.polimi.se2019.exceptions.InvalidCharacterException;
+import it.polimi.se2019.exceptions.InvalidRoomException;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.enumeration.Orientation;
@@ -99,7 +100,9 @@ public class Platform {
         return playersOnThePlatform;
     }
 
-    public void setPlatformRoom(Room platformRoom) {
+    public void setPlatformRoom(Room platformRoom) throws InvalidRoomException {
+        if (platformRoom == null)
+            throw new InvalidRoomException();
         this.platformRoom = platformRoom;
     }
 
@@ -120,7 +123,7 @@ public class Platform {
      * @throws InvalidCharacterException if the character does not exist
      */
     public void setPlayerOnPlatform(Character character) throws InvalidCharacterException {
-        if (!HandyFunctions.characterExist(character))
+        if (!HandyFunctions.characterExists(character))
             throw new InvalidCharacterException();
         playersOnThePlatform.add(character);
     }
