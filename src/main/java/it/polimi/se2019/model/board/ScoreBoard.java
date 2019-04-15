@@ -29,24 +29,28 @@ public class ScoreBoard {
     /**
      * @param character in order to see his current score
      * @return the score of a selected player
+     * @throws InvalidCharacterException if the character does not exist
      */
     public Integer getScorePlayer(Character character) throws InvalidCharacterException {
-        if (!HandyFunctions.characterExist(character))
+        if (!HandyFunctions.characterExists(character))
             throw new InvalidCharacterException();
         return scoreBoard.get(character);
     }
 
-    public Map<Character,Integer> getScoreBoard(){
+    public Map<Character, Integer> getScoreBoard() {
         return scoreBoard;
     }
+
     /**
      * @param character to set the points
      * @param quantity  of points to set to the player
+     * @throws InvalidCharacterException if the character does not exist
+     * @throws InvalidQuantityException  if the quantity is < 1
      */
     public void setScoreToPlayer(Character character, int quantity) throws InvalidQuantityException, InvalidCharacterException {
         if (quantity < 1)
             throw new InvalidQuantityException("the score to set to the player must be > 0");
-        if (!HandyFunctions.characterExist(character))
+        if (!HandyFunctions.characterExists(character))
             throw new InvalidCharacterException();
         scoreBoard.replace(character, scoreBoard.get(character) + quantity);
     }

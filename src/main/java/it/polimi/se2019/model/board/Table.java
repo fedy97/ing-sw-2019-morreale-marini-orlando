@@ -19,6 +19,14 @@ public class Table {
     private GameField gameField;
     private ScoreBoard scoreBoard;
 
+    /**
+     * @param availableWeapons a map of generation spot holding an arraylist of weapons ready to be grabbed
+     * @param skullsBoard
+     * @param gameField
+     * @param scoreBoard
+     * @throws InvalidDeckException if availableWeapons deck is not full, or a platform is null in the availableWeapons Map
+     *                              or there are not exactly 3 platforms in the Map
+     */
     public Table(Map<Platform, ArrayList<WeaponCard>> availableWeapons,
                  SkullsBoard skullsBoard, GameField gameField, ScoreBoard scoreBoard) throws InvalidDeckException {
         if (availableWeapons.keySet().size() != 3 || availableWeapons.keySet().contains(null) || !isAvailableWeaponsFull())
@@ -40,6 +48,7 @@ public class Table {
     /**
      * @param generationSpot in which the weapons can be grabbed
      * @return an arraylist of weapon cards in a specified generation spot
+     * @throws InvalidGenerationSpotException
      */
     public ArrayList<WeaponCard> getPlatformAvailableWeapons(Platform generationSpot) throws InvalidGenerationSpotException {
         if (!generationSpot.isGenerationSpot())
@@ -50,6 +59,8 @@ public class Table {
     /**
      * @param generationSpot where the weapons are located
      * @param weaponsToSet   to be added to the current available weapons that are less than 3
+     * @throws InvalidGenerationSpotException
+     * @throws InvalidDeckException
      */
     public void setPlatformAvailableWeapons(Platform generationSpot, ArrayList<WeaponCard> weaponsToSet) throws InvalidGenerationSpotException,
             InvalidDeckException {
