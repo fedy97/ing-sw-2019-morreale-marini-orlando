@@ -2,6 +2,7 @@ package it.polimi.se2019.model.board;
 
 import java.util.*;
 
+import it.polimi.se2019.exceptions.InvalidAdjacentPlatformsException;
 import it.polimi.se2019.exceptions.InvalidCardException;
 import it.polimi.se2019.exceptions.InvalidCharacterException;
 import it.polimi.se2019.exceptions.InvalidRoomException;
@@ -28,7 +29,7 @@ public class Platform {
     private ArrayList<Character> playersOnThePlatform;
 
     /**
-     * @param platformPosition
+     * @param platformPosition an array of length = 2, containing x and y coordinates
      * @param isGenerationSpot
      * @param platformAmmoCard
      * @throws InvalidCardException if the starting ammo card of the platform is null
@@ -100,6 +101,18 @@ public class Platform {
         return playersOnThePlatform;
     }
 
+    /**
+     * @param direction of the adjacent platform to be returned
+     * @return the platform in orientation dir, null if doesn't exist
+     */
+    public Platform getAdjacentPlatform(Orientation direction) {
+        return adjacentPlatforms.get(direction);
+    }
+
+    /**
+     * @param platformRoom to link to this platform
+     * @throws InvalidRoomException if the room is null
+     */
     public void setPlatformRoom(Room platformRoom) throws InvalidRoomException {
         if (platformRoom == null)
             throw new InvalidRoomException();
@@ -128,16 +141,14 @@ public class Platform {
         playersOnThePlatform.add(character);
     }
 
-    public void setAdjacentPlatforms(Map<Orientation, Platform> adjacentPlatforms) {
-        this.adjacentPlatforms = adjacentPlatforms;
-    }
-
     /**
-     * @param direction of the adjacent platform to be returned
-     * @return the platform in orientation dir, null if doesn't exist
+     * @param adjacentPlatforms to link to this platform
+     * @throws InvalidAdjacentPlatformsException
      */
-    public Platform getAdjacentPlatform(Orientation direction) {
-        return adjacentPlatforms.get(direction);
+    public void setAdjacentPlatforms(Map<Orientation, Platform> adjacentPlatforms) throws InvalidAdjacentPlatformsException {
+        if (adjacentPlatforms == null)
+            throw new InvalidAdjacentPlatformsException();
+        this.adjacentPlatforms = adjacentPlatforms;
     }
 
 }

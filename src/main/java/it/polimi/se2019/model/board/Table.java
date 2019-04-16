@@ -5,6 +5,7 @@ import it.polimi.se2019.exceptions.InvalidGenerationSpotException;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -15,27 +16,56 @@ import java.util.Map;
 public class Table {
 
     private Map<Platform, ArrayList<WeaponCard>> availableWeapons;
+    private WeaponCard[] initWeapons;
     private SkullsBoard skullsBoard;
     private GameField gameField;
     private ScoreBoard scoreBoard;
 
     /**
-     * @param availableWeapons a map of generation spot holding an arraylist of weapons ready to be grabbed
+     * @param initWeapons an array of weapons ready to be grabbed, each weapon will be linked to its platform
      * @param skullsBoard
      * @param gameField
      * @param scoreBoard
      * @throws InvalidDeckException if availableWeapons deck is not full, or a platform is null in the availableWeapons Map
      *                              or there are not exactly 3 platforms in the Map
      */
-    public Table(Map<Platform, ArrayList<WeaponCard>> availableWeapons,
+    public Table(WeaponCard[] initWeapons,
                  SkullsBoard skullsBoard, GameField gameField, ScoreBoard scoreBoard) throws InvalidDeckException {
-        if (availableWeapons.keySet().size() != 3 || availableWeapons.keySet().contains(null) || !isAvailableWeaponsFull())
+        if (!areValidWeapons())
             throw new InvalidDeckException("something went wrong while building available weapons, please check again your arguments");
-        this.availableWeapons = availableWeapons;
+        this.initWeapons = initWeapons;
+        //create the Map of weapons in each generation spot
+        availableWeapons = new HashMap<>();
+        int index = 0;
+        for (int i = 0; i < gameField.getField().length; i++) {
+            for (int j = 0; j < gameField.getField()[0].length; j++) {
+                Platform p = gameField.getField()[i][j];
+                if (p.isGenerationSpot()) {
+                    ArrayList<WeaponCard> arrWeapons = new ArrayList<>();
+                    arrWeapons.add(initWeapons[index++]);
+                    arrWeapons.add(initWeapons[index++]);
+                    arrWeapons.add(initWeapons[index++]);
+                    availableWeapons.put(p, arrWeapons);
+                }
+            }
+        }
         this.skullsBoard = skullsBoard;
         this.gameField = gameField;
         this.scoreBoard = scoreBoard;
 
+    }
+
+    /**
+     * @return true if the array of 9 weapons is valid
+     */
+    private boolean areValidWeapons() {
+        if (initWeapons.length != 9) {
+            return false;
+        }
+        for (int i = 0; i < initWeapons.length; i++) {
+            if (initWeapons[i] == null) return false;
+        }
+        return true;
     }
 
     /**
@@ -85,17 +115,6 @@ public class Table {
 
     public ScoreBoard getScoreBoard() {
         return scoreBoard;
-    }
-
-    /**
-     * @return true if every platform that holds weapons has 3! weapons ready to be grabbed
-     */
-    private boolean isAvailableWeaponsFull() {
-        boolean isFull = true;
-        for (ArrayList<WeaponCard> arrWep : availableWeapons.values()) {
-            if (arrWep.size() != 3) isFull = false;
-        }
-        return isFull;
     }
 
 }
