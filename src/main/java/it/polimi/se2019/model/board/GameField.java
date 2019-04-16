@@ -32,7 +32,7 @@ public class GameField {
         if (rooms.size() != 5 && rooms.size() != 6)
             throw new InvalidNumOfRoomsException();
         this.rooms = rooms;
-        if (field.length != 4 || field[0].length != 3 || !hasMoreThan2Nulls())
+        if (field.length != 3 || field[0].length != 4 || !hasMoreThan2Nulls())
             throw new InvalidFieldException();
         this.field = field;
         //build the adjacency list of every platform in the field
