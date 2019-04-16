@@ -13,6 +13,7 @@ public abstract class Card {
 
     protected String name;
     protected Image bgImage;
+    protected String description;
 
     /***
      * Instantiate an anonymous card
@@ -59,6 +60,18 @@ public abstract class Card {
      */
     public Image getBgImage() {
         return bgImage;
+    }
+
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * @return the description of the card
+     */
+    public String getDescription() {
+        return description;
     }
 
 }
