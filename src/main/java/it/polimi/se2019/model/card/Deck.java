@@ -46,7 +46,6 @@ public class Deck<Card> extends ArrayList<Card> {
 
     /**
      * @param card element to be added to the deck
-     * @throws NullPointerException if card reference is inconsistent with the definition adopted
      * @throws InvalidDeckException thrown if trying to add a card to a full deck
      */
     public void addCard(Card card) throws InvalidDeckException {

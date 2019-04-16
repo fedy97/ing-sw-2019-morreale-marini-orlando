@@ -1,32 +1,23 @@
 package it.polimi.se2019.view;
 
 /**
+ * GUI implementation of RemoteView
  *
+ * @author Gabriel Raul Marini
  */
-public class GUI {
+public class GUI extends RemoteView {
 
     public GUI() {
 
     }
 
-    public void showPossibleMoves() {
+    @Override
+    public void showMessage(String msg) {
+        //TODO
     }
 
-    public void showGrabableWeapons() {
-    }
-
-    public void showPossibleTargets() {
-    }
-
-    public void update() {
-    }
-
-    public void reloadWeapon() {
-    }
-
-    public void unloadWeapon() {
-    }
-
-    public void showPowerUps() {
+    @Override
+    public void reportError() {
+        //TODO
     }
 }
