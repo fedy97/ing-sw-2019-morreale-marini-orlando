@@ -6,14 +6,16 @@ import it.polimi.se2019.model.Model;
  * @author Gabriel Raul Marini
  */
 public class Controller {
+    private Model model;
+    private DecksManager decksManager;
+    private GameManager gameManager;
+    private PlayerManager playerManager;
+    private Validator validator;
+
 
     public Controller() {
     }
 
-    private Model model;
-    public DecksManager decksManager;
-    public GameManager gameManager;
-    public PlayerManager playerManager;
 
     /**
      * Instatiate a new controller class

@@ -1,28 +1,17 @@
 package it.polimi.se2019.model.card.weapons;
 
-import it.polimi.se2019.model.enumeration.AmmoCube;
-
 
 public abstract class WeaponAlternativeFire extends WeaponCard {
-
+    private Effect alternativeEffect;
 
     public WeaponAlternativeFire() {
     }
 
-
-    private AmmoCube alternativeCost;
-
-    /*
-     * @return
+    /**
+     * @return the alternative effect of the weapon
      */
-    public AmmoCube getAlternativeCost() {
-        // TODO
-        return null;
-    }
-
-
-    public void activateAlternativeEffect() {
-        // TODO
+    public Effect getAlternativeEffect() {
+        return alternativeEffect;
     }
 
 }

@@ -1,19 +1,15 @@
 package it.polimi.se2019.model.card.weapons;
 
-import it.polimi.se2019.model.enumeration.AmmoCube;
+import java.util.ArrayList;
 
-
-public abstract class WeaponAddingEffect extends WeaponCard {
-
+/**
+ * @author Gabriel Raul Marini
+ */
+public class WeaponAddingEffect extends WeaponCard {
+    private ArrayList<Effect> addingEffects;
 
     public WeaponAddingEffect() {
     }
-
-
-    private AmmoCube addingCostFirst;
-
-
-    private AmmoCube addingCostSecond;
 
 
     public void activateFirstEffect() {
@@ -25,20 +21,10 @@ public abstract class WeaponAddingEffect extends WeaponCard {
         // TODO
     }
 
-    /*
-     * @return
+    /**
+     * @return the effects of the cards
      */
-    public AmmoCube getAddingCostFirst() {
-        // TODO
-        return null;
+    public ArrayList<Effect> getAddigEffects() {
+        return addingEffects;
     }
-
-    /*
-     * @return
-     */
-    public AmmoCube getAddingCostSecond() {
-        // TODO
-        return null;
-    }
-
 }

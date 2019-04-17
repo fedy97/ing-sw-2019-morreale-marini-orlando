@@ -9,6 +9,7 @@ import it.polimi.se2019.exceptions.InvalidCardException;
 import it.polimi.se2019.exceptions.InvalidCharacterException;
 import it.polimi.se2019.exceptions.InvalidRoomException;
 import it.polimi.se2019.model.card.AmmoCard;
+import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -30,6 +31,7 @@ public class Platform {
     private boolean hasAmmoCard;
     private AmmoCard platformAmmoCard;
     private ArrayList<Character> playersOnThePlatform;
+    private ArrayList<WeaponCard> weapons;
 
     /**
      * @param platformPosition an array of length = 2, containing x and y coordinates
@@ -158,6 +160,10 @@ public class Platform {
         if (adjacentPlatforms == null)
             throw new InvalidAdjacentPlatformsException();
         this.adjacentPlatforms = adjacentPlatforms;
+    }
+
+    public ArrayList<WeaponCard> getWeapons(){
+        return weapons;
     }
 
 }

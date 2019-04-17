@@ -21,21 +21,10 @@ public class PlayerManager {
 
     private Player currentPlayer;
     private int actionsLeft;
-    private Validator validator;
 
-    public PlayerManager(Player player, Validator initialValidator) {
+    public PlayerManager(Player player) {
         actionsLeft = 0;
         currentPlayer = player;
-        validator = initialValidator;
-    }
-
-    /**
-     * Method called when game mode change and different actions are permitted
-     *
-     * @param newValidator specifying the legal actions in the new game mode
-     */
-    public void changeValidator(Validator newValidator) {
-        validator = newValidator;
     }
 
     /**
@@ -68,13 +57,13 @@ public class PlayerManager {
      * @param dirs the set of directions to follow to move the players
      */
     public void move(ArrayList<Orientation> dirs) {
-        if (validator.isValidMove(dirs)) {
-            Platform platform = currentPlayer.getCurrentPlatform();
-            for (Orientation dir : dirs) {
-                platform = platform.getAdjacentPlatform(dir);
-            }
-            currentPlayer.setCurrentPlatform(platform);
+
+        Platform platform = currentPlayer.getCurrentPlatform();
+        for (Orientation dir : dirs) {
+            platform = platform.getAdjacentPlatform(dir);
         }
+        currentPlayer.setCurrentPlatform(platform);
+
     }
 
     /**
@@ -129,6 +118,10 @@ public class PlayerManager {
             else
                 throw new InsufficientAmmoException("CurrentPlayer hasn't enough ammos to recharhe the weapons");
         }
+    }
+
+    public Player getCurrentPlayer(){
+        return currentPlayer;
     }
 
     /**

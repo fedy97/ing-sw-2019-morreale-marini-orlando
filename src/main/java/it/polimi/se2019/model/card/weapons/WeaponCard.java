@@ -9,9 +9,10 @@ import it.polimi.se2019.model.enumeration.*;
  * @author Gabriel Raul Marini
  */
 
-public abstract class WeaponCard extends Card {
+public class WeaponCard extends Card {
     private AmmoCube paidCost;
     private AmmoCube[] extraCost;
+    private Effect basicEffect;
     private boolean loaded;
 
     /**
