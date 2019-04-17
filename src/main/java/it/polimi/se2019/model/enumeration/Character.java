@@ -45,7 +45,7 @@ public enum Character {
      * @param playerName to link to the character
      */
     public void setPlayerName(String playerName) throws InvalidNameException {
-        if (playerName == "")
+        if (playerName.equals(""))
             throw new InvalidNameException();
         this.playerName = playerName;
     }
