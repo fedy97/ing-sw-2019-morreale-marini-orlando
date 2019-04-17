@@ -1,13 +1,12 @@
 package it.polimi.se2019.model.board;
 
-import it.polimi.se2019.exceptions.InvalidAdjacentPlatformsException;
-import it.polimi.se2019.exceptions.InvalidFieldException;
-import it.polimi.se2019.exceptions.InvalidNumOfRoomsException;
-import it.polimi.se2019.exceptions.InvalidPositionException;
+import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.utils.HandyFunctions;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * GameField is a matrix of Platform (3x4) in which characters can move.
@@ -27,21 +26,28 @@ public class GameField {
      * @throws InvalidFieldException             if there is more than 1 platform equal to null or the matrix is not 3x4
      * @throws InvalidAdjacentPlatformsException if the adjacency list has more than 2 nulls
      */
-    public GameField(ArrayList<Room> rooms, Platform[][] field) throws InvalidNumOfRoomsException, InvalidFieldException,
+    public GameField(Platform[][] field) throws InvalidFieldException, InvalidRoomException,
             InvalidAdjacentPlatformsException {
+        /*
         if (rooms.size() != 5 && rooms.size() != 6)
             throw new InvalidNumOfRoomsException();
-        this.rooms = rooms;
+        this.rooms = rooms;*/
         if (field.length != 3 || field[0].length != 4 || !hasMoreThan2Nulls())
             throw new InvalidFieldException();
         this.field = field;
         //build the adjacency list of every platform in the field
+        int cont = 0;
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[0].length; j++) {
                 Platform p = field[i][j];
-                buildPlatformAdjMap(p, i, j);
+                if (p != null)
+                    buildPlatformAdjMap(p, i, j);
+
             }
         }
+        // we may now build the rooms
+        this.rooms = new ArrayList<>();
+        buildRooms(field);
 
     }
 
@@ -127,5 +133,47 @@ public class GameField {
         platform.setAdjacentPlatforms(adjMap);
     }
 
+    /**
+     * it creates the array list of rooms
+     * firstly it creates the arraylists of platform having the same color,
+     * then those arraylists will be added to rooms arraylist
+     *
+     * @param field of the configuration chosen by the players
+     */
+    private void buildRooms(Platform[][] field) throws InvalidRoomException {
+        int numOfRooms;
+        List<Color> listOfColors = new ArrayList<>();
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field[0].length; j++) {
+                Platform p = field[i][j];
+                if (p != null) {
+                    Color c = p.getPlatformColor();
+                    if (!listOfColors.contains(c))
+                        listOfColors.add(c);
+                }
+            }
+        }
+        numOfRooms = listOfColors.size();
+        Color currentColor = null;
+        for (int i = 0; i < numOfRooms; i++) {
+            ArrayList<Platform> listOfPlat = new ArrayList<>();
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 4; k++) {
+                    Platform p = field[j][k];
+                    if (p != null) {
+                        if (listOfPlat.isEmpty() && listOfColors.contains(p.getPlatformColor()))
+                            currentColor=p.getPlatformColor();
+                        if (listOfColors.contains(p.getPlatformColor()) && p.getPlatformColor() == currentColor) {
+                            listOfPlat.add(p);
+                        }
+                    }
+                }
+            }
+            listOfColors.remove(currentColor);
+            Room r = new Room(listOfPlat);
+            this.rooms.add(r);
+        }
+
+    }
 
 }
