@@ -1,6 +1,8 @@
 package it.polimi.se2019.model.board;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 import it.polimi.se2019.exceptions.InvalidAdjacentPlatformsException;
 import it.polimi.se2019.exceptions.InvalidCardException;
@@ -19,6 +21,7 @@ import it.polimi.se2019.utils.HandyFunctions;
 public class Platform {
 
     private Room platformRoom;
+    private Color platformColor;
     private Map<Orientation, Platform> adjacentPlatforms;
     private int[] platformPosition;
     private boolean isGenerationSpot;
@@ -32,12 +35,14 @@ public class Platform {
      * @param platformPosition an array of length = 2, containing x and y coordinates
      * @param isGenerationSpot
      * @param platformAmmoCard
+     * @param platformColor    this four params will be parsed from json
      * @throws InvalidCardException if the starting ammo card of the platform is null
      */
-    public Platform(int[] platformPosition, boolean isGenerationSpot, AmmoCard platformAmmoCard)
+    public Platform(int[] platformPosition, boolean isGenerationSpot, AmmoCard platformAmmoCard, Color platformColor)
             throws InvalidCardException {
         this.platformPosition = platformPosition;
         this.isGenerationSpot = isGenerationSpot;
+        this.platformColor = platformColor;
         if (platformAmmoCard == null && !isGenerationSpot)
             throw new InvalidCardException("starting ammo card cannot be null");
         this.platformAmmoCard = platformAmmoCard;
@@ -85,6 +90,10 @@ public class Platform {
 
     public Room getPlatformRoom() {
         return platformRoom;
+    }
+
+    public Color getPlatformColor() {
+        return platformColor;
     }
 
     /**
