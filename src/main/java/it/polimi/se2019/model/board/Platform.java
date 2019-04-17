@@ -4,10 +4,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-import it.polimi.se2019.exceptions.InvalidAdjacentPlatformsException;
-import it.polimi.se2019.exceptions.InvalidCardException;
-import it.polimi.se2019.exceptions.InvalidCharacterException;
-import it.polimi.se2019.exceptions.InvalidRoomException;
+import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
@@ -120,6 +117,12 @@ public class Platform {
         return adjacentPlatforms.get(direction);
     }
 
+    public ArrayList<WeaponCard> getWeapons() throws InvalidGenerationSpotException {
+        if (!this.isGenerationSpot())
+            throw new InvalidGenerationSpotException();
+        return weapons;
+    }
+
     /**
      * @param platformRoom to link to this platform
      * @throws InvalidRoomException if the room is null
@@ -162,8 +165,14 @@ public class Platform {
         this.adjacentPlatforms = adjacentPlatforms;
     }
 
-    public ArrayList<WeaponCard> getWeapons(){
-        return weapons;
+    /**
+     * @param weapons to set to the generation spot
+     * @throws InvalidGenerationSpotException
+     */
+    public void setWeapons(ArrayList<WeaponCard> weapons) throws InvalidGenerationSpotException {
+        if (!this.isGenerationSpot())
+            throw new InvalidGenerationSpotException();
+        this.weapons = weapons;
     }
 
 }
