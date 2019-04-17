@@ -1,0 +1,295 @@
+{
+"config1": [
+	{
+		"x": 0,
+		"y": 0,
+		"isGenerationSpot": false,
+		"platformColor": null
+	},
+	{
+		"x": 1,
+		"y": 0,
+		"isGenerationSpot": true,
+		"platformColor": "BLUE"
+	},
+	{
+		"x": 2,
+		"y": 0,
+		"isGenerationSpot": false,
+		"platformColor": "BLUE"
+	},
+	{
+		"x": 3,
+		"y": 0,
+		"isGenerationSpot": false,
+		"platformColor": "RED"
+	},
+	{
+		"x": 0,
+		"y": 1,
+		"isGenerationSpot": false,
+		"platformColor": "YELLOW"
+	},
+	{
+		"x": 1,
+		"y": 1,
+		"isGenerationSpot": false,
+		"platformColor": "PINK"
+	},
+	{
+		"x": 2,
+		"y": 1,
+		"isGenerationSpot": false,
+		"platformColor": "PINK"
+	},
+	{
+		"x": 3,
+		"y": 1,
+		"isGenerationSpot": true,
+		"platformColor": "RED"
+	},
+	{
+		"x": 0,
+		"y": 2,
+		"isGenerationSpot": true,
+		"platformColor": "YELLOW"
+	},
+	{
+		"x": 1,
+		"y": 2,
+		"isGenerationSpot": false,
+		"platformColor": "WHITE"
+	},
+	{
+		"x": 2,
+		"y": 2,
+		"isGenerationSpot": false,
+		"platformColor": "WHITE"
+	},
+	{
+		"x": 3,
+		"y": 2,
+		"isGenerationSpot": false,
+		"platformColor": "WHITE"
+	}],
+"config2": [
+	{
+		"x": 0,
+		"y": 0,
+		"isGenerationSpot": false,
+		"platformColor": "BLUE"
+	},
+	{
+		"x": 1,
+		"y": 0,
+		"isGenerationSpot": false,
+		"platformColor": "BLUE"
+	},
+	{
+		"x": 2,
+		"y": 0,
+		"isGenerationSpot": true,
+		"platformColor": "BLUE"
+	},
+	{
+		"x": 3,
+		"y": 0,
+		"isGenerationSpot": false,
+		"platformColor": "GREEN"
+	},
+	{
+		"x": 0,
+		"y": 1,
+		"isGenerationSpot": true,
+		"platformColor": "RED"
+	},
+	{
+		"x": 1,
+		"y": 1,
+		"isGenerationSpot": false,
+		"platformColor": "RED"
+	},
+	{
+		"x": 2,
+		"y": 1,
+		"isGenerationSpot": false,
+		"platformColor": "YELLOW"
+	},
+	{
+		"x": 3,
+		"y": 1,
+		"isGenerationSpot": false,
+		"platformColor": "YELLOW"
+	},
+	{
+		"x": 0,
+		"y": 2,
+		"isGenerationSpot": false,
+		"platformColor": null
+	},
+	{
+		"x": 1,
+		"y": 2,
+		"isGenerationSpot": false,
+		"platformColor": "WHITE"
+	},
+	{
+		"x": 2,
+		"y": 2,
+		"isGenerationSpot": false,
+		"platformColor": "YELLOW"
+	},
+	{
+		"x": 3,
+		"y": 2,
+		"isGenerationSpot": true,
+		"platformColor": "YELLOW"
+	}],
+"config3": [
+	{
+		"x": 0,
+		"y": 0,
+		"isGenerationSpot": false,
+		"platformColor": null
+	},
+	{
+		"x": 1,
+		"y": 0,
+		"isGenerationSpot": true,
+		"platformColor": "BLUE"
+	},
+	{
+		"x": 2,
+		"y": 0,
+		"isGenerationSpot": false,
+		"platformColor": "BLUE"
+	},
+	{
+		"x": 3,
+		"y": 0,
+		"isGenerationSpot": false,
+		"platformColor": "BLUE"
+	},
+	{
+		"x": 0,
+		"y": 1,
+		"isGenerationSpot": false,
+		"platformColor": "YELLOW"
+	},
+	{
+		"x": 1,
+		"y": 1,
+		"isGenerationSpot": false,
+		"platformColor": "RED"
+	},
+	{
+		"x": 2,
+		"y": 1,
+		"isGenerationSpot": false,
+		"platformColor": "RED"
+	},
+	{
+		"x": 3,
+		"y": 1,
+		"isGenerationSpot": true,
+		"platformColor": "RED"
+	},
+	{
+		"x": 0,
+		"y": 2,
+		"isGenerationSpot": true,
+		"platformColor": "YELLOW"
+	},
+	{
+		"x": 1,
+		"y": 2,
+		"isGenerationSpot": false,
+		"platformColor": "WHITE"
+	},
+	{
+		"x": 2,
+		"y": 2,
+		"isGenerationSpot": false,
+		"platformColor": "WHITE"
+	},
+	{
+		"x": 3,
+		"y": 2,
+		"isGenerationSpot": false,
+		"platformColor": null
+	}],
+"config4": [
+	{
+		"x": 0,
+		"y": 0,
+		"isGenerationSpot": false,
+		"platformColor": "RED"
+	},
+	{
+		"x": 1,
+		"y": 0,
+		"isGenerationSpot": false,
+		"platformColor": "BLUE"
+	},
+	{
+		"x": 2,
+		"y": 0,
+		"isGenerationSpot": true,
+		"platformColor": "BLUE"
+	},
+	{
+		"x": 3,
+		"y": 0,
+		"isGenerationSpot": false,
+		"platformColor": "GREEN"
+	},
+	{
+		"x": 0,
+		"y": 1,
+		"isGenerationSpot": true,
+		"platformColor": "RED"
+	},
+	{
+		"x": 1,
+		"y": 1,
+		"isGenerationSpot": false,
+		"platformColor": "PINK"
+	},
+	{
+		"x": 2,
+		"y": 1,
+		"isGenerationSpot": false,
+		"platformColor": "YELLOW"
+	},
+	{
+		"x": 3,
+		"y": 1,
+		"isGenerationSpot": false,
+		"platformColor": "YELLOW"
+	},
+	{
+		"x": 0,
+		"y": 2,
+		"isGenerationSpot": false,
+		"platformColor": "WHITE"
+	},
+	{
+		"x": 1,
+		"y": 2,
+		"isGenerationSpot": false,
+		"platformColor": "WHITE"
+	},
+	{
+		"x": 2,
+		"y": 2,
+		"isGenerationSpot": false,
+		"platformColor": "YELLOW"
+	},
+	{
+		"x": 3,
+		"y": 2,
+		"isGenerationSpot": true,
+		"platformColor": "YELLOW"
+	}]
+}
+

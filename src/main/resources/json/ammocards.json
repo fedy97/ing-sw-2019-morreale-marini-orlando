@@ -1,0 +1,46 @@
+{
+  "ammos": [
+    {
+      "powerup": false,
+      "ammocube1": "RED",
+      "ammocube2": "YELLOW",
+      "ammocube3": "YELLOW"
+    },
+    {
+      "powerup": false,
+      "ammocube1": "BLUE",
+      "ammocube2": "RED",
+      "ammocube3": "RED"
+    },
+    {
+      "powerup": true,
+      "ammocube1": "RED",
+      "ammocube2": "BLUE",
+      "ammocube3": null
+    },
+    {
+      "powerup": true,
+      "ammocube1": "RED",
+      "ammocube2": "YELLOW",
+      "ammocube3": null
+    },
+    {
+      "powerup": false,
+      "ammocube1": "YELLOW",
+      "ammocube2": "BLUE",
+      "ammocube3": "BLUE"
+    },
+    {
+      "powerup": false,
+      "ammocube1": "RED",
+      "ammocube2": "BLUE",
+      "ammocube3": "BLUE"
+    },
+    {
+      "powerup": true,
+      "ammocube1": "BLUE",
+      "ammocube2": "BLUE",
+      "ammocube3": null
+    }
+  ]
+}
