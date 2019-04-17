@@ -1,5 +1,6 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.exceptions.InvalidGenerationSpotException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
@@ -40,14 +41,14 @@ public abstract class Validator {
      * @return the list of weapons that can be grabbed by the player in his current position
      * according to the ammo qty in his AmmoBox
      */
-    public ArrayList<WeaponCard> getGrabableWeapons() {
+    public ArrayList<WeaponCard> getGrabableWeapons() throws InvalidGenerationSpotException {
         ArrayList<WeaponCard> res = new ArrayList<>();
         Player currPlayer = playerManager.getCurrentPlayer();
         AmmoBox ammoBox = currPlayer.getPlayerBoard().getAmmoBox();
         Platform p = currPlayer.getCurrentPlatform();
 
         if (!p.isGenerationSpot())
-            return res;
+            throw new InvalidGenerationSpotException();
 
         res.addAll(p.getWeapons());
 
