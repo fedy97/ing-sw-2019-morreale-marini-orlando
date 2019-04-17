@@ -16,7 +16,7 @@ import java.util.*;
 public class Model extends Observable {
 
     private Table table;
-    private Player players;
+    private ArrayList<Player> players;
     private Deck<WeaponCard> weaponsDeck;
     private Deck<PowerUpCard> powerUpDeck;
     private Deck<PowerUpCard> garbageDeck;
@@ -34,43 +34,43 @@ public class Model extends Observable {
     /**
      * @return the players
      */
-    public Player getPlayers() {
-        return null;
+    public List<Player> getPlayers() {
+        return players;
     }
 
     /**
      * @return
      */
     public Deck<WeaponCard> getWeaponsDeck() {
-        return null;
+        return weaponsDeck;
     }
 
     /**
      * @return
      */
     public Deck<PowerUpCard> getPowerUpDeck() {
-        return null;
+        return powerUpDeck;
     }
 
     /**
      * @return
      */
     public Deck<PowerUpCard> getGarbageDeck() {
-        return null;
+        return garbageDeck;
     }
 
     /**
      * @return
      */
     public Deck<AmmoCard> getAmmoDeck() {
-        return null;
+        return ammoDeck;
     }
 
     /**
      * @return
      */
     public Map<Character,Player> getCharacterPlayers() {
-        return null;
+        return characterPlayers;
     }
 
     /**
@@ -80,7 +80,7 @@ public class Model extends Observable {
     }
 
     /**
-     * @param player
+     * @param player to link to the character
      * @param character
      */
     public void setPlayerCharacter(Player player, Character character) {
