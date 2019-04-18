@@ -1,6 +1,8 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.exceptions.InsufficientAmmoException;
+import it.polimi.se2019.exceptions.InvalidCardException;
+import it.polimi.se2019.exceptions.InvalidDeckException;
 import it.polimi.se2019.exceptions.MaxWeaponException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
@@ -21,10 +23,12 @@ public class PlayerManager {
 
     private Player currentPlayer;
     private int actionsLeft;
+    private Controller father;
 
-    public PlayerManager(Player player) {
-        actionsLeft = 0;
+    public PlayerManager(Player player, Controller father) {
+        actionsLeft = 2;
         currentPlayer = player;
+        this.father = father;
     }
 
     /**
@@ -35,10 +39,14 @@ public class PlayerManager {
     }
 
     public void useAction() {
-
+        actionsLeft--;
     }
 
+    /**
+     * Reset the actions the current player can perform
+     */
     public void resetActionLeft() {
+        actionsLeft = 2;
     }
 
     /**
@@ -57,13 +65,11 @@ public class PlayerManager {
      * @param dirs the set of directions to follow to move the players
      */
     public void move(ArrayList<Orientation> dirs) {
-
         Platform platform = currentPlayer.getCurrentPlatform();
         for (Orientation dir : dirs) {
             platform = platform.getAdjacentPlatform(dir);
         }
         currentPlayer.setCurrentPlatform(platform);
-
     }
 
     /**
@@ -79,7 +85,7 @@ public class PlayerManager {
      * @param targets
      * @param weapon
      */
-    public void shoot(ArrayList<Orientation> dir, boolean reload, ArrayList<Player> targets, WeaponCard weapon) {
+    public void shoot(ArrayList<Player> targets, WeaponCard weapon) {
 
     }
 
@@ -99,10 +105,16 @@ public class PlayerManager {
     }
 
     /**
-     * @param powerUp
+     * @param powerUp chosen by the player from the list of those allowed by the validator
+     * @throws InvalidCardException if the card doesn't belong to the current player
      */
-    public void usePowerUp(PowerUpCard powerUp) {
+    public void usePowerUp(PowerUpCard powerUp) throws InvalidCardException {
+        if (!currentPlayer.getPowerUpCards().contains(powerUp))
+            throw new InvalidCardException("The PowerUp doesn't belong to the current player, something went wrong!");
 
+        powerUp.useEffect(father);
+        currentPlayer.removePowerUpCard(powerUp);
+        father.getDecksManager().addToGarbage(powerUp);
     }
 
     /**
@@ -116,11 +128,11 @@ public class PlayerManager {
             if (box.hasAmmos(weaponCard.getTotalCost()))
                 weaponCard.reload();
             else
-                throw new InsufficientAmmoException("CurrentPlayer hasn't enough ammos to recharhe the weapons");
+                throw new InsufficientAmmoException("CurrentPlayer hasn't enough ammos to recharge the weapons");
         }
     }
 
-    public Player getCurrentPlayer(){
+    public Player getCurrentPlayer() {
         return currentPlayer;
     }
 

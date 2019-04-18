@@ -27,7 +27,7 @@ public class Player {
     private ArrayList<PowerUpCard> powerUpCards;
     private ArrayList<WeaponCard> weaponCards;
     private int frenzyModeType;
-
+    private boolean underAttack;
 
     /**
      * Class constructor that initializes data structures that will be used
@@ -189,11 +189,11 @@ public class Player {
      * @throws NullPointerException if card reference is null
      * @throws MissingCardException if powerUpCards does not contain card
      */
-    public void removePowerUpCard(PowerUpCard card) throws NullPointerException, MissingCardException {
+    public void removePowerUpCard(PowerUpCard card) throws NullPointerException {
         if (card == null)
             throw new NullPointerException("Card can not be null!");
-        if (!powerUpCards.contains(card))
-            throw new MissingCardException("PowerUpCards does not contain this card!");
+    /**    if (!powerUpCards.contains(card))
+            throw new MissingCardException("PowerUpCards does not contain this card!");*/
         powerUpCards.remove(card);
     }
 
@@ -233,6 +233,18 @@ public class Player {
      */
     public void setFrenzyModeType(int type) {
         frenzyModeType = type;
+    }
+
+    public void setUnderAttackMode(){
+        underAttack = true;
+    }
+
+    public void resetAttackMode(){
+        underAttack = false;
+    }
+
+    public boolean isUnderAttack(){
+        return underAttack;
     }
 
 }

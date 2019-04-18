@@ -1,12 +1,12 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.model.Model;
+import it.polimi.se2019.model.Game;
 
 /**
  * @author Gabriel Raul Marini
  */
 public class Controller {
-    private Model model;
+    private Game game;
     private DecksManager decksManager;
     private GameManager gameManager;
     private PlayerManager playerManager;
@@ -20,13 +20,13 @@ public class Controller {
     /**
      * Instatiate a new controller class
      *
-     * @param model
+     * @param game
      * @param decksManager
      * @param gameManager
      * @param playerManager
      */
-    public Controller(Model model, DecksManager decksManager, GameManager gameManager, PlayerManager playerManager) {
-        this.model = model;
+    public Controller(Game game, DecksManager decksManager, GameManager gameManager, PlayerManager playerManager) {
+        this.game = game;
         this.decksManager = decksManager;
         this.gameManager = gameManager;
         this.playerManager = playerManager;
@@ -35,15 +35,15 @@ public class Controller {
     /**
      * @return
      */
-    public Model getModel() {
-        return model;
+    public Game getGame() {
+        return game;
     }
 
     /**
-     * @param model
+     * @param game
      */
-    public void setModel(Model model) {
-        this.model = model;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     /**
