@@ -37,8 +37,9 @@ public class Platform {
      * @param platformColor    this four params will be parsed from json
      * @throws InvalidCardException if the starting ammo card of the platform is null
      */
-    public Platform(int[] platformPosition, boolean isGenerationSpot, AmmoCard platformAmmoCard, Color platformColor)
+    public Platform(int[] platformPosition, boolean isGenerationSpot, AmmoCard platformAmmoCard, Color platformColor, ArrayList<Orientation> doors)
             throws InvalidCardException {
+        this.doorLocation = doors;
         this.platformPosition = platformPosition;
         this.isGenerationSpot = isGenerationSpot;
         this.platformColor = platformColor;
@@ -47,12 +48,6 @@ public class Platform {
         this.platformAmmoCard = platformAmmoCard;
         this.playersOnThePlatform = new ArrayList<>();
         //build the arraylist of doors of the platform, knowing the adjacent platforms
-        this.doorLocation = new ArrayList<>();
-        for (Map.Entry<Orientation, Platform> entry : adjacentPlatforms.entrySet()) {
-            if (entry.getValue().getPlatformRoom() != this.getPlatformRoom())
-                this.doorLocation.add(entry.getKey());
-        }
-        this.hasDoor = doorLocation.isEmpty() ? false : true;
         this.hasAmmoCard = platformAmmoCard == null ? false : true;
 
     }
@@ -175,4 +170,11 @@ public class Platform {
         this.weapons = weapons;
     }
 
+    public void setDoorLocation(ArrayList<Orientation> doorLocation) {
+        this.doorLocation = doorLocation;
+    }
+
+    public void setHasDoor(boolean hasDoor) {
+        this.hasDoor = hasDoor;
+    }
 }

@@ -28,11 +28,8 @@ public class GameField {
      */
     public GameField(Platform[][] field) throws InvalidFieldException, InvalidRoomException,
             InvalidAdjacentPlatformsException {
-        /*
-        if (rooms.size() != 5 && rooms.size() != 6)
-            throw new InvalidNumOfRoomsException();
-        this.rooms = rooms;*/
-        if (field.length != 3 || field[0].length != 4 || !hasMoreThan2Nulls())
+
+        if (hasMoreThan2Nulls(field))
             throw new InvalidFieldException();
         this.field = field;
         //build the adjacency list of every platform in the field
@@ -40,15 +37,16 @@ public class GameField {
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[0].length; j++) {
                 Platform p = field[i][j];
-                if (p != null)
+                if (p != null) {
                     buildPlatformAdjMap(p, i, j);
-
+                    //to be removed buildDoorLocation(p);
+                }
             }
         }
+
         // we may now build the rooms
         this.rooms = new ArrayList<>();
-        buildRooms(field);
-
+        buildRooms();
     }
 
     /**
@@ -94,7 +92,7 @@ public class GameField {
     /**
      * @return true if the field has more than 2 nulls, if so, the field is not valid
      */
-    private boolean hasMoreThan2Nulls() {
+    private boolean hasMoreThan2Nulls(Platform[][] field) {
         int counter = 0;
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[0].length; j++) {
@@ -114,20 +112,25 @@ public class GameField {
      */
     private void buildPlatformAdjMap(Platform platform, int row, int column) throws InvalidAdjacentPlatformsException {
         EnumMap<Orientation, Platform> adjMap = new EnumMap<>(Orientation.class);
-        if (row - 1 < 0) adjMap.put(Orientation.UP, null);
-        else adjMap.put(Orientation.UP, field[row - 1][column]);
-        if (row + 1 >= field.length) adjMap.put(Orientation.DOWN, null);
-        else adjMap.put(Orientation.UP, field[row + 1][column]);
-        if (column - 1 < 0) adjMap.put(Orientation.LEFT, null);
-        else adjMap.put(Orientation.UP, field[row][column - 1]);
-        if (column + 1 >= field[0].length) adjMap.put(Orientation.RIGHT, null);
-        else adjMap.put(Orientation.UP, field[row][column + 1]);
+        if (row - 1 >= 0 && field[row - 1][column] != null && (platform.getPlatformColor().equals(field[row - 1][column].getPlatformColor()) || platform.getDoorLocation().contains(Orientation.UP)))
+            adjMap.put(Orientation.UP, field[row - 1][column]);
+        else adjMap.put(Orientation.UP, null);
+        if (row + 1 < 3 && field[row + 1][column] != null && (platform.getPlatformColor().equals(field[row + 1][column].getPlatformColor()) || platform.getDoorLocation().contains(Orientation.DOWN)))
+            adjMap.put(Orientation.DOWN, field[row + 1][column]);
+        else adjMap.put(Orientation.DOWN, null);
+        if (column - 1 >= 0 && field[row][column - 1] != null && (platform.getPlatformColor().equals(field[row][column - 1].getPlatformColor()) || platform.getDoorLocation().contains(Orientation.LEFT)))
+            adjMap.put(Orientation.LEFT, field[row][column - 1]);
+        else adjMap.put(Orientation.LEFT, null);
+        if (column + 1 < 4 && field[row][column + 1] != null && (platform.getPlatformColor().equals(field[row][column + 1].getPlatformColor()) || platform.getDoorLocation().contains(Orientation.RIGHT)))
+            adjMap.put(Orientation.RIGHT, field[row][column + 1]);
+        else adjMap.put(Orientation.RIGHT, null);
+
         //check if it's a valid adjacency list
         int numOfNull = 0;
         for (Platform p : adjMap.values()) {
             if (p == null) numOfNull++;
         }
-        if (numOfNull >= 2)
+        if (numOfNull > 2)
             throw new InvalidAdjacentPlatformsException();
 
         platform.setAdjacentPlatforms(adjMap);
@@ -137,10 +140,8 @@ public class GameField {
      * it creates the array list of rooms
      * firstly it creates the arraylists of platform having the same color,
      * then those arraylists will be added to rooms arraylist
-     *
-     * @param field of the configuration chosen by the players
      */
-    private void buildRooms(Platform[][] field) throws InvalidRoomException {
+    private void buildRooms() throws InvalidRoomException {
         int numOfRooms;
         List<Color> listOfColors = new ArrayList<>();
         for (int i = 0; i < field.length; i++) {
@@ -162,7 +163,7 @@ public class GameField {
                     Platform p = field[j][k];
                     if (p != null) {
                         if (listOfPlat.isEmpty() && listOfColors.contains(p.getPlatformColor()))
-                            currentColor=p.getPlatformColor();
+                            currentColor = p.getPlatformColor();
                         if (listOfColors.contains(p.getPlatformColor()) && p.getPlatformColor() == currentColor) {
                             listOfPlat.add(p);
                         }
@@ -175,5 +176,17 @@ public class GameField {
         }
 
     }
+
+    /*public void buildDoorLocation(Platform p) {
+
+        ArrayList<Orientation> or = new ArrayList<>();
+        for (Map.Entry<Orientation, Platform> entry : p.getAdjacentPlatforms().entrySet()) {
+            if (entry.getValue().getPlatformRoom() != p.getPlatformRoom())
+                or.add(entry.getKey());
+        }
+        p.setDoorLocation(or);
+        p.setHasDoor(p.getDoorLocation().isEmpty() ? false : true);
+
+    }*/
 
 }

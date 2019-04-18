@@ -1,12 +1,17 @@
 package it.polimi.se2019.utils;
 
 import it.polimi.se2019.exceptions.InvalidCardException;
+import it.polimi.se2019.exceptions.InvalidFieldException;
+import it.polimi.se2019.exceptions.NoCardException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.AmmoCard;
+import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.enumeration.AmmoCube;
+import it.polimi.se2019.model.enumeration.Orientation;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,7 +78,46 @@ public class JsonParser {
         return null;
     }
 
-    public Platform[][] buildField() {
+    /**
+     * @param numConfig there are 4 configurations of the field in json file
+     * @param deck      of the ammocards, it has to be full
+     * @return the matrix 3x4 of the platforms
+     * @throws NoCardException
+     * @throws InvalidCardException
+     */
+    public Platform[][] buildField(int numConfig, Deck<AmmoCard> deck) throws NoCardException, InvalidCardException,
+            NoSuchFieldException,IllegalAccessException {
+        if (path.equals("/json/field.json")) {
+            Platform[][] field = new Platform[3][4];
+            int[] pos;
+            boolean isGenSpot;
+            Color platCol;
+            AmmoCard ammoC;
+            ArrayList<Orientation> arrOr;
+            JSONArray configObj = jsonObj.getJSONArray("config" + numConfig);
+
+            for (int i = 0; i < configObj.length(); i++) {
+                arrOr = new ArrayList<>();
+                JSONObject currPlatformObj = configObj.getJSONObject(i);
+                JSONArray jarr = currPlatformObj.getJSONArray("orientation");
+                pos = new int[2];
+                pos[1] = currPlatformObj.getInt("x");
+                pos[0] = currPlatformObj.getInt("y");
+                if (!currPlatformObj.getString("platformColor").isEmpty()) {
+                    for (int j = 0; j < jarr.length(); j++)
+                        arrOr.add(Orientation.valueOf(jarr.get(j).toString()));
+                    isGenSpot = currPlatformObj.getBoolean("isGenerationSpot");
+                    String nameCol = currPlatformObj.getString("platformColor");
+                    platCol = (Color)Color.class.getField(nameCol).get(null);
+                    ammoC = deck.drawCard();
+                    Platform p = new Platform(pos, isGenSpot, ammoC, platCol, arrOr);
+                    field[pos[0]][pos[1]] = p;
+                } else {
+                    field[pos[0]][pos[1]] = null;
+                }
+            }
+            return field;
+        }
         return null;
     }
 }

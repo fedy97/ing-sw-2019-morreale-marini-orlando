@@ -26,7 +26,7 @@ public class TestPlatform {
         pos[1] = 0;
         try {
             AmmoCard ammoCard = new AmmoCard(ammoCubes, true);
-            Platform p = new Platform(pos, false, ammoCard, null);
+            Platform p = new Platform(pos, false, ammoCard, null, null);
             platforms.add(p);
             /*
                 setPlatformRoom() is called by Room constructor
@@ -51,14 +51,14 @@ public class TestPlatform {
     @Test
     public void testSetPlatformAmmoCard() {
         try {
-            Platform p = new Platform(new int[2], false, null, null);
+            Platform p = new Platform(new int[2], false, null, null,null);
             fail();
         } catch (InvalidCardException ex) {
 
         }
         try {
             AmmoCard ammoC = new AmmoCard(new AmmoCube[2], true);
-            Platform p3 = new Platform(new int[2], true, ammoC, null);
+            Platform p3 = new Platform(new int[2], true, ammoC, null,null);
             AmmoCard ammoC2 = new AmmoCard(new AmmoCube[3], false);
             p3.setPlatformAmmoCard(ammoC2);
         } catch (InvalidCardException ex) {
@@ -67,14 +67,14 @@ public class TestPlatform {
         }
         try {
             AmmoCard ammoC = new AmmoCard(new AmmoCube[2], true);
-            Platform p4 = new Platform(new int[2], false, ammoC, null);
+            Platform p4 = new Platform(new int[2], false, ammoC, null,null);
             p4.setPlatformAmmoCard(null);
             fail();
         } catch (InvalidCardException ex) {
         } catch (NullPointerException ex) {
         }
         try {
-            Platform p4 = new Platform(new int[2], true, null, null);
+            Platform p4 = new Platform(new int[2], true, null, null,null);
             p4.setPlatformAmmoCard(new AmmoCard(new AmmoCube[2], true));
             fail();
         } catch (InvalidCardException ex) {
@@ -88,7 +88,7 @@ public class TestPlatform {
 
         try {
             c1.setPlayerName("morre");
-            Platform p1 = new Platform(new int[2], true, null, null);
+            Platform p1 = new Platform(new int[2], true, null, null,null);
             p1.setPlayerOnPlatform(c1);
         } catch (InvalidCardException ex) {
         } catch (InvalidCharacterException ex) {

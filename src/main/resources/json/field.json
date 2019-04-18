@@ -4,73 +4,85 @@
 		"x": 0,
 		"y": 0,
 		"isGenerationSpot": false,
-		"platformColor": null
+		"platformColor": "",
+		"orientation": [""]
 	},
 	{
 		"x": 1,
 		"y": 0,
 		"isGenerationSpot": true,
-		"platformColor": "BLUE"
+		"platformColor": "BLUE",
+		"orientation": ["DOWN"]
 	},
 	{
 		"x": 2,
 		"y": 0,
 		"isGenerationSpot": false,
-		"platformColor": "BLUE"
+		"platformColor": "BLUE",
+		"orientation": ["DOWN", "RIGHT"]
 	},
 	{
 		"x": 3,
 		"y": 0,
 		"isGenerationSpot": false,
-		"platformColor": "RED"
+		"platformColor": "RED",
+		"orientation": ["LEFT"]
 	},
 	{
 		"x": 0,
 		"y": 1,
 		"isGenerationSpot": false,
-		"platformColor": "YELLOW"
+		"platformColor": "YELLOW",
+		"orientation": ["RIGHT"]
 	},
 	{
 		"x": 1,
 		"y": 1,
 		"isGenerationSpot": false,
-		"platformColor": "PINK"
+		"platformColor": "PINK",
+		"orientation": ["UP","LEFT"]
 	},
 	{
 		"x": 2,
 		"y": 1,
 		"isGenerationSpot": false,
-		"platformColor": "PINK"
+		"platformColor": "PINK",
+		"orientation": ["UP", "DOWN"]
 	},
 	{
 		"x": 3,
 		"y": 1,
 		"isGenerationSpot": true,
-		"platformColor": "RED"
+		"platformColor": "RED",
+		"orientation": ["DOWN"]
 	},
 	{
 		"x": 0,
 		"y": 2,
 		"isGenerationSpot": true,
-		"platformColor": "YELLOW"
+		"platformColor": "YELLOW",
+		"orientation": ["RIGHT"]
 	},
 	{
 		"x": 1,
 		"y": 2,
 		"isGenerationSpot": false,
-		"platformColor": "WHITE"
+		"platformColor": "WHITE",
+		"orientation": ["LEFT"]
 	},
 	{
 		"x": 2,
 		"y": 2,
 		"isGenerationSpot": false,
-		"platformColor": "WHITE"
+		"platformColor": "WHITE",
+		"orientation": ["UP"]
 	},
 	{
 		"x": 3,
 		"y": 2,
 		"isGenerationSpot": false,
-		"platformColor": "WHITE"
+		"platformColor": "WHITE",
+		"orientation": ["UP"]
 	}],
 "config2": [
 	{
@@ -125,7 +137,7 @@
 		"x": 0,
 		"y": 2,
 		"isGenerationSpot": false,
-		"platformColor": null
+		"platformColor": ""
 	},
 	{
 		"x": 1,
@@ -150,7 +162,7 @@
 		"x": 0,
 		"y": 0,
 		"isGenerationSpot": false,
-		"platformColor": null
+		"platformColor": ""
 	},
 	{
 		"x": 1,
@@ -216,7 +228,7 @@
 		"x": 3,
 		"y": 2,
 		"isGenerationSpot": false,
-		"platformColor": null
+		"platformColor": ""
 	}],
 "config4": [
 	{
