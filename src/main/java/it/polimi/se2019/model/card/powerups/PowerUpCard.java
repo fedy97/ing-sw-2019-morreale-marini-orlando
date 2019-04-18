@@ -1,7 +1,9 @@
 package it.polimi.se2019.model.card.powerups;
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.enumeration.AmmoCube;
+import it.polimi.se2019.model.player.Player;
 
 /**
  * A class representing the PowerUp card of the game
@@ -14,8 +16,8 @@ public abstract class PowerUpCard extends Card {
 
 
     /**
-     *
      * Instantiate an anonymous PowerUp card
+     *
      * @param ammoCube the type of cube the player can use instead of using the
      *                 PowerUp effect
      */
@@ -35,6 +37,11 @@ public abstract class PowerUpCard extends Card {
     /**
      * Activate the effect of the card
      */
-    public abstract void useEffect();
+    public abstract void useEffect(Controller c);
+
+    /**
+     * Return if the player in his current state can use the power up or not
+     */
+    public abstract boolean isUsable(Player player);
 
 }

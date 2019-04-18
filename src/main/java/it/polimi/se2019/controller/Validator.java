@@ -2,9 +2,8 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.exceptions.InvalidGenerationSpotException;
 import it.polimi.se2019.model.board.Platform;
+import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
-import it.polimi.se2019.model.enumeration.AmmoCube;
-import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
 
@@ -76,4 +75,17 @@ public abstract class Validator {
         return res;
     }
 
+    /**
+     * @return the list of PowerUp cards the player can use in the actual state of the game
+     */
+    public ArrayList<PowerUpCard> getUsablePowerUps() {
+        ArrayList<PowerUpCard> res = new ArrayList<>();
+        Player currPlayer = playerManager.getCurrentPlayer();
+
+        for (PowerUpCard powerUp : currPlayer.getPowerUpCards())
+            if (powerUp.isUsable(currPlayer))
+                res.add(powerUp);
+
+        return res;
+    }
 }

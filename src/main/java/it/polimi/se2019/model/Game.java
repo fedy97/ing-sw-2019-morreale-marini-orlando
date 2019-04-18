@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * @author Federico Morreale
  */
-public class Model extends Observable {
+public class Game extends Observable {
 
     private Table table;
     private ArrayList<Player> players;
@@ -23,7 +23,7 @@ public class Model extends Observable {
     private Deck<AmmoCard> ammoDeck;
     private Map<Character, Player> characterPlayers;
     
-    public Model() {
+    public Game() {
     }
     
     public Table getTable() {

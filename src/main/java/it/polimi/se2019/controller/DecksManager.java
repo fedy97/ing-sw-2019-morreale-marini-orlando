@@ -6,6 +6,8 @@ import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 
+import java.util.ArrayList;
+
 /**
  * A class that manages the refill and the draw operations on the deck
  *
@@ -14,10 +16,10 @@ import it.polimi.se2019.model.card.powerups.PowerUpCard;
 public class DecksManager {
 
     private Deck<PowerUpCard> powerUps;
-    private Deck<PowerUpCard> garbageDeck;
+    private ArrayList<PowerUpCard> garbageDeck;
     private Deck<AmmoCard> ammoDeck;
 
-    public DecksManager(Deck<PowerUpCard> powerUps, Deck<PowerUpCard> garbageDeck, Deck<AmmoCard> ammoDeck) {
+    public DecksManager(Deck<PowerUpCard> powerUps, ArrayList<PowerUpCard> garbageDeck, Deck<AmmoCard> ammoDeck) {
         this.powerUps = powerUps;
         this.garbageDeck = garbageDeck;
         this.ammoDeck = ammoDeck;
@@ -59,10 +61,18 @@ public class DecksManager {
     private void refillDeck() {
         try {
             powerUps.addCards(garbageDeck);
+            garbageDeck.clear();
             powerUps.mix();
         } catch (InvalidDeckException e) {
             System.out.println("Something went wrong when refilling the deck");
         }
+    }
+
+    /**
+     * @param powerUp used by player and discarded
+     */
+    public void addToGarbage(PowerUpCard powerUp) {
+        garbageDeck.add(powerUp);
     }
 
 }
