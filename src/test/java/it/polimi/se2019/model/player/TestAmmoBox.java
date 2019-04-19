@@ -68,25 +68,6 @@ public class TestAmmoBox {
         assertEquals(yellow, 3);
         assertEquals(blue, 3);
 
-        /*
-            Test of the impossibility of having a null AmmoCube
-         */
-        try {
-            myAmmoBox.addAmmos(null, 1);
-            fail();
-        } catch (NullPointerException e) {
-
-        }
-
-        /*
-            Test of the impossibility of adding a number of negative ammunition
-         */
-        try {
-            myAmmoBox.addAmmos(AmmoCube.BLUE, -4);
-            fail();
-        } catch (IllegalArgumentException e) {
-
-        }
 
     }
 
@@ -130,26 +111,6 @@ public class TestAmmoBox {
         assertEquals(myAmmoBox.getYellowAmmos(), 0);
         assertEquals(myAmmoBox.getBlueAmmos(), 0);
 
-        /*
-            Test of the impossibility of having a null AmmoCube
-         */
-        try {
-            myAmmoBox.removeAmmos(null, 1);
-            fail();
-        } catch (NullPointerException e) {
-
-        }
-
-        /*
-            Test of the impossibility of removing a number of negative ammunition
-         */
-        try {
-            myAmmoBox.removeAmmos(AmmoCube.BLUE, -3);
-            fail();
-        } catch (IllegalArgumentException e) {
-
-        }
-
     }
 
     /**
@@ -157,6 +118,9 @@ public class TestAmmoBox {
      */
     @Test
     public void testCheckAmmos() {
+        /*
+         * By default a new AmmoBox has 1 cube of each color
+         */
         AmmoBox ammoBox = new AmmoBox();
         AmmoCube[] ammoCubes = {AmmoCube.BLUE, AmmoCube.BLUE, AmmoCube.YELLOW};
 
@@ -166,13 +130,16 @@ public class TestAmmoBox {
         ammoBox.addAmmos(AmmoCube.BLUE, 2);
 
         assertTrue(ammoBox.hasAmmos(ammoCubes));
+        assertTrue(ammoBox.hasAmmo(AmmoCube.RED));
 
         /*
          *  The ammoBox hasn't enough BLUE cubes, expected value is false
          */
         ammoBox.removeAmmos(AmmoCube.BLUE, 2);
+        ammoBox.removeAmmos(AmmoCube.RED, 1);
 
         assertFalse(ammoBox.hasAmmos(ammoCubes));
+        assertFalse(ammoBox.hasAmmo(AmmoCube.RED));
     }
 
 

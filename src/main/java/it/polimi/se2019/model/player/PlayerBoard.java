@@ -88,14 +88,8 @@ public class PlayerBoard {
      * Add marks to the player
      * @param character The character of player who marks
      * @param value The number of marks to be added
-     * @throws InvalidCharacterException if value is less than zero
-     * @throws NegativeNumberException if character reference is null
      */
-    public void addRevengeMark(Character character, int value) throws InvalidCharacterException, NegativeNumberException {
-        if (value < 0)
-            throw new NegativeNumberException("Value should be greater than zero!");
-        if(character == null)
-            throw new InvalidCharacterException("Character cannot be null!");
+    public void addRevengeMark(Character character, int value){
         int counter = 0;
         for (Character c: revengeMarks) {
             if (c == character)

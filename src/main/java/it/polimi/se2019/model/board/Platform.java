@@ -146,7 +146,7 @@ public class Platform {
      */
     public void setPlayerOnPlatform(Character character) throws InvalidCharacterException {
         if (!HandyFunctions.characterExists(character))
-            throw new InvalidCharacterException();
+            throw new InvalidCharacterException("Character selected does not exists");
         playersOnThePlatform.add(character);
     }
 

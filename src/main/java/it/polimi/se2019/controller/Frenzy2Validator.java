@@ -9,8 +9,8 @@ import java.util.*;
  */
 public class Frenzy2Validator extends Validator {
 
-    public Frenzy2Validator(PlayerManager playerManager) {
-        super(playerManager);
+    public Frenzy2Validator(PlayerManager playerManager, Controller father) {
+        super(playerManager, father);
     }
 
     public ArrayList<Platform> getValidMoves() {

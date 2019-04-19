@@ -5,6 +5,8 @@ import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.Player;
 
+import java.util.List;
+
 /**
  * A class representing the PowerUp card of the game
  *
@@ -13,7 +15,6 @@ import it.polimi.se2019.model.player.Player;
 public abstract class PowerUpCard extends Card {
 
     private AmmoCube value;
-
 
     /**
      * Instantiate an anonymous PowerUp card
@@ -43,5 +44,10 @@ public abstract class PowerUpCard extends Card {
      * Return if the player in his current state can use the power up or not
      */
     public abstract boolean isUsable(Player player);
+
+    /**
+     * @return a collection of players that can be the target
+     */
+    public abstract List<Player> getPossibleTargets(Controller c);
 
 }

@@ -33,7 +33,7 @@ public class ScoreBoard {
      */
     public Integer getScorePlayer(Character character) throws InvalidCharacterException {
         if (!HandyFunctions.characterExists(character))
-            throw new InvalidCharacterException();
+            throw new InvalidCharacterException("Invalid character!");
         return scoreBoard.get(character);
     }
 
@@ -51,7 +51,7 @@ public class ScoreBoard {
         if (quantity < 1)
             throw new InvalidQuantityException("the score to set to the player must be > 0");
         if (!HandyFunctions.characterExists(character))
-            throw new InvalidCharacterException();
+            throw new InvalidCharacterException("Invalid character!");
         scoreBoard.replace(character, scoreBoard.get(character) + quantity);
     }
 

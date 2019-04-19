@@ -9,8 +9,8 @@ import java.util.*;
  */
 public class DamagedValidator extends Validator {
 
-    public DamagedValidator(PlayerManager playerManager) {
-        super(playerManager);
+    public DamagedValidator(PlayerManager playerManager, Controller father) {
+        super(playerManager, father);
     }
 
     public ArrayList<Platform> getValidMoves(){

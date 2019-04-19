@@ -70,7 +70,7 @@ public class GameField {
      */
     public Room getRoom(int[] position) throws InvalidPositionException {
         if (!HandyFunctions.isValidPosition(position))
-            throw new InvalidPositionException();
+            throw new InvalidPositionException("Invalid position");
         Platform p = field[position[0]][position[1]];
         for (Room r : rooms) {
             if (r.getPlatformsInRoom().contains(p)) return r;
@@ -85,7 +85,7 @@ public class GameField {
      */
     public Platform getPlatform(int[] position) throws InvalidPositionException {
         if (!HandyFunctions.isValidPosition(position))
-            throw new InvalidPositionException();
+            throw new InvalidPositionException("Invalid positions!");
         return field[position[0]][position[1]];
     }
 

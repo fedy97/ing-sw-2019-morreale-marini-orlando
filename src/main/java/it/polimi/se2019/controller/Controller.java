@@ -1,6 +1,11 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.Game;
+import it.polimi.se2019.model.enumeration.AmmoCube;
+import it.polimi.se2019.model.player.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Gabriel Raul Marini
@@ -107,5 +112,30 @@ public class Controller {
      */
     public void endGame() {
         //TODO
+    }
+
+    /**
+     *
+     * @return the targets chosen by the player from those returned by the Validator
+     */
+    public List<Player> askForTargets(List<Player> possibleTargets){
+        //TODO
+        return new ArrayList<>();
+    }
+
+    public Validator getValidator() {
+        return validator;
+    }
+
+    public void setValidator(Validator validator) {
+        this.validator = validator;
+    }
+
+    /**
+     * @return the cube chosen by the player in order to perform an action
+     */
+    public AmmoCube askForTribute(){
+        //TODO
+        return null;
     }
 }

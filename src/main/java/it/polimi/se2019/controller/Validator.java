@@ -14,34 +14,44 @@ import java.util.*;
  */
 public abstract class Validator {
     private PlayerManager playerManager;
+    private Controller father;
 
     /**
      * Instantiate a validator according to the match state
      */
-    public Validator(PlayerManager playerManager) {
+    public Validator(PlayerManager playerManager, Controller father) {
+        this.father = father;
         this.playerManager = playerManager;
     }
 
     /**
      * @return the platform the player can reach according to the actual health state and game mode
      */
-    public abstract ArrayList<Platform> getValidMoves();
+    public abstract List<Platform> getValidMoves();
 
     /**
      * @param weapon chosen by the player to perform a damage action
      * @return the list of player that can be the targets of the weapon according to its effect
      */
-    public ArrayList<Player> getValidTargets(WeaponCard weapon) {
+    public List<Player> getValidTargets(WeaponCard weapon) {
         //TODO
         return null;
+    }
+
+    /**
+     * @param powerUpCard chosen by the player to perform an action
+     * @return the list of player that can be the targets of the powerUp according to its effect
+     */
+    public List<Player> getValidTargets(PowerUpCard powerUpCard){
+        return powerUpCard.getPossibleTargets(father);
     }
 
     /**
      * @return the list of weapons that can be grabbed by the player in his current position
      * according to the ammo qty in his AmmoBox
      */
-    public ArrayList<WeaponCard> getGrabableWeapons() throws InvalidGenerationSpotException {
-        ArrayList<WeaponCard> res = new ArrayList<>();
+    public List<WeaponCard> getGrabableWeapons() throws InvalidGenerationSpotException {
+        List<WeaponCard> res = new ArrayList<>();
         Player currPlayer = playerManager.getCurrentPlayer();
         AmmoBox ammoBox = currPlayer.getPlayerBoard().getAmmoBox();
         Platform p = currPlayer.getCurrentPlatform();
@@ -62,9 +72,9 @@ public abstract class Validator {
     /**
      * @return the list of weapons the current player can reload according to his ammos
      */
-    public ArrayList<WeaponCard> getReloadableWeapons() {
+    public List<WeaponCard> getReloadableWeapons() {
         Player currPlayer = playerManager.getCurrentPlayer();
-        ArrayList<WeaponCard> res = currPlayer.getWeaponCards();
+        List<WeaponCard> res = currPlayer.getWeaponCards();
         AmmoBox ammoBox = currPlayer.getPlayerBoard().getAmmoBox();
 
         for (WeaponCard weapon : res) {
@@ -78,8 +88,8 @@ public abstract class Validator {
     /**
      * @return the list of PowerUp cards the player can use in the actual state of the game
      */
-    public ArrayList<PowerUpCard> getUsablePowerUps() {
-        ArrayList<PowerUpCard> res = new ArrayList<>();
+    public List<PowerUpCard> getUsablePowerUps() {
+        List<PowerUpCard> res = new ArrayList<>();
         Player currPlayer = playerManager.getCurrentPlayer();
 
         for (PowerUpCard powerUp : currPlayer.getPowerUpCards())

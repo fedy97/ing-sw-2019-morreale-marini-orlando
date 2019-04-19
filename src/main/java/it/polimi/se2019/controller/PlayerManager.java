@@ -2,12 +2,10 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.exceptions.InsufficientAmmoException;
 import it.polimi.se2019.exceptions.InvalidCardException;
-import it.polimi.se2019.exceptions.InvalidDeckException;
 import it.polimi.se2019.exceptions.MaxWeaponException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
-import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
@@ -64,7 +62,7 @@ public class PlayerManager {
      *
      * @param dirs the set of directions to follow to move the players
      */
-    public void move(ArrayList<Orientation> dirs) {
+    public void move(List<Orientation> dirs) {
         Platform platform = currentPlayer.getCurrentPlatform();
         for (Orientation dir : dirs) {
             platform = platform.getAdjacentPlatform(dir);
@@ -75,18 +73,15 @@ public class PlayerManager {
     /**
      * @param dir
      */
-    public void grab(ArrayList<Orientation> dir) {
-
+    public void grab(List<Orientation> dir) {
+        //TODO
     }
 
     /**
-     * @param dir
-     * @param reload
-     * @param targets
-     * @param weapon
+     * @param targetsMap
      */
-    public void shoot(ArrayList<Player> targets, WeaponCard weapon) {
-
+    public void addDamage(Map<Player, Integer> targetsMap) {
+        //TODO
     }
 
     /**
@@ -101,7 +96,6 @@ public class PlayerManager {
             currentPlayer.addWeaponCard(weapon);
         } else
             throw new InsufficientAmmoException("Player hasn't enough ammos to buy the weapon");
-
     }
 
     /**
@@ -122,7 +116,7 @@ public class PlayerManager {
      * @throws InsufficientAmmoException if the player hasn't enough ammos to pay the reload cost
      *                                   of the weapon
      */
-    public void reload(ArrayList<WeaponCard> weapons) throws InsufficientAmmoException {
+    public void reload(List<WeaponCard> weapons) throws InsufficientAmmoException {
         AmmoBox box = currentPlayer.getPlayerBoard().getAmmoBox();
         for (WeaponCard weaponCard : weapons) {
             if (box.hasAmmos(weaponCard.getTotalCost()))

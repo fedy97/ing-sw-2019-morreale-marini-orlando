@@ -1,7 +1,7 @@
 package it.polimi.se2019.model.enumeration;
 
 /**
- * Visibility paramters used to define the weapon effects
+ * Visibility parameters used to define the weapon effects
  *
  * @author Gabriel Raul Marini
  */

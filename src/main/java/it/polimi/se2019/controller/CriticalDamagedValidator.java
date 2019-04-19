@@ -9,10 +9,9 @@ import java.util.*;
  */
 public class CriticalDamagedValidator extends Validator {
 
-    public CriticalDamagedValidator(PlayerManager playerManager) {
-        super(playerManager);
+    public CriticalDamagedValidator(PlayerManager playerManager, Controller father) {
+        super(playerManager, father);
     }
-
     public ArrayList<Platform> getValidMoves() {
         //TODO
         return null;

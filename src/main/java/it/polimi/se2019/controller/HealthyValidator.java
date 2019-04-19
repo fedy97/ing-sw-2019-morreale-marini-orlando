@@ -9,8 +9,8 @@ import java.util.*;
  */
 public class HealthyValidator extends Validator {
 
-    public HealthyValidator(PlayerManager playerManager) {
-        super(playerManager);
+    public HealthyValidator(PlayerManager playerManager, Controller father) {
+        super(playerManager, father);
     }
 
     public ArrayList<Platform> getValidMoves(){

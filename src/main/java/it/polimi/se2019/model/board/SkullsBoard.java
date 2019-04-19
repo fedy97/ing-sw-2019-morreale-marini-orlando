@@ -61,7 +61,7 @@ public class SkullsBoard {
      */
     public Integer getKillMarksPlayer(Character character) throws InvalidCharacterException {
         if (!HandyFunctions.characterExists(character))
-            throw new InvalidCharacterException();
+            throw new InvalidCharacterException("Invalid character!");
         return killMarks.get(character);
     }
 
@@ -74,7 +74,7 @@ public class SkullsBoard {
      */
     public Integer addKillMarks(Character character, int quantity) throws InvalidCharacterException, InvalidQuantityException {
         if (!HandyFunctions.characterExists(character))
-            throw new InvalidCharacterException();
+            throw new InvalidCharacterException("Invalid character!");
         if (quantity > 2 || quantity < 1)
             throw new InvalidQuantityException("you cannot add more than 2 or less than 1 marks");
         return killMarks.replace(character, killMarks.get(character) + quantity);

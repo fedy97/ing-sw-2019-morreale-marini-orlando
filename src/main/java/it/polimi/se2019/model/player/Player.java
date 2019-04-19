@@ -28,6 +28,8 @@ public class Player {
     private ArrayList<WeaponCard> weaponCards;
     private int frenzyModeType;
     private boolean underAttack;
+    private List<Player> currentTargets;
+    private boolean attacking;
 
     /**
      * Class constructor that initializes data structures that will be used
@@ -51,6 +53,7 @@ public class Player {
         weaponCards = new ArrayList<>();
         frenzyModeType = 0;
         underAttack = false;
+        attacking = false;
     }
 
     /**
@@ -199,12 +202,9 @@ public class Player {
      * Add a weapon card to those already owned by the player
      *
      * @param card The card drawn
-     * @throws InvalidCardException if card reference is null
      * @throws MaxWeaponException when the player has already three weapons
      */
-    public void addWeaponCard(WeaponCard card) throws InvalidCardException, MaxWeaponException {
-        if (card == null)
-            throw new InvalidCardException("Card can not be null!");
+    public void addWeaponCard(WeaponCard card) throws MaxWeaponException {
         if (weaponCards.size() < 3)
             weaponCards.add(card);
         else
@@ -215,12 +215,9 @@ public class Player {
      * Eliminates a weapon card from those owned by the player
      *
      * @param card The weapon card that must be eliminated
-     * @throws InvalidCardException if card reference is null
      * @throws MissingCardException if weaponCards does not contain card
      */
-    public void removeWeaponCard(WeaponCard card) throws InvalidCardException, MissingCardException {
-        if (card == null)
-            throw new InvalidCardException("Card can not be null!");
+    public void removeWeaponCard(WeaponCard card) throws MissingCardException {
         if (!weaponCards.contains(card))
             throw new MissingCardException("WeaponCards does not contain this card!");
         weaponCards.remove(card);
@@ -246,4 +243,23 @@ public class Player {
         return underAttack;
     }
 
+    public List<Player> getCurrentTargets() {
+        return currentTargets;
+    }
+
+    public void addTarget(Player currentTarget) {
+        this.currentTargets.add(currentTarget);
+    }
+
+    public void beginAttack(){
+        attacking = true;
+    }
+
+    public void terminateAttack(){
+        attacking = false;
+    }
+
+    public boolean isAttacking(){
+        return attacking;
+    }
 }
