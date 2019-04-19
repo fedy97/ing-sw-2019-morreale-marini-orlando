@@ -1,7 +1,6 @@
 package it.polimi.se2019.utils;
 
 import it.polimi.se2019.exceptions.InvalidCardException;
-import it.polimi.se2019.exceptions.InvalidFieldException;
 import it.polimi.se2019.exceptions.NoCardException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.AmmoCard;
@@ -86,7 +85,7 @@ public class JsonParser {
      * @throws InvalidCardException
      */
     public Platform[][] buildField(int numConfig, Deck<AmmoCard> deck) throws NoCardException, InvalidCardException,
-            NoSuchFieldException,IllegalAccessException {
+            NoSuchFieldException, IllegalAccessException {
         if (path.equals("/json/field.json")) {
             Platform[][] field = new Platform[3][4];
             int[] pos;
@@ -105,16 +104,15 @@ public class JsonParser {
                 pos[0] = currPlatformObj.getInt("y");
                 if (!currPlatformObj.getString("platformColor").isEmpty()) {
                     for (int j = 0; j < jarr.length(); j++)
-                        arrOr.add(Orientation.valueOf(jarr.get(j).toString()));
+                        if (!jarr.get(j).toString().isEmpty()) arrOr.add(Orientation.valueOf(jarr.get(j).toString()));
                     isGenSpot = currPlatformObj.getBoolean("isGenerationSpot");
                     String nameCol = currPlatformObj.getString("platformColor");
-                    platCol = (Color)Color.class.getField(nameCol).get(null);
+                    platCol = (Color) Color.class.getField(nameCol).get(null);
                     ammoC = deck.drawCard();
                     Platform p = new Platform(pos, isGenSpot, ammoC, platCol, arrOr);
                     field[pos[0]][pos[1]] = p;
-                } else {
+                } else
                     field[pos[0]][pos[1]] = null;
-                }
             }
             return field;
         }

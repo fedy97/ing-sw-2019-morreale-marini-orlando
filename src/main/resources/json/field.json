@@ -1,307 +1,455 @@
 {
-"config1": [
-	{
-		"x": 0,
-		"y": 0,
-		"isGenerationSpot": false,
-		"platformColor": "",
-		"orientation": [""]
-	},
-	{
-		"x": 1,
-		"y": 0,
-		"isGenerationSpot": true,
-		"platformColor": "BLUE",
-		"orientation": ["DOWN"]
-	},
-	{
-		"x": 2,
-		"y": 0,
-		"isGenerationSpot": false,
-		"platformColor": "BLUE",
-		"orientation": ["DOWN", "RIGHT"]
-	},
-	{
-		"x": 3,
-		"y": 0,
-		"isGenerationSpot": false,
-		"platformColor": "RED",
-		"orientation": ["LEFT"]
-	},
-	{
-		"x": 0,
-		"y": 1,
-		"isGenerationSpot": false,
-		"platformColor": "YELLOW",
-		"orientation": ["RIGHT"]
-	},
-	{
-		"x": 1,
-		"y": 1,
-		"isGenerationSpot": false,
-		"platformColor": "PINK",
-		"orientation": ["UP","LEFT"]
-	},
-	{
-		"x": 2,
-		"y": 1,
-		"isGenerationSpot": false,
-		"platformColor": "PINK",
-		"orientation": ["UP", "DOWN"]
-	},
-	{
-		"x": 3,
-		"y": 1,
-		"isGenerationSpot": true,
-		"platformColor": "RED",
-		"orientation": ["DOWN"]
-	},
-	{
-		"x": 0,
-		"y": 2,
-		"isGenerationSpot": true,
-		"platformColor": "YELLOW",
-		"orientation": ["RIGHT"]
-	},
-	{
-		"x": 1,
-		"y": 2,
-		"isGenerationSpot": false,
-		"platformColor": "WHITE",
-		"orientation": ["LEFT"]
-	},
-	{
-		"x": 2,
-		"y": 2,
-		"isGenerationSpot": false,
-		"platformColor": "WHITE",
-		"orientation": ["UP"]
-	},
-	{
-		"x": 3,
-		"y": 2,
-		"isGenerationSpot": false,
-		"platformColor": "WHITE",
-		"orientation": ["UP"]
-	}],
-"config2": [
-	{
-		"x": 0,
-		"y": 0,
-		"isGenerationSpot": false,
-		"platformColor": "BLUE"
-	},
-	{
-		"x": 1,
-		"y": 0,
-		"isGenerationSpot": false,
-		"platformColor": "BLUE"
-	},
-	{
-		"x": 2,
-		"y": 0,
-		"isGenerationSpot": true,
-		"platformColor": "BLUE"
-	},
-	{
-		"x": 3,
-		"y": 0,
-		"isGenerationSpot": false,
-		"platformColor": "GREEN"
-	},
-	{
-		"x": 0,
-		"y": 1,
-		"isGenerationSpot": true,
-		"platformColor": "RED"
-	},
-	{
-		"x": 1,
-		"y": 1,
-		"isGenerationSpot": false,
-		"platformColor": "RED"
-	},
-	{
-		"x": 2,
-		"y": 1,
-		"isGenerationSpot": false,
-		"platformColor": "YELLOW"
-	},
-	{
-		"x": 3,
-		"y": 1,
-		"isGenerationSpot": false,
-		"platformColor": "YELLOW"
-	},
-	{
-		"x": 0,
-		"y": 2,
-		"isGenerationSpot": false,
-		"platformColor": ""
-	},
-	{
-		"x": 1,
-		"y": 2,
-		"isGenerationSpot": false,
-		"platformColor": "WHITE"
-	},
-	{
-		"x": 2,
-		"y": 2,
-		"isGenerationSpot": false,
-		"platformColor": "YELLOW"
-	},
-	{
-		"x": 3,
-		"y": 2,
-		"isGenerationSpot": true,
-		"platformColor": "YELLOW"
-	}],
-"config3": [
-	{
-		"x": 0,
-		"y": 0,
-		"isGenerationSpot": false,
-		"platformColor": ""
-	},
-	{
-		"x": 1,
-		"y": 0,
-		"isGenerationSpot": true,
-		"platformColor": "BLUE"
-	},
-	{
-		"x": 2,
-		"y": 0,
-		"isGenerationSpot": false,
-		"platformColor": "BLUE"
-	},
-	{
-		"x": 3,
-		"y": 0,
-		"isGenerationSpot": false,
-		"platformColor": "BLUE"
-	},
-	{
-		"x": 0,
-		"y": 1,
-		"isGenerationSpot": false,
-		"platformColor": "YELLOW"
-	},
-	{
-		"x": 1,
-		"y": 1,
-		"isGenerationSpot": false,
-		"platformColor": "RED"
-	},
-	{
-		"x": 2,
-		"y": 1,
-		"isGenerationSpot": false,
-		"platformColor": "RED"
-	},
-	{
-		"x": 3,
-		"y": 1,
-		"isGenerationSpot": true,
-		"platformColor": "RED"
-	},
-	{
-		"x": 0,
-		"y": 2,
-		"isGenerationSpot": true,
-		"platformColor": "YELLOW"
-	},
-	{
-		"x": 1,
-		"y": 2,
-		"isGenerationSpot": false,
-		"platformColor": "WHITE"
-	},
-	{
-		"x": 2,
-		"y": 2,
-		"isGenerationSpot": false,
-		"platformColor": "WHITE"
-	},
-	{
-		"x": 3,
-		"y": 2,
-		"isGenerationSpot": false,
-		"platformColor": ""
-	}],
-"config4": [
-	{
-		"x": 0,
-		"y": 0,
-		"isGenerationSpot": false,
-		"platformColor": "RED"
-	},
-	{
-		"x": 1,
-		"y": 0,
-		"isGenerationSpot": false,
-		"platformColor": "BLUE"
-	},
-	{
-		"x": 2,
-		"y": 0,
-		"isGenerationSpot": true,
-		"platformColor": "BLUE"
-	},
-	{
-		"x": 3,
-		"y": 0,
-		"isGenerationSpot": false,
-		"platformColor": "GREEN"
-	},
-	{
-		"x": 0,
-		"y": 1,
-		"isGenerationSpot": true,
-		"platformColor": "RED"
-	},
-	{
-		"x": 1,
-		"y": 1,
-		"isGenerationSpot": false,
-		"platformColor": "PINK"
-	},
-	{
-		"x": 2,
-		"y": 1,
-		"isGenerationSpot": false,
-		"platformColor": "YELLOW"
-	},
-	{
-		"x": 3,
-		"y": 1,
-		"isGenerationSpot": false,
-		"platformColor": "YELLOW"
-	},
-	{
-		"x": 0,
-		"y": 2,
-		"isGenerationSpot": false,
-		"platformColor": "WHITE"
-	},
-	{
-		"x": 1,
-		"y": 2,
-		"isGenerationSpot": false,
-		"platformColor": "WHITE"
-	},
-	{
-		"x": 2,
-		"y": 2,
-		"isGenerationSpot": false,
-		"platformColor": "YELLOW"
-	},
-	{
-		"x": 3,
-		"y": 2,
-		"isGenerationSpot": true,
-		"platformColor": "YELLOW"
-	}]
+  "config1": [
+    {
+      "x": 0,
+      "y": 0,
+      "isGenerationSpot": false,
+      "platformColor": "",
+      "orientation": [
+        ""
+      ]
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "isGenerationSpot": true,
+      "platformColor": "BLUE",
+      "orientation": [
+        "DOWN"
+      ]
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "isGenerationSpot": false,
+      "platformColor": "BLUE",
+      "orientation": [
+        "DOWN",
+        "RIGHT"
+      ]
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "isGenerationSpot": false,
+      "platformColor": "RED",
+      "orientation": [
+        "LEFT"
+      ]
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "isGenerationSpot": false,
+      "platformColor": "YELLOW",
+      "orientation": [
+        "RIGHT"
+      ]
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "isGenerationSpot": false,
+      "platformColor": "PINK",
+      "orientation": [
+        "UP",
+        "LEFT"
+      ]
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "isGenerationSpot": false,
+      "platformColor": "PINK",
+      "orientation": [
+        "UP",
+        "DOWN"
+      ]
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "isGenerationSpot": true,
+      "platformColor": "RED",
+      "orientation": [
+        "DOWN"
+      ]
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "isGenerationSpot": true,
+      "platformColor": "YELLOW",
+      "orientation": [
+        "RIGHT"
+      ]
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "isGenerationSpot": false,
+      "platformColor": "WHITE",
+      "orientation": [
+        "LEFT"
+      ]
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "isGenerationSpot": false,
+      "platformColor": "WHITE",
+      "orientation": [
+        "UP"
+      ]
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "isGenerationSpot": false,
+      "platformColor": "WHITE",
+      "orientation": [
+        "UP"
+      ]
+    }
+  ],
+  "config2": [
+    {
+      "x": 0,
+      "y": 0,
+      "isGenerationSpot": false,
+      "platformColor": "BLUE",
+      "orientation": [
+        "DOWN"
+      ]
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "isGenerationSpot": false,
+      "platformColor": "BLUE",
+      "orientation": [
+        ""
+      ]
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "isGenerationSpot": true,
+      "platformColor": "BLUE",
+      "orientation": [
+        "DOWN",
+        "RIGHT"
+      ]
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "isGenerationSpot": false,
+      "platformColor": "GREEN",
+      "orientation": [
+        "LEFT",
+        "DOWN"
+      ]
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "isGenerationSpot": true,
+      "platformColor": "RED",
+      "orientation": [
+        "UP"
+      ]
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "isGenerationSpot": false,
+      "platformColor": "RED",
+      "orientation": [
+        "DOWN"
+      ]
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "isGenerationSpot": false,
+      "platformColor": "YELLOW",
+      "orientation": [
+        "UP"
+      ]
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "isGenerationSpot": false,
+      "platformColor": "YELLOW",
+      "orientation": [
+        "UP"
+      ]
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "isGenerationSpot": false,
+      "platformColor": "",
+      "orientation": [
+        ""
+      ]
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "isGenerationSpot": false,
+      "platformColor": "WHITE",
+      "orientation": [
+        "UP",
+        "RIGHT"
+      ]
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "isGenerationSpot": false,
+      "platformColor": "YELLOW",
+      "orientation": [
+        "LEFT"
+      ]
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "isGenerationSpot": true,
+      "platformColor": "YELLOW",
+      "orientation": [
+        ""
+      ]
+    }
+  ],
+  "config3": [
+    {
+      "x": 0,
+      "y": 0,
+      "isGenerationSpot": false,
+      "platformColor": "",
+      "orientation": [
+        ""
+      ]
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "isGenerationSpot": true,
+      "platformColor": "BLUE",
+      "orientation": [
+        "DOWN"
+      ]
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "isGenerationSpot": false,
+      "platformColor": "BLUE",
+      "orientation": [
+        ""
+      ]
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "isGenerationSpot": false,
+      "platformColor": "BLUE",
+      "orientation": [
+        "DOWN"
+      ]
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "isGenerationSpot": false,
+      "platformColor": "YELLOW",
+      "orientation": [
+        "RIGHT"
+      ]
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "isGenerationSpot": false,
+      "platformColor": "RED",
+      "orientation": [
+        "LEFT",
+        "UP"
+      ]
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "isGenerationSpot": false,
+      "platformColor": "RED",
+      "orientation": [
+        "DOWN"
+      ]
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "isGenerationSpot": true,
+      "platformColor": "RED",
+      "orientation": [
+        "UP"
+      ]
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "isGenerationSpot": true,
+      "platformColor": "YELLOW",
+      "orientation": [
+        "RIGHT"
+      ]
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "isGenerationSpot": false,
+      "platformColor": "WHITE",
+      "orientation": [
+        "LEFT"
+      ]
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "isGenerationSpot": false,
+      "platformColor": "WHITE",
+      "orientation": [
+        "UP"
+      ]
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "isGenerationSpot": false,
+      "platformColor": "",
+      "orientation": [
+        ""
+      ]
+    }
+  ],
+  "config4": [
+    {
+      "x": 0,
+      "y": 0,
+      "isGenerationSpot": false,
+      "platformColor": "RED",
+      "orientation": [
+        "RIGHT"
+      ]
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "isGenerationSpot": false,
+      "platformColor": "BLUE",
+      "orientation": [
+        "LEFT",
+        "DOWN"
+      ]
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "isGenerationSpot": true,
+      "platformColor": "BLUE",
+      "orientation": [
+        "DOWN",
+        "RIGHT"
+      ]
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "isGenerationSpot": false,
+      "platformColor": "GREEN",
+      "orientation": [
+        "LEFT",
+        "DOWN"
+      ]
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "isGenerationSpot": true,
+      "platformColor": "RED",
+      "orientation": [
+        "DOWN"
+      ]
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "isGenerationSpot": false,
+      "platformColor": "PINK",
+      "orientation": [
+        "UP",
+        "DOWN"
+      ]
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "isGenerationSpot": false,
+      "platformColor": "YELLOW",
+      "orientation": [
+        "UP"
+      ]
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "isGenerationSpot": false,
+      "platformColor": "YELLOW",
+      "orientation": [
+        "UP"
+      ]
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "isGenerationSpot": false,
+      "platformColor": "WHITE",
+      "orientation": [
+        "UP"
+      ]
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "isGenerationSpot": false,
+      "platformColor": "WHITE",
+      "orientation": [
+        "UP",
+        "RIGHT"
+      ]
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "isGenerationSpot": false,
+      "platformColor": "YELLOW",
+      "orientation": [
+        "LEFT"
+      ]
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "isGenerationSpot": true,
+      "platformColor": "YELLOW",
+      "orientation": [
+        ""
+      ]
+    }
+  ]
 }
 
