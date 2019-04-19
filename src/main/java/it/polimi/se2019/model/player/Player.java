@@ -112,7 +112,7 @@ public class Player {
      *
      * @return List containing the player's power up cards
      */
-    public List<PowerUpCard> getPowerUpCards() {
+    public ArrayList<PowerUpCard> getPowerUpCards() {
         return  new ArrayList<>(powerUpCards);
     }
 
@@ -121,7 +121,7 @@ public class Player {
      *
      * @return List containing the player's weapon cards
      */
-    public List<WeaponCard> getWeaponCards() {
+    public ArrayList<WeaponCard> getWeaponCards() {
         return new ArrayList<>(weaponCards);
     }
 

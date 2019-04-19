@@ -4,7 +4,6 @@ import it.polimi.se2019.exceptions.InvalidCharacterException;
 import it.polimi.se2019.exceptions.NegativeNumberException;
 import it.polimi.se2019.model.enumeration.Character;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class that manages the damages and the marks suffered by the player and
@@ -38,7 +37,7 @@ public class PlayerBoard {
      * Gets the marks that the player has received from other players
      * @return A list with the marks suffered
      */
-    public List<Character> getRevengeMarks() {
+    public ArrayList<Character> getRevengeMarks() {
         return new ArrayList<>(revengeMarks);
     }
 
@@ -46,7 +45,7 @@ public class PlayerBoard {
      * Get the damage suffered by the player
      * @return A list with the damages suffered
      */
-    public List<Character> getDamageLine() {
+    public ArrayList<Character> getDamageLine() {
         return new ArrayList<>(damageLine);
     }
 

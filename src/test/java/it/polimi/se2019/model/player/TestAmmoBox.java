@@ -25,15 +25,11 @@ public class TestAmmoBox {
         /*
             Test of the standard addition
          */
-        try {
-            myAmmoBox.addAmmos(AmmoCube.RED, redNum);
-            myAmmoBox.addAmmos(AmmoCube.YELLOW, yellowNum);
-            myAmmoBox.addAmmos(AmmoCube.BLUE, blueNum);
-        } catch (IllegalArgumentException e) {
-            fail();
-        } catch (NullPointerException e) {
-            fail();
-        }
+
+        myAmmoBox.addAmmos(AmmoCube.RED, redNum);
+        myAmmoBox.addAmmos(AmmoCube.YELLOW, yellowNum);
+        myAmmoBox.addAmmos(AmmoCube.BLUE, blueNum);
+
 
         int red = myAmmoBox.getRedAmmos();
         int yellow = myAmmoBox.getYellowAmmos();
@@ -42,31 +38,6 @@ public class TestAmmoBox {
         assertEquals(red, redNum + startValueRed);
         assertEquals(yellow, yellowNum + startValueYellow);
         assertEquals(blue, blueNum + startValueBlue);
-
-        /*
-            Test of addition with saturation
-         */
-        int redToAdd = 2;
-        int yellowToAdd = 4;
-        int blueToAdd = 1;
-
-        try {
-            myAmmoBox.addAmmos(AmmoCube.RED, redToAdd);
-            myAmmoBox.addAmmos(AmmoCube.YELLOW, yellowToAdd);
-            myAmmoBox.addAmmos(AmmoCube.BLUE, blueToAdd);
-        } catch (IllegalArgumentException e) {
-            fail();
-        } catch (NullPointerException e) {
-            fail();
-        }
-
-        red = myAmmoBox.getRedAmmos();
-        yellow = myAmmoBox.getYellowAmmos();
-        blue = myAmmoBox.getBlueAmmos();
-
-        assertEquals(red, 3);
-        assertEquals(yellow, 3);
-        assertEquals(blue, 3);
 
 
     }
@@ -79,37 +50,15 @@ public class TestAmmoBox {
         /*
             Test of the standard ammunition removal
          */
-        try {
-            myAmmoBox.removeAmmos(AmmoCube.RED, 1);
-            myAmmoBox.removeAmmos(AmmoCube.YELLOW, 1);
-            myAmmoBox.removeAmmos(AmmoCube.BLUE, 1);
-        } catch (NullPointerException e) {
-            fail();
-        } catch (IllegalArgumentException e) {
-            fail();
-        }
+
+        myAmmoBox.removeAmmos(AmmoCube.RED, 1);
+        myAmmoBox.removeAmmos(AmmoCube.YELLOW, 1);
+        myAmmoBox.removeAmmos(AmmoCube.BLUE, 1);
+
         assertEquals(myAmmoBox.getRedAmmos(), 0);
         assertEquals(myAmmoBox.getYellowAmmos(), 0);
         assertEquals(myAmmoBox.getBlueAmmos(), 0);
 
-        /*
-            Test when num is greater than the current ammunition number
-         */
-        myAmmoBox.addAmmos(AmmoCube.RED, 2);
-        myAmmoBox.addAmmos(AmmoCube.YELLOW, 1);
-        myAmmoBox.addAmmos(AmmoCube.BLUE, 3);
-        try {
-            myAmmoBox.removeAmmos(AmmoCube.RED, 4);
-            myAmmoBox.removeAmmos(AmmoCube.YELLOW, 3);
-            myAmmoBox.removeAmmos(AmmoCube.BLUE, 6);
-        } catch (NullPointerException e) {
-            fail();
-        } catch (IllegalArgumentException e) {
-            fail();
-        }
-        assertEquals(myAmmoBox.getRedAmmos(), 0);
-        assertEquals(myAmmoBox.getYellowAmmos(), 0);
-        assertEquals(myAmmoBox.getBlueAmmos(), 0);
 
     }
 

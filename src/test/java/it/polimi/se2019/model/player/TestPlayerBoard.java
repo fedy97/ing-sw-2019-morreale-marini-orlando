@@ -1,5 +1,7 @@
 package it.polimi.se2019.model.player;
 
+import it.polimi.se2019.exceptions.InvalidCharacterException;
+import it.polimi.se2019.exceptions.NegativeNumberException;
 import it.polimi.se2019.model.enumeration.Character;
 import org.junit.Test;
 
@@ -23,10 +25,10 @@ public class TestPlayerBoard {
         try {
             myBoard.addDamage(Character.BANSHEE, damage);
         }
-        catch (IllegalArgumentException e) {
+        catch (InvalidCharacterException e) {
             fail();
         }
-        catch (NullPointerException e) {
+        catch (NegativeNumberException e) {
             fail();
         }
 
@@ -42,42 +44,37 @@ public class TestPlayerBoard {
         try {
             myBoard.addDamage(Character.BANSHEE, 10);
         }
-        catch (IllegalArgumentException e) {
+        catch (InvalidCharacterException e) {
             fail();
         }
-        catch (NullPointerException e) {
+        catch (NegativeNumberException e) {
             fail();
         }
         line = myBoard.getDamageLine();
         assertEquals(line.size(),12);
 
         /*
-            Test of the impossibility of having a null character
+            Test of the impossibility of having a null character and a negative value
          */
         try {
             myBoard.addDamage(null, 2);
             fail();
         }
-        catch (NullPointerException e) {
+        catch (InvalidCharacterException e) {
+
+        }
+        catch (NegativeNumberException e) {
 
         }
 
-        /*
-            Test of the impossibility of having a negative value
-         */
-        try {
-            myBoard.addDamage(Character.DISTRUCTOR,-2);
-            fail();
-        }
-        catch (IllegalArgumentException e) {
-
-        }
     }
 
     @Test
-    public void testResetDamageLine() {
+    public void testResetDamageLine() throws NegativeNumberException, InvalidCharacterException{
         PlayerBoard myBoard = new PlayerBoard();
-        myBoard.addDamage(Character.DISTRUCTOR,5);
+
+        myBoard.addDamage(Character.DISTRUCTOR, 5);
+
         myBoard.resetDamageLine();
         ArrayList<Character> line = myBoard.getDamageLine();
         assertEquals(line.size(),0);
@@ -90,15 +87,9 @@ public class TestPlayerBoard {
         /*
             Testing the standard addition of marks
          */
-        try {
-            myBoard.addRevengeMark(Character.BANSHEE,2);
-        }
-        catch (IllegalArgumentException e) {
-            fail();
-        }
-        catch (NullPointerException e) {
-            fail();
-        }
+
+        myBoard.addRevengeMark(Character.BANSHEE,2);
+
 
         ArrayList<Character> line = myBoard.getRevengeMarks();
         assertEquals(line.size(),2);
@@ -109,15 +100,7 @@ public class TestPlayerBoard {
         /*
             Testing when value plus current marks is greater than 3
          */
-        try {
-            myBoard.addRevengeMark(Character.BANSHEE,2);
-        }
-        catch (IllegalArgumentException e) {
-            fail();
-        }
-        catch (NullPointerException e) {
-            fail();
-        }
+        myBoard.addRevengeMark(Character.BANSHEE,2);
 
         line = myBoard.getRevengeMarks();
         assertEquals(line.size(),3);
@@ -125,27 +108,6 @@ public class TestPlayerBoard {
             assertEquals(c,Character.BANSHEE);
         }
 
-        /*
-            Test of the impossibility of having a null character
-         */
-        try {
-            myBoard.addRevengeMark(null, 2);
-            fail();
-        }
-        catch (NullPointerException e) {
-
-        }
-
-        /*
-            Test of the impossibility of having a negative value
-         */
-        try {
-            myBoard.addRevengeMark(Character.DISTRUCTOR,-2);
-            fail();
-        }
-        catch (IllegalArgumentException e) {
-
-        }
 
     }
 
@@ -161,7 +123,7 @@ public class TestPlayerBoard {
         try {
             myBoard.removeRevengeMarks(Character.DOZER);
         }
-        catch (NullPointerException e) {
+        catch (InvalidCharacterException e) {
             fail();
         }
         int counter = 0;
@@ -179,7 +141,7 @@ public class TestPlayerBoard {
             myBoard.removeRevengeMarks(null);
             fail();
         }
-        catch (NullPointerException e) {
+        catch (InvalidCharacterException e) {
 
         }
     }
