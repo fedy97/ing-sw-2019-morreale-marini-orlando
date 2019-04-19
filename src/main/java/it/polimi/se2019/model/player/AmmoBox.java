@@ -1,5 +1,7 @@
 package it.polimi.se2019.model.player;
 
+import it.polimi.se2019.exceptions.InvalidCubeException;
+import it.polimi.se2019.exceptions.NegativeNumberException;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 
 /**
@@ -54,14 +56,14 @@ public class AmmoBox {
      *
      * @param type The color of the ammunition to add
      * @param num  The number of ammunition to add
-     * @throws IllegalArgumentException if num is less than zero
-     * @throws NullPointerException     if AmmoCube reference is null
+     * @throws NegativeNumberException if num is less than zero
+     * @throws InvalidCubeException     if AmmoCube reference is null
      */
-    public void addAmmos(AmmoCube type, int num) throws IllegalArgumentException, NullPointerException {
+    public void addAmmos(AmmoCube type, int num) throws NegativeNumberException, InvalidCubeException {
         if (num < 0)
-            throw new IllegalArgumentException("Num should be greater than zero!");
+            throw new NegativeNumberException("Num should be greater than zero!");
         if (type == null)
-            throw new NullPointerException("Type cannot be null!");
+            throw new InvalidCubeException("Type cannot be null!");
         if (type == AmmoCube.RED) {
             if (redAmmos + num > 3)
                 redAmmos = 3;
@@ -85,14 +87,14 @@ public class AmmoBox {
      *
      * @param type The color of the ammunition to remove
      * @param num  The number of ammunition to remove
-     * @throws IllegalArgumentException if num is less than zero
-     * @throws NullPointerException     if AmmoCube reference is null
+     * @throws NegativeNumberException if num is less than zero
+     * @throws InvalidCubeException     if AmmoCube reference is null
      */
-    public void removeAmmos(AmmoCube type, int num) throws IllegalArgumentException, NullPointerException {
+    public void removeAmmos(AmmoCube type, int num) throws NegativeNumberException, InvalidCubeException {
         if (num < 0)
-            throw new IllegalArgumentException("Num should be greater than zero!");
+            throw new NegativeNumberException("Num should be greater than zero!");
         if (type == null)
-            throw new NullPointerException("Type cannot be null!");
+            throw new InvalidCubeException("Type cannot be null!");
         if (type == AmmoCube.RED) {
             if (redAmmos - num < 0)
                 redAmmos = 0;
@@ -118,17 +120,19 @@ public class AmmoBox {
      * @return if the AmmoBox has enough ammos
      */
     public boolean hasAmmos(AmmoCube[] ammos) {
-        int red, blue, yellow;
+        int red;
+        int blue;
+        int yellow;
         red = 0;
         blue = 0;
         yellow = 0;
 
-        for (int i = 0; i < ammos.length; i++) {
-            if (ammos[i] == AmmoCube.YELLOW)
+        for (AmmoCube cube: ammos) {
+            if (cube == AmmoCube.YELLOW)
                 yellow++;
-            if (ammos[i] == AmmoCube.BLUE)
+            if(cube == AmmoCube.BLUE)
                 blue++;
-            if (ammos[i] == AmmoCube.RED)
+            if (cube == AmmoCube.RED)
                 red++;
         }
 

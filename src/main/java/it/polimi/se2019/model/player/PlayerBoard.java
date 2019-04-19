@@ -1,7 +1,10 @@
 package it.polimi.se2019.model.player;
 
+import it.polimi.se2019.exceptions.InvalidCharacterException;
+import it.polimi.se2019.exceptions.NegativeNumberException;
 import it.polimi.se2019.model.enumeration.Character;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class that manages the damages and the marks suffered by the player and
@@ -33,22 +36,18 @@ public class PlayerBoard {
 
     /**
      * Gets the marks that the player has received from other players
-     * @return
+     * @return A list with the marks suffered
      */
-    public ArrayList<Character> getRevengeMarks() {
-        ArrayList<Character> temp = new ArrayList<>();
-        temp.addAll(revengeMarks);
-        return temp;
+    public List<Character> getRevengeMarks() {
+        return new ArrayList<>(revengeMarks);
     }
 
     /**
      * Get the damage suffered by the player
-     * @return
+     * @return A list with the damages suffered
      */
-    public ArrayList<Character> getDamageLine() {
-        ArrayList<Character> temp = new ArrayList<>();
-        temp.addAll(damageLine);
-        return temp;
+    public List<Character> getDamageLine() {
+        return new ArrayList<>(damageLine);
     }
 
 
@@ -56,14 +55,14 @@ public class PlayerBoard {
      * Add damage to the player
      * @param character The character of player who deals the damage
      * @param value The number of damages to be inflicted
-     * @throws IllegalArgumentException if value is less than zero
-     * @throws NullPointerException if character reference is null
+     * @throws NegativeNumberException if value is less than zero
+     * @throws InvalidCharacterException if character reference is null
      */
-    public void addDamage(Character character, int value) throws IllegalArgumentException, NullPointerException{
+    public void addDamage(Character character, int value) throws NegativeNumberException, InvalidCharacterException {
         if (value < 0)
-            throw new IllegalArgumentException("Value should be greater than zero!");
+            throw new NegativeNumberException("Value should be greater than zero!");
         if (character == null)
-            throw new NullPointerException("Character cannot be null!");
+            throw new InvalidCharacterException("Character can not be null!");
         int oldSize = damageLine.size();
         if (oldSize + value > 12) {
             for (int i = 0; i < 12 - oldSize; i++) {
@@ -89,14 +88,14 @@ public class PlayerBoard {
      * Add marks to the player
      * @param character The character of player who marks
      * @param value The number of marks to be added
-     * @throws IllegalArgumentException if value is less than zero
-     * @throws NullPointerException if character reference is null
+     * @throws InvalidCharacterException if value is less than zero
+     * @throws NegativeNumberException if character reference is null
      */
-    public void addRevengeMark(Character character, int value) throws IllegalArgumentException, NullPointerException {
+    public void addRevengeMark(Character character, int value) throws InvalidCharacterException, NegativeNumberException {
         if (value < 0)
-            throw new IllegalArgumentException("Value should be greater than zero!");
+            throw new NegativeNumberException("Value should be greater than zero!");
         if(character == null)
-            throw new NullPointerException("Character cannot be null!");
+            throw new InvalidCharacterException("Character cannot be null!");
         int counter = 0;
         for (Character c: revengeMarks) {
             if (c == character)
@@ -118,11 +117,11 @@ public class PlayerBoard {
     /**
      * Remove all marks received from a player
      * @param character The character of the player whose marks are to be removed
-     * @throws NullPointerException if character reference is null
+     * @throws InvalidCharacterException if character reference is null
      */
-    public void removeRevengeMarks(Character character) throws NullPointerException{
+    public void removeRevengeMarks(Character character) throws InvalidCharacterException{
         if (character == null)
-            throw new NullPointerException("Character cannot be null!");
+            throw new InvalidCharacterException("Character cannot be null!");
         while (revengeMarks.contains(character)) {
             revengeMarks.remove(character);
         }

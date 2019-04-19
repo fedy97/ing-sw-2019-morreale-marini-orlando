@@ -1,13 +1,13 @@
 package it.polimi.se2019.model.player;
 
-import it.polimi.se2019.exceptions.MaxWeaponException;
-import it.polimi.se2019.exceptions.MissingCardException;
+import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.enumeration.Character;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -34,11 +34,14 @@ public class Player {
      * to store all the related game information concerning the player
      *
      * @param character Character chosen by the player at the start of the game
-     * @throws NullPointerException if character or startPlatform are null
+     * @throws InvalidCharacterException if character is null
+     * @throws InvalidPositionException if startPlatform is null
      */
-    public Player(Character character, Platform startPlatform) throws NullPointerException {
-        if (character == null || startPlatform == null)
-            throw new NullPointerException("Character and startPlatform can not be null!");
+    public Player(Character character, Platform startPlatform) throws InvalidCharacterException, InvalidPositionException{
+        if (character == null)
+            throw new InvalidCharacterException("Character can not be null!");
+        if (startPlatform == null)
+            throw new InvalidPositionException("StartPlatform can not be null!");
         this.character = character;
         this.currentPlatform = startPlatform;
         currentScore = 0;
@@ -47,6 +50,7 @@ public class Player {
         powerUpCards = new ArrayList<>();
         weaponCards = new ArrayList<>();
         frenzyModeType = 0;
+        underAttack = false;
     }
 
     /**
@@ -76,7 +80,7 @@ public class Player {
     }
 
     /**
-     * @return
+     * @return The player mode
      */
     public int getFrenzyModeType() {
         return frenzyModeType;
@@ -105,10 +109,8 @@ public class Player {
      *
      * @return List containing the player's power up cards
      */
-    public ArrayList<PowerUpCard> getPowerUpCards() {
-        ArrayList<PowerUpCard> temp = new ArrayList<>();
-        temp.addAll(powerUpCards);
-        return temp;
+    public List<PowerUpCard> getPowerUpCards() {
+        return  new ArrayList<>(powerUpCards);
     }
 
     /**
@@ -116,10 +118,8 @@ public class Player {
      *
      * @return List containing the player's weapon cards
      */
-    public ArrayList<WeaponCard> getWeaponCards() {
-        ArrayList<WeaponCard> temp = new ArrayList<>();
-        temp.addAll(weaponCards);
-        return temp;
+    public List<WeaponCard> getWeaponCards() {
+        return new ArrayList<>(weaponCards);
     }
 
     /**
@@ -135,11 +135,11 @@ public class Player {
      * Change the player's position by moving him to a new platform
      *
      * @param newPlatform The new platform where the player wants to go
-     * @throws NullPointerException if newPlatform reference is null
+     * @throws InvalidPositionException if newPlatform reference is null
      */
-    public void changePlatform(Platform newPlatform) throws NullPointerException {
+    public void changePlatform(Platform newPlatform) throws InvalidPositionException {
         if (newPlatform == null)
-            throw new NullPointerException("NewPlatform can not be null!");
+            throw new InvalidPositionException("NewPlatform can not be null!");
         currentPlatform = newPlatform;
     }
 
@@ -147,11 +147,11 @@ public class Player {
      * Add points to those already scored by the player
      *
      * @param point Points to be added
-     * @throws IllegalArgumentException if point is less than zero
+     * @throws NegativeNumberException if point is less than zero
      */
-    public void addPoint(int point) throws IllegalArgumentException {
+    public void addPoint(int point) throws NegativeNumberException {
         if (point < 0)
-            throw new IllegalArgumentException("Point should be greater than zero!");
+            throw new NegativeNumberException("Point should be greater than zero!");
         currentScore = currentScore + point;
     }
 
@@ -173,11 +173,11 @@ public class Player {
      * Add a power up card to those already owned by the player
      *
      * @param card The card drawn
-     * @throws NullPointerException if card reference is null
+     * @throws InvalidCardException if card reference is null
      */
-    public void addPowerUpCard(PowerUpCard card) throws NullPointerException {
+    public void addPowerUpCard(PowerUpCard card) throws InvalidCardException {
         if (card == null)
-            throw new NullPointerException("Card can not be null!");
+            throw new InvalidCardException("Card cannot be null!");
         if (powerUpCards.size() < 3)
             powerUpCards.add(card);
     }
@@ -186,14 +186,12 @@ public class Player {
      * Eliminates a power up card from those owned by the player
      *
      * @param card The power up card that must be eliminated
-     * @throws NullPointerException if card reference is null
-     * @throws MissingCardException if powerUpCards does not contain card
+     * @throws InvalidCardException if card reference is null
+     *
      */
-    public void removePowerUpCard(PowerUpCard card) throws NullPointerException {
+    public void removePowerUpCard(PowerUpCard card) throws InvalidCardException {
         if (card == null)
-            throw new NullPointerException("Card can not be null!");
-    /**    if (!powerUpCards.contains(card))
-            throw new MissingCardException("PowerUpCards does not contain this card!");*/
+            throw new InvalidCardException("Card cannot be null!");
         powerUpCards.remove(card);
     }
 
@@ -201,12 +199,12 @@ public class Player {
      * Add a weapon card to those already owned by the player
      *
      * @param card The card drawn
-     * @throws NullPointerException if card reference is null
+     * @throws InvalidCardException if card reference is null
      * @throws MaxWeaponException when the player has already three weapons
      */
-    public void addWeaponCard(WeaponCard card) throws NullPointerException, MaxWeaponException {
+    public void addWeaponCard(WeaponCard card) throws InvalidCardException, MaxWeaponException {
         if (card == null)
-            throw new NullPointerException("Card can not be null!");
+            throw new InvalidCardException("Card can not be null!");
         if (weaponCards.size() < 3)
             weaponCards.add(card);
         else
@@ -217,29 +215,30 @@ public class Player {
      * Eliminates a weapon card from those owned by the player
      *
      * @param card The weapon card that must be eliminated
-     * @throws NullPointerException if card reference is null
+     * @throws InvalidCardException if card reference is null
      * @throws MissingCardException if weaponCards does not contain card
      */
-    public void removeWeaponCard(WeaponCard card) throws NullPointerException, MissingCardException {
+    public void removeWeaponCard(WeaponCard card) throws InvalidCardException, MissingCardException {
         if (card == null)
-            throw new NullPointerException("Card can not be null!");
+            throw new InvalidCardException("Card can not be null!");
         if (!weaponCards.contains(card))
             throw new MissingCardException("WeaponCards does not contain this card!");
         weaponCards.remove(card);
     }
 
     /**
-     * @param type
+     * @param type The new player mode
      */
     public void setFrenzyModeType(int type) {
         frenzyModeType = type;
     }
 
-    public void setUnderAttackMode(){
+
+    public void setUnderAttack(){
         underAttack = true;
     }
 
-    public void resetAttackMode(){
+    public void resetUnderAttack(){
         underAttack = false;
     }
 
