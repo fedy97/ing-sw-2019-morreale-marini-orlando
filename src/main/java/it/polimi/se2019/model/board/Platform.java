@@ -134,10 +134,13 @@ public class Platform {
      */
     public void setPlatformAmmoCard(AmmoCard platformAmmoCard) throws InvalidCardException {
         if (platformAmmoCard == null)
-            throw new InvalidCardException("The ammoCard to be set cannot be null");
+            throw new InvalidCardException("the ammocard to be set cannot be null");
         if (isGenerationSpot)
             throw new InvalidCardException("cannot set a ammo card on a generation spot");
+        if (hasAmmoCard())
+            throw new InvalidCardException("this platform already got an ammocard");
         this.platformAmmoCard = platformAmmoCard;
+        this.hasAmmoCard = true;
     }
 
     /**
@@ -168,6 +171,11 @@ public class Platform {
         if (!this.isGenerationSpot())
             throw new InvalidGenerationSpotException();
         this.weapons = weapons;
+    }
+
+    public AmmoCard grabAmmoCard(){
+        hasAmmoCard = false;
+        return platformAmmoCard;
     }
 
 }

@@ -26,7 +26,7 @@ public class TestPlatform {
         pos[1] = 0;
         try {
             AmmoCard ammoCard = new AmmoCard(ammoCubes, true);
-            Platform p = new Platform(pos, false, ammoCard, null, null);
+            Platform p = new Platform(pos, false, ammoCard, null, new ArrayList<>());
             platforms.add(p);
             /*
                 setPlatformRoom() is called by Room constructor
@@ -49,36 +49,34 @@ public class TestPlatform {
     }
 
     @Test
-    public void testSetPlatformAmmoCard() {
+    public void testSetPlatformAmmoCard() throws NullPointerException {
         try {
-            Platform p = new Platform(new int[2], false, null, null,null);
+            Platform p = new Platform(new int[2], false, null, null, new ArrayList<>());
             fail();
         } catch (InvalidCardException ex) {
 
         }
         try {
             AmmoCard ammoC = new AmmoCard(new AmmoCube[2], true);
-            Platform p3 = new Platform(new int[2], true, ammoC, null,null);
+            Platform p3 = new Platform(new int[2], false, ammoC, null, new ArrayList<>());
             AmmoCard ammoC2 = new AmmoCard(new AmmoCube[3], false);
-            p3.setPlatformAmmoCard(ammoC2);
+            if (!p3.hasAmmoCard() && !p3.isGenerationSpot())
+                p3.setPlatformAmmoCard(ammoC2);
         } catch (InvalidCardException ex) {
 
-        } catch (NullPointerException ex) {
         }
         try {
             AmmoCard ammoC = new AmmoCard(new AmmoCube[2], true);
-            Platform p4 = new Platform(new int[2], false, ammoC, null,null);
+            Platform p4 = new Platform(new int[2], false, ammoC, null, new ArrayList<>());
             p4.setPlatformAmmoCard(null);
             fail();
         } catch (InvalidCardException ex) {
-        } catch (NullPointerException ex) {
         }
         try {
-            Platform p4 = new Platform(new int[2], true, null, null,null);
+            Platform p4 = new Platform(new int[2], true, null, null, new ArrayList<>());
             p4.setPlatformAmmoCard(new AmmoCard(new AmmoCube[2], true));
             fail();
         } catch (InvalidCardException ex) {
-        } catch (NullPointerException ex) {
         }
     }
 
@@ -88,7 +86,7 @@ public class TestPlatform {
 
         try {
             c1.setPlayerName("morre");
-            Platform p1 = new Platform(new int[2], true, null, null,null);
+            Platform p1 = new Platform(new int[2], true, null, null, new ArrayList<>());
             p1.setPlayerOnPlatform(c1);
         } catch (InvalidCardException ex) {
         } catch (InvalidCharacterException ex) {
