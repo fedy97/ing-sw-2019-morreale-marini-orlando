@@ -1,6 +1,7 @@
 package it.polimi.se2019.utils;
 
 import it.polimi.se2019.exceptions.InvalidCardException;
+import it.polimi.se2019.exceptions.InvalidDeckException;
 import it.polimi.se2019.exceptions.NoCardException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.AmmoCard;
@@ -43,11 +44,10 @@ public class JsonParser {
     }
 
     /**
-     * @return an arraylist of 7 different types of ammo cards,
-     * ready to be added to a real deck of 36 ammos
+     * @return a deck of 36 ammos
      * @throws InvalidCardException
      */
-    public ArrayList<AmmoCard> buildAmmoCards() throws InvalidCardException {
+    public Deck<AmmoCard> buildAmmoCards() throws InvalidCardException, InvalidDeckException {
         if (path.equals("/json/ammocards.json")) {
             ArrayList<AmmoCard> ammoCards = new ArrayList<>();
             AmmoCube[] arrAmmos;
@@ -72,7 +72,9 @@ public class JsonParser {
                 AmmoCard amm = new AmmoCard(arrAmmos, hasPowerup);
                 ammoCards.add(amm);
             }
-            return ammoCards;
+            Deck<AmmoCard> d = new Deck<>(36);
+            d.addCards(ammoCards);
+            return d;
         }
         return null;
     }

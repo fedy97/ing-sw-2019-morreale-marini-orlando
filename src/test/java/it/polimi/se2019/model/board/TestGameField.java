@@ -17,10 +17,8 @@ public class TestGameField {
             InvalidFieldException, InvalidAdjacentPlatformsException, InvalidRoomException, InvalidPositionException,
             NoSuchFieldException, IllegalAccessException {
         JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
-        ArrayList<AmmoCard> ammocards = parserAmmos.buildAmmoCards();
-        Deck<AmmoCard> deck = new Deck<>(36);
-        deck.addCards(ammocards);
-        deck.addCards(ammocards); //now we have 14 ammocards in the deck
+        Deck<AmmoCard> deck = parserAmmos.buildAmmoCards();
+        //now we have 36 ammocards in the deck
         JsonParser parserField = new JsonParser("/json/field.json");
         Platform[][] field = parserField.buildField(1, deck);
         GameField gf = new GameField(field);
