@@ -37,10 +37,8 @@ public class GameField {
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[0].length; j++) {
                 Platform p = field[i][j];
-                if (p != null) {
+                if (p != null)
                     buildPlatformAdjMap(p, i, j);
-                    //to be removed buildDoorLocation(p);
-                }
             }
         }
 

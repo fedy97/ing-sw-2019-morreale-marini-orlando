@@ -170,8 +170,4 @@ public class Platform {
         this.weapons = weapons;
     }
 
-    public void setDoorLocation(ArrayList<Orientation> doorLocation) {
-        this.doorLocation = doorLocation;
-    }
-
 }

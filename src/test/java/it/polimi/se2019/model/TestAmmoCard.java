@@ -40,8 +40,8 @@ public class TestAmmoCard {
         } catch (InvalidCardException e) {}
         try {
             JsonParser parser = new JsonParser("/json/ammocards.json");
-            Deck<AmmoCard> deck = new Deck<>(36);
-            //now ammocards has 7 different ammo cards according to json
+            Deck<AmmoCard> deck;
+            //now ammocards has 36 ammo cards according to json
             deck = parser.buildAmmoCards();
             assertEquals(deck.drawCard().hasPowerUp(), true);
         } catch (InvalidCardException ex) {}
