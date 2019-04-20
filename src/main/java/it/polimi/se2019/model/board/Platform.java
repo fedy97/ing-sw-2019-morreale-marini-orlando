@@ -49,7 +49,7 @@ public class Platform {
         this.playersOnThePlatform = new ArrayList<>();
         //build the arraylist of doors of the platform, knowing the adjacent platforms
         this.hasAmmoCard = platformAmmoCard == null ? false : true;
-
+        this.hasDoor = doors.isEmpty() ? false : true;
     }
 
     /**
@@ -174,7 +174,4 @@ public class Platform {
         this.doorLocation = doorLocation;
     }
 
-    public void setHasDoor(boolean hasDoor) {
-        this.hasDoor = hasDoor;
-    }
 }

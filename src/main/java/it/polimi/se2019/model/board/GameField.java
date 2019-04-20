@@ -177,16 +177,4 @@ public class GameField {
 
     }
 
-    /*public void buildDoorLocation(Platform p) {
-
-        ArrayList<Orientation> or = new ArrayList<>();
-        for (Map.Entry<Orientation, Platform> entry : p.getAdjacentPlatforms().entrySet()) {
-            if (entry.getValue().getPlatformRoom() != p.getPlatformRoom())
-                or.add(entry.getKey());
-        }
-        p.setDoorLocation(or);
-        p.setHasDoor(p.getDoorLocation().isEmpty() ? false : true);
-
-    }*/
-
 }
