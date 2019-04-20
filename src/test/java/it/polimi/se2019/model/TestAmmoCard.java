@@ -2,7 +2,10 @@ package it.polimi.se2019.model;
 
 
 import it.polimi.se2019.exceptions.InvalidCardException;
+import it.polimi.se2019.exceptions.InvalidDeckException;
+import it.polimi.se2019.exceptions.NoCardException;
 import it.polimi.se2019.model.card.AmmoCard;
+import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.utils.JsonParser;
 import org.junit.Test;
@@ -25,7 +28,7 @@ public class TestAmmoCard {
      * AmmoCard
      */
     @Test
-    public void TestAmmoCard() {
+    public void TestAmmoCard() throws InvalidDeckException, NoCardException {
         try {
             new AmmoCard(new AmmoCube[3], true);
             fail();
@@ -37,10 +40,10 @@ public class TestAmmoCard {
         } catch (InvalidCardException e) {}
         try {
             JsonParser parser = new JsonParser("/json/ammocards.json");
-            ArrayList<AmmoCard> ammoCards;
+            Deck<AmmoCard> deck = new Deck<>(36);
             //now ammocards has 7 different ammo cards according to json
-            ammoCards = parser.buildAmmoCards();
-            assertEquals(ammoCards.get(0).hasPowerUp(), false);
+            deck = parser.buildAmmoCards();
+            assertEquals(deck.drawCard().hasPowerUp(), true);
         } catch (InvalidCardException ex) {}
     }
 }
