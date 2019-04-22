@@ -12,32 +12,32 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class TestGameField {
+    GameField gf;
 
-    @Test
-    public void testGetPlatform() throws InvalidCardException, InvalidDeckException, NoCardException,
+    @Before
+    public void initTest()throws InvalidCardException, InvalidDeckException, NoCardException,
             InvalidFieldException, InvalidAdjacentPlatformsException, InvalidRoomException, InvalidPositionException,
             NoSuchFieldException, IllegalAccessException {
-        JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
-        Deck<AmmoCard> deck = parserAmmos.buildAmmoCards();
-        //now we have 36 ammocards in the deck
-        JsonParser parserField = new JsonParser("/json/field.json");
-        Platform[][] field = parserField.buildField(1, deck);
-        GameField gf = new GameField(field);
+
+            JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
+            Deck<AmmoCard> deck = parserAmmos.buildAmmoCards();
+            //now we have 36 ammocards in the deck
+            JsonParser parserField = new JsonParser("/json/field.json");
+            Platform[][] field = parserField.buildField(1, deck);
+            gf = new GameField(field);
+    }
+
+
+    @Test
+    public void testGetPlatform() throws InvalidPositionException {
         Platform p = gf.getPlatform(gf.getField()[0][1].getPlatformPosition());
         assertEquals(p.isGenerationSpot(), true);
     }
 
     @Test
-    public void testFindAvailablePlatforms() throws InvalidCardException, InvalidDeckException, NoCardException,
-            InvalidFieldException, InvalidAdjacentPlatformsException, InvalidRoomException, InvalidPositionException,
-            NoSuchFieldException, IllegalAccessException {
-        JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
-        Deck<AmmoCard> deck = parserAmmos.buildAmmoCards();
-        //now we have 36 ammocards in the deck
-        JsonParser parserField = new JsonParser("/json/field.json");
-        Platform[][] field = parserField.buildField(1, deck);
-        GameField gf = new GameField(field);
-        ArrayList<Platform> list = gf.findAvailablePlatforms(gf.getPlatform(new int[]{0,2}), 2);
+    public void testGetAvailablePlatforms() throws InvalidPositionException {
+
+        ArrayList<Platform> list = gf.getAvailablePlatforms(gf.getPlatform(new int[]{0,1}), 2);
         /*for (int i = 0; i < list.size(); i++) {
             System.out.println("[" + list.get(i).getPlatformPosition()[0] + " " + list.get(i).getPlatformPosition()[1] + "]");
         }*/

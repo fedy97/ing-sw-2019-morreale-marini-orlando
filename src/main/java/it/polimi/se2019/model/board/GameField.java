@@ -177,35 +177,34 @@ public class GameField {
     }
 
     /**
+     * iterative BFS using adjacency list
+     *
      * @param initPlat
      * @param numOfMaxSteps
      * @return an arraylist of platforms in which the player can go from the initPlat, given the numOfMaxSteps permitted
      */
-    public ArrayList<Platform> findAvailablePlatforms(Platform initPlat, int numOfMaxSteps) {
+    public ArrayList<Platform> getAvailablePlatforms(Platform initPlat, int numOfMaxSteps) {
         ArrayList<Platform> platsAvailable = new ArrayList<>();
         LinkedList<Platform> queue = new LinkedList<>();
         boolean[][] visitedPlats = new boolean[3][4];
-        int counter = 0;
         queue.add(initPlat);
-        while (counter <= 12) {
+        while (!queue.isEmpty()) {
             Platform p = queue.poll();
-            if (p != null) {
-                if (!visitedPlats[p.getPlatformPosition()[0]][p.getPlatformPosition()[1]]) {
-                    visitedPlats[p.getPlatformPosition()[0]][p.getPlatformPosition()[1]] = true;
-                    platsAvailable.add(p);
-                }
-                if (!isUltimateDistance(numOfMaxSteps, initPlat, p)) {
-                    for (Map.Entry<Orientation, Platform> entry : p.getAdjacentPlatforms().entrySet()) {
-                        Platform pl = entry.getValue();
-                        if (pl != null) {
-                            if (!visitedPlats[pl.getPlatformPosition()[0]][pl.getPlatformPosition()[1]]) {
-                                queue.add(pl);
-                            }
+            if (!visitedPlats[p.getPlatformPosition()[0]][p.getPlatformPosition()[1]]) {
+                visitedPlats[p.getPlatformPosition()[0]][p.getPlatformPosition()[1]] = true;
+                platsAvailable.add(p);
+            }
+            if (!isUltimateDistance(numOfMaxSteps, initPlat, p)) {
+                for (Map.Entry<Orientation, Platform> entry : p.getAdjacentPlatforms().entrySet()) {
+                    Platform pl = entry.getValue();
+                    if (pl != null) {
+                        if (!visitedPlats[pl.getPlatformPosition()[0]][pl.getPlatformPosition()[1]]) {
+                            queue.add(pl);
                         }
                     }
                 }
             }
-            counter++;
+
         }
         return platsAvailable;
     }
