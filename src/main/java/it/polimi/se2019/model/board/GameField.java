@@ -1,6 +1,7 @@
 package it.polimi.se2019.model.board;
 
 import it.polimi.se2019.exceptions.*;
+import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.utils.HandyFunctions;
 
@@ -175,6 +176,11 @@ public class GameField {
 
     }
 
+    /**
+     * @param initPlat
+     * @param numOfMaxSteps
+     * @return an arraylist of platforms in which the player can go from the initPlat, given the numOfMaxSteps permitted
+     */
     public ArrayList<Platform> findAvailablePlatforms(Platform initPlat, int numOfMaxSteps) {
         ArrayList<Platform> platsAvailable = new ArrayList<>();
         LinkedList<Platform> queue = new LinkedList<>();
@@ -204,11 +210,34 @@ public class GameField {
         return platsAvailable;
     }
 
+    /**
+     * @param numOfMaxSteps
+     * @param initPlat
+     * @param p             current Platform
+     * @return true if the distance is equal to the number of maximum steps
+     */
     private boolean isUltimateDistance(int numOfMaxSteps, Platform initPlat, Platform p) {
         int distX = (initPlat.getPlatformPosition()[0] > p.getPlatformPosition()[0]) ? initPlat.getPlatformPosition()[0] - p.getPlatformPosition()[0] : p.getPlatformPosition()[0] - initPlat.getPlatformPosition()[0];
         int distY = (initPlat.getPlatformPosition()[1] > p.getPlatformPosition()[1]) ? initPlat.getPlatformPosition()[1] - p.getPlatformPosition()[1] : p.getPlatformPosition()[1] - initPlat.getPlatformPosition()[1];
         int distTot = distX + distY;
         return distTot == numOfMaxSteps ? true : false;
+    }
+
+    /**
+     * @param platform in which calculate all the visible players
+     * @return an arraylist of visible players from that platform
+     */
+    public ArrayList<Character> getVisiblePlayers(Platform platform) {
+        ArrayList<Character> characterArrayList = new ArrayList<>();
+        for (Platform p : platform.getPlatformRoom().getPlatformsInRoom()) {
+            characterArrayList.addAll(p.getPlayersOnThePlatform());
+        }
+        for (Orientation or : platform.getDoorLocation()) {
+            for (Platform p : platform.getAdjacentPlatform(or).getPlatformRoom().getPlatformsInRoom()) {
+                characterArrayList.addAll(p.getPlayersOnThePlatform());
+            }
+        }
+        return characterArrayList;
     }
 
 }
