@@ -173,9 +173,12 @@ public class Platform {
         this.weapons = weapons;
     }
 
-    public AmmoCard grabAmmoCard(){
-        hasAmmoCard = false;
-        return platformAmmoCard;
+    public AmmoCard grabAmmoCard() throws InvalidCardException {
+        if (hasAmmoCard) {
+            hasAmmoCard = false;
+            return this.platformAmmoCard;
+        } else
+            throw new InvalidCardException("there is no ammo card set in this platform");
     }
 
 }

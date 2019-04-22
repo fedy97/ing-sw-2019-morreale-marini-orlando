@@ -175,4 +175,40 @@ public class GameField {
 
     }
 
+    public ArrayList<Platform> findAvailablePlatforms(Platform initPlat, int numOfMaxSteps) {
+        ArrayList<Platform> platsAvailable = new ArrayList<>();
+        LinkedList<Platform> queue = new LinkedList<>();
+        boolean[][] visitedPlats = new boolean[3][4];
+        int counter = 0;
+        queue.add(initPlat);
+        while (counter <= 12) {
+            Platform p = queue.poll();
+            if (p != null) {
+                if (!visitedPlats[p.getPlatformPosition()[0]][p.getPlatformPosition()[1]]) {
+                    visitedPlats[p.getPlatformPosition()[0]][p.getPlatformPosition()[1]] = true;
+                    platsAvailable.add(p);
+                }
+                if (!isUltimateDistance(numOfMaxSteps, initPlat, p)) {
+                    for (Map.Entry<Orientation, Platform> entry : p.getAdjacentPlatforms().entrySet()) {
+                        Platform pl = entry.getValue();
+                        if (pl != null) {
+                            if (!visitedPlats[pl.getPlatformPosition()[0]][pl.getPlatformPosition()[1]]) {
+                                queue.add(pl);
+                            }
+                        }
+                    }
+                }
+            }
+            counter++;
+        }
+        return platsAvailable;
+    }
+
+    private boolean isUltimateDistance(int numOfMaxSteps, Platform initPlat, Platform p) {
+        int distX = (initPlat.getPlatformPosition()[0] > p.getPlatformPosition()[0]) ? initPlat.getPlatformPosition()[0] - p.getPlatformPosition()[0] : p.getPlatformPosition()[0] - initPlat.getPlatformPosition()[0];
+        int distY = (initPlat.getPlatformPosition()[1] > p.getPlatformPosition()[1]) ? initPlat.getPlatformPosition()[1] - p.getPlatformPosition()[1] : p.getPlatformPosition()[1] - initPlat.getPlatformPosition()[1];
+        int distTot = distX + distY;
+        return distTot == numOfMaxSteps ? true : false;
+    }
+
 }
