@@ -74,7 +74,7 @@ public class TestAmmoBox {
         AmmoCube[] ammoCubes = {AmmoCube.BLUE, AmmoCube.BLUE, AmmoCube.YELLOW};
 
         /*
-            The ammoBox has enough cubes, expected value to be true
+         * The ammoBox has enough cubes, expected value to be true
          */
         ammoBox.addAmmos(AmmoCube.BLUE, 2);
 
@@ -89,6 +89,14 @@ public class TestAmmoBox {
 
         assertFalse(ammoBox.hasAmmos(ammoCubes));
         assertFalse(ammoBox.hasAmmo(AmmoCube.RED));
+
+        ammoBox.removeAmmos(AmmoCube.BLUE, 1);
+        ammoBox.removeAmmos(AmmoCube.YELLOW, 1);
+
+        /*
+         *  The AmmoBox is now empty, true value expected by isEmpty() method
+         */
+        assertTrue(ammoBox.isEmpty());
     }
 
 

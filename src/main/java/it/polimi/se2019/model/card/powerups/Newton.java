@@ -1,8 +1,9 @@
 package it.polimi.se2019.model.card.powerups;
 
-
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.AmmoCube;
+import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.model.player.Player;
 
 import java.util.ArrayList;
@@ -20,9 +21,13 @@ public final class Newton extends PowerUpCard {
      * Activate the effect of the card
      */
     public void useEffect(Controller c) {
-        //TODO
+        Player currPlayer = c.getPlayerManager().getCurrentPlayer();
+        List<Orientation> dir = new ArrayList<>();
+        dir.add(Orientation.ALL);
+        Player target = c.askForTargets(c.getValidator().getValidTargets(this)).get(0);
+        Platform destination =  c.askForPosition(c.getGame().getGameField().getPlatformDir(dir));
+        target.setCurrentPlatform(destination);
     }
-
 
     /**
      * Return if the player in his current state can use the power up or not

@@ -1,5 +1,7 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.Action;
+import it.polimi.se2019.exceptions.InvalidActionException;
 import it.polimi.se2019.exceptions.InvalidGenerationSpotException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
@@ -13,21 +15,22 @@ import java.util.*;
  * @author Gabriel Raul Marini
  */
 public abstract class Validator {
-    private PlayerManager playerManager;
-    private Controller father;
+    protected Controller father;
 
     /**
      * Instantiate a validator according to the match state
      */
-    public Validator(PlayerManager playerManager, Controller father) {
+    public Validator(Controller father) {
         this.father = father;
-        this.playerManager = playerManager;
     }
 
     /**
-     * @return the platform the player can reach according to the actual health state and game mode
+     * @param c command received by the player
+     * @return the list of platform destination the player can move to
+     * @throws InvalidActionException if the player cannot move in the current health state with the
+     *                                selected action
      */
-    public abstract List<Platform> getValidMoves();
+    public abstract List<Platform> getValidMoves(Action c) throws InvalidActionException;
 
     /**
      * @param weapon chosen by the player to perform a damage action
@@ -35,14 +38,14 @@ public abstract class Validator {
      */
     public List<Player> getValidTargets(WeaponCard weapon) {
         //TODO
-        return null;
+        return new ArrayList<>();
     }
 
     /**
      * @param powerUpCard chosen by the player to perform an action
      * @return the list of player that can be the targets of the powerUp according to its effect
      */
-    public List<Player> getValidTargets(PowerUpCard powerUpCard){
+    public List<Player> getValidTargets(PowerUpCard powerUpCard) {
         return powerUpCard.getPossibleTargets(father);
     }
 
@@ -52,7 +55,7 @@ public abstract class Validator {
      */
     public List<WeaponCard> getGrabableWeapons() throws InvalidGenerationSpotException {
         List<WeaponCard> res = new ArrayList<>();
-        Player currPlayer = playerManager.getCurrentPlayer();
+        Player currPlayer = father.getPlayerManager().getCurrentPlayer();
         AmmoBox ammoBox = currPlayer.getPlayerBoard().getAmmoBox();
         Platform p = currPlayer.getCurrentPlatform();
 
@@ -73,7 +76,7 @@ public abstract class Validator {
      * @return the list of weapons the current player can reload according to his ammos
      */
     public List<WeaponCard> getReloadableWeapons() {
-        Player currPlayer = playerManager.getCurrentPlayer();
+        Player currPlayer = father.getPlayerManager().getCurrentPlayer();
         List<WeaponCard> res = currPlayer.getWeaponCards();
         AmmoBox ammoBox = currPlayer.getPlayerBoard().getAmmoBox();
 
@@ -90,7 +93,7 @@ public abstract class Validator {
      */
     public List<PowerUpCard> getUsablePowerUps() {
         List<PowerUpCard> res = new ArrayList<>();
-        Player currPlayer = playerManager.getCurrentPlayer();
+        Player currPlayer = father.getPlayerManager().getCurrentPlayer();
 
         for (PowerUpCard powerUp : currPlayer.getPowerUpCards())
             if (powerUp.isUsable(currPlayer))

@@ -20,6 +20,7 @@ import java.util.*;
 public class PlayerManager {
 
     private Player currentPlayer;
+    private List<Player> tempPlayers;
     private int actionsLeft;
     private Controller father;
 
@@ -137,4 +138,11 @@ public class PlayerManager {
         currentPlayer = player;
     }
 
+    public List<Player> getTempPlayers() {
+        return tempPlayers;
+    }
+
+    public void setTempPlayers(List<Player> tempPlayers) {
+        this.tempPlayers = tempPlayers;
+    }
 }

@@ -1,6 +1,7 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.Game;
+import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.Player;
 
@@ -121,6 +122,15 @@ public class Controller {
     public List<Player> askForTargets(List<Player> possibleTargets){
         //TODO
         return new ArrayList<>();
+    }
+
+    /**
+     * @param possibleDestination the list of possible platform destination
+     * @return the destination platform chosen by the player
+     */
+    public Platform askForPosition(List<Platform> possibleDestination){
+        //TODO
+        return null;
     }
 
     public Validator getValidator() {

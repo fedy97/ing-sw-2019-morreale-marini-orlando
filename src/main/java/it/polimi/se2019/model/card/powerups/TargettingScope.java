@@ -22,7 +22,6 @@ public final class TargettingScope extends PowerUpCard {
      */
     public void useEffect(Controller c) {
         Player currPlayer = c.getPlayerManager().getCurrentPlayer();
-        AmmoBox ammoBox = currPlayer.getPlayerBoard().getAmmoBox();
         Player target = c.askForTargets(c.getValidator().getValidTargets(this)).get(0);
         AmmoCube cost = c.askForTribute();
         HashMap<Player, Integer> targetMap = new HashMap<>();

@@ -288,4 +288,19 @@ public class GameField {
         return characterArrayList;
     }
 
+    public List<Platform> getPlatforms(){
+        //TODO for you fede
+        return new ArrayList<>();
+    }
+
+    /**
+     *
+     * @param dir
+     * @return the platforms in the directions selected
+     */
+    public List<Platform> getPlatformDir(List<Orientation> dir){
+        //TODO for you fede
+        return new ArrayList<>();
+    }
+
 }

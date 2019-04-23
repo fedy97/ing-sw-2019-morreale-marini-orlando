@@ -1,5 +1,6 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.Action;
 import it.polimi.se2019.model.board.Platform;
 
 import java.util.*;
@@ -9,13 +10,13 @@ import java.util.*;
  */
 public class Frenzy2Validator extends Validator {
 
-    public Frenzy2Validator(PlayerManager playerManager, Controller father) {
-        super(playerManager, father);
+    public Frenzy2Validator(Controller father) {
+        super(father);
     }
 
-    public ArrayList<Platform> getValidMoves() {
+    public List<Platform> getValidMoves(Action c) {
         //TODO
-        return null;
+        return new ArrayList<>();
     }
 
 }
