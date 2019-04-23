@@ -21,7 +21,6 @@ public final class Newton extends PowerUpCard {
      * Activate the effect of the card
      */
     public void useEffect(Controller c) {
-        Player currPlayer = c.getPlayerManager().getCurrentPlayer();
         List<Orientation> dir = new ArrayList<>();
         dir.add(Orientation.ALL);
         Player target = c.askForTargets(c.getValidator().getValidTargets(this)).get(0);

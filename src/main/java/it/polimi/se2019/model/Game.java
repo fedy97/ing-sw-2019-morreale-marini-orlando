@@ -24,11 +24,11 @@ public class Game extends Observable {
     private Map<Character, Player> characterPlayers;
     
     public Game() {
+        //TODO
     }
     
     public GameField getGameField() {
- 
-        return null;
+        return gameField;
     }
 
     /**
@@ -77,6 +77,7 @@ public class Game extends Observable {
      * @param player to be added to the match
      */
     public void addPlayer(Player player) {
+        players.add(player);
     }
 
     /**
@@ -84,24 +85,28 @@ public class Game extends Observable {
      * @param character
      */
     public void setPlayerCharacter(Player player, Character character) {
+        characterPlayers.put(character, player);
     }
 
     /**
      * @param weapons
      */
     public void setWeaponDeck(Deck<WeaponCard> weapons) {
+        weaponsDeck = weapons;
     }
 
     /**
      * @param powerUps
      */
     public void setPowerUpDeck(Deck<PowerUpCard> powerUps) {
+        powerUpDeck = powerUps;
     }
 
     /**
      * @param ammos
      */
     public void setAmmoDeck(Deck<AmmoCard> ammos) {
+        ammoDeck = ammos;
     }
 
 }

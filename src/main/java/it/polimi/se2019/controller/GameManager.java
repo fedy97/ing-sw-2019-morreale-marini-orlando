@@ -12,7 +12,7 @@ public class GameManager {
 
     private GameField gameField;
     private GameState gameState;
-    private ArrayList<Player> players;
+    private List<Player> players;
     private Map<Character, Player> characterPlayer;
 
     public GameManager() {
@@ -20,7 +20,7 @@ public class GameManager {
     }
 
 
-    public ArrayList<Player> getPlayers() {
+    public List<Player> getPlayers() {
         // TODO
         return players;
     }
@@ -94,7 +94,7 @@ public class GameManager {
         return gameState;
     }
 
-    public void setPlayers(ArrayList<Player> players) {
+    public void setPlayers(List<Player> players) {
         this.players = players;
     }
 

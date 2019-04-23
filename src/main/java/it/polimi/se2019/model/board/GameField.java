@@ -278,7 +278,7 @@ public class GameField {
 
     public ArrayList<Character> getVisiblePlayers(Platform platform, String dirXY) {
         ArrayList<Character> characterArrayList = new ArrayList<>();
-        if (dirXY == "x") {
+        if (dirXY.equals("x")) {
             for (int i = 0; i < 4; i++)
                 characterArrayList.addAll(field[platform.getPlatformPosition()[0]][i].getPlayersOnThePlatform());
         } else {

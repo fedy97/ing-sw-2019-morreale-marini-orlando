@@ -5,6 +5,7 @@ import it.polimi.se2019.exceptions.NoCardException;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * A generic class representing a deck of cards
@@ -59,7 +60,7 @@ public class Deck<Card> extends ArrayList<Card> {
      * @throws NullPointerException if cards are null
      * @throws InvalidDeckException if collection reference is null or has no elements
      */
-    public void addCards(ArrayList<Card> cards) throws InvalidDeckException {
+    public void addCards(List<Card> cards) throws InvalidDeckException {
         if (cards.size() == 0 || (cards.size() + size()) > initialSize)
             throw new InvalidDeckException("Collection of cards cannot be added to the deck, check the maximum allowed " +
                     "size of the deck or if collection is null or empty!");

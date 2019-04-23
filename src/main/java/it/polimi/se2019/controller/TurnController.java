@@ -10,35 +10,36 @@ import java.util.*;
 public class TurnController {
 
     public TurnController() {
+        //TODO
     }
 
     private Player playerTurn;
-    private ArrayList<Player> turningOrder;
+    private List<Player> turningOrder;
     private Timer turnTimer;
 
     /**
      * @return
      */
     public Player getPlayerTurn() {
-        return null;
+        return playerTurn;
     }
 
     /**
      * @return
      */
-    public ArrayList<Player> getTurningOrder() {
-        return null;
+    public List<Player> getTurningOrder() {
+        return turningOrder;
     }
 
     /**
      * @return
      */
     public Timer getTurnTimer() {
-        return null;
+        return turnTimer;
     }
 
     private void stopTimer() {
-
+        //TODO
     }
 
 }

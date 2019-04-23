@@ -6,7 +6,7 @@ import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A class that manages the refill and the draw operations on the deck
@@ -16,10 +16,10 @@ import java.util.ArrayList;
 public class DecksManager {
 
     private Deck<PowerUpCard> powerUps;
-    private ArrayList<PowerUpCard> garbageDeck;
+    private List<PowerUpCard> garbageDeck;
     private Deck<AmmoCard> ammoDeck;
 
-    public DecksManager(Deck<PowerUpCard> powerUps, ArrayList<PowerUpCard> garbageDeck, Deck<AmmoCard> ammoDeck) {
+    public DecksManager(Deck<PowerUpCard> powerUps, List<PowerUpCard> garbageDeck, Deck<AmmoCard> ammoDeck) {
         this.powerUps = powerUps;
         this.garbageDeck = garbageDeck;
         this.ammoDeck = ammoDeck;
