@@ -25,7 +25,8 @@ public final class Newton extends PowerUpCard {
         List<Orientation> dir = new ArrayList<>();
         dir.add(Orientation.ALL);
         Player target = c.askForTargets(c.getValidator().getValidTargets(this)).get(0);
-        Platform destination =  c.askForPosition(c.getGame().getGameField().getPlatformDir(dir));
+        Platform destination =  c.askForPosition(c.getGame().getGameField().getPlatformDir(target.getCurrentPlatform(),
+                dir));
         target.setCurrentPlatform(destination);
     }
 
