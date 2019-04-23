@@ -21,15 +21,13 @@ public class GameField {
     private Platform[][] field;
 
     /**
-     * @param rooms of the field, 5 or 6
-     * @param field where the 11 or 12 platforms are located
+     * @param field       where the 11 or 12 platforms are located
      * @throws InvalidNumOfRoomsException        if the rooms are not 5 or 6
      * @throws InvalidFieldException             if there is more than 1 platform equal to null or the matrix is not 3x4
      * @throws InvalidAdjacentPlatformsException if the adjacency list has more than 2 nulls
      */
     public GameField(Platform[][] field) throws InvalidFieldException, InvalidRoomException,
-            InvalidAdjacentPlatformsException {
-
+            InvalidAdjacentPlatformsException{
         if (hasMoreThan2Nulls(field))
             throw new InvalidFieldException();
         this.field = field;
@@ -46,6 +44,7 @@ public class GameField {
         // we may now build the rooms
         this.rooms = new ArrayList<>();
         buildRooms();
+
     }
 
     /**
@@ -185,41 +184,29 @@ public class GameField {
      */
     public ArrayList<Platform> getAvailablePlatforms(Platform initPlat, int numOfMaxSteps) {
         ArrayList<Platform> platsAvailable = new ArrayList<>();
-        LinkedList<Platform> queue = new LinkedList<>();
+        Stack<Platform> queue = new Stack<>();
+        Stack<Integer> dist = new Stack<>();
         boolean[][] visitedPlats = new boolean[3][4];
         queue.add(initPlat);
-        while (!queue.isEmpty()) {
-            Platform p = queue.poll();
+        dist.add(0);
+        while (!queue.empty()) {
+            Platform p = queue.pop();
+            int distCorr = dist.pop();
             if (!visitedPlats[p.getPlatformPosition()[0]][p.getPlatformPosition()[1]]) {
                 visitedPlats[p.getPlatformPosition()[0]][p.getPlatformPosition()[1]] = true;
                 platsAvailable.add(p);
             }
-            if (!isUltimateDistance(numOfMaxSteps, initPlat, p)) {
+            if (distCorr + 1 <= numOfMaxSteps) {
                 for (Map.Entry<Orientation, Platform> entry : p.getAdjacentPlatforms().entrySet()) {
                     Platform pl = entry.getValue();
-                    if (pl != null) {
-                        if (!visitedPlats[pl.getPlatformPosition()[0]][pl.getPlatformPosition()[1]]) {
-                            queue.add(pl);
-                        }
+                    if (pl != null && !visitedPlats[pl.getPlatformPosition()[0]][pl.getPlatformPosition()[1]]) {
+                        queue.push(pl);
+                        dist.push(distCorr + 1);
                     }
                 }
             }
-
         }
         return platsAvailable;
-    }
-
-    /**
-     * @param numOfMaxSteps
-     * @param initPlat
-     * @param p             current Platform
-     * @return true if the distance is equal to the number of maximum steps
-     */
-    private boolean isUltimateDistance(int numOfMaxSteps, Platform initPlat, Platform p) {
-        int distX = (initPlat.getPlatformPosition()[0] > p.getPlatformPosition()[0]) ? initPlat.getPlatformPosition()[0] - p.getPlatformPosition()[0] : p.getPlatformPosition()[0] - initPlat.getPlatformPosition()[0];
-        int distY = (initPlat.getPlatformPosition()[1] > p.getPlatformPosition()[1]) ? initPlat.getPlatformPosition()[1] - p.getPlatformPosition()[1] : p.getPlatformPosition()[1] - initPlat.getPlatformPosition()[1];
-        int distTot = distX + distY;
-        return distTot == numOfMaxSteps ? true : false;
     }
 
     /**
@@ -235,6 +222,24 @@ public class GameField {
             for (Platform p : platform.getAdjacentPlatform(or).getPlatformRoom().getPlatformsInRoom()) {
                 characterArrayList.addAll(p.getPlayersOnThePlatform());
             }
+        }
+        return characterArrayList;
+    }
+
+    /**
+     * @param platform whre the current player stands
+     * @param dirXY is equal to "x" if the player wants to target every player in his "x" position,
+     *              otherwise every target in "y" postion will be targeted
+     * @return an arraylist of players visible given the direction, this method is used by specific weapons
+     */
+    public ArrayList<Character> getVisiblePlayers(Platform platform, String dirXY) {
+        ArrayList<Character> characterArrayList = new ArrayList<>();
+        if (dirXY == "x") {
+            for (int i = 0; i < 4; i++)
+                characterArrayList.addAll(field[platform.getPlatformPosition()[0]][i].getPlayersOnThePlatform());
+        } else {
+            for (int i = 0; i < 3; i++)
+                characterArrayList.addAll(field[i][platform.getPlatformPosition()[1]].getPlayersOnThePlatform());
         }
         return characterArrayList;
     }
