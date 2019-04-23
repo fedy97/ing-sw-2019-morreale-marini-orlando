@@ -1,6 +1,7 @@
 package it.polimi.se2019.model.board;
 
 import it.polimi.se2019.exceptions.*;
+import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -19,15 +20,22 @@ public class GameField {
 
     private ArrayList<Room> rooms;
     private Platform[][] field;
+    private WeaponCard[] initWeapons;
+    private SkullsBoard skullsBoard;
+    private ScoreBoard scoreBoard;
 
     /**
-     * @param field       where the 11 or 12 platforms are located
+     * @param initWeapons an array of weapons ready to be grabbed, each weapon will be linked to its platform
+     * @param skullsBoard
+     * @param scoreBoard
+     * @param field       where the 10, 11 or 12 platforms are located
      * @throws InvalidNumOfRoomsException        if the rooms are not 5 or 6
      * @throws InvalidFieldException             if there is more than 1 platform equal to null or the matrix is not 3x4
      * @throws InvalidAdjacentPlatformsException if the adjacency list has more than 2 nulls
      */
-    public GameField(Platform[][] field) throws InvalidFieldException, InvalidRoomException,
-            InvalidAdjacentPlatformsException{
+    public GameField(Platform[][] field, WeaponCard[] initWeapons,
+                     SkullsBoard skullsBoard, ScoreBoard scoreBoard) throws InvalidFieldException, InvalidRoomException,
+            InvalidAdjacentPlatformsException, InvalidDeckException, InvalidGenerationSpotException {
         if (hasMoreThan2Nulls(field))
             throw new InvalidFieldException();
         this.field = field;
@@ -44,6 +52,26 @@ public class GameField {
         // we may now build the rooms
         this.rooms = new ArrayList<>();
         buildRooms();
+        this.scoreBoard = scoreBoard;
+        this.skullsBoard = skullsBoard;
+
+        if (!areValidWeapons(initWeapons))
+            throw new InvalidDeckException("something went wrong while building available weapons, please check again your arguments");
+        this.initWeapons = initWeapons;
+        //create the Map of weapons in each generation spot
+        int index = 0;
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field[0].length; j++) {
+                Platform p = field[i][j];
+                if (p != null && p.isGenerationSpot()) {
+                    ArrayList<WeaponCard> arrWeapons = new ArrayList<>();
+                    arrWeapons.add(initWeapons[index++]);
+                    arrWeapons.add(initWeapons[index++]);
+                    arrWeapons.add(initWeapons[index++]);
+                    p.setWeapons(arrWeapons);
+                }
+            }
+        }
 
     }
 
@@ -59,6 +87,14 @@ public class GameField {
      */
     public Platform[][] getField() {
         return field;
+    }
+
+    public SkullsBoard getSkullsBoard() {
+        return skullsBoard;
+    }
+
+    public ScoreBoard getScoreBoard() {
+        return scoreBoard;
     }
 
     /**
@@ -99,6 +135,19 @@ public class GameField {
             }
         }
         return counter <= 1 ? false : true;
+    }
+
+    /**
+     * @return true if the array of 9 weapons is valid
+     */
+    private boolean areValidWeapons(WeaponCard[] initWeapons) {
+        if (initWeapons.length != 9) {
+            return false;
+        }
+        for (int i = 0; i < initWeapons.length; i++) {
+            if (initWeapons[i] == null) return false;
+        }
+        return true;
     }
 
     /**
@@ -176,21 +225,22 @@ public class GameField {
     }
 
     /**
-     * iterative BFS using adjacency list
+     * iterative DFS using adjacency list
      *
-     * @param initPlat
-     * @param numOfMaxSteps
-     * @return an arraylist of platforms in which the player can go from the initPlat, given the numOfMaxSteps permitted
+     * @param initPlat      is the root of the tree
+     * @param numOfMaxSteps permitted from initPlat, depending on the state of the player
+     * @return an arraylist of platforms in which the player can go from the initPlat,
+     * given the numOfMaxSteps permitted
      */
     public ArrayList<Platform> getAvailablePlatforms(Platform initPlat, int numOfMaxSteps) {
         ArrayList<Platform> platsAvailable = new ArrayList<>();
-        Stack<Platform> queue = new Stack<>();
+        Stack<Platform> stack = new Stack<>();
         Stack<Integer> dist = new Stack<>();
         boolean[][] visitedPlats = new boolean[3][4];
-        queue.add(initPlat);
+        stack.add(initPlat);
         dist.add(0);
-        while (!queue.empty()) {
-            Platform p = queue.pop();
+        while (!stack.empty()) {
+            Platform p = stack.pop();
             int distCorr = dist.pop();
             if (!visitedPlats[p.getPlatformPosition()[0]][p.getPlatformPosition()[1]]) {
                 visitedPlats[p.getPlatformPosition()[0]][p.getPlatformPosition()[1]] = true;
@@ -200,7 +250,7 @@ public class GameField {
                 for (Map.Entry<Orientation, Platform> entry : p.getAdjacentPlatforms().entrySet()) {
                     Platform pl = entry.getValue();
                     if (pl != null && !visitedPlats[pl.getPlatformPosition()[0]][pl.getPlatformPosition()[1]]) {
-                        queue.push(pl);
+                        stack.push(pl);
                         dist.push(distCorr + 1);
                     }
                 }
@@ -226,12 +276,6 @@ public class GameField {
         return characterArrayList;
     }
 
-    /**
-     * @param platform whre the current player stands
-     * @param dirXY is equal to "x" if the player wants to target every player in his "x" position,
-     *              otherwise every target in "y" postion will be targeted
-     * @return an arraylist of players visible given the direction, this method is used by specific weapons
-     */
     public ArrayList<Character> getVisiblePlayers(Platform platform, String dirXY) {
         ArrayList<Character> characterArrayList = new ArrayList<>();
         if (dirXY == "x") {

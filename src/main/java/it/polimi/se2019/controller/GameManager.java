@@ -10,7 +10,7 @@ import it.polimi.se2019.model.enumeration.*;
 
 public class GameManager {
 
-    private Table table;
+    private GameField gameField;
     private GameState gameState;
     private ArrayList<Player> players;
     private Map<Character, Player> characterPlayer;
@@ -78,12 +78,12 @@ public class GameManager {
         // TODO
     }
 
-    public Table getTable() {
-        return table;
+    public GameField getGameField() {
+        return gameField;
     }
 
-    public void setTable(Table table) {
-        this.table = table;
+    public void setGameField(GameField gameField) {
+        this.gameField = gameField;
     }
 
     public void setGameState(GameState gameState) {

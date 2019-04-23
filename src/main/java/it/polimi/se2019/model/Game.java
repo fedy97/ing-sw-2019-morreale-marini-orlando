@@ -1,6 +1,6 @@
 package it.polimi.se2019.model;
 
-import it.polimi.se2019.model.board.Table;
+import it.polimi.se2019.model.board.GameField;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
@@ -15,7 +15,7 @@ import java.util.*;
  */
 public class Game extends Observable {
 
-    private Table table;
+    private GameField gameField;
     private ArrayList<Player> players;
     private Deck<WeaponCard> weaponsDeck;
     private Deck<PowerUpCard> powerUpDeck;
@@ -26,7 +26,7 @@ public class Game extends Observable {
     public Game() {
     }
     
-    public Table getTable() {
+    public GameField getGameField() {
  
         return null;
     }

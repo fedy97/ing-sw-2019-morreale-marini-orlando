@@ -14,15 +14,15 @@ import java.util.*;
  */
 public class ScoreBoard {
 
-    private Map<Character, Integer> scoreBoard;
+    private Map<Character, Integer> ranking;
 
     /**
      * initialize the scoreboard with zero points
      */
     public ScoreBoard() {
-        this.scoreBoard = new EnumMap<>(Character.class);
-        for (Character c : this.scoreBoard.keySet()) {
-            this.scoreBoard.put(c, 0);
+        this.ranking = new EnumMap<>(Character.class);
+        for (Character c : this.ranking.keySet()) {
+            this.ranking.put(c, 0);
         }
     }
 
@@ -34,11 +34,11 @@ public class ScoreBoard {
     public Integer getScorePlayer(Character character) throws InvalidCharacterException {
         if (!HandyFunctions.characterExists(character))
             throw new InvalidCharacterException("Invalid character!");
-        return scoreBoard.get(character);
+        return ranking.get(character);
     }
 
     public Map<Character, Integer> getScoreBoard() {
-        return scoreBoard;
+        return ranking;
     }
 
     /**
@@ -52,7 +52,7 @@ public class ScoreBoard {
             throw new InvalidQuantityException("the score to set to the player must be > 0");
         if (!HandyFunctions.characterExists(character))
             throw new InvalidCharacterException("Invalid character!");
-        scoreBoard.replace(character, scoreBoard.get(character) + quantity);
+        ranking.replace(character, ranking.get(character) + quantity);
     }
 
 }
