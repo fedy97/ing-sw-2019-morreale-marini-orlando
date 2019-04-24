@@ -40,7 +40,7 @@ public class JsonParser {
             }
             jsonObj = new JSONObject(ris.toString());
         } catch (IOException ex) {}
-        catch (JSONException ex) {}
+
     }
 
     /**

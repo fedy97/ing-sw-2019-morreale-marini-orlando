@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 public class TestGameField {
     GameField gf;
-
+    int config;
     @Before
     public void initTest() throws InvalidCardException, InvalidDeckException, NoCardException,
             InvalidFieldException, InvalidAdjacentPlatformsException, InvalidRoomException, InvalidPositionException,
@@ -25,7 +25,8 @@ public class TestGameField {
         //now we have 36 ammocards in the deck
         deck.mix();
         JsonParser parserField = new JsonParser("/json/field.json");
-        Platform[][] field = parserField.buildField(1, deck);
+        config=1;
+        Platform[][] field = parserField.buildField(config, deck);
         WeaponCard[] weaponCards = new WeaponCard[9];
         for (int i = 0; i < 9; i++)
             weaponCards[i] = new WeaponCard();
@@ -42,6 +43,23 @@ public class TestGameField {
     public void testGetAvailablePlatforms() throws InvalidPositionException {
 
         ArrayList<Platform> list = gf.getAvailablePlatforms(gf.getPlatform(new int[]{2, 2}), 2);
+        /*for (int i = 0; i < list.size(); i++) {
+            System.out.println("[" + list.get(i).getPlatformPosition()[0] + " " + list.get(i).getPlatformPosition()[1] + "]");
+        }*/
+    }
+
+    @Test
+    public void testGetPlatforms(){
+        ArrayList<Platform> list = gf.getPlatforms();
+        /*for (int i = 0; i < list.size(); i++) {
+            System.out.println("[" + list.get(i).getPlatformPosition()[0] + " " + list.get(i).getPlatformPosition()[1] + "]");
+        }*/
+        if (config==1) assertEquals(list.size(), 11);
+    }
+
+    @Test
+    public void testGetPlatformDir() throws InvalidPositionException{
+        ArrayList<Platform> list = gf.getPlatformDir(gf.getPlatform(new int[]{1,2}));
         /*for (int i = 0; i < list.size(); i++) {
             System.out.println("[" + list.get(i).getPlatformPosition()[0] + " " + list.get(i).getPlatformPosition()[1] + "]");
         }*/

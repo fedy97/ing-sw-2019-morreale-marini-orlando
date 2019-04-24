@@ -296,7 +296,7 @@ public class GameField {
     /**
      * @return an arraylist of every platform in the field
      */
-    public List<Platform> getPlatforms() {
+    public ArrayList<Platform> getPlatforms() {
         ArrayList<Platform> platformArrayList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
@@ -308,21 +308,21 @@ public class GameField {
     }
 
     /**
-     * @param dir in which the target can be moved
      * @param curr platform of the target
      * @return the platforms in the directions selected of max distance from curr = 2, used by Newton
      */
-    public List<Platform> getPlatformDir(Platform curr, List<Orientation> dir) {
+    public ArrayList<Platform> getPlatformDir(Platform curr) {
         ArrayList<Platform> platformArrayList = new ArrayList<>();
-        for (Orientation or : dir) {
-            Platform adjPlat = curr.getAdjacentPlatform(or);
-            if (adjPlat != null) {
-                platformArrayList.add(adjPlat);
-                Platform adjAdjPlat = adjPlat.getAdjacentPlatform(or);
-                if (adjAdjPlat != null)
-                    platformArrayList.add(adjAdjPlat);
-            }
-        }
+        int row = curr.getPlatformPosition()[0];
+        int column = curr.getPlatformPosition()[1];
+        if (row + 1 < 3 && field[row + 1][column] != null) platformArrayList.add(field[row + 1][column]);
+        if (row + 2 < 3 && field[row + 2][column] != null) platformArrayList.add(field[row + 2][column]);
+        if (column + 1 < 4 && field[row][column + 1] != null) platformArrayList.add(field[row][column + 1]);
+        if (column + 2 < 4 && field[row][column + 2] != null) platformArrayList.add(field[row][column + 2]);
+        if (row - 1 >= 0 && field[row - 1][column] != null) platformArrayList.add(field[row - 1][column]);
+        if (row - 2 >= 0 && field[row - 2][column] != null) platformArrayList.add(field[row - 2][column]);
+        if (column - 1 >= 0 && field[row][column - 1] != null) platformArrayList.add(field[row][column - 1]);
+        if (column - 2 >= 0 && field[row][column - 2] != null) platformArrayList.add(field[row][column - 2]);
         return platformArrayList;
     }
 
