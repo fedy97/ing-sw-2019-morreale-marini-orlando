@@ -1,0 +1,28 @@
+{
+  "powerups": [
+    {
+      "name": "mirino",
+      "description": "Puoi giocare questa carta quando stai dando\ndanno a uno o più bersagli. Paga 1 cubo munizioni\ndi qualsiasi colore. Scegli 1 dei bersagli e dagli\n1 segnalino danno aggiuntivo. Nota: non puoi\nusare questo potenziamento per dare 1 danno a un\nbersaglio che sta solo ricevendo marchi.",
+      "ammoCube": ["YELLOW","BLUE","RED"],
+      "image": ["/assets/powerups/AD_powerups_IT_027","/assets/powerups/AD_powerups_IT_025","/assets/powerups/AD_powerups_IT_026"]
+    },
+    {
+      "name": "raggio cinetico",
+      "description": "Puoi giocare questa carta nel tuo turno prima o dopo\naver svolto qualsiasi azione. Scegli la miniatura di\nun altro giocatore e muovila di 1 o 2 quadrati in una\ndirezione. (Non puoi usare questo potenziamento\nper muovere una miniatura dopo che è stata\nrigenerata alla fine del tuo turno, è troppo tardi.)",
+      "ammoCube": ["YELLOW","BLUE","RED"],
+      "image": ["/assets/powerups/AD_powerups_IT_0210","/assets/powerups/AD_powerups_IT_028","/assets/powerups/AD_powerups_IT_029"]
+    },
+    {
+      "name": "granata venom",
+      "description": "Puoi giocare questa carta\nquando ricevi un danno da un\ngiocatore che puoi vedere.\nDai 1 marchio a quel giocatore.",
+      "ammoCube": ["YELLOW","BLUE","RED"],
+      "image": ["/assets/powerups/AD_powerups_IT_024","/assets/powerups/AD_powerups_IT_022","/assets/powerups/AD_powerups_IT_023"]
+    },
+    {
+      "name": "teletrasporto",
+      "description": "Puoi giocare questa carta nel tuo turno prima\no dopo aver svolto qualsiasi azione. Prendi la tua\nminiatura e piazzala in un qualsiasi quadrato sulla\nplancia. (Non puoi usare questo potenziamento\ndopo che hai visto dove un altro giocatore si\nrigenera alla fine del tuo turno, è troppo tardi.)",
+      "ammoCube": ["YELLOW","BLUE","RED"],
+      "image": ["/assets/powerups/AD_powerups_IT_0213","/assets/powerups/AD_powerups_IT_0211","/assets/powerups/AD_powerups_IT_0212"]
+    }
+  ]
+}

@@ -12,7 +12,7 @@ import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.utils.HandyFunctions;
 
 /**
- * Platform containing info about doors, walls, players, generation spot and ammo card
+ * Platform containing info about doors, walls, players, generation spot and ammos card
  *
  * @author Federico Morreale
  */
@@ -35,7 +35,7 @@ public class Platform {
      * @param isGenerationSpot indicates if the platform is a generation spot
      * @param platformAmmoCard the ammunition card located on the platform
      * @param platformColor    this four params will be parsed from json
-     * @throws InvalidCardException if the starting ammo card of the platform is null
+     * @throws InvalidCardException if the starting ammos card of the platform is null
      */
     public Platform(int[] platformPosition, boolean isGenerationSpot, AmmoCard platformAmmoCard, Color platformColor, ArrayList<Orientation> doors)
             throws InvalidCardException {
@@ -44,7 +44,7 @@ public class Platform {
         this.isGenerationSpot = isGenerationSpot;
         this.platformColor = platformColor;
         if (platformAmmoCard == null && !isGenerationSpot)
-            throw new InvalidCardException("starting ammo card cannot be null");
+            throw new InvalidCardException("starting ammo cards cannot be null");
         this.platformAmmoCard = platformAmmoCard;
         this.playersOnThePlatform = new ArrayList<>();
         //build the arraylist of doors of the platform, knowing the adjacent platforms
@@ -136,7 +136,7 @@ public class Platform {
         if (platformAmmoCard == null)
             throw new InvalidCardException("the ammocard to be set cannot be null");
         if (isGenerationSpot)
-            throw new InvalidCardException("cannot set a ammo card on a generation spot");
+            throw new InvalidCardException("cannot set a ammos card on a generation spot");
         if (hasAmmoCard())
             throw new InvalidCardException("this platform already got an ammocard");
         this.platformAmmoCard = platformAmmoCard;
@@ -198,7 +198,7 @@ public class Platform {
             hasAmmoCard = false;
             return this.platformAmmoCard;
         } else
-            throw new InvalidCardException("there is no ammo card set in this platform");
+            throw new InvalidCardException("there is no ammos card set in this platform");
     }
 
 }

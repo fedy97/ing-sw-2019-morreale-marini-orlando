@@ -1,13 +1,13 @@
 package it.polimi.se2019.model.card;
 
 
-import it.polimi.se2019.exceptions.InvalidCardException;
-import it.polimi.se2019.exceptions.InvalidDeckException;
-import it.polimi.se2019.exceptions.NoCardException;
+import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
+import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.utils.JsonParser;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -28,20 +28,12 @@ public class TestAmmoCard {
      * AmmoCard
      */
     @Test
-    public void TestAmmoCard() throws InvalidDeckException, NoCardException {
-        try {
-            new AmmoCard(new AmmoCube[3], true);
-            fail();
-        } catch (InvalidCardException e) {}
+    public void TestAmmoCard() throws InvalidImageException,IOException,InvalidDeckException, NoCardException {
 
-        try {
-            new AmmoCard(new AmmoCube[2], false);
-            fail();
-        } catch (InvalidCardException e) {}
         try {
             JsonParser parser = new JsonParser("/json/ammocards.json");
             Deck<AmmoCard> deck;
-            //now ammocards has 36 ammo cards according to json
+            //now ammocards has 36 ammos cards according to json
             deck = parser.buildAmmoCards();
             assertEquals(deck.drawCard().hasPowerUp(), true);
         } catch (InvalidCardException ex) {}

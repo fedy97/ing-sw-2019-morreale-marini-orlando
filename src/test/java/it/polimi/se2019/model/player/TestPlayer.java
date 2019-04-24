@@ -5,15 +5,19 @@ import it.polimi.se2019.exceptions.*;
 
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.AmmoCard;
+import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.Newton;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.enumeration.Orientation;
+import it.polimi.se2019.utils.JsonParser;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -25,12 +29,21 @@ import static org.junit.Assert.*;
  * @author Simone Orlando
  */
 public class TestPlayer {
+    Deck<PowerUpCard> deck;
+    Deck<AmmoCard> deckAmmos;
+    @Before
+    public void initTest() throws InvalidCardException,InvalidCubeException, InvalidNameException, InvalidImageException,InvalidDeckException, IOException {
+        JsonParser parser = new JsonParser("/json/powerups.json");
+        deck = parser.buildPowerupCards();
+        JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
+        deckAmmos = parserAmmos.buildAmmoCards();
+    }
 
     @Test
-    public void testChangePlatform() throws InvalidCardException, InvalidPositionException, InvalidCharacterException {
+    public void testChangePlatform() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
         int pos[] = {1, 0};
-        AmmoCube cube[] = {AmmoCube.RED, AmmoCube.YELLOW, AmmoCube.YELLOW};
-        AmmoCard card = new AmmoCard(cube, false);
+
+        AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
         Player player = new Player(Character.BANSHEE, start);
@@ -49,10 +62,10 @@ public class TestPlayer {
     }
 
     @Test
-    public void testAddPoint() throws InvalidCardException, InvalidPositionException, InvalidCharacterException {
+    public void testAddPoint() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
         int pos[] = {1, 0};
         AmmoCube cube[] = {AmmoCube.RED, AmmoCube.YELLOW, AmmoCube.YELLOW};
-        AmmoCard card = new AmmoCard(cube, false);
+        AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
         Player player = new Player(Character.BANSHEE, start);
@@ -72,10 +85,9 @@ public class TestPlayer {
     }
 
     @Test
-    public void testAddDeath() throws InvalidCardException, InvalidPositionException, InvalidCharacterException {
+    public void testAddDeath() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
         int pos[] = {1, 0};
-        AmmoCube cube[] = {AmmoCube.RED, AmmoCube.YELLOW, AmmoCube.YELLOW};
-        AmmoCard card = new AmmoCard(cube, false);
+        AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
         Player player = new Player(Character.BANSHEE, start);
@@ -85,10 +97,9 @@ public class TestPlayer {
     }
 
     @Test
-    public void testResetDeaths() throws InvalidCardException, InvalidPositionException, InvalidCharacterException {
+    public void testResetDeaths() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
         int pos[] = {1, 0};
-        AmmoCube cube[] = {AmmoCube.RED, AmmoCube.YELLOW, AmmoCube.YELLOW};
-        AmmoCard card = new AmmoCard(cube, false);
+        AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
         Player player = new Player(Character.BANSHEE, start);
@@ -100,15 +111,14 @@ public class TestPlayer {
     }
 
     @Test
-    public void testAddPowerUpCard() throws InvalidCardException, InvalidPositionException, InvalidCharacterException {
+    public void testAddPowerUpCard() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
         int pos[] = {1, 0};
-        AmmoCube cube[] = {AmmoCube.RED, AmmoCube.YELLOW, AmmoCube.YELLOW};
-        AmmoCard card = new AmmoCard(cube, false);
+        AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
         Player player = new Player(Character.BANSHEE, start);
 
-        PowerUpCard pCard = new Newton(AmmoCube.YELLOW);
+        PowerUpCard pCard = deck.drawCard();
 
         player.addPowerUpCard(pCard);
 
@@ -122,15 +132,14 @@ public class TestPlayer {
     }
 
     @Test
-    public void testRemovePowerUpCard() throws InvalidCardException, InvalidPositionException, InvalidCharacterException {
+    public void testRemovePowerUpCard() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
         int pos[] = {1, 0};
-        AmmoCube cube[] = {AmmoCube.RED, AmmoCube.YELLOW, AmmoCube.YELLOW};
-        AmmoCard card = new AmmoCard(cube, false);
+        AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
         Player player = new Player(Character.BANSHEE, start);
 
-        PowerUpCard pCard = new Newton(AmmoCube.YELLOW);
+        PowerUpCard pCard = deck.drawCard();
         player.addPowerUpCard(pCard);
         assertEquals(player.getPowerUpCards().contains(pCard), true);
         try {
@@ -149,10 +158,9 @@ public class TestPlayer {
     }
 
     @Test
-    public void testAddWeaponCard() throws InvalidCardException, InvalidPositionException, InvalidCharacterException {
+    public void testAddWeaponCard() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
         int pos[] = {1, 0};
-        AmmoCube cube[] = {AmmoCube.RED, AmmoCube.YELLOW, AmmoCube.YELLOW};
-        AmmoCard card = new AmmoCard(cube, false);
+        AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
         Player player = new Player(Character.BANSHEE, start);
@@ -181,10 +189,9 @@ public class TestPlayer {
     }
 
     @Test
-    public void testRemoveWeaponCard() throws InvalidCardException, InvalidPositionException, InvalidCharacterException, MaxWeaponException {
+    public void testRemoveWeaponCard() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException, MaxWeaponException {
         int pos[] = {1, 0};
-        AmmoCube cube[] = {AmmoCube.RED, AmmoCube.YELLOW, AmmoCube.YELLOW};
-        AmmoCard card = new AmmoCard(cube, false);
+        AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
         Player player = new Player(Character.BANSHEE, start);
@@ -201,10 +208,9 @@ public class TestPlayer {
     }
 
     @Test
-    public void testSetFrenzyModeType() throws InvalidCardException, InvalidPositionException, InvalidCharacterException, MaxWeaponException {
+    public void testSetFrenzyModeType() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException, MaxWeaponException {
         int pos[] = {1, 0};
-        AmmoCube cube[] = {AmmoCube.RED, AmmoCube.YELLOW, AmmoCube.YELLOW};
-        AmmoCard card = new AmmoCard(cube, false);
+        AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
         Player player = new Player(Character.BANSHEE, start);

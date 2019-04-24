@@ -20,7 +20,7 @@ public class GameField {
 
     private ArrayList<Room> rooms;
     private Platform[][] field;
-    private WeaponCard[] initWeapons;
+    protected WeaponCard[] initWeapons;
     private SkullsBoard skullsBoard;
     private ScoreBoard scoreBoard;
 
@@ -233,12 +233,12 @@ public class GameField {
      */
     public ArrayList<Platform> getAvailablePlatforms(Platform initPlat, int numOfMaxSteps) {
         ArrayList<Platform> platsAvailable = new ArrayList<>();
-        Stack<Platform> stack = new Stack<>();
-        Stack<Integer> dist = new Stack<>();
+        Deque<Platform> stack = new ArrayDeque<>();
+        Deque<Integer> dist = new ArrayDeque<>();
         boolean[][] visitedPlats = new boolean[3][4];
         stack.add(initPlat);
         dist.add(0);
-        while (!stack.empty()) {
+        while (!stack.isEmpty()) {
             Platform p = stack.pop();
             int distCorr = dist.pop();
             if (!visitedPlats[p.getPlatformPosition()[0]][p.getPlatformPosition()[1]]) {

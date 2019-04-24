@@ -1,22 +1,22 @@
 package it.polimi.se2019.utils;
 
-import it.polimi.se2019.exceptions.InvalidCardException;
-import it.polimi.se2019.exceptions.InvalidDeckException;
-import it.polimi.se2019.exceptions.NoCardException;
+import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
+import it.polimi.se2019.model.card.powerups.*;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Orientation;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Deque;
 
 /**
  * @author Federico Morreale
@@ -39,19 +39,21 @@ public class JsonParser {
             }
             jsonObj = new JSONObject(ris.toString());
         } catch (IOException ex) {
-            ex.printStackTrace();
         }
 
     }
 
     /**
      * @return a deck of 36 ammos
-     * @throws InvalidCardException if the ammocard is invalid
+     * @throws InvalidCardException
      */
-    public Deck<AmmoCard> buildAmmoCards() throws InvalidCardException, InvalidDeckException {
+    public Deck<AmmoCard> buildAmmoCards() throws InvalidCardException, InvalidDeckException,InvalidImageException,IOException {
         if (path.equals("/json/ammocards.json")) {
             ArrayList<AmmoCard> ammoCards = new ArrayList<>();
             AmmoCube[] arrAmmos;
+            Image image;
+            String pathImg;
+            File imgInput;
             JSONArray ammosObj = jsonObj.getJSONArray("ammos");
 
             for (int i = 0; i < ammosObj.length(); i++) {
@@ -59,6 +61,9 @@ public class JsonParser {
                 boolean hasPowerup = currAmmosObj.getBoolean("powerup");
                 AmmoCube a1 = AmmoCube.valueOf(currAmmosObj.getString("ammocube1"));
                 AmmoCube a2 = AmmoCube.valueOf(currAmmosObj.getString("ammocube2"));
+                pathImg = "/assets/ammos/"+ currAmmosObj.getString("image") + ".png";
+                imgInput = new File(JsonParser.class.getResource(pathImg).getFile());
+                image = ImageIO.read(imgInput);
                 if (!hasPowerup) {
                     AmmoCube a3 = AmmoCube.valueOf(currAmmosObj.getString("ammocube3"));
                     arrAmmos = new AmmoCube[3];
@@ -70,7 +75,7 @@ public class JsonParser {
                     arrAmmos[0] = a1;
                     arrAmmos[1] = a2;
                 }
-                AmmoCard amm = new AmmoCard(arrAmmos, hasPowerup);
+                AmmoCard amm = new AmmoCard(arrAmmos, hasPowerup, image);
                 ammoCards.add(amm);
             }
             Deck<AmmoCard> d = new Deck<>(36);
@@ -84,8 +89,8 @@ public class JsonParser {
      * @param numConfig there are 4 configurations of the field in json file
      * @param deck      of the ammocards, it has to be full
      * @return the matrix 3x4 of the platforms
-     * @throws NoCardException if the card is not present
-     * @throws InvalidCardException if the card is not valid
+     * @throws NoCardException
+     * @throws InvalidCardException
      */
     public Platform[][] buildField(int numConfig, Deck<AmmoCard> deck) throws InvalidCardException,
             NoSuchFieldException, IllegalAccessException, NoCardException {
@@ -119,6 +124,54 @@ public class JsonParser {
             }
             return field;
         }
-        return new Platform[0][0];
+        return null;
+    }
+
+    /**
+     *
+     * @return a deck of 24 powerups
+     * @throws InvalidDeckException
+     * @throws IOException
+     * @throws InvalidCubeException
+     * @throws InvalidImageException
+     * @throws InvalidNameException
+     */
+    public Deck<PowerUpCard> buildPowerupCards() throws InvalidDeckException, IOException,
+            InvalidCubeException, InvalidImageException, InvalidNameException {
+        if (path.equals("/json/powerups.json")) {
+            ArrayList<PowerUpCard> powerUpCards = new ArrayList<>();
+            AmmoCube ammo;
+            String name;
+            String description;
+            Image image;
+            String pathImg;
+            File imgInput;
+            PowerUpCard powerUpCard;
+            JSONArray powerupsObj = jsonObj.getJSONArray("powerups");
+            for (int k = 0; k < 2; k++) {
+                for (int i = 0; i < powerupsObj.length(); i++) {
+                    JSONObject currPowerupsObj = powerupsObj.getJSONObject(i);
+                    name = currPowerupsObj.getString("name");
+                    description = currPowerupsObj.getString("description");
+                    JSONArray jArrAmmocube = currPowerupsObj.getJSONArray("ammoCube");
+                    JSONArray jArrImage = currPowerupsObj.getJSONArray("image");
+                    for (int j = 0; j < jArrAmmocube.length(); j++) {
+                        ammo = AmmoCube.valueOf(jArrAmmocube.get(j).toString());
+                        pathImg = jArrImage.getString(j) + ".png";
+                        imgInput = new File(JsonParser.class.getResource(pathImg).getFile());
+                        image = ImageIO.read(imgInput);
+                        if (i == 0) powerUpCard = new TargettingScope(ammo, name, description, image);
+                        else if (i == 1) powerUpCard = new Newton(ammo, name, description, image);
+                        else if (i == 2) powerUpCard = new TagbackGrenade(ammo, name, description, image);
+                        else powerUpCard = new Teleporter(ammo, name, description, image);
+                        powerUpCards.add(powerUpCard);
+                    }
+                }
+            }
+            Deck<PowerUpCard> d = new Deck<>(24);
+            d.addCards(powerUpCards);
+            return d;
+        }
+        return null;
     }
 }

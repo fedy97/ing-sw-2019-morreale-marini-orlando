@@ -48,11 +48,11 @@ public class DecksManager {
      * @param oldAmmoCard picked by the player on the platform
      * @throws NoCardException if previous operation were wrong
      */
-    public AmmoCard getNewAmmoCard(AmmoCard oldAmmoCard) throws NoCardException {
+    /*public AmmoCard getNewAmmoCard(AmmoCard oldAmmoCard) throws NoCardException {
         ammoDeck.add(oldAmmoCard);
         ammoDeck.mix();
         return ammoDeck.drawCard();
-    }
+    }*/
 
     /**
      * Check the deck status before drawing a card and refill the PowerUp deck with new

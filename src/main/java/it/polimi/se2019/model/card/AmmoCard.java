@@ -1,7 +1,10 @@
 package it.polimi.se2019.model.card;
 
 import it.polimi.se2019.exceptions.InvalidCardException;
+import it.polimi.se2019.exceptions.InvalidImageException;
 import it.polimi.se2019.model.enumeration.AmmoCube;
+
+import java.awt.*;
 
 
 /**
@@ -18,9 +21,9 @@ public final class AmmoCard extends Card {
      * @param cubes      the number of cubes the player can grab
      * @param hasPowerUp true if the player can draw a PowerUp card, false otherwise
      */
-    public AmmoCard(AmmoCube[] cubes, boolean hasPowerUp) throws InvalidCardException {
+    public AmmoCard(AmmoCube[] cubes, boolean hasPowerUp, Image img) throws InvalidCardException, InvalidImageException {
+        super(img);
         this.hasPowerUp = hasPowerUp;
-
         if ((cubes.length != 3 && !hasPowerUp) || (hasPowerUp && cubes.length != 2))
             throw new InvalidCardException("Cannot create this type of AmmoCard, please check the rules!");
 

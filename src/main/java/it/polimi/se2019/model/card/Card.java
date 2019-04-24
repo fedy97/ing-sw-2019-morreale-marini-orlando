@@ -1,5 +1,8 @@
 package it.polimi.se2019.model.card;
 
+import it.polimi.se2019.exceptions.InvalidImageException;
+import it.polimi.se2019.exceptions.InvalidNameException;
+
 import java.awt.*;
 
 /**
@@ -23,9 +26,24 @@ public abstract class Card {
     }
 
     /**
+     * Costructor used by AmmoCard, it only needs the image, not name or description
+     * @param img of the ammocard
+     */
+    public Card(Image img) throws InvalidImageException {
+        if (img == null)
+            throw new InvalidImageException();
+        this.bgImage = img;
+    }
+
+    /**
      * Instantiate a card with a specified name and a given background image
      */
-    public Card(String name, Image img) {
+    public Card(String name, String description, Image img) throws InvalidNameException, InvalidImageException {
+        if (name == "" || description == "")
+            throw new InvalidNameException();
+        if (img == null)
+            throw new InvalidImageException();
+        this.description = description;
         this.name = name;
         this.bgImage = img;
     }
@@ -38,33 +56,10 @@ public abstract class Card {
     }
 
     /**
-     * Set the name of the card
-     *
-     * @param name of the card
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Set the bgImage of the card with the image specified
-     *
-     * @param image background image of the card
-     */
-    public void setBgImage(Image image) {
-        this.bgImage = image;
-    }
-
-    /**
      * @return the reference to the background image of the card
      */
     public Image getBgImage() {
         return bgImage;
-    }
-
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     /**
