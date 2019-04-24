@@ -15,7 +15,7 @@ public class Room {
     private boolean hasGenerationSpot;
 
     /**
-     * @param platformsInRoom
+     * @param platformsInRoom All the platforms that make up the room
      * @throws InvalidRoomException if there is no platform in the room
      */
     public Room(ArrayList<Platform> platformsInRoom) throws InvalidRoomException {

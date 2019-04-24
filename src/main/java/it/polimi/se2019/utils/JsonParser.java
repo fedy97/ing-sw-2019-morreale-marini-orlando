@@ -9,7 +9,6 @@ import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Orientation;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.awt.*;
@@ -39,13 +38,15 @@ public class JsonParser {
                 ris.append(line).append("\n");
             }
             jsonObj = new JSONObject(ris.toString());
-        } catch (IOException ex) {}
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
     }
 
     /**
      * @return a deck of 36 ammos
-     * @throws InvalidCardException
+     * @throws InvalidCardException if the ammocard is invalid
      */
     public Deck<AmmoCard> buildAmmoCards() throws InvalidCardException, InvalidDeckException {
         if (path.equals("/json/ammocards.json")) {
@@ -83,8 +84,8 @@ public class JsonParser {
      * @param numConfig there are 4 configurations of the field in json file
      * @param deck      of the ammocards, it has to be full
      * @return the matrix 3x4 of the platforms
-     * @throws NoCardException
-     * @throws InvalidCardException
+     * @throws NoCardException if the card is not present
+     * @throws InvalidCardException if the card is not valid
      */
     public Platform[][] buildField(int numConfig, Deck<AmmoCard> deck) throws InvalidCardException,
             NoSuchFieldException, IllegalAccessException, NoCardException {
@@ -118,6 +119,6 @@ public class JsonParser {
             }
             return field;
         }
-        return null;
+        return new Platform[0][0];
     }
 }

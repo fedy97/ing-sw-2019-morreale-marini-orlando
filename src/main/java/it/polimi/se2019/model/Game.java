@@ -39,35 +39,35 @@ public class Game extends Observable {
     }
 
     /**
-     * @return
+     * @return The deck containing the weapon cards
      */
     public Deck<WeaponCard> getWeaponsDeck() {
         return weaponsDeck;
     }
 
     /**
-     * @return
+     * @return The deck containing the power up cards
      */
     public Deck<PowerUpCard> getPowerUpDeck() {
         return powerUpDeck;
     }
 
     /**
-     * @return
+     * @return The power up cards already used
      */
     public Deck<PowerUpCard> getGarbageDeck() {
         return garbageDeck;
     }
 
     /**
-     * @return
+     * @return The deck containing the ammo card
      */
     public Deck<AmmoCard> getAmmoDeck() {
         return ammoDeck;
     }
 
     /**
-     * @return
+     * @return The map that connects player with character
      */
     public Map<Character,Player> getCharacterPlayers() {
         return characterPlayers;
@@ -82,28 +82,28 @@ public class Game extends Observable {
 
     /**
      * @param player to link to the character
-     * @param character
+     * @param character to assign to the player
      */
     public void setPlayerCharacter(Player player, Character character) {
         characterPlayers.put(character, player);
     }
 
     /**
-     * @param weapons
+     * @param weapons The deck containing the power up cards
      */
     public void setWeaponDeck(Deck<WeaponCard> weapons) {
         weaponsDeck = weapons;
     }
 
     /**
-     * @param powerUps
+     * @param powerUps The deck containing the power up cards
      */
     public void setPowerUpDeck(Deck<PowerUpCard> powerUps) {
         powerUpDeck = powerUps;
     }
 
     /**
-     * @param ammos
+     * @param ammos The deck containing the ammo card
      */
     public void setAmmoDeck(Deck<AmmoCard> ammos) {
         ammoDeck = ammos;

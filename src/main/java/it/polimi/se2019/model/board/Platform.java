@@ -32,8 +32,8 @@ public class Platform {
 
     /**
      * @param platformPosition an array of length = 2, containing x and y coordinates
-     * @param isGenerationSpot
-     * @param platformAmmoCard
+     * @param isGenerationSpot indicates if the platform is a generation spot
+     * @param platformAmmoCard the ammunition card located on the platform
      * @param platformColor    this four params will be parsed from json
      * @throws InvalidCardException if the starting ammo card of the platform is null
      */
@@ -48,8 +48,8 @@ public class Platform {
         this.platformAmmoCard = platformAmmoCard;
         this.playersOnThePlatform = new ArrayList<>();
         //build the arraylist of doors of the platform, knowing the adjacent platforms
-        this.hasAmmoCard = platformAmmoCard == null ? false : true;
-        this.hasDoor = doors.isEmpty() ? false : true;
+        this.hasAmmoCard = platformAmmoCard != null;
+        this.hasDoor = !doors.isEmpty();
     }
 
     /**
@@ -155,7 +155,7 @@ public class Platform {
 
     /**
      * @param adjacentPlatforms to link to this platform
-     * @throws InvalidAdjacentPlatformsException
+     * @throws InvalidAdjacentPlatformsException if adjacentPlatforms is null
      */
     public void setAdjacentPlatforms(Map<Orientation, Platform> adjacentPlatforms) throws InvalidAdjacentPlatformsException {
         if (adjacentPlatforms == null)
@@ -165,7 +165,7 @@ public class Platform {
 
     /**
      * @param weapons to set to the generation spot
-     * @throws InvalidGenerationSpotException
+     * @throws InvalidGenerationSpotException if the current platform is not a generation spot
      */
     public void setWeapons(ArrayList<WeaponCard> weapons) throws InvalidGenerationSpotException {
         if (!this.isGenerationSpot())
@@ -184,8 +184,8 @@ public class Platform {
 
     /**
      *
-     * @param weaponCard
-     * @throws InvalidGenerationSpotException
+     * @param weaponCard the weapon card to be removed from the platform
+     * @throws InvalidGenerationSpotException if the current platform is not a generation spot
      */
     public void removeWeaponCard(WeaponCard weaponCard) throws InvalidGenerationSpotException{
         if (!this.isGenerationSpot())

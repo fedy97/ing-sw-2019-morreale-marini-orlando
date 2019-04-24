@@ -27,10 +27,10 @@ public class Controller {
     /**
      * Instatiate a new controller class
      *
-     * @param game
-     * @param decksManager
-     * @param gameManager
-     * @param playerManager
+     * @param game The game to menage
+     * @param decksManager The manager of all decks used in the game
+     * @param gameManager The game manager
+     * @param playerManager The manager of the players in the game
      */
     public Controller(Game game, DecksManager decksManager, GameManager gameManager, PlayerManager playerManager) {
         this.game = game;
@@ -40,56 +40,56 @@ public class Controller {
     }
 
     /**
-     * @return
+     * @return The current game
      */
     public Game getGame() {
         return game;
     }
 
     /**
-     * @param game
+     * @param game The game to manage
      */
     public void setGame(Game game) {
         this.game = game;
     }
 
     /**
-     * @return
+     * @return The manager of all decks used in the game
      */
     public DecksManager getDecksManager() {
         return decksManager;
     }
 
     /**
-     * @param deckManager
+     * @param deckManager The manager of all decks used in the game
      */
     public void setDecksManager(DecksManager deckManager) {
         this.decksManager = deckManager;
     }
 
     /**
-     * @return
+     * @return The game manager
      */
     public GameManager getGameManager() {
         return gameManager;
     }
 
     /**
-     * @param gameManager
+     * @param gameManager The game manager
      */
     public void setGameManager(GameManager gameManager) {
         this.gameManager = gameManager;
     }
 
     /**
-     * @return
+     * @return The manager of the players in the game
      */
     public PlayerManager getPlayerManager() {
         return playerManager;
     }
 
     /**
-     * @param playerManager
+     * @param playerManager The manager of the players in the game
      */
     public void setPlayerManager(PlayerManager playerManager) {
         this.playerManager = playerManager;

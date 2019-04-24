@@ -2,7 +2,6 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.player.Player;
 
-import java.util.*;
 
 /**
  * @author Federico Morreale
@@ -16,7 +15,7 @@ public abstract class PointsCounter {
     }
 
     /**
-     * @return
+     * @return The player who won the game
      */
     public Player getWinner() {
         return null;

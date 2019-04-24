@@ -25,7 +25,7 @@ public class HealthyValidator extends Validator {
     public List<Platform> getValidMoves(Action c) throws InvalidActionException{
         GameField gameField = father.getGame().getGameField();
         Player currentPlayer = father.getPlayerManager().getCurrentPlayer();
-        List<Platform> res = null;
+        List<Platform> res;
 
         if (c == Action.MOVE)
             res = gameField.getAvailablePlatforms(currentPlayer.getCurrentPlatform(), 3);

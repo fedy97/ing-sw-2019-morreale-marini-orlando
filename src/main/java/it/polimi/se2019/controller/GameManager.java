@@ -36,8 +36,8 @@ public class GameManager {
     }
 
     /**
-     * @param character
-     * @param player
+     * @param character The character to assign
+     * @param player The player to whom the character will be assigned
      */
     public void setCharacterToPlayer(Character character, Player player) {
         //TODO

@@ -18,21 +18,21 @@ public class TurnController {
     private Timer turnTimer;
 
     /**
-     * @return
+     * @return The player who has the turn
      */
     public Player getPlayerTurn() {
         return playerTurn;
     }
 
     /**
-     * @return
+     * @return A list indicating the order of players' turns
      */
     public List<Player> getTurningOrder() {
         return turningOrder;
     }
 
     /**
-     * @return
+     * @return The current value of the timer
      */
     public Timer getTurnTimer() {
         return turnTimer;

@@ -17,7 +17,7 @@ public class DamagedValidator extends Validator {
         super(father);
     }
 
-    @Override
+
     /**
      * @param c command received by the player
      * @return the list of platform destination the player can move to
@@ -25,7 +25,7 @@ public class DamagedValidator extends Validator {
      * selected action
      */
     public List<Platform> getValidMoves(Action c) throws InvalidActionException {
-        List<Platform> res = null;
+        List<Platform> res;
         GameField gameField = father.getGame().getGameField();
         Player currentPlayer = father.getPlayerManager().getCurrentPlayer();
 

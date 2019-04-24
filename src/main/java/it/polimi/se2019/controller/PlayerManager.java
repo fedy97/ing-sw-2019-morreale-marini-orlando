@@ -8,7 +8,6 @@ import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
 
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * A manager class that controls the player behaviour

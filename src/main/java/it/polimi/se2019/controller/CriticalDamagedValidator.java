@@ -16,7 +16,7 @@ public class CriticalDamagedValidator extends Validator {
         super(father);
     }
 
-    @Override
+
     /**
      * @param c command received by the player
      * @return the list of platform destination the player can move to
