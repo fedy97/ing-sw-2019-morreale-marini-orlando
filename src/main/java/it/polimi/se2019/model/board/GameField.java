@@ -40,7 +40,6 @@ public class GameField {
             throw new InvalidFieldException();
         this.field = field;
         //build the adjacency list of every platform in the field
-        int cont = 0;
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[0].length; j++) {
                 Platform p = field[i][j];
@@ -276,6 +275,12 @@ public class GameField {
         return characterArrayList;
     }
 
+    /**
+     * @param platform whre the current player stands
+     * @param dirXY    is equal to "x" if the player wants to target every player in his "x" position,
+     *                 otherwise every target in "y" postion will be targeted
+     * @return an arraylist of players visible given the direction, this method is used by specific weapons
+     */
     public ArrayList<Character> getVisiblePlayers(Platform platform, String dirXY) {
         ArrayList<Character> characterArrayList = new ArrayList<>();
         if (dirXY.equals("x")) {
@@ -288,19 +293,37 @@ public class GameField {
         return characterArrayList;
     }
 
-    public List<Platform> getPlatforms(){
-        //TODO for you fede
-        return new ArrayList<>();
+    /**
+     * @return an arraylist of every platform in the field
+     */
+    public List<Platform> getPlatforms() {
+        ArrayList<Platform> platformArrayList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (field[i][j] != null)
+                    platformArrayList.add(field[i][j]);
+            }
+        }
+        return platformArrayList;
     }
 
     /**
-     *
-     * @param dir
-     * @return the platforms in the directions selected
+     * @param dir in which the target can be moved
+     * @param curr platform of the target
+     * @return the platforms in the directions selected of max distance from curr = 2, used by Newton
      */
-    public List<Platform> getPlatformDir(Platform curr, List<Orientation> dir){
-        //TODO for you fede
-        return new ArrayList<>();
+    public List<Platform> getPlatformDir(Platform curr, List<Orientation> dir) {
+        ArrayList<Platform> platformArrayList = new ArrayList<>();
+        for (Orientation or : dir) {
+            Platform adjPlat = curr.getAdjacentPlatform(or);
+            if (adjPlat != null) {
+                platformArrayList.add(adjPlat);
+                Platform adjAdjPlat = adjPlat.getAdjacentPlatform(or);
+                if (adjAdjPlat != null)
+                    platformArrayList.add(adjAdjPlat);
+            }
+        }
+        return platformArrayList;
     }
 
 }
