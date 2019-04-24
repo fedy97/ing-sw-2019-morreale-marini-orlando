@@ -54,12 +54,9 @@ public class PlayerBoard {
      * Add damage to the player
      * @param character The character of player who deals the damage
      * @param value The number of damages to be inflicted
-     * @throws NegativeNumberException if value is less than zero
      * @throws InvalidCharacterException if character reference is null
      */
-    public void addDamage(Character character, int value) throws NegativeNumberException, InvalidCharacterException {
-        if (value < 0)
-            throw new NegativeNumberException("Value should be greater than zero!");
+    public void addDamage(Character character, int value) throws InvalidCharacterException {
         if (character == null)
             throw new InvalidCharacterException("Character can not be null!");
         int oldSize = damageLine.size();

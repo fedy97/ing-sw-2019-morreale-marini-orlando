@@ -28,9 +28,7 @@ public class TestPlayerBoard {
         catch (InvalidCharacterException e) {
             fail();
         }
-        catch (NegativeNumberException e) {
-            fail();
-        }
+
 
         ArrayList<Character> line = myBoard.getDamageLine();
         assertEquals(line.size(),damage);
@@ -47,9 +45,7 @@ public class TestPlayerBoard {
         catch (InvalidCharacterException e) {
             fail();
         }
-        catch (NegativeNumberException e) {
-            fail();
-        }
+
         line = myBoard.getDamageLine();
         assertEquals(line.size(),12);
 
@@ -63,9 +59,7 @@ public class TestPlayerBoard {
         catch (InvalidCharacterException e) {
 
         }
-        catch (NegativeNumberException e) {
-
-        }
+       
 
     }
 

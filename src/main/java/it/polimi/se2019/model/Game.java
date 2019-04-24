@@ -109,4 +109,11 @@ public class Game extends Observable {
         ammoDeck = ammos;
     }
 
+    /**
+     * Method used to notify that something changed in the model
+     */
+    public void notifyChanges(){
+        setChanged();
+        notifyObservers();
+    }
 }

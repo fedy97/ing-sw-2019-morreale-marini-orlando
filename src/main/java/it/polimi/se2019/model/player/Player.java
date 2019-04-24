@@ -215,11 +215,8 @@ public class Player {
      * Eliminates a weapon card from those owned by the player
      *
      * @param card The weapon card that must be eliminated
-     * @throws MissingCardException if weaponCards does not contain card
      */
-    public void removeWeaponCard(WeaponCard card) throws MissingCardException {
-        if (!weaponCards.contains(card))
-            throw new MissingCardException("WeaponCards does not contain this card!");
+    public void removeWeaponCard(WeaponCard card){
         weaponCards.remove(card);
     }
 

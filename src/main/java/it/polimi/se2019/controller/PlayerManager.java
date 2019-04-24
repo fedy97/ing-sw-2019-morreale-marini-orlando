@@ -1,16 +1,14 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.exceptions.InsufficientAmmoException;
-import it.polimi.se2019.exceptions.InvalidCardException;
-import it.polimi.se2019.exceptions.MaxWeaponException;
+import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
-import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
 
 import java.util.*;
+import java.util.logging.Level;
 
 /**
  * A manager class that controls the player behaviour
@@ -56,33 +54,64 @@ public class PlayerManager {
      */
     public void mark(Player target, int amount) {
         target.getPlayerBoard().addRevengeMark(target.getCharacter(), amount);
+        father.getGame().notifyChanges();
     }
 
     /**
      * Move the player using the current validator to verify that actions are allowed
      *
-     * @param dirs the set of directions to follow to move the players
+     * @param platform platform destination
      */
-    public void move(List<Orientation> dirs) {
-        Platform platform = currentPlayer.getCurrentPlatform();
-        for (Orientation dir : dirs) {
-            platform = platform.getAdjacentPlatform(dir);
-        }
+    public void move(Platform platform) {
         currentPlayer.setCurrentPlatform(platform);
+        father.getGame().notifyChanges();
     }
 
     /**
-     * @param dir
+     * @param weapons that can be grabbed by the player according to his ammos
+     * @throws MaxWeaponException is something went wrong
      */
-    public void grab(List<Orientation> dir) {
-        //TODO
+    public void grab(List<WeaponCard> weapons) throws MaxWeaponException {
+        for (WeaponCard weaponCard : weapons) {
+
+            try {
+                currentPlayer.addWeaponCard(weaponCard);
+                currentPlayer.getCurrentPlatform().removeWeaponCard(weaponCard);
+            } catch (MaxWeaponException e) {
+
+                WeaponCard choice = father.askForDiscard(currentPlayer.getWeaponCards());
+
+                if (choice != null) {
+                    currentPlayer.removeWeaponCard(choice);
+                    currentPlayer.addWeaponCard(weaponCard);
+                }
+
+            } catch (InvalidGenerationSpotException e) {
+                //?
+            }
+        }
+        father.getGame().notifyChanges();
     }
 
     /**
-     * @param targetsMap
+     * @param targetsMap containing the damage values for each player
      */
     public void addDamage(Map<Player, Integer> targetsMap) {
-        //TODO
+        Iterator hmIterator = targetsMap.entrySet().iterator();
+        Player p;
+
+        while (hmIterator.hasNext()) {
+            Map.Entry mapElement = (Map.Entry) hmIterator.next();
+            int damage = ((int) mapElement.getValue());
+            p = (Player) mapElement.getKey();
+            try {
+                p.getPlayerBoard().addDamage(currentPlayer.getCharacter(), damage);
+            }catch(InvalidCharacterException e){
+                e.printStackTrace();
+            }
+        }
+
+        father.getGame().notifyChanges();
     }
 
     /**
@@ -97,6 +126,7 @@ public class PlayerManager {
             currentPlayer.addWeaponCard(weapon);
         } else
             throw new InsufficientAmmoException("Player hasn't enough ammos to buy the weapon");
+        father.getGame().notifyChanges();
     }
 
     /**
@@ -110,6 +140,7 @@ public class PlayerManager {
         powerUp.useEffect(father);
         currentPlayer.removePowerUpCard(powerUp);
         father.getDecksManager().addToGarbage(powerUp);
+        father.getGame().notifyChanges();
     }
 
     /**
@@ -125,6 +156,7 @@ public class PlayerManager {
             else
                 throw new InsufficientAmmoException("CurrentPlayer hasn't enough ammos to recharge the weapons");
         }
+        father.getGame().notifyChanges();
     }
 
     public Player getCurrentPlayer() {

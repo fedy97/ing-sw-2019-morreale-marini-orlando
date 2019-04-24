@@ -2,6 +2,7 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.board.Platform;
+import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.Player;
 
@@ -113,6 +114,24 @@ public class Controller {
      */
     public void endGame() {
         //TODO
+    }
+
+    /**
+     * @param possibleChoices list of weapons returned by the validator
+     * @return the weapons the player want to grab
+     */
+    public List<WeaponCard> askForWeapons(List<WeaponCard> possibleChoices){
+        //TODO
+        return new ArrayList<>();
+    }
+
+    /**
+     * @param discardables weapons owned by the current player in the actual state of the game
+     * @return the weapon the player want to discard in order to grab another one
+     */
+    public WeaponCard askForDiscard(List<WeaponCard> discardables){
+        //TODO
+        return null;
     }
 
     /**

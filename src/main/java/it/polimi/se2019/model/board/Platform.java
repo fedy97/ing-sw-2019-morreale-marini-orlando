@@ -173,6 +173,26 @@ public class Platform {
         this.weapons = weapons;
     }
 
+    /**
+     *
+     */
+    public void addWeaponCard(WeaponCard weaponCard) throws InvalidGenerationSpotException{
+        if (!this.isGenerationSpot())
+            throw new InvalidGenerationSpotException();
+        weapons.add(weaponCard);
+    }
+
+    /**
+     *
+     * @param weaponCard
+     * @throws InvalidGenerationSpotException
+     */
+    public void removeWeaponCard(WeaponCard weaponCard) throws InvalidGenerationSpotException{
+        if (!this.isGenerationSpot())
+            throw new InvalidGenerationSpotException();
+        weapons.remove(weaponCard);
+    }
+
     public AmmoCard grabAmmoCard() throws InvalidCardException {
         if (hasAmmoCard) {
             hasAmmoCard = false;
