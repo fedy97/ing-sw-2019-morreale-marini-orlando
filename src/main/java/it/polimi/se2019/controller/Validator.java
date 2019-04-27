@@ -101,4 +101,19 @@ public abstract class Validator {
 
         return res;
     }
+
+    /**
+     * @return a list of the platform where the player can grab an ammo
+     */
+    public List<Platform> getGrabableAmmos() {
+        List<Platform> res = null;
+
+        try {
+            res = getValidMoves(Action.GRAB);
+        } catch (InvalidActionException e) {
+            e.printStackTrace();
+        }
+
+        return res;
+    }
 }

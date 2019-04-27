@@ -86,7 +86,7 @@ public class PlayerManager {
                 }
 
             } catch (InvalidGenerationSpotException e) {
-                //?
+                e.printStackTrace();
             }
         }
         father.getGame().notifyChanges();

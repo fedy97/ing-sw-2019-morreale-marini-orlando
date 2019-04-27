@@ -1,9 +1,11 @@
 package it.polimi.se2019.view;
 
+import java.rmi.Remote;
+
 /**
  * @author Gabriel Raul Marini
  */
-public abstract class RemoteView {
+public abstract class RemoteView implements Remote {
 
     public RemoteView() {
 

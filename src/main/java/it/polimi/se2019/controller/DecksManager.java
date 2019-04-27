@@ -46,7 +46,7 @@ public class DecksManager {
      * to put a new one on the board
      *
      * @param oldAmmoCard picked by the player on the platform
-     * @throws NoCardException if previous operation were wrong
+     * @throws NoCardException if previous operations were wrong
      */
     /*public AmmoCard getNewAmmoCard(AmmoCard oldAmmoCard) throws NoCardException {
         ammoDeck.add(oldAmmoCard);

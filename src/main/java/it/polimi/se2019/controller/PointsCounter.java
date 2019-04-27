@@ -2,41 +2,29 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.player.Player;
 
+import java.util.List;
+
 
 /**
  * @author Federico Morreale
  */
-public abstract class PointsCounter {
-
-    /**
-     *
-     */
-    public PointsCounter() {
-    }
+public interface PointsCounter{
 
     /**
      * @return The player who won the game
      */
-    public Player getWinner() {
-        return null;
-    }
+    Player getWinner();
 
-    public void calculatePoints() {
-
-    }
+    void calculatePoints();
 
     /**
      * @return
      */
-    public Player getActualRanking() {
-        return null;
-    }
+    List<Player> getActualRanking();
 
     /**
      * @return
      */
-    public Player getFinalRanking() {
-        return null;
-    }
+    List<Player> getFinalRanking();
 
 }

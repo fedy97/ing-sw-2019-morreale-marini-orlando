@@ -8,14 +8,15 @@ import java.util.*;
  * @author Federico Morreale
  */
 public class TurnController {
-
-    public TurnController() {
-        //TODO
-    }
-
     private Player playerTurn;
     private List<Player> turningOrder;
     private Timer turnTimer;
+
+    public TurnController(List<Player> turningOrder){
+        playerTurn = turningOrder.get(0);
+        this.turningOrder = turningOrder;
+        turnTimer = new Timer();
+    }
 
     /**
      * @return The player who has the turn

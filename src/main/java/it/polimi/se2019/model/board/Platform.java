@@ -37,9 +37,9 @@ public class Platform {
      * @param platformColor    this four params will be parsed from json
      * @throws InvalidCardException if the starting ammos card of the platform is null
      */
-    public Platform(int[] platformPosition, boolean isGenerationSpot, AmmoCard platformAmmoCard, Color platformColor, ArrayList<Orientation> doors)
+    public Platform(int[] platformPosition, boolean isGenerationSpot, AmmoCard platformAmmoCard, Color platformColor, List<Orientation> doors)
             throws InvalidCardException {
-        this.doorLocation = doors;
+        this.doorLocation = (ArrayList<Orientation>) doors;
         this.platformPosition = platformPosition;
         this.isGenerationSpot = isGenerationSpot;
         this.platformColor = platformColor;
@@ -112,7 +112,7 @@ public class Platform {
         return adjacentPlatforms.get(direction);
     }
 
-    public ArrayList<WeaponCard> getWeapons() throws InvalidGenerationSpotException {
+    public List<WeaponCard> getWeapons() throws InvalidGenerationSpotException {
         if (!this.isGenerationSpot())
             throw new InvalidGenerationSpotException();
         return weapons;
@@ -167,10 +167,10 @@ public class Platform {
      * @param weapons to set to the generation spot
      * @throws InvalidGenerationSpotException if the current platform is not a generation spot
      */
-    public void setWeapons(ArrayList<WeaponCard> weapons) throws InvalidGenerationSpotException {
+    public void setWeapons(List<WeaponCard> weapons) throws InvalidGenerationSpotException {
         if (!this.isGenerationSpot())
             throw new InvalidGenerationSpotException();
-        this.weapons = weapons;
+        this.weapons = (ArrayList<WeaponCard>) weapons;
     }
 
     /**
