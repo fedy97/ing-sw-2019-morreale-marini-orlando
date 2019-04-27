@@ -64,7 +64,15 @@ public class RMIClient implements Client {
     }
 
     public void disconnect() {
-        //TODO
+        stub = null;
+        try {
+            registry.unbind("RemoteView");
+        } catch (RemoteException e) {
+            //TODO
+        } catch (NotBoundException e) {
+            //TODO
+        }
+        connected = false;
     }
 
     /**
