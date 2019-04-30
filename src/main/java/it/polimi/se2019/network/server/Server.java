@@ -7,19 +7,26 @@ package it.polimi.se2019.network.server;
  */
 public abstract class Server {
     protected int port;
-    protected boolean connected;
+    protected boolean available;
 
     public Server() {
-        connected = false;
+        available = false;
     }
 
     public Server(int port) {
         this.port = port;
-        connected = false;
+        available = false;
     }
 
     /**
      * Initialize the server parameters in order to connect to the client
      */
     public abstract void start();
+
+    /**
+     * @return if the server is ready to accept connections
+     */
+    public boolean isAvailable(){
+        return available;
+    }
 }

@@ -1,59 +1,56 @@
 package it.polimi.se2019.network.server;
 
-import it.polimi.se2019.view.RemoteView;
+import it.polimi.se2019.network.client.RMIClientInterface;
 import it.polimi.se2019.view.View;
 
-import java.rmi.AlreadyBoundException;
-import java.rmi.NotBoundException;
-import java.rmi.Remote;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  * RMI implementation of Server
- * <p>
- * WARNING!!!! Implementation to be discussed
  *
  * @author Gabriel Raul Marini
  */
-public class RMIServer extends Server implements Remote {
-    private View stub;
-    private RemoteView skeleton;
+public class RMIServer extends Server implements RMIServerInterface {
+    private RMIClientInterface skeleton;
+    private View actor;
+    private static final Logger LOGGER = Logger.getLogger(Class.class.getName());
 
-    public RMIServer(View stub, int port) {
+    public RMIServer(View actor, int port) {
         this.port = port;
-        this.stub = stub;
-        connected = false;
+        this.actor = actor;
     }
 
     /**
-     * Start the RMI server using the View as stub
+     * Start the RMI server
      */
     public void start() {
         try {
             exportRemoteObject();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (AlreadyBoundException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.toString());
         }
-        connected = true;
+        available = true;
+        LOGGER.log(Level.INFO, "RMI Server is ready");
     }
 
     /**
-     * Export the remote reference of the object used to call remote methods
-     *
-     * @throws RemoteException
-     * @throws AlreadyBoundException if the stub was already registered
+     * Export the remote reference of this in order to allow remote calling procedures
      */
-    private void exportRemoteObject() throws RemoteException, AlreadyBoundException {
-        stub = (View) UnicastRemoteObject.exportObject(stub, port);
+    private void exportRemoteObject() {
+        try {
+            RMIServerInterface stub = (RMIServerInterface) UnicastRemoteObject.exportObject(this, port);
 
-        // Bind the remote object's stub in the registry
-        Registry registry = LocateRegistry.getRegistry();
-        registry.bind("View", stub);
+            // Bind the remote object's stub in the registry
+            Registry registry = LocateRegistry.createRegistry(port);
+            registry.bind("FakeView", stub);
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.toString());
+        }
     }
 
     /**
@@ -61,17 +58,17 @@ public class RMIServer extends Server implements Remote {
      */
     public void stop() {
         try {
-            Registry registry = LocateRegistry.getRegistry();
-            registry.unbind("View");
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (NotBoundException e) {
-            e.printStackTrace();
+            Registry registry = LocateRegistry.getRegistry(port);
+            registry.unbind("FakeView");
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.toString());
         }
-        connected = false;
+
+        available = false;
         skeleton = null;
     }
 
+    @Override
     /**
      * Register the skeleton of the client in order to interact with the remote view
      *
@@ -81,12 +78,29 @@ public class RMIServer extends Server implements Remote {
     public void registerClient(String host, int port) {
         try {
             Registry registry = LocateRegistry.getRegistry(host, port);
-            skeleton = (RemoteView) registry.lookup("RemoteView");
-        } catch (RemoteException e) {
-            //TODO
-        } catch (NotBoundException e) {
-            //TODO
+            skeleton = (RMIClientInterface) registry.lookup("RemoteView");
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.toString());
         }
     }
 
+    @Override
+    /**
+     * Method used to test the connection between the client and the local stub
+     */
+    public void testMethod() {
+        LOGGER.log(Level.INFO, "Metodo chiamato sul server!");
+    }
+
+    @Override
+    /**
+     * Method used to test the connection to the remote object of the client
+     */
+    public void callClient() {
+        try {
+            skeleton.testMethod();
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.toString());
+        }
+    }
 }
