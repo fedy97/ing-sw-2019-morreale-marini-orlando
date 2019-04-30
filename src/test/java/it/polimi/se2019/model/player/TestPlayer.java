@@ -6,10 +6,8 @@ import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
-import it.polimi.se2019.model.card.powerups.Newton;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
-import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.utils.JsonParser;
@@ -29,8 +27,8 @@ import static org.junit.Assert.*;
  * @author Simone Orlando
  */
 public class TestPlayer {
-    Deck<PowerUpCard> deck;
-    Deck<AmmoCard> deckAmmos;
+    private Deck<PowerUpCard> deck;
+    private Deck<AmmoCard> deckAmmos;
     @Before
     public void initTest() throws InvalidCardException,InvalidCubeException, InvalidNameException, InvalidImageException,InvalidDeckException, IOException {
         JsonParser parser = new JsonParser("/json/powerups.json");
@@ -41,7 +39,7 @@ public class TestPlayer {
 
     @Test
     public void testChangePlatform() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
-        int pos[] = {1, 0};
+        int[] pos = {1, 0};
 
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
@@ -63,8 +61,7 @@ public class TestPlayer {
 
     @Test
     public void testAddPoint() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
-        int pos[] = {1, 0};
-        AmmoCube cube[] = {AmmoCube.RED, AmmoCube.YELLOW, AmmoCube.YELLOW};
+        int[] pos = {1, 0};
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
@@ -74,7 +71,7 @@ public class TestPlayer {
         } catch (NegativeNumberException e) {
             fail();
         }
-        assertEquals(player.getCurrentScore(), 5);
+        assertEquals(5, player.getCurrentScore());
 
         try {
             player.addPoint(-3);
@@ -86,33 +83,33 @@ public class TestPlayer {
 
     @Test
     public void testAddDeath() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
-        int pos[] = {1, 0};
+        int[] pos = {1, 0};
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
         Player player = new Player(Character.BANSHEE, start);
 
         player.addDeath();
-        assertEquals(player.getNumOfDeaths(), 1);
+        assertEquals(1,player.getNumOfDeaths());
     }
 
     @Test
     public void testResetDeaths() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
-        int pos[] = {1, 0};
+        int[] pos = {1, 0};
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
         Player player = new Player(Character.BANSHEE, start);
 
         player.addDeath();
-        assertEquals(player.getNumOfDeaths(), 1);
+        assertEquals(1, player.getNumOfDeaths());
         player.resetDeaths();
-        assertEquals(player.getNumOfDeaths(), 0);
+        assertEquals(0,player.getNumOfDeaths());
     }
 
     @Test
     public void testAddPowerUpCard() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
-        int pos[] = {1, 0};
+        int[] pos = {1, 0};
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
@@ -122,7 +119,7 @@ public class TestPlayer {
 
         player.addPowerUpCard(pCard);
 
-        assertEquals(player.getPowerUpCards().contains(pCard), true);
+        assertTrue(player.getPowerUpCards().contains(pCard));
         try {
             player.addPowerUpCard(null);
             fail();
@@ -133,7 +130,7 @@ public class TestPlayer {
 
     @Test
     public void testRemovePowerUpCard() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
-        int pos[] = {1, 0};
+        int[] pos = {1, 0};
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
@@ -141,13 +138,13 @@ public class TestPlayer {
 
         PowerUpCard pCard = deck.drawCard();
         player.addPowerUpCard(pCard);
-        assertEquals(player.getPowerUpCards().contains(pCard), true);
+        assertTrue(player.getPowerUpCards().contains(pCard));
         try {
             player.removePowerUpCard(pCard);
         } catch (InvalidCardException e) {
             fail();
         }
-        assertEquals(player.getPowerUpCards().contains(pCard), false);
+        assertFalse(player.getPowerUpCards().contains(pCard));
 
         try {
             player.removePowerUpCard(null);
@@ -159,7 +156,7 @@ public class TestPlayer {
 
     @Test
     public void testAddWeaponCard() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
-        int pos[] = {1, 0};
+        int[] pos = {1, 0};
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
@@ -171,7 +168,7 @@ public class TestPlayer {
         } catch (MaxWeaponException e) {
             fail();
         }
-        assertEquals(player.getWeaponCards().contains(wCard), true);
+        assertTrue(player.getWeaponCards().contains(wCard));
 
         try {
             player.addWeaponCard(wCard);
@@ -190,7 +187,7 @@ public class TestPlayer {
 
     @Test
     public void testRemoveWeaponCard() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException, MaxWeaponException {
-        int pos[] = {1, 0};
+        int[] pos = {1, 0};
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
@@ -198,25 +195,25 @@ public class TestPlayer {
 
         WeaponCard wCard = new WeaponCard();
         player.addWeaponCard(wCard);
-        assertEquals(player.getWeaponCards().contains(wCard), true);
+        assertTrue( player.getWeaponCards().contains(wCard));
 
 
         player.removeWeaponCard(wCard);
 
-        assertEquals(player.getWeaponCards().contains(wCard), false);
+        assertFalse( player.getWeaponCards().contains(wCard));
 
     }
 
     @Test
-    public void testSetFrenzyModeType() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException, MaxWeaponException {
-        int pos[] = {1, 0};
+    public void testSetFrenzyModeType() throws NoCardException,InvalidCardException, InvalidPositionException, InvalidCharacterException {
+        int[] pos = {1, 0};
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
         Player player = new Player(Character.BANSHEE, start);
 
         player.setFrenzyModeType(2);
-        assertEquals(player.getFrenzyModeType(), 2);
+        assertEquals(2, player.getFrenzyModeType());
     }
 
 }

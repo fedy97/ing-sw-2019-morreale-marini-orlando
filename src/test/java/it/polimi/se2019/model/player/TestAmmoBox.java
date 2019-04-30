@@ -55,9 +55,9 @@ public class TestAmmoBox {
         myAmmoBox.removeAmmos(AmmoCube.YELLOW, 1);
         myAmmoBox.removeAmmos(AmmoCube.BLUE, 1);
 
-        assertEquals(myAmmoBox.getRedAmmos(), 0);
-        assertEquals(myAmmoBox.getYellowAmmos(), 0);
-        assertEquals(myAmmoBox.getBlueAmmos(), 0);
+        assertEquals(0,myAmmoBox.getRedAmmos());
+        assertEquals(0,myAmmoBox.getYellowAmmos());
+        assertEquals(0,myAmmoBox.getBlueAmmos());
 
 
     }

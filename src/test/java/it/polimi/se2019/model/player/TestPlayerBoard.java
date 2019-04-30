@@ -1,7 +1,6 @@
 package it.polimi.se2019.model.player;
 
 import it.polimi.se2019.exceptions.InvalidCharacterException;
-import it.polimi.se2019.exceptions.NegativeNumberException;
 import it.polimi.se2019.model.enumeration.Character;
 import org.junit.Test;
 
@@ -33,7 +32,7 @@ public class TestPlayerBoard {
         ArrayList<Character> line = myBoard.getDamageLine();
         assertEquals(line.size(),damage);
         for (Character c: line) {
-            assertEquals(c,Character.BANSHEE);
+            assertEquals(Character.BANSHEE, c);
         }
 
         /*
@@ -47,7 +46,7 @@ public class TestPlayerBoard {
         }
 
         line = myBoard.getDamageLine();
-        assertEquals(line.size(),12);
+        assertEquals(12, line.size());
 
         /*
             Test of the impossibility of having a null character and a negative value
@@ -64,14 +63,14 @@ public class TestPlayerBoard {
     }
 
     @Test
-    public void testResetDamageLine() throws NegativeNumberException, InvalidCharacterException{
+    public void testResetDamageLine() throws InvalidCharacterException{
         PlayerBoard myBoard = new PlayerBoard();
 
         myBoard.addDamage(Character.DISTRUCTOR, 5);
 
         myBoard.resetDamageLine();
         ArrayList<Character> line = myBoard.getDamageLine();
-        assertEquals(line.size(),0);
+        assertEquals(0, line.size());
     }
 
     @Test
@@ -86,9 +85,9 @@ public class TestPlayerBoard {
 
 
         ArrayList<Character> line = myBoard.getRevengeMarks();
-        assertEquals(line.size(),2);
+        assertEquals(2, line.size());
         for (Character c: line) {
-            assertEquals(c,Character.BANSHEE);
+            assertEquals(Character.BANSHEE, c);
         }
 
         /*
@@ -97,9 +96,9 @@ public class TestPlayerBoard {
         myBoard.addRevengeMark(Character.BANSHEE,2);
 
         line = myBoard.getRevengeMarks();
-        assertEquals(line.size(),3);
+        assertEquals(3, line.size());
         for (Character c: line) {
-            assertEquals(c,Character.BANSHEE);
+            assertEquals(Character.BANSHEE, c);
         }
 
 
@@ -126,7 +125,7 @@ public class TestPlayerBoard {
             if (c == Character.DOZER)
                 counter++;
         }
-        assertEquals(counter,0);
+        assertEquals(0, counter);
 
         /*
             Test of the impossibility of having a null character
