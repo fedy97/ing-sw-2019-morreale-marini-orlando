@@ -39,7 +39,7 @@ public abstract class Card {
      * Instantiate a card with a specified name and a given background image
      */
     public Card(String name, String description, Image img) throws InvalidNameException, InvalidImageException {
-        if (name == "" || description == "")
+        if (name.equals("") || description.equals(""))
             throw new InvalidNameException();
         if (img == null)
             throw new InvalidImageException();

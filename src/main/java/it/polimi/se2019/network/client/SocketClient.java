@@ -32,7 +32,7 @@ public class SocketClient implements Client {
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
-            e.printStackTrace();
+            //TODO e.printStackTrace();
         }
 
         connected = true;
