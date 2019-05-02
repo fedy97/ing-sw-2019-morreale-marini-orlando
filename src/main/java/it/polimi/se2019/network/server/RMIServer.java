@@ -1,5 +1,6 @@
 package it.polimi.se2019.network.server;
 
+import it.polimi.se2019.network.Message;
 import it.polimi.se2019.network.client.RMIClientInterface;
 import it.polimi.se2019.view.View;
 
@@ -96,7 +97,7 @@ public class RMIServer extends Server implements RMIServerInterface {
     /**
      * Method used to test the connection to the remote object of the client
      */
-    public void callClient() {
+    public void callClient(Message msg) {
         try {
             skeleton.testMethod();
         } catch (Exception e) {

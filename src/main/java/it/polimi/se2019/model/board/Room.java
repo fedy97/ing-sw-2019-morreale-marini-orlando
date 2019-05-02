@@ -18,10 +18,10 @@ public class Room {
      * @param platformsInRoom All the platforms that make up the room
      * @throws InvalidRoomException if there is no platform in the room
      */
-    public Room(ArrayList<Platform> platformsInRoom) throws InvalidRoomException {
+    public Room(List<Platform> platformsInRoom) throws InvalidRoomException {
         if (platformsInRoom.isEmpty())
             throw new InvalidRoomException();
-        this.platformsInRoom = platformsInRoom;
+        this.platformsInRoom = (ArrayList<Platform>) platformsInRoom;
         this.hasGenerationSpot = false;
         for (Platform p : platformsInRoom) {
             if (p.isGenerationSpot()) this.hasGenerationSpot = true;

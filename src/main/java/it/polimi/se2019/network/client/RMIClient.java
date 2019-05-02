@@ -1,5 +1,6 @@
 package it.polimi.se2019.network.client;
 
+import it.polimi.se2019.network.Message;
 import it.polimi.se2019.network.server.RMIServerInterface;
 import it.polimi.se2019.view.RemoteView;
 
@@ -100,7 +101,7 @@ public class RMIClient implements RMIClientInterface {
     }
 
     @Override
-    public void callServer() {
+    public void callServer(Message msg) {
         try {
             stub.testMethod();
         } catch (Exception e) {

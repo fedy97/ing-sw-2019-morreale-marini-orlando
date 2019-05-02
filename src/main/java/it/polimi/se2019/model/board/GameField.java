@@ -231,8 +231,8 @@ public class GameField {
      * @return an arraylist of platforms in which the player can go from the initPlat,
      * given the numOfMaxSteps permitted
      */
-    public ArrayList<Platform> getAvailablePlatforms(Platform initPlat, int numOfMaxSteps) {
-        ArrayList<Platform> platsAvailable = new ArrayList<>();
+    public List<Platform> getAvailablePlatforms(Platform initPlat, int numOfMaxSteps) {
+        List<Platform> platsAvailable = new ArrayList<>();
         Deque<Platform> stack = new ArrayDeque<>();
         Deque<Integer> dist = new ArrayDeque<>();
         boolean[][] visitedPlats = new boolean[3][4];
@@ -262,8 +262,8 @@ public class GameField {
      * @param platform in which calculate all the visible players
      * @return an arraylist of visible players from that platform
      */
-    public ArrayList<Character> getVisiblePlayers(Platform platform) {
-        ArrayList<Character> characterArrayList = new ArrayList<>();
+    public List<Character> getVisiblePlayers(Platform platform) {
+        List<Character> characterArrayList = new ArrayList<>();
         for (Platform p : platform.getPlatformRoom().getPlatformsInRoom()) {
             characterArrayList.addAll(p.getPlayersOnThePlatform());
         }
@@ -281,8 +281,8 @@ public class GameField {
      *                 otherwise every target in "y" postion will be targeted
      * @return an arraylist of players visible given the direction, this method is used by specific weapons
      */
-    public ArrayList<Character> getVisiblePlayers(Platform platform, String dirXY) {
-        ArrayList<Character> characterArrayList = new ArrayList<>();
+    public List<Character> getVisiblePlayers(Platform platform, String dirXY) {
+        List<Character> characterArrayList = new ArrayList<>();
         if (dirXY.equals("x")) {
             for (int i = 0; i < 4; i++)
                 characterArrayList.addAll(field[platform.getPlatformPosition()[0]][i].getPlayersOnThePlatform());
@@ -296,8 +296,8 @@ public class GameField {
     /**
      * @return an arraylist of every platform in the field
      */
-    public ArrayList<Platform> getPlatforms() {
-        ArrayList<Platform> platformArrayList = new ArrayList<>();
+    public List<Platform> getPlatforms() {
+        List<Platform> platformArrayList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
                 if (field[i][j] != null)
@@ -311,8 +311,8 @@ public class GameField {
      * @param curr platform of the target
      * @return the platforms in the directions selected of max distance from curr = 2, used by Newton
      */
-    public ArrayList<Platform> getPlatformDir(Platform curr) {
-        ArrayList<Platform> platformArrayList = new ArrayList<>();
+    public List<Platform> getPlatformDir(Platform curr) {
+        List<Platform> platformArrayList = new ArrayList<>();
         int row = curr.getPlatformPosition()[0];
         int column = curr.getPlatformPosition()[1];
         if (row + 1 < 3 && field[row + 1][column] != null) platformArrayList.add(field[row + 1][column]);

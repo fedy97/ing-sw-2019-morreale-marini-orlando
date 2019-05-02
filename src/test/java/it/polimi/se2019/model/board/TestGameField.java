@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -38,13 +39,13 @@ public class TestGameField {
     @Test
     public void testGetPlatform() throws InvalidPositionException {
         Platform p = gf.getPlatform(gf.getField()[0][1].getPlatformPosition());
-        if (config == 1) assertEquals(p.isGenerationSpot(), true);
+        if (config == 1) assertTrue(p.isGenerationSpot());
     }
 
     @Test
     public void testGetAvailablePlatforms() throws InvalidPositionException {
 
-        ArrayList<Platform> list = gf.getAvailablePlatforms(gf.getPlatform(new int[]{0, 1}), 3);
+        List<Platform> list = gf.getAvailablePlatforms(gf.getPlatform(new int[]{0, 1}), 3);
         /*for (int i = 0; i < list.size(); i++) {
             System.out.println("[" + list.get(i).getPlatformPosition()[0] + " " + list.get(i).getPlatformPosition()[1] + "]");
         }*/
@@ -52,16 +53,16 @@ public class TestGameField {
 
     @Test
     public void testGetPlatforms() {
-        ArrayList<Platform> list = gf.getPlatforms();
+        List<Platform> list = gf.getPlatforms();
         /*for (int i = 0; i < list.size(); i++) {
             System.out.println("[" + list.get(i).getPlatformPosition()[0] + " " + list.get(i).getPlatformPosition()[1] + "]");
         }*/
-        if (config == 1) assertEquals(list.size(), 11);
+        if (config == 1) assertEquals(11,list.size());
     }
 
     @Test
     public void testGetPlatformDir() throws InvalidPositionException {
-        ArrayList<Platform> list = gf.getPlatformDir(gf.getPlatform(new int[]{1, 2}));
+        List<Platform> list = gf.getPlatformDir(gf.getPlatform(new int[]{1, 2}));
         /*for (int i = 0; i < list.size(); i++) {
             System.out.println("[" + list.get(i).getPlatformPosition()[0] + " " + list.get(i).getPlatformPosition()[1] + "]");
         }*/

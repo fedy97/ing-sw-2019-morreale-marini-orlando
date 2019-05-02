@@ -8,13 +8,15 @@ import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.utils.Loggable;
 
 import java.util.*;
+import java.util.logging.Level;
 
 /**
  * @author Gabriel Raul Marini
  */
-public abstract class Validator {
+public abstract class Validator extends Loggable {
     protected Controller father;
 
     /**
@@ -111,7 +113,7 @@ public abstract class Validator {
         try {
             res = getValidMoves(Action.GRAB);
         } catch (InvalidActionException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, e.toString());
         }
 
         return res;

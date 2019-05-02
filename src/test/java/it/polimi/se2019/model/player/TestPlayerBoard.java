@@ -5,6 +5,7 @@ import it.polimi.se2019.model.enumeration.Character;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -29,7 +30,7 @@ public class TestPlayerBoard {
         }
 
 
-        ArrayList<Character> line = myBoard.getDamageLine();
+        List<Character> line = myBoard.getDamageLine();
         assertEquals(line.size(),damage);
         for (Character c: line) {
             assertEquals(Character.BANSHEE, c);
@@ -69,7 +70,7 @@ public class TestPlayerBoard {
         myBoard.addDamage(Character.DISTRUCTOR, 5);
 
         myBoard.resetDamageLine();
-        ArrayList<Character> line = myBoard.getDamageLine();
+        List<Character> line = myBoard.getDamageLine();
         assertEquals(0, line.size());
     }
 
@@ -84,7 +85,7 @@ public class TestPlayerBoard {
         myBoard.addRevengeMark(Character.BANSHEE,2);
 
 
-        ArrayList<Character> line = myBoard.getRevengeMarks();
+        List<Character> line = myBoard.getRevengeMarks();
         assertEquals(2, line.size());
         for (Character c: line) {
             assertEquals(Character.BANSHEE, c);
@@ -120,7 +121,7 @@ public class TestPlayerBoard {
             fail();
         }
         int counter = 0;
-        ArrayList<Character> line = myBoard.getRevengeMarks();
+        List<Character> line = myBoard.getRevengeMarks();
         for (Character c: line) {
             if (c == Character.DOZER)
                 counter++;
