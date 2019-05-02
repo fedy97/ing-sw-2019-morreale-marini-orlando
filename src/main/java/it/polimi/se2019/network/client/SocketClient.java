@@ -58,4 +58,16 @@ public class SocketClient implements Client {
         socket.close();
         connected = false;
     }
+
+    public boolean isConnected(){
+        return connected;
+    }
+
+    public void testMethod(){
+        //TODO
+    }
+
+    public void callServer(Message msg){
+       //TODO
+    }
 }

@@ -1,43 +1,33 @@
 package it.polimi.se2019.network.server;
 
+import it.polimi.se2019.network.Message;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 /**
  * A generic class used by the View to connect to remote clients
  *
  * @author Gabriel Raul Marini
  * @author Simone Orlando
  */
-public abstract class Server {
-    protected int port;
-    protected boolean available;
-
-    public Server() {
-        available = false;
-    }
-
-    public Server(int port) {
-        this.port = port;
-        available = false;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
+public interface Server extends Remote {
 
     /**
      * Initialize the server parameters in order to connect to the client
      */
-    public abstract void start();
+    void start() throws RemoteException;
+
+    void stop() throws RemoteException;
 
     /**
      * @return if the server is ready to accept connections
      */
-    public boolean isAvailable(){
-        return available;
-    }
+    boolean isAvailable() throws RemoteException;
 
-    public abstract void receive();
+    void testMethod() throws RemoteException;
 
-    public abstract void send();
+    void callClient(Message msg) throws RemoteException;
 
-    public abstract void close();
+    void registerClient(String host, int port) throws RemoteException;
 }

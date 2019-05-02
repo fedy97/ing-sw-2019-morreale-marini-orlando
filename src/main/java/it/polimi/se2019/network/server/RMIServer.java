@@ -1,8 +1,8 @@
 package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.network.Message;
-import it.polimi.se2019.network.client.RMIClientInterface;
-import it.polimi.se2019.view.View;
+import it.polimi.se2019.network.client.Client;
+import it.polimi.se2019.view.VirtualView;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -16,16 +16,19 @@ import java.util.logging.Logger;
  *
  * @author Gabriel Raul Marini
  */
-public class RMIServer extends Server implements RMIServerInterface {
-    private RMIClientInterface skeleton;
-    private View actor;
+public class RMIServer implements Server {
+    private Client skeleton;
+    private VirtualView actor;
     private static final Logger LOGGER = Logger.getLogger(Class.class.getName());
+    private boolean available;
+    private int port;
 
-    public RMIServer(View actor, int port) {
+    public RMIServer(VirtualView actor, int port) {
         this.port = port;
         this.actor = actor;
     }
 
+    @Override
     /**
      * Start the RMI server
      */
@@ -44,7 +47,7 @@ public class RMIServer extends Server implements RMIServerInterface {
      */
     private void exportRemoteObject() {
         try {
-            RMIServerInterface stub = (RMIServerInterface) UnicastRemoteObject.exportObject(this, port);
+            Server stub = (Server) UnicastRemoteObject.exportObject(this, port);
 
             // Bind the remote object's stub in the registry
             Registry registry = LocateRegistry.createRegistry(port);
@@ -54,6 +57,7 @@ public class RMIServer extends Server implements RMIServerInterface {
         }
     }
 
+    @Override
     /**
      * Unbind the remote object View and stop the communication
      */
@@ -79,7 +83,7 @@ public class RMIServer extends Server implements RMIServerInterface {
     public void registerClient(String host, int port) {
         try {
             Registry registry = LocateRegistry.getRegistry(host, port);
-            skeleton = (RMIClientInterface) registry.lookup("RemoteView");
+            skeleton = (Client) registry.lookup("RemoteView");
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, e.toString());
         }
@@ -103,5 +107,13 @@ public class RMIServer extends Server implements RMIServerInterface {
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, e.toString());
         }
+    }
+
+    @Override
+    /**
+     * @return if the server is ready to receive connections
+     */
+    public boolean isAvailable() {
+        return available;
     }
 }

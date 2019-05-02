@@ -1,37 +1,21 @@
 package it.polimi.se2019.network.client;
 
+import it.polimi.se2019.network.Message;
+
+import java.io.IOException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 /**
- * @author Simone Orlando
+ * Interface of the remote client to be implemented with Socket or RMI
+ *
+ * @author Gabriel Raul Marini
  */
-public abstract class Client {
+public interface Client extends Remote {
 
-    private String ip;
-    private int port;
-    private boolean connected;
-
-    public Client() {
-        connected = false;
-    }
-
-    public Client(String ip, int port) {
-        this.ip = ip;
-        this.port = port;
-        connected = false;
-    }
-
-    public void setIp(String ip) {
-        //TODO
-    }
-
-    public void setPort(int port) {
-        //TODO
-    }
-
-    public abstract void connect();
-
-    public abstract void send();
-
-    public abstract void receive();
-
-    public abstract void disconnect();
+    void connect(String host, int port)throws RemoteException;
+    void disconnect() throws IOException, RemoteException;
+    void callServer(Message msg) throws RemoteException;
+    void testMethod() throws RemoteException;
+    boolean isConnected() throws RemoteException;
 }

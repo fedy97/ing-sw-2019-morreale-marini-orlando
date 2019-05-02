@@ -1,7 +1,7 @@
 package it.polimi.se2019.network.client;
 
 import it.polimi.se2019.network.Message;
-import it.polimi.se2019.network.server.RMIServerInterface;
+import it.polimi.se2019.network.server.Server;
 import it.polimi.se2019.view.RemoteView;
 
 import java.net.InetAddress;
@@ -17,8 +17,8 @@ import java.util.logging.Logger;
  *
  * @author Gabriel Raul Marini
  */
-public class RMIClient implements RMIClientInterface {
-    private RMIServerInterface stub;
+public class RMIClient implements Client {
+    private Server stub;
     private RemoteView actor;
     private boolean connected;
     private int port;
@@ -48,7 +48,7 @@ public class RMIClient implements RMIClientInterface {
     public void connect(String host, int port) {
         try {
             Registry remoteRegistry = LocateRegistry.getRegistry(host, port);
-            stub = (RMIServerInterface) remoteRegistry.lookup("FakeView");
+            stub = (Server) remoteRegistry.lookup("FakeView");
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, e.toString());
         }
@@ -71,7 +71,7 @@ public class RMIClient implements RMIClientInterface {
      */
     private void exportRemoteObject() {
         try {
-            RMIClientInterface skeleton = (RMIClientInterface) UnicastRemoteObject.exportObject(this, port);
+            Client skeleton = (Client) UnicastRemoteObject.exportObject(this, port);
             registry.bind("RemoteView", skeleton);
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, e.toString());
@@ -109,7 +109,7 @@ public class RMIClient implements RMIClientInterface {
         }
     }
 
-    public RMIServerInterface getStub(){
+    public Server getStub(){
         return stub;
     }
 
