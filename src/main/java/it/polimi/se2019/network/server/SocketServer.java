@@ -1,6 +1,6 @@
 package it.polimi.se2019.network.server;
 
-import it.polimi.se2019.network.Message;
+import it.polimi.se2019.network.message.Message;
 
 import java.net.ServerSocket;
 import java.net.Socket;

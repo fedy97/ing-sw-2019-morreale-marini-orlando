@@ -1,6 +1,6 @@
 package it.polimi.se2019.network.server;
 
-import it.polimi.se2019.network.Message;
+import it.polimi.se2019.network.message.Message;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -25,7 +25,7 @@ public interface Server extends Remote {
      */
     boolean isAvailable() throws RemoteException;
 
-    void testMethod() throws RemoteException;
+    void interpretMessage(Message msg) throws RemoteException;
 
     void callClient(Message msg) throws RemoteException;
 

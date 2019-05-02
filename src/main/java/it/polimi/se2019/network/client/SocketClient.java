@@ -1,12 +1,11 @@
 package it.polimi.se2019.network.client;
 
-import it.polimi.se2019.network.Message;
+import it.polimi.se2019.network.message.Message;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 /**
  * Socket implementation of remote client
@@ -32,7 +31,7 @@ public class SocketClient implements Client {
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
-            //TODO e.printStackTrace();
+
         }
 
         connected = true;
@@ -45,6 +44,10 @@ public class SocketClient implements Client {
     public void sendMessage(Message msg) throws IOException {
         objectOutputStream.writeObject(msg);
 
+    }
+
+    public void interpretMessage(Message msg){
+       // msg.performAction();
     }
 
     /**
@@ -63,9 +66,6 @@ public class SocketClient implements Client {
         return connected;
     }
 
-    public void testMethod(){
-        //TODO
-    }
 
     public void callServer(Message msg){
        //TODO

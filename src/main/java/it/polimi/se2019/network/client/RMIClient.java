@@ -1,6 +1,6 @@
 package it.polimi.se2019.network.client;
 
-import it.polimi.se2019.network.Message;
+import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.network.server.Server;
 import it.polimi.se2019.view.RemoteView;
 
@@ -96,14 +96,14 @@ public class RMIClient implements Client {
     }
 
     @Override
-    public void testMethod() {
-        LOGGER.log(Level.INFO, "This method is called on the client");
+    public void interpretMessage(Message msg) {
+        msg.performAction(actor);
     }
 
     @Override
     public void callServer(Message msg) {
         try {
-            stub.testMethod();
+            stub.interpretMessage(msg);
         } catch (Exception e) {
             LOGGER.log(Level.INFO, e.toString());
         }

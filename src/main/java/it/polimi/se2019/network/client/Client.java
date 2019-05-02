@@ -1,6 +1,6 @@
 package it.polimi.se2019.network.client;
 
-import it.polimi.se2019.network.Message;
+import it.polimi.se2019.network.message.Message;
 
 import java.io.IOException;
 import java.rmi.Remote;
@@ -14,8 +14,8 @@ import java.rmi.RemoteException;
 public interface Client extends Remote {
 
     void connect(String host, int port)throws RemoteException;
-    void disconnect() throws IOException, RemoteException;
+    void disconnect() throws IOException;
     void callServer(Message msg) throws RemoteException;
-    void testMethod() throws RemoteException;
+    void interpretMessage(Message msg) throws RemoteException;
     boolean isConnected() throws RemoteException;
 }

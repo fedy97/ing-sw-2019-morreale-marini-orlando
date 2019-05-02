@@ -1,6 +1,7 @@
 package it.polimi.se2019.network;
 
 import it.polimi.se2019.network.client.RMIClient;
+import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.network.server.RMIServer;
 
 

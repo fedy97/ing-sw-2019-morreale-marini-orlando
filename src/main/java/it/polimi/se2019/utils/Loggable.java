@@ -2,7 +2,7 @@ package it.polimi.se2019.utils;
 
 import java.util.logging.Logger;
 
-public class Loggable {
+public final class Loggable {
     protected final Logger LOGGER;
 
     public Loggable(){

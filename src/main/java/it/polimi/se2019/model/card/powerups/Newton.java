@@ -6,7 +6,6 @@ import it.polimi.se2019.exceptions.InvalidImageException;
 import it.polimi.se2019.exceptions.InvalidNameException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.AmmoCube;
-import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.model.player.Player;
 
 import java.awt.*;

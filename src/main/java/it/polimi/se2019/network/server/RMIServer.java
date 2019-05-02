@@ -1,6 +1,6 @@
 package it.polimi.se2019.network.server;
 
-import it.polimi.se2019.network.Message;
+import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.view.VirtualView;
 
@@ -93,8 +93,8 @@ public class RMIServer implements Server {
     /**
      * Method used to test the connection between the client and the local stub
      */
-    public void testMethod() {
-        LOGGER.log(Level.INFO, "Metodo chiamato sul server!");
+    public void interpretMessage(Message msg) {
+        msg.performAction(actor);
     }
 
     @Override
@@ -103,7 +103,7 @@ public class RMIServer implements Server {
      */
     public void callClient(Message msg) {
         try {
-            skeleton.testMethod();
+            skeleton.interpretMessage(msg);
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, e.toString());
         }
