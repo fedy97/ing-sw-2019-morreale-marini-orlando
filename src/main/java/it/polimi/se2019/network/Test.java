@@ -13,7 +13,7 @@ public class Test {
         RMIClient client = new RMIClient(null, 1543);
         client.connect("127.0.0.1", 1234);
 
-        client.callServer(new Message());
-        server.callClient(new Message());
+        //client.callServer(new Message());
+        //server.callClient(new Message());
     }
 }

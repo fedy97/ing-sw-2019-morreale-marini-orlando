@@ -27,7 +27,7 @@ public class GameField {
     /**
      * @param initWeapons an array of weapons ready to be grabbed, each weapon will be linked to its platform
      * @param skullsBoard the board that manages the killings
-     * @param scoreBoard the board that manages the assignable points
+     * @param scoreBoard  the board that manages the assignable points
      * @param field       where the 10, 11 or 12 platforms are located
      * @throws InvalidNumOfRoomsException        if the rooms are not 5 or 6
      * @throws InvalidFieldException             if there is more than 1 platform equal to null or the matrix is not 3x4

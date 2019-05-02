@@ -2,6 +2,7 @@ package it.polimi.se2019.network.client;
 
 import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.network.server.Server;
+import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.RemoteView;
 
 import java.net.InetAddress;
@@ -23,7 +24,6 @@ public class RMIClient implements Client {
     private boolean connected;
     private int port;
     private Registry registry;
-    private static final Logger LOGGER = Logger.getLogger(Class.class.getName());
 
     public RMIClient(RemoteView actor, int port) {
         this.actor = actor;
@@ -32,7 +32,7 @@ public class RMIClient implements Client {
         try {
             registry = LocateRegistry.createRegistry(port);
         } catch (RemoteException e) {
-            LOGGER.log(Level.WARNING, e.toString());
+            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
 
         connected = false;
@@ -50,20 +50,20 @@ public class RMIClient implements Client {
             Registry remoteRegistry = LocateRegistry.getRegistry(host, port);
             stub = (Server) remoteRegistry.lookup("FakeView");
         } catch (Exception e) {
-            LOGGER.log(Level.WARNING, e.toString());
+            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
 
         exportRemoteObject();
 
         try {
             stub.registerClient(InetAddress.getLocalHost().getHostAddress(), this.port);
-            LOGGER.log(Level.INFO, "Client registered itself to the server!");
+            HandyFunctions.LOGGER.log(Level.INFO, "Client registered itself to the server!");
         } catch (Exception e) {
-            LOGGER.log(Level.WARNING, e.toString());
+            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
 
         connected = true;
-        LOGGER.log(Level.INFO, "Client is connected!");
+        HandyFunctions.LOGGER.log(Level.INFO, "Client is connected!");
     }
 
     /**
@@ -74,7 +74,7 @@ public class RMIClient implements Client {
             Client skeleton = (Client) UnicastRemoteObject.exportObject(this, port);
             registry.bind("RemoteView", skeleton);
         } catch (Exception e) {
-            LOGGER.log(Level.WARNING, e.toString());
+            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
     }
 
@@ -83,7 +83,7 @@ public class RMIClient implements Client {
         try {
             registry.unbind("RemoteView");
         } catch (Exception e) {
-            LOGGER.log(Level.WARNING, e.toString());
+            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
         connected = false;
     }
@@ -105,7 +105,7 @@ public class RMIClient implements Client {
         try {
             stub.interpretMessage(msg);
         } catch (Exception e) {
-            LOGGER.log(Level.INFO, e.toString());
+            HandyFunctions.LOGGER.log(Level.INFO, e.toString());
         }
     }
 

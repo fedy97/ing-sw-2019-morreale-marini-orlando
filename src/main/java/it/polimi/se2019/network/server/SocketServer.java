@@ -4,6 +4,7 @@ import it.polimi.se2019.network.message.Message;
 
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.RemoteException;
 
 /**
  * Socket implementation of the server
@@ -39,7 +40,6 @@ public class SocketServer implements Server {
         //TODO
     }
 
-    @Override
     public void testMethod() {
         //TODO
     }
@@ -57,4 +57,8 @@ public class SocketServer implements Server {
         //TODO
     }
 
+    @Override
+    public void interpretMessage(Message msg) throws RemoteException {
+
+    }
 }
