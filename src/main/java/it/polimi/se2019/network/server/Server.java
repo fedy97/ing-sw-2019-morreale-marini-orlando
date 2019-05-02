@@ -4,6 +4,7 @@ package it.polimi.se2019.network.server;
  * A generic class used by the View to connect to remote clients
  *
  * @author Gabriel Raul Marini
+ * @author Simone Orlando
  */
 public abstract class Server {
     protected int port;
@@ -18,6 +19,10 @@ public abstract class Server {
         available = false;
     }
 
+    public void setPort(int port) {
+        this.port = port;
+    }
+
     /**
      * Initialize the server parameters in order to connect to the client
      */
@@ -29,4 +34,10 @@ public abstract class Server {
     public boolean isAvailable(){
         return available;
     }
+
+    public abstract void receive();
+
+    public abstract void send();
+
+    public abstract void close();
 }

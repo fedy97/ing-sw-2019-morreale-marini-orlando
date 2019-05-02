@@ -1,4 +1,6 @@
-package it.polimi.se2019.view;
+package it.polimi.se2019.view.gui;
+
+import it.polimi.se2019.view.RemoteView;
 
 /**
  * GUI implementation of RemoteView
