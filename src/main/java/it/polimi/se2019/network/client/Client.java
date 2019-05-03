@@ -11,8 +11,11 @@ import java.rmi.RemoteException;
  *
  * @author Gabriel Raul Marini
  */
-public interface Client {
+public interface Client extends Remote {
 
-    void connect() throws RemoteException;
-    void sendFromClient(Message msg) throws RemoteException;
+    void connect(String host, int port, String user)throws RemoteException;
+    void disconnect() throws IOException;
+    void callServer(Message msg) throws RemoteException;
+    void interpretMessage(Message msg) throws RemoteException;
+    boolean isConnected() throws RemoteException;
 }

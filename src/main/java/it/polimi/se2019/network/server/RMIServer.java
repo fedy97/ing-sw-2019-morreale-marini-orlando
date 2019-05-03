@@ -89,7 +89,7 @@ public class RMIServer implements Server {
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
-        Lobby.
+        //TODO lobby
     }
 
     @Override

@@ -37,12 +37,7 @@ public class SocketServer implements Server {
     }
 
     @Override
-    public void sendToClient(Message msg) {
-        connection
-    }
-
-    @Override
-    public void testMethod() {
+    public void sendToClient(Message msg, String user) {
         //TODO
     }
 

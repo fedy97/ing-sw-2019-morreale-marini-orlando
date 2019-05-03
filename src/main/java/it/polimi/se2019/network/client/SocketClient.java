@@ -1,67 +1,73 @@
 package it.polimi.se2019.network.client;
 
 import it.polimi.se2019.network.message.Message;
-import it.polimi.se2019.utils.HandyFunctions;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.rmi.RemoteException;
-import java.util.logging.Level;
 
 /**
  * Socket implementation of remote client
  */
 public class SocketClient implements Client {
     private boolean connected;
-    private String host;
     private Socket socket;
     private ObjectOutputStream objectOutputStream;
     private ObjectInputStream objectInputStream;
 
-    public SocketClient(String host) {
-        this.host = host;
+    public SocketClient() {
         connected = false;
     }
 
     /**
-     * @param msg to be sent
+     * @param ip   address of the server
+     * @param port of the server
      */
-    public void sendFromClient(Message msg) {
-        try {
-            objectOutputStream.writeObject(msg);
-            objectOutputStream.flush();
-        } catch (IOException ex) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-    }
+    public void connect(String ip, int port, String user) {
 
-    @Override
-    public void connect() {
         try {
-            socket = new Socket(host, 1100);
+            socket = new Socket(ip, port);
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
-            connected = true;
-            //now the client listen to the socketServer
-            HandyFunctions.LOGGER.log(Level.INFO, "Socket Client connected itself to the server");
-            new Thread(() -> {
-                while (true) {
-                    try {
-                        Message message = (Message) objectInputStream.readObject();
-                        if (message != null) {
-                            HandyFunctions.LOGGER.log(Level.INFO, "Arrived ping from server");
-                        }
-                    } catch (IOException e) {
-                        HandyFunctions.LOGGER.log(Level.SEVERE, e.getMessage(), e);
-                        break;
-                    } catch (ClassNotFoundException e) {
-                    }
-                }
-            }).start();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, e.getMessage(), e);
+
         }
+
+        connected = true;
+    }
+
+    /**
+     * @param msg to be sent
+     * @throws IOException if something went wrong
+     */
+    public void sendMessage(Message msg) throws IOException {
+        objectOutputStream.writeObject(msg);
+
+    }
+
+    public void interpretMessage(Message msg){
+       // msg.performAction();
+    }
+
+    /**
+     * Close the socket and disconnect the client
+     *
+     * @throws IOException if operations went wrong
+     */
+    public void disconnect() throws IOException {
+        objectInputStream.close();
+        objectInputStream.close();
+        socket.close();
+        connected = false;
+    }
+
+    public boolean isConnected(){
+        return connected;
+    }
+
+
+    public void callServer(Message msg){
+       //TODO
     }
 }
