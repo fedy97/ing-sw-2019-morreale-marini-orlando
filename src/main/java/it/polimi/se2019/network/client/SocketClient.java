@@ -2,7 +2,7 @@ package it.polimi.se2019.network.client;
 
 import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.view.RemoteView;
+import it.polimi.se2019.view.client.RemoteView;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

@@ -3,7 +3,7 @@ package it.polimi.se2019.network.server;
 import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.view.VirtualView;
+import it.polimi.se2019.view.server.VirtualView;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;

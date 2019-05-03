@@ -1,14 +1,8 @@
-package it.polimi.se2019.view.cli;
+package it.polimi.se2019.view.client.cli;
 
 import it.polimi.se2019.network.client.Client;
-import it.polimi.se2019.network.client.RMIClient;
-import it.polimi.se2019.network.client.SocketClient;
-import it.polimi.se2019.network.message.Message;
-import it.polimi.se2019.view.RemoteView;
 import it.polimi.se2019.view.State;
-import it.polimi.se2019.view.View;
-
-import java.rmi.RemoteException;
+import it.polimi.se2019.view.client.RemoteView;
 
 /**
  * @author Simone Orlando

@@ -1,16 +1,15 @@
-package it.polimi.se2019.view.gui;
+package it.polimi.se2019.view.server;
 
-import it.polimi.se2019.view.RemoteView;
+import it.polimi.se2019.network.server.Server;
 import it.polimi.se2019.view.State;
+import it.polimi.se2019.view.View;
 
 /**
  * @author Simone Orlando
  */
-public class GUI extends RemoteView {
+public class VirtualView extends View {
 
-    public GUI() {
-
-    }
+    private Server server;
 
     @Override
     public void start() {
@@ -52,4 +51,3 @@ public class GUI extends RemoteView {
 
     }
 }
-

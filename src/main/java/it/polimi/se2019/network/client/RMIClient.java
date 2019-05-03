@@ -3,7 +3,7 @@ package it.polimi.se2019.network.client;
 import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.network.server.Server;
 import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.view.RemoteView;
+import it.polimi.se2019.view.client.RemoteView;
 
 import java.net.InetAddress;
 import java.rmi.RemoteException;
@@ -11,7 +11,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * RMI implementation of remote client

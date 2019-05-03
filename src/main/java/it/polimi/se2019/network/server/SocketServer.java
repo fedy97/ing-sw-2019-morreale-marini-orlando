@@ -1,14 +1,12 @@
 package it.polimi.se2019.network.server;
 
-import it.polimi.se2019.Lobby;
 import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.view.VirtualView;
+import it.polimi.se2019.view.server.VirtualView;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;

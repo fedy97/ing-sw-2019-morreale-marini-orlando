@@ -1,4 +1,4 @@
-package it.polimi.se2019.view.cli;
+package it.polimi.se2019.view.client.cli;
 
 import java.util.Scanner;
 import java.util.Timer;
