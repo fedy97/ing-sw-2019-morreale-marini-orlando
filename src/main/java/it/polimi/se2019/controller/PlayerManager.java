@@ -6,8 +6,7 @@ import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.utils.HandyFunctions;
-
+import it.polimi.se2019.utils.Loggable;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -17,7 +16,7 @@ import java.util.logging.Level;
  *
  * @author Gabriel Raul Marini
  */
-public class PlayerManager {
+public class PlayerManager extends Loggable {
 
     private Player currentPlayer;
     private List<Player> tempPlayers;
@@ -89,7 +88,7 @@ public class PlayerManager {
                 }
 
             } catch (InvalidGenerationSpotException e) {
-                HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+                LOGGER.log(Level.WARNING, e.toString());
             }
         }
         father.getGame().notifyChanges();
@@ -109,7 +108,7 @@ public class PlayerManager {
             try {
                 p.getPlayerBoard().addDamage(currentPlayer.getCharacter(), damage);
             }catch(InvalidCharacterException e){
-                HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+                LOGGER.log(Level.WARNING, e.toString());
             }
         }
 

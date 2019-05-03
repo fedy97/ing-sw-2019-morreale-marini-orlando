@@ -2,12 +2,9 @@ package it.polimi.se2019.utils;
 
 import it.polimi.se2019.model.enumeration.Character;
 
-import java.util.logging.Logger;
-
 //add here some recurrent functions that can be helpful
 public class HandyFunctions {
 
-    public static final Logger LOGGER = Logger.getLogger(Class.class.getName());
     /**
      * @param character to check
      * @return true if character is in the enum Character

@@ -5,7 +5,7 @@ import it.polimi.se2019.exceptions.NoCardException;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
-import it.polimi.se2019.utils.HandyFunctions;
+import it.polimi.se2019.utils.Loggable;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -15,7 +15,7 @@ import java.util.logging.Level;
  *
  * @author Gabriel Raul Marini
  */
-public class DecksManager {
+public class DecksManager extends Loggable {
 
     private Deck<PowerUpCard> powerUps;
     private List<PowerUpCard> garbageDeck;
@@ -67,7 +67,7 @@ public class DecksManager {
             garbageDeck.clear();
             powerUps.mix();
         } catch (InvalidDeckException e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, "Something went wrong when refilling the deck");
+            LOGGER.log(Level.WARNING, "Something went wrong when refilling the deck");
         }
     }
 
