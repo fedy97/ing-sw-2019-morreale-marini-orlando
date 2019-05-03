@@ -96,8 +96,9 @@ public class RMIServer implements Server {
     /**
      * Method used to test the connection between the client and the local stub
      */
-    public void interpretMessage(Message msg) {
+    public void interpretMessage(Message msg, String user) {
         msg.performAction(actor);
+        //TODO
     }
 
     @Override
@@ -118,5 +119,13 @@ public class RMIServer implements Server {
      */
     public boolean isAvailable() {
         return available;
+    }
+
+    @Override
+    /**
+     * @return if the user is actually connected to the server
+     */
+    public boolean isConnected(String user) {
+        return skeletons.containsKey(user);
     }
 }

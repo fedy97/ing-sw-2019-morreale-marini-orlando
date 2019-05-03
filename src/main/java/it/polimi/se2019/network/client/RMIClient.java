@@ -24,10 +24,12 @@ public class RMIClient implements Client {
     private boolean connected;
     private int port;
     private Registry registry;
+    private String user;
 
-    public RMIClient(RemoteView actor, int port) {
+    public RMIClient(RemoteView actor, int port, String user) {
         this.actor = actor;
         this.port = port;
+        this.user = user;
 
         try {
             registry = LocateRegistry.createRegistry(port);
@@ -45,7 +47,7 @@ public class RMIClient implements Client {
      * @param host address of the server
      * @param port to bind in order to retrieve the stub
      */
-    public void connect(String host, int port, String user) {
+    public void connect(String host, int port) {
         try {
             Registry remoteRegistry = LocateRegistry.getRegistry(host, port);
             stub = (Server) remoteRegistry.lookup("FakeView");
@@ -103,14 +105,10 @@ public class RMIClient implements Client {
     @Override
     public void callServer(Message msg) {
         try {
-            stub.interpretMessage(msg);
+            stub.interpretMessage(msg, user);
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.INFO, e.toString());
         }
-    }
-
-    public Server getStub(){
-        return stub;
     }
 
 }

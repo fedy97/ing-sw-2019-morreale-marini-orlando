@@ -25,9 +25,17 @@ public interface Server extends Remote {
      */
     boolean isAvailable() throws RemoteException;
 
-    void interpretMessage(Message msg) throws RemoteException;
+    /**
+     *
+     * @param msg to be interpreted in order to perform action on the actor
+     * @param user from which the request started
+     * @throws RemoteException
+     */
+    void interpretMessage(Message msg, String user) throws RemoteException;
 
     void sendToClient(Message msg, String username) throws RemoteException;
 
     void registerClient(String host, int port, String user) throws RemoteException;
+
+    boolean isConnected(String user);
 }

@@ -13,7 +13,7 @@ import java.rmi.RemoteException;
  */
 public interface Client extends Remote {
 
-    void connect(String host, int port, String user)throws RemoteException;
+    void connect(String host, int port)throws RemoteException;
     void disconnect() throws IOException;
     void callServer(Message msg) throws RemoteException;
     void interpretMessage(Message msg) throws RemoteException;

@@ -1,13 +1,17 @@
 package it.polimi.se2019;
 
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.client.Client;
+import it.polimi.se2019.network.client.RMIClient;
+import it.polimi.se2019.network.message.Message;
+import it.polimi.se2019.network.message.SimpleMessage;
+import it.polimi.se2019.network.server.RMIServer;
+import it.polimi.se2019.utils.HandyFunctions;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 public class Lobby {
 
@@ -17,9 +21,22 @@ public class Lobby {
 
     public static void main(String[] args) {
         users = new ArrayList<>();
+        new RMIServer(null, 1099).start();
+
+        Client client1 = new RMIClient(null, 1234, "User1");
+        Client client2 = new RMIClient(null, 1345, "User2");
+
+        try {
+            client1.connect("127.0.0.1", 1099);
+            client2.connect("127.0.0.1", 1099);
+            client1.callServer(new SimpleMessage(null));
+            client2.callServer(new SimpleMessage(null));
+        }catch(Exception e){
+            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+        }
+
 
     }
-
 
 
 }
