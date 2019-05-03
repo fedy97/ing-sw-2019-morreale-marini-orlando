@@ -54,7 +54,12 @@ public class SocketServer implements Server {
         //TODO
     }
 
-    public void interpretMessage(Message msg) {
+    public void interpretMessage(Message msg, String user) {
         msg.performAction(actor);
+    }
+
+    @Override
+    public boolean isConnected(String user){
+        return false;
     }
 }

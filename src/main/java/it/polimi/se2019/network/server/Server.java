@@ -37,5 +37,5 @@ public interface Server extends Remote {
 
     void registerClient(String host, int port, String user) throws RemoteException;
 
-    boolean isConnected(String user);
+    boolean isConnected(String user) throws RemoteException;
 }

@@ -3,7 +3,6 @@ package it.polimi.se2019;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.client.RMIClient;
-import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.network.message.SimpleMessage;
 import it.polimi.se2019.network.server.RMIServer;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -21,7 +20,8 @@ public class Lobby {
 
     public static void main(String[] args) {
         users = new ArrayList<>();
-        new RMIServer(null, 1099).start();
+        RMIServer rmiServer = new RMIServer(null, 1099);
+        rmiServer.start();
 
         Client client1 = new RMIClient(null, 1234, "User1");
         Client client2 = new RMIClient(null, 1345, "User2");
@@ -35,6 +35,10 @@ public class Lobby {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
 
+        if(rmiServer.isConnected("User1"))
+            HandyFunctions.LOGGER.log(Level.INFO, "OK user 1");
+        if(!rmiServer.isConnected("User3"))
+            HandyFunctions.LOGGER.log(Level.INFO, "KO user 3");
 
     }
 

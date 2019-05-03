@@ -24,7 +24,7 @@ public class SocketClient implements Client {
      * @param ip   address of the server
      * @param port of the server
      */
-    public void connect(String ip, int port, String user) {
+    public void connect(String ip, int port) {
 
         try {
             socket = new Socket(ip, port);
