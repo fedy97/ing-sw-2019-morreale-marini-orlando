@@ -16,7 +16,8 @@ public class SocketClient implements Client {
     private ObjectOutputStream objectOutputStream;
     private ObjectInputStream objectInputStream;
 
-    public SocketClient() {
+    public SocketClient(String host) {
+        this.host = host;
         connected = false;
     }
 

@@ -23,6 +23,7 @@ public class RMIClient implements Client {
     private RemoteView actor;
     private boolean connected;
     private int port;
+    private String host;
     private Registry registry;
 
     public RMIClient(RemoteView actor, int port) {
@@ -41,9 +42,6 @@ public class RMIClient implements Client {
     /**
      * Connect to the remote object on the server and register itself as skeleton calling
      * remote method registerClient() of the RMIServer
-     *
-     * @param host address of the server
-     * @param port to bind in order to retrieve the stub
      */
     public void connect(String host, int port) {
         try {
