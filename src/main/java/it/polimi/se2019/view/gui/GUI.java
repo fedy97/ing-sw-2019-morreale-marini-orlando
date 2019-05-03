@@ -1,11 +1,10 @@
 package it.polimi.se2019.view.gui;
 
 import it.polimi.se2019.view.RemoteView;
+import it.polimi.se2019.view.State;
 
 /**
- * GUI implementation of RemoteView
- *
- * @author Gabriel Raul Marini
+ * @author Simone Orlando
  */
 public class GUI extends RemoteView {
 
@@ -14,12 +13,43 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void showMessage(String msg) {
-        //TODO
+    public void start() {
+
     }
 
     @Override
-    public void reportError() {
-        //TODO
+    protected void setComunicationType() {
+
+    }
+
+    @Override
+    protected void startConnection() {
+
+    }
+
+    @Override
+    protected void setUserName() {
+
+    }
+
+    @Override
+    protected void waitGameStart() {
+
+    }
+
+    @Override
+    protected void menageTurn() {
+
+    }
+
+    @Override
+    protected void getCurrentPlayer() {
+
+    }
+
+    @Override
+    protected void setState(State newState) {
+
     }
 }
+

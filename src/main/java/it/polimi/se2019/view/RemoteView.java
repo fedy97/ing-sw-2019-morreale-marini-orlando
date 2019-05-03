@@ -1,21 +1,16 @@
 package it.polimi.se2019.view;
 
-import java.rmi.Remote;
+import it.polimi.se2019.network.client.Client;
 
 /**
- * @author Gabriel Raul Marini
+ * @author Simone Orlando
  */
 public abstract class RemoteView extends View{
+
+    protected Client client;
 
     public RemoteView() {
 
     }
 
-    public abstract void showMessage(String msg);
-
-    public abstract void reportError();
-
-    public void update() {
-        //TODO
-    }
 }

@@ -1,20 +1,26 @@
 package it.polimi.se2019.view.cli;
 
 import it.polimi.se2019.network.client.Client;
+import it.polimi.se2019.network.client.RMIClient;
+import it.polimi.se2019.network.client.SocketClient;
+import it.polimi.se2019.network.message.Message;
+import it.polimi.se2019.view.RemoteView;
+import it.polimi.se2019.view.State;
+import it.polimi.se2019.view.View;
+
+import java.rmi.RemoteException;
 
 /**
  * @author Simone Orlando
- *
- * This class will extend RemoteView
  */
-public class CLI  {
+public class CLI extends RemoteView {
 
     private State cliState;
     private String userName;
     private Client client;
     private CliReader reader;
 
-    public CLI() {
+    public CLI(int comunicationType) {
 
     }
 
@@ -22,31 +28,31 @@ public class CLI  {
 
     }
 
-    private void setComunicationType() {
+    protected void setComunicationType() {
 
     }
 
-    private void startConnection() {
+    protected void startConnection() {
 
     }
 
-    private void setUserName() {
+    protected void setUserName() {
 
     }
 
-    private void waitGameStart() {
+    protected void waitGameStart() {
 
     }
 
-    private void menageTurn() {
+    protected void menageTurn() {
 
     }
 
-    private String getCurrentPlayer() {
-        return null;
+    protected void getCurrentPlayer() {
+        return;
     }
 
-    private void setState(State newState) {
+    protected void setState(State newState) {
 
     }
 

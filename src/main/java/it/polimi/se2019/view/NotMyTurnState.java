@@ -1,4 +1,4 @@
-package it.polimi.se2019.view.cli;
+package it.polimi.se2019.view;
 
 /**
  * @author Simone Orlando

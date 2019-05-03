@@ -1,4 +1,6 @@
-package it.polimi.se2019.view.cli;
+package it.polimi.se2019.view;
+
+import it.polimi.se2019.view.cli.CliReader;
 
 /**
  * @author Simone Orlando
