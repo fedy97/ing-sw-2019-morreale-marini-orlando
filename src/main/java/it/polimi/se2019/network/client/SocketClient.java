@@ -1,22 +1,29 @@
 package it.polimi.se2019.network.client;
 
 import it.polimi.se2019.network.message.Message;
+import it.polimi.se2019.utils.HandyFunctions;
+import it.polimi.se2019.view.RemoteView;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.logging.Level;
 
 /**
  * Socket implementation of remote client
  */
 public class SocketClient implements Client {
     private boolean connected;
+    private RemoteView actor;
     private Socket socket;
+    private String user;
     private ObjectOutputStream objectOutputStream;
     private ObjectInputStream objectInputStream;
 
-    public SocketClient() {
+    public SocketClient(RemoteView actor, String user) {
+        this.actor = actor;
+        this.user = user;
         connected = false;
     }
 
@@ -31,23 +38,14 @@ public class SocketClient implements Client {
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
-
+            HandyFunctions.LOGGER.log(Level.SEVERE, "Error connecting to the server socket");
         }
 
         connected = true;
     }
 
-    /**
-     * @param msg to be sent
-     * @throws IOException if something went wrong
-     */
-    public void sendMessage(Message msg) throws IOException {
-        objectOutputStream.writeObject(msg);
-
-    }
-
-    public void interpretMessage(Message msg){
-       // msg.performAction();
+    public void interpretMessage(Message msg) {
+        msg.performAction(actor);
     }
 
     /**
@@ -62,12 +60,20 @@ public class SocketClient implements Client {
         connected = false;
     }
 
-    public boolean isConnected(){
+    public boolean isConnected() {
         return connected;
     }
 
-
-    public void callServer(Message msg){
-       //TODO
+    /**
+     * @param msg to be sent
+     * @throws IOException if something went wrong
+     */
+    public void callServer(Message msg) {
+        try {
+            objectOutputStream.writeObject(msg);
+            objectOutputStream.flush();
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "Error sending message to the server using socket");
+        }
     }
 }

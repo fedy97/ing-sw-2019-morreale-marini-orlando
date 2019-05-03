@@ -1,10 +1,18 @@
 package it.polimi.se2019.network.server;
 
+import it.polimi.se2019.Lobby;
 import it.polimi.se2019.network.message.Message;
+import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.VirtualView;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.logging.Level;
 
 /**
  * Socket implementation of the server
@@ -12,20 +20,43 @@ import java.net.Socket;
  * @author Gabriel Raul Marini
  */
 public class SocketServer implements Server {
-    private Socket[] connection;
+    private ArrayList<Socket> connection = new ArrayList<>();
     private ServerSocket serverSocket;
     private VirtualView actor;
     private boolean isAvailable;
     private int port;
 
-    public SocketServer(int port) {
+    public SocketServer(VirtualView actor, int port) {
         this.port = port;
+        this.actor = actor;
         isAvailable = false;
     }
 
     @Override
     public void start() {
-        //TODO
+        try {
+            serverSocket = new ServerSocket(port);
+            HandyFunctions.LOGGER.log(Level.INFO, "Socket Server is ready");
+            new Thread() {
+                public void run() {
+                    while (true) {
+                        try {
+                            Socket socket = serverSocket.accept();
+                            connection.add(socket); //accetta client
+                            HandyFunctions.printConsole("added socket client successfully");
+                            ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
+                            output.flush();
+                            ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
+
+                        } catch (IOException e) {
+                            HandyFunctions.LOGGER.log(Level.SEVERE, "error accepting client in socketserver");
+                        }
+                    }
+                }
+            }.start();
+        } catch (IOException ex) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error starting socket server");
+        }
     }
 
     @Override
@@ -41,16 +72,9 @@ public class SocketServer implements Server {
         //TODO
     }
 
-    @Override
-    /**
-     * @return
-     */
-    public boolean isAvailable() {
-        return isAvailable;
-    }
 
     @Override
-    public void registerClient(String host, int port, String username){
+    public void registerClient(String host, int port, String username) {
         //TODO
     }
 
@@ -59,7 +83,12 @@ public class SocketServer implements Server {
     }
 
     @Override
-    public boolean isConnected(String user){
+    public boolean isConnected(String user) {
         return false;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return isAvailable;
     }
 }

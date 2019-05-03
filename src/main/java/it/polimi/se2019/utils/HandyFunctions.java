@@ -7,6 +7,10 @@ import java.util.logging.Logger;
 //add here some recurrent functions that can be helpful
 public class HandyFunctions {
     public static final Logger LOGGER = Logger.getLogger(Class.class.getName());
+    public static void printConsole(String message){
+        System.out.println(message);
+    }
+
     /**
      * @param character to check
      * @return true if character is in the enum Character

@@ -99,6 +99,7 @@ public class RMIClient implements Client {
 
     @Override
     public void interpretMessage(Message msg) {
+        HandyFunctions.LOGGER.log(Level.INFO,user + " was called");
         msg.performAction(actor);
     }
 
