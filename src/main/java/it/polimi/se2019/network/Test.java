@@ -6,12 +6,12 @@ import it.polimi.se2019.network.server.RMIServer;
 
 
 public class Test {
-    public static void main(String []args) {
-        RMIServer server = new RMIServer(null, 1234);
+    /*public static void main(String []args) {
+        RMIServer server = new RMIServer(1234);
         server.start();
 
-        RMIClient client = new RMIClient(null, 1543);
-        client.connect("127.0.0.1", 1234);
+        RMIClient client = new RMIClient( 1543);
+        client.connect("");
 
         //client.callServer(new Message());
         //server.callClient(new Message());

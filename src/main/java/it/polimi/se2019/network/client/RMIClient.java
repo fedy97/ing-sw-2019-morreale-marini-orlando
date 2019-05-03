@@ -1,33 +1,29 @@
 package it.polimi.se2019.network.client;
 
 import it.polimi.se2019.network.message.Message;
-import it.polimi.se2019.network.server.Server;
+import it.polimi.se2019.network.server.RMIServerInterface;
 import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.view.RemoteView;
 
-import java.net.InetAddress;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * RMI implementation of remote client
  *
  * @author Gabriel Raul Marini
  */
-public class RMIClient implements Client {
-    private Server stub;
-    private RemoteView actor;
-    private boolean connected;
+public class RMIClient implements Client, RMIClientInterface {
+    private RMIServerInterface stub;
+    private RMIClientInterface skeleton;
     private int port;
     private String host;
     private Registry registry;
 
-    public RMIClient(RemoteView actor, int port) {
-        this.actor = actor;
+    public RMIClient(int port, String host) {
+        this.host = host;
         this.port = port;
 
         try {
@@ -35,18 +31,16 @@ public class RMIClient implements Client {
         } catch (RemoteException e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
-
-        connected = false;
     }
 
     /**
      * Connect to the remote object on the server and register itself as skeleton calling
      * remote method registerClient() of the RMIServer
      */
-    public void connect(String host, int port) {
+    public void connect() {
         try {
-            Registry remoteRegistry = LocateRegistry.getRegistry(host, port);
-            stub = (Server) remoteRegistry.lookup("FakeView");
+            Registry remoteRegistry = LocateRegistry.getRegistry(host, 1099);
+            stub = (RMIServerInterface) remoteRegistry.lookup("FakeView");
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
@@ -54,14 +48,11 @@ public class RMIClient implements Client {
         exportRemoteObject();
 
         try {
-            stub.registerClient(InetAddress.getLocalHost().getHostAddress(), this.port);
-            HandyFunctions.LOGGER.log(Level.INFO, "Client registered itself to the server!");
+            stub.registerClient(skeleton, "ciao");
+            HandyFunctions.LOGGER.log(Level.INFO, "RMI Client registered itself to the server!");
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
-
-        connected = true;
-        HandyFunctions.LOGGER.log(Level.INFO, "Client is connected!");
     }
 
     /**
@@ -69,46 +60,30 @@ public class RMIClient implements Client {
      */
     private void exportRemoteObject() {
         try {
-            Client skeleton = (Client) UnicastRemoteObject.exportObject(this, port);
+            skeleton = (RMIClientInterface) UnicastRemoteObject.exportObject(this, port);
             registry.bind("RemoteView", skeleton);
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
     }
 
-    public void disconnect() {
-        stub = null;
-        try {
-            registry.unbind("RemoteView");
-        } catch (Exception e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+    @Override
+    public void rmiNotifyClient(Message msg) throws RemoteException {
+        if (msg != null){
+            HandyFunctions.LOGGER.log(Level.INFO, "ping from server");
         }
-        connected = false;
-    }
 
-    /**
-     * @return if the client is connected to the server stub
-     */
-    public boolean isConnected() {
-        return connected;
     }
 
     @Override
-    public void interpretMessage(Message msg) {
-        msg.performAction(actor);
-    }
+    public void sendFromClient(Message msg) {
+        new Thread(() -> {
+            try {
+                stub.callClient(msg);
 
-    @Override
-    public void callServer(Message msg) {
-        try {
-            stub.interpretMessage(msg);
-        } catch (Exception e) {
-            HandyFunctions.LOGGER.log(Level.INFO, e.toString());
-        }
+            } catch (RemoteException e) {
+                HandyFunctions.LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            }
+        }).start();
     }
-
-    public Server getStub(){
-        return stub;
-    }
-
 }
