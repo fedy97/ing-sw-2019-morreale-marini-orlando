@@ -4,12 +4,11 @@ import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -18,16 +17,17 @@ import java.util.logging.Level;
  * @author Gabriel Raul Marini
  */
 public class SocketServer implements Server {
-    private ArrayList<Socket> connection = new ArrayList<>();
+    private Map<String, Socket> connections;
     private ServerSocket serverSocket;
-    private VirtualView actor;
-    private boolean isAvailable;
+    private Map<String, VirtualView> actors;
+    private boolean available;
     private int port;
 
-    public SocketServer(VirtualView actor, int port) {
+    public SocketServer(int port) {
+        connections = new HashMap<>();
         this.port = port;
-        this.actor = actor;
-        isAvailable = false;
+        actors = new HashMap<>();
+        available = false;
     }
 
     @Override
@@ -35,25 +35,52 @@ public class SocketServer implements Server {
         try {
             serverSocket = new ServerSocket(port);
             HandyFunctions.LOGGER.log(Level.INFO, "Socket Server is ready");
+
             new Thread() {
+
                 public void run() {
+
                     while (true) {
                         try {
                             Socket socket = serverSocket.accept();
-                            connection.add(socket); //accetta client
-                            HandyFunctions.printConsole("added socket client successfully");
-                            ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
-                            output.flush();
-                            ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
+                            Thread.sleep(500);
 
-                        } catch (IOException e) {
-                            HandyFunctions.LOGGER.log(Level.SEVERE, "error accepting client in socketserver");
+                            String user = new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine();
+
+                            connections.put(user, socket);
+                            actors.put(user, new VirtualView());
+                            HandyFunctions.LOGGER.log(Level.INFO, user + "connected to the socket server!");
+
+                            new Thread() {
+
+                                public void run() {
+                                    try {
+                                        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+                                        Message msg;
+
+                                        while (true) {
+                                            msg = (Message) in.readObject();
+
+                                            if (msg != null) {
+                                                interpretMessage(msg, user);
+                                            }
+
+                                            Thread.sleep(100);
+                                        }
+                                    } catch (Exception e) {
+                                        HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
+                                    }
+                                }
+                            }.start();
+
+                        } catch (Exception e) {
+                            HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
                         }
                     }
                 }
             }.start();
         } catch (IOException ex) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error starting socket server");
+            HandyFunctions.LOGGER.log(Level.SEVERE, "Error starting socket server");
         }
     }
 
@@ -62,12 +89,18 @@ public class SocketServer implements Server {
      * Close the streams and the sockets
      */
     public void stop() {
-        //TODO
+        serverSocket = null;
+        available = false;
     }
 
     @Override
     public void sendToClient(Message msg, String user) {
-        //TODO
+        try {
+            ObjectOutputStream outStream = new ObjectOutputStream(connections.get(user).getOutputStream());
+            outStream.writeObject(msg);
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+        }
     }
 
 
@@ -77,16 +110,21 @@ public class SocketServer implements Server {
     }
 
     public void interpretMessage(Message msg, String user) {
-        msg.performAction(actor);
+        msg.performAction(actors.get(user));
+        HandyFunctions.LOGGER.log(Level.INFO, user + "required the socket server to interpret a message!");
     }
 
     @Override
     public boolean isConnected(String user) {
-        return false;
+        return connections.containsKey(user);
     }
 
     @Override
     public boolean isAvailable() {
-        return isAvailable;
+        return available;
+    }
+
+    public VirtualView getVirtualView(String user) {
+        return actors.get(user);
     }
 }

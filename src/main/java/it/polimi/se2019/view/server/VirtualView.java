@@ -15,10 +15,7 @@ import java.rmi.RemoteException;
  */
 public class VirtualView extends View implements Runnable{
 
-    private Server server;
-
-    public VirtualView(Server server) {
-        this.server = server;
+    public VirtualView() {
     }
 
     @Override
@@ -38,15 +35,7 @@ public class VirtualView extends View implements Runnable{
 
     @Override
     protected void startConnection() {
-
-        server = new RMIServer(this, 9999);
-
-        try {
-            server.start();
-        }
-        catch (RemoteException e) {
-
-        }
+        //TODO
     }
 
     @Override

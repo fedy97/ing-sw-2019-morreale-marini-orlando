@@ -22,8 +22,8 @@ public class Lobby {
 
     public static void main(String[] args) {
         users = new ArrayList<>();
-        RMIServer rmiServer = new RMIServer(null, 1099);
-        SocketServer socketServer = new SocketServer(null, 1100);
+        RMIServer rmiServer = new RMIServer(1099);
+        SocketServer socketServer = new SocketServer(1100);
         rmiServer.start();
         socketServer.start();
 
@@ -32,20 +32,21 @@ public class Lobby {
         Client client2 = new RMIClient(null, 1345, "User2");
 
         try {
-            client3.connect("127.0.0.1", 1100);
+         //   client3.connect("127.0.0.1", 1100);
             client1.connect("127.0.0.1", 1099);
             client2.connect("127.0.0.1", 1099);
             client1.callServer(new SimpleMessage(null));
             client2.callServer(new SimpleMessage(null));
-            client3.callServer(new SimpleMessage(null));
+           // client3.callServer(new SimpleMessage(null));
+           // socketServer.sendToClient(new SimpleMessage(null), "User3");
             rmiServer.sendToClient(new SimpleMessage(null), "User1");
-        }catch(Exception e){
+        } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
 
-        if(rmiServer.isConnected("User1"))
+        if (rmiServer.isConnected("User1"))
             HandyFunctions.LOGGER.log(Level.INFO, "OK user 1");
-        if(!rmiServer.isConnected("User7"))
+        if (!rmiServer.isConnected("User7"))
             HandyFunctions.LOGGER.log(Level.INFO, "KO user 3");
 
     }

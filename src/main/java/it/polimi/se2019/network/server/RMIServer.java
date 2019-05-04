@@ -20,14 +20,14 @@ import java.util.logging.Level;
  */
 public class RMIServer implements Server {
     private Map<String, Client> skeletons;
-    private VirtualView actor;
+    private Map<String, VirtualView> clientActor;
     private boolean available;
     private int port;
 
-    public RMIServer(VirtualView actor, int port) {
+    public RMIServer(int port) {
         this.port = port;
-        this.actor = actor;
         skeletons = new HashMap<>();
+        clientActor = new HashMap<>();
     }
 
     @Override
@@ -86,6 +86,7 @@ public class RMIServer implements Server {
         try {
             Registry registry = LocateRegistry.getRegistry(host, port);
             skeletons.put(username, (Client) registry.lookup("RemoteView"));
+            clientActor.put(username, new VirtualView());
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
@@ -97,7 +98,7 @@ public class RMIServer implements Server {
      * Method used to test the connection between the client and the local stub
      */
     public void interpretMessage(Message msg, String user) {
-        msg.performAction(actor);
+        msg.performAction(clientActor.get(user));
         //TODO
     }
 

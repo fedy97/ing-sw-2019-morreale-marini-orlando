@@ -4,9 +4,7 @@ import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.client.RemoteView;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.logging.Level;
 
@@ -37,6 +35,23 @@ public class SocketClient implements Client {
             socket = new Socket(ip, port);
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
+            new PrintWriter(socket.getOutputStream(), true).println(user);
+
+            new Thread() {
+                public void run() {
+                    Message msg;
+                    try {
+                        while (connected) {
+                            msg = (Message) objectInputStream.readObject();
+                            if (msg != null)
+                                interpretMessage(msg);
+                        }
+                    } catch (Exception e) {
+                        HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+                    }
+                }
+            }.start();
+
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "Error connecting to the server socket");
         }
@@ -65,8 +80,7 @@ public class SocketClient implements Client {
     }
 
     /**
-     * @param msg to be sent
-     * @throws IOException if something went wrong
+     * @param msg to be sent to the server socket
      */
     public void callServer(Message msg) {
         try {

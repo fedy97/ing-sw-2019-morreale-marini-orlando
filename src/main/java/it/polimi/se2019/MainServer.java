@@ -8,7 +8,7 @@ public class MainServer {
 
     public static void main(String[] arg) {
 
-        VirtualView myView = new VirtualView(null);
+        VirtualView myView = new VirtualView();
         myView.start();
 
 
