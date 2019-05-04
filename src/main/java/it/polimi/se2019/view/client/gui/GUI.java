@@ -1,5 +1,6 @@
 package it.polimi.se2019.view.client.gui;
 
+import it.polimi.se2019.Action;
 import it.polimi.se2019.view.client.RemoteView;
 import it.polimi.se2019.view.State;
 
@@ -51,5 +52,6 @@ public class GUI extends RemoteView {
     protected void setState(State newState) {
 
     }
+
 }
 

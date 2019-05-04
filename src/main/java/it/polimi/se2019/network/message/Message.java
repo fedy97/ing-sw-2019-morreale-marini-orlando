@@ -5,7 +5,7 @@ import it.polimi.se2019.view.View;
 import java.io.Serializable;
 
 public abstract class Message implements Serializable {
-    private Object payload;
+    protected Object payload;
 
     public Message(Object payload){
         this.payload = payload;

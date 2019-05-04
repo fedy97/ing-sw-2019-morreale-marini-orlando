@@ -1,5 +1,7 @@
 package it.polimi.se2019.view;
 
+import it.polimi.se2019.Action;
+
 /**
  * @author Simone Orlando
  */
@@ -7,6 +9,7 @@ public abstract class View {
 
     protected State state;
     protected String userName;
+    protected Action chosenAction;
 
     public abstract void start();
 
@@ -23,4 +26,9 @@ public abstract class View {
     protected abstract void getCurrentPlayer();
 
     protected abstract void setState(State newState);
+
+    public State getState() {
+        return state;
+    }
+
 }

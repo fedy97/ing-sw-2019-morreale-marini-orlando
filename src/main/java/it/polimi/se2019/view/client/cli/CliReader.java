@@ -15,9 +15,13 @@ public class CliReader {
         in = new Scanner(System.in);
     }
 
-    private String getInput() {
-        //TODO
-        return null;
+    public String getString() {
+
+        return in.next();
+    }
+
+    public int getInt() {
+        return in.nextInt();
     }
 
     private void startTimer() {

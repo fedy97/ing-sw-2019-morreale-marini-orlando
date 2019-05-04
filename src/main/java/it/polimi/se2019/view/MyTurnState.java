@@ -1,5 +1,6 @@
 package it.polimi.se2019.view;
 
+import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.view.client.cli.CliReader;
 
 /**
@@ -9,8 +10,9 @@ public class MyTurnState extends State {
 
     private CliReader reader;
 
-    public MyTurnState() {
-        //TODO
+    public MyTurnState(Client client, CliReader reader) {
+        this.reader = reader;
+        this.client = client;
     }
 
     @Override

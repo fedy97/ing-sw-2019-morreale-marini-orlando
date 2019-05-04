@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 public class HandyFunctions {
     public static final Logger LOGGER = Logger.getLogger(Class.class.getName());
     public static void printConsole(String message){
-        System.out.println(message);
+        System.out.print(message);
     }
 
     /**
