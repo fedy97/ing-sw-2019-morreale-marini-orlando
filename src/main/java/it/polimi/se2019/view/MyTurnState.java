@@ -10,9 +10,9 @@ public class MyTurnState extends State {
 
     private CliReader reader;
 
-    public MyTurnState(Client client, CliReader reader) {
-        this.reader = reader;
-        this.client = client;
+    public MyTurnState() {
+        //this.reader = reader;
+        //this.client = client;
     }
 
     @Override

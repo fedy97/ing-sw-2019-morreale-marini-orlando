@@ -13,22 +13,18 @@ public abstract class View {
 
     public abstract void start();
 
-    protected abstract void setComunicationType();
+    public abstract void setComunicationType();
 
-    protected abstract void startConnection();
+    public abstract void startConnection();
 
-    protected abstract void setUserName();
+    public abstract void setUserName();
 
-    protected abstract void waitGameStart();
+    public abstract void waitGameStart();
 
-    protected abstract void menageTurn();
+    public abstract void menageTurn();
 
-    protected abstract void getCurrentPlayer();
+    public abstract void setState(State newState);
 
-    protected abstract void setState(State newState);
-
-    public State getState() {
-        return state;
-    }
+    public abstract void startGame();
 
 }

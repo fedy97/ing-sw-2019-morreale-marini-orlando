@@ -19,37 +19,38 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    protected void setComunicationType() {
+    public void startGame() {
 
     }
 
     @Override
-    protected void startConnection() {
+    public void setComunicationType() {
 
     }
 
     @Override
-    protected void setUserName() {
+    public void startConnection() {
 
     }
 
     @Override
-    protected void waitGameStart() {
+    public void setUserName() {
 
     }
 
     @Override
-    protected void menageTurn() {
+    public void waitGameStart() {
 
     }
 
     @Override
-    protected void getCurrentPlayer() {
+    public void menageTurn() {
 
     }
 
+
     @Override
-    protected void setState(State newState) {
+    public void setState(State newState) {
 
     }
 
