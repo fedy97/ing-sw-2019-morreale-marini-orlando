@@ -37,7 +37,6 @@ public class VirtualView extends View implements Runnable{
         menageTurn();
     }
 
-    @Override
     public void startGame() {
         HandyFunctions.printConsole("The game is started!\n");
     }
