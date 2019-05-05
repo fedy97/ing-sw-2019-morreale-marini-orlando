@@ -6,7 +6,10 @@ import java.util.logging.Logger;
 
 //add here some recurrent functions that can be helpful
 public class HandyFunctions {
+    private HandyFunctions(){}
+
     public static final Logger LOGGER = Logger.getLogger(Class.class.getName());
+
     public static void printConsole(String message){
         System.out.print(message);
     }

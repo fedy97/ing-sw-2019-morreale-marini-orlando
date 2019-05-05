@@ -7,12 +7,13 @@ import it.polimi.se2019.view.client.cli.CLI;
 import it.polimi.se2019.view.client.cli.CliPrinter;
 import it.polimi.se2019.view.client.cli.CliSetUp;
 import it.polimi.se2019.view.client.gui.GUI;
+import it.polimi.se2019.view.client.gui.LoginPage;
 
 import java.util.Scanner;
 
 public class MainClient {
 
-    public static void main(String[] arg) {
+    public static void main(String[] args) {
 
         RemoteView myView;
         int choice;
@@ -29,7 +30,7 @@ public class MainClient {
             myView = new CLI();
         }
         else {
-            myView = new GUI();
+            myView = new GUI(args);
         }
 
         myView.start();
