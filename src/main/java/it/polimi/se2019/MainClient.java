@@ -7,7 +7,6 @@ import it.polimi.se2019.view.client.cli.CLI;
 import it.polimi.se2019.view.client.cli.CliPrinter;
 import it.polimi.se2019.view.client.cli.CliSetUp;
 import it.polimi.se2019.view.client.gui.GUI;
-import it.polimi.se2019.view.client.gui.LoginPage;
 
 import java.util.Scanner;
 
@@ -30,7 +29,7 @@ public class MainClient {
             myView = new CLI();
         }
         else {
-            myView = new GUI(args);
+            myView = new GUI();
         }
 
         myView.start();

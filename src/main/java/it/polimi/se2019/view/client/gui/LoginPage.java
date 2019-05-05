@@ -22,7 +22,7 @@ public class LoginPage extends Application {
 
     }
 
-    public void startLoginPage(){
+    public static void startLoginPage(){
         launch();
     }
 }
