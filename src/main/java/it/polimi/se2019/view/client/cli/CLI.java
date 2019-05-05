@@ -20,7 +20,7 @@ public class CLI extends RemoteView {
     private int port;
 
     public CLI() {
-        reader = new CliReader();
+        reader = new CliReader(5);
     }
 
     @Override

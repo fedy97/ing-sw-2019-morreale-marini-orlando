@@ -9,13 +9,14 @@ import it.polimi.se2019.view.State;
  */
 public class GUI extends RemoteView {
 
+    private LoginPage login;
     public GUI() {
-
+        login = new LoginPage();
     }
 
     @Override
     public void start() {
-
+        login.startLoginPage();
     }
 
     @Override

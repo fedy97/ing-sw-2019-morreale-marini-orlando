@@ -24,6 +24,7 @@ public class VirtualView extends View implements Runnable{
     public void setServer(Server server) {
         this.server = server;
     }
+
     @Override
     public void run() {
         start();
