@@ -32,13 +32,13 @@ public class Lobby {
         Client client2 = new RMIClient(null, 1345, "User2");
 
         try {
-         //   client3.connect("127.0.0.1", 1100);
+            client3.connect("127.0.0.1", 1100);
             client1.connect("127.0.0.1", 1099);
             client2.connect("127.0.0.1", 1099);
             client1.callServer(new SimpleMessage(null));
             client2.callServer(new SimpleMessage(null));
-           // client3.callServer(new SimpleMessage(null));
-           // socketServer.sendToClient(new SimpleMessage(null), "User3");
+            client3.callServer(new SimpleMessage(null));
+            socketServer.sendToClient(new SimpleMessage(null), "User3");
             rmiServer.sendToClient(new SimpleMessage(null), "User1");
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());

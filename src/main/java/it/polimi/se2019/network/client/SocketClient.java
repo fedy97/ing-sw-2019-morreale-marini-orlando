@@ -35,22 +35,21 @@ public class SocketClient implements Client {
             socket = new Socket(ip, port);
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
-            new PrintWriter(socket.getOutputStream(), true).println(user);
+            objectOutputStream.writeObject(user);
+            objectOutputStream.flush();
 
-            new Thread() {
-                public void run() {
-                    Message msg;
-                    try {
-                        while (connected) {
-                            msg = (Message) objectInputStream.readObject();
-                            if (msg != null)
-                                interpretMessage(msg);
-                        }
-                    } catch (Exception e) {
-                        HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            new Thread(() -> {
+                try {
+                    while (connected) {
+                        Message msg;
+                        msg = (Message) objectInputStream.readObject();
+                        if (msg != null)
+                            interpretMessage(msg);
                     }
+                } catch (Exception e) {
+                    HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
                 }
-            }.start();
+            }).start();
 
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "Error connecting to the server socket");
