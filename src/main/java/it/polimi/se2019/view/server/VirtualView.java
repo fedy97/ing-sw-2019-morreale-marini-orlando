@@ -1,23 +1,29 @@
 package it.polimi.se2019.view.server;
 
-import it.polimi.se2019.Action;
-import it.polimi.se2019.network.server.RMIServer;
+
 import it.polimi.se2019.network.server.Server;
-import it.polimi.se2019.network.server.SocketServer;
 import it.polimi.se2019.utils.HandyFunctions;
+import it.polimi.se2019.view.MyTurnState;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.View;
 
 import java.rmi.RemoteException;
+
 
 /**
  * @author Simone Orlando
  */
 public class VirtualView extends View implements Runnable{
 
+    private Server server;
+
     public VirtualView() {
+
     }
 
+    public void setServer(Server server) {
+        this.server = server;
+    }
     @Override
     public void run() {
         start();
@@ -26,40 +32,47 @@ public class VirtualView extends View implements Runnable{
     @Override
     public void start() {
         startConnection();
+        waitGameStart();
+        startGame();
+        menageTurn();
     }
 
     @Override
-    protected void setComunicationType() {
-
+    public void startGame() {
+        HandyFunctions.printConsole("The game is started!\n");
     }
 
     @Override
-    protected void startConnection() {
-        //TODO
-    }
-
-    @Override
-    protected void setUserName() {
-
-    }
-
-    @Override
-    protected void waitGameStart() {
+    public void setComunicationType() {
 
     }
 
     @Override
-    protected void menageTurn() {
+    public void startConnection() {
+    }
+
+    @Override
+    public void setUserName() {
 
     }
 
     @Override
-    protected void getCurrentPlayer() {
+    public void waitGameStart() {
 
     }
 
     @Override
-    protected void setState(State newState) {
+    public void menageTurn() {
+
+    }
+
+
+    public void getCurrentPlayer() {
+
+    }
+
+    @Override
+    public void setState(State newState) {
 
     }
 
