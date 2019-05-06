@@ -16,7 +16,7 @@ import java.util.logging.Level;
 
 public class Lobby {
 
-    private static List<String> users;
+    public static List<String> users;
 
     private static Map<String, Player> userPlayer;
 
