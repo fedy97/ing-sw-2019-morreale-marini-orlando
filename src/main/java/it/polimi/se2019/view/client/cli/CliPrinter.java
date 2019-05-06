@@ -28,12 +28,12 @@ public class CliPrinter {
 
     public static void welcomeMessage() {
 
-        stamp("\n" +
-                "    ___    ____  ____  _____ _   __ __    __    ___ _   __ _____ \n" +
-                "   /   |  / __ \\/ __ \\/ ____/ | / /   |  / /   /  _/ | / / ____/\n" +
-                "  / /| | / / / / /_/ / __/ /  |/ / /| | / /    / //  |/ / __/   \n" +
-                " / ___ |/ /_/ / _, _/ /___/ /|  / ___ |/ /____/ // /|  / /___   \n" +
-                "/_/  |_/_____/_/ |_/_____/_/ |_/_/  |_/_____/___/_/ |_/_____/  ", CliColor.TEXTRED);
+        stamp("\n" + " \t\t █████╗ ██████╗ ██████╗ ███████╗███╗   ██╗ █████╗ ██╗     ██╗███╗   ██╗███████╗\n" +
+                "\t\t██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗  ██║██╔══██╗██║     ██║████╗  ██║██╔════╝\n" +
+                "\t\t███████║██║  ██║██████╔╝█████╗  ██╔██╗ ██║███████║██║     ██║██╔██╗ ██║█████╗  \n" +
+                "\t\t██╔══██║██║  ██║██╔══██╗██╔══╝  ██║╚██╗██║██╔══██║██║     ██║██║╚██╗██║██╔══╝  \n" +
+                "\t\t██║  ██║██████╔╝██║  ██║███████╗██║ ╚████║██║  ██║███████╗██║██║ ╚████║███████╗\n" +
+                "\t\t╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝", CliColor.TEXTRED);
     }
 
     public static void errorMessage(String msg) {
@@ -50,6 +50,34 @@ public class CliPrinter {
 
     public static void warningMessage(String msg) {
         stamp("[WARNING] "+msg+"\n");
+    }
+
+    public static void boxInterfaceMessage() {
+        CliPrinter.stamp("\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃           Which interface do you want to use?            ┃\n");
+        CliPrinter.stamp("\t\t\t ┃               <1> CLI                                    ┃\n");
+        CliPrinter.stamp("\t\t\t ┃               <2> GUI                                    ┃\n");
+        CliPrinter.stamp("\t\t\t ┃           choice:");
+        CliSetUp.savePosition();
+        CliPrinter.stamp("                                        ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliSetUp.restorePosition();
+    }
+
+    public static void boxConnectionMessage() {
+        CliPrinter.stamp("\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃           Choose a connection type:                      ┃\n");
+        CliPrinter.stamp("\t\t\t ┃               <1> Socket                                 ┃\n");
+        CliPrinter.stamp("\t\t\t ┃               <2> Rmi                                    ┃\n");
+        CliPrinter.stamp("\t\t\t ┃           choice:");
+        CliSetUp.savePosition();
+        CliPrinter.stamp("                                        ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliSetUp.restorePosition();
     }
 
 }

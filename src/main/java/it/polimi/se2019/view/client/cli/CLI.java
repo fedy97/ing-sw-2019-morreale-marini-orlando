@@ -39,7 +39,8 @@ public class CLI extends RemoteView {
 
     @Override
     public void setComunicationType() {
-        HandyFunctions.printConsole("\n\nChoose a connection type:\n<1> Socket\n<2> Rmi\n: ");
+        HandyFunctions.printConsole("\n\n");
+        CliPrinter.boxConnectionMessage();
         connectionChosen = reader.getInt();
         HandyFunctions.printConsole("Port: ");
         port = reader.getInt();

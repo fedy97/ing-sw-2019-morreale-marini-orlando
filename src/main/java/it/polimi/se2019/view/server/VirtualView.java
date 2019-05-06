@@ -3,7 +3,6 @@ package it.polimi.se2019.view.server;
 
 import it.polimi.se2019.network.server.Server;
 import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.view.MyTurnState;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.View;
 

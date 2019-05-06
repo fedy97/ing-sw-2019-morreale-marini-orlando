@@ -21,7 +21,7 @@ public class MainClient {
         CliSetUp.cursorToHome();
         CliPrinter.welcomeMessage();
         HandyFunctions.printConsole("\n\n");
-        HandyFunctions.printConsole("Which interface do you want to use?\n<1> CLI\n<2> GUI\n: ");
+        CliPrinter.boxInterfaceMessage();
         choice = in.nextInt();
         CliSetUp.clear();
         CliSetUp.cursorToHome();
