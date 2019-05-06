@@ -98,11 +98,14 @@ public class RMIClient implements Client {
 
     @Override
     public void interpretMessage(Message msg) {
-        HandyFunctions.LOGGER.log(Level.INFO,user + " was called");
         msg.performAction(actor);
     }
 
     @Override
+    /**
+     * @param msg containing the set of action to be performed on the corresponding
+     *            server side virtual view
+     */
     public void callServer(Message msg) {
         try {
             stub.interpretMessage(msg, user);

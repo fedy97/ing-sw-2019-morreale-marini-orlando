@@ -58,6 +58,9 @@ public class SocketClient implements Client {
         connected = true;
     }
 
+    /**
+     * @param msg containing action to be performed on RemoteView
+     */
     public void interpretMessage(Message msg) {
         msg.performAction(actor);
     }
@@ -74,6 +77,9 @@ public class SocketClient implements Client {
         connected = false;
     }
 
+    /**
+     * @return if the client is still connected to the socket
+     */
     public boolean isConnected() {
         return connected;
     }

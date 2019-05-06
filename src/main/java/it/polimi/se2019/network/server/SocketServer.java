@@ -54,7 +54,7 @@ public class SocketServer implements Server {
 
                         actors.put(user, new VirtualView());
                         HandyFunctions.LOGGER.log(Level.INFO, user + " connected to the socket server!");
-                        Lobby.users.add(user);
+                        Lobby.addUser(user);
                         SpecificSocketServer specificSocketServer = new SpecificSocketServer(this, socket, input, output, user);
                         specificSocketServer.start();
                         connections.put(user, specificSocketServer);

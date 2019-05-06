@@ -5,7 +5,7 @@ import it.polimi.se2019.utils.HandyFunctions;
 /**
  * @author Simone Orlando
  */
-public class CliSetUp {
+public final class CliSetUp {
 
     private static final String ESC = "\033[";
     private static final String CLEAR = "2J";
