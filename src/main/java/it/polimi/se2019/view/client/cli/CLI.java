@@ -1,6 +1,5 @@
 package it.polimi.se2019.view.client.cli;
 
-import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.client.SocketClient;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -8,18 +7,19 @@ import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.client.RemoteView;
 
 import java.rmi.RemoteException;
+import java.util.logging.Level;
 
 /**
  * @author Simone Orlando
  */
 public class CLI extends RemoteView {
 
-    private Client client;
     private CliReader reader;
     private int connectionChosen;
     private int port;
 
     public CLI() {
+        client = null;
         reader = new CliReader(5);
     }
 
@@ -58,7 +58,7 @@ public class CLI extends RemoteView {
             client.connect("127.0.0.1", 9999);
         }
         catch (RemoteException e) {
-
+            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
     }
 
@@ -75,7 +75,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void menageTurn() {
-
+        //TODO
     }
 
     @Override

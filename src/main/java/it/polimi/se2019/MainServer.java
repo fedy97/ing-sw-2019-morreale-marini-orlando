@@ -2,11 +2,11 @@ package it.polimi.se2019;
 
 import it.polimi.se2019.network.server.RMIServer;
 import it.polimi.se2019.network.server.Server;
-import it.polimi.se2019.network.server.SocketServer;
+import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
+import java.util.logging.Level;
 
 public class MainServer {
 
@@ -20,7 +20,7 @@ public class MainServer {
             test.start();
         }
         catch (RemoteException e) {
-
+            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
     }
 }

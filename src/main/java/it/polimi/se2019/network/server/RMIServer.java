@@ -81,6 +81,7 @@ public class RMIServer implements Server {
      *
      * @param host address of the client
      * @param port the port on which the client registry has been exported
+     * @param username associated to the client
      */
     public void registerClient(String host, int port, String username) {
         try {
@@ -95,16 +96,19 @@ public class RMIServer implements Server {
 
     @Override
     /**
-     * Method used to test the connection between the client and the local stub
+     * Method used to perform action on server side virtual view
+     * @param msg info packet containing commands to perform on virtual view
+     * @param user requesting server decoding service
      */
     public void interpretMessage(Message msg, String user) {
         msg.performAction(clientActor.get(user));
-        //TODO
     }
 
     @Override
     /**
-     * Method used to test the connection to the remote object of the client
+     * Server side invocation of client
+     * @param msg to be sent with action requesting
+     * @param username of client side destination
      */
     public void sendToClient(Message msg, String username) {
         try {
@@ -124,6 +128,7 @@ public class RMIServer implements Server {
 
     @Override
     /**
+     * @param user client to be checked
      * @return if the user is actually connected to the server
      */
     public boolean isConnected(String user) {

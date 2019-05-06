@@ -1,6 +1,5 @@
 package it.polimi.se2019;
 
-import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.client.SocketClient;
@@ -11,14 +10,12 @@ import it.polimi.se2019.utils.HandyFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 
 public class Lobby {
 
-    public static List<String> users;
-
-    private static Map<String, Player> userPlayer;
+    private static final String LOCALHOST = "127.0.0.1";
+    private static List<String> users;
 
     public static void main(String[] args) {
         users = new ArrayList<>();
@@ -33,10 +30,10 @@ public class Lobby {
         Client client4 = new SocketClient(null, "User4");
 
         try {
-            client3.connect("127.0.0.1", 1100);
-            client1.connect("127.0.0.1", 1099);
-            client2.connect("127.0.0.1", 1099);
-            client4.connect("127.0.0.1", 1100);
+            client3.connect(LOCALHOST, 1100);
+            client1.connect(LOCALHOST, 1099);
+            client2.connect(LOCALHOST, 1099);
+            client4.connect(LOCALHOST, 1100);
             client1.callServer(new SimpleMessage(null));
             client2.callServer(new SimpleMessage(null));
             client3.callServer(new SimpleMessage(null));
@@ -48,11 +45,10 @@ public class Lobby {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
 
-        if (rmiServer.isConnected("User1"))
-            HandyFunctions.LOGGER.log(Level.INFO, "OK user 1");
-        if (!rmiServer.isConnected("User7"))
-            HandyFunctions.LOGGER.log(Level.INFO, "KO user 3");
+    }
 
+    public static void addUser(String user){
+        users.add(user);
     }
 
 

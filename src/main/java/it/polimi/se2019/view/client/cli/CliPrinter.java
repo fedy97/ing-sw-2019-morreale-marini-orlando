@@ -6,9 +6,9 @@ import it.polimi.se2019.utils.HandyFunctions;
 /**
  * @author Simone Orlando
  */
-public class CliPrinter {
+public final class CliPrinter {
 
-    private static String RESET = "\u001B[0m";
+    private static final String RESET = "\u001B[0m";
 
     public static void stamp(String msg) {
         HandyFunctions.printConsole(msg + RESET);
