@@ -2,6 +2,8 @@ package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.Lobby;
 import it.polimi.se2019.network.message.Message;
+import it.polimi.se2019.network.message.ToClientMessage;
+import it.polimi.se2019.network.message.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
@@ -53,11 +55,11 @@ public class SocketServer implements Server {
                         String user = (String) input.readObject();
 
                         actors.put(user, new VirtualView());
-                        HandyFunctions.LOGGER.log(Level.INFO, user + " connected to the socket server!");
                         Lobby.addUser(user);
                         SpecificSocketServer specificSocketServer = new SpecificSocketServer(this, socket, input, output, user);
                         specificSocketServer.start();
                         connections.put(user, specificSocketServer);
+                        HandyFunctions.LOGGER.log(Level.INFO, user + " connected to the socket server!");
 
                     } catch (Exception e) {
                         HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
@@ -79,7 +81,7 @@ public class SocketServer implements Server {
     }
 
     @Override
-    public void sendToClient(Message msg, String user) {
+    public void sendToClient(ToClientMessage msg, String user) {
         try {
             ObjectOutputStream outStream = connections.get(user).getOutput();
             outStream.writeObject(msg);
@@ -94,7 +96,7 @@ public class SocketServer implements Server {
         //TODO
     }
 
-    public void interpretMessage(Message msg, String user) {
+    public void interpretMessage(ToServerMessage msg, String user) {
         msg.performAction(actors.get(user));
         HandyFunctions.LOGGER.log(Level.INFO, user + " required the socket server to interpret a message!");
     }

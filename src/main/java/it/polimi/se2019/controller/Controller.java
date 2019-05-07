@@ -5,19 +5,21 @@ import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.view.server.VirtualView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Gabriel Raul Marini
  */
-public class Controller {
+public class Controller implements Observer {
     private Game game;
     private DecksManager decksManager;
     private GameManager gameManager;
     private PlayerManager playerManager;
     private Validator validator;
+    private Map<String, Player> userPlayer;
+    private VirtualView currentView;
 
 
     public Controller() {
@@ -25,19 +27,18 @@ public class Controller {
 
 
     /**
-     * Instatiate a new controller class
+     * Instantiate a new controller class
      *
-     * @param game The game to menage
-     * @param decksManager The manager of all decks used in the game
-     * @param gameManager The game manager
-     * @param playerManager The manager of the players in the game
+     * @param game The game to be managed
      */
-    public Controller(Game game, DecksManager decksManager, GameManager gameManager, PlayerManager playerManager) {
+    public Controller(Game game) {
         this.game = game;
-        this.decksManager = decksManager;
-        this.gameManager = gameManager;
-        this.playerManager = playerManager;
+        this.decksManager = new DecksManager(game.getPowerUpDeck(), game.getAmmoDeck());
+        this.gameManager = new GameManager();
+        this.playerManager = new PlayerManager(this);
+        userPlayer = new HashMap<>();
     }
+
 
     /**
      * @return The current game
@@ -68,7 +69,7 @@ public class Controller {
     }
 
     /**
-     * @return The game manager
+     * @return the game manager
      */
     public GameManager getGameManager() {
         return gameManager;
@@ -82,7 +83,7 @@ public class Controller {
     }
 
     /**
-     * @return The manager of the players in the game
+     * @return the manager of the players in the game
      */
     public PlayerManager getPlayerManager() {
         return playerManager;
@@ -120,7 +121,7 @@ public class Controller {
      * @param possibleChoices list of weapons returned by the validator
      * @return the weapons the player want to grab
      */
-    public List<WeaponCard> askForWeapons(List<WeaponCard> possibleChoices){
+    public List<WeaponCard> askForWeapons(List<WeaponCard> possibleChoices) {
         //TODO
         return new ArrayList<>();
     }
@@ -129,17 +130,16 @@ public class Controller {
      * @param discardables weapons owned by the current player in the actual state of the game
      * @return the weapon the player want to discard in order to grab another one
      */
-    public WeaponCard askForDiscard(List<WeaponCard> discardables){
+    public WeaponCard askForDiscard(List<WeaponCard> discardables) {
         //TODO
         return null;
     }
 
     /**
-     *
      * @return the targets chosen by the player from those returned by the Validator
      */
-    public List<Player> askForTargets(List<Player> possibleTargets){
-        //TODO
+    public List<Player> askForTargets(List<Player> possibleTargets) {
+        currentView.lightPlayers(possibleTargets);
         return new ArrayList<>();
     }
 
@@ -147,7 +147,7 @@ public class Controller {
      * @param possibleDestination the list of possible platform destination
      * @return the destination platform chosen by the player
      */
-    public Platform askForPosition(List<Platform> possibleDestination){
+    public Platform askForPosition(List<Platform> possibleDestination) {
         //TODO
         return null;
     }
@@ -163,8 +163,26 @@ public class Controller {
     /**
      * @return the cube chosen by the player in order to perform an action
      */
-    public AmmoCube askForTribute(){
+    public AmmoCube askForTribute() {
         //TODO
         return null;
+    }
+
+    /**
+     * Associate a user to a player in the model
+     *
+     * @param user   chosen by the client
+     * @param player to be associated with the user selected
+     */
+    public void setPlayerToUser(String user, Player player) {
+        userPlayer.put(user, player);
+    }
+
+    @Override
+    /**
+     * Called when the VirtualView notify changes
+     */
+    public void update(Observable obs, Object arg) {
+        //TODO
     }
 }

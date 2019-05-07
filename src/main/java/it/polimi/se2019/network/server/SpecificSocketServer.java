@@ -1,6 +1,7 @@
 package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.network.message.Message;
+import it.polimi.se2019.network.message.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 
 import java.io.ObjectInputStream;
@@ -27,8 +28,8 @@ public class SpecificSocketServer extends Thread {
     public void run() {
         while (!socket.isClosed()) {
             try {
-                Message msg;
-                msg = (Message) input.readObject();
+                ToServerMessage msg;
+                msg = (ToServerMessage) input.readObject();
 
                 if (msg != null)
                     ss.interpretMessage(msg, user);

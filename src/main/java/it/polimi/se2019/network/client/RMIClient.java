@@ -1,6 +1,8 @@
 package it.polimi.se2019.network.client;
 
 import it.polimi.se2019.network.message.Message;
+import it.polimi.se2019.network.message.ToClientMessage;
+import it.polimi.se2019.network.message.ToServerMessage;
 import it.polimi.se2019.network.server.Server;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.client.RemoteView;
@@ -97,8 +99,13 @@ public class RMIClient implements Client {
     }
 
     @Override
-    public void interpretMessage(Message msg) {
-        msg.performAction(actor);
+    public void interpretMessage(ToClientMessage msg) {
+        try {
+            msg.performAction(actor);
+        }
+        catch(Exception e){
+            HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
+        }
     }
 
     @Override
@@ -106,7 +113,7 @@ public class RMIClient implements Client {
      * @param msg containing the set of action to be performed on the corresponding
      *            server side virtual view
      */
-    public void callServer(Message msg) {
+    public void callServer(ToServerMessage msg) {
         try {
             stub.interpretMessage(msg, user);
         } catch (Exception e) {

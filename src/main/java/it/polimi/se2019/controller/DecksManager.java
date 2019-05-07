@@ -7,6 +7,7 @@ import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.utils.HandyFunctions;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -21,10 +22,10 @@ public class DecksManager{
     private List<PowerUpCard> garbageDeck;
     private Deck<AmmoCard> ammoDeck;
 
-    public DecksManager(Deck<PowerUpCard> powerUps, List<PowerUpCard> garbageDeck, Deck<AmmoCard> ammoDeck) {
+    public DecksManager(Deck<PowerUpCard> powerUps, Deck<AmmoCard> ammoDeck) {
         this.powerUps = powerUps;
-        this.garbageDeck = garbageDeck;
         this.ammoDeck = ammoDeck;
+        garbageDeck = new ArrayList<>();
     }
 
     /**

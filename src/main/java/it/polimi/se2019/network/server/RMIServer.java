@@ -2,6 +2,8 @@ package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.network.client.Client;
+import it.polimi.se2019.network.message.ToClientMessage;
+import it.polimi.se2019.network.message.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
@@ -100,7 +102,7 @@ public class RMIServer implements Server {
      * @param msg info packet containing commands to perform on virtual view
      * @param user requesting server decoding service
      */
-    public void interpretMessage(Message msg, String user) {
+    public void interpretMessage(ToServerMessage msg, String user) {
         msg.performAction(clientActor.get(user));
     }
 
@@ -110,7 +112,7 @@ public class RMIServer implements Server {
      * @param msg to be sent with action requesting
      * @param username of client side destination
      */
-    public void sendToClient(Message msg, String username) {
+    public void sendToClient(ToClientMessage msg, String username) {
         try {
             skeletons.get(username).interpretMessage(msg);
         } catch (Exception e) {

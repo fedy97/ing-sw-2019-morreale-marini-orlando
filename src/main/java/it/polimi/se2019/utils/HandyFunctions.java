@@ -13,6 +13,9 @@ public class HandyFunctions {
     public static void printConsole(String message){
         System.out.print(message);
     }
+    public static void printLineConsole(String message){
+        System.out.println(message);
+    }
     public static void printConsole(int value) { System.out.print(value); }
 
     /**

@@ -3,7 +3,7 @@ package it.polimi.se2019.view;
 /**
  * @author Simone Orlando
  */
-public class EndGame extends State{
+public class EndGame extends State {
 
     public EndGame() {
         //TODO

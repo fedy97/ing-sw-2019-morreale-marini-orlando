@@ -32,8 +32,7 @@ public class TestDecksManager {
         Deck<PowerUpCard> powerUpCardDeck = parser.buildPowerupCards();
         JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
         Deck<AmmoCard> ammoCardDeck = parserAmmos.buildAmmoCards();
-        List<PowerUpCard> garbage = new ArrayList<>();
-        decksManager = new DecksManager(powerUpCardDeck, garbage, ammoCardDeck);
+        decksManager = new DecksManager(powerUpCardDeck, ammoCardDeck);
     }
 
     /**

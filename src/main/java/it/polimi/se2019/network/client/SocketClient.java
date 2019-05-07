@@ -1,6 +1,8 @@
 package it.polimi.se2019.network.client;
 
 import it.polimi.se2019.network.message.Message;
+import it.polimi.se2019.network.message.ToClientMessage;
+import it.polimi.se2019.network.message.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.client.RemoteView;
 
@@ -41,8 +43,8 @@ public class SocketClient implements Client {
             new Thread(() -> {
                 try {
                     while (connected) {
-                        Message msg;
-                        msg = (Message) objectInputStream.readObject();
+                        ToClientMessage msg;
+                        msg = (ToClientMessage) objectInputStream.readObject();
                         if (msg != null)
                             interpretMessage(msg);
                     }
@@ -61,7 +63,7 @@ public class SocketClient implements Client {
     /**
      * @param msg containing action to be performed on RemoteView
      */
-    public void interpretMessage(Message msg) {
+    public void interpretMessage(ToClientMessage msg) {
         msg.performAction(actor);
     }
 
@@ -87,7 +89,7 @@ public class SocketClient implements Client {
     /**
      * @param msg to be sent to the server socket
      */
-    public void callServer(Message msg) {
+    public void callServer(ToServerMessage msg) {
         try {
             objectOutputStream.writeObject(msg);
             objectOutputStream.flush();

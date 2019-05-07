@@ -2,10 +2,13 @@ package it.polimi.se2019.view;
 
 import it.polimi.se2019.Action;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * @author Simone Orlando
  */
-public abstract class View {
+public abstract class View extends Observable implements Observer {
 
     protected State state;
     protected String userName;
@@ -13,7 +16,7 @@ public abstract class View {
 
     public abstract void start();
 
-    public abstract void setComunicationType();
+    public abstract void setCommunicationType();
 
     public abstract void startConnection();
 

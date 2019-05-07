@@ -13,8 +13,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * A test class that validates the behaviour of the AmmoCard
@@ -35,7 +34,7 @@ public class TestAmmoCard {
             Deck<AmmoCard> deck;
             //now ammocards has 36 ammos cards according to json
             deck = parser.buildAmmoCards();
-            assertEquals(deck.drawCard().hasPowerUp(), true);
+            assertTrue(deck.drawCard().hasPowerUp());
         } catch (InvalidCardException ex) {}
     }
 }

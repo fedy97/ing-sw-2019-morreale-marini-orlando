@@ -23,9 +23,8 @@ public class PlayerManager{
     private int actionsLeft;
     private Controller father;
 
-    public PlayerManager(Player player, Controller father) {
+    public PlayerManager(Controller father) {
         actionsLeft = 2;
-        currentPlayer = player;
         this.father = father;
     }
 
