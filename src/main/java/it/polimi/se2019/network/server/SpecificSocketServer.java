@@ -1,9 +1,11 @@
 package it.polimi.se2019.network.server;
 
-import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.network.message.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
+import it.polimi.se2019.view.server.VirtualView;
 
+import java.io.EOFException;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -15,18 +17,24 @@ public class SpecificSocketServer extends Thread {
     private ObjectInputStream input;
     private String user;
     private SocketServer ss;
+    private VirtualView specificVirtualView;
 
-    public SpecificSocketServer(SocketServer ss, Socket socket, ObjectInputStream input, ObjectOutputStream output,String user) {
+    public SpecificSocketServer(SocketServer ss, Socket socket, ObjectInputStream input, ObjectOutputStream output, VirtualView vv) {
         this.socket = socket;
         this.input = input;
         this.output = output;
-        this.user = user;
+        this.specificVirtualView = vv;
         this.ss = ss;
+        this.user = vv.getUser();
+
+        //TODO send Message to notify other clients that a new one is created,
+        // using notifyObservers from the virtual view
+
     }
 
     @Override
     public void run() {
-        while (!socket.isClosed()) {
+        while (!socket.isClosed())  {
             try {
                 ToServerMessage msg;
                 msg = (ToServerMessage) input.readObject();
@@ -35,11 +43,18 @@ public class SpecificSocketServer extends Thread {
                     ss.interpretMessage(msg, user);
 
                 Thread.sleep(100);
+            } catch (EOFException e) {
+                try {
+                    socket.close();
+                } catch (IOException ex) {
+                }
+                HandyFunctions.LOGGER.log(Level.FINE, user + " closed the connection");
             } catch (Exception e) {
                 HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
             }
         }
     }
+
 
     public Socket getSocket() {
         return socket;

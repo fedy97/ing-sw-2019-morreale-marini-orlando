@@ -11,7 +11,7 @@ import java.util.logging.Level;
 public class MainServer {
 
     public static void main(String[] arg) {
-        int port = 9999;
+        /*int port = 9999;
         Server server = new RMIServer(port);
         try {
             server.start();
@@ -21,6 +21,6 @@ public class MainServer {
         }
         catch (RemoteException e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
-        }
+        }*/
     }
 }

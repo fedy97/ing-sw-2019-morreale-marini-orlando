@@ -7,7 +7,7 @@ import it.polimi.se2019.view.client.RemoteView;
 import it.polimi.se2019.view.client.cli.CLI;
 import it.polimi.se2019.view.client.cli.CliPrinter;
 import it.polimi.se2019.view.client.cli.CliSetUp;
-import it.polimi.se2019.view.client.gui.GUI;
+import it.polimi.se2019.view.client.gui.LoginPage;
 
 
 import java.net.URI;
@@ -22,9 +22,11 @@ public class MainClient {
         Path path = Paths.get(URI.create(ClassLoader.getSystemResource("soundtrack.wav").toString()));
 
         Thread track = new Thread(new Track(path.toString()));
+        /*
+        la lascio commentata per ora cosi non parte sempre
         track.start();
+         */
 
-        RemoteView myView;
         int choice;
         Scanner in = new Scanner(System.in);
         CliSetUp.clear();
@@ -36,12 +38,13 @@ public class MainClient {
         CliSetUp.clear();
         CliSetUp.cursorToHome();
         if (choice == 1) {
-            myView = new CLI();
+            RemoteView myView = new CLI();
+            myView.start();
         }
         else {
-            myView = new GUI();
+            LoginPage.startLoginPage();
         }
 
-        myView.start();
+
     }
 }

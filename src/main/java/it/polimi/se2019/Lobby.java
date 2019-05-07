@@ -22,8 +22,6 @@ public class Lobby {
         SocketServer socketServer = new SocketServer(1100);
         rmiServer.start();
         socketServer.start();
-
-
     }
 
     public static void addUser(String user){

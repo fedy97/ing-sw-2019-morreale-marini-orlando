@@ -5,13 +5,10 @@ import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
-public class WaitingLobbyController extends Observable implements Observer {
+public class WaitingLobbyController {
 
-    private List<String> playerNames = new ArrayList<>();
-    private List<Label> players;
+    private List<Label> playerLabels = new ArrayList<>();
 
     @FXML
     private Label player1;
@@ -24,16 +21,18 @@ public class WaitingLobbyController extends Observable implements Observer {
     @FXML
     private Label player5;
 
-    public WaitingLobbyController() {
-        players = new ArrayList<>();
-    }
-
     public void initialize() {
-
+        playerLabels.add(player1);
+        playerLabels.add(player2);
+        playerLabels.add(player3);
+        playerLabels.add(player4);
+        playerLabels.add(player5);
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-
+    public void updateLoggedPlayers(List<String> users) {
+        for (String user : users)
+            playerLabels.get(users.indexOf(user)).setText(user + " just joined the game");
     }
+
+
 }

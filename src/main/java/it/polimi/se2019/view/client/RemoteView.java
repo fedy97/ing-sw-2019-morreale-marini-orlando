@@ -10,11 +10,6 @@ import java.util.List;
  */
 public abstract class RemoteView extends View {
 
-    protected Client client;
-
-    public RemoteView() {
-    }
-
     public abstract void lightWeapons(List<String> weapons);
 
 }

@@ -12,6 +12,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 
 /**
@@ -19,7 +21,7 @@ import java.util.logging.Level;
  *
  * @author Gabriel Raul Marini
  */
-public class RMIClient implements Client {
+public class RMIClient implements Client, Observer {
     private Server stub;
     private RemoteView actor;
     private boolean connected;
@@ -121,4 +123,8 @@ public class RMIClient implements Client {
         }
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+
+    }
 }

@@ -1,5 +1,6 @@
 package it.polimi.se2019.network.server;
 
+import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.message.ToClientMessage;
@@ -21,7 +22,7 @@ import java.util.logging.Level;
  * @author Gabriel Raul Marini
  */
 public class RMIServer implements Server {
-    private Map<String, Client> skeletons;
+    private Map<String, RMIClient> skeletons;
     private Map<String, VirtualView> clientActor;
     private boolean available;
     private int port;
@@ -88,8 +89,8 @@ public class RMIServer implements Server {
     public void registerClient(String host, int port, String username) {
         try {
             Registry registry = LocateRegistry.getRegistry(host, port);
-            skeletons.put(username, (Client) registry.lookup("RemoteView"));
-            clientActor.put(username, new VirtualView());
+            skeletons.put(username, (RMIClient) registry.lookup("RemoteView"));
+            clientActor.put(username, new VirtualView(this,username));
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }

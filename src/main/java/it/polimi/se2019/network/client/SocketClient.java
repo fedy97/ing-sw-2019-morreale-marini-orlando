@@ -8,12 +8,14 @@ import it.polimi.se2019.view.client.RemoteView;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 
 /**
  * Socket implementation of remote client
  */
-public class SocketClient implements Client {
+public class SocketClient implements Client, Observer {
     private boolean connected;
     private RemoteView actor;
     private Socket socket;
@@ -96,5 +98,10 @@ public class SocketClient implements Client {
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "Error sending message to the server using socket");
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }

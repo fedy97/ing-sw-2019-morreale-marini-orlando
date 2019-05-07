@@ -38,6 +38,10 @@ public class SocketServer implements Server {
         return connections;
     }
 
+    public Map<String, VirtualView> getActors() {
+        return actors;
+    }
+
     @Override
     public void start() {
         try {
@@ -53,10 +57,9 @@ public class SocketServer implements Server {
                         output.flush();
                         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
                         String user = (String) input.readObject();
-
-                        actors.put(user, new VirtualView());
+                        actors.put(user, new VirtualView(this,user));
                         Lobby.addUser(user);
-                        SpecificSocketServer specificSocketServer = new SpecificSocketServer(this, socket, input, output, user);
+                        SpecificSocketServer specificSocketServer = new SpecificSocketServer(this, socket, input, output, actors.get(user));
                         specificSocketServer.start();
                         connections.put(user, specificSocketServer);
                         HandyFunctions.LOGGER.log(Level.INFO, user + " connected to the socket server!");
@@ -93,7 +96,9 @@ public class SocketServer implements Server {
 
     @Override
     public void registerClient(String host, int port, String username) {
-        //TODO
+        /*
+        unused for socket server
+         */
     }
 
     public void interpretMessage(ToServerMessage msg, String user) {

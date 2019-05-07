@@ -4,6 +4,7 @@ import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.client.SocketClient;
 import it.polimi.se2019.utils.HandyFunctions;
+import it.polimi.se2019.view.client.RemoteView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,11 +15,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
-import java.util.Observable;
-import java.util.Observer;
+
 import java.util.logging.Level;
 
-public class LoginController implements Observer {
+public class LoginController {
 
     @FXML
     private TextField userTextField;
@@ -38,56 +38,32 @@ public class LoginController implements Observer {
         socketButton.setSelected(true);
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        /*
-        we do not need this method here
-         */
-    }
-
     @FXML
     public void login() throws RemoteException {
 
-        if (getUsername().equals(""))
-        {
+        if (getUsername().equals("")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid username");
             alert.showAndWait();
-        }
-        else
-        {
-            Client client;
+        } else {
+            GUI gui = new GUI((Stage)loginButton.getScene().getWindow());
+
             if (getConnection().equals("RMI")) {
-                client=new RMIClient(null,1560,getUsername());
-                client.connect(getIp(),1099);
+                RMIClient client = new RMIClient(gui, 1560, getUsername());
+                client.connect(getIp(), 1099);
+                gui.addObserver(client);
+            } else {
+                SocketClient client = new SocketClient(gui, getUsername());
+                client.connect(getIp(), 1100);
+                gui.addObserver(client);
             }
-            else {
-                client = new SocketClient(null,getUsername());
-                client.connect(getIp(),1100);
-            }
-            showWaitingLobby();
+            showWaitingLobby(gui);
         }
     }
 
-    private void showWaitingLobby() {
-        Platform.runLater(() ->  {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/waitingLobby.fxml"));
-                Parent root = fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-                stage.setOnCloseRequest(event -> {
-                    Platform.exit();
-                    System.exit(0);
-                });
-                Stage stageToBeClosed = (Stage)loginButton.getScene().getWindow();
-                stageToBeClosed.close();
-            } catch (IOException ex) {
-                HandyFunctions.LOGGER.log(Level.SEVERE, "error loading waiting lobby");
-            }
-        });
+    private void showWaitingLobby(GUI gui) {
+        gui.start();
     }
 
     private String getUsername() {
@@ -101,10 +77,11 @@ public class LoginController implements Observer {
 
     /**
      * Gets the connection type (socket or RMI)
+     *
      * @return the text of the button selected
      */
     private String getConnection() {
-        ToggleButton selectedButton = (ToggleButton)connectionType.getSelectedToggle();
+        ToggleButton selectedButton = (ToggleButton) connectionType.getSelectedToggle();
         return selectedButton.getText();
     }
 

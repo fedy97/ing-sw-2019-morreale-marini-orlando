@@ -4,45 +4,45 @@ package it.polimi.se2019.view.server;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.server.Server;
-import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.View;
 
-import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 
-/**
- * @author Simone Orlando
- */
-public class VirtualView extends View implements Runnable {
+public class VirtualView extends View implements Observer {
     private Game game;
-    private Server server;
+    private Server virtualServer;
+    private String user;
 
-    public VirtualView() {
+    /*
+        rmi or socket server that contains all clients, now we need to extract
+        the specific connection of the specific client
+     */
 
+    /**
+     * @param virtualServer either RMIServer or SocketServer, we need to be more specific
+     * @param user
+     */
+    public VirtualView(Server virtualServer,String user) {
+        this.virtualServer = virtualServer;
+        this.user = user;
+        //TODO metterere il controller ad osservare (this)
     }
 
-    public void setServer(Server server) {
-        this.server = server;
-    }
-
-    @Override
-    public void run() {
-        start();
+    public String getUser() {
+        return user;
     }
 
     @Override
     public void start() {
-        startConnection();
-        waitGameStart();
-        startGame();
-        menageTurn();
+
     }
 
     public void startGame() {
-        HandyFunctions.printConsole("The game is started!\n");
+
     }
 
     @Override
@@ -88,7 +88,7 @@ public class VirtualView extends View implements Runnable {
     /**
      * @param targets players to show as targets
      */
-    public void lightPlayers(List<Player> targets){
+    public void lightPlayers(List<Player> targets) {
         //TODO
     }
 

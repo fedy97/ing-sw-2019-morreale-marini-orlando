@@ -21,7 +21,6 @@ public class CLI extends RemoteView {
     private int port;
 
     public CLI() {
-        client = null;
         reader = new CliReader(5);
     }
 
@@ -50,16 +49,16 @@ public class CLI extends RemoteView {
 
     @Override
     public void startConnection() {
-        if (connectionChosen == 1) {
-            client = new SocketClient(this, userName);
-        }
-        else {
-            client = new RMIClient(this, port, userName);
-        }
         try {
-            client.connect("127.0.0.1", 9999);
+            if (connectionChosen == 1) {
+                SocketClient client = new SocketClient(this, userName);
+                client.connect("127.0.0.1", 1100);
+            } else {
+                RMIClient client = new RMIClient(this, port, userName);
+                client.connect("127.0.0.1", 1099);
+            }
         }
-        catch (RemoteException e) {
+        catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
     }
