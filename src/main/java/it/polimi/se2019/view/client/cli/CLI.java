@@ -18,9 +18,10 @@ public class CLI extends RemoteView {
 
     private CliReader reader;
     private int connectionChosen;
-    private int port;
+    private String ip;
 
     public CLI() {
+        client = null;
         reader = new CliReader(5);
     }
 
@@ -29,8 +30,8 @@ public class CLI extends RemoteView {
         CliPrinter.welcomeMessage();
         setCommunicationType();
         setUserName();
-        startConnection();
         waitGameStart();
+        while (true) {}
     }
 
     @Override
@@ -43,35 +44,36 @@ public class CLI extends RemoteView {
         HandyFunctions.printConsole("\n\n");
         CliPrinter.boxConnectionMessage();
         connectionChosen = reader.getInt();
-        HandyFunctions.printConsole("Port: ");
-        port = reader.getInt();
     }
 
     @Override
     public void startConnection() {
-        try {
-            if (connectionChosen == 1) {
-                SocketClient client = new SocketClient(this, userName);
-                client.connect("127.0.0.1", 1100);
-            } else {
-                RMIClient client = new RMIClient(this, port, userName);
-                client.connect("127.0.0.1", 1099);
-            }
-        }
-        catch (Exception e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
-        }
+
     }
 
     @Override
     public void setUserName() {
-        HandyFunctions.printConsole("Username: ");
+        CliSetUp.clear();
+        CliSetUp.cursorToHome();
+        CliPrinter.welcomeMessage();
+        HandyFunctions.printConsole("\n\n");
+        CliPrinter.boxUsernameMessage();
         userName = reader.getString();
+        CliSetUp.clear();
+        CliSetUp.cursorToHome();
+        CliPrinter.welcomeMessage();
+        HandyFunctions.printConsole("\n\n");
+        CliPrinter.boxIpMessage(userName);
+        ip = reader.getString();
     }
 
     @Override
     public void waitGameStart() {
-        HandyFunctions.printConsole("Waiting for other players...\n");
+        CliSetUp.clear();
+        CliSetUp.cursorToHome();
+        CliPrinter.welcomeMessage();
+        HandyFunctions.printConsole("\n\n");
+        CliPrinter.boxWaitingMessage();
     }
 
     @Override

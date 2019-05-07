@@ -80,4 +80,47 @@ public final class CliPrinter {
         CliSetUp.restorePosition();
     }
 
+    public static void boxUsernameMessage() {
+        CliPrinter.stamp("\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃           Username: ");
+        CliSetUp.savePosition();
+        CliPrinter.stamp("                                     ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃           Ip:                                            ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliSetUp.restorePosition();
+    }
+
+    public static void boxIpMessage(String usename) {
+        CliPrinter.stamp("\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃           Username: "+usename);
+        for (int i=0; i < 37-usename.length(); i++) {
+            CliPrinter.stamp(" ");
+        }
+        CliPrinter.stamp("┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃           Ip: ");
+        CliSetUp.savePosition();
+        CliPrinter.stamp("                                           ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliSetUp.restorePosition();
+    }
+
+    public static void boxWaitingMessage() {
+        CliPrinter.stamp("\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃               Waiting for other players...               ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+    }
+
 }
