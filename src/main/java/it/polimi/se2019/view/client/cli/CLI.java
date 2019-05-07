@@ -21,7 +21,7 @@ public class CLI extends RemoteView {
     private String ip;
 
     public CLI() {
-        client = null;
+
         reader = new CliReader(5);
     }
 
