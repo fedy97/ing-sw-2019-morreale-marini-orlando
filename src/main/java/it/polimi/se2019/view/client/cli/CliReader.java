@@ -53,7 +53,7 @@ public class CliReader {
     }
 
     public String getString() {
-        return scanner.nextLine();
+        return scanner.next();
     }
 
     public int getInt() {

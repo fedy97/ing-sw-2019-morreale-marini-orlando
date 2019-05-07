@@ -18,7 +18,7 @@ public class CLI extends RemoteView {
 
     private CliReader reader;
     private int connectionChosen;
-    private int port;
+    private String ip;
 
     public CLI() {
         client = null;
@@ -30,8 +30,8 @@ public class CLI extends RemoteView {
         CliPrinter.welcomeMessage();
         setCommunicationType();
         setUserName();
-        startConnection();
         waitGameStart();
+        while (true) {}
     }
 
     @Override
@@ -44,35 +44,36 @@ public class CLI extends RemoteView {
         HandyFunctions.printConsole("\n\n");
         CliPrinter.boxConnectionMessage();
         connectionChosen = reader.getInt();
-        HandyFunctions.printConsole("Port: ");
-        port = reader.getInt();
     }
 
     @Override
     public void startConnection() {
-        if (connectionChosen == 1) {
-            client = new SocketClient(this, userName);
-        }
-        else {
-            client = new RMIClient(this, port, userName);
-        }
-        try {
-            client.connect("127.0.0.1", 9999);
-        }
-        catch (RemoteException e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
-        }
+
     }
 
     @Override
     public void setUserName() {
-        HandyFunctions.printConsole("Username: ");
+        CliSetUp.clear();
+        CliSetUp.cursorToHome();
+        CliPrinter.welcomeMessage();
+        HandyFunctions.printConsole("\n\n");
+        CliPrinter.boxUsernameMessage();
         userName = reader.getString();
+        CliSetUp.clear();
+        CliSetUp.cursorToHome();
+        CliPrinter.welcomeMessage();
+        HandyFunctions.printConsole("\n\n");
+        CliPrinter.boxIpMessage(userName);
+        ip = reader.getString();
     }
 
     @Override
     public void waitGameStart() {
-        HandyFunctions.printConsole("Waiting for other players...\n");
+        CliSetUp.clear();
+        CliSetUp.cursorToHome();
+        CliPrinter.welcomeMessage();
+        HandyFunctions.printConsole("\n\n");
+        CliPrinter.boxWaitingMessage();
     }
 
     @Override
