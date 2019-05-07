@@ -4,21 +4,26 @@ import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.client.SocketClient;
 import it.polimi.se2019.utils.HandyFunctions;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.effect.DropShadow;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
 
 public class LoginController implements Observer {
 
     @FXML
     private TextField userTextField;
     @FXML
-    private TextField ipAddressField;
-
+    private TextField ipTextField;
     @FXML
     private ToggleButton rmiButton;
     @FXML
@@ -35,6 +40,9 @@ public class LoginController implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        /*
+        we do not need this method here
+         */
     }
 
     @FXML
@@ -50,8 +58,6 @@ public class LoginController implements Observer {
         else
         {
             Client client;
-            if (getIp().equals(""))
-                ipAddressField.setText("127.0.0.1");
             if (getConnection().equals("RMI")) {
                 client=new RMIClient(null,1560,getUsername());
                 client.connect(getIp(),1099);
@@ -60,8 +66,28 @@ public class LoginController implements Observer {
                 client = new SocketClient(null,getUsername());
                 client.connect(getIp(),1100);
             }
-            //TODO show progress dialog to wait for players
+            showWaitingLobby();
         }
+    }
+
+    private void showWaitingLobby() {
+        Platform.runLater(() ->  {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/waitingLobby.fxml"));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                stage.setOnCloseRequest(event -> {
+                    Platform.exit();
+                    System.exit(0);
+                });
+                Stage stageToBeClosed = (Stage)loginButton.getScene().getWindow();
+                stageToBeClosed.close();
+            } catch (IOException ex) {
+                HandyFunctions.LOGGER.log(Level.SEVERE, "error loading waiting lobby");
+            }
+        });
     }
 
     private String getUsername() {
@@ -69,7 +95,8 @@ public class LoginController implements Observer {
     }
 
     private String getIp() {
-        return ipAddressField.getText();
+        if (ipTextField.getText().equals("")) return "127.0.0.1";
+        return ipTextField.getText();
     }
 
     /**

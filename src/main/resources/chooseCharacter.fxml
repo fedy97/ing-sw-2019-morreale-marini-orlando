@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="it.polimi.se2019.view.client.gui.ChooseCharacterController">
+   <children>
+      <ToggleButton fx:id="bluebutton" layoutX="14.0" layoutY="60.0" mnemonicParsing="false" onAction="#chooseBlue" prefHeight="127.0" prefWidth="107.0">
+         <graphic>
+            <ImageView fitHeight="132.0" fitWidth="124.0">
+               <image>
+                  <Image url="@assets/characters/blue.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <ToggleButton fx:id="violetbutton" layoutX="120.0" layoutY="238.0" mnemonicParsing="false" onAction="#chooseViolet" prefHeight="141.0" prefWidth="142.0">
+         <graphic>
+            <ImageView fitHeight="131.0" fitWidth="126.0">
+               <image>
+                  <Image url="@assets/characters/violet.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <ToggleButton fx:id="yellowbutton" layoutX="340.0" layoutY="238.0" mnemonicParsing="false" onAction="#chooseYellow" prefHeight="141.0" prefWidth="148.0">
+         <graphic>
+            <ImageView fitHeight="120.0" fitWidth="130.0">
+               <image>
+                  <Image url="@assets/characters/yellow.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <ToggleButton fx:id="greenbutton" layoutX="229.0" layoutY="59.0" mnemonicParsing="false" onAction="#chooseGreen" prefHeight="121.0" prefWidth="141.0">
+         <graphic>
+            <ImageView fitHeight="133.0" fitWidth="124.0">
+               <image>
+                  <Image url="@assets/characters/green.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <ToggleButton fx:id="greybutton" layoutX="443.0" layoutY="60.0" mnemonicParsing="false" onAction="#chooseGrey" prefHeight="121.0" prefWidth="141.0">
+         <graphic>
+            <ImageView fitHeight="132.0" fitWidth="125.0">
+               <image>
+                  <Image url="@assets/characters/grey.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <Label layoutX="172.0" layoutY="14.0" text="Scegli Personaggio:">
+         <font>
+            <Font name="Ubuntu" size="29.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

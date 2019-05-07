@@ -23,7 +23,7 @@ public class Lobby {
         SocketServer socketServer = new SocketServer(1100);
         rmiServer.start();
         socketServer.start();
-
+        /*
         Client client3 = new SocketClient(null, "User3");
         Client client1 = new RMIClient(null, 1234, "User1");
         Client client2 = new RMIClient(null, 1345, "User2");
@@ -43,7 +43,8 @@ public class Lobby {
             rmiServer.sendToClient(new SimpleMessage(null), "User1");
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
-        }
+        }*/
+
 
     }
 
