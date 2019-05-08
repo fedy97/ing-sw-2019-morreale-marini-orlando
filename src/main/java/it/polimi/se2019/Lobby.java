@@ -17,13 +17,13 @@ public class Lobby {
     private static List<String> users = new ArrayList<>();
     private static RMIServer rmiServer = new RMIServer(1099);
     private static SocketServer socketServer = new SocketServer(1100);
-
+    private static Controller controller = new Controller(new Game());
     public static void main(String[] args) {
-        Controller controller = new Controller(new Game());
+
         rmiServer.start();
         socketServer.start();
 
-        String stdUser = "user1";
+        /*String stdUser = "user1";
 
         RMIClient c1 = new RMIClient(new CLI(), 1234, stdUser);
 
@@ -31,8 +31,20 @@ public class Lobby {
             c1.connect(LOCALHOST, 1099);
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
-        }
+        }*/
 
+    }
+
+    public static List<String> getUsers() {
+        return users;
+    }
+
+    /**
+     * @return the controller, useful I need it in VirtualView without passing it,
+     * we could alternatively use singleton pattern for this
+     */
+    public static Controller getController() {
+        return controller;
     }
 
     public static void addUser(String user) {

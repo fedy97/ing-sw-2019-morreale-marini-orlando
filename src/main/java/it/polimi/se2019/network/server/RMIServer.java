@@ -1,6 +1,9 @@
 package it.polimi.se2019.network.server;
 
+import it.polimi.se2019.Lobby;
 import it.polimi.se2019.network.client.Client;
+import it.polimi.se2019.network.client.RMIClient;
+import it.polimi.se2019.network.message.to_client.NewConnectionMessage;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -87,8 +90,14 @@ public class RMIServer implements Server {
     public void registerClient(String host, int port, String username) {
         try {
             Registry registry = LocateRegistry.getRegistry(host, port);
-            skeletons.put(username, (Client) registry.lookup("RemoteView"));
-            clientActor.put(username, new VirtualView(this,username));
+            VirtualView virtualView = new VirtualView(this,username);
+            skeletons.put(username, (RMIClient) registry.lookup("RemoteView"));
+            clientActor.put(username, virtualView);
+            Lobby.addUser(username);
+            virtualView.viewSetChanged();
+            virtualView.notifyObservers(new NewConnectionMessage(Lobby.getUsers()));
+
+            HandyFunctions.LOGGER.log(Level.INFO, username + " connected to the RMI server!");
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }

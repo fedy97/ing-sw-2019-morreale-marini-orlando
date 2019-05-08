@@ -41,6 +41,11 @@ public class CLI extends RemoteView {
     }
 
     @Override
+    public void updatePlayersOnWaitingList(List<String> users) {
+        //TODO
+    }
+
+    @Override
     public void startGame() {
         HandyFunctions.printConsole("The game is started!\n");
     }

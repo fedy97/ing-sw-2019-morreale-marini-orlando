@@ -97,9 +97,15 @@ public class GUI extends RemoteView {
         //TODO
     }
 
+    /**
+     * @param users to display on the view(GUI)
+     */
+    @Override
+    public void updatePlayersOnWaitingList(List<String> users){
+        waitingLobbyController.updateLoggedPlayers(users);
+    }
     @Override
     public void setUserName() {
-        //TODO
     }
 
     @Override

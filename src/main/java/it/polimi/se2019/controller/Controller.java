@@ -6,6 +6,7 @@ import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.message.to_client.NewConnectionMessage;
 import it.polimi.se2019.network.message.to_client.ShowPlatformMessage;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.view.server.VirtualView;
@@ -25,11 +26,6 @@ public class Controller implements Observer {
     private Map<String, VirtualView> userView;
     private VirtualView currentView;
 
-
-    public Controller() {
-    }
-
-
     /**
      * Instantiate a new controller class
      *
@@ -43,19 +39,27 @@ public class Controller implements Observer {
         userPlayer = new HashMap<>();
     }
 
+    @Override
+    /**
+     * Called when the VirtualView notify changes
+     */
+    public void update(Observable virtualView, Object message) {
+        if (message instanceof NewConnectionMessage) {
+            //notify all clients connected
+            for (String user : Lobby.getUsers()) {
+                if (Lobby.getRmiServer().isConnected(user))
+                    Lobby.getRmiServer().sendToClient((ToClientMessage) message, user);
+                if (Lobby.getSocketServer().isConnected(user))
+                    Lobby.getSocketServer().sendToClient((ToClientMessage) message, user);
+            }
+        }
+    }
 
     /**
      * @return The current game
      */
     public Game getGame() {
         return game;
-    }
-
-    /**
-     * @param game The game to manage
-     */
-    public void setGame(Game game) {
-        this.game = game;
     }
 
     /**
@@ -203,11 +207,5 @@ public class Controller implements Observer {
         userView.put(user, virtualView);
     }
 
-    @Override
-    /**
-     * Called when the VirtualView notify changes
-     */
-    public void update(Observable obs, Object arg) {
-        //TODO
-    }
+
 }

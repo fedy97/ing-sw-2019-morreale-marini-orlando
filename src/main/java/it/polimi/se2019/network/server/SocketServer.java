@@ -1,6 +1,7 @@
 package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.Lobby;
+import it.polimi.se2019.network.message.to_client.NewConnectionMessage;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -55,12 +56,15 @@ public class SocketServer implements Server {
                         output.flush();
                         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
                         String user = (String) input.readObject();
-                        actors.put(user, new VirtualView(this,user));
+                        VirtualView virtualView = new VirtualView(this,user);
+                        actors.put(user, virtualView);
                         Lobby.addUser(user);
-                        SpecificSocketServer specificSocketServer = new SpecificSocketServer(this, socket, input, output, actors.get(user));
+                        SpecificSocketServer specificSocketServer = new SpecificSocketServer(this,socket, input, output, virtualView);
                         specificSocketServer.start();
                         connections.put(user, specificSocketServer);
                         HandyFunctions.LOGGER.log(Level.INFO, user + " connected to the socket server!");
+                        virtualView.viewSetChanged();
+                        virtualView.notifyObservers(new NewConnectionMessage(Lobby.getUsers()));
 
                     } catch (Exception e) {
                         HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
@@ -100,6 +104,9 @@ public class SocketServer implements Server {
     }
 
     public void interpretMessage(ToServerMessage msg) {
+
+        //la virtual view associata al giusto user notifica il controller
+
         actors.get(msg.getSender()).notifyObservers(msg);
     }
 

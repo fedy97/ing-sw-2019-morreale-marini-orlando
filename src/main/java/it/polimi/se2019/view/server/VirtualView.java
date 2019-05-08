@@ -1,6 +1,7 @@
 package it.polimi.se2019.view.server;
 
 
+import it.polimi.se2019.Lobby;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.server.Server;
@@ -17,23 +18,31 @@ public class VirtualView extends View {
     private Server virtualServer;
     private String user;
 
-    /*
-        rmi or socket server that contains all clients, now we need to extract
-        the specific connection of the specific client
-     */
-
     /**
-     * @param virtualServer either RMIServer or SocketServer, we need to be more specific
+     * @param virtualServer either RMIServer or SocketServer
      * @param user
      */
     public VirtualView(Server virtualServer, String user) {
         this.virtualServer = virtualServer;
         this.user = user;
-        //TODO metterere il controller ad osservare (this)
+        this.game = Lobby.getController().getGame();
+        //controller observs (this)
+        this.addObserver(Lobby.getController());
+        //(this) observs model
+        game.addObserver(this);
     }
 
     public String getUser() {
         return user;
+    }
+
+    /**
+     * @param game who is being observed by (this)
+     * @param message sent by the model(game)
+     */
+    @Override
+    public void update(Observable game, Object message) {
+        //TODO
     }
 
     @Override
@@ -80,24 +89,11 @@ public class VirtualView extends View {
         //TODO
     }
 
-    @Override
-    public void update(Observable game, Object arg) {
-        //TODO
-    }
-
     /**
      * @param targets players to show as targets
      */
     public void lightPlayers(List<Player> targets) {
         //TODO
-    }
-
-    /**
-     * @param game used to extract information about the game state and send it through
-     *             the network
-     */
-    public void setGame(Game game) {
-        this.game = game;
     }
 
 }

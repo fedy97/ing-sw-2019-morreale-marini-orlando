@@ -23,8 +23,8 @@ public class SpecificSocketServer extends Thread {
         this.socket = socket;
         this.input = input;
         this.output = output;
-        this.specificVirtualView = vv;
         this.ss = ss;
+        this.specificVirtualView = vv;
         this.user = vv.getUser();
 
         //TODO send Message to notify other clients that a new one is created,
@@ -45,8 +45,11 @@ public class SpecificSocketServer extends Thread {
                 Thread.sleep(100);
             } catch (EOFException e) {
                 try {
+                    input.close();
+                    output.close();
                     socket.close();
                 } catch (IOException ex) {
+                    HandyFunctions.LOGGER.log(Level.INFO, user + " stream of " + user + " already closed");
                 }
                 HandyFunctions.LOGGER.log(Level.FINE, user + " closed the connection");
             } catch (Exception e) {

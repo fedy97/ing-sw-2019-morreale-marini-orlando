@@ -61,7 +61,6 @@ public class RMIClient implements Client, Observer {
 
         try {
             stub.registerClient(InetAddress.getLocalHost().getHostAddress(), this.port, user);
-            HandyFunctions.LOGGER.log(Level.INFO, "Client registered itself to the server!");
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }

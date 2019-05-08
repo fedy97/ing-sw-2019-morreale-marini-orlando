@@ -2,6 +2,7 @@ package it.polimi.se2019.view;
 
 import it.polimi.se2019.Action;
 
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -13,6 +14,10 @@ public abstract class View extends Observable implements Observer {
     protected State state;
     protected String userName;
     protected Action chosenAction;
+
+    public void viewSetChanged(){
+        this.setChanged();
+    }
 
     public abstract void start();
 
