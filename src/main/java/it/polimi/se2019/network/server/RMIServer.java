@@ -91,7 +91,7 @@ public class RMIServer implements Server {
         try {
             Registry registry = LocateRegistry.getRegistry(host, port);
             VirtualView virtualView = new VirtualView(this,username);
-            skeletons.put(username, (RMIClient) registry.lookup("RemoteView"));
+            skeletons.put(username, (Client) registry.lookup("RemoteView"));
             clientActor.put(username, virtualView);
             Lobby.addUser(username);
             virtualView.viewSetChanged();

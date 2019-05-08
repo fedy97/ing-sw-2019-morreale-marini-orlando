@@ -1,15 +1,19 @@
 package it.polimi.se2019.network.message.to_client;
 
+import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.client.RemoteView;
 
 import java.util.List;
 
 public class NewConnectionMessage extends ToClientMessage {
 
+    /**
+     * @param payload list of clients' username
+     */
     public NewConnectionMessage(Object payload){
         super(payload);
     }
-    //the payload is the username String
+
     @Override
     public void performAction(RemoteView remoteView) {
         //todo for simo, implement updatePlayersOnWaitingList on CLI view
