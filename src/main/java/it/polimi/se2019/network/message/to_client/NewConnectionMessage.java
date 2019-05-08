@@ -12,7 +12,6 @@ public class NewConnectionMessage extends ToClientMessage {
     //the payload is the username String
     @Override
     public void performAction(RemoteView remoteView) {
-        //todo for simo, implement updatePlayersOnWaitingList on CLI view
         remoteView.updatePlayersOnWaitingList((List<String>) payload);
     }
 
