@@ -1,8 +1,7 @@
 package it.polimi.se2019.network.server;
 
-import it.polimi.se2019.network.message.Message;
-import it.polimi.se2019.network.message.ToClientMessage;
-import it.polimi.se2019.network.message.ToServerMessage;
+import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.network.message.to_server.ToServerMessage;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -29,10 +28,9 @@ public interface Server extends Remote {
 
     /**
      * @param msg  to be interpreted in order to perform action on the actor
-     * @param user from which the request started
      * @throws RemoteException
      */
-    void interpretMessage(ToServerMessage msg, String user) throws RemoteException;
+    void interpretMessage(ToServerMessage msg) throws RemoteException;
 
     void sendToClient(ToClientMessage msg, String username) throws RemoteException;
 

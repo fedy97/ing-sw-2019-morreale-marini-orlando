@@ -1,12 +1,11 @@
 package it.polimi.se2019.view.client.cli;
 
-import it.polimi.se2019.network.client.RMIClient;
-import it.polimi.se2019.network.client.SocketClient;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.client.RemoteView;
 
-import java.rmi.RemoteException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Observable;
 import java.util.logging.Level;
@@ -21,7 +20,11 @@ public class CLI extends RemoteView {
     private String ip;
 
     public CLI() {
-
+        try {
+            ip = InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+        }
         reader = new CliReader(5);
     }
 
@@ -31,7 +34,10 @@ public class CLI extends RemoteView {
         setCommunicationType();
         setUserName();
         waitGameStart();
-        while (true) {}
+        /**
+        while (true) {
+            //TODO
+        }*/
     }
 
     @Override
@@ -48,7 +54,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void startConnection() {
-
+        //TODO
     }
 
     @Override
@@ -87,12 +93,20 @@ public class CLI extends RemoteView {
     }
 
     @Override
-    public void update(Observable obs, Object obj){
+    public void update(Observable obs, Object obj) {
         //TODO
     }
 
     @Override
-    public void lightWeapons(List<String> weapons){
+    public void lightWeapons(List<String> weapons) {
+        //TODO
+    }
+
+    @Override
+    public void lightPlatforms(List<String> platforms) {
+        for (String platform : platforms) {
+            HandyFunctions.printLineConsole("Platform" + platform + "was lighted!");
+        }
         //TODO
     }
 }

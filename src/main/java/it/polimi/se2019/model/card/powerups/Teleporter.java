@@ -25,8 +25,8 @@ public final class Teleporter extends PowerUpCard {
      * Activate the effect of the card
      */
     public void useEffect(Controller c) {
-        Platform destination = c.askForPosition(c.getGame().getGameField().getPlatforms());
-        c.getPlayerManager().getCurrentPlayer().setCurrentPlatform(destination);
+       /** Platform destination = c.askForPosition(c.getGame().getGameField().getPlatforms());
+        c.getPlayerManager().getCurrentPlayer().setCurrentPlatform(destination);*/
     }
 
 

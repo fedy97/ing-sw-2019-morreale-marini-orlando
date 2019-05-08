@@ -1,16 +1,14 @@
 package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.Lobby;
-import it.polimi.se2019.network.message.Message;
-import it.polimi.se2019.network.message.ToClientMessage;
-import it.polimi.se2019.network.message.ToServerMessage;
+import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -101,9 +99,8 @@ public class SocketServer implements Server {
          */
     }
 
-    public void interpretMessage(ToServerMessage msg, String user) {
-        msg.performAction(actors.get(user));
-        HandyFunctions.LOGGER.log(Level.INFO, user + " required the socket server to interpret a message!");
+    public void interpretMessage(ToServerMessage msg) {
+        actors.get(msg.getSender()).notifyObservers(msg);
     }
 
     @Override

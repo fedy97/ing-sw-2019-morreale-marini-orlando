@@ -1,10 +1,13 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.Lobby;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.message.to_client.ShowPlatformMessage;
+import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.util.*;
@@ -19,6 +22,7 @@ public class Controller implements Observer {
     private PlayerManager playerManager;
     private Validator validator;
     private Map<String, Player> userPlayer;
+    private Map<String, VirtualView> userView;
     private VirtualView currentView;
 
 
@@ -147,9 +151,26 @@ public class Controller implements Observer {
      * @param possibleDestination the list of possible platform destination
      * @return the destination platform chosen by the player
      */
-    public Platform askForPosition(List<Platform> possibleDestination) {
-        //TODO
-        return null;
+    public void askForPosition(List<Platform> possibleDestination) {
+        String user = null;
+        List<String> lightVersion = new ArrayList<>();
+
+        for (Platform platform : possibleDestination)
+            lightVersion.add(platform.toString());
+
+        Player currPlayer = playerManager.getCurrentPlayer();
+
+        for (Map.Entry<String, Player> entry : userPlayer.entrySet()) {
+            if (entry.getValue() == currPlayer)
+                user = entry.getKey();
+        }
+        ToClientMessage msg = new ShowPlatformMessage(lightVersion);
+
+        if (Lobby.getRmiServer().isConnected(user))
+            Lobby.getRmiServer().sendToClient(msg, user);
+        if (Lobby.getSocketServer().isConnected(user))
+            Lobby.getSocketServer().sendToClient(msg, user);
+
     }
 
     public Validator getValidator() {
@@ -176,6 +197,10 @@ public class Controller implements Observer {
      */
     public void setPlayerToUser(String user, Player player) {
         userPlayer.put(user, player);
+    }
+
+    public void addVirtualView(VirtualView virtualView, String user) {
+        userView.put(user, virtualView);
     }
 
     @Override

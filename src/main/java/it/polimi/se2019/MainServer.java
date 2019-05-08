@@ -1,13 +1,5 @@
 package it.polimi.se2019;
 
-import it.polimi.se2019.network.server.RMIServer;
-import it.polimi.se2019.network.server.Server;
-import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.view.server.VirtualView;
-
-import java.rmi.RemoteException;
-import java.util.logging.Level;
-
 public class MainServer {
 
     public static void main(String[] arg) {

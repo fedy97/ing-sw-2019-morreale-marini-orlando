@@ -1,6 +1,6 @@
 package it.polimi.se2019.network.server;
 
-import it.polimi.se2019.network.message.ToServerMessage;
+import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
@@ -40,7 +40,7 @@ public class SpecificSocketServer extends Thread {
                 msg = (ToServerMessage) input.readObject();
 
                 if (msg != null)
-                    ss.interpretMessage(msg, user);
+                    ss.interpretMessage(msg);
 
                 Thread.sleep(100);
             } catch (EOFException e) {

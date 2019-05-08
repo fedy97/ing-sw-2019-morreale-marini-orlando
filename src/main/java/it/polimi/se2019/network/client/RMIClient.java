@@ -1,8 +1,7 @@
 package it.polimi.se2019.network.client;
 
-import it.polimi.se2019.network.message.Message;
-import it.polimi.se2019.network.message.ToClientMessage;
-import it.polimi.se2019.network.message.ToServerMessage;
+import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.network.server.Server;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.client.RemoteView;
@@ -104,8 +103,7 @@ public class RMIClient implements Client, Observer {
     public void interpretMessage(ToClientMessage msg) {
         try {
             msg.performAction(actor);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
         }
     }
@@ -117,7 +115,7 @@ public class RMIClient implements Client, Observer {
      */
     public void callServer(ToServerMessage msg) {
         try {
-            stub.interpretMessage(msg, user);
+            stub.interpretMessage(msg);
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.INFO, e.toString());
         }

@@ -1,5 +1,6 @@
-package it.polimi.se2019.network.message;
+package it.polimi.se2019.network.message.to_client;
 
+import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.view.client.RemoteView;
 
 public abstract class ToClientMessage extends Message {

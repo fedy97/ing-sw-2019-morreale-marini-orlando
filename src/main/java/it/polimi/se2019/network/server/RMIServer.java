@@ -1,10 +1,8 @@
 package it.polimi.se2019.network.server;
 
-import it.polimi.se2019.network.client.RMIClient;
-import it.polimi.se2019.network.message.Message;
 import it.polimi.se2019.network.client.Client;
-import it.polimi.se2019.network.message.ToClientMessage;
-import it.polimi.se2019.network.message.ToServerMessage;
+import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
@@ -22,7 +20,7 @@ import java.util.logging.Level;
  * @author Gabriel Raul Marini
  */
 public class RMIServer implements Server {
-    private Map<String, RMIClient> skeletons;
+    private Map<String, Client> skeletons;
     private Map<String, VirtualView> clientActor;
     private boolean available;
     private int port;
@@ -89,7 +87,7 @@ public class RMIServer implements Server {
     public void registerClient(String host, int port, String username) {
         try {
             Registry registry = LocateRegistry.getRegistry(host, port);
-            skeletons.put(username, (RMIClient) registry.lookup("RemoteView"));
+            skeletons.put(username, (Client) registry.lookup("RemoteView"));
             clientActor.put(username, new VirtualView(this,username));
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
@@ -103,8 +101,8 @@ public class RMIServer implements Server {
      * @param msg info packet containing commands to perform on virtual view
      * @param user requesting server decoding service
      */
-    public void interpretMessage(ToServerMessage msg, String user) {
-        msg.performAction(clientActor.get(user));
+    public void interpretMessage(ToServerMessage msg) {
+        clientActor.get(msg.getSender()).notifyObservers(msg);
     }
 
     @Override

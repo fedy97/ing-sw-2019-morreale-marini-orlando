@@ -11,5 +11,6 @@ import java.util.List;
 public abstract class RemoteView extends View {
 
     public abstract void lightWeapons(List<String> weapons);
+    public abstract void lightPlatforms(List<String> platforms);
 
 }

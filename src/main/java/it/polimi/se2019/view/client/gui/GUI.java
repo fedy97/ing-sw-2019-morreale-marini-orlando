@@ -117,6 +117,11 @@ public class GUI extends RemoteView {
         //TODO
     }
 
+    @Override
+    public void lightPlatforms(List<String> platforms){
+        //TODO
+    }
+
 
     @Override
     public void setState(State newState) {

@@ -12,7 +12,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 
-public class VirtualView extends View implements Observer {
+public class VirtualView extends View {
     private Game game;
     private Server virtualServer;
     private String user;
@@ -26,7 +26,7 @@ public class VirtualView extends View implements Observer {
      * @param virtualServer either RMIServer or SocketServer, we need to be more specific
      * @param user
      */
-    public VirtualView(Server virtualServer,String user) {
+    public VirtualView(Server virtualServer, String user) {
         this.virtualServer = virtualServer;
         this.user = user;
         //TODO metterere il controller ad osservare (this)
