@@ -102,6 +102,8 @@ public class GUI extends RemoteView {
      */
     @Override
     public void updatePlayersOnWaitingList(List<String> users){
+        if(waitingLobbyController == null)
+            HandyFunctions.printLineConsole("porco");
         waitingLobbyController.updateLoggedPlayers(users);
     }
     @Override
