@@ -2,6 +2,8 @@ package it.polimi.se2019.view.client.cli;
 
 import it.polimi.se2019.utils.HandyFunctions;
 
+import java.util.List;
+
 
 /**
  * @author Simone Orlando
@@ -121,6 +123,119 @@ public final class CliPrinter {
         CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
         CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
         CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+    }
+
+    public static void boxLobbyMessage(List<String> users) {
+        if (users.size() == 1) {
+            CliPrinter.stamp("\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(0) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(0)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        }
+        else if (users.size() == 2) {
+            CliPrinter.stamp("\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(0) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(0)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(1) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(1)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        }
+        else if (users.size() == 3) {
+            CliPrinter.stamp("\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(0) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(0)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(1) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(1)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(2) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(2)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        }
+        else if (users.size() == 4) {
+            CliPrinter.stamp("\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(0) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(0)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(1) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(1)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(2) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(2)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(3) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(3)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        }
+        else {
+            CliPrinter.stamp("\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(0) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(0)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(1) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(1)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(2) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(2)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(3) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(3)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃  " + users.get(4) + " joined the game");
+            for (int i = 0; i < 40 - (users.get(4)).length(); i++) {
+                CliPrinter.stamp(" ");
+            }
+            CliPrinter.stamp("┃\n");
+            CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+            CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        }
     }
 
 }
