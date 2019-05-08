@@ -90,6 +90,7 @@ public class SocketServer implements Server {
         try {
             ObjectOutputStream outStream = connections.get(user).getOutput();
             outStream.writeObject(msg);
+            outStream.reset();
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
