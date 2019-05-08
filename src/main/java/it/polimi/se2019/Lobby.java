@@ -39,6 +39,10 @@ public class Lobby {
         return users;
     }
 
+    public static void addUser(String user) {
+        users.add(user);
+    }
+
     /**
      * @return the controller, useful I need it in VirtualView without passing it,
      * we could alternatively use singleton pattern for this
@@ -47,9 +51,6 @@ public class Lobby {
         return controller;
     }
 
-    public static void addUser(String user) {
-        users.add(user);
-    }
 
     public static RMIServer getRmiServer() {
         return rmiServer;

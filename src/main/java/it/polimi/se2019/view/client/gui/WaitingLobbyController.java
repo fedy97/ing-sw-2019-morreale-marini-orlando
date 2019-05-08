@@ -1,5 +1,6 @@
 package it.polimi.se2019.view.client.gui;
 
+import it.polimi.se2019.utils.HandyFunctions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -30,8 +31,12 @@ public class WaitingLobbyController {
     }
 
     public void updateLoggedPlayers(List<String> users) {
-        for (String user : users)
-            playerLabels.get(users.indexOf(user)).setText(user + " just joined the game");
+        int n = 0;
+        for (String user : users) {
+            playerLabels.get(n).setText(user + " just joined the game");
+            n++;
+        }
+
     }
 
 

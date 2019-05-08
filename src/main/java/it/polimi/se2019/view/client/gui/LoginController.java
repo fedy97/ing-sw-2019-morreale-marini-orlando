@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
+import java.util.Random;
 import java.util.logging.Level;
 
 public class LoginController {
@@ -48,9 +49,10 @@ public class LoginController {
             alert.showAndWait();
         } else {
             GUI gui = new GUI((Stage)loginButton.getScene().getWindow());
-
             if (getConnection().equals("RMI")) {
-                RMIClient client = new RMIClient(gui, 1560, getUsername());
+                Random random = new Random();
+                int port = random.nextInt(500)+1500;
+                RMIClient client = new RMIClient(gui, port, getUsername());
                 client.connect(getIp(), 1099);
                 gui.addObserver(client);
             } else {

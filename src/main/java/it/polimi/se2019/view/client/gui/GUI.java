@@ -3,6 +3,7 @@ package it.polimi.se2019.view.client.gui;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.client.RemoteView;
 import it.polimi.se2019.view.State;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -54,7 +55,7 @@ public class GUI extends RemoteView {
             sceneChooseCharacter = new Scene(root);
             chooseCharacterController = loader.getController();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE,"error initializing choose character");
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose character");
         }
     }
 
@@ -66,7 +67,7 @@ public class GUI extends RemoteView {
             sceneWaitingLobby = new Scene(root);
             waitingLobbyController = loader.getController();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE,"error initializing waiting lobby");
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing waiting lobby");
         }
     }
 
@@ -78,7 +79,7 @@ public class GUI extends RemoteView {
             sceneChooseMap = new Scene(root);
             chooseMapController = loader.getController();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE,"error initializing choose map");
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose map");
         }
     }
 
@@ -101,11 +102,13 @@ public class GUI extends RemoteView {
      * @param users to display on the view(GUI)
      */
     @Override
-    public void updatePlayersOnWaitingList(List<String> users){
-        if(waitingLobbyController == null)
-            HandyFunctions.printLineConsole("porco");
-        waitingLobbyController.updateLoggedPlayers(users);
+    public void updatePlayersOnWaitingList(List<String> users) {
+        Platform.runLater(
+                () -> {
+                    waitingLobbyController.updateLoggedPlayers(users);
+                });
     }
+
     @Override
     public void setUserName() {
     }
@@ -126,7 +129,7 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void lightPlatforms(List<String> platforms){
+    public void lightPlatforms(List<String> platforms) {
         //TODO
     }
 
