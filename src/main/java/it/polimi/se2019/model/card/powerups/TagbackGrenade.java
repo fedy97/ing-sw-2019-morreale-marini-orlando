@@ -24,8 +24,9 @@ public final class TagbackGrenade extends PowerUpCard {
      * Activate the effect of the card
      */
     public void useEffect(Controller c) {
+        /** TODO
         Player target = c.askForTargets(c.getValidator().getValidTargets(this)).get(0);
-        c.getPlayerManager().mark(target, 1);
+        c.getPlayerManager().mark(target, 1);*/
     }
 
     /**

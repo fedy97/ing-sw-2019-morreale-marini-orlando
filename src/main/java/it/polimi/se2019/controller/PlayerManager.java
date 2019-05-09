@@ -78,13 +78,13 @@ public class PlayerManager{
                 currentPlayer.addWeaponCard(weaponCard);
                 currentPlayer.getCurrentPlatform().removeWeaponCard(weaponCard);
             } catch (MaxWeaponException e) {
-
+                /** TODO
                 WeaponCard choice = father.askForDiscard(currentPlayer.getWeaponCards());
 
                 if (choice != null) {
                     currentPlayer.removeWeaponCard(choice);
                     currentPlayer.addWeaponCard(weaponCard);
-                }
+                }*/
 
             } catch (InvalidGenerationSpotException e) {
                 HandyFunctions.LOGGER.log(Level.WARNING, e.toString());

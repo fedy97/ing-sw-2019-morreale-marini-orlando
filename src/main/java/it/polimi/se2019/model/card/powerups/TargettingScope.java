@@ -25,13 +25,14 @@ public final class TargettingScope extends PowerUpCard {
      * Activate the effect of Targeting Scope
      */
     public void useEffect(Controller c) {
+        /** TODO
         Player currPlayer = c.getPlayerManager().getCurrentPlayer();
         Player target = c.askForTargets(c.getValidator().getValidTargets(this)).get(0);
         AmmoCube cost = c.askForTribute();
         HashMap<Player, Integer> targetMap = new HashMap<>();
         targetMap.put(target, 1);
         c.getPlayerManager().addDamage(targetMap);
-        currPlayer.getPlayerBoard().getAmmoBox().removeAmmos(cost, 1);
+        currPlayer.getPlayerBoard().getAmmoBox().removeAmmos(cost, 1);*/
     }
 
     /**

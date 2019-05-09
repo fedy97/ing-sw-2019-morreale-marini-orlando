@@ -2,13 +2,9 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.Lobby;
 import it.polimi.se2019.model.Game;
-import it.polimi.se2019.model.board.Platform;
-import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.network.message.to_client.NewConnectionMessage;
-import it.polimi.se2019.network.message.to_client.ShowPlatformMessage;
-import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.network.message.to_client.*;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
@@ -126,42 +122,30 @@ public class Controller implements Observer {
         //TODO
     }
 
-    public <T> void askFor(List<T> possibleChoices, String choice){
-
-    }
-
     /**
-     * @param possibleChoices list of weapons returned by the validator
+     * @param possibleChoices collection of elements to show to the user
+     * @param choice type of info required by the controller to manage the current
+     *               state of the game
+     * @param <T> type of object to show to the client
      */
-    public void askForWeapons(List<WeaponCard> possibleChoices) {
-        //TODO
-    }
-
-    /**
-     * @param discardables weapons owned by the current player in the actual state of the game
-     * @return the weapon the player want to discard in order to grab another one
-     */
-    public void askForDiscard(List<WeaponCard> discardables) {
-        //TODO
-    }
-
-    /**
-     * @param possibleTargets collection of all players that can be target of the current player
-     */
-    public void askForTargets(List<Player> possibleTargets) {
-        List<String> lightVersion = HandyFunctions.getLightCollection(possibleTargets);
-
-    }
-
-    /**
-     * @param possibleDestination the list of possible platform destination
-     * @return the destination platform chosen by the player
-     */
-    public void askForPosition(List<Platform> possibleDestination) {
-        List<String> lightVersion = HandyFunctions.getLightCollection(possibleDestination);
-
+    public <T> void askFor(List<T> possibleChoices, String choice) {
+        ToClientMessage msg = null;
+        List<String> lightVersion = HandyFunctions.getLightCollection(possibleChoices);
         Player currPlayer = playerManager.getCurrentPlayer();
-        ToClientMessage msg = new ShowPlatformMessage(lightVersion);
+
+        if (choice.equals("weapons"))
+            msg = new ShowWeaponsMessage(lightVersion);
+        else if (choice.equals("position"))
+            msg = new ShowPlatformMessage(lightVersion);
+        else if (choice.equals("targets"))
+            msg = new ShowPossibleTargetsMessage(lightVersion);
+        else if (choice.equals("discard"))
+            msg = new AskForCubeMessage(lightVersion);
+        else if (choice.equals("cube"))
+            msg = new AskForCubeMessage(lightVersion);
+        else
+            msg = null; // OTHER options
+
         callView(msg, getUserFromPlayer(currPlayer));
     }
 
