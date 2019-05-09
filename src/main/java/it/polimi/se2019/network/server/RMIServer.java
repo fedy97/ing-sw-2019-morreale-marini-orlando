@@ -96,7 +96,7 @@ public class RMIServer implements Server {
             clientActor.put(username, virtualView);
             Lobby.addUser(username);
             virtualView.viewSetChanged();
-            virtualView.notifyObservers(new NewConnectionMessage(Lobby.getUsers()));
+            virtualView.notifyObservers("new client connected");
             HandyFunctions.checkForAtLeast2Players(virtualView);
             HandyFunctions.LOGGER.log(Level.INFO, username + " connected to the RMI server!");
         } catch (Exception e) {

@@ -90,7 +90,7 @@ public class SocketClient implements Client, Observer {
     /**
      * @param msg to be sent to the server socket
      */
-    public void callServer(ToServerMessage msg) {
+    private void callServer(ToServerMessage msg) {
         try {
             objectOutputStream.writeObject(msg);
             objectOutputStream.flush();
@@ -101,6 +101,6 @@ public class SocketClient implements Client, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
+        callServer((ToServerMessage) arg);
     }
 }

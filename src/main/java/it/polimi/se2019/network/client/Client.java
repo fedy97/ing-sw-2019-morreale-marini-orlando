@@ -16,7 +16,6 @@ public interface Client extends Remote {
 
     void connect(String host, int port)throws RemoteException;
     void disconnect() throws IOException;
-    void callServer(ToServerMessage msg) throws RemoteException;
     void interpretMessage(ToClientMessage msg) throws RemoteException;
     boolean isConnected() throws RemoteException;
 }

@@ -107,12 +107,11 @@ public class RMIClient implements Client, Observer {
         }
     }
 
-    @Override
     /**
      * @param msg containing the set of action to be performed on the corresponding
      *            server side virtual view
      */
-    public void callServer(ToServerMessage msg) {
+    private void callServer(ToServerMessage msg) {
         try {
             stub.interpretMessage(msg);
         } catch (Exception e) {
@@ -122,6 +121,6 @@ public class RMIClient implements Client, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
+        callServer((ToServerMessage) arg);
     }
 }
