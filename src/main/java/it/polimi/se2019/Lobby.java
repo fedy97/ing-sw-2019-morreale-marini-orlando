@@ -18,6 +18,7 @@ public class Lobby {
     private static RMIServer rmiServer = new RMIServer(1099);
     private static SocketServer socketServer = new SocketServer(1100);
     private static Controller controller = new Controller(new Game());
+
     public static void main(String[] args) {
 
         rmiServer.start();

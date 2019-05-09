@@ -9,6 +9,7 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.NewConnectionMessage;
 import it.polimi.se2019.network.message.to_client.ShowPlatformMessage;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.util.*;
@@ -125,30 +126,31 @@ public class Controller implements Observer {
         //TODO
     }
 
+    public <T> void askFor(List<T> possibleChoices, String choice){
+
+    }
+
     /**
      * @param possibleChoices list of weapons returned by the validator
-     * @return the weapons the player want to grab
      */
-    public List<WeaponCard> askForWeapons(List<WeaponCard> possibleChoices) {
+    public void askForWeapons(List<WeaponCard> possibleChoices) {
         //TODO
-        return new ArrayList<>();
     }
 
     /**
      * @param discardables weapons owned by the current player in the actual state of the game
      * @return the weapon the player want to discard in order to grab another one
      */
-    public WeaponCard askForDiscard(List<WeaponCard> discardables) {
+    public void askForDiscard(List<WeaponCard> discardables) {
         //TODO
-        return null;
     }
 
     /**
-     * @return the targets chosen by the player from those returned by the Validator
+     * @param possibleTargets collection of all players that can be target of the current player
      */
-    public List<Player> askForTargets(List<Player> possibleTargets) {
-        currentView.lightPlayers(possibleTargets);
-        return new ArrayList<>();
+    public void askForTargets(List<Player> possibleTargets) {
+        List<String> lightVersion = HandyFunctions.getLightCollection(possibleTargets);
+
     }
 
     /**
@@ -156,25 +158,11 @@ public class Controller implements Observer {
      * @return the destination platform chosen by the player
      */
     public void askForPosition(List<Platform> possibleDestination) {
-        String user = null;
-        List<String> lightVersion = new ArrayList<>();
-
-        for (Platform platform : possibleDestination)
-            lightVersion.add(platform.toString());
+        List<String> lightVersion = HandyFunctions.getLightCollection(possibleDestination);
 
         Player currPlayer = playerManager.getCurrentPlayer();
-
-        for (Map.Entry<String, Player> entry : userPlayer.entrySet()) {
-            if (entry.getValue() == currPlayer)
-                user = entry.getKey();
-        }
         ToClientMessage msg = new ShowPlatformMessage(lightVersion);
-
-        if (Lobby.getRmiServer().isConnected(user))
-            Lobby.getRmiServer().sendToClient(msg, user);
-        if (Lobby.getSocketServer().isConnected(user))
-            Lobby.getSocketServer().sendToClient(msg, user);
-
+        callView(msg, getUserFromPlayer(currPlayer));
     }
 
     public Validator getValidator() {
@@ -191,6 +179,34 @@ public class Controller implements Observer {
     public AmmoCube askForTribute() {
         //TODO
         return null;
+    }
+
+    /**
+     * @param player value of the map
+     * @return the user associated to the param player
+     */
+    private String getUserFromPlayer(Player player) {
+        String user = null;
+
+        for (Map.Entry<String, Player> entry : userPlayer.entrySet()) {
+            if (entry.getValue() == player)
+                user = entry.getKey();
+        }
+
+        return user;
+    }
+
+    /**
+     * Common method across RMI and Socket to send requests to client
+     *
+     * @param msg  to the destination client
+     * @param user recipient of the message
+     */
+    private void callView(ToClientMessage msg, String user) {
+        if (Lobby.getRmiServer().isConnected(user))
+            Lobby.getRmiServer().sendToClient(msg, user);
+        if (Lobby.getSocketServer().isConnected(user))
+            Lobby.getSocketServer().sendToClient(msg, user);
     }
 
     /**
