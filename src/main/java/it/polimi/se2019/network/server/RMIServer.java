@@ -1,6 +1,7 @@
 package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.Lobby;
+import it.polimi.se2019.model.Game;
 import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.message.to_client.NewConnectionMessage;
@@ -96,7 +97,7 @@ public class RMIServer implements Server {
             Lobby.addUser(username);
             virtualView.viewSetChanged();
             virtualView.notifyObservers(new NewConnectionMessage(Lobby.getUsers()));
-
+            HandyFunctions.checkForAtLeast2Players(virtualView);
             HandyFunctions.LOGGER.log(Level.INFO, username + " connected to the RMI server!");
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());

@@ -12,6 +12,7 @@ import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Observable;
+import java.util.Random;
 import java.util.logging.Level;
 
 /**
@@ -31,6 +32,11 @@ public class CLI extends RemoteView {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
         reader = new CliReader(5);
+    }
+
+    @Override
+    public void updateTimer(int count) {
+        //TODO for simo
     }
 
     @Override
@@ -72,7 +78,7 @@ public class CLI extends RemoteView {
         }
         else {
 
-            RMIClient client = new RMIClient(this,1560,userName);
+            RMIClient client = new RMIClient(this,HandyFunctions.randomIntegerBetWeen(1500,2000),userName);
             client.connect(ip,1099);
             this.addObserver(client);
         }

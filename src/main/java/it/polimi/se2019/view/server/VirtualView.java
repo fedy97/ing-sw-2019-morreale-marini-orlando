@@ -4,6 +4,8 @@ package it.polimi.se2019.view.server;
 import it.polimi.se2019.Lobby;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.network.message.to_client.UpdateTimerMessage;
 import it.polimi.se2019.network.server.Server;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.View;
@@ -25,11 +27,11 @@ public class VirtualView extends View {
     public VirtualView(Server virtualServer, String user) {
         this.virtualServer = virtualServer;
         this.user = user;
-        this.game = Lobby.getController().getGame();
+        this.game = Game.getInstance();
+        //virtual view(this) observs model(Game)
+        game.addObserver(this);
         //controller observs (this)
         this.addObserver(Lobby.getController());
-        //(this) observs model
-        game.addObserver(this);
     }
 
     public String getUser() {
@@ -42,7 +44,11 @@ public class VirtualView extends View {
      */
     @Override
     public void update(Observable game, Object message) {
-        //TODO
+        if (message instanceof UpdateTimerMessage) {
+            for (String user : Lobby.getUsers()) {
+                callView((ToClientMessage) message,user);
+            }
+        }
     }
 
     @Override
@@ -94,6 +100,18 @@ public class VirtualView extends View {
      */
     public void lightPlayers(List<Player> targets) {
         //TODO
+    }
+    /**
+     * Common method across RMI and Socket to send requests to client
+     *
+     * @param msg  to the destination client
+     * @param user recipient of the message
+     */
+    private void callView(ToClientMessage msg, String user) {
+        if (Lobby.getRmiServer().isConnected(user))
+            Lobby.getRmiServer().sendToClient(msg, user);
+        if (Lobby.getSocketServer().isConnected(user))
+            Lobby.getSocketServer().sendToClient(msg, user);
     }
 
 }

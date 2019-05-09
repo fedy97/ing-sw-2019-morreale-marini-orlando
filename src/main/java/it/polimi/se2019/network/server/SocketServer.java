@@ -1,10 +1,13 @@
 package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.Lobby;
+import it.polimi.se2019.model.Game;
 import it.polimi.se2019.network.message.to_client.NewConnectionMessage;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.network.message.to_client.UpdateTimerMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
+import it.polimi.se2019.utils.Timer;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.io.*;
@@ -64,7 +67,8 @@ public class SocketServer implements Server {
                         connections.put(user, specificSocketServer);
                         HandyFunctions.LOGGER.log(Level.INFO, user + " connected to the socket server!");
                         virtualView.viewSetChanged();
-                        virtualView.notifyObservers(new NewConnectionMessage(Lobby.getUsers()));
+                        virtualView.notifyObservers("new client connected");
+                        HandyFunctions.checkForAtLeast2Players(virtualView);
 
                     } catch (Exception e) {
                         HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
@@ -106,9 +110,9 @@ public class SocketServer implements Server {
 
     public void interpretMessage(ToServerMessage msg) {
 
-        //la virtual view associata al giusto user notifica il controller
-
-        actors.get(msg.getSender()).notifyObservers(msg);
+        //virtual view associated to the right sender notifies the controller
+        getVirtualView(msg.getSender()).viewSetChanged();
+        getVirtualView(msg.getSender()).notifyObservers(msg);
     }
 
     @Override

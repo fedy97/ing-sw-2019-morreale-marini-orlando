@@ -1,14 +1,19 @@
 package it.polimi.se2019.utils;
 
+import it.polimi.se2019.Lobby;
+import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.Character;
+import it.polimi.se2019.view.server.VirtualView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 
 //add here some recurrent functions that can be helpful
 public class HandyFunctions {
+    private static Random random = new Random();
     private HandyFunctions() {
     }
 
@@ -62,4 +67,28 @@ public class HandyFunctions {
         return lightVersion;
     }
 
+    public static void checkForAtLeast2Players(VirtualView virtualView){
+        if (Lobby.getUsers().size() == 2 && !Game.getInstance().isTimerStarted()) {
+            Game.getInstance().setTimerStarted(true);
+            virtualView.viewSetChanged();
+            virtualView.notifyObservers("we are at least 2");
+        }
+    }
+
+    public static int randomInteger(){
+        return random.nextInt();
+    }
+
+    /**
+     * return a random number between first and second inclusive
+     * @param first int
+     * @param second int
+     * @return random int
+     */
+    public static int randomIntegerBetWeen(int first, int second){
+        if (first >= second) {
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+        return random.nextInt((second - first) + 1) + first;
+    }
 }

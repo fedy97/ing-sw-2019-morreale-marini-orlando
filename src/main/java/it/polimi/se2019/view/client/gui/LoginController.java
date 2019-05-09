@@ -50,9 +50,7 @@ public class LoginController {
         } else {
             GUI gui = new GUI((Stage)loginButton.getScene().getWindow());
             if (getConnection().equals("RMI")) {
-                Random random = new Random();
-                int port = random.nextInt(500)+1500;
-                RMIClient client = new RMIClient(gui, port, getUsername());
+                RMIClient client = new RMIClient(gui, HandyFunctions.randomIntegerBetWeen(1500,3000), getUsername());
                 client.connect(getIp(), 1099);
                 gui.addObserver(client);
             } else {

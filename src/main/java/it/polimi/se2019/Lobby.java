@@ -17,8 +17,7 @@ public class Lobby {
     private static List<String> users = new ArrayList<>();
     private static RMIServer rmiServer = new RMIServer(1099);
     private static SocketServer socketServer = new SocketServer(1100);
-    private static Controller controller = new Controller(new Game());
-
+    private static Controller controller = Controller.getInstance();
     public static void main(String[] args) {
 
         rmiServer.start();

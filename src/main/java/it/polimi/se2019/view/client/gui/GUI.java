@@ -82,6 +82,23 @@ public class GUI extends RemoteView {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose map");
         }
     }
+    /**
+     * @param users to display on the view(GUI)
+     */
+    @Override
+    public void updatePlayersOnWaitingList(List<String> users) {
+        Platform.runLater(
+                () -> {
+                    waitingLobbyController.updateLoggedPlayers(users);
+                });
+    }
+    @Override
+    public void updateTimer(int count){
+        Platform.runLater(
+                () -> {
+                    waitingLobbyController.updateTimer(count);
+                });
+    }
 
     @Override
     public void startGame() {
@@ -98,16 +115,7 @@ public class GUI extends RemoteView {
         //TODO
     }
 
-    /**
-     * @param users to display on the view(GUI)
-     */
-    @Override
-    public void updatePlayersOnWaitingList(List<String> users) {
-        Platform.runLater(
-                () -> {
-                    waitingLobbyController.updateLoggedPlayers(users);
-                });
-    }
+
 
     @Override
     public void setUserName() {

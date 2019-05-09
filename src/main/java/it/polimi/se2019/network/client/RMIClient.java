@@ -66,7 +66,7 @@ public class RMIClient implements Client, Observer {
         }
 
         connected = true;
-        HandyFunctions.LOGGER.log(Level.INFO, "Client is connected!");
+        HandyFunctions.LOGGER.log(Level.FINE, "Client is connected!");
     }
 
     /**

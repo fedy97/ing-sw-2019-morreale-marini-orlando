@@ -7,6 +7,7 @@ import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.message.to_client.UpdateTimerMessage;
 
 import java.util.*;
 
@@ -22,11 +23,32 @@ public class Game extends Observable {
     private Deck<PowerUpCard> garbageDeck;
     private Deck<AmmoCard> ammoDeck;
     private Map<Character, Player> characterPlayers;
-    
-    public Game() {
-        //TODO
+    private int secondsLeft;
+    private boolean timerStarted = false;
+    private static Game instance = null;
+    /**
+     * Game singleton constructor
+     * @return instance
+     */
+    public static Game getInstance(){
+        if(instance == null){
+            instance = new Game();
+        }
+        return instance;
     }
-    
+    //TODO, when the game starts, the method is thrown, every attribute will be set not only gamefield
+    public void initGame(GameField gameField) {
+        this.gameField = gameField;
+    }
+
+    public boolean isTimerStarted() {
+        return timerStarted;
+    }
+
+    public void setTimerStarted(boolean timerStarted) {
+        this.timerStarted = timerStarted;
+    }
+
     public GameField getGameField() {
         return gameField;
     }
@@ -115,5 +137,15 @@ public class Game extends Observable {
     public void notifyChanges(){
         setChanged();
         notifyObservers();
+    }
+
+    /**
+     * every time ths method is called by the timer, (this) will notify the virtual view
+     * @param secondsLeft to the chooseMap page
+     */
+    public synchronized void setSecondsLeft(int secondsLeft) {
+        this.secondsLeft = secondsLeft;
+        setChanged();
+        notifyObservers(new UpdateTimerMessage(secondsLeft));
     }
 }

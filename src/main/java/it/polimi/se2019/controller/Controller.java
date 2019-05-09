@@ -6,6 +6,7 @@ import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.*;
 import it.polimi.se2019.utils.HandyFunctions;
+import it.polimi.se2019.utils.Timer;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.util.*;
@@ -22,33 +23,52 @@ public class Controller implements Observer {
     private Map<String, Player> userPlayer;
     private Map<String, VirtualView> userView;
     private VirtualView currentView;
+    private static Controller instance = null;
 
     /**
-     * Instantiate a new controller class
+     * Controller singleton constructor
      *
-     * @param game The game to be managed
+     * @return instance
      */
-    public Controller(Game game) {
-        this.game = game;
+    public static Controller getInstance() {
+        if (instance == null) {
+            instance = new Controller();
+        }
+        return instance;
+    }
+
+
+    /**
+     * now we need the managers,
+     * this method is thrown
+     * after we set all parameters to the Game,
+     * when the game starts
+     */
+    public void setManagers() {
+        this.game = Game.getInstance();
         this.decksManager = new DecksManager(game.getPowerUpDeck(), game.getAmmoDeck());
         this.gameManager = new GameManager();
         this.playerManager = new PlayerManager(this);
         userPlayer = new HashMap<>();
     }
 
+
     @Override
     /**
      * Called when the VirtualView notify changes
      */
     public void update(Observable virtualView, Object message) {
-        if (message instanceof NewConnectionMessage) {
+        //new client connected is actually a ToServerCommand,
+        //however I did not create the class, I am lazy
+        if (message.equals("new client connected")) {
             //notify all clients connected
             for (String user : Lobby.getUsers()) {
-                if (Lobby.getRmiServer().isConnected(user))
-                    Lobby.getRmiServer().sendToClient((ToClientMessage) message, user);
-                if (Lobby.getSocketServer().isConnected(user))
-                    Lobby.getSocketServer().sendToClient((ToClientMessage) message, user);
+                callView(new NewConnectionMessage(Lobby.getUsers()), user);
             }
+        } else if (message.equals("we are at least 2")) {
+            //this timer will modify the model(Game) where the seconds integer is hold
+            Timer t = new Timer(30);
+            t.start();
         }
     }
 
@@ -124,9 +144,9 @@ public class Controller implements Observer {
 
     /**
      * @param possibleChoices collection of elements to show to the user
-     * @param choice type of info required by the controller to manage the current
-     *               state of the game
-     * @param <T> type of object to show to the client
+     * @param choice          type of info required by the controller to manage the current
+     *                        state of the game
+     * @param <T>             type of object to show to the client
      */
     public <T> void askFor(List<T> possibleChoices, String choice) {
         ToClientMessage msg = null;

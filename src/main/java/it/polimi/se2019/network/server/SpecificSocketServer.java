@@ -1,5 +1,6 @@
 package it.polimi.se2019.network.server;
 
+import it.polimi.se2019.Lobby;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
@@ -27,9 +28,6 @@ public class SpecificSocketServer extends Thread {
         this.specificVirtualView = vv;
         this.user = vv.getUser();
 
-        //TODO send Message to notify other clients that a new one is created,
-        // using notifyObservers from the virtual view
-
     }
 
     @Override
@@ -48,6 +46,7 @@ public class SpecificSocketServer extends Thread {
                     input.close();
                     output.close();
                     socket.close();
+                    Lobby.getUsers().remove(user);
                 } catch (IOException ex) {
                     HandyFunctions.LOGGER.log(Level.INFO, user + " stream of " + user + " already closed");
                 }
