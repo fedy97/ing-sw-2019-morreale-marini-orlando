@@ -1,13 +1,11 @@
 package it.polimi.se2019.network.message.to_server;
 
-import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.PlayerManager;
 import it.polimi.se2019.utils.HandyFunctions;
 
 import java.util.logging.Level;
 
 public class CollectAmmoTileMessage extends ToServerMessage {
-
     public CollectAmmoTileMessage(Object payload) {
         super(payload);
     }
@@ -16,7 +14,7 @@ public class CollectAmmoTileMessage extends ToServerMessage {
     /**
      * Control if the action "move" is valid and move the character of the current player
      */
-    public void performAction(Controller actor){
+    public void performAction(){
         PlayerManager manager = actor.getPlayerManager();
 
         if(actor.isValidAction("grabAmmo")) {

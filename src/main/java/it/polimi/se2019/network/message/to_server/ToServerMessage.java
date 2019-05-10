@@ -4,13 +4,15 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.network.message.Message;
 
 public abstract class ToServerMessage extends Message {
-    private String sender;
+    protected String sender;
+    protected Controller actor;
 
     public ToServerMessage(Object payload) {
         super(payload);
+        actor = Controller.getInstance();
     }
 
-    public abstract void performAction(Controller c);
+    public abstract void performAction();
 
     /**
      * @param sender username of the client sending the message

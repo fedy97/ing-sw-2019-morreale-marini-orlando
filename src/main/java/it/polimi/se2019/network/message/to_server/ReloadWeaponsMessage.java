@@ -22,7 +22,8 @@ public class ReloadWeaponsMessage extends ToServerMessage {
     /**
      * Control if the action "move" is valid and move the character of the current player
      */
-    public void performAction(Controller actor) {
+    public void performAction() {
+        Controller actor = Controller.getInstance();
         List<String> lightVersion = (ArrayList<String>) payload;
         List<WeaponCard> weapons = new ArrayList<>();
         for (String weapon : lightVersion)
