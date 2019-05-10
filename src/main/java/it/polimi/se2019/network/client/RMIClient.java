@@ -119,6 +119,11 @@ public class RMIClient implements Client, Observer {
         }
     }
 
+    /**
+     * it recives the updates from GUI or CLI
+     * @param o GUI/CLI
+     * @param arg the message sent from gui or cli
+     */
     @Override
     public void update(Observable o, Object arg) {
         callServer((ToServerMessage) arg);

@@ -112,6 +112,7 @@ public class RMIServer implements Server {
      * @param user requesting server decoding service
      */
     public void interpretMessage(ToServerMessage msg) {
+        clientActor.get(msg.getSender()).viewSetChanged();
         clientActor.get(msg.getSender()).notifyObservers(msg);
     }
 
