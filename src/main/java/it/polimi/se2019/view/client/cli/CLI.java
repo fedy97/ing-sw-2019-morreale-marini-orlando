@@ -41,7 +41,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void updateTimer(int count) {
-        //TODO for simo
+        CliPrinter.timerMessage(count);
     }
 
     @Override

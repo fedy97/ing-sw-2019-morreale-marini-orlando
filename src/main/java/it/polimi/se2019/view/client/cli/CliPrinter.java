@@ -238,4 +238,8 @@ public final class CliPrinter {
         }
     }
 
+    public static void timerMessage(int count) {
+        HandyFunctions.printConsole("\r\t\t\t                  The game will start in: "+count);
+    }
+
 }
