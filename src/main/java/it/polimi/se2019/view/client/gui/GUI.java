@@ -104,7 +104,7 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void updateTimer(int count) {
+    public void updateTimerLobby(int count) {
         Platform.runLater(
                 () -> {
                     waitingLobbyController.updateTimer(count);

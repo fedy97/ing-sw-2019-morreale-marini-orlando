@@ -40,17 +40,12 @@ public class VirtualView extends View {
     }
 
     /**
-     * @param game who is being observed by (this)
+     * @param game    who is being observed by (this)
      * @param message sent by the model(game)
      */
     @Override
     public void update(Observable game, Object message) {
-        if (message instanceof UpdateTimerMessage) {
-            updateUsers((ToClientMessage) message);
-        }
-        if (message instanceof ShowChooseMapMessage) {
-            updateUsers((ToClientMessage) message);
-        }
+        updateUsers((ToClientMessage) message);
     }
 
     @Override
@@ -103,6 +98,7 @@ public class VirtualView extends View {
     public void lightPlayers(List<Player> targets) {
         //TODO
     }
+
     /**
      * Common method across RMI and Socket to send requests to client
      *
@@ -115,9 +111,14 @@ public class VirtualView extends View {
         if (Lobby.getSocketServer().isConnected(user))
             Lobby.getSocketServer().sendToClient(msg, user);
     }
-    private void updateUsers(ToClientMessage message){
+
+    /**
+     * update all clients connected
+     * @param message to be sent
+     */
+    private void updateUsers(ToClientMessage message) {
         for (String user : Lobby.getUsers()) {
-            callView(message,user);
+            callView(message, user);
         }
     }
 
