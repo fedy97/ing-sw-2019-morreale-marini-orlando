@@ -2,18 +2,14 @@ package it.polimi.se2019.view.client.cli;
 
 import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.client.SocketClient;
-import it.polimi.se2019.network.server.RMIServer;
+import it.polimi.se2019.network.message.to_server.SendMapChosenMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.client.RemoteView;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.rmi.RemoteException;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Random;
+import java.util.*;
 import java.util.logging.Level;
 
 /**
@@ -25,6 +21,10 @@ public class CLI extends RemoteView {
     private int connectionChosen;
     private String ip;
     private final int SOCKET = 1;
+    private int mapChosen = 0;
+    private int timeLeftForMaps = 0;
+    private int[] vote;
+    private boolean firstTime = true;
 
     public CLI() {
         try {
@@ -33,21 +33,45 @@ public class CLI extends RemoteView {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
         reader = new CliReader(5);
+        vote = new int[4];
+        vote[0] = 0;
+        vote[1] = 0;
+        vote[2] = 0;
+        vote[3] = 0;
     }
 
     @Override
     public void updateTimerMap(int count) {
-
+        timeLeftForMaps = count;
+        showChooseMap();
     }
 
     @Override
     public void updateVotesMapChosen(Map<Integer, Integer> map) {
-
+        for(int i=1; i<=4;i++) {
+            vote[i-1] = map.get(i);
+        }
+        showChooseMap();
     }
 
     @Override
     public void showChooseMap() {
-
+        if(firstTime) {
+            new Thread( () -> {
+                Scanner sc = new Scanner(System.in);
+                mapChosen = sc.nextInt();
+                SendMapChosenMessage message = new SendMapChosenMessage(mapChosen);
+                message.setSender(userName);
+                viewSetChanged();
+                notifyObservers(message);
+            }).start();
+            firstTime = false;
+        }
+        CliSetUp.clear();
+        CliSetUp.cursorToHome();
+        CliPrinter.welcomeMessage();
+        HandyFunctions.printConsole("\n\n");
+        CliPrinter.possibleMapsMessage(timeLeftForMaps,vote);
     }
 
     @Override

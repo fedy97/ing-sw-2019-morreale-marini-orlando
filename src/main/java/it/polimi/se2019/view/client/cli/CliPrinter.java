@@ -242,4 +242,20 @@ public final class CliPrinter {
         HandyFunctions.printConsole("\r\t\t\t                  The game will start in: "+count);
     }
 
+    public static void possibleMapsMessage(int timer, int[] vote) {
+        CliPrinter.stamp("\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinter.stamp("\t\t\t ┃                      Choose the map                      ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃    <1> 3-4-4(votes: "+vote[0]+")            <3> 3-4-3(votes: "+vote[2]+")    ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃    <2> 4-4-3(votes: "+vote[1]+")            <4> 4-4-4(votes: "+vote[3]+")    ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                      choice: ");
+        CliSetUp.savePosition();
+        CliPrinter.stamp("                            ┃\n");
+        CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliPrinter.stamp("\t\t\t  Time left: "+timer);
+        CliSetUp.restorePosition();
+    }
+
 }
