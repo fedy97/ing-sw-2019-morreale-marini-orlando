@@ -23,7 +23,8 @@ public final class Teleporter extends PowerUpCard {
     /**
      * Activate the effect of the card
      */
-    public void useEffect(Controller c) {
+    public void useEffect() {
+        Controller c = Controller.getInstance();
         c.askFor(c.getGame().getGameField().getPlatforms(), "position");
         c.addValidAction("move");
     }

@@ -23,7 +23,7 @@ public final class Newton extends PowerUpCard {
     /**
      * Activate the effect of the card
      */
-    public void useEffect(Controller c) {
+    public void useEffect() {
         /** TODO
         Player target = c.askForTargets(c.getValidator().getValidTargets(this)).get(0);
 

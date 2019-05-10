@@ -45,7 +45,7 @@ public abstract class PowerUpCard extends Card {
     /**
      * Activate the effect of the card
      */
-    public abstract void useEffect(Controller c);
+    public abstract void useEffect();
 
     /**
      * Return if the player in his current state can use the power up or not

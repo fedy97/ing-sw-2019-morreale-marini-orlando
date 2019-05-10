@@ -7,7 +7,7 @@ public class UseWeaponMessage extends ToServerMessage {
 
     @Override
     /**
-     * Control if the action "move" is valid and move the character of the current player
+     * Use the selected weapon on the chosen targets
      */
     public void performAction() {
         //TODO

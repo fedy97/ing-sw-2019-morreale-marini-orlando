@@ -1,35 +1,53 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.model.player.Player;
-
 import java.util.*;
 
 /**
- * @author Federico Morreale
+ * @author Gabriel Raul Marini
  */
 public class TurnController {
-    private Player playerTurn;
-    private List<Player> turningOrder;
+    private String curr;
+    private String first;
+    private List<String> turningOrder;
     private Timer turnTimer;
 
-    public TurnController(List<Player> turningOrder){
-        playerTurn = turningOrder.get(0);
-        this.turningOrder = turningOrder;
+    public TurnController(){
+        turningOrder = new ArrayList<String>();
         turnTimer = new Timer();
+    }
+
+    /**
+     * Init the game logic
+     */
+    public void start(){
+        curr = first;
+    }
+
+    /**
+     * @param user to be added to the ordered list
+     */
+    public void addUser(String user){
+        if(turningOrder.size() == 0)
+            first = user;
+        turningOrder.add(user);
+    }
+
+    /**
+     * End the turn of the current user and switch to the next
+     */
+    public void endTurn(){
+        int currIndex = turningOrder.indexOf(curr);
+        if((currIndex + 1) == turningOrder.size())
+            curr = turningOrder.get(0);
+        else
+            curr = turningOrder.get(currIndex + 1);
     }
 
     /**
      * @return The player who has the turn
      */
-    public Player getPlayerTurn() {
-        return playerTurn;
-    }
-
-    /**
-     * @return A list indicating the order of players' turns
-     */
-    public List<Player> getTurningOrder() {
-        return turningOrder;
+    public String getTurnUser() {
+        return curr;
     }
 
     /**

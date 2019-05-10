@@ -7,7 +7,7 @@ import it.polimi.se2019.utils.Deserializer;
 import javax.naming.ldap.Control;
 
 /**
- * Message sent by the current player to move his character to another destination
+ * Message sent by the current player to move his character to another platform
  */
 public class MoveCurrPlayerMessage extends ToServerMessage {
     public MoveCurrPlayerMessage(Object payload) {
@@ -22,7 +22,7 @@ public class MoveCurrPlayerMessage extends ToServerMessage {
         Platform dest = Deserializer.getPlatform((String) payload);
         Controller actor = Controller.getInstance();
         if (actor.getUserFromPlayer(actor.getPlayerManager().getCurrentPlayer()) == getSender() &&
-                actor.isValidAction("move")){
+                actor.isValidAction("move")) {
             actor.getPlayerManager().move(dest);
             actor.removeValidAction("move");
         }

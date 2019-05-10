@@ -24,7 +24,7 @@ public final class TargettingScope extends PowerUpCard {
     /**
      * Activate the effect of Targeting Scope
      */
-    public void useEffect(Controller c) {
+    public void useEffect() {
         /** TODO
         Player currPlayer = c.getPlayerManager().getCurrentPlayer();
         Player target = c.askForTargets(c.getValidator().getValidTargets(this)).get(0);

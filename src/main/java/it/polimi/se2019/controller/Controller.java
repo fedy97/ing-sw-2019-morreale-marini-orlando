@@ -21,6 +21,7 @@ public class Controller implements Observer {
     private GameManager gameManager;
     private PlayerManager playerManager;
     private Validator validator;
+    private TurnController turnController;
     private Map<String, Player> userPlayer;
     private Map<String, VirtualView> userView;
     private VirtualView currentView;
@@ -41,6 +42,7 @@ public class Controller implements Observer {
 
     private Controller() {
         validActions = new ArrayList<>();
+        turnController = new TurnController();
     }
 
     /**
@@ -262,4 +264,7 @@ public class Controller implements Observer {
     }
 
 
+    public TurnController getTurnController(){
+        return turnController;
+    }
 }

@@ -10,14 +10,15 @@ import it.polimi.se2019.view.client.cli.CLI;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 public class Lobby {
     private static final String LOCALHOST = "127.0.0.1";
-    private static List<String> users = new ArrayList<>();
+    /** Turn controller should be enough
+    private static List<String> users = new ArrayList<>();*/
     private static RMIServer rmiServer = new RMIServer(1099);
     private static SocketServer socketServer = new SocketServer(1100);
     private static Controller controller = Controller.getInstance();
+
     public static void main(String[] args) {
 
         rmiServer.start();
@@ -40,9 +41,8 @@ public class Lobby {
     }
 
     public static void addUser(String user) {
-        users.add(user);
+        controller.getTurnController().addUser(user);
     }
-
     /**
      * @return the controller, useful I need it in VirtualView without passing it,
      * we could alternatively use singleton pattern for this

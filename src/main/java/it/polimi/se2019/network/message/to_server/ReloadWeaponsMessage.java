@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 
 /**
- * Message sent by the client to show the weapons it want to recharge (chosen from the Validator set)
+ * Message sent by the client to notify the weapons it want to recharge (chosen from the Validator set)
  */
 public class ReloadWeaponsMessage extends ToServerMessage {
     public ReloadWeaponsMessage(Object payload) {
