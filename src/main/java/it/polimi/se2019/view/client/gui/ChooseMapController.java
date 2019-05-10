@@ -25,6 +25,8 @@ public class ChooseMapController {
     private ToggleButton map3button;
     @FXML
     private ToggleButton map4button;
+    @FXML
+    private Label timer;
 
     private ToggleGroup connectionType = new ToggleGroup();
 

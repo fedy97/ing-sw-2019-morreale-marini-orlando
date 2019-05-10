@@ -8,6 +8,6 @@ public class UpdateTimerMessage extends ToClientMessage {
 
     @Override
     public void performAction(RemoteView remoteView) {
-        remoteView.updateTimer((int)payload);
+        remoteView.updateTimerLobby((int)payload);
     }
 }
