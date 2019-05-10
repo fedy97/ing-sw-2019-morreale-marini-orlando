@@ -4,15 +4,15 @@ import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.view.View;
 
 import java.util.List;
+import java.util.Map;
 
-/**
- * @author Simone Orlando
- */
 public abstract class RemoteView extends View {
 
     public abstract void updatePlayersOnWaitingList(List<String> users);
     public abstract void updateTimerLobby(int count);
+    public abstract void updateTimerMap(int count);
     public abstract void showChooseMap();
+    public abstract void updateVotesMapChosen(Map<Integer,Integer> map);
     public abstract void lightWeapons(List<String> weapons);
     public abstract void lightPlatforms(List<String> platforms);
 

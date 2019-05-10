@@ -12,9 +12,8 @@ import java.util.Observer;
 public abstract class View extends Observable implements Observer {
 
     protected State state;
-    protected String userName;
     protected Action chosenAction;
-
+    protected String userName;
     public void viewSetChanged(){
         this.setChanged();
     }

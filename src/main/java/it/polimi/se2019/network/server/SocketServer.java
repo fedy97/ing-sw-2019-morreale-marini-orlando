@@ -1,13 +1,9 @@
 package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.Lobby;
-import it.polimi.se2019.model.Game;
-import it.polimi.se2019.network.message.to_client.NewConnectionMessage;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
-import it.polimi.se2019.network.message.to_client.UpdateTimerMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.utils.Timer;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.io.*;
@@ -59,10 +55,10 @@ public class SocketServer implements Server {
                         output.flush();
                         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
                         String user = (String) input.readObject();
-                        VirtualView virtualView = new VirtualView(this,user);
+                        VirtualView virtualView = new VirtualView(this, user);
                         actors.put(user, virtualView);
                         Lobby.addUser(user);
-                        SpecificSocketServer specificSocketServer = new SpecificSocketServer(this,socket, input, output, virtualView);
+                        SpecificSocketServer specificSocketServer = new SpecificSocketServer(this, socket, input, output, virtualView);
                         specificSocketServer.start();
                         connections.put(user, specificSocketServer);
                         HandyFunctions.LOGGER.log(Level.INFO, user + " connected to the socket server!");

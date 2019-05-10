@@ -8,7 +8,10 @@ import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.ShowChooseMapMessage;
-import it.polimi.se2019.network.message.to_client.UpdateTimerMessage;
+import it.polimi.se2019.network.message.to_client.UpdateTimerLobbyMessage;
+import it.polimi.se2019.network.message.to_client.UpdateTimerMapMessage;
+import it.polimi.se2019.network.message.to_client.UpdateVotesMapChosenMessage;
+import it.polimi.se2019.utils.TimerMap;
 
 import java.util.*;
 
@@ -26,7 +29,7 @@ public class Game extends Observable {
     private Map<Character, Player> characterPlayers;
     private int secondsLeft;
     private boolean timerStarted = false;
-    private Map<Integer,Integer> mapChosen = new HashMap<>();
+    private Map<Integer,Integer> mapChosen;
     private static Game instance = null;
     /**
      * Game singleton constructor
@@ -35,6 +38,11 @@ public class Game extends Observable {
     public static Game getInstance(){
         if(instance == null){
             instance = new Game();
+            instance.mapChosen = new HashMap<>();
+            instance.mapChosen.put(1,0);
+            instance.mapChosen.put(2,0);
+            instance.mapChosen.put(3,0);
+            instance.mapChosen.put(4,0);
         }
         return instance;
     }
@@ -53,6 +61,12 @@ public class Game extends Observable {
 
     public GameField getGameField() {
         return gameField;
+    }
+
+    public void setVoteMapChosen(int voteMapChosen){
+        mapChosen.put(voteMapChosen, mapChosen.get(voteMapChosen) + 1);
+        setChanged();
+        notifyObservers(new UpdateVotesMapChosenMessage(mapChosen));
     }
 
     /**
@@ -145,13 +159,26 @@ public class Game extends Observable {
      * every time ths method is called by the timer, (this) will notify the virtual view
      * @param secondsLeft to the chooseMap page
      */
-    public synchronized void setSecondsLeft(int secondsLeft) {
+    public synchronized void setSecondsLeftLobby(int secondsLeft) {
         this.secondsLeft = secondsLeft;
         setChanged();
-        notifyObservers(new UpdateTimerMessage(secondsLeft));
+        notifyObservers(new UpdateTimerLobbyMessage(secondsLeft));
         if (secondsLeft == 0) {
             setChanged();
             notifyObservers(new ShowChooseMapMessage(null));
+            //starts the other timer
+            TimerMap t = new TimerMap(5);
+            t.start();
+
         }
+    }
+
+    /**
+     * @param secondsLeft to the choose character page
+     */
+    public synchronized void setSecondsLeftMap(int secondsLeft) {
+        this.secondsLeft = secondsLeft;
+        setChanged();
+        notifyObservers(new UpdateTimerMapMessage(secondsLeft));
     }
 }

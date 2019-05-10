@@ -1,5 +1,6 @@
 package it.polimi.se2019.view.client.gui;
 
+import it.polimi.se2019.network.message.to_server.SendMapChosenMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.client.RemoteView;
 import it.polimi.se2019.view.State;
@@ -12,12 +13,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.logging.Level;
 
-/**
- * @author Simone Orlando
- */
 public class GUI extends RemoteView {
 
     private WaitingLobbyController waitingLobbyController;
@@ -27,11 +26,11 @@ public class GUI extends RemoteView {
     private Scene sceneWaitingLobby;
     private Scene sceneChooseMap;
     private Scene sceneChooseCharacter;
-
     private Stage stage;
 
-    public GUI(Stage stage) {
+    public GUI(String user, Stage stage) {
         this.stage = stage;
+        this.userName = user;
     }
 
     @Override
@@ -51,6 +50,7 @@ public class GUI extends RemoteView {
     public void showChooseMap() {
         Platform.runLater(
                 () -> {
+                    chooseMapController.passGUI(this);
                     stage.setScene(sceneChooseMap);
                     stage.show();
                 });
@@ -112,6 +112,29 @@ public class GUI extends RemoteView {
     }
 
     @Override
+    public void updateTimerMap(int count) {
+        Platform.runLater(
+                () -> {
+                    chooseMapController.updateTimer(count);
+                });
+    }
+
+    public void sendMapChosenByPlayer(int config) {
+        SendMapChosenMessage message = new SendMapChosenMessage(config);
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
+    }
+
+    @Override
+    public void updateVotesMapChosen(Map<Integer, Integer> map) {
+        Platform.runLater(
+                () -> {
+                    chooseMapController.updateVotes(map);
+                });
+    }
+
+    @Override
     public void startGame() {
         //TODO
     }
@@ -126,9 +149,9 @@ public class GUI extends RemoteView {
         //TODO
     }
 
-
     @Override
     public void setUserName() {
+        //useless
     }
 
     @Override

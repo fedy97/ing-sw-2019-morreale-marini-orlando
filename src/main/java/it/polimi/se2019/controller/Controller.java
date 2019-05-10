@@ -5,8 +5,9 @@ import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.*;
+import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.utils.Timer;
+import it.polimi.se2019.utils.TimerLobby;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.util.*;
@@ -62,8 +63,7 @@ public class Controller implements Observer {
      * Called when the VirtualView notify changes
      */
     public void update(Observable virtualView, Object message) {
-        //new client connected is actually a ToServerCommand,
-        //however I did not create the class, I am lazy
+
         if (message.equals("new client connected")) {
             //notify all clients connected
             for (String user : Lobby.getUsers()) {
@@ -71,8 +71,11 @@ public class Controller implements Observer {
             }
         } else if (message.equals("we are at least 2")) {
             //this timer will modify the model(Game) where the seconds integer is hold
-            Timer t = new Timer(5);
+            TimerLobby t = new TimerLobby(5);
             t.start();
+        } else {
+            //every ToServerMessage will modify the model in its own class hardcoded in performaction
+            ((ToServerMessage) message).performAction();
         }
     }
 

@@ -5,11 +5,9 @@ import it.polimi.se2019.network.message.Message;
 
 public abstract class ToServerMessage extends Message {
     protected String sender;
-    protected Controller actor;
 
     public ToServerMessage(Object payload) {
         super(payload);
-        actor = Controller.getInstance();
     }
 
     public abstract void performAction();

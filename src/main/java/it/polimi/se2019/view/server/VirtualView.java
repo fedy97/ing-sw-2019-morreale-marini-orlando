@@ -4,16 +4,13 @@ package it.polimi.se2019.view.server;
 import it.polimi.se2019.Lobby;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.network.message.to_client.ShowChooseMapMessage;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
-import it.polimi.se2019.network.message.to_client.UpdateTimerMessage;
 import it.polimi.se2019.network.server.Server;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.View;
 
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 
 
 public class VirtualView extends View {

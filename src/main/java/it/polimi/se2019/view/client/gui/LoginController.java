@@ -48,7 +48,8 @@ public class LoginController {
             alert.setHeaderText("Invalid username");
             alert.showAndWait();
         } else {
-            GUI gui = new GUI((Stage)loginButton.getScene().getWindow());
+            GUI gui = new GUI(getUsername(),(Stage)loginButton.getScene().getWindow());
+            gui.setUserName();
             if (getConnection().equals("RMI")) {
                 RMIClient client = new RMIClient(gui, HandyFunctions.randomIntegerBetWeen(1500,3000), getUsername());
                 client.connect(getIp(), 1099);

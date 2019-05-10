@@ -11,6 +11,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Random;
 import java.util.logging.Level;
@@ -32,6 +33,16 @@ public class CLI extends RemoteView {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
         reader = new CliReader(5);
+    }
+
+    @Override
+    public void updateTimerMap(int count) {
+
+    }
+
+    @Override
+    public void updateVotesMapChosen(Map<Integer, Integer> map) {
+
     }
 
     @Override

@@ -15,4 +15,5 @@ public abstract class Message implements Serializable {
     public Object getPayload() {
         return payload;
     }
+
 }

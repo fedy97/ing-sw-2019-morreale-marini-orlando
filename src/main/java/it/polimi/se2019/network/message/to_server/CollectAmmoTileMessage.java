@@ -1,5 +1,6 @@
 package it.polimi.se2019.network.message.to_server;
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.PlayerManager;
 import it.polimi.se2019.utils.HandyFunctions;
 
@@ -15,8 +16,8 @@ public class CollectAmmoTileMessage extends ToServerMessage {
      * Control if the action "move" is valid and move the character of the current player
      */
     public void performAction(){
+        Controller actor = Controller.getInstance();
         PlayerManager manager = actor.getPlayerManager();
-
         if(actor.isValidAction("grabAmmo")) {
             manager.grabAmmoCard();
             actor.removeValidAction("grabAmmo");
