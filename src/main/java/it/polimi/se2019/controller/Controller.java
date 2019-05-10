@@ -23,6 +23,7 @@ public class Controller implements Observer {
     private Map<String, Player> userPlayer;
     private Map<String, VirtualView> userView;
     private VirtualView currentView;
+    private List<String> validActions;
     private static Controller instance = null;
 
     /**
@@ -37,6 +38,9 @@ public class Controller implements Observer {
         return instance;
     }
 
+    private Controller(){
+        validActions = new ArrayList<>();
+    }
 
     /**
      * now we need the managers,
@@ -189,7 +193,7 @@ public class Controller implements Observer {
      * @param player value of the map
      * @return the user associated to the param player
      */
-    private String getUserFromPlayer(Player player) {
+    public String getUserFromPlayer(Player player) {
         String user = null;
 
         for (Map.Entry<String, Player> entry : userPlayer.entrySet()) {
@@ -223,8 +227,28 @@ public class Controller implements Observer {
         userPlayer.put(user, player);
     }
 
+    /**
+     * @param virtualView fake instance of the remote view of the player
+     * @param user        of the remote view
+     */
     public void addVirtualView(VirtualView virtualView, String user) {
         userView.put(user, virtualView);
+    }
+
+    /**
+     * @param action that can be validated by the controller once received a command message
+     *               from the client
+     */
+    public void addValidAction(String action){
+        validActions.add(action);
+    }
+
+    /**
+     * @param action to be validated
+     * @return if the action is valid in the current state of the game
+     */
+    public boolean isValidAction(String action){
+        return validActions.contains(action);
     }
 
 

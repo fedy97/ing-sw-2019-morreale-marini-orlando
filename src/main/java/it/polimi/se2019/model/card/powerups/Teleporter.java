@@ -5,7 +5,6 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.exceptions.InvalidCubeException;
 import it.polimi.se2019.exceptions.InvalidImageException;
 import it.polimi.se2019.exceptions.InvalidNameException;
-import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.Player;
 
@@ -25,8 +24,8 @@ public final class Teleporter extends PowerUpCard {
      * Activate the effect of the card
      */
     public void useEffect(Controller c) {
-       /** Platform destination = c.askForPosition(c.getGame().getGameField().getPlatforms());
-        c.getPlayerManager().getCurrentPlayer().setCurrentPlatform(destination);*/
+        c.askFor(c.getGame().getGameField().getPlatforms(), "position");
+        c.addValidAction("move");
     }
 
 
