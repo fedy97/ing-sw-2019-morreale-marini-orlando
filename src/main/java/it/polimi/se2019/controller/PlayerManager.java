@@ -2,8 +2,10 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.board.Platform;
+import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
+import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -16,7 +18,7 @@ import java.util.logging.Level;
  *
  * @author Gabriel Raul Marini
  */
-public class PlayerManager{
+public class PlayerManager {
 
     private Player currentPlayer;
     private List<Player> tempPlayers;
@@ -68,6 +70,28 @@ public class PlayerManager{
     }
 
     /**
+     * Grab the ammo card placed on the current platform
+     */
+    public void grabAmmoCard() {
+        try {
+            AmmoCard ammo = currentPlayer.getCurrentPlatform().grabAmmoCard();
+            AmmoCard newAmmo = father.getDecksManager().getNewAmmoCard(ammo);
+
+            if (ammo.hasPowerUp()) {
+                currentPlayer.addPowerUpCard(father.getDecksManager().drawPowerUp());
+            }
+
+            AmmoCube[] ammoCubes = ammo.getAmmoCubes();
+            for (int i = 0; i < ammoCubes.length; i++)
+                currentPlayer.getPlayerBoard().getAmmoBox().addAmmos(ammoCubes[i], 1);
+
+            currentPlayer.getCurrentPlatform().setPlatformAmmoCard(newAmmo);
+        } catch (Exception e) {
+            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+        }
+    }
+
+    /**
      * @param weapons that can be grabbed by the player according to his ammos
      * @throws MaxWeaponException is something went wrong
      */
@@ -79,12 +103,12 @@ public class PlayerManager{
                 currentPlayer.getCurrentPlatform().removeWeaponCard(weaponCard);
             } catch (MaxWeaponException e) {
                 /** TODO
-                WeaponCard choice = father.askForDiscard(currentPlayer.getWeaponCards());
+                 WeaponCard choice = father.askForDiscard(currentPlayer.getWeaponCards());
 
-                if (choice != null) {
-                    currentPlayer.removeWeaponCard(choice);
-                    currentPlayer.addWeaponCard(weaponCard);
-                }*/
+                 if (choice != null) {
+                 currentPlayer.removeWeaponCard(choice);
+                 currentPlayer.addWeaponCard(weaponCard);
+                 }*/
 
             } catch (InvalidGenerationSpotException e) {
                 HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
@@ -106,7 +130,7 @@ public class PlayerManager{
             p = (Player) mapElement.getKey();
             try {
                 p.getPlayerBoard().addDamage(currentPlayer.getCharacter(), damage);
-            }catch(InvalidCharacterException e){
+            } catch (InvalidCharacterException e) {
                 HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
             }
         }

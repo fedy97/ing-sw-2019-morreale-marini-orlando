@@ -38,7 +38,7 @@ public class Controller implements Observer {
         return instance;
     }
 
-    private Controller(){
+    private Controller() {
         validActions = new ArrayList<>();
     }
 
@@ -239,15 +239,22 @@ public class Controller implements Observer {
      * @param action that can be validated by the controller once received a command message
      *               from the client
      */
-    public void addValidAction(String action){
+    public void addValidAction(String action) {
         validActions.add(action);
+    }
+
+    /**
+     * @param action to be removed
+     */
+    public void removeValidAction(String action) {
+        validActions.remove(action);
     }
 
     /**
      * @param action to be validated
      * @return if the action is valid in the current state of the game
      */
-    public boolean isValidAction(String action){
+    public boolean isValidAction(String action) {
         return validActions.contains(action);
     }
 

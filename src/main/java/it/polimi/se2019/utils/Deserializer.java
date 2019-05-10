@@ -2,6 +2,7 @@ package it.polimi.se2019.utils;
 
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.board.Platform;
+import it.polimi.se2019.model.card.weapons.WeaponCard;
 
 /**
  * Class providing service methods to match the server objects' reference with the corresponding
@@ -13,8 +14,16 @@ public final class Deserializer {
      * @param light remote id of the platform
      * @return the reference to the target platform
      */
-    public static Platform getPlatform(String light){
+    public static Platform getPlatform(String light) {
         return Controller.getInstance().getGame().getGameField().getPlatform(light);
+    }
+
+    /**
+     *
+     */
+    public static WeaponCard getWeapon(String light) {
+        //TODO
+        return null;
     }
 
 }

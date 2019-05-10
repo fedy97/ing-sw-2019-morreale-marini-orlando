@@ -19,7 +19,9 @@ public class MoveCurrPlayerMessage extends ToServerMessage {
     public void performAction(Controller actor) {
         Platform dest = Deserializer.getPlatform((String) payload);
         if (actor.getUserFromPlayer(actor.getPlayerManager().getCurrentPlayer()) == getSender() &&
-                actor.isValidAction("move"))
+                actor.isValidAction("move")){
             actor.getPlayerManager().move(dest);
+            actor.removeValidAction("move");
+        }
     }
 }
