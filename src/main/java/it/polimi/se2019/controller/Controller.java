@@ -68,8 +68,8 @@ public class Controller implements Observer {
 
         if (message.equals("new client connected")) {
             //notify all clients connected
-            for (String user : Lobby.getUsers()) {
-                callView(new NewConnectionMessage(Lobby.getUsers()), user);
+            for (String user : turnController.getUsers()) {
+                callView(new NewConnectionMessage(turnController.getUsers()), user);
             }
         } else if (message.equals("we are at least 2")) {
             //this timer will modify the model(Game) where the seconds integer is hold

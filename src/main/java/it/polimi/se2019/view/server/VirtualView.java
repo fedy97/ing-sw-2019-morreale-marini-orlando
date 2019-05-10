@@ -2,6 +2,7 @@ package it.polimi.se2019.view.server;
 
 
 import it.polimi.se2019.Lobby;
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
@@ -114,7 +115,7 @@ public class VirtualView extends View {
      * @param message to be sent
      */
     private void updateUsers(ToClientMessage message) {
-        for (String user : Lobby.getUsers()) {
+        for (String user : Controller.getInstance().getTurnController().getUsers()) {
             callView(message, user);
         }
     }

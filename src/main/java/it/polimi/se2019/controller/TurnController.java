@@ -50,6 +50,14 @@ public class TurnController {
         return curr;
     }
 
+    public List<String> getUsers(){
+        return turningOrder;
+    }
+
+    public void removeUser(String user){
+        turningOrder.remove(user);
+    }
+
     /**
      * @return The current value of the timer
      */

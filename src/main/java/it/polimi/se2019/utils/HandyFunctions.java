@@ -1,6 +1,7 @@
 package it.polimi.se2019.utils;
 
 import it.polimi.se2019.Lobby;
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.Character;
@@ -68,7 +69,7 @@ public class HandyFunctions {
     }
 
     public static void checkForAtLeast2Players(VirtualView virtualView){
-        if (Lobby.getUsers().size() == 2 && !Game.getInstance().isTimerStarted()) {
+        if (Controller.getInstance().getTurnController().getUsers().size() == 2 && !Game.getInstance().isTimerStarted()) {
             Game.getInstance().setTimerStarted(true);
             virtualView.viewSetChanged();
             virtualView.notifyObservers("we are at least 2");

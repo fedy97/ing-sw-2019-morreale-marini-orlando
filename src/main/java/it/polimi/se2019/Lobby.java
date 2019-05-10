@@ -36,10 +36,6 @@ public class Lobby {
 
     }
 
-    public static List<String> getUsers() {
-        return users;
-    }
-
     public static void addUser(String user) {
         controller.getTurnController().addUser(user);
     }

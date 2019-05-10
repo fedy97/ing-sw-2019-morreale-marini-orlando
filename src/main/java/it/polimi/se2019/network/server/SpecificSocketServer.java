@@ -1,6 +1,7 @@
 package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.Lobby;
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
@@ -46,7 +47,7 @@ public class SpecificSocketServer extends Thread {
                     input.close();
                     output.close();
                     socket.close();
-                    Lobby.getUsers().remove(user);
+                    Controller.getInstance().getTurnController().removeUser(user);
                 } catch (IOException ex) {
                     HandyFunctions.LOGGER.log(Level.INFO, user + " stream of " + user + " already closed");
                 }
