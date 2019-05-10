@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * !!!WORK IN PROGRESS
  */
-public class CollectWeaponsMessage extends ToServerMessage{
+public class CollectWeaponsMessage extends ToServerMessage {
 
     public CollectWeaponsMessage(Object payload) {
         super(payload);
