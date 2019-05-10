@@ -7,6 +7,7 @@ import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.message.to_client.ShowChooseMapMessage;
 import it.polimi.se2019.network.message.to_client.UpdateTimerMessage;
 
 import java.util.*;
@@ -25,6 +26,7 @@ public class Game extends Observable {
     private Map<Character, Player> characterPlayers;
     private int secondsLeft;
     private boolean timerStarted = false;
+    private Map<Integer,Integer> mapChosen = new HashMap<>();
     private static Game instance = null;
     /**
      * Game singleton constructor
@@ -147,5 +149,9 @@ public class Game extends Observable {
         this.secondsLeft = secondsLeft;
         setChanged();
         notifyObservers(new UpdateTimerMessage(secondsLeft));
+        if (secondsLeft == 0) {
+            setChanged();
+            notifyObservers(new ShowChooseMapMessage(null));
+        }
     }
 }

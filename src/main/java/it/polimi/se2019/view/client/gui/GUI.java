@@ -47,6 +47,15 @@ public class GUI extends RemoteView {
         stage.show();
     }
 
+    @Override
+    public void showChooseMap() {
+        Platform.runLater(
+                () -> {
+                    stage.setScene(sceneChooseMap);
+                    stage.show();
+                });
+    }
+
     private void initChooseCharacter() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/chooseCharacter.fxml"));
         try {
@@ -82,6 +91,7 @@ public class GUI extends RemoteView {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose map");
         }
     }
+
     /**
      * @param users to display on the view(GUI)
      */
@@ -92,8 +102,9 @@ public class GUI extends RemoteView {
                     waitingLobbyController.updateLoggedPlayers(users);
                 });
     }
+
     @Override
-    public void updateTimer(int count){
+    public void updateTimer(int count) {
         Platform.runLater(
                 () -> {
                     waitingLobbyController.updateTimer(count);
@@ -114,7 +125,6 @@ public class GUI extends RemoteView {
     public void startConnection() {
         //TODO
     }
-
 
 
     @Override
@@ -149,7 +159,9 @@ public class GUI extends RemoteView {
 
     @Override
     public void update(Observable obs, Object obj) {
-        //TODO
+        /*
+        we use this in RemoteView, here we got specific update methods
+         */
     }
 
 }

@@ -8,7 +8,7 @@ import javafx.scene.control.ToggleGroup;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ChooseMapController implements Observer {
+public class ChooseMapController {
     @FXML
     private Label map1vote;
     @FXML
@@ -30,11 +30,6 @@ public class ChooseMapController implements Observer {
 
     public void initialize() {
         connectionType.getToggles().addAll(map1button,map2button,map3button,map4button);
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
     }
 
     public void voteForMap1(){}

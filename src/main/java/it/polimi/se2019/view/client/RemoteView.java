@@ -12,6 +12,7 @@ public abstract class RemoteView extends View {
 
     public abstract void updatePlayersOnWaitingList(List<String> users);
     public abstract void updateTimer(int count);
+    public abstract void showChooseMap();
     public abstract void lightWeapons(List<String> weapons);
     public abstract void lightPlatforms(List<String> platforms);
 

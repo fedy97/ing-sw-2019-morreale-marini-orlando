@@ -35,6 +35,11 @@ public class CLI extends RemoteView {
     }
 
     @Override
+    public void showChooseMap() {
+
+    }
+
+    @Override
     public void updateTimer(int count) {
         //TODO for simo
     }

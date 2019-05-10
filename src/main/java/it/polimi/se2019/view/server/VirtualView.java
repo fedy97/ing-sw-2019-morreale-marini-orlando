@@ -4,6 +4,7 @@ package it.polimi.se2019.view.server;
 import it.polimi.se2019.Lobby;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.message.to_client.ShowChooseMapMessage;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.network.message.to_client.UpdateTimerMessage;
 import it.polimi.se2019.network.server.Server;
@@ -45,9 +46,10 @@ public class VirtualView extends View {
     @Override
     public void update(Observable game, Object message) {
         if (message instanceof UpdateTimerMessage) {
-            for (String user : Lobby.getUsers()) {
-                callView((ToClientMessage) message,user);
-            }
+            updateUsers((ToClientMessage) message);
+        }
+        if (message instanceof ShowChooseMapMessage) {
+            updateUsers((ToClientMessage) message);
         }
     }
 
@@ -112,6 +114,11 @@ public class VirtualView extends View {
             Lobby.getRmiServer().sendToClient(msg, user);
         if (Lobby.getSocketServer().isConnected(user))
             Lobby.getSocketServer().sendToClient(msg, user);
+    }
+    private void updateUsers(ToClientMessage message){
+        for (String user : Lobby.getUsers()) {
+            callView(message,user);
+        }
     }
 
 }

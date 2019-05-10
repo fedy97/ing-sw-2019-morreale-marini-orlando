@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="514.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.polimi.se2019.view.client.gui.ChooseMapController">
+<AnchorPane prefHeight="514.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.view.client.gui.ChooseMapController">
    <children>
       <ToggleButton fx:id="map1button" layoutX="37.0" layoutY="78.0" mnemonicParsing="false" onAction="#voteForMap1" prefHeight="162.0" prefWidth="225.0" snapToPixel="false">
          <graphic>
@@ -42,20 +41,20 @@
                </image>
             </ImageView>
          </graphic></ToggleButton>
-      <Label layoutX="211.0" layoutY="28.0" prefHeight="15.0" prefWidth="164.0" text="Scegli Mappa">
+      <Label layoutX="224.0" layoutY="29.0" prefHeight="29.0" prefWidth="139.0" text="Choose Map">
          <font>
-            <Font size="24.0" />
+            <Font name="Ubuntu" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="405.0" layoutY="250.0" text="Voti:" />
-      <Label layoutX="122.0" layoutY="250.0" text="Voti:" />
-      <Label layoutX="122.0" layoutY="464.0" text="Voti:" />
-      <Label layoutX="405.0" layoutY="464.0" text="Voti:" />
+      <Label layoutX="384.0" layoutY="250.0" text="Votes:" />
+      <Label layoutX="104.0" layoutY="250.0" text="Votes:" />
+      <Label layoutX="104.0" layoutY="464.0" text="Votes:" />
+      <Label layoutX="384.0" layoutY="464.0" text="Votes:" />
       <Label fx:id="map1vote" layoutX="159.0" layoutY="250.0" text="0" />
       <Label fx:id="map2vote" layoutX="443.0" layoutY="250.0" text="0" />
       <Label fx:id="map3vote" layoutX="159.0" layoutY="464.0" text="0" />
       <Label fx:id="map4vote" layoutX="443.0" layoutY="464.0" text="0" />
-      <Label layoutX="260.0" layoutY="258.0" text="Tempo:" />
+      <Label layoutX="260.0" layoutY="258.0" text="Timer:" />
       <Label fx:id="timer" layoutX="310.0" layoutY="258.0" text="10" />
    </children>
 </AnchorPane>

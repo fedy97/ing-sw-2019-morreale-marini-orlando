@@ -67,7 +67,7 @@ public class Controller implements Observer {
             }
         } else if (message.equals("we are at least 2")) {
             //this timer will modify the model(Game) where the seconds integer is hold
-            Timer t = new Timer(30);
+            Timer t = new Timer(5);
             t.start();
         }
     }
