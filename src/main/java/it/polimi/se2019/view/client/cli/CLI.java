@@ -40,7 +40,7 @@ public class CLI extends RemoteView {
     }
 
     @Override
-    public void updateTimer(int count) {
+    public void updateTimerLobby(int count) {
         CliPrinter.timerMessage(count);
     }
 
