@@ -28,8 +28,6 @@ public abstract class View extends Observable implements Observer {
 
     public abstract void waitGameStart();
 
-    public abstract void menageTurn();
-
     public abstract void setState(State newState);
 
     public abstract void startGame();

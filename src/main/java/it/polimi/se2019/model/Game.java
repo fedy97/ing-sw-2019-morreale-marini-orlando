@@ -1,19 +1,24 @@
 package it.polimi.se2019.model;
 
+import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.board.GameField;
+import it.polimi.se2019.model.board.Platform;
+import it.polimi.se2019.model.board.ScoreBoard;
+import it.polimi.se2019.model.board.SkullsBoard;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.network.message.to_client.ShowChooseMapMessage;
-import it.polimi.se2019.network.message.to_client.UpdateTimerLobbyMessage;
-import it.polimi.se2019.network.message.to_client.UpdateTimerMapMessage;
-import it.polimi.se2019.network.message.to_client.UpdateVotesMapChosenMessage;
+import it.polimi.se2019.network.message.to_client.*;
+import it.polimi.se2019.utils.HandyFunctions;
+import it.polimi.se2019.utils.JsonParser;
 import it.polimi.se2019.utils.TimerMap;
 
+import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
 
 /**
  * @author Federico Morreale
@@ -29,26 +34,32 @@ public class Game extends Observable {
     private Map<Character, Player> characterPlayers;
     private int secondsLeft;
     private boolean timerStarted = false;
-    private Map<Integer,Integer> mapChosen;
+    private Map<Integer, Integer> mapChosen;
     private static Game instance = null;
+
     /**
      * Game singleton constructor
+     *
      * @return instance
      */
-    public static Game getInstance(){
-        if(instance == null){
+    public static Game getInstance() {
+        if (instance == null) {
             instance = new Game();
             instance.mapChosen = new HashMap<>();
-            instance.mapChosen.put(1,0);
-            instance.mapChosen.put(2,0);
-            instance.mapChosen.put(3,0);
-            instance.mapChosen.put(4,0);
+            instance.mapChosen.put(1, 0);
+            instance.mapChosen.put(2, 0);
+            instance.mapChosen.put(3, 0);
+            instance.mapChosen.put(4, 0);
         }
         return instance;
     }
+
     //TODO, when the game starts, the method is thrown, every attribute will be set not only gamefield
-    public void initGame(GameField gameField) {
+    private void initGame(GameField gameField, Deck<WeaponCard> weaponsDeck, Deck<PowerUpCard> powerUpDeck, Deck<AmmoCard> ammoDeck) {
         this.gameField = gameField;
+        this.powerUpDeck = powerUpDeck;
+        this.weaponsDeck = weaponsDeck;
+        this.ammoDeck = ammoDeck;
     }
 
     public boolean isTimerStarted() {
@@ -63,7 +74,7 @@ public class Game extends Observable {
         return gameField;
     }
 
-    public void setVoteMapChosen(int voteMapChosen){
+    public void setVoteMapChosen(int voteMapChosen) {
         mapChosen.put(voteMapChosen, mapChosen.get(voteMapChosen) + 1);
         setChanged();
         notifyObservers(new UpdateVotesMapChosenMessage(mapChosen));
@@ -107,7 +118,7 @@ public class Game extends Observable {
     /**
      * @return The map that connects player with character
      */
-    public Map<Character,Player> getCharacterPlayers() {
+    public Map<Character, Player> getCharacterPlayers() {
         return characterPlayers;
     }
 
@@ -119,7 +130,7 @@ public class Game extends Observable {
     }
 
     /**
-     * @param player to link to the character
+     * @param player    to link to the character
      * @param character to assign to the player
      */
     public void setPlayerCharacter(Player player, Character character) {
@@ -141,22 +152,16 @@ public class Game extends Observable {
     }
 
     /**
-     * @param ammos The deck containing the ammo card
-     */
-    public void setAmmoDeck(Deck<AmmoCard> ammos) {
-        ammoDeck = ammos;
-    }
-
-    /**
      * Method used to notify that something changed in the model
      */
-    public void notifyChanges(){
+    public void notifyChanges() {
         setChanged();
         notifyObservers();
     }
 
     /**
      * every time ths method is called by the timer, (this) will notify the virtual view
+     *
      * @param secondsLeft to the chooseMap page
      */
     public synchronized void setSecondsLeftLobby(int secondsLeft) {
@@ -180,5 +185,42 @@ public class Game extends Observable {
         this.secondsLeft = secondsLeft;
         setChanged();
         notifyObservers(new UpdateTimerMapMessage(secondsLeft));
+        if (secondsLeft == 0) {
+            try {
+                setChanged();
+                notifyObservers(new ShowChooseCharacterMessage(null));
+                int config = findWhichMapWon();
+                JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
+                Deck<AmmoCard> deck = parserAmmos.buildAmmoCards();
+                //now we have 36 ammocards in the deck
+                deck.mix();
+                JsonParser parserField = new JsonParser("/json/field.json");
+                Platform[][] field = parserField.buildField(config, deck);
+                WeaponCard[] weaponCards = new WeaponCard[9];
+                for (int i = 0; i < 9; i++)
+                    weaponCards[i] = new WeaponCard();
+                JsonParser parser = new JsonParser("/json/powerups.json");
+                Deck<PowerUpCard> powerUpCardDeck = parser.buildPowerupCards();
+
+                GameField gf = new GameField(field, weaponCards, new SkullsBoard(8), new ScoreBoard());
+
+                initGame(gf, null, powerUpCardDeck, ammoDeck);
+
+            } catch (Exception ex) {
+                HandyFunctions.LOGGER.log(Level.SEVERE, ex.toString());
+            }
+        }
+    }
+
+    private int findWhichMapWon() {
+        int max = -1;
+        int config = -1;
+        for (int i : mapChosen.keySet()) {
+            if (mapChosen.get(i) > max) {
+                max = mapChosen.get(i);
+                config = i;
+            }
+        }
+        return config;
     }
 }

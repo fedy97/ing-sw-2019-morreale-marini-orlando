@@ -41,6 +41,11 @@ public class CLI extends RemoteView {
     }
 
     @Override
+    public void showChooseCharacter() {
+
+    }
+
+    @Override
     public void updateTimerMap(int count) {
         timeLeftForMaps = count;
         showChooseMap();
@@ -147,11 +152,6 @@ public class CLI extends RemoteView {
         CliPrinter.welcomeMessage();
         HandyFunctions.printConsole("\n\n");
         CliPrinter.boxWaitingMessage();
-    }
-
-    @Override
-    public void menageTurn() {
-        //TODO
     }
 
     @Override

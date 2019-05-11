@@ -1,13 +1,10 @@
 package it.polimi.se2019.utils;
 
-import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.Game;
 
-import java.io.IOException;
-
-public class TimerMap extends Thread {
+public class TimerCharacter extends Thread {
     private int seconds;
-    public TimerMap(int seconds) {
+    public TimerCharacter(int seconds) {
         this.seconds = seconds;
     }
 
@@ -18,11 +15,10 @@ public class TimerMap extends Thread {
             while (slept < seconds * 1000) {
                 sleep(1000);
                 slept = slept + 1000;
-                Game.getInstance().setSecondsLeftMap(seconds - slept / 1000);
+                //TODO Game.getInstance().setSecondsLeftMap(seconds - slept / 1000);
             }
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
-        } catch (Exception ex) {
         }
 
     }

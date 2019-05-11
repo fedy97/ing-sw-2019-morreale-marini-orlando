@@ -13,7 +13,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 /**
  * @author Simone Orlando
  */
-public class Track implements Runnable{
+/*public class Track implements Runnable{
 
 
     private String path;
@@ -42,4 +42,4 @@ public class Track implements Runnable{
 
         }
     }
-}
+}*/

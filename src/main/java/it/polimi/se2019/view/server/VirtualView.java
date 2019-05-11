@@ -75,12 +75,6 @@ public class VirtualView extends View {
         //TODO
     }
 
-    @Override
-    public void menageTurn() {
-        //TODO
-    }
-
-
     public void getCurrentPlayer() {
         //TODO
     }
