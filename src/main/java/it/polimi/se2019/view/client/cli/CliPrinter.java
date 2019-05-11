@@ -2,6 +2,7 @@ package it.polimi.se2019.view.client.cli;
 
 import it.polimi.se2019.utils.HandyFunctions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -11,7 +12,7 @@ import java.util.List;
 public final class CliPrinter {
 
     private static final String RESET = "\u001B[0m";
-    
+
 
     public static void stamp(String msg) {
         HandyFunctions.printConsole(msg + RESET);
@@ -250,6 +251,59 @@ public final class CliPrinter {
         CliPrinter.stamp("\t\t\t ┃    <1> 3-4-4(votes: "+vote[0]+")            <3> 3-4-3(votes: "+vote[2]+")    ┃\n");
         CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
         CliPrinter.stamp("\t\t\t ┃    <2> 4-4-3(votes: "+vote[1]+")            <4> 4-4-4(votes: "+vote[3]+")    ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃            press the <key> followed by enter ");
+        CliSetUp.savePosition();
+        CliPrinter.stamp("            ┃\n");
+        CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliPrinter.stamp("\t\t\t  Time left: "+timer);
+        CliSetUp.restorePosition();
+    }
+
+    public static void possibleCharMessage(int timer, ArrayList<String> chosen, int myChoice) {
+
+        char cBan = ' ';
+        char cSpr = ' ';
+        char cDoz = ' ';
+        char cVio = ' ';
+        char cDis = ' ';
+        if(chosen.contains("BANSHEE")) {
+            cBan = '✖';
+        }
+        if(chosen.contains("SPROG")) {
+            cSpr = '✖';
+        }
+        if(chosen.contains("DOZER")) {
+            cDoz = '✖';
+        }
+        if(chosen.contains("VIOLET")) {
+            cVio = '✖';
+        }
+        if(chosen.contains("DISTRUCTOR")) {
+            cDis = '✖';
+        }
+
+        if(myChoice == 1) {
+            cBan = '✔';
+        }
+        else if(myChoice ==2) {
+            cSpr = '✔';
+        }
+        else if(myChoice ==3) {
+            cDoz = '✔';
+        }
+        else if(myChoice ==4) {
+            cVio = '✔';
+        }
+        else if(myChoice ==5) {
+            cDis = '✔';
+        }
+        CliPrinter.stamp("\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinter.stamp("\t\t\t ┃                   Choose the character                   ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃  <1> Banshee "+cBan+"          <2> Sprog "+cSpr+"         <3> Dozer "+cDoz+"  ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃            <4> Violet "+cVio+"          <5> Distructor "+cDis+"        ┃\n");
         CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
         CliPrinter.stamp("\t\t\t ┃            press the <key> followed by enter ");
         CliSetUp.savePosition();

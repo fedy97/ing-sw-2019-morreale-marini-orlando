@@ -2,6 +2,7 @@ package it.polimi.se2019.view.client.cli;
 
 import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.client.SocketClient;
+import it.polimi.se2019.network.message.to_server.SendCharacterChosenMessage;
 import it.polimi.se2019.network.message.to_server.SendMapChosenMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.State;
@@ -23,8 +24,12 @@ public class CLI extends RemoteView {
     private String ip;
     private int mapChosen = 0;
     private int timeLeftForMaps = 0;
+    private int timeLeftForChar = 0;
     private int[] vote;
     private boolean firstTime = true;
+    private ArrayList<String> charChosen;
+    private int myChar = 0;
+    private String myCharEnumString;
 
     public CLI() {
         try {
@@ -38,21 +43,59 @@ public class CLI extends RemoteView {
         vote[1] = 0;
         vote[2] = 0;
         vote[3] = 0;
+        charChosen = new ArrayList<>();
     }
 
     @Override
     public void updateVotesCharacterChosen(String c) {
-
+        if (!c.equals(myCharEnumString))
+            charChosen.add(c);
+        showChooseCharacter();
     }
 
     @Override
     public void updateTimerCharacter(int count) {
-
+        timeLeftForChar = count;
+        showChooseCharacter();
     }
 
     @Override
     public void showChooseCharacter() {
-        //TODO
+        if(!firstTime) {
+            new Thread( () -> {
+                boolean okChar = false;
+                Console c = System.console();
+                while (!okChar) {
+                    int temp;
+                    temp = Character.getNumericValue((c.readPassword())[0]);
+                    if (temp == 1) {
+                        myCharEnumString = "BANSHEE";
+                    } else if (temp == 2) {
+                        myCharEnumString = "SPROG";
+                    } else if (temp == 3) {
+                        myCharEnumString = "DOZER";
+                    } else if (temp == 4) {
+                        myCharEnumString = "VIOLET";
+                    } else {
+                        myCharEnumString = "DISTRUCTOR";
+                    }
+                    if (!charChosen.contains(myCharEnumString)) {
+                        okChar = true;
+                        myChar = temp;
+                    }
+                }
+                SendCharacterChosenMessage message = new SendCharacterChosenMessage(myCharEnumString);
+                message.setSender(userName);
+                viewSetChanged();
+                notifyObservers(message);
+            }).start();
+            firstTime = true;
+        }
+        CliSetUp.clear();
+        CliSetUp.cursorToHome();
+        CliPrinter.welcomeMessage();
+        HandyFunctions.printConsole("\n\n");
+        CliPrinter.possibleCharMessage(timeLeftForChar,charChosen,myChar);
     }
 
     @Override

@@ -206,7 +206,7 @@ public class Game extends Observable {
             setChanged();
             notifyObservers(new ShowChooseCharacterMessage(null));
             createAssets();
-            TimerCharacter t = new TimerCharacter(5);
+            TimerCharacter t = new TimerCharacter(10);
             t.start();
 
         }
