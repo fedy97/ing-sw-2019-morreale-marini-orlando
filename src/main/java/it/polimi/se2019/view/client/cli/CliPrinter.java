@@ -250,9 +250,9 @@ public final class CliPrinter {
         CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
         CliPrinter.stamp("\t\t\t ┃    <2> 4-4-3(votes: "+vote[1]+")            <4> 4-4-4(votes: "+vote[3]+")    ┃\n");
         CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t ┃                      choice: ");
+        CliPrinter.stamp("\t\t\t ┃            press the <key> followed by enter ");
         CliSetUp.savePosition();
-        CliPrinter.stamp("                            ┃\n");
+        CliPrinter.stamp("            ┃\n");
         CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         CliPrinter.stamp("\t\t\t  Time left: "+timer);
         CliSetUp.restorePosition();

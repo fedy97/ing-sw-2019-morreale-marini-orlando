@@ -7,6 +7,7 @@ import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.client.RemoteView;
 
+import java.io.Console;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
@@ -58,8 +59,10 @@ public class CLI extends RemoteView {
     public void showChooseMap() {
         if(firstTime) {
             new Thread( () -> {
-                Scanner sc = new Scanner(System.in);
-                mapChosen = sc.nextInt();
+                //Scanner sc = new Scanner(System.in);
+                //mapChosen = sc.nextInt();
+                Console c = System.console();
+                mapChosen = Character.getNumericValue((c.readPassword())[0]);
                 SendMapChosenMessage message = new SendMapChosenMessage(mapChosen);
                 message.setSender(userName);
                 viewSetChanged();
