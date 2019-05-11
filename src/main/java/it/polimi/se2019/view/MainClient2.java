@@ -1,8 +1,8 @@
-package it.polimi.se2019;
+package it.polimi.se2019.view;
 
 
 import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.utils.Track;
+//import it.polimi.se2019.utils.Track;
 import it.polimi.se2019.view.client.RemoteView;
 import it.polimi.se2019.view.client.cli.CLI;
 import it.polimi.se2019.view.client.cli.CliPrinter;
@@ -19,9 +19,9 @@ public class MainClient2 {
 
     public static void main(String[] args) {
 
-        Path path = Paths.get(URI.create(ClassLoader.getSystemResource("soundtrack.wav").toString()));
+        //Path path = Paths.get(URI.create(ClassLoader.getSystemResource("soundtrack.wav").toString()));
 
-        Thread track = new Thread(new Track(path.toString()));
+        //Thread track = new Thread(new Track(path.toString()));
         /*
         la lascio commentata per ora cosi non parte sempre
         track.start();

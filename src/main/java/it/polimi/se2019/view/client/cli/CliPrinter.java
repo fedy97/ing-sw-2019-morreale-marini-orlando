@@ -11,6 +11,7 @@ import java.util.List;
 public final class CliPrinter {
 
     private static final String RESET = "\u001B[0m";
+    
 
     public static void stamp(String msg) {
         HandyFunctions.printConsole(msg + RESET);

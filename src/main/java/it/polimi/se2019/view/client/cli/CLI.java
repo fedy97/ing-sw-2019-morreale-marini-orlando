@@ -21,7 +21,6 @@ public class CLI extends RemoteView {
     private CliReader reader;
     private int connectionChosen;
     private String ip;
-    private final int SOCKET = 1;
     private int mapChosen = 0;
     private int timeLeftForMaps = 0;
     private int[] vote;
@@ -43,7 +42,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void showChooseCharacter() {
-
+        //TODO
     }
 
     @Override
@@ -64,8 +63,6 @@ public class CLI extends RemoteView {
     public void showChooseMap() {
         if(firstTime) {
             new Thread( () -> {
-                //Scanner sc = new Scanner(System.in);
-                //mapChosen = sc.nextInt();
                 Console c = System.console();
                 mapChosen = Character.getNumericValue((c.readPassword())[0]);
                 SendMapChosenMessage message = new SendMapChosenMessage(mapChosen);
@@ -119,6 +116,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void startConnection() {
+        final int SOCKET = 1;
         if(connectionChosen == SOCKET) {
             SocketClient client = new SocketClient(this, userName);
             client.connect(ip,1100);
