@@ -14,7 +14,7 @@ public class ChooseCharacterPage extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/chooseCharacter.fxml"));
         primaryStage.setTitle("Choose Character");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
         primaryStage.setOnCloseRequest(event -> {
             Platform.exit();

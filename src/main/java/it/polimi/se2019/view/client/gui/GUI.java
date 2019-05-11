@@ -56,6 +56,16 @@ public class GUI extends RemoteView {
                 });
     }
 
+    @Override
+    public void showChooseCharacter() {
+        Platform.runLater(
+                () -> {
+                    chooseCharacterController.passGUI(this);
+                    stage.setScene(sceneChooseCharacter);
+                    stage.show();
+                });
+    }
+
     private void initChooseCharacter() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/chooseCharacter.fxml"));
         try {
@@ -119,7 +129,7 @@ public class GUI extends RemoteView {
                 });
     }
 
-    public void sendMapChosenByPlayer(int config) {
+    protected void sendMapChosenByPlayer(int config) {
         SendMapChosenMessage message = new SendMapChosenMessage(config);
         message.setSender(userName);
         viewSetChanged();
@@ -156,11 +166,6 @@ public class GUI extends RemoteView {
 
     @Override
     public void waitGameStart() {
-        //TODO
-    }
-
-    @Override
-    public void menageTurn() {
         //TODO
     }
 

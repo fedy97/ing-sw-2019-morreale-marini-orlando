@@ -1,13 +1,14 @@
 package it.polimi.se2019.view.client.gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 
 import java.util.Observable;
 import java.util.Observer;
 
-public class ChooseCharacterController implements Observer {
+public class ChooseCharacterController {
 
     @FXML
     private ToggleButton violetbutton;
@@ -19,12 +20,20 @@ public class ChooseCharacterController implements Observer {
     private ToggleButton greenbutton;
     @FXML
     private ToggleButton greybutton;
+    @FXML
+    private Label timer;
 
     private ToggleGroup connectionType = new ToggleGroup();
 
-    @Override
-    public void update(Observable o, Object arg) {
+    private GUI gui;
 
+    /**
+     * here I need the reference to GUI in order to notify it for the click of a button
+     *
+     * @param gui
+     */
+    protected void passGUI(GUI gui) {
+        this.gui = gui;
     }
 
     public void initialize() {
@@ -37,4 +46,7 @@ public class ChooseCharacterController implements Observer {
     public void chooseYellow(){}
     public void chooseViolet(){}
 
+    public void updateTimer(int count) {
+        timer.setText(Integer.toString(count));
+    }
 }
