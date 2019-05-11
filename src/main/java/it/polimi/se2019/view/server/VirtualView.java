@@ -30,7 +30,7 @@ public class VirtualView extends View {
         //virtual view(this) observs model(Game)
         game.addObserver(this);
         //controller observs (this)
-        this.addObserver(Lobby.getController());
+        this.addObserver(Controller.getInstance());
     }
 
     public String getUser() {

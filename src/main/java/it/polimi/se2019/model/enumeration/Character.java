@@ -11,13 +11,12 @@ import java.awt.*;
  * @author Federico Morreale
  */
 public enum Character {
-    DOZER(Color.darkGray),
+    DOZER(Color.gray),
     DISTRUCTOR(Color.yellow),
-    SPROG(Color.red),
-    BANSHEE(Color.green),
+    SPROG(Color.green),
+    BANSHEE(Color.blue),
     VIOLET(Color.pink);
 
-    private String playerName;
     private final Color color;
 
     /**
@@ -28,26 +27,10 @@ public enum Character {
     }
 
     /**
-     * @return the name of the player associated to the character
-     */
-    public String getPlayerName() {
-        return playerName;
-    }
-
-    /**
      * @return the color associated to the character
      */
     public Color getColor() {
         return color;
-    }
-
-    /**
-     * @param playerName to link to the character
-     */
-    public void setPlayerName(String playerName) throws InvalidNameException {
-        if (playerName.equals(""))
-            throw new InvalidNameException();
-        this.playerName = playerName;
     }
 
 }

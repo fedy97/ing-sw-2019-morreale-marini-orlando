@@ -44,7 +44,7 @@ public class TestPlayer {
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
-        Player player = new Player(Character.BANSHEE, start);
+        Player player = new Player("ciao",Character.BANSHEE, start);
 
         Platform newPlat = new Platform(pos, true, card, Color.BLUE, orient);
 
@@ -65,7 +65,7 @@ public class TestPlayer {
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
-        Player player = new Player(Character.BANSHEE, start);
+        Player player = new Player("ciao",Character.BANSHEE, start);
         try {
             player.addPoint(5);
         } catch (NegativeNumberException e) {
@@ -87,7 +87,7 @@ public class TestPlayer {
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
-        Player player = new Player(Character.BANSHEE, start);
+        Player player = new Player("ciao",Character.BANSHEE, start);
 
         player.addDeath();
         assertEquals(1,player.getNumOfDeaths());
@@ -99,7 +99,7 @@ public class TestPlayer {
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
-        Player player = new Player(Character.BANSHEE, start);
+        Player player = new Player("ciao",Character.BANSHEE, start);
 
         player.addDeath();
         assertEquals(1, player.getNumOfDeaths());
@@ -113,7 +113,7 @@ public class TestPlayer {
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
-        Player player = new Player(Character.BANSHEE, start);
+        Player player = new Player("ciao",Character.BANSHEE, start);
 
         PowerUpCard pCard = deck.drawCard();
 
@@ -134,7 +134,7 @@ public class TestPlayer {
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
-        Player player = new Player(Character.BANSHEE, start);
+        Player player = new Player("ciao",Character.BANSHEE, start);
 
         PowerUpCard pCard = deck.drawCard();
         player.addPowerUpCard(pCard);
@@ -160,7 +160,7 @@ public class TestPlayer {
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
-        Player player = new Player(Character.BANSHEE, start);
+        Player player = new Player("ciao",Character.BANSHEE, start);
 
         WeaponCard wCard = new WeaponCard();
         try {
@@ -191,7 +191,7 @@ public class TestPlayer {
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
-        Player player = new Player(Character.BANSHEE, start);
+        Player player = new Player("ciao",Character.BANSHEE, start);
 
         WeaponCard wCard = new WeaponCard();
         player.addWeaponCard(wCard);
@@ -210,7 +210,7 @@ public class TestPlayer {
         AmmoCard card = deckAmmos.drawCard();
         ArrayList<Orientation> orient = new ArrayList<>();
         Platform start = new Platform(pos, true, card, Color.BLUE, orient);
-        Player player = new Player(Character.BANSHEE, start);
+        Player player = new Player("ciao",Character.BANSHEE, start);
 
         player.setFrenzyModeType(2);
         assertEquals(2, player.getFrenzyModeType());

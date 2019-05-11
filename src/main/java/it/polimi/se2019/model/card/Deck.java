@@ -34,6 +34,7 @@ public class Deck<Card> extends ArrayList<Card> {
         if(size()==0)
             throw new NoCardException();
         return remove(size() - 1);
+        //now here we have to notify the virtual view
     }
 
     /**

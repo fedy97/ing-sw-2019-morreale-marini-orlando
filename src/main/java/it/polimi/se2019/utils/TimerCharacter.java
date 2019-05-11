@@ -15,7 +15,7 @@ public class TimerCharacter extends Thread {
             while (slept < seconds * 1000) {
                 sleep(1000);
                 slept = slept + 1000;
-                //TODO Game.getInstance().setSecondsLeftMap(seconds - slept / 1000);
+                Game.getInstance().setSecondsLeftCharacter(seconds - slept / 1000);
             }
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();

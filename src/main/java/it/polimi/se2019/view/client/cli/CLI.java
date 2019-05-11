@@ -41,6 +41,16 @@ public class CLI extends RemoteView {
     }
 
     @Override
+    public void updateVotesCharacterChosen(String c) {
+
+    }
+
+    @Override
+    public void updateTimerCharacter(int count) {
+
+    }
+
+    @Override
     public void showChooseCharacter() {
         //TODO
     }

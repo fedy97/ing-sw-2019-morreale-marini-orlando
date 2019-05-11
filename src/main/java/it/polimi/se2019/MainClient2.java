@@ -1,4 +1,4 @@
-package it.polimi.se2019.view;
+package it.polimi.se2019;
 
 
 import it.polimi.se2019.utils.HandyFunctions;

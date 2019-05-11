@@ -1,5 +1,6 @@
 package it.polimi.se2019.view.client.gui;
 
+import it.polimi.se2019.network.message.to_server.SendCharacterChosenMessage;
 import it.polimi.se2019.network.message.to_server.SendMapChosenMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.client.RemoteView;
@@ -128,9 +129,23 @@ public class GUI extends RemoteView {
                     chooseMapController.updateTimer(count);
                 });
     }
+    @Override
+    public void updateTimerCharacter(int count) {
+        Platform.runLater(
+                () -> {
+                    chooseCharacterController.updateTimer(count);
+                });
+    }
 
     protected void sendMapChosenByPlayer(int config) {
         SendMapChosenMessage message = new SendMapChosenMessage(config);
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
+    }
+
+    protected void sendCharacterChosenByPlayer(String characterEnuminString){
+        SendCharacterChosenMessage message = new SendCharacterChosenMessage(characterEnuminString);
         message.setSender(userName);
         viewSetChanged();
         notifyObservers(message);
@@ -141,6 +156,14 @@ public class GUI extends RemoteView {
         Platform.runLater(
                 () -> {
                     chooseMapController.updateVotes(map);
+                });
+    }
+
+    @Override
+    public void updateVotesCharacterChosen(String c) {
+        Platform.runLater(
+                () -> {
+                    chooseCharacterController.updateCharacters(c);
                 });
     }
 

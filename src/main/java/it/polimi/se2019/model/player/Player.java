@@ -19,6 +19,7 @@ import java.util.List;
  */
 public class Player {
 
+    private String name;
     private Character character;
     private Platform currentPlatform;
     private int currentScore;
@@ -37,15 +38,16 @@ public class Player {
      *
      * @param character Character chosen by the player at the start of the game
      * @throws InvalidCharacterException if character is null
-     * @throws InvalidPositionException if startPlatform is null
+     * @throws InvalidPositionException  if startPlatform is null
      */
-    public Player(Character character, Platform startPlatform) throws InvalidCharacterException, InvalidPositionException{
+    public Player(String name, Character character, Platform startPlatform) throws InvalidCharacterException, InvalidPositionException {
         if (character == null)
             throw new InvalidCharacterException("Character can not be null!");
-        if (startPlatform == null)
-            throw new InvalidPositionException("StartPlatform can not be null!");
+        /*if (startPlatform == null)
+            throw new InvalidPositionException("StartPlatform can not be null!");*/
         this.character = character;
         this.currentPlatform = startPlatform;
+        this.name = name;
         currentScore = 0;
         playerBoard = new PlayerBoard();
         numOfDeaths = 0;
@@ -65,6 +67,10 @@ public class Player {
         return character;
     }
 
+    public String getName() {
+        return name;
+    }
+
     /**
      * Get the platform where the player is located(his position)
      *
@@ -76,6 +82,7 @@ public class Player {
 
     /**
      * Set the position of the player
+     *
      * @param platform the new position of the player
      */
     public void setCurrentPlatform(Platform platform) {
@@ -113,7 +120,7 @@ public class Player {
      * @return List containing the player's power up cards
      */
     public List<PowerUpCard> getPowerUpCards() {
-        return  new ArrayList<>(powerUpCards);
+        return new ArrayList<>(powerUpCards);
     }
 
     /**
@@ -190,7 +197,6 @@ public class Player {
      *
      * @param card The power up card that must be eliminated
      * @throws InvalidCardException if card reference is null
-     *
      */
     public void removePowerUpCard(PowerUpCard card) throws InvalidCardException {
         if (card == null)
@@ -216,7 +222,7 @@ public class Player {
      *
      * @param card The weapon card that must be eliminated
      */
-    public void removeWeaponCard(WeaponCard card){
+    public void removeWeaponCard(WeaponCard card) {
         weaponCards.remove(card);
     }
 
@@ -228,15 +234,15 @@ public class Player {
     }
 
 
-    public void setUnderAttack(){
+    public void setUnderAttack() {
         underAttack = true;
     }
 
-    public void resetUnderAttack(){
+    public void resetUnderAttack() {
         underAttack = false;
     }
 
-    public boolean isUnderAttack(){
+    public boolean isUnderAttack() {
         return underAttack;
     }
 
@@ -248,15 +254,15 @@ public class Player {
         this.currentTargets.add(currentTarget);
     }
 
-    public void beginAttack(){
+    public void beginAttack() {
         attacking = true;
     }
 
-    public void terminateAttack(){
+    public void terminateAttack() {
         attacking = false;
     }
 
-    public boolean isAttacking(){
+    public boolean isAttacking() {
         return attacking;
     }
 }

@@ -1,5 +1,6 @@
 package it.polimi.se2019.model;
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.board.GameField;
 import it.polimi.se2019.model.board.Platform;
@@ -14,6 +15,7 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.*;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.utils.JsonParser;
+import it.polimi.se2019.utils.TimerCharacter;
 import it.polimi.se2019.utils.TimerMap;
 
 import java.io.IOException;
@@ -45,6 +47,7 @@ public class Game extends Observable {
     public static Game getInstance() {
         if (instance == null) {
             instance = new Game();
+            instance.players = new ArrayList<>();
             instance.mapChosen = new HashMap<>();
             instance.mapChosen.put(1, 0);
             instance.mapChosen.put(2, 0);
@@ -54,7 +57,12 @@ public class Game extends Observable {
         return instance;
     }
 
-    //TODO, when the game starts, the method is thrown, every attribute will be set not only gamefield
+    /**
+     * @param gameField
+     * @param weaponsDeck
+     * @param powerUpDeck
+     * @param ammoDeck
+     */
     private void initGame(GameField gameField, Deck<WeaponCard> weaponsDeck, Deck<PowerUpCard> powerUpDeck, Deck<AmmoCard> ammoDeck) {
         this.gameField = gameField;
         this.powerUpDeck = powerUpDeck;
@@ -77,7 +85,15 @@ public class Game extends Observable {
     public void setVoteMapChosen(int voteMapChosen) {
         mapChosen.put(voteMapChosen, mapChosen.get(voteMapChosen) + 1);
         setChanged();
+        //the virtual view will be notified by running the update() method
         notifyObservers(new UpdateVotesMapChosenMessage(mapChosen));
+    }
+
+    public void setCharacterChosen(String name, String characterChosen) throws InvalidCharacterException, InvalidPositionException {
+        Player player = new Player(name, Character.valueOf(characterChosen), null);
+        players.add(player);
+        setChanged();
+        notifyObservers(new UpdateVotesCharacterChosenMessage(characterChosen));
     }
 
     /**
@@ -171,7 +187,8 @@ public class Game extends Observable {
         if (secondsLeft == 0) {
             setChanged();
             notifyObservers(new ShowChooseMapMessage(null));
-            //starts the other timer
+            //starts the other timer, this timer even if is in Model , is a controller feature
+            //in fact TimerMap will modify the model by calling setSecondsLeftMap
             TimerMap t = new TimerMap(5);
             t.start();
 
@@ -186,32 +203,58 @@ public class Game extends Observable {
         setChanged();
         notifyObservers(new UpdateTimerMapMessage(secondsLeft));
         if (secondsLeft == 0) {
-            try {
-                setChanged();
-                notifyObservers(new ShowChooseCharacterMessage(null));
-                int config = findWhichMapWon();
-                JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
-                Deck<AmmoCard> deck = parserAmmos.buildAmmoCards();
-                //now we have 36 ammocards in the deck
-                deck.mix();
-                JsonParser parserField = new JsonParser("/json/field.json");
-                Platform[][] field = parserField.buildField(config, deck);
-                WeaponCard[] weaponCards = new WeaponCard[9];
-                for (int i = 0; i < 9; i++)
-                    weaponCards[i] = new WeaponCard();
-                JsonParser parser = new JsonParser("/json/powerups.json");
-                Deck<PowerUpCard> powerUpCardDeck = parser.buildPowerupCards();
+            setChanged();
+            notifyObservers(new ShowChooseCharacterMessage(null));
+            createAssets();
+            TimerCharacter t = new TimerCharacter(5);
+            t.start();
 
-                GameField gf = new GameField(field, weaponCards, new SkullsBoard(8), new ScoreBoard());
-
-                initGame(gf, null, powerUpCardDeck, ammoDeck);
-
-            } catch (Exception ex) {
-                HandyFunctions.LOGGER.log(Level.SEVERE, ex.toString());
-            }
         }
     }
 
+    /**
+     * @param secondsLeft to the game field page
+     */
+    public synchronized void setSecondsLeftCharacter(int secondsLeft) {
+        this.secondsLeft = secondsLeft;
+        setChanged();
+        notifyObservers(new UpdateTimerCharacterMessage(secondsLeft));
+    }
+
+    /**
+     * we can now build the field and the decks
+     */
+    private void createAssets() {
+        try {
+            int config = findWhichMapWon();
+            if (config == -1)
+                throw new InvalidFieldException();
+            JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
+            Deck<AmmoCard> deck = parserAmmos.buildAmmoCards();
+            //now we have 36 ammocards in the deck
+            deck.mix();
+            JsonParser parserField = new JsonParser("/json/field.json");
+            Platform[][] field = parserField.buildField(config, deck);
+            WeaponCard[] weaponCards = new WeaponCard[9];
+            for (int i = 0; i < 9; i++)
+                weaponCards[i] = new WeaponCard();
+            JsonParser parser = new JsonParser("/json/powerups.json");
+            Deck<PowerUpCard> powerUpCardDeck = parser.buildPowerupCards();
+            GameField gf = new GameField(field, weaponCards, new SkullsBoard(8), new ScoreBoard());
+            //TODO add weapons deck, to be parsed in json
+            initGame(gf, null, powerUpCardDeck, ammoDeck);
+            Controller.getInstance().setManagers();
+        } catch (Exception ex) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, ex.toString());
+        }
+
+    }
+
+    /**
+     * if there is a draw, the first between them will be chosen.
+     *
+     * @return the config of the map that won the votations.
+     */
     private int findWhichMapWon() {
         int max = -1;
         int config = -1;

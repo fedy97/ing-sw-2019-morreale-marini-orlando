@@ -94,13 +94,12 @@ public class TestPlatform {
         Character c1 = Character.BANSHEE;
 
         try {
-            c1.setPlayerName("morre");
+
             Platform p1 = new Platform(new int[2], true, null, null, new ArrayList<>());
             p1.setPlayerOnPlatform(c1);
         } catch (InvalidCardException ex) {
         } catch (InvalidCharacterException ex) {
         } catch (NullPointerException ex) {
-        } catch (InvalidNameException ex) {
         }
 
     }
