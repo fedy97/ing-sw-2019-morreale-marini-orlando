@@ -109,32 +109,28 @@ public class GUI extends RemoteView {
     @Override
     public void updatePlayersOnWaitingList(List<String> users) {
         Platform.runLater(
-                () -> {
-                    waitingLobbyController.updateLoggedPlayers(users);
-                });
+                () ->
+                        waitingLobbyController.updateLoggedPlayers(users));
     }
 
     @Override
     public void updateTimerLobby(int count) {
         Platform.runLater(
-                () -> {
-                    waitingLobbyController.updateTimer(count);
-                });
+                () -> waitingLobbyController.updateTimer(count));
     }
 
     @Override
     public void updateTimerMap(int count) {
         Platform.runLater(
-                () -> {
-                    chooseMapController.updateTimer(count);
-                });
+                () ->
+                        chooseMapController.updateTimer(count));
     }
+
     @Override
     public void updateTimerCharacter(int count) {
         Platform.runLater(
-                () -> {
-                    chooseCharacterController.updateTimer(count);
-                });
+                () ->
+                        chooseCharacterController.updateTimer(count));
     }
 
     protected void sendMapChosenByPlayer(int config) {
@@ -144,7 +140,7 @@ public class GUI extends RemoteView {
         notifyObservers(message);
     }
 
-    protected void sendCharacterChosenByPlayer(String characterEnuminString){
+    protected void sendCharacterChosenByPlayer(String characterEnuminString) {
         SendCharacterChosenMessage message = new SendCharacterChosenMessage(characterEnuminString);
         message.setSender(userName);
         viewSetChanged();
@@ -154,17 +150,15 @@ public class GUI extends RemoteView {
     @Override
     public void updateVotesMapChosen(Map<Integer, Integer> map) {
         Platform.runLater(
-                () -> {
-                    chooseMapController.updateVotes(map);
-                });
+                () ->
+                        chooseMapController.updateVotes(map));
     }
 
     @Override
     public void updateVotesCharacterChosen(String c) {
         Platform.runLater(
-                () -> {
-                    chooseCharacterController.updateCharacters(c);
-                });
+                () ->
+                        chooseCharacterController.updateCharacters(c));
     }
 
     @Override
