@@ -60,12 +60,12 @@
             <Font name="Ubuntu" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="228.0" layoutY="416.0" text="Timer:">
+      <Label layoutX="181.0" layoutY="414.0" text="Game will start in:">
          <font>
             <Font name="Ubuntu" size="25.0" />
          </font>
       </Label>
-      <Label fx:id="timer" layoutX="333.0" layoutY="416.0" prefHeight="15.0" prefWidth="3.0" text="5">
+      <Label fx:id="timer" layoutX="404.0" layoutY="414.0" prefHeight="15.0" prefWidth="3.0" text="5">
          <font>
             <Font name="Ubuntu" size="25.0" />
          </font>

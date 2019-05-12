@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 
 import java.util.*;
 
@@ -27,6 +29,7 @@ public class ChooseCharacterController {
 
     private GUI gui;
     private Map<String, ToggleButton> buttons;
+    private DropShadow shadow = new DropShadow();
     /**
      * here I need the reference to GUI in order to notify it for the click of a button
      *
@@ -48,22 +51,27 @@ public class ChooseCharacterController {
 
     public void chooseBlue(){
         gui.sendCharacterChosenByPlayer("BANSHEE");
+        setEffectToButton(bluebutton);
         disableButtons();
     }
     public void chooseGreen(){
         gui.sendCharacterChosenByPlayer("SPROG");
+        setEffectToButton(greenbutton);
         disableButtons();
     }
     public void chooseGrey(){
         gui.sendCharacterChosenByPlayer("DOZER");
+        setEffectToButton(greybutton);
         disableButtons();
     }
     public void chooseYellow(){
         gui.sendCharacterChosenByPlayer("DISTRUCTOR");
+        setEffectToButton(yellowbutton);
         disableButtons();
     }
     public void chooseViolet(){
         gui.sendCharacterChosenByPlayer("VIOLET");
+        setEffectToButton(violetbutton);
         disableButtons();
     }
 
@@ -80,5 +88,10 @@ public class ChooseCharacterController {
 
     public void updateCharacters(String c) {
         buttons.get(c).setDisable(true);
+    }
+
+    private void setEffectToButton(ToggleButton toggleButton){
+        shadow.setColor(new Color(0, 0,0.7,1));
+        toggleButton.setEffect(shadow);
     }
 }

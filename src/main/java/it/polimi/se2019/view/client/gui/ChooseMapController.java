@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -34,6 +36,7 @@ public class ChooseMapController {
     private ArrayList<Label> voteLabels;
 
     private ToggleGroup connectionType = new ToggleGroup();
+    private DropShadow shadow = new DropShadow();
 
     public void initialize() {
         voteLabels = new ArrayList<>();
@@ -55,21 +58,25 @@ public class ChooseMapController {
 
     public void voteForMap1() {
         gui.sendMapChosenByPlayer(1);
+        setEffectToButton(map1button);
         disableButtons();
     }
 
     public void voteForMap2() {
         gui.sendMapChosenByPlayer(2);
+        setEffectToButton(map2button);
         disableButtons();
     }
 
     public void voteForMap3() {
         gui.sendMapChosenByPlayer(3);
+        setEffectToButton(map3button);
         disableButtons();
     }
 
     public void voteForMap4() {
         gui.sendMapChosenByPlayer(4);
+        setEffectToButton(map4button);
         disableButtons();
     }
 
@@ -90,5 +97,10 @@ public class ChooseMapController {
 
     public void updateTimer(int count) {
         timer.setText(Integer.toString(count));
+    }
+
+    private void setEffectToButton(ToggleButton toggleButton){
+        shadow.setColor(new Color(0, 0,0.7,1));
+        toggleButton.setEffect(shadow);
     }
 }
