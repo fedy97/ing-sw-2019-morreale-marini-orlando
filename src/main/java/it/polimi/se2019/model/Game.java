@@ -236,7 +236,10 @@ public class Game extends Observable {
                 }
                 try {
                     if (!isFound) {
-                        players.add(new Player(user, arr.remove(arr.size() - 1), null));
+                        Character c = arr.remove(arr.size()-1);
+                        Player p = new Player(user, c, null);
+                        players.add(p);
+                        characterPlayers.put(c, p);
                     }
                 } catch (Exception e) {
                     HandyFunctions.LOGGER.log(Level.SEVERE,"error in creating random character");
