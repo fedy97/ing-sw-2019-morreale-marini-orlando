@@ -48,7 +48,7 @@ public class Controller implements Observer {
         validActions = new ArrayList<>();
         currentTargets = new ArrayList<>();
         turnController = new TurnController();
-        state = ControllerState.IDLE;
+        state = ControllerState.SETUP;
         lock = false;
     }
 
@@ -152,7 +152,7 @@ public class Controller implements Observer {
      *
      */
     public void startGame() {
-        //TODO
+        state = ControllerState.IDLE;
     }
 
     /**
@@ -257,8 +257,11 @@ public class Controller implements Observer {
         return turnController;
     }
 
-    public void getLock(){
+    public boolean getLock(){
+        if(lock)
+            return false;
         lock = true;
+        return true;
     }
 
     public void releaseLock(){

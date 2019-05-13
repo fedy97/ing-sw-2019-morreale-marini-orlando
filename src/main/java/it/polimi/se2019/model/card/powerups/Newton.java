@@ -7,10 +7,12 @@ import it.polimi.se2019.exceptions.InvalidNameException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.utils.HandyFunctions;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 public final class Newton extends PowerUpCard {
 
@@ -25,6 +27,7 @@ public final class Newton extends PowerUpCard {
      */
     public void useEffect() {
         Controller c = Controller.getInstance();
+        //TODO lock
         c.getLock();
         c.askFor(c.getValidator().getValidTargets(this), "targets");
         c.waitForResponse();
