@@ -8,6 +8,6 @@ public class ShowChooseCharacterMessage extends ToClientMessage {
 
     @Override
     public void performAction(RemoteView remoteView) {
-        remoteView.showChooseCharacter();
+       remoteView.showChooseCharacter((String) payload);
     }
 }

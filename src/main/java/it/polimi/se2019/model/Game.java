@@ -210,9 +210,10 @@ public class Game extends Observable {
         setChanged();
         notifyObservers(new UpdateTimerMapMessage(secondsLeft));
         if (secondsLeft == 0) {
+            int config = findWhichMapWon();
+            createAssets(config);
             setChanged();
-            notifyObservers(new ShowChooseCharacterMessage(null));
-            createAssets();
+            notifyObservers(new ShowChooseCharacterMessage(Integer.toString(config)));
             TimerCharacter t = new TimerCharacter(5);
             t.start();
 
@@ -246,6 +247,8 @@ public class Game extends Observable {
                 }
             }
             Controller.getInstance().startGame();
+            setChanged();
+            notifyObservers(new ShowGameBoardMessage(null));
         }
     }
 
@@ -260,9 +263,8 @@ public class Game extends Observable {
     /**
      * we can now build the field and the decks
      */
-    private void createAssets() {
+    private void createAssets(int config) {
         try {
-            int config = findWhichMapWon();
             if (config == -1)
                 throw new InvalidFieldException();
             JsonParser parserAmmos = new JsonParser("/json/ammocards.json");

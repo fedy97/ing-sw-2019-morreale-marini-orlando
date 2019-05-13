@@ -47,20 +47,25 @@ public class CLI extends RemoteView {
     }
 
     @Override
+    public void showGameBoard() {
+
+    }
+
+    @Override
     public void updateVotesCharacterChosen(String c) {
         if (!c.equals(myCharEnumString))
             charChosen.add(c);
-        showChooseCharacter();
+        showChooseCharacter("null");
     }
 
     @Override
     public void updateTimerCharacter(int count) {
         timeLeftForChar = count;
-        showChooseCharacter();
+        showChooseCharacter("null");
     }
 
     @Override
-    public void showChooseCharacter() {
+    public void showChooseCharacter(String config) {
         if(!firstTime) {
             new Thread( () -> {
                 boolean okChar = false;

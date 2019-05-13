@@ -23,10 +23,12 @@ public class GUI extends RemoteView {
     private WaitingLobbyController waitingLobbyController;
     private ChooseMapController chooseMapController;
     private ChooseCharacterController chooseCharacterController;
+    private GameBoardController gameBoardController;
 
     private Scene sceneWaitingLobby;
     private Scene sceneChooseMap;
     private Scene sceneChooseCharacter;
+    private Scene sceneGameBoard;
     private Stage stage;
 
     public GUI(String user, Stage stage) {
@@ -58,11 +60,22 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void showChooseCharacter() {
+    public void showChooseCharacter(String config) {
         Platform.runLater(
                 () -> {
+                    initGameBoard(config);
                     chooseCharacterController.passGUI(this);
                     stage.setScene(sceneChooseCharacter);
+                    stage.show();
+                });
+    }
+
+    @Override
+    public void showGameBoard() {
+        Platform.runLater(
+                () -> {
+                    //chooseMapController.passGUI(this);
+                    stage.setScene(sceneGameBoard);
                     stage.show();
                 });
     }
@@ -100,6 +113,18 @@ public class GUI extends RemoteView {
             chooseMapController = loader.getController();
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose map");
+        }
+    }
+
+    private void initGameBoard(String config) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gameBoard" + config + ".fxml"));
+        try {
+            Parent root = loader.load();
+            stage.setTitle("Adrenaline");
+            sceneGameBoard = new Scene(root);
+            gameBoardController = loader.getController();
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing game board");
         }
     }
 

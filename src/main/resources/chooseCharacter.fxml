@@ -14,7 +14,7 @@
          <graphic>
             <ImageView fitHeight="132.0" fitWidth="124.0">
                <image>
-                  <Image url="@assets/characters/blue.jpg" />
+                  <Image url="@assets/characters/banshee2.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -32,7 +32,7 @@
          <graphic>
             <ImageView fitHeight="120.0" fitWidth="130.0">
                <image>
-                  <Image url="@assets/characters/yellow.jpg" />
+                  <Image url="@assets/characters/distructor2.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -41,7 +41,7 @@
          <graphic>
             <ImageView fitHeight="133.0" fitWidth="124.0">
                <image>
-                  <Image url="@assets/characters/green.jpg" />
+                  <Image url="@assets/characters/sprog2.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -50,7 +50,7 @@
          <graphic>
             <ImageView fitHeight="132.0" fitWidth="125.0">
                <image>
-                  <Image url="@assets/characters/grey.jpg" />
+                  <Image url="@assets/characters/dozer2.jpg" />
                </image>
             </ImageView>
          </graphic>
