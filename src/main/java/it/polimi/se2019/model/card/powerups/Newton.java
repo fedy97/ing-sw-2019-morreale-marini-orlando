@@ -24,11 +24,14 @@ public final class Newton extends PowerUpCard {
      * Activate the effect of the card
      */
     public void useEffect() {
-        /** TODO
-        Player target = c.askForTargets(c.getValidator().getValidTargets(this)).get(0);
-
-        Platform destination = c.askForPosition(c.getGame().getGameField().getPlatformDir(target.getCurrentPlatform()));
-        target.setCurrentPlatform(destination);*/
+        Controller c = Controller.getInstance();
+        c.getLock();
+        c.askFor(c.getValidator().getValidTargets(this), "targets");
+        c.waitForResponse();
+        Player target = c.getCurrentTargets().get(0);
+        c.askFor(c.getGame().getGameField().getPlatformDir(target.getCurrentPlatform()), "positionForOther");
+        c.waitForResponse();
+        c.releaseLock();
     }
 
     /**

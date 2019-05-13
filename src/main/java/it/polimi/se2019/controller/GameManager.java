@@ -105,4 +105,6 @@ public class GameManager {
     public void setCharacterPlayer(Map<Character, Player> characterPlayer) {
         this.characterPlayer = characterPlayer;
     }
+
+
 }
