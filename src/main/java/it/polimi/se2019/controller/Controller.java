@@ -11,6 +11,7 @@ import it.polimi.se2019.utils.TimerLobby;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.util.*;
+import java.util.logging.Level;
 
 /**
  * @author Gabriel Raul Marini
@@ -22,11 +23,14 @@ public class Controller implements Observer {
     private PlayerManager playerManager;
     private Validator validator;
     private TurnController turnController;
-    private Map<String, Player> userPlayer;
     private Map<String, VirtualView> userView;
     private VirtualView currentView;
     private List<String> validActions;
+    private ControllerState state;
+    private List<Player> currentTargets;
+    private boolean lock;
     private static Controller instance = null;
+
 
     /**
      * Controller singleton constructor
@@ -42,7 +46,10 @@ public class Controller implements Observer {
 
     private Controller() {
         validActions = new ArrayList<>();
+        currentTargets = new ArrayList<>();
         turnController = new TurnController();
+        state = ControllerState.IDLE;
+        lock = false;
     }
 
     /**
@@ -56,7 +63,6 @@ public class Controller implements Observer {
         this.decksManager = new DecksManager(game.getPowerUpDeck(), game.getAmmoDeck());
         this.gameManager = new GameManager();
         this.playerManager = new PlayerManager(this);
-        userPlayer = new HashMap<>();
     }
 
 
@@ -77,7 +83,12 @@ public class Controller implements Observer {
             t.start();
         } else {
             //every ToServerMessage will modify the model in its own class hardcoded in performaction
-            ((ToServerMessage) message).performAction();
+            if(state == ControllerState.WAIT_CURRENT_PLAYER || state == ControllerState.WAIT_TARGET_PLAYER) {
+                ((ToServerMessage) message).performAction();
+                state = ControllerState.IDLE;
+            }
+            else
+                HandyFunctions.LOGGER.log(Level.WARNING, "Invalid message for this state of controller!");
         }
     }
 
@@ -161,11 +172,14 @@ public class Controller implements Observer {
         ToClientMessage msg = null;
         List<String> lightVersion = HandyFunctions.getLightCollection(possibleChoices);
         Player currPlayer = playerManager.getCurrentPlayer();
+        state = ControllerState.WAIT_CURRENT_PLAYER;
 
         if (choice.equals("weapons"))
             msg = new ShowWeaponsMessage(lightVersion);
         else if (choice.equals("position"))
             msg = new ShowPlatformMessage(lightVersion);
+        else if(choice.equals("positionForOther"))
+            msg = new ShowPlatformMessageForOther(lightVersion);
         else if (choice.equals("targets"))
             msg = new ShowPossibleTargetsMessage(lightVersion);
         else if (choice.equals("discard"))
@@ -175,7 +189,7 @@ public class Controller implements Observer {
         else
             msg = null; // OTHER options
 
-        callView(msg, getUserFromPlayer(currPlayer));
+        callView(msg, currPlayer.getName());
     }
 
     public Validator getValidator() {
@@ -195,21 +209,6 @@ public class Controller implements Observer {
     }
 
     /**
-     * @param player value of the map
-     * @return the user associated to the param player
-     */
-    public String getUserFromPlayer(Player player) {
-        String user = null;
-
-        for (Map.Entry<String, Player> entry : userPlayer.entrySet()) {
-            if (entry.getValue() == player)
-                user = entry.getKey();
-        }
-
-        return user;
-    }
-
-    /**
      * Common method across RMI and Socket to send requests to client
      *
      * @param msg  to the destination client
@@ -220,16 +219,6 @@ public class Controller implements Observer {
             Lobby.getRmiServer().sendToClient(msg, user);
         if (Lobby.getSocketServer().isConnected(user))
             Lobby.getSocketServer().sendToClient(msg, user);
-    }
-
-    /**
-     * Associate a user to a player in the model
-     *
-     * @param user   chosen by the client
-     * @param player to be associated with the user selected
-     */
-    public void setPlayerToUser(String user, Player player) {
-        userPlayer.put(user, player);
     }
 
     /**
@@ -266,5 +255,27 @@ public class Controller implements Observer {
 
     public TurnController getTurnController(){
         return turnController;
+    }
+
+    public void getLock(){
+        lock = true;
+    }
+
+    public void releaseLock(){
+        lock = false;
+    }
+
+    public void waitForResponse(){
+        try{
+            while(state != ControllerState.IDLE){
+                Thread.sleep(2000);
+            }
+        }catch(InterruptedException e){
+            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+        }
+    }
+
+    public List<Player> getCurrentTargets(){
+        return currentTargets;
     }
 }
