@@ -1,6 +1,7 @@
 package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.Lobby;
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.client.RMIClient;
@@ -91,7 +92,12 @@ public class RMIServer implements Server {
     public void registerClient(String host, int port, String username) {
         try {
             Registry registry = LocateRegistry.getRegistry(host, port);
-            VirtualView virtualView = new VirtualView(this,username);
+            int k = 1;
+            while (Controller.getInstance().getTurnController().getUsers().contains(username)) {
+                username = username + k;
+                k++;
+            }
+            VirtualView virtualView = new VirtualView(this, username);
             skeletons.put(username, (Client) registry.lookup("RemoteView"));
             clientActor.put(username, virtualView);
             Lobby.addUser(username);

@@ -1,6 +1,7 @@
 package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.Lobby;
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -55,6 +56,11 @@ public class SocketServer implements Server {
                         output.flush();
                         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
                         String user = (String) input.readObject();
+                        int k = 1;
+                        while (Controller.getInstance().getTurnController().getUsers().contains(user)) {
+                            user = user + k;
+                            k++;
+                        }
                         VirtualView virtualView = new VirtualView(this, user);
                         actors.put(user, virtualView);
                         Lobby.addUser(user);
