@@ -11,6 +11,7 @@ import it.polimi.se2019.utils.TimerLobby;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 /**
@@ -271,7 +272,7 @@ public class Controller implements Observer {
     public void waitForResponse(){
         try{
             while(state != ControllerState.IDLE){
-                Thread.sleep(2000);
+                TimeUnit.SECONDS.sleep(1);
             }
         }catch(InterruptedException e){
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
