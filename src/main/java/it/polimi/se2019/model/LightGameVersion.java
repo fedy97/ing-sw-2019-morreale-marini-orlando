@@ -7,11 +7,11 @@ import java.util.Map;
 public class LightGameVersion implements Serializable {
     private int skullsNum;
     private Map<String, String> playerPlatform; //character MAIUSCOLO - platform ("0,0")
-    private Map<String, AmmoRep> ammoTilePlatform; //platform - AmmoRep
     private Map<String, List<CardRep>> playerPowerups; //character - CardRep
     private Map<String, List<CardRep>> playerWeapons; // character - CardRep
-    private Map<String, BoardRep> playerBoardRep; //character - BoardRep
-    private Map<String, List<CardRep>> platformWeapons;
+    private Map<String, AmmoRep> platformAmmoTile; //platform - AmmoRep
+    private Map<String, BoardRep> playerBoardRep; //character - BoardRep TODO
+    private Map<String, List<CardRep>> platformWeapons; // platform - CardRep
 
     public int getSkullsNum() {
         return skullsNum;
@@ -53,12 +53,12 @@ public class LightGameVersion implements Serializable {
         this.platformWeapons = platformWeapons;
     }
 
-    public Map<String, AmmoRep> getAmmoTilePlatform() {
-        return ammoTilePlatform;
+    public Map<String, AmmoRep> getPlatformAmmoTile() {
+        return platformAmmoTile;
     }
 
-    public void setAmmoTilePlatform(Map<String, AmmoRep> ammoTilePlatform) {
-        this.ammoTilePlatform = ammoTilePlatform;
+    public void setPlatformAmmoTile(Map<String, AmmoRep> platformAmmoTile) {
+        this.platformAmmoTile = platformAmmoTile;
     }
 
     public Map<String, List<CardRep>> getPlayerWeapons() {

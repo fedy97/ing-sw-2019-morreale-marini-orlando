@@ -2,6 +2,7 @@ package it.polimi.se2019.model.card;
 
 import it.polimi.se2019.exceptions.InvalidCardException;
 import it.polimi.se2019.exceptions.InvalidImageException;
+import it.polimi.se2019.model.AmmoRep;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 
 import java.awt.*;
@@ -42,6 +43,24 @@ public final class AmmoCard extends Card {
      */
     public boolean hasPowerUp() {
         return hasPowerUp;
+    }
+
+    //TODO test
+    @Override
+    public String toString() {
+        String result = new String();
+
+        for (int i = 0; i < ammoCubes.length; i++) {
+            if (ammoCubes[i] == AmmoCube.RED)
+                result.concat("r");
+            else if (ammoCubes[i] == AmmoCube.BLUE)
+                result.concat("b");
+            else
+                result.concat("y");
+
+        }
+
+        return result;
     }
 
 }

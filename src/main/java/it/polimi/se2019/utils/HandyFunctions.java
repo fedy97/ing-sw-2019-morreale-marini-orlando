@@ -92,4 +92,12 @@ public class HandyFunctions {
         }
         return random.nextInt((second - first) + 1) + first;
     }
+
+    /**
+     * @param o object to be addressed
+     * @return the system address of the selected object
+     */
+    public static int getSystemAddress(Object o){
+        return System.identityHashCode(o);
+    }
 }

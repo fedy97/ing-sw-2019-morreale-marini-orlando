@@ -17,6 +17,7 @@ public abstract class Card {
     protected String name;
     protected Image bgImage;
     protected String description;
+    protected String imgPath;
 
     /***
      * Instantiate an anonymous card
@@ -27,6 +28,7 @@ public abstract class Card {
 
     /**
      * Costructor used by AmmoCard, it only needs the image, not name or description
+     *
      * @param img of the ammocard
      */
     public Card(Image img) throws InvalidImageException {
@@ -67,6 +69,10 @@ public abstract class Card {
      */
     public String getDescription() {
         return description;
+    }
+
+    public String getImgPath() {
+        return imgPath;
     }
 
 }

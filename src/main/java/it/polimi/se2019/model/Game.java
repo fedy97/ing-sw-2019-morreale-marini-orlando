@@ -7,6 +7,7 @@ import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.board.ScoreBoard;
 import it.polimi.se2019.model.board.SkullsBoard;
 import it.polimi.se2019.model.card.AmmoCard;
+import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
@@ -50,11 +51,11 @@ public class Game extends Observable {
             instance.players = new ArrayList<>();
             instance.mapChosen = new HashMap<>();
             instance.characterPlayers = new EnumMap<>(Character.class);
-            instance.characterPlayers.put(Character.BANSHEE,null);
-            instance.characterPlayers.put(Character.VIOLET,null);
-            instance.characterPlayers.put(Character.SPROG,null);
-            instance.characterPlayers.put(Character.DISTRUCTOR,null);
-            instance.characterPlayers.put(Character.DOZER,null);
+            instance.characterPlayers.put(Character.BANSHEE, null);
+            instance.characterPlayers.put(Character.VIOLET, null);
+            instance.characterPlayers.put(Character.SPROG, null);
+            instance.characterPlayers.put(Character.DISTRUCTOR, null);
+            instance.characterPlayers.put(Character.DOZER, null);
             instance.mapChosen.put(1, 0);
             instance.mapChosen.put(2, 0);
             instance.mapChosen.put(3, 0);
@@ -183,10 +184,64 @@ public class Game extends Observable {
     }
 
 
-    public LightGameVersion getLightVersion(){
-        //TODO
-        return null;
+    public LightGameVersion getLightVersion() {
+        //set the skulls
+        LightGameVersion lightVersion = new LightGameVersion();
+        lightVersion.setSkullsNum(getGameField().getSkullsBoard().getCurrentSkulls());
+
+        Map<String, String> playerPlatform = new HashMap<>();
+        Map<String, List<CardRep>> playerPowerups = new HashMap<>();
+        Map<String, List<CardRep>> playerWeapons = new HashMap<>();
+
+        //associate the players (characters) with their info (platform, powerUps, weapons)
+        for (Player player : getPlayers()) {
+            playerPlatform.put(player.getCharacter().toString(), getGameField().getPlatformPos(player.getCurrentPlatform()));
+            List<CardRep> powerUps = new ArrayList<>();
+            List<CardRep> weapons = new ArrayList<>();
+
+            for (PowerUpCard powerUp : player.getPowerUpCards())
+                powerUps.add(new CardRep(HandyFunctions.getSystemAddress(powerUp), powerUp.getName(), powerUp.getDescription(),
+                        powerUp.getImgPath()));
+
+            for (WeaponCard weaponCard : player.getWeaponCards())
+                weapons.add(new CardRep(HandyFunctions.getSystemAddress(weaponCard), weaponCard.getName(), weaponCard.getDescription(),
+                        weaponCard.getImgPath()));
+
+            playerPowerups.put(player.getCharacter().toString(), powerUps);
+            playerWeapons.put(player.getCharacter().toString(), weapons);
+        }
+
+        lightVersion.setPlayerPlatform(playerPlatform);
+        lightVersion.setPlayerPowerups(playerPowerups);
+        lightVersion.setPlatformWeapons(playerWeapons);
+
+        //associate the platform with the ammo tile and the weapons
+        Map<String, AmmoRep> platformAmmoTile = new HashMap<>();
+        Map<String, List<CardRep>> platformWeapons = new HashMap<>();
+
+        for (Platform platform : gameField.getPlatforms()) {
+            List<CardRep> weapons = new ArrayList<>();
+            if (platform.hasAmmoCard()) {
+                AmmoCard ammoCard = platform.getPlatformAmmoCard();
+                platformAmmoTile.put(gameField.getPlatformPos(platform),
+                        new AmmoRep(HandyFunctions.getSystemAddress(ammoCard), ammoCard.toString()));
+            }
+
+            try {
+                for (WeaponCard weaponCard : platform.getWeapons())
+                    weapons.add(new CardRep(HandyFunctions.getSystemAddress(weaponCard), weaponCard.getName(), weaponCard.getDescription(),
+                            weaponCard.getImgPath()));
+                platformWeapons.put(gameField.getPlatformPos(platform), weapons);
+            } catch (InvalidGenerationSpotException e) {
+            }
+        }
+        lightVersion.setPlatformAmmoTile(platformAmmoTile);
+        lightVersion.setPlatformWeapons(platformWeapons);
+
+        //TODO Board rep
+        return lightVersion;
     }
+
     /**
      * every time ths method is called by the timer, (this) will notify the virtual view
      *
@@ -242,13 +297,13 @@ public class Game extends Observable {
                 }
                 try {
                     if (!isFound) {
-                        Character c = arr.remove(arr.size()-1);
+                        Character c = arr.remove(arr.size() - 1);
                         Player p = new Player(user, c, null);
                         players.add(p);
                         characterPlayers.put(c, p);
                     }
                 } catch (Exception e) {
-                    HandyFunctions.LOGGER.log(Level.SEVERE,"error in creating random character");
+                    HandyFunctions.LOGGER.log(Level.SEVERE, "error in creating random character");
                 }
             }
             Controller.getInstance().startGame();

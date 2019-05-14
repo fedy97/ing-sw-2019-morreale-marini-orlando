@@ -318,6 +318,20 @@ public class GameField {
         return null;
     }
 
+    //TODO test
+    public String getPlatformPos(Platform platform) {
+        String result = null;
+        for (int i = 0; i < field.length; i++)
+            for (int j = 0; j < field[0].length; j++)
+                if (field.equals(platform)) {
+                    result = new String();
+                    result.concat(Integer.toString(i));
+                    result.concat(",");
+                    result.concat(Integer.toString(j));
+                }
+        return result;
+    }
+
     /**
      * @param curr platform of the target
      * @return the platforms in the directions selected of max distance from curr = 2, used by Newton
