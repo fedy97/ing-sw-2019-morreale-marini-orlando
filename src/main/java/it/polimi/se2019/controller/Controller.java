@@ -11,7 +11,6 @@ import it.polimi.se2019.utils.TimerLobby;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 /**
@@ -72,23 +71,27 @@ public class Controller implements Observer {
      * Called when the VirtualView notify changes
      */
     public void update(Observable virtualView, Object message) {
-
-        if (message.equals("new client connected")) {
-            //notify all clients connected
-            for (String user : turnController.getUsers()) {
-                callView(new NewConnectionMessage(turnController.getUsers()), user);
+        if (state == ControllerState.SETUP) {
+            if (message.equals("new client connected")) {
+                //notify all clients connected
+                for (String user : turnController.getUsers()) {
+                    callView(new NewConnectionMessage(turnController.getUsers()), user);
+                }
+            } else if (message.equals("we are at least 2")) {
+                //this timer will modify the model(Game) where the seconds integer is hold
+                TimerLobby t = new TimerLobby(5);
+                t.start();
             }
-        } else if (message.equals("we are at least 2")) {
-            //this timer will modify the model(Game) where the seconds integer is hold
-            TimerLobby t = new TimerLobby(5);
-            t.start();
+            else {
+                //set chosen map from client and character
+                ((ToServerMessage) message).performAction();
+            }
         } else {
             //every ToServerMessage will modify the model in its own class hardcoded in performaction
-            if(state == ControllerState.WAIT_CURRENT_PLAYER || state == ControllerState.WAIT_TARGET_PLAYER) {
+            if (state == ControllerState.WAIT_CURRENT_PLAYER || state == ControllerState.WAIT_TARGET_PLAYER) {
                 ((ToServerMessage) message).performAction();
                 state = ControllerState.IDLE;
-            }
-            else
+            } else
                 HandyFunctions.LOGGER.log(Level.WARNING, "Invalid message for this state of controller!");
         }
     }
@@ -179,7 +182,7 @@ public class Controller implements Observer {
             msg = new ShowWeaponsMessage(lightVersion);
         else if (choice.equals("position"))
             msg = new ShowPlatformMessage(lightVersion);
-        else if(choice.equals("positionForOther"))
+        else if (choice.equals("positionForOther"))
             msg = new ShowPlatformMessageForOther(lightVersion);
         else if (choice.equals("targets"))
             msg = new ShowPossibleTargetsMessage(lightVersion);
@@ -254,32 +257,32 @@ public class Controller implements Observer {
     }
 
 
-    public TurnController getTurnController(){
+    public TurnController getTurnController() {
         return turnController;
     }
 
-    public boolean getLock(){
-        if(lock)
+    public boolean getLock() {
+        if (lock)
             return false;
         lock = true;
         return true;
     }
 
-    public void releaseLock(){
+    public void releaseLock() {
         lock = false;
     }
 
-    public void waitForResponse(){
-        try{
-            while(state != ControllerState.IDLE){
-                TimeUnit.SECONDS.sleep(1);
+    public void waitForResponse() {
+        try {
+            while (state != ControllerState.IDLE) {
+                Thread.sleep(2000);
             }
-        }catch(InterruptedException e){
+        } catch (InterruptedException e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
     }
 
-    public List<Player> getCurrentTargets(){
+    public List<Player> getCurrentTargets() {
         return currentTargets;
     }
 }

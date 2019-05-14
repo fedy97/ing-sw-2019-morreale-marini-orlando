@@ -49,6 +49,12 @@ public class Game extends Observable {
             instance = new Game();
             instance.players = new ArrayList<>();
             instance.mapChosen = new HashMap<>();
+            instance.characterPlayers = new EnumMap<>(Character.class);
+            instance.characterPlayers.put(Character.BANSHEE,null);
+            instance.characterPlayers.put(Character.VIOLET,null);
+            instance.characterPlayers.put(Character.SPROG,null);
+            instance.characterPlayers.put(Character.DISTRUCTOR,null);
+            instance.characterPlayers.put(Character.DOZER,null);
             instance.mapChosen.put(1, 0);
             instance.mapChosen.put(2, 0);
             instance.mapChosen.put(3, 0);
@@ -92,6 +98,7 @@ public class Game extends Observable {
     public void setCharacterChosen(String name, String characterChosen) throws InvalidCharacterException, InvalidPositionException {
         Player player = new Player(name, Character.valueOf(characterChosen), null);
         players.add(player);
+        characterPlayers.put(Character.valueOf(characterChosen), player);
         setChanged();
         notifyObservers(new UpdateVotesCharacterChosenMessage(characterChosen));
     }
@@ -203,9 +210,10 @@ public class Game extends Observable {
         setChanged();
         notifyObservers(new UpdateTimerMapMessage(secondsLeft));
         if (secondsLeft == 0) {
+            int config = findWhichMapWon();
+            createAssets(config);
             setChanged();
-            notifyObservers(new ShowChooseCharacterMessage(null));
-            createAssets();
+            notifyObservers(new ShowChooseCharacterMessage(Integer.toString(config)));
             TimerCharacter t = new TimerCharacter(5);
             t.start();
 
@@ -219,14 +227,44 @@ public class Game extends Observable {
         this.secondsLeft = secondsLeft;
         setChanged();
         notifyObservers(new UpdateTimerCharacterMessage(secondsLeft));
+        if (secondsLeft == 0) {
+            //if a player did not chose a character, assign a random one
+            ArrayList<Character> arr = findCharactersAvailable();
+            for (String user : Controller.getInstance().getTurnController().getUsers()) {
+                boolean isFound = false;
+                for (Player p : players) {
+                    if (user.equals(p.getName())) isFound = true;
+                }
+                try {
+                    if (!isFound) {
+                        Character c = arr.remove(arr.size()-1);
+                        Player p = new Player(user, c, null);
+                        players.add(p);
+                        characterPlayers.put(c, p);
+                    }
+                } catch (Exception e) {
+                    HandyFunctions.LOGGER.log(Level.SEVERE,"error in creating random character");
+                }
+            }
+            Controller.getInstance().startGame();
+            setChanged();
+            notifyObservers(new ShowGameBoardMessage(null));
+        }
+    }
+
+    private ArrayList<Character> findCharactersAvailable() {
+        ArrayList<Character> arr = new ArrayList<>();
+        for (Map.Entry<Character, Player> entry : characterPlayers.entrySet()) {
+            if (entry.getValue() == null) arr.add(entry.getKey());
+        }
+        return arr;
     }
 
     /**
      * we can now build the field and the decks
      */
-    private void createAssets() {
+    private void createAssets(int config) {
         try {
-            int config = findWhichMapWon();
             if (config == -1)
                 throw new InvalidFieldException();
             JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
