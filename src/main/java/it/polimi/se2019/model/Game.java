@@ -179,9 +179,14 @@ public class Game extends Observable {
      */
     public void notifyChanges() {
         setChanged();
-        notifyObservers();
+        notifyObservers(getLightVersion());
     }
 
+
+    public LightGameVersion getLightVersion(){
+        //TODO
+        return null;
+    }
     /**
      * every time ths method is called by the timer, (this) will notify the virtual view
      *

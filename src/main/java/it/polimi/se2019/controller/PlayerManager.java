@@ -86,6 +86,7 @@ public class PlayerManager {
                 currentPlayer.getPlayerBoard().getAmmoBox().addAmmos(ammoCubes[i], 1);
 
             currentPlayer.getCurrentPlatform().setPlatformAmmoCard(newAmmo);
+            father.getGame().notifyChanges();
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }

@@ -43,6 +43,7 @@ public class VirtualView extends View {
      */
     @Override
     public void update(Observable game, Object message) {
+        //callView(new GameChangedMessage(message))
         updateUsers((ToClientMessage) message);
     }
 

@@ -273,13 +273,7 @@ public class Controller implements Observer {
     }
 
     public void waitForResponse() {
-        try {
-            while (state != ControllerState.IDLE) {
-                Thread.sleep(2000);
-            }
-        } catch (InterruptedException e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
-        }
+       //BOH TODO
     }
 
     public List<Player> getCurrentTargets() {
