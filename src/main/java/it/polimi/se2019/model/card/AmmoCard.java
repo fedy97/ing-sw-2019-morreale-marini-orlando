@@ -49,7 +49,6 @@ public final class AmmoCard extends Card {
     @Override
     public String toString() {
         String result = new String();
-
         for (int i = 0; i < ammoCubes.length; i++) {
             if (ammoCubes[i] == AmmoCube.RED)
                 result.concat("r");
@@ -59,7 +58,6 @@ public final class AmmoCard extends Card {
                 result.concat("y");
 
         }
-
         return result;
     }
 
