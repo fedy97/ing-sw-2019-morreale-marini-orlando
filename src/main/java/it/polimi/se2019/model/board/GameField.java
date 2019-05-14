@@ -321,6 +321,7 @@ public class GameField {
     //TODO test
     public String getPlatformPos(Platform platform) {
         String result = null;
+
         for (int i = 0; i < field.length; i++)
             for (int j = 0; j < field[0].length; j++)
                 if (field.equals(platform)) {
@@ -329,6 +330,7 @@ public class GameField {
                     result.concat(",");
                     result.concat(Integer.toString(j));
                 }
+
         return result;
     }
 
