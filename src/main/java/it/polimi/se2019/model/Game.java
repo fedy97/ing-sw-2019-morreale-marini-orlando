@@ -237,7 +237,6 @@ public class Game extends Observable {
         }
         lightVersion.setPlatformAmmoTile(platformAmmoTile);
         lightVersion.setPlatformWeapons(platformWeapons);
-
         //TODO Board rep
         return lightVersion;
     }
