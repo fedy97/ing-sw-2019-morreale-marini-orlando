@@ -369,4 +369,15 @@ public class Game extends Observable {
         }
         return config;
     }
+
+    /**
+     * @param name username of the player
+     * @return the reference to the object player
+     */
+    public Player getPlayer(String name) {
+        for (Player player : players)
+            if (player.getName().equals(name))
+                return player;
+        return null;
+    }
 }
