@@ -65,4 +65,7 @@ public abstract class PowerUpCard extends Card {
      */
     public abstract List<Player> getPossibleTargets(Controller c);
 
+    public List<Integer> getStages() {
+        return stages;
+    }
 }
