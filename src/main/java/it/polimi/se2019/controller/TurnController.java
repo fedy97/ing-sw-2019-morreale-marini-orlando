@@ -1,5 +1,7 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.model.Game;
+
 import java.util.*;
 
 /**
@@ -21,6 +23,7 @@ public class TurnController {
      */
     public void start(){
         curr = first;
+        Controller.getInstance().getPlayerManager().setCurrentPlayer(Game.getInstance().getPlayer(first));
     }
 
     /**
@@ -41,6 +44,7 @@ public class TurnController {
             curr = turningOrder.get(0);
         else
             curr = turningOrder.get(currIndex + 1);
+        Controller.getInstance().getPlayerManager().setCurrentPlayer(Game.getInstance().getPlayer(curr));
     }
 
     /**

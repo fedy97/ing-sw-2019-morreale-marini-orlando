@@ -10,4 +10,12 @@ public final class AmmoRep implements Serializable {
         this.id = id;
         this.type = type;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getType() {
+        return type;
+    }
 }

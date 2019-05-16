@@ -20,9 +20,7 @@
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
-         <image>
-            <Image url="@../../../../../Scrivania/Progetto%20SWEng/assets/field/1.jpg" />
-         </image>
+        
       </ImageView>
       <Button layoutX="803.0" mnemonicParsing="false" opacity="1.0" prefHeight="140.0" prefWidth="103.0" />
       <Button layoutX="922.0" layoutY="402.0" mnemonicParsing="false" opacity="1.0" prefHeight="97.0" prefWidth="152.0" />
@@ -67,7 +65,7 @@
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView fx:id="ammozerozero" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <GridPane layoutX="355.0" layoutY="151.0" prefHeight="162.0" prefWidth="184.0">
@@ -97,7 +95,7 @@
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView fx:id="ammozeroone" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -136,7 +134,7 @@
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView fx:id="ammozerotwo" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -175,7 +173,7 @@
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView fx:id="ammozerothree" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -214,7 +212,7 @@
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView fx:id="ammoonezero" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -258,7 +256,7 @@
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView fx:id="ammooneone" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -298,7 +296,7 @@
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView fx:id="ammoonetwo" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -338,7 +336,7 @@
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView fx:id="ammoonethree" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -378,7 +376,7 @@
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView fx:id="ammotwozero" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -418,7 +416,7 @@
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView fx:id="ammotwoone" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -458,7 +456,7 @@
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView fx:id="ammotwotwo" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -498,7 +496,7 @@
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView fx:id="ammotwothree" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

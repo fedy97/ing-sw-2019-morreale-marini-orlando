@@ -1,5 +1,7 @@
 package it.polimi.se2019.view.client.gui;
 
+import it.polimi.se2019.model.AmmoRep;
+import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.network.message.to_server.SendCharacterChosenMessage;
 import it.polimi.se2019.network.message.to_server.SendMapChosenMessage;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -14,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -34,6 +37,8 @@ public class GUI extends RemoteView {
     private Scene sceneChoosePowerup;
     private Stage stage;
     private Stage secondStage;
+    private String charInString;
+    private String config;
 
     public GUI(String user, Stage stage) {
         this.stage = stage;
@@ -55,8 +60,8 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void showChoosePowerup(String im1, String im2) {
-        initChoosePowerup(im1, im2);
+    public void showChoosePowerup(CardRep p1, CardRep p2) {
+        initChoosePowerup(p1, p2);
         Platform.runLater(
                 () -> {
                     choosePowerupController.passGUI(this);
@@ -81,7 +86,7 @@ public class GUI extends RemoteView {
     public void showChooseCharacter(String config) {
         Platform.runLater(
                 () -> {
-                    initGameBoard(config);
+                    this.config = config;
                     chooseCharacterController.passGUI(this);
                     stage.setScene(sceneChooseCharacter);
                     stage.setResizable(false);
@@ -90,9 +95,10 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void showGameBoard() {
+    public void showGameBoard(List<AmmoRep> ammoReps) {
         Platform.runLater(
                 () -> {
+                    initGameBoard(config,ammoReps);
                     gameBoardController.passGUI(this);
                     stage.setScene(sceneGameBoard);
                     stage.setResizable(false);
@@ -136,7 +142,7 @@ public class GUI extends RemoteView {
         }
     }
 
-    private void initGameBoard(String config) {
+    private void initGameBoard(String config, List<AmmoRep> ammoReps) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gameBoard.fxml"));
         try {
             Parent root = loader.load();
@@ -144,24 +150,25 @@ public class GUI extends RemoteView {
             sceneGameBoard = new Scene(root);
             gameBoardController = loader.getController();
             gameBoardController.setConfig(config);
+            gameBoardController.setAmmoReps(ammoReps);
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing game board");
         }
     }
 
-    private void initChoosePowerup(String im1path, String im2path) {
+    private void initChoosePowerup(CardRep p1, CardRep p2) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/choosePowerup.fxml"));
         try {
             Parent root = loader.load();
             secondStage = new Stage();
             secondStage.setTitle("Choose Powerup");
-            secondStage.initStyle(StageStyle.UNDECORATED);
+            /*secondStage.initStyle(StageStyle.UNDECORATED);
             secondStage.initOwner(stage);
-            secondStage.initModality(Modality.APPLICATION_MODAL);
+            secondStage.initModality(Modality.APPLICATION_MODAL);*/
             sceneChoosePowerup = new Scene(root);
             choosePowerupController = loader.getController();
-            choosePowerupController.im1path = im1path;
-            choosePowerupController.im2path = im2path;
+            choosePowerupController.im1path = p1.getPath();
+            choosePowerupController.im2path = p2.getPath();
 
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose power up");
@@ -207,6 +214,7 @@ public class GUI extends RemoteView {
     }
 
     protected void sendCharacterChosenByPlayer(String characterEnuminString) {
+        charInString = characterEnuminString;
         SendCharacterChosenMessage message = new SendCharacterChosenMessage(characterEnuminString);
         message.setSender(userName);
         viewSetChanged();

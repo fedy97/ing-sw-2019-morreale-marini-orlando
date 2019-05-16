@@ -36,8 +36,8 @@ public class GameField {
     public GameField(Platform[][] field, WeaponCard[] initWeapons,
                      SkullsBoard skullsBoard, ScoreBoard scoreBoard) throws InvalidFieldException, InvalidRoomException,
             InvalidAdjacentPlatformsException, InvalidDeckException, InvalidGenerationSpotException {
-        if (hasMoreThan2Nulls(field))
-            throw new InvalidFieldException();
+        if (hasMoreThan2Nulls(field)) {
+            throw new InvalidFieldException();}
         this.field = field;
         //build the adjacency list of every platform in the field
         for (int i = 0; i < field.length; i++) {
@@ -133,7 +133,7 @@ public class GameField {
                 if (p == null) counter++;
             }
         }
-        return counter > 1;
+        return counter > 2;
     }
 
     /**

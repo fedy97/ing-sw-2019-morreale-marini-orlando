@@ -1,5 +1,7 @@
 package it.polimi.se2019.view.client.cli;
 
+import it.polimi.se2019.model.AmmoRep;
+import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.client.SocketClient;
 import it.polimi.se2019.network.message.to_server.SendCharacterChosenMessage;
@@ -50,12 +52,12 @@ public class CLI extends RemoteView {
     }
 
     @Override
-    public void showChoosePowerup(String im1, String im2) {
+    public void showChoosePowerup(CardRep p1, CardRep p2) {
 
     }
 
     @Override
-    public void showGameBoard() {
+    public void showGameBoard(List<AmmoRep> ammoReps) {
         CliSetUp.clear();
         CliSetUp.cursorToHome();
         CliPrinter.welcomeMessage();

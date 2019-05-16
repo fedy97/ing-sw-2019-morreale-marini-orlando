@@ -30,15 +30,15 @@
     },
     {
       "powerup": false,
-      "ammocube1": "YELLOW",
-      "ammocube2": "BLUE",
+      "ammocube1": "BLUE",
+      "ammocube2": "YELLOW",
       "ammocube3": "YELLOW",
       "image": "byy"
     },
     {
       "powerup": false,
-      "ammocube1": "RED",
-      "ammocube2": "BLUE",
+      "ammocube1": "BLUE",
+      "ammocube2": "RED",
       "ammocube3": "RED",
       "image": "brr"
     },
@@ -65,23 +65,23 @@
     },
     {
       "powerup": false,
-      "ammocube1": "YELLOW",
+      "ammocube3": "YELLOW",
       "ammocube2": "YELLOW",
-      "ammocube3": "RED",
+      "ammocube1": "RED",
       "image": "ryy"
     },
     {
       "powerup": false,
-      "ammocube1": "YELLOW",
-      "ammocube2": "BLUE",
+      "ammocube2": "YELLOW",
+      "ammocube1": "BLUE",
       "ammocube3": "YELLOW",
       "image": "byy"
     },
     {
       "powerup": false,
-      "ammocube1": "RED",
+      "ammocube3": "RED",
       "ammocube2": "RED",
-      "ammocube3": "BLUE",
+      "ammocube1": "BLUE",
       "image": "brr"
     },
     {
@@ -93,9 +93,9 @@
     },
     {
       "powerup": false,
-      "ammocube1": "RED",
+      "ammocube3": "RED",
       "ammocube2": "RED",
-      "ammocube3": "YELLOW",
+      "ammocube1": "YELLOW",
       "image": "yrr"
     },
     {
@@ -114,16 +114,16 @@
     },
     {
       "powerup": false,
-      "ammocube1": "YELLOW",
+      "ammocube3": "YELLOW",
       "ammocube2": "YELLOW",
-      "ammocube3": "BLUE",
+      "ammocube1": "BLUE",
       "image": "byy"
     },
     {
       "powerup": false,
-      "ammocube1": "RED",
+      "ammocube3": "RED",
       "ammocube2": "RED",
-      "ammocube3": "BLUE",
+      "ammocube1": "BLUE",
       "image": "brr"
     },
     {

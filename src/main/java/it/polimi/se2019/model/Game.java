@@ -285,22 +285,42 @@ public class Game extends Observable {
     /**
      * @param secondsLeft to the game field page
      */
-    public synchronized void setSecondsLeftCharacter(int secondsLeft) throws NoCardException {
+    public synchronized void setSecondsLeftCharacter(int secondsLeft) {
         this.secondsLeft = secondsLeft;
         setChanged();
         notifyObservers(new UpdateTimerCharacterMessage(secondsLeft));
         if (secondsLeft == 0) {
             //if a player did not chose a character, assign a random one
-            findCharactersAvailableAndReplace();
-            Controller.getInstance().startGame();
-            Controller.getInstance().getTurnController().start();
-            List<String> arr = new ArrayList<>();
-            //the first user will recieve 2 paths of powerups
-            arr.add(Controller.getInstance().getTurnController().getTurnUser());
-            arr.add(powerUpDeck.drawCard().getImgPath());
-            arr.add(powerUpDeck.drawCard().getImgPath());
-            setChanged();
-            notifyObservers(new ShowGameBoardMessage(arr));
+            try {
+                findCharactersAvailableAndReplace();
+                Controller.getInstance().startGame();
+                Controller.getInstance().getTurnController().start();
+                List<CardRep> cardReps = new ArrayList<>();
+                String firstUser = Controller.getInstance().getTurnController().getTurnUser();
+                //the first user will recieve 2 paths of powerups
+                PowerUpCard p1 = powerUpDeck.drawCard();
+                PowerUpCard p2 = powerUpDeck.drawCard();
+
+                cardReps.add(new CardRep(HandyFunctions.getSystemAddress(p1), p1.getName(), p1.getDescription(), p1.getImgPath()));
+                cardReps.add(new CardRep(HandyFunctions.getSystemAddress(p2), p2.getName(), p2.getDescription(), p2.getImgPath()));
+
+                List<AmmoRep> ammoReps = new ArrayList<>();
+                //set for each platform an ammocard, than add it to the array of ammoreps
+                for (int i = 0; i < gameField.getField().length; i++) {
+                    for (int j = 0; j < gameField.getField()[0].length; j++) {
+                        Platform p = gameField.getField()[i][j];
+                        if (p != null) {
+                            AmmoCard ammoCard = p.getPlatformAmmoCard();
+                            ammoReps.add(new AmmoRep(HandyFunctions.getSystemAddress(ammoCard), ammoCard.toString()));
+                        }
+                        else ammoReps.add(null);
+                    }
+                }
+                setChanged();
+                notifyObservers(new ShowGameBoardMessage(firstUser, ammoReps, cardReps));
+            } catch (Exception e) {
+                HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
+            }
         }
     }
 
@@ -332,8 +352,6 @@ public class Game extends Observable {
      */
     private void createAssets(int config) {
         try {
-            if (config == -1)
-                throw new InvalidFieldException();
             JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
             ammoDeck = parserAmmos.buildAmmoCards();
             JsonParser parserField = new JsonParser("/json/field.json");
