@@ -19,10 +19,6 @@ public final class Teleporter extends PowerUpCard {
         super(ammoCube, name, description, img);
     }
 
-    @Override
-    /**
-     * Activate the effect of the card
-     */
     public void useEffect() {
         Controller c = Controller.getInstance();
         c.getLock();

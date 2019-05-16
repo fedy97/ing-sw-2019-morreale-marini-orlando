@@ -5,6 +5,7 @@ import it.polimi.se2019.exceptions.InvalidCubeException;
 import it.polimi.se2019.exceptions.InvalidImageException;
 import it.polimi.se2019.exceptions.InvalidNameException;
 import it.polimi.se2019.model.board.Platform;
+import it.polimi.se2019.model.card.weapons.BasicEffect;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -19,22 +20,19 @@ public final class Newton extends PowerUpCard {
 
     public Newton(AmmoCube ammoCube, String name, String description, String img) throws InvalidNameException, InvalidCubeException {
         super(ammoCube, name, description, img);
-    }
 
-    @Override
-    /**
-     * Activate the effect of the card
-     */
-    public void useEffect() {
-        Controller c = Controller.getInstance();
-        //TODO lock
-        c.getLock();
-        c.askFor(c.getValidator().getValidTargets(this), "targets");
-        c.waitForResponse();
-        Player target = c.getCurrentTargets().get(0);
-        c.askFor(c.getGame().getGameField().getPlatformDir(target.getCurrentPlatform()), "positionForOther");
-        c.waitForResponse();
-        c.releaseLock();
+        BasicEffect eff1 = (c) -> {
+            c.askFor(c.getValidator().getValidTargets(this), "targets");
+        };
+        BasicEffect eff2 = (c) -> {
+            Player target = c.getCurrentTargets().get(0);
+            c.askFor(c.getGame().getGameField().getPlatformDir(target.getCurrentPlatform()), "positionForOther");
+        };
+
+        effects.add(eff1);
+        effects.add(eff2);
+        stages.add(0);
+        stages.add(1);
     }
 
     /**

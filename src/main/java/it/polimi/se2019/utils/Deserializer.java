@@ -9,7 +9,7 @@ import it.polimi.se2019.model.player.Player;
 import java.util.List;
 
 /**
- * Class providing service methods to match the server objects' reference with the corresponding
+ * Class providing service methods to match the server objects' with the corresponding
  * remote version
  */
 public final class Deserializer {
@@ -23,24 +23,27 @@ public final class Deserializer {
     }
 
     /**
-     *
+     * @param light hashcode of the WeaponCard received from the client
+     * @return the server reference of the WeaponCard
      */
     public static WeaponCard getWeapon(String light) {
         List<WeaponCard> weapons = Controller.getInstance().getPlayerManager().getCurrentPlayer().getWeaponCards();
-        for(WeaponCard weaponCard: weapons){
-            if(Integer.toString(weaponCard.hashCode()).equals(light))
+        for (WeaponCard weaponCard : weapons) {
+            if (Integer.toString(weaponCard.hashCode()).equals(light))
                 return weaponCard;
         }
         return null;
     }
 
     /**
-     *
+     * @param light hashcode of the PowerUp received from the client
+     * @param owner of the PowerUp card
+     * @return the server reference of the PowerUp
      */
     public static PowerUpCard getPowerUp(String light, String owner) {
         Player player = Controller.getInstance().getGame().getPlayer(owner);
-        for(PowerUpCard powerUpCard: player.getPowerUpCards()){
-            if(Integer.toString(powerUpCard.hashCode()).equals(light))
+        for (PowerUpCard powerUpCard : player.getPowerUpCards()) {
+            if (Integer.toString(powerUpCard.hashCode()).equals(light))
                 return powerUpCard;
         }
         return null;

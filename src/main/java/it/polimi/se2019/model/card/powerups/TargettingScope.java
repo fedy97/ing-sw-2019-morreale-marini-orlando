@@ -20,10 +20,7 @@ public final class TargettingScope extends PowerUpCard {
         super(ammoCube, name, description, img);
     }
 
-    @Override
-    /**
-     * Activate the effect of Targeting Scope
-     */
+
     public void useEffect() {
         /** TODO
         Player currPlayer = c.getPlayerManager().getCurrentPlayer();
