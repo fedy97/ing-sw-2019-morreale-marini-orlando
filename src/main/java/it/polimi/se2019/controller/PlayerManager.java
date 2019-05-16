@@ -162,7 +162,7 @@ public class PlayerManager {
         if (!currentPlayer.getPowerUpCards().contains(powerUp))
             throw new InvalidCardException("The PowerUp doesn't belong to the current player, something went wrong!");
 
-        powerUp.useEffect();
+        powerUp.activate(0);
         currentPlayer.removePowerUpCard(powerUp);
         father.getDecksManager().addToGarbage(powerUp);
         father.getGame().notifyChanges();
