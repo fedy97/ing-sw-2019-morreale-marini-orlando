@@ -1,9 +1,12 @@
 package it.polimi.se2019.view.client.cli;
 
+import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.utils.HandyFunctions;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 
 /**
@@ -312,5 +315,96 @@ public final class CliPrinter {
         CliPrinter.stamp("\t\t\t  Time left: "+timer);
         CliSetUp.restorePosition();
     }
+
+    public static void printMap1(int[][] map) {
+        CliPrinter.stamp("┏━━━━━━━━━━━┓", CliColor.TEXTRED); CliPrinter.stamp("┏━━━━━━━━━━━┓┏━━━━━━━━━━━┓\n",CliColor.TEXTCYAN);
+        CliPrinter.stamp("┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTCYAN);
+        CliPrinter.stamp("┃           ┗", CliColor.TEXTRED); CliPrinter.stamp("┛                        ┃\n",CliColor.TEXTCYAN);
+        CliPrinter.stamp("┃           ┏", CliColor.TEXTRED); CliPrinter.stamp("┓                        ┃\n",CliColor.TEXTCYAN);
+        CliPrinter.stamp("┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTCYAN);
+        CliPrinter.stamp("┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┗━━━━┓ ┏━━━━┛┗━━━━┓ ┏━━━━┛\n",CliColor.TEXTCYAN);
+        CliPrinter.stamp("┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┏━━━━┛ ┗━━━━━━━━━━┛ ┗━━━━┓", CliColor.TEXTPURPLE); CliPrinter.stamp("┏━━━━━━━━━━━┓\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┗", CliColor.TEXTPURPLE); CliPrinter.stamp("┛           ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┏", CliColor.TEXTPURPLE); CliPrinter.stamp("┓           ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┗━━━━┓ ┏━━━━┛", CliColor.TEXTRED); CliPrinter.stamp("┗━━━━┓ ┏━━━━━━━━━━━━━━━━━┛", CliColor.TEXTPURPLE); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┏━━━━┛ ┗━━━━━━━━━━┛ ┗━━━━━━━━━━━━━━━━━┓", CliColor.TEXTWHITE); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┃                                     ┃", CliColor.TEXTWHITE); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┃                                     ┗", CliColor.TEXTWHITE); CliPrinter.stamp("┛           ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┃                                     ┏", CliColor.TEXTWHITE); CliPrinter.stamp("┓           ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┃                                     ┃", CliColor.TEXTWHITE); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛", CliColor.TEXTWHITE); CliPrinter.stamp("┗━━━━━━━━━━━┛\n",CliColor.TEXTYELLOW);
+
+    }
+
+    public static void printMap2(int[][] map) {
+        CliPrinter.stamp("\t\t\t     ┏━━━━━━━━━━━┓┏━━━━━━━━━━━┓┏━━━━━━━━━━━┓",CliColor.TEXTCYAN); CliPrinter.stamp("┏━━━━━━━━━━━┓\n",CliColor.TEXTGREEN);
+        CliPrinter.stamp("\t\t\t     ┃                                     ┃",CliColor.TEXTCYAN); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTGREEN);
+        CliPrinter.stamp("\t\t\t     ┃                                     ┗",CliColor.TEXTCYAN); CliPrinter.stamp("┛           ┃\n",CliColor.TEXTGREEN);
+        CliPrinter.stamp("\t\t\t     ┃                                     ┏",CliColor.TEXTCYAN); CliPrinter.stamp("┓           ┃\n",CliColor.TEXTGREEN);
+        CliPrinter.stamp("\t\t\t     ┃                                     ┃",CliColor.TEXTCYAN); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTGREEN);
+        CliPrinter.stamp("\t\t\t     ┗━━━━┓ ┏━━━━┛┗━━━━━━━━━━━┛┗━━━━┓ ┏━━━━┛",CliColor.TEXTCYAN); CliPrinter.stamp("┗━━━━┓ ┏━━━━┛\n",CliColor.TEXTGREEN);
+        CliPrinter.stamp("\t\t\t     ┏━━━━┛ ┗━━━━┓┏━━━━━━━━━━━┓",CliColor.TEXTRED); CliPrinter.stamp("┏━━━━┛ ┗━━━━━━━━━━┛ ┗━━━━┓\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃                        ┃",CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃                        ┃",CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃                        ┃",CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃                        ┃",CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┗━━━━━━━━━━━┛┗━━━━┓ ┏━━━━┛",CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t                  ┏━━━━┛ ┗━━━━┓",CliColor.TEXTWHITE); CliPrinter.stamp("┃                        ┃ \n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t                  ┃           ┃",CliColor.TEXTWHITE); CliPrinter.stamp("┃                        ┃ \n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t                  ┃           ┗",CliColor.TEXTWHITE); CliPrinter.stamp("┛                        ┃ \n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t                  ┃           ┏",CliColor.TEXTWHITE); CliPrinter.stamp("┓                        ┃ \n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t                  ┃           ┃",CliColor.TEXTWHITE); CliPrinter.stamp("┃                        ┃ \n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t                  ┗━━━━━━━━━━━┛",CliColor.TEXTWHITE); CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━┛ \n",CliColor.TEXTYELLOW);
+    }
+
+    public static void printMap3(int[][] map) {
+        CliPrinter.stamp("┏━━━━━━━━━━━┓┏━━━━━━━━━━━┓┏━━━━━━━━━━━┓\n", CliColor.TEXTCYAN);
+        CliPrinter.stamp("┃                                     ┃\n", CliColor.TEXTCYAN);
+        CliPrinter.stamp("┃                                     ┃\n", CliColor.TEXTCYAN);
+        CliPrinter.stamp("┃                                     ┃\n", CliColor.TEXTCYAN);
+        CliPrinter.stamp("┃                                     ┃\n", CliColor.TEXTCYAN);
+        CliPrinter.stamp("┗━━━━┓ ┏━━━━┛┗━━━━━━━━━━━┛┗━━━━┓ ┏━━━━┛\n", CliColor.TEXTCYAN);
+        CliPrinter.stamp("┏━━━━┛ ┗━━━━┓┏━━━━━━",CliColor.TEXTRED); CliPrinter.stamp("━━━━━┓┏━━━━┛ ┗━━━━┓", CliColor.TEXTPURPLE); CliPrinter.stamp("┏━━━━━━━━━━━┓\n", CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┃                   ",CliColor.TEXTRED); CliPrinter.stamp("                  ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃           ┃\n", CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┃                   ",CliColor.TEXTRED); CliPrinter.stamp("                  ┗", CliColor.TEXTPURPLE); CliPrinter.stamp("┛           ┃\n", CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┃                   ",CliColor.TEXTRED); CliPrinter.stamp("                  ┏", CliColor.TEXTPURPLE); CliPrinter.stamp("┓           ┃\n", CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┃                   ",CliColor.TEXTRED); CliPrinter.stamp("                  ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃           ┃\n", CliColor.TEXTYELLOW);
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━┓",CliColor.TEXTRED); CliPrinter.stamp(" ┏━━━━━━━━━━━━━━━━━┛", CliColor.TEXTPURPLE); CliPrinter.stamp("┃           ┃\n", CliColor.TEXTYELLOW);
+        CliPrinter.stamp("             ┏━━━━┛ ┗━━━━┓┏━━━━━━━━━━━┓",CliColor.TEXTWHITE); CliPrinter.stamp("┃           ┃\n", CliColor.TEXTYELLOW);
+        CliPrinter.stamp("             ┃                        ┃",CliColor.TEXTWHITE); CliPrinter.stamp("┃           ┃\n", CliColor.TEXTYELLOW);
+        CliPrinter.stamp("             ┃                        ┗",CliColor.TEXTWHITE); CliPrinter.stamp("┛           ┃\n", CliColor.TEXTYELLOW);
+        CliPrinter.stamp("             ┃                        ┏",CliColor.TEXTWHITE); CliPrinter.stamp("┓           ┃\n", CliColor.TEXTYELLOW);
+        CliPrinter.stamp("             ┃                        ┃",CliColor.TEXTWHITE); CliPrinter.stamp("┃           ┃\n", CliColor.TEXTYELLOW);
+        CliPrinter.stamp("             ┗━━━━━━━━━━━━━━━━━━━━━━━━┛",CliColor.TEXTWHITE); CliPrinter.stamp("┗━━━━━━━━━━━┛\n", CliColor.TEXTYELLOW);
+
+
+    }
+
+    public static void printMap4(int[][] map) {
+        CliPrinter.stamp("\t\t\t     ┏━━━━━━━━━━━┓", CliColor.TEXTRED); CliPrinter.stamp("┏━━━━━━━━━━━┓┏━━━━━━━━━━━┓", CliColor.TEXTCYAN); CliPrinter.stamp("┏━━━━━━━━━━━┓\n",CliColor.TEXTGREEN);
+        CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃", CliColor.TEXTCYAN); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTGREEN);
+        CliPrinter.stamp("\t\t\t     ┃           ┗", CliColor.TEXTRED); CliPrinter.stamp("┛                        ┗", CliColor.TEXTCYAN); CliPrinter.stamp("┛           ┃\n",CliColor.TEXTGREEN);
+        CliPrinter.stamp("\t\t\t     ┃           ┏", CliColor.TEXTRED); CliPrinter.stamp("┓                        ┏", CliColor.TEXTCYAN); CliPrinter.stamp("┓           ┃\n",CliColor.TEXTGREEN);
+        CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃", CliColor.TEXTCYAN); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTGREEN);
+        CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┗━━━━┓ ┏━━━━┛┗━━━━┓ ┏━━━━┛", CliColor.TEXTCYAN); CliPrinter.stamp("┗━━━━┓ ┏━━━━┛\n",CliColor.TEXTGREEN);
+        CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┏━━━━┛ ┗━━━━┓", CliColor.TEXTPURPLE); CliPrinter.stamp("┏━━━━┛ ┗━━━━━━━━━━┛ ┗━━━━┓\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃           ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃           ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃           ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃           ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┗━━━━┓ ┏━━━━┛", CliColor.TEXTRED); CliPrinter.stamp("┗━━━━┓ ┏━━━━┛", CliColor.TEXTPURPLE); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┏━━━━┛ ┗━━━━━━━━━━┛ ┗━━━━┓", CliColor.TEXTWHITE);  CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃                        ┃", CliColor.TEXTWHITE) ; CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃                        ┃", CliColor.TEXTWHITE) ; CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃                        ┗", CliColor.TEXTWHITE) ; CliPrinter.stamp("┛                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃                        ┏", CliColor.TEXTWHITE) ; CliPrinter.stamp("┓                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃                        ┃", CliColor.TEXTWHITE) ; CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃                        ┃", CliColor.TEXTWHITE) ; CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┗━━━━━━━━━━━━━━━━━━━━━━━━┛", CliColor.TEXTWHITE) ; CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━┛\n",CliColor.TEXTYELLOW);
+
+    }
+
 
 }

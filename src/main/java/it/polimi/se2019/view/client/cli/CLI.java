@@ -30,6 +30,8 @@ public class CLI extends RemoteView {
     private ArrayList<String> charChosen;
     private int myChar = 0;
     private String myCharEnumString;
+    private String chosenBoard;
+    private int[][] map;
 
     public CLI() {
         try {
@@ -44,6 +46,7 @@ public class CLI extends RemoteView {
         vote[2] = 0;
         vote[3] = 0;
         charChosen = new ArrayList<>();
+        map = new int[3][4];
     }
 
     @Override
@@ -53,24 +56,36 @@ public class CLI extends RemoteView {
 
     @Override
     public void showGameBoard() {
-
+        CliSetUp.clear();
+        CliSetUp.cursorToHome();
+        CliPrinter.welcomeMessage();
+        HandyFunctions.printConsole("\n\n");
+        if (chosenBoard.equals("1"))
+            CliPrinter.printMap1(map);
+        else if (chosenBoard.equals("2"))
+            CliPrinter.printMap2(map);
+        else if (chosenBoard.equals("3"))
+            CliPrinter.printMap3(map);
+        else
+            CliPrinter.printMap4(map);
     }
 
     @Override
     public void updateVotesCharacterChosen(String c) {
         if (!c.equals(myCharEnumString))
             charChosen.add(c);
-        showChooseCharacter("null");
+        showChooseCharacter(chosenBoard);
     }
 
     @Override
     public void updateTimerCharacter(int count) {
         timeLeftForChar = count;
-        showChooseCharacter("null");
+        showChooseCharacter(chosenBoard);
     }
 
     @Override
     public void showChooseCharacter(String config) {
+        chosenBoard = config;
         if(!firstTime) {
             new Thread( () -> {
                 boolean okChar = false;
