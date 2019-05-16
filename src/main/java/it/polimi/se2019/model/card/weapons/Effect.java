@@ -32,7 +32,7 @@ public class Effect {
     public void activateEffect(ArrayList<Player> targets) {
         for (Player player : targets) {
             for (BasicEffect effect : basicEffects) {
-                effect.applyTo(player);
+                //     effect.applyTo(player);
             }
         }
     }

@@ -2,6 +2,8 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.Lobby;
 import it.polimi.se2019.model.Game;
+import it.polimi.se2019.model.card.powerups.PowerUpCard;
+import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.*;
@@ -11,7 +13,6 @@ import it.polimi.se2019.utils.TimerLobby;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * @author Gabriel Raul Marini
@@ -26,8 +27,11 @@ public class Controller implements Observer {
     private Map<String, VirtualView> userView;
     private VirtualView currentView;
     private List<String> validActions;
-    private ControllerState state;
+    private ControllerState state; //the state is set to processing power up or weapon when a specific message from the client (ActivateCardMessage) is received
     private List<Player> currentTargets;
+    private List<Integer> processingStages;
+    private PowerUpCard processingPowerUp;
+    private WeaponCard processingWeaponCard;
     private boolean lock;
     private static Controller instance = null;
 
@@ -81,18 +85,45 @@ public class Controller implements Observer {
                 //this timer will modify the model(Game) where the seconds integer is hold
                 TimerLobby t = new TimerLobby(5);
                 t.start();
-            }
-            else {
+            } else {
                 //set chosen map from client and character
                 ((ToServerMessage) message).performAction();
             }
         } else {
-            //every ToServerMessage will modify the model in its own class hardcoded in performaction
-            if (state == ControllerState.WAIT_CURRENT_PLAYER || state == ControllerState.WAIT_TARGET_PLAYER) {
-                ((ToServerMessage) message).performAction();
-                state = ControllerState.IDLE;
-            } else
-                HandyFunctions.LOGGER.log(Level.WARNING, "Invalid message for this state of controller!");
+            ((ToServerMessage) message).performAction();
+
+            if(state == ControllerState.PROCESSING_POWERUP){
+                processingStages.remove(0);
+                processPowerUp(processingPowerUp);
+            }else if(state == ControllerState.PROCESSING_WEAPON){
+                processingStages.remove(0);
+                processWeaponCard(processingWeaponCard);
+            }
+
+            state = ControllerState.IDLE;
+        }
+    }
+
+    /**
+     * @param powerUp composed of different stages in order to perform the final effect
+     */
+    public void processPowerUp(PowerUpCard powerUp) {
+        // powerUp.activate(processingStages.get(0));
+        if (processingStages.size() == 0) {
+            state = ControllerState.IDLE;
+            decksManager.addToGarbage(processingPowerUp);
+            processingPowerUp = null;
+        }
+    }
+
+    /**
+     * @param weapon composed of different stages in order to perform the final effect
+     */
+    public void processWeaponCard(WeaponCard weapon) {
+        //weaponCard.activate(processingStages.get(0));
+        if (processingStages.size() == 0){
+            state = ControllerState.IDLE;
+            processingWeaponCard = null;
         }
     }
 
@@ -176,7 +207,6 @@ public class Controller implements Observer {
         ToClientMessage msg = null;
         List<String> lightVersion = HandyFunctions.getLightCollection(possibleChoices);
         Player currPlayer = playerManager.getCurrentPlayer();
-        state = ControllerState.WAIT_CURRENT_PLAYER;
 
         if (choice.equals("weapons"))
             msg = new ShowWeaponsMessage(lightVersion);
@@ -273,10 +303,18 @@ public class Controller implements Observer {
     }
 
     public void waitForResponse() {
-       //BOH TODO
+        //BOH TODO
     }
 
     public List<Player> getCurrentTargets() {
         return currentTargets;
+    }
+
+    public void setState(ControllerState state) {
+        this.state = state;
+    }
+
+    public void addStages(List<Integer> stages) {
+        processingStages.addAll(stages);
     }
 }

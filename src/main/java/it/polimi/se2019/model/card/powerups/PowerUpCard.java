@@ -48,9 +48,10 @@ public abstract class PowerUpCard extends Card {
 
     /**
      * Activate the effect of the card at the current stage
+     *
      * @param stage the game state in which the card is being processed
      */
-    public void activate(Integer stage){
+    public void activate(Integer stage) {
         effects.get(stage).activate(Controller.getInstance());
     }
 
