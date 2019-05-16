@@ -10,6 +10,11 @@
 
 <AnchorPane prefHeight="464.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.view.client.gui.ChooseCharacterController">
    <children>
+      <ImageView fitHeight="464.0" fitWidth="600.0" pickOnBounds="true">
+         <image>
+            <Image url="@assets/backgrounds/bgchoose.jpg" />
+         </image>
+      </ImageView>
       <ToggleButton fx:id="bluebutton" layoutX="14.0" layoutY="73.0" mnemonicParsing="false" onAction="#chooseBlue" prefHeight="127.0" prefWidth="107.0">
          <graphic>
             <ImageView fitHeight="132.0" fitWidth="124.0">
@@ -55,17 +60,17 @@
             </ImageView>
          </graphic>
       </ToggleButton>
-      <Label layoutX="180.0" layoutY="14.0" text="Choose Character:">
+      <Label layoutX="180.0" layoutY="14.0" text="Choose Character:" textFill="WHITE">
          <font>
             <Font name="Ubuntu" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="181.0" layoutY="414.0" text="Game will start in:">
+      <Label layoutX="181.0" layoutY="414.0" text="Game will start in:" textFill="WHITE">
          <font>
             <Font name="Ubuntu" size="25.0" />
          </font>
       </Label>
-      <Label fx:id="timer" layoutX="404.0" layoutY="414.0" prefHeight="15.0" prefWidth="3.0" text="5">
+      <Label fx:id="timer" layoutX="404.0" layoutY="414.0" prefHeight="15.0" prefWidth="3.0" text="5" textFill="WHITE">
          <font>
             <Font name="Ubuntu" size="25.0" />
          </font>

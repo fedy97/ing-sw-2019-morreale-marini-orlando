@@ -9,7 +9,9 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.List;
@@ -135,12 +137,13 @@ public class GUI extends RemoteView {
     }
 
     private void initGameBoard(String config) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gameBoard" + config + ".fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gameBoard.fxml"));
         try {
             Parent root = loader.load();
             stage.setTitle("Adrenaline");
             sceneGameBoard = new Scene(root);
             gameBoardController = loader.getController();
+            gameBoardController.setConfig(config);
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing game board");
         }
@@ -152,6 +155,9 @@ public class GUI extends RemoteView {
             Parent root = loader.load();
             secondStage = new Stage();
             secondStage.setTitle("Choose Powerup");
+            secondStage.initStyle(StageStyle.UNDECORATED);
+            secondStage.initOwner(stage);
+            secondStage.initModality(Modality.APPLICATION_MODAL);
             sceneChoosePowerup = new Scene(root);
             choosePowerupController = loader.getController();
             choosePowerupController.im1path = im1path;

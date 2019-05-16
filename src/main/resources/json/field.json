@@ -4,46 +4,46 @@
       "x": 0,
       "y": 0,
       "isGenerationSpot": false,
+      "platformColor": "RED",
+      "orientation": [
+        "RIGHT"
+      ]
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "isGenerationSpot": false,
+      "platformColor": "BLUE",
+      "orientation": [
+        "DOWN",
+        "LEFT"
+      ]
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "isGenerationSpot": true,
+      "platformColor": "BLUE",
+      "orientation": [
+        "DOWN"
+      ]
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "isGenerationSpot": false,
       "platformColor": "",
       "orientation": [
         ""
       ]
     },
     {
-      "x": 1,
-      "y": 0,
-      "isGenerationSpot": true,
-      "platformColor": "BLUE",
-      "orientation": [
-        "DOWN"
-      ]
-    },
-    {
-      "x": 2,
-      "y": 0,
-      "isGenerationSpot": false,
-      "platformColor": "BLUE",
-      "orientation": [
-        "DOWN",
-        "RIGHT"
-      ]
-    },
-    {
-      "x": 3,
-      "y": 0,
-      "isGenerationSpot": false,
-      "platformColor": "RED",
-      "orientation": [
-        "LEFT"
-      ]
-    },
-    {
       "x": 0,
       "y": 1,
-      "isGenerationSpot": false,
-      "platformColor": "YELLOW",
+      "isGenerationSpot": true,
+      "platformColor": "RED",
       "orientation": [
-        "RIGHT"
+        "DOWN"
       ]
     },
     {
@@ -53,7 +53,7 @@
       "platformColor": "PINK",
       "orientation": [
         "UP",
-        "LEFT"
+        "DOWN"
       ]
     },
     {
@@ -63,25 +63,25 @@
       "platformColor": "PINK",
       "orientation": [
         "UP",
-        "DOWN"
+        "RIGHT"
       ]
     },
     {
       "x": 3,
       "y": 1,
-      "isGenerationSpot": true,
-      "platformColor": "RED",
+      "isGenerationSpot": false,
+      "platformColor": "YELLOW",
       "orientation": [
-        "DOWN"
+        "LEFT"
       ]
     },
     {
       "x": 0,
       "y": 2,
-      "isGenerationSpot": true,
-      "platformColor": "YELLOW",
+      "isGenerationSpot": false,
+      "platformColor": "WHITE",
       "orientation": [
-        "RIGHT"
+        "UP"
       ]
     },
     {
@@ -90,7 +90,7 @@
       "isGenerationSpot": false,
       "platformColor": "WHITE",
       "orientation": [
-        "LEFT"
+        "UP"
       ]
     },
     {
@@ -99,16 +99,16 @@
       "isGenerationSpot": false,
       "platformColor": "WHITE",
       "orientation": [
-        "UP"
+        "RIGHT"
       ]
     },
     {
       "x": 3,
       "y": 2,
-      "isGenerationSpot": false,
-      "platformColor": "WHITE",
+      "isGenerationSpot": true,
+      "platformColor": "YELLOW",
       "orientation": [
-        "UP"
+        "LEFT"
       ]
     }
   ],
@@ -230,68 +230,40 @@
       "x": 0,
       "y": 0,
       "isGenerationSpot": false,
+      "platformColor": "BLUE",
+      "orientation": [
+        "DOWN"
+      ]
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "isGenerationSpot": false,
+      "platformColor": "BLUE",
+      "orientation": [
+        ""
+      ]
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "isGenerationSpot": true,
+      "platformColor": "BLUE",
+      "orientation": [
+        "DOWN"
+      ]
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "isGenerationSpot": false,
       "platformColor": "",
       "orientation": [
         ""
       ]
     },
     {
-      "x": 1,
-      "y": 0,
-      "isGenerationSpot": true,
-      "platformColor": "BLUE",
-      "orientation": [
-        "DOWN"
-      ]
-    },
-    {
-      "x": 2,
-      "y": 0,
-      "isGenerationSpot": false,
-      "platformColor": "BLUE",
-      "orientation": [
-        ""
-      ]
-    },
-    {
-      "x": 3,
-      "y": 0,
-      "isGenerationSpot": false,
-      "platformColor": "BLUE",
-      "orientation": [
-        "DOWN"
-      ]
-    },
-    {
       "x": 0,
-      "y": 1,
-      "isGenerationSpot": false,
-      "platformColor": "YELLOW",
-      "orientation": [
-        "RIGHT"
-      ]
-    },
-    {
-      "x": 1,
-      "y": 1,
-      "isGenerationSpot": false,
-      "platformColor": "RED",
-      "orientation": [
-        "LEFT",
-        "UP"
-      ]
-    },
-    {
-      "x": 2,
-      "y": 1,
-      "isGenerationSpot": false,
-      "platformColor": "RED",
-      "orientation": [
-        "DOWN"
-      ]
-    },
-    {
-      "x": 3,
       "y": 1,
       "isGenerationSpot": true,
       "platformColor": "RED",
@@ -300,25 +272,44 @@
       ]
     },
     {
-      "x": 0,
-      "y": 2,
-      "isGenerationSpot": true,
-      "platformColor": "YELLOW",
+      "x": 1,
+      "y": 1,
+      "isGenerationSpot": false,
+      "platformColor": "RED",
       "orientation": [
+        "DOWN"
+      ]
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "isGenerationSpot": false,
+      "platformColor": "RED",
+      "orientation": [
+        "UP",
         "RIGHT"
       ]
     },
     {
-      "x": 1,
-      "y": 2,
+      "x": 3,
+      "y": 1,
       "isGenerationSpot": false,
-      "platformColor": "WHITE",
+      "platformColor": "YELLOW",
       "orientation": [
         "LEFT"
       ]
     },
     {
-      "x": 2,
+      "x": 0,
+      "y": 2,
+      "isGenerationSpot": false,
+      "platformColor": "",
+      "orientation": [
+        ""
+      ]
+    },
+    {
+      "x": 1,
       "y": 2,
       "isGenerationSpot": false,
       "platformColor": "WHITE",
@@ -327,12 +318,21 @@
       ]
     },
     {
-      "x": 3,
+      "x": 2,
       "y": 2,
       "isGenerationSpot": false,
-      "platformColor": "",
+      "platformColor": "WHITE",
       "orientation": [
-        ""
+        "RIGHT"
+      ]
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "isGenerationSpot": true,
+      "platformColor": "YELLOW",
+      "orientation": [
+        "LEFT"
       ]
     }
   ],

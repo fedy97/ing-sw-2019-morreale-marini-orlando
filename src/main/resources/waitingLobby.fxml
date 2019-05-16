@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -11,22 +12,27 @@
 
 <AnchorPane blendMode="DARKEN" cacheHint="SPEED" depthTest="DISABLE" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.view.client.gui.WaitingLobbyController">
    <children>
-      <ProgressIndicator blendMode="RED" layoutX="150.0" layoutY="153.0" prefHeight="94.0" prefWidth="104.0" />
-      <Label layoutX="54.0" layoutY="34.0" prefHeight="62.0" prefWidth="291.0" text="Waiting for players..." textAlignment="CENTER">
+      <ImageView fitHeight="400.0" fitWidth="400.0" pickOnBounds="true">
+         <image>
+            <Image url="@assets/backgrounds/bgchoose.jpg" />
+         </image>
+      </ImageView>
+      <ProgressIndicator layoutX="150.0" layoutY="153.0" prefHeight="94.0" prefWidth="104.0" />
+      <Label layoutX="54.0" layoutY="34.0" prefHeight="62.0" prefWidth="291.0" text="Waiting for players..." textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Ubuntu" size="31.0" />
          </font>
       </Label>
-      <Label fx:id="player1" layoutX="27.0" layoutY="280.0" prefHeight="15.0" prefWidth="345.0" textAlignment="CENTER" />
-      <Label fx:id="player2" layoutX="27.0" layoutY="300.0" prefHeight="15.0" prefWidth="345.0" textAlignment="CENTER" />
-      <Label fx:id="player3" layoutX="27.0" layoutY="320.0" prefHeight="15.0" prefWidth="345.0" textAlignment="CENTER" />
-      <Label fx:id="player4" layoutX="27.0" layoutY="340.0" prefHeight="15.0" prefWidth="345.0" textAlignment="CENTER" />
-      <Label fx:id="player5" layoutX="27.0" layoutY="360.0" prefHeight="15.0" prefWidth="345.0" textAlignment="CENTER" />
-      <Label layoutX="105.0" layoutY="113.0" text="Countdown:">
+      <Label fx:id="player1" layoutX="27.0" layoutY="280.0" prefHeight="15.0" prefWidth="345.0" textAlignment="CENTER" textFill="WHITE" />
+      <Label fx:id="player2" layoutX="27.0" layoutY="300.0" prefHeight="15.0" prefWidth="345.0" textAlignment="CENTER" textFill="WHITE" />
+      <Label fx:id="player3" layoutX="27.0" layoutY="320.0" prefHeight="15.0" prefWidth="345.0" textAlignment="CENTER" textFill="WHITE" />
+      <Label fx:id="player4" layoutX="27.0" layoutY="340.0" prefHeight="15.0" prefWidth="345.0" textAlignment="CENTER" textFill="WHITE" />
+      <Label fx:id="player5" layoutX="27.0" layoutY="360.0" prefHeight="15.0" prefWidth="345.0" textAlignment="CENTER" textFill="WHITE" />
+      <Label layoutX="105.0" layoutY="113.0" text="Countdown:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label fx:id="timer" layoutX="254.0" layoutY="113.0" text="10">
+      <Label fx:id="timer" layoutX="254.0" layoutY="113.0" text="5" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

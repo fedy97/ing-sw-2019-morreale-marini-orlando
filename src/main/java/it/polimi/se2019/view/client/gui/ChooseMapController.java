@@ -1,16 +1,17 @@
 package it.polimi.se2019.view.client.gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
 public class ChooseMapController {
 
@@ -33,18 +34,25 @@ public class ChooseMapController {
     private ToggleButton map4button;
     @FXML
     private Label timer;
+    @FXML
+    private ImageView bgImg;
+
     private ArrayList<Label> voteLabels;
 
     private ToggleGroup connectionType = new ToggleGroup();
     private DropShadow shadow = new DropShadow();
 
     public void initialize() {
-        voteLabels = new ArrayList<>();
-        voteLabels.add(map1vote);
-        voteLabels.add(map2vote);
-        voteLabels.add(map3vote);
-        voteLabels.add(map4vote);
-        connectionType.getToggles().addAll(map1button, map2button, map3button, map4button);
+        Platform.runLater(() -> {
+            voteLabels = new ArrayList<>();
+            voteLabels.add(map1vote);
+            voteLabels.add(map2vote);
+            voteLabels.add(map3vote);
+            voteLabels.add(map4vote);
+            bgImg.setImage(new Image("/assets/backgrounds/bgchoose.jpg"));
+            connectionType.getToggles().addAll(map1button, map2button, map3button, map4button);
+        });
+
     }
 
     /**
@@ -100,7 +108,7 @@ public class ChooseMapController {
     }
 
     private void setEffectToButton(ToggleButton toggleButton){
-        shadow.setColor(new Color(0, 0,0.7,1));
+        shadow.setColor(new Color(1, 1,0,1));
         toggleButton.setEffect(shadow);
     }
 }

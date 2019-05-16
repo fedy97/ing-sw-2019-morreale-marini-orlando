@@ -91,7 +91,7 @@ public class ChooseCharacterController {
     }
 
     private void setEffectToButton(ToggleButton toggleButton){
-        shadow.setColor(new Color(0, 0,0.7,1));
+        shadow.setColor(new Color(1, 1,0,1));
         toggleButton.setEffect(shadow);
     }
 }
