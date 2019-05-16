@@ -15,6 +15,7 @@ public abstract class RemoteView extends View {
     public abstract void showChooseMap();
     public abstract void showChooseCharacter(String config);
     public abstract void showGameBoard();
+    public abstract void showChoosePowerup(String im1, String im2);
     public abstract void updateVotesMapChosen(Map<Integer,Integer> map);
     public abstract void updateVotesCharacterChosen(String c);
     public abstract void lightWeapons(List<String> weapons);

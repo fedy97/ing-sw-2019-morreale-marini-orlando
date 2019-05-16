@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -24,12 +23,15 @@ public class GUI extends RemoteView {
     private ChooseMapController chooseMapController;
     private ChooseCharacterController chooseCharacterController;
     private GameBoardController gameBoardController;
+    private ChoosePowerupController choosePowerupController;
 
     private Scene sceneWaitingLobby;
     private Scene sceneChooseMap;
     private Scene sceneChooseCharacter;
     private Scene sceneGameBoard;
+    private Scene sceneChoosePowerup;
     private Stage stage;
+    private Stage secondStage;
 
     public GUI(String user, Stage stage) {
         this.stage = stage;
@@ -46,7 +48,20 @@ public class GUI extends RemoteView {
 
     private void showWaitingLobby() {
         stage.setScene(sceneWaitingLobby);
+        stage.setResizable(false);
         stage.show();
+    }
+
+    @Override
+    public void showChoosePowerup(String im1, String im2) {
+        initChoosePowerup(im1, im2);
+        Platform.runLater(
+                () -> {
+                    choosePowerupController.passGUI(this);
+                    secondStage.setScene(sceneChoosePowerup);
+                    secondStage.setResizable(false);
+                    secondStage.show();
+                });
     }
 
     @Override
@@ -55,6 +70,7 @@ public class GUI extends RemoteView {
                 () -> {
                     chooseMapController.passGUI(this);
                     stage.setScene(sceneChooseMap);
+                    stage.setResizable(false);
                     stage.show();
                 });
     }
@@ -66,6 +82,7 @@ public class GUI extends RemoteView {
                     initGameBoard(config);
                     chooseCharacterController.passGUI(this);
                     stage.setScene(sceneChooseCharacter);
+                    stage.setResizable(false);
                     stage.show();
                 });
     }
@@ -74,8 +91,9 @@ public class GUI extends RemoteView {
     public void showGameBoard() {
         Platform.runLater(
                 () -> {
-                    //chooseMapController.passGUI(this);
+                    gameBoardController.passGUI(this);
                     stage.setScene(sceneGameBoard);
+                    stage.setResizable(false);
                     stage.show();
                 });
     }
@@ -126,6 +144,23 @@ public class GUI extends RemoteView {
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing game board");
         }
+    }
+
+    private void initChoosePowerup(String im1path, String im2path) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/choosePowerup.fxml"));
+        try {
+            Parent root = loader.load();
+            secondStage = new Stage();
+            secondStage.setTitle("Choose Powerup");
+            sceneChoosePowerup = new Scene(root);
+            choosePowerupController = loader.getController();
+            choosePowerupController.im1path = im1path;
+            choosePowerupController.im2path = im2path;
+
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose power up");
+        }
+
     }
 
     /**
@@ -188,17 +223,17 @@ public class GUI extends RemoteView {
 
     @Override
     public void startGame() {
-        //TODO
+        //useless
     }
 
     @Override
     public void setCommunicationType() {
-        //TODO
+        //useless
     }
 
     @Override
     public void startConnection() {
-        //TODO
+        //useless
     }
 
     @Override
@@ -208,23 +243,23 @@ public class GUI extends RemoteView {
 
     @Override
     public void waitGameStart() {
-        //TODO
+        //useless
     }
 
     @Override
     public void lightWeapons(List<String> weapons) {
-        //TODO
+        //useless
     }
 
     @Override
     public void lightPlatforms(List<String> platforms) {
-        //TODO
+        //useless
     }
 
 
     @Override
     public void setState(State newState) {
-        //TODO
+        //useless
     }
 
     @Override

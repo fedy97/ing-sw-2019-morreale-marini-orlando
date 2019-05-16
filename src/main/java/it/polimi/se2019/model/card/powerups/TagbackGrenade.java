@@ -15,7 +15,7 @@ import java.util.List;
 public final class TagbackGrenade extends PowerUpCard {
 
 
-    public TagbackGrenade(AmmoCube ammoCube, String name, String description, Image img) throws InvalidImageException, InvalidNameException, InvalidCubeException {
+    public TagbackGrenade(AmmoCube ammoCube, String name, String description, String img) throws InvalidNameException, InvalidCubeException {
         super(ammoCube, name, description, img);
     }
 

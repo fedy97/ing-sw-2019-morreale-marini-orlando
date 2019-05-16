@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.view.client.gui.GameBoardController">
    <children>
@@ -17,28 +24,535 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </ImageView>
-      <Button layoutX="171.0" layoutY="151.0" mnemonicParsing="false" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
-      <Button layoutX="355.0" layoutY="151.0" mnemonicParsing="false" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
-      <Button layoutX="539.0" layoutY="151.0" mnemonicParsing="false" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
-      <Button layoutX="723.0" layoutY="151.0" mnemonicParsing="false" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
-      <Button layoutX="171.0" layoutY="313.0" mnemonicParsing="false" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
-      <Button layoutX="355.0" layoutY="313.0" mnemonicParsing="false" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
-      <Button layoutX="539.0" layoutY="313.0" mnemonicParsing="false" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
-      <Button layoutX="723.0" layoutY="313.0" mnemonicParsing="false" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
-      <Button layoutX="355.0" layoutY="475.0" mnemonicParsing="false" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
-      <Button layoutX="539.0" layoutY="475.0" mnemonicParsing="false" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
-      <Button layoutX="723.0" layoutY="475.0" mnemonicParsing="false" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
-      <Button layoutX="171.0" layoutY="475.0" mnemonicParsing="false" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
-      <Button layoutX="29.0" layoutY="183.0" mnemonicParsing="false" opacity="0" prefHeight="164.0" prefWidth="119.0" />
-      <Button layoutX="29.0" layoutY="37.0" mnemonicParsing="false" opacity="0" prefHeight="103.0" prefWidth="84.0" />
-      <Button layoutX="409.0" mnemonicParsing="false" opacity="0.0" prefHeight="140.0" prefWidth="119.0" />
-      <Button layoutX="290.0" mnemonicParsing="false" opacity="0.0" prefHeight="140.0" prefWidth="119.0" />
-      <Button layoutX="165.0" mnemonicParsing="false" opacity="0.0" prefHeight="140.0" prefWidth="119.0" />
-      <Button layoutX="922.0" layoutY="257.0" mnemonicParsing="false" opacity="0.0" prefHeight="97.0" prefWidth="152.0" />
-      <Button layoutX="922.0" layoutY="469.0" mnemonicParsing="false" opacity="0.0" prefHeight="97.0" prefWidth="152.0" />
-      <Button layoutX="6.0" layoutY="402.0" mnemonicParsing="false" opacity="0.0" prefHeight="97.0" prefWidth="152.0" />
-      <Button layoutX="6.0" layoutY="508.0" mnemonicParsing="false" opacity="0.0" prefHeight="97.0" prefWidth="152.0" />
-      <Button layoutX="6.0" layoutY="615.0" mnemonicParsing="false" opacity="0.0" prefHeight="97.0" prefWidth="152.0" />
-      <Button layoutX="922.0" layoutY="360.0" mnemonicParsing="false" opacity="0.0" prefHeight="97.0" prefWidth="152.0" />
+      <Button layoutX="409.0" mnemonicParsing="false" opacity="1.0" prefHeight="140.0" prefWidth="119.0" />
+      <Button layoutX="287.0" mnemonicParsing="false" opacity="1.0" prefHeight="140.0" prefWidth="119.0" />
+      <Button layoutX="165.0" mnemonicParsing="false" opacity="1.0" prefHeight="140.0" prefWidth="119.0" />
+      <Button layoutX="922.0" layoutY="257.0" mnemonicParsing="false" opacity="1.0" prefHeight="97.0" prefWidth="152.0" />
+      <Button layoutX="922.0" layoutY="463.0" mnemonicParsing="false" opacity="1.0" prefHeight="97.0" prefWidth="152.0" />
+      <Button layoutX="6.0" layoutY="402.0" mnemonicParsing="false" opacity="1.0" prefHeight="97.0" prefWidth="152.0" />
+      <Button layoutX="6.0" layoutY="508.0" mnemonicParsing="false" opacity="1.0" prefHeight="97.0" prefWidth="152.0" />
+      <Button layoutX="6.0" layoutY="615.0" mnemonicParsing="false" opacity="1.0" prefHeight="97.0" prefWidth="152.0" />
+      <Button layoutX="922.0" layoutY="360.0" mnemonicParsing="false" opacity="1.0" prefHeight="97.0" prefWidth="152.0" />
+      <GridPane layoutX="171.0" layoutY="151.0" prefHeight="162.0" prefWidth="184.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@assets/characters/banshee2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@assets/characters/sprog2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/violet.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/distructor2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@assets/characters/dozer2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="355.0" layoutY="151.0" prefHeight="162.0" prefWidth="184.0">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@assets/characters/banshee2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@assets/characters/sprog2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/violet.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/distructor2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@assets/characters/dozer2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane layoutX="539.0" layoutY="151.0" prefHeight="162.0" prefWidth="184.0">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@assets/characters/banshee2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@assets/characters/sprog2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/violet.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/distructor2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@assets/characters/dozer2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane layoutX="723.0" layoutY="151.0" prefHeight="162.0" prefWidth="184.0">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@assets/characters/banshee2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@assets/characters/sprog2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/violet.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/distructor2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@assets/characters/dozer2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane layoutX="171.0" layoutY="313.0" prefHeight="162.0" prefWidth="184.0">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@assets/characters/banshee2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@assets/characters/sprog2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/violet.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/distructor2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@assets/characters/dozer2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Button fx:id="zerothree" layoutX="723.0" layoutY="151.0" mnemonicParsing="false" onAction="#zerothreeClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
+      <Button fx:id="zerotwo" layoutX="539.0" layoutY="151.0" mnemonicParsing="false" onAction="#zerotwoClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
+      <Button fx:id="zeroone" layoutX="355.0" layoutY="151.0" mnemonicParsing="false" onAction="#zerooneClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
+      <Button fx:id="zerozero" layoutX="171.0" layoutY="151.0" mnemonicParsing="false" onAction="#zerozeroClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
+      <Button fx:id="onezero" layoutX="171.0" layoutY="313.0" mnemonicParsing="false" onAction="#onezeroClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
+      <GridPane layoutX="355.0" layoutY="313.0" prefHeight="162.0" prefWidth="184.0">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@assets/characters/banshee2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@assets/characters/sprog2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/violet.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/distructor2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@assets/characters/dozer2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Button fx:id="oneone" layoutX="355.0" layoutY="313.0" mnemonicParsing="false" onAction="#oneoneClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
+      <GridPane layoutX="539.0" layoutY="313.0" prefHeight="162.0" prefWidth="184.0">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@assets/characters/banshee2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@assets/characters/sprog2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/violet.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/distructor2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@assets/characters/dozer2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Button fx:id="onetwo" layoutX="539.0" layoutY="313.0" mnemonicParsing="false" onAction="#onetwoClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
+      <GridPane layoutX="723.0" layoutY="313.0" prefHeight="162.0" prefWidth="184.0">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@assets/characters/banshee2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@assets/characters/sprog2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/violet.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/distructor2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@assets/characters/dozer2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Button fx:id="onethree" layoutX="723.0" layoutY="313.0" mnemonicParsing="false" onAction="#onethreeClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
+      <GridPane layoutX="171.0" layoutY="476.0" prefHeight="162.0" prefWidth="184.0">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@assets/characters/banshee2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@assets/characters/sprog2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/violet.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/distructor2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@assets/characters/dozer2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Button fx:id="twozero" layoutX="171.0" layoutY="475.0" mnemonicParsing="false" onAction="#twozeroClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
+      <GridPane layoutX="355.0" layoutY="475.0" prefHeight="162.0" prefWidth="184.0">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@assets/characters/banshee2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@assets/characters/sprog2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/violet.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/distructor2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@assets/characters/dozer2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Button fx:id="twoone" layoutX="355.0" layoutY="475.0" mnemonicParsing="false" onAction="#twooneClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
+      <GridPane layoutX="539.0" layoutY="479.0" prefHeight="162.0" prefWidth="184.0">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@assets/characters/banshee2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@assets/characters/sprog2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/violet.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/distructor2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@assets/characters/dozer2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Button fx:id="twotwo" layoutX="539.0" layoutY="475.0" mnemonicParsing="false" onAction="#twotwoClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
+      <GridPane layoutX="723.0" layoutY="475.0" prefHeight="162.0" prefWidth="184.0">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@assets/characters/banshee2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@assets/characters/sprog2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/violet.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@assets/characters/distructor2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@assets/characters/dozer2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Button fx:id="twothree" layoutX="723.0" layoutY="475.0" mnemonicParsing="false" onAction="#twothreeClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
+      <ImageView fitHeight="108.0" fitWidth="87.0" layoutX="30.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="dozerbutton" layoutX="430.0" layoutY="649.0" mnemonicParsing="false" onAction="#dozerClick" prefHeight="63.0" prefWidth="64.0">
+         <graphic>
+            <ImageView fitHeight="51.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/characters/dozer2.jpg" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="violetbutton" layoutX="514.0" layoutY="649.0" mnemonicParsing="false" onAction="#violetClick" prefHeight="63.0" prefWidth="64.0">
+         <graphic>
+            <ImageView fitHeight="48.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/characters/violet.jpg" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="distructorbutton" layoutX="599.0" layoutY="649.0" mnemonicParsing="false" onAction="#distructorClick" prefHeight="63.0" prefWidth="64.0">
+         <graphic>
+            <ImageView fitHeight="48.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/characters/distructor2.jpg" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="sprogbutton" layoutX="680.0" layoutY="649.0" mnemonicParsing="false" onAction="#sprogClick" prefHeight="63.0" prefWidth="64.0">
+         <graphic>
+            <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/characters/sprog2.jpg" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="bansheebutton" layoutX="763.0" layoutY="649.0" mnemonicParsing="false" onAction="#bansheeClick" prefHeight="63.0" prefWidth="64.0">
+         <graphic>
+            <ImageView fitHeight="52.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/characters/banshee2.jpg" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
 </AnchorPane>

@@ -17,7 +17,7 @@ public abstract class View extends Observable implements Observer {
     public void viewSetChanged(){
         this.setChanged();
     }
-
+    public String getUserName() {return userName;}
     public abstract void start();
 
     public abstract void setCommunicationType();

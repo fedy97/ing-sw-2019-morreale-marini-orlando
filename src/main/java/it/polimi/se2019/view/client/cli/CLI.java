@@ -47,6 +47,11 @@ public class CLI extends RemoteView {
     }
 
     @Override
+    public void showChoosePowerup(String im1, String im2) {
+
+    }
+
+    @Override
     public void showGameBoard() {
 
     }

@@ -14,6 +14,7 @@ public class LoginPage extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
         primaryStage.setTitle("Adrenaline");
         primaryStage.setScene(new Scene(root, 612, 318));
+        primaryStage.setResizable(false);
         primaryStage.show();
         primaryStage.setOnCloseRequest(event -> {
             Platform.exit();

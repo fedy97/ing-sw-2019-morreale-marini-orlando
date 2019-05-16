@@ -195,7 +195,7 @@ public class Game extends Observable {
 
         //associate the players (characters) with their info (platform, powerUps, weapons)
         for (Player player : getPlayers()) {
-            playerPlatform.put(player.getCharacter().toString(), getGameField().getPlatformPos(player.getCurrentPlatform()));
+            playerPlatform.put(player.getCharacter().name(), getGameField().getPlatformPos(player.getCurrentPlatform()));
             List<CardRep> powerUps = new ArrayList<>();
             List<CardRep> weapons = new ArrayList<>();
 
@@ -207,8 +207,8 @@ public class Game extends Observable {
                 weapons.add(new CardRep(HandyFunctions.getSystemAddress(weaponCard), weaponCard.getName(), weaponCard.getDescription(),
                         weaponCard.getImgPath()));
 
-            playerPowerups.put(player.getCharacter().toString(), powerUps);
-            playerWeapons.put(player.getCharacter().toString(), weapons);
+            playerPowerups.put(player.getCharacter().name(), powerUps);
+            playerWeapons.put(player.getCharacter().name(), weapons);
         }
 
         lightVersion.setPlayerPlatform(playerPlatform);
@@ -269,54 +269,62 @@ public class Game extends Observable {
         setChanged();
         notifyObservers(new UpdateTimerMapMessage(secondsLeft));
         if (secondsLeft == 0) {
-            int config = findWhichMapWon();
-            createAssets(config);
-            setChanged();
-            notifyObservers(new ShowChooseCharacterMessage(Integer.toString(config)));
-            TimerCharacter t = new TimerCharacter(5);
-            t.start();
-
+            try {
+                int config = findWhichMapWon();
+                createAssets(config);
+                setChanged();
+                notifyObservers(new ShowChooseCharacterMessage(Integer.toString(config)));
+                TimerCharacter t = new TimerCharacter(5);
+                t.start();
+            } catch (Exception e) {
+                HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
+            }
         }
     }
 
     /**
      * @param secondsLeft to the game field page
      */
-    public synchronized void setSecondsLeftCharacter(int secondsLeft) {
+    public synchronized void setSecondsLeftCharacter(int secondsLeft) throws NoCardException {
         this.secondsLeft = secondsLeft;
         setChanged();
         notifyObservers(new UpdateTimerCharacterMessage(secondsLeft));
         if (secondsLeft == 0) {
             //if a player did not chose a character, assign a random one
-            ArrayList<Character> arr = findCharactersAvailable();
-            for (String user : Controller.getInstance().getTurnController().getUsers()) {
-                boolean isFound = false;
-                for (Player p : players) {
-                    if (user.equals(p.getName())) isFound = true;
-                }
-                try {
-                    if (!isFound) {
-                        Character c = arr.remove(arr.size() - 1);
-                        Player p = new Player(user, c, null);
-                        players.add(p);
-                        characterPlayers.put(c, p);
-                    }
-                } catch (Exception e) {
-                    HandyFunctions.LOGGER.log(Level.SEVERE, "error in creating random character");
-                }
-            }
+            findCharactersAvailableAndReplace();
             Controller.getInstance().startGame();
+            Controller.getInstance().getTurnController().start();
+            List<String> arr = new ArrayList<>();
+            //the first user will recieve 2 paths of powerups
+            arr.add(Controller.getInstance().getTurnController().getTurnUser());
+            arr.add(powerUpDeck.drawCard().getImgPath());
+            arr.add(powerUpDeck.drawCard().getImgPath());
             setChanged();
-            notifyObservers(new ShowGameBoardMessage(null));
+            notifyObservers(new ShowGameBoardMessage(arr));
         }
     }
 
-    private ArrayList<Character> findCharactersAvailable() {
+    private void findCharactersAvailableAndReplace() {
         ArrayList<Character> arr = new ArrayList<>();
         for (Map.Entry<Character, Player> entry : characterPlayers.entrySet()) {
             if (entry.getValue() == null) arr.add(entry.getKey());
         }
-        return arr;
+        for (String user : Controller.getInstance().getTurnController().getUsers()) {
+            boolean isFound = false;
+            for (Player p : players) {
+                if (user.equals(p.getName())) isFound = true;
+            }
+            try {
+                if (!isFound) {
+                    Character c = arr.remove(arr.size() - 1);
+                    Player p = new Player(user, c, null);
+                    players.add(p);
+                    characterPlayers.put(c, p);
+                }
+            } catch (Exception e) {
+                HandyFunctions.LOGGER.log(Level.SEVERE, "error in creating random character");
+            }
+        }
     }
 
     /**
@@ -327,19 +335,17 @@ public class Game extends Observable {
             if (config == -1)
                 throw new InvalidFieldException();
             JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
-            Deck<AmmoCard> deck = parserAmmos.buildAmmoCards();
-            //now we have 36 ammocards in the deck
-            deck.mix();
+            ammoDeck = parserAmmos.buildAmmoCards();
             JsonParser parserField = new JsonParser("/json/field.json");
-            Platform[][] field = parserField.buildField(config, deck);
+            Platform[][] field = parserField.buildField(config, ammoDeck);
             WeaponCard[] weaponCards = new WeaponCard[9];
             for (int i = 0; i < 9; i++)
                 weaponCards[i] = new WeaponCard();
             JsonParser parser = new JsonParser("/json/powerups.json");
-            Deck<PowerUpCard> powerUpCardDeck = parser.buildPowerupCards();
-            GameField gf = new GameField(field, weaponCards, new SkullsBoard(8), new ScoreBoard());
+            powerUpDeck = parser.buildPowerupCards();
+            gameField = new GameField(field, weaponCards, new SkullsBoard(8), new ScoreBoard());
             //TODO add weapons deck, to be parsed in json
-            initGame(gf, null, powerUpCardDeck, ammoDeck);
+            initGame(gameField, null, powerUpDeck, ammoDeck);
             Controller.getInstance().setManagers();
         } catch (Exception ex) {
             HandyFunctions.LOGGER.log(Level.SEVERE, ex.toString());

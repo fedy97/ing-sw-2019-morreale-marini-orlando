@@ -22,7 +22,7 @@ public final class AmmoCard extends Card {
      * @param cubes      the number of cubes the player can grab
      * @param hasPowerUp true if the player can draw a PowerUp card, false otherwise
      */
-    public AmmoCard(AmmoCube[] cubes, boolean hasPowerUp, Image img) throws InvalidCardException, InvalidImageException {
+    public AmmoCard(AmmoCube[] cubes, boolean hasPowerUp, String img) throws InvalidCardException {
         super(img);
         this.hasPowerUp = hasPowerUp;
         if ((cubes.length != 3 && !hasPowerUp) || (hasPowerUp && cubes.length != 2))
@@ -48,17 +48,17 @@ public final class AmmoCard extends Card {
     //TODO test
     @Override
     public String toString() {
-        String result = new String();
-        for (int i = 0; i < ammoCubes.length; i++) {
-            if (ammoCubes[i] == AmmoCube.RED)
-                result.concat("r");
-            else if (ammoCubes[i] == AmmoCube.BLUE)
-                result.concat("b");
+        StringBuilder result = new StringBuilder();
+        for (AmmoCube ammoCube : ammoCubes) {
+            if (ammoCube == AmmoCube.RED)
+                result.append("r");
+            else if (ammoCube == AmmoCube.BLUE)
+                result.append("b");
             else
-                result.concat("y");
+                result.append("y");
 
         }
-        return result;
+        return result.toString();
     }
 
 }

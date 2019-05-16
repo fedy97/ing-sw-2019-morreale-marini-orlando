@@ -47,13 +47,11 @@ public class JsonParser {
      * @return a deck of 36 ammos
      * @throws InvalidCardException
      */
-    public Deck<AmmoCard> buildAmmoCards() throws InvalidCardException, InvalidDeckException,InvalidImageException,IOException {
+    public Deck<AmmoCard> buildAmmoCards() throws InvalidCardException, InvalidDeckException,IOException {
         if (path.equals("/json/ammocards.json")) {
             ArrayList<AmmoCard> ammoCards = new ArrayList<>();
             AmmoCube[] arrAmmos;
-            Image image;
             String pathImg;
-            File imgInput;
             JSONArray ammosObj = jsonObj.getJSONArray("ammos");
 
             for (int i = 0; i < ammosObj.length(); i++) {
@@ -62,8 +60,7 @@ public class JsonParser {
                 AmmoCube a1 = AmmoCube.valueOf(currAmmosObj.getString("ammocube1"));
                 AmmoCube a2 = AmmoCube.valueOf(currAmmosObj.getString("ammocube2"));
                 pathImg = "/assets/ammos/"+ currAmmosObj.getString("image") + ".png";
-                imgInput = new File(JsonParser.class.getResource(pathImg).getFile());
-                image = ImageIO.read(imgInput);
+
                 if (!hasPowerup) {
                     AmmoCube a3 = AmmoCube.valueOf(currAmmosObj.getString("ammocube3"));
                     arrAmmos = new AmmoCube[3];
@@ -75,11 +72,12 @@ public class JsonParser {
                     arrAmmos[0] = a1;
                     arrAmmos[1] = a2;
                 }
-                AmmoCard amm = new AmmoCard(arrAmmos, hasPowerup, image);
+                AmmoCard amm = new AmmoCard(arrAmmos, hasPowerup, pathImg);
                 ammoCards.add(amm);
             }
             Deck<AmmoCard> d = new Deck<>(36);
             d.addCards(ammoCards);
+            d.mix();
             return d;
         }
         return null;
@@ -137,15 +135,13 @@ public class JsonParser {
      * @throws InvalidNameException
      */
     public Deck<PowerUpCard> buildPowerupCards() throws InvalidDeckException, IOException,
-            InvalidCubeException, InvalidImageException, InvalidNameException {
+            InvalidCubeException, InvalidNameException {
         if (path.equals("/json/powerups.json")) {
             ArrayList<PowerUpCard> powerUpCards = new ArrayList<>();
             AmmoCube ammo;
             String name;
             String description;
-            Image image;
             String pathImg;
-            File imgInput;
             PowerUpCard powerUpCard;
             JSONArray powerupsObj = jsonObj.getJSONArray("powerups");
             for (int k = 0; k < 2; k++) {
@@ -157,19 +153,18 @@ public class JsonParser {
                     JSONArray jArrImage = currPowerupsObj.getJSONArray("image");
                     for (int j = 0; j < jArrAmmocube.length(); j++) {
                         ammo = AmmoCube.valueOf(jArrAmmocube.get(j).toString());
-                        pathImg = jArrImage.getString(j) + ".png";
-                        imgInput = new File(JsonParser.class.getResource(pathImg).getFile());
-                        image = ImageIO.read(imgInput);
-                        if (i == 0) powerUpCard = new TargettingScope(ammo, name, description, image);
-                        else if (i == 1) powerUpCard = new Newton(ammo, name, description, image);
-                        else if (i == 2) powerUpCard = new TagbackGrenade(ammo, name, description, image);
-                        else powerUpCard = new Teleporter(ammo, name, description, image);
+                        pathImg = jArrImage.getString(j) + ".jpg";
+                        if (i == 0) powerUpCard = new TargettingScope(ammo, name, description, pathImg);
+                        else if (i == 1) powerUpCard = new Newton(ammo, name, description, pathImg);
+                        else if (i == 2) powerUpCard = new TagbackGrenade(ammo, name, description, pathImg);
+                        else powerUpCard = new Teleporter(ammo, name, description, pathImg);
                         powerUpCards.add(powerUpCard);
                     }
                 }
             }
             Deck<PowerUpCard> d = new Deck<>(24);
             d.addCards(powerUpCards);
+            d.mix();
             return d;
         }
         return null;

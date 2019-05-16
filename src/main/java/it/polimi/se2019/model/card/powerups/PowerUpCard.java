@@ -26,7 +26,7 @@ public abstract class PowerUpCard extends Card {
      * @param ammoCube the type of cube the player can use instead of using the
      *                 PowerUp effect
      */
-    public PowerUpCard(AmmoCube ammoCube, String name, String description, Image img) throws InvalidImageException, InvalidNameException, InvalidCubeException {
+    public PowerUpCard(AmmoCube ammoCube, String name, String description, String img) throws InvalidNameException, InvalidCubeException {
         super(name, description, img);
         if (ammoCube == null)
             throw new InvalidCubeException("ammocube cannot be null");

@@ -16,7 +16,7 @@ import java.util.List;
 public final class TargettingScope extends PowerUpCard {
 
 
-    public TargettingScope(AmmoCube ammoCube, String name, String description, Image img) throws InvalidImageException, InvalidNameException, InvalidCubeException {
+    public TargettingScope(AmmoCube ammoCube, String name, String description, String img) throws InvalidNameException, InvalidCubeException {
         super(ammoCube, name, description, img);
     }
 

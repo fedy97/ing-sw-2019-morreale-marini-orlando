@@ -15,7 +15,6 @@ import java.awt.*;
 public abstract class Card {
 
     protected String name;
-    protected Image bgImage;
     protected String description;
     protected String imgPath;
 
@@ -31,23 +30,19 @@ public abstract class Card {
      *
      * @param img of the ammocard
      */
-    public Card(Image img) throws InvalidImageException {
-        if (img == null)
-            throw new InvalidImageException();
-        this.bgImage = img;
+    public Card(String img) {
+        this.imgPath = img;
     }
 
     /**
      * Instantiate a card with a specified name and a given background image
      */
-    public Card(String name, String description, Image img) throws InvalidNameException, InvalidImageException {
+    public Card(String name, String description, String img) throws InvalidNameException {
         if (name.equals("") || description.equals(""))
             throw new InvalidNameException();
-        if (img == null)
-            throw new InvalidImageException();
         this.description = description;
         this.name = name;
-        this.bgImage = img;
+        this.imgPath = img;
     }
 
     /**
@@ -55,13 +50,6 @@ public abstract class Card {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * @return the reference to the background image of the card
-     */
-    public Image getBgImage() {
-        return bgImage;
     }
 
     /**

@@ -17,7 +17,7 @@ import java.util.logging.Level;
 public final class Newton extends PowerUpCard {
 
 
-    public Newton(AmmoCube ammoCube, String name, String description, Image img) throws InvalidImageException, InvalidNameException, InvalidCubeException {
+    public Newton(AmmoCube ammoCube, String name, String description, String img) throws InvalidNameException, InvalidCubeException {
         super(ammoCube, name, description, img);
     }
 
