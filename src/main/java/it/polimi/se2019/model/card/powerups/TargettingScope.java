@@ -5,6 +5,7 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.exceptions.InvalidCubeException;
 import it.polimi.se2019.exceptions.InvalidImageException;
 import it.polimi.se2019.exceptions.InvalidNameException;
+import it.polimi.se2019.model.card.weapons.BasicEffect;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
@@ -18,6 +19,14 @@ public final class TargettingScope extends PowerUpCard {
 
     public TargettingScope(AmmoCube ammoCube, String name, String description, String img) throws InvalidNameException, InvalidCubeException {
         super(ammoCube, name, description, img);
+
+        BasicEffect eff1 = c -> c.askFor(c.getValidator().getValidTargets(this), "targets");
+        BasicEffect eff2 = c -> c.askFor(c.getGame().getGameField().getPlatformDir(c.getCurrentTargets().get(0).getCurrentPlatform()), "tribute");
+
+        effects.add(eff1);
+        effects.add(eff2);
+        stages.add(0);
+        stages.add(1);
     }
 
 
