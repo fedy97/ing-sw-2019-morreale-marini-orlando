@@ -109,7 +109,7 @@ public class Controller implements Observer {
      */
     public void processPowerUp(PowerUpCard powerUp) {
         // powerUp.activate(processingStages.get(0));
-        if (processingStages.size() == 0) {
+        if (processingStages.isEmpty()) {
             state = ControllerState.IDLE;
             decksManager.addToGarbage(processingPowerUp);
             processingPowerUp = null;
@@ -121,7 +121,7 @@ public class Controller implements Observer {
      */
     public void processWeaponCard(WeaponCard weapon) {
         //weaponCard.activate(processingStages.get(0));
-        if (processingStages.size() == 0){
+        if (processingStages.isEmpty()){
             state = ControllerState.IDLE;
             processingWeaponCard = null;
         }

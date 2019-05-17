@@ -2,6 +2,9 @@ package it.polimi.se2019.model.player;
 
 import it.polimi.se2019.model.enumeration.AmmoCube;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class that manages the ammunition owned by the player
  *
@@ -47,6 +50,13 @@ public class AmmoBox {
      */
     public int getYellowAmmos() {
         return yellowAmmos;
+    }
+
+    /**
+     * @return the total number of AmmoCubes of the box
+     */
+    public int getTotal() {
+        return redAmmos + blueAmmos + yellowAmmos;
     }
 
     /**
@@ -144,5 +154,21 @@ public class AmmoBox {
         }
 
         return blueAmmos >= blue && redAmmos >= red && yellowAmmos >= yellow;
+    }
+
+    /**
+     * @return the list of cubes of the AmmoBox
+     */
+    public List<AmmoCube> getCubes() {
+        List<AmmoCube> cubes = new ArrayList<>();
+
+        for (int i = 0; i < redAmmos; i++)
+            cubes.add(AmmoCube.RED);
+        for (int i = 0; i < blueAmmos; i++)
+            cubes.add(AmmoCube.BLUE);
+        for (int i = 0; i < yellowAmmos; i++)
+            cubes.add(AmmoCube.YELLOW);
+
+        return cubes;
     }
 }

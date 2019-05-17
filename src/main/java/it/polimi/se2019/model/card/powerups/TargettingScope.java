@@ -3,16 +3,15 @@ package it.polimi.se2019.model.card.powerups;
 
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.exceptions.InvalidCubeException;
-import it.polimi.se2019.exceptions.InvalidImageException;
 import it.polimi.se2019.exceptions.InvalidNameException;
 import it.polimi.se2019.model.card.weapons.BasicEffect;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public final class TargettingScope extends PowerUpCard {
 
@@ -20,18 +19,25 @@ public final class TargettingScope extends PowerUpCard {
     public TargettingScope(AmmoCube ammoCube, String name, String description, String img) throws InvalidNameException, InvalidCubeException {
         super(ammoCube, name, description, img);
 
+        BasicEffect eff2 = c -> c.askFor(c.getPlayerManager().getCurrentPlayer().getPlayerBoard().getAmmoBox().getCubes(), "tribute");
         BasicEffect eff1 = c -> c.askFor(c.getValidator().getValidTargets(this), "targets");
-        BasicEffect eff2 = c -> c.askFor(c.getGame().getGameField().getPlatformDir(c.getCurrentTargets().get(0).getCurrentPlatform()), "tribute");
+        BasicEffect eff3 = c -> {
+            Map<Player, Integer> damageMap = new HashMap<>();
+            damageMap.put(c.getPlayerManager().getCurrentPlayer(), 1);
+            c.getPlayerManager().addDamage(damageMap);
+        };
 
         effects.add(eff1);
         effects.add(eff2);
+        effects.add(eff3);
         stages.add(0);
         stages.add(1);
+        stages.add(2);
     }
 
 
     public void useEffect() {
-        /** TODO
+        /**
         Player currPlayer = c.getPlayerManager().getCurrentPlayer();
         Player target = c.askForTargets(c.getValidator().getValidTargets(this)).get(0);
         AmmoCube cost = c.askForTribute();
