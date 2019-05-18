@@ -68,7 +68,7 @@ public class HandyFunctions {
             GameField gf = Controller.getInstance().getGame().getGameField();
             for(T element: elements){
                 Platform p = (Platform)element;
-                lightVersion.add(gf.getPlatformPos(p));
+                lightVersion.add(gf.getPlatformPosLight(p));
             }
             return lightVersion;
         }
