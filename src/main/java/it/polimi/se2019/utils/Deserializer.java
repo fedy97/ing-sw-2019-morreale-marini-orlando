@@ -48,19 +48,6 @@ public final class Deserializer {
         }
         return null;
     }
-    /**
-     * @param light hashcode of the PowerUp received from the client
-     * @param owner of the PowerUp card
-     * @return the server reference of the PowerUp
-     */
-    public static PowerUpCard getOtherPowerUp(String light, String owner) {
-        Player player = Controller.getInstance().getGame().getPlayer(owner);
-        for (PowerUpCard powerUpCard : player.getPowerUpCards()) {
-            if (!Integer.toString(powerUpCard.hashCode()).equals(light))
-                return powerUpCard;
-        }
-        return null;
-    }
 
 
 }

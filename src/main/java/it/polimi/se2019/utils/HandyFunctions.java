@@ -70,7 +70,7 @@ public class HandyFunctions {
     }
 
     public static void checkForAtLeast2Players(VirtualView virtualView){
-        if (Controller.getInstance().getTurnController().getUsers().size() == 1 && !Game.getInstance().isTimerStarted()) {
+        if (Controller.getInstance().getTurnController().getUsers().size() == 2 && !Game.getInstance().isTimerStarted()) {
             Game.getInstance().setTimerStarted(true);
             virtualView.viewSetChanged();
             virtualView.notifyObservers("we are at least 2");

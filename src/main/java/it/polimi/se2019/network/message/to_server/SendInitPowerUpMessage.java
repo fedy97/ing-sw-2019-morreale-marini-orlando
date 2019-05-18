@@ -10,6 +10,7 @@ import it.polimi.se2019.utils.Deserializer;
 import it.polimi.se2019.utils.HandyFunctions;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 public class SendInitPowerUpMessage extends ToServerMessage {
@@ -21,18 +22,18 @@ public class SendInitPowerUpMessage extends ToServerMessage {
     @Override
     public void performAction() {
         try {
-            int hash = (int) payload;
+            int hashChosen = ((ArrayList<Integer>) payload).get(0);
+            int hashGarbage = ((ArrayList<Integer>) payload).get(1);
             Controller c = Controller.getInstance();
             Player curr = c.getPlayerManager().getCurrentPlayer();
-            //will be removed the other power up initially added anyway in the Game class
-            //TODO the card removed will be deleted, not good
             HandyFunctions.printLineConsole("ciao");
-            curr.removePowerUpCard(Deserializer.getOtherPowerUp(Integer.toString(hash),this.sender));
+            //move the card not chosen from the user's power ups to the garbage deck
+            Controller.getInstance().getDecksManager().addToGarbage(Deserializer.getPowerUp(Integer.toString(hashGarbage), this.sender));
             //now we want to set the right generation spot to the player
-            PowerUpCard p = Deserializer.getPowerUp(Integer.toString(hash), this.sender);
+            PowerUpCard p = Deserializer.getPowerUp(Integer.toString(hashChosen), this.sender);
             Color powerupColor = HandyFunctions.stringToColor(p.getAmmoCube().name());
-            for(Room r : Game.getInstance().getGameField().getRooms()) {
-                if(r.hasGenerationSpot() && r.getGenSpot().getPlatformColor().equals(powerupColor)){
+            for (Room r : Game.getInstance().getGameField().getRooms()) {
+                if (r.hasGenerationSpot() && r.getGenSpot().getPlatformColor().equals(powerupColor)) {
                     curr.setCurrentPlatform(r.getGenSpot());
                 }
             }

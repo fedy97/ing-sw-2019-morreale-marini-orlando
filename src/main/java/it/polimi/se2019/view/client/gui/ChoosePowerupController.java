@@ -42,14 +42,14 @@ public class ChoosePowerupController {
 
     public void chooseFirstPowerup() {
         Stage stage = (Stage) info1button.getScene().getWindow();
-        gui.sendPowerupChosen(im1rep.getId());
+        gui.sendPowerupChosen(im1rep.getId(), im2rep.getId());
         stage.close();
 
     }
 
     public void chooseSecondPowerup() {
         Stage stage = (Stage) info1button.getScene().getWindow();
-        gui.sendPowerupChosen(im2rep.getId());
+        gui.sendPowerupChosen(im2rep.getId(), im1rep.getId());
         stage.close();
     }
     public void info1click(){
