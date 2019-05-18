@@ -17,7 +17,7 @@ public class ActivateCardMessage extends ToServerMessage {
      */
     public void performAction(){
         Controller actor = Controller.getInstance();
-        String id = (String) payload;
+        int id = (int) payload;
         //TODO
         if(Deserializer.getPowerUp(id, sender) != null) {
             PowerUpCard powerUp = Deserializer.getPowerUp(id, sender);

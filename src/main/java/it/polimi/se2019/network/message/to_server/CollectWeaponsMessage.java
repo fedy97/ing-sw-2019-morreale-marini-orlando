@@ -18,10 +18,10 @@ public class CollectWeaponsMessage extends ToServerMessage {
 
     @Override
     public void performAction() {
-        List<String> lightVersion = (ArrayList<String>) payload;
+        List<Integer> lightVersion = (ArrayList<Integer>) payload;
         Controller actor = Controller.getInstance();
         List<WeaponCard> weapons = new ArrayList<>();
-        for (String weapon : lightVersion)
+        for (int weapon : lightVersion)
             weapons.add(Deserializer.getWeapon(weapon));
         //TODO
 

@@ -221,6 +221,7 @@ public class GUI extends RemoteView {
         viewSetChanged();
         notifyObservers(message);
     }
+
     protected void sendPowerupChosen(int hashCodeChosen, int hashCodeGarbage) {
         ArrayList<Integer> arrayList = new ArrayList<>();
         arrayList.add(hashCodeChosen);

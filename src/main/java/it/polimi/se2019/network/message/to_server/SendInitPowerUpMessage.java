@@ -26,11 +26,10 @@ public class SendInitPowerUpMessage extends ToServerMessage {
             int hashGarbage = ((ArrayList<Integer>) payload).get(1);
             Controller c = Controller.getInstance();
             Player curr = c.getPlayerManager().getCurrentPlayer();
-            HandyFunctions.printLineConsole("ciao");
             //move the card not chosen from the user's power ups to the garbage deck
-            Controller.getInstance().getDecksManager().addToGarbage(Deserializer.getPowerUp(Integer.toString(hashGarbage), this.sender));
+            Controller.getInstance().getDecksManager().addToGarbage(Deserializer.getPowerUp(hashGarbage, this.sender));
             //now we want to set the right generation spot to the player
-            PowerUpCard p = Deserializer.getPowerUp(Integer.toString(hashChosen), this.sender);
+            PowerUpCard p = Deserializer.getPowerUp(hashChosen, this.sender);
             Color powerupColor = HandyFunctions.stringToColor(p.getAmmoCube().name());
             for (Room r : Game.getInstance().getGameField().getRooms()) {
                 if (r.hasGenerationSpot() && r.getGenSpot().getPlatformColor().equals(powerupColor)) {
