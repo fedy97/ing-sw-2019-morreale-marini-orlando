@@ -2,6 +2,7 @@ package it.polimi.se2019.view.client;
 
 import it.polimi.se2019.model.AmmoRep;
 import it.polimi.se2019.model.CardRep;
+import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.view.View;
 
@@ -15,6 +16,7 @@ public abstract class RemoteView extends View {
     public abstract void updateTimerLobby(int count);
     public abstract void updateTimerMap(int count);
     public abstract void updateTimerCharacter(int count);
+    public abstract void updateAll(LightGameVersion lightGameVersion);
     public abstract void showChooseMap();
     public abstract void showChooseCharacter(String config);
     public abstract void showGameBoard(List<AmmoRep> ammoReps);

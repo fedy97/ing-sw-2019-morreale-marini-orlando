@@ -40,27 +40,27 @@
           <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="bansheezerozero" fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@assets/characters/banshee2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+            <ImageView fx:id="sprogzerozero" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
                <image>
                   <Image url="@assets/characters/sprog2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+            <ImageView fx:id="violetzerozero" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/violet.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="distructorzerozero" fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/distructor2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+            <ImageView fx:id="dozerzerozero" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
                <image>
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
@@ -70,27 +70,27 @@
       </GridPane>
       <GridPane layoutX="355.0" layoutY="151.0" prefHeight="162.0" prefWidth="184.0">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="bansheezeroone" fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@assets/characters/banshee2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+            <ImageView fx:id="sprogzeroone" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
                <image>
                   <Image url="@assets/characters/sprog2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+            <ImageView fx:id="violetzeroone" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/violet.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="distructorzeroone" fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/distructor2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+            <ImageView fx:id="dozerzeroone" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
                <image>
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
@@ -109,27 +109,27 @@
       </GridPane>
       <GridPane layoutX="539.0" layoutY="151.0" prefHeight="162.0" prefWidth="184.0">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="bansheezerotwo" fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@assets/characters/banshee2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+            <ImageView fx:id="sprogzerotwo" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
                <image>
                   <Image url="@assets/characters/sprog2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+            <ImageView fx:id="violetzerotwo" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/violet.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="distructorzerotwo" fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/distructor2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+            <ImageView fx:id="dozerzerotwo" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
                <image>
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
@@ -148,27 +148,27 @@
       </GridPane>
       <GridPane layoutX="723.0" layoutY="151.0" prefHeight="162.0" prefWidth="184.0">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="bansheezerothree" fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@assets/characters/banshee2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+            <ImageView fx:id="sprogzerothree" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
                <image>
                   <Image url="@assets/characters/sprog2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+            <ImageView fx:id="violetzerothree" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/violet.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="distructorzerothree" fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/distructor2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+            <ImageView fx:id="dozerzerothree" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
                <image>
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
@@ -187,27 +187,27 @@
       </GridPane>
       <GridPane layoutX="171.0" layoutY="313.0" prefHeight="162.0" prefWidth="184.0">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="bansheeonezero" fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@assets/characters/banshee2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+            <ImageView fx:id="sprogonezero" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
                <image>
                   <Image url="@assets/characters/sprog2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+            <ImageView fx:id="violetonezero" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/violet.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="distructoronezero" fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/distructor2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+            <ImageView fx:id="dozeronezero" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
                <image>
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
@@ -231,27 +231,27 @@
       <Button fx:id="onezero" layoutX="171.0" layoutY="313.0" mnemonicParsing="false" onAction="#onezeroClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
       <GridPane layoutX="355.0" layoutY="313.0" prefHeight="162.0" prefWidth="184.0">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="bansheeoneone" fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@assets/characters/banshee2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+            <ImageView fx:id="sprogoneone" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
                <image>
                   <Image url="@assets/characters/sprog2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+            <ImageView fx:id="violetoneone" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/violet.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="distructoroneone" fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/distructor2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+            <ImageView fx:id="dozeroneone" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
                <image>
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
@@ -271,27 +271,27 @@
       <Button fx:id="oneone" layoutX="355.0" layoutY="313.0" mnemonicParsing="false" onAction="#oneoneClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
       <GridPane layoutX="539.0" layoutY="313.0" prefHeight="162.0" prefWidth="184.0">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="bansheeonetwo" fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@assets/characters/banshee2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+            <ImageView fx:id="sprogonetwo" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
                <image>
                   <Image url="@assets/characters/sprog2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+            <ImageView fx:id="violetonetwo" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/violet.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="distructoronetwo" fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/distructor2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+            <ImageView fx:id="dozeronetwo" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
                <image>
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
@@ -311,27 +311,27 @@
       <Button fx:id="onetwo" layoutX="539.0" layoutY="313.0" mnemonicParsing="false" onAction="#onetwoClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
       <GridPane layoutX="723.0" layoutY="313.0" prefHeight="162.0" prefWidth="184.0">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="bansheeonethree" fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@assets/characters/banshee2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+            <ImageView fx:id="sprogonethree" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
                <image>
                   <Image url="@assets/characters/sprog2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+            <ImageView fx:id="violetonethree" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/violet.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="distructoronethree" fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/distructor2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+            <ImageView fx:id="dozeronethree" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
                <image>
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
@@ -351,27 +351,27 @@
       <Button fx:id="onethree" layoutX="723.0" layoutY="313.0" mnemonicParsing="false" onAction="#onethreeClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
       <GridPane layoutX="171.0" layoutY="476.0" prefHeight="162.0" prefWidth="184.0">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="bansheetwozero" fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@assets/characters/banshee2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+            <ImageView fx:id="sprogtwozero" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
                <image>
                   <Image url="@assets/characters/sprog2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+            <ImageView fx:id="violettwozero" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/violet.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="distructortwozero" fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/distructor2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+            <ImageView fx:id="dozertwozero" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
                <image>
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
@@ -391,27 +391,27 @@
       <Button fx:id="twozero" layoutX="171.0" layoutY="475.0" mnemonicParsing="false" onAction="#twozeroClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
       <GridPane layoutX="355.0" layoutY="475.0" prefHeight="162.0" prefWidth="184.0">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="bansheetwoone" fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@assets/characters/banshee2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+            <ImageView fx:id="sprogtwoone" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
                <image>
                   <Image url="@assets/characters/sprog2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+            <ImageView fx:id="violettwoone" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/violet.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="distructortwoone" fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/distructor2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+            <ImageView fx:id="dozertwoone" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
                <image>
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
@@ -431,27 +431,27 @@
       <Button fx:id="twoone" layoutX="355.0" layoutY="475.0" mnemonicParsing="false" onAction="#twooneClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
       <GridPane layoutX="539.0" layoutY="479.0" prefHeight="162.0" prefWidth="184.0">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="bansheetwotwo" fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@assets/characters/banshee2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+            <ImageView fx:id="sprogtwotwo" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
                <image>
                   <Image url="@assets/characters/sprog2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+            <ImageView fx:id="violettwotwo" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/violet.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="distructortwotwo" fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/distructor2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+            <ImageView fx:id="dozertwotwo" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
                <image>
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>
@@ -471,27 +471,27 @@
       <Button fx:id="twotwo" layoutX="539.0" layoutY="475.0" mnemonicParsing="false" onAction="#twotwoClick" opacity="0.0" prefHeight="162.0" prefWidth="184.0" />
       <GridPane layoutX="723.0" layoutY="475.0" prefHeight="162.0" prefWidth="184.0">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="bansheetwothree" fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@assets/characters/banshee2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
+            <ImageView fx:id="sprogtwothree" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1">
                <image>
                   <Image url="@assets/characters/sprog2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
+            <ImageView fx:id="violettwothree" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/violet.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="distructortwothree" fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@assets/characters/distructor2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
+            <ImageView fx:id="dozertwothree" fitHeight="48.0" fitWidth="55.0" pickOnBounds="true" visible="false" GridPane.rowIndex="2">
                <image>
                   <Image url="@assets/characters/dozer2.jpg" />
                </image>

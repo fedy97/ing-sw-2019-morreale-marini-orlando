@@ -2,6 +2,7 @@ package it.polimi.se2019.view.client.gui;
 
 import it.polimi.se2019.model.AmmoRep;
 import it.polimi.se2019.model.CardRep;
+import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.network.message.to_server.SendCharacterChosenMessage;
 import it.polimi.se2019.network.message.to_server.SendInitPowerUpMessage;
 import it.polimi.se2019.network.message.to_server.SendMapChosenMessage;
@@ -205,6 +206,12 @@ public class GUI extends RemoteView {
         Platform.runLater(
                 () ->
                         chooseCharacterController.updateTimer(count));
+    }
+
+    @Override
+    public void updateAll(LightGameVersion lightGameVersion) {
+        Platform.runLater(
+                () -> gameBoardController.updateAll(lightGameVersion));
     }
 
     protected void sendMapChosenByPlayer(int config) {

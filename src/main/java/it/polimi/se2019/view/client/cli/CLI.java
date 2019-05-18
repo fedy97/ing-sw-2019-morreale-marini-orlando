@@ -2,6 +2,7 @@ package it.polimi.se2019.view.client.cli;
 
 import it.polimi.se2019.model.AmmoRep;
 import it.polimi.se2019.model.CardRep;
+import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.client.SocketClient;
 import it.polimi.se2019.network.message.to_server.SendCharacterChosenMessage;
@@ -49,6 +50,11 @@ public class CLI extends RemoteView {
         vote[3] = 0;
         charChosen = new ArrayList<>();
         map = new int[3][4];
+    }
+
+    @Override
+    public void updateAll(LightGameVersion lightGameVersion) {
+
     }
 
     @Override

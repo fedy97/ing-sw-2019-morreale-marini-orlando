@@ -75,6 +75,6 @@ public class LightGameVersion extends ToClientMessage implements Serializable {
 
     @Override
     public void performAction(RemoteView remoteView) {
-
+        remoteView.updateAll(this);
     }
 }
