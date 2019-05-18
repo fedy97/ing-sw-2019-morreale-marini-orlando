@@ -40,7 +40,7 @@ public class TestPlatform {
             /*
                 setPlatformRoom() is called by Room constructor
              */
-            Room room = new Room(platforms);
+            Room room = new Room(platforms, platforms.get(0).getPlatformColor());
             assertEquals(platforms.get(0).getPlatformRoom(), room);
         } catch (InvalidCardException ex) {
             fail();
@@ -49,7 +49,7 @@ public class TestPlatform {
         } catch (NullPointerException ex) {
         }
         try {
-            Room room = new Room(new ArrayList<>());
+            Room room = new Room(new ArrayList<>(), null);
             fail();
         } catch (InvalidRoomException ex) {
 

@@ -190,6 +190,7 @@ public class Player {
             throw new InvalidCardException("Card cannot be null!");
         if (powerUpCards.size() < 3)
             powerUpCards.add(card);
+
     }
 
     /**

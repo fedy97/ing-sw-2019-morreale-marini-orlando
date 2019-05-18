@@ -17,9 +17,6 @@ public class CollectWeaponsMessage extends ToServerMessage {
     }
 
     @Override
-    /**
-     * Control if the action "move" is valid and move the character of the current player
-     */
     public void performAction() {
         List<String> lightVersion = (ArrayList<String>) payload;
         Controller actor = Controller.getInstance();

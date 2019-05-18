@@ -87,7 +87,6 @@ public class Controller implements Observer {
                 TimerLobby t = new TimerLobby(5);
                 t.start();
             } else {
-                //set chosen map from client and character
                 ((ToServerMessage) message).performAction();
             }
         } else {

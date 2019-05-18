@@ -113,7 +113,7 @@ public class JsonParser {
                         if (!jarr.get(j).toString().isEmpty()) arrOr.add(Orientation.valueOf(jarr.get(j).toString()));
                     isGenSpot = currPlatformObj.getBoolean("isGenerationSpot");
                     String nameCol = currPlatformObj.getString("platformColor");
-                    platCol = (Color) Color.class.getField(nameCol).get(null);
+                    platCol = HandyFunctions.stringToColor(nameCol);
                     ammoC = deck.drawCard();
                     Platform p = new Platform(pos, isGenSpot, ammoC, platCol, arrOr);
                     field[pos[0]][pos[1]] = p;

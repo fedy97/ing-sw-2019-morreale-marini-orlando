@@ -7,6 +7,7 @@ import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.view.server.VirtualView;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -69,7 +70,7 @@ public class HandyFunctions {
     }
 
     public static void checkForAtLeast2Players(VirtualView virtualView){
-        if (Controller.getInstance().getTurnController().getUsers().size() == 2 && !Game.getInstance().isTimerStarted()) {
+        if (Controller.getInstance().getTurnController().getUsers().size() == 1 && !Game.getInstance().isTimerStarted()) {
             Game.getInstance().setTimerStarted(true);
             virtualView.viewSetChanged();
             virtualView.notifyObservers("we are at least 2");
@@ -99,5 +100,8 @@ public class HandyFunctions {
      */
     public static int getSystemAddress(Object o){
         return System.identityHashCode(o);
+    }
+    public static Color stringToColor(String color) throws NoSuchFieldException, IllegalAccessException{
+        return  (Color) Color.class.getField(color).get(null);
     }
 }

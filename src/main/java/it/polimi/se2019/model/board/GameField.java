@@ -216,8 +216,8 @@ public class GameField {
                     }
                 }
             }
+            Room r = new Room(listOfPlat,currentColor);
             listOfColors.remove(currentColor);
-            Room r = new Room(listOfPlat);
             this.rooms.add(r);
         }
 
@@ -319,19 +319,10 @@ public class GameField {
     }
 
     //TODO test
-    public String getPlatformPos(Platform platform) {
-        String result = null;
-
-        for (int i = 0; i < field.length; i++)
-            for (int j = 0; j < field[0].length; j++)
-                if (field.equals(platform)) {
-                    result = new String();
-                    result.concat(Integer.toString(i));
-                    result.concat(",");
-                    result.concat(Integer.toString(j));
-                }
-
-        return result;
+    public String getPlatformPosLight(Platform platform) {
+        if (platform !=null)
+            return platform.getPlatformPosition()[0] + "," + platform.getPlatformPosition()[1];
+        return null;
     }
 
     /**

@@ -186,7 +186,7 @@ public class Game extends Observable {
 
     public LightGameVersion getLightVersion() {
         //set the skulls
-        LightGameVersion lightVersion = new LightGameVersion();
+        LightGameVersion lightVersion = new LightGameVersion(null);
         lightVersion.setSkullsNum(getGameField().getSkullsBoard().getCurrentSkulls());
 
         Map<String, String> playerPlatform = new HashMap<>();
@@ -195,7 +195,7 @@ public class Game extends Observable {
 
         //associate the players (characters) with their info (platform, powerUps, weapons)
         for (Player player : getPlayers()) {
-            playerPlatform.put(player.getCharacter().name(), getGameField().getPlatformPos(player.getCurrentPlatform()));
+            playerPlatform.put(player.getCharacter().name(), getGameField().getPlatformPosLight(player.getCurrentPlatform()));
             List<CardRep> powerUps = new ArrayList<>();
             List<CardRep> weapons = new ArrayList<>();
 
@@ -223,7 +223,7 @@ public class Game extends Observable {
             List<CardRep> weapons = new ArrayList<>();
             if (platform.hasAmmoCard()) {
                 AmmoCard ammoCard = platform.getPlatformAmmoCard();
-                platformAmmoTile.put(gameField.getPlatformPos(platform),
+                platformAmmoTile.put(gameField.getPlatformPosLight(platform),
                         new AmmoRep(HandyFunctions.getSystemAddress(ammoCard), ammoCard.toString()));
             }
 
@@ -231,8 +231,9 @@ public class Game extends Observable {
                 for (WeaponCard weaponCard : platform.getWeapons())
                     weapons.add(new CardRep(HandyFunctions.getSystemAddress(weaponCard), weaponCard.getName(), weaponCard.getDescription(),
                             weaponCard.getImgPath()));
-                platformWeapons.put(gameField.getPlatformPos(platform), weapons);
+                platformWeapons.put(gameField.getPlatformPosLight(platform), weapons);
             } catch (InvalidGenerationSpotException e) {
+                //go on
             }
         }
         lightVersion.setPlatformAmmoTile(platformAmmoTile);
@@ -297,10 +298,11 @@ public class Game extends Observable {
                 Controller.getInstance().getTurnController().start();
                 List<CardRep> cardReps = new ArrayList<>();
                 String firstUser = Controller.getInstance().getTurnController().getTurnUser();
-                //the first user will recieve 2 paths of powerups
+                //the first user will recieve 2 reps of powerups
                 PowerUpCard p1 = powerUpDeck.drawCard();
                 PowerUpCard p2 = powerUpDeck.drawCard();
-
+                Controller.getInstance().getPlayerManager().getCurrentPlayer().addPowerUpCard(p1);
+                Controller.getInstance().getPlayerManager().getCurrentPlayer().addPowerUpCard(p2);
                 cardReps.add(new CardRep(HandyFunctions.getSystemAddress(p1), p1.getName(), p1.getDescription(), p1.getImgPath()));
                 cardReps.add(new CardRep(HandyFunctions.getSystemAddress(p2), p2.getName(), p2.getDescription(), p2.getImgPath()));
 

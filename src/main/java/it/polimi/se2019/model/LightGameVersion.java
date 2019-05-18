@@ -1,10 +1,14 @@
 package it.polimi.se2019.model;
 
+import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.view.client.RemoteView;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class LightGameVersion implements Serializable {
+public class LightGameVersion extends ToClientMessage implements Serializable {
+    public LightGameVersion(Object payload) {super(payload);}
     private int skullsNum;
     private Map<String, String> playerPlatform; //character MAIUSCOLO - platform ("0,0")
     private Map<String, List<CardRep>> playerPowerups; //character - CardRep
@@ -67,5 +71,10 @@ public class LightGameVersion implements Serializable {
 
     public void setPlayerWeapons(Map<String, List<CardRep>> playerWeapons) {
         this.playerWeapons = playerWeapons;
+    }
+
+    @Override
+    public void performAction(RemoteView remoteView) {
+
     }
 }
