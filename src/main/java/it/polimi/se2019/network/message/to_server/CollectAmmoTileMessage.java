@@ -12,9 +12,6 @@ public class CollectAmmoTileMessage extends ToServerMessage {
     }
 
     @Override
-    /**
-     * Control if the action "move" is valid and move the character of the current player
-     */
     public void performAction(){
         Controller actor = Controller.getInstance();
         PlayerManager manager = actor.getPlayerManager();

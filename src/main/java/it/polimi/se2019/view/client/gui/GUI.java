@@ -3,6 +3,7 @@ package it.polimi.se2019.view.client.gui;
 import it.polimi.se2019.model.AmmoRep;
 import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.network.message.to_server.SendCharacterChosenMessage;
+import it.polimi.se2019.network.message.to_server.SendInitPowerUpMessage;
 import it.polimi.se2019.network.message.to_server.SendMapChosenMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.client.RemoteView;
@@ -162,13 +163,13 @@ public class GUI extends RemoteView {
             Parent root = loader.load();
             secondStage = new Stage();
             secondStage.setTitle("Choose Powerup");
-            /*secondStage.initStyle(StageStyle.UNDECORATED);
+            //secondStage.initStyle(StageStyle.UNDECORATED);
             secondStage.initOwner(stage);
-            secondStage.initModality(Modality.APPLICATION_MODAL);*/
+            secondStage.initModality(Modality.APPLICATION_MODAL);
             sceneChoosePowerup = new Scene(root);
             choosePowerupController = loader.getController();
-            choosePowerupController.im1path = p1.getPath();
-            choosePowerupController.im2path = p2.getPath();
+            choosePowerupController.im1rep = p1;
+            choosePowerupController.im2rep = p2;
 
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose power up");
@@ -216,6 +217,16 @@ public class GUI extends RemoteView {
     protected void sendCharacterChosenByPlayer(String characterEnuminString) {
         charInString = characterEnuminString;
         SendCharacterChosenMessage message = new SendCharacterChosenMessage(characterEnuminString);
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
+    }
+
+    protected void sendPowerupChosen(int hashCodeChosen, int hashCodeGarbage) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        arrayList.add(hashCodeChosen);
+        arrayList.add(hashCodeGarbage);
+        SendInitPowerUpMessage message = new SendInitPowerUpMessage(arrayList);
         message.setSender(userName);
         viewSetChanged();
         notifyObservers(message);

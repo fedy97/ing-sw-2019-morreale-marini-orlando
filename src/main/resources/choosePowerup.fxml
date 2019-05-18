@@ -18,8 +18,8 @@
             <Image url="@assets/backgrounds/bgchoose.jpg" />
          </image>
       </ImageView>
-        <ImageView fx:id="im1" fitHeight="186.0" fitWidth="146.0" layoutX="56.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="im2" fitHeight="186.0" fitWidth="146.0" layoutX="261.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="im1" fitHeight="186.0" fitWidth="146.0" layoutX="56.0" layoutY="65.0" pickOnBounds="true" />
+        <ImageView fx:id="im2" fitHeight="186.0" fitWidth="146.0" layoutX="261.0" layoutY="65.0" pickOnBounds="true" />
         <Button fx:id="powerup1" layoutX="56.0" layoutY="65.0" mnemonicParsing="false" onAction="#chooseFirstPowerup" opacity="0.0" prefHeight="186.0" prefWidth="146.0" />
         <Button fx:id="powerup2" layoutX="261.0" layoutY="65.0" mnemonicParsing="false" onAction="#chooseSecondPowerup" opacity="0.0" prefHeight="186.0" prefWidth="146.0" />
       <Label layoutX="126.0" layoutY="14.0" text="Choose a Power Up" textFill="WHITE">
@@ -27,5 +27,7 @@
             <Font name="Ubuntu" size="24.0" />
          </font>
       </Label>
+      <Button fx:id="info1button" layoutX="104.0" layoutY="276.0" mnemonicParsing="false" onAction="#info1click" text="INFO" />
+      <Button fx:id="info2button" layoutX="312.0" layoutY="276.0" mnemonicParsing="false" onAction="#info2click" text="INFO" />
     </children>
 </AnchorPane>

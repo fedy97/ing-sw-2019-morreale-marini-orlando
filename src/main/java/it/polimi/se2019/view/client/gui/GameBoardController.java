@@ -102,6 +102,7 @@ public class GameBoardController {
                         AmmoRep ammoRep = ammoReps.get(i);
                         ImageView imageView = imageViews.get(i);
                         if (ammoRep != null)
+                            //TODO revert this map
                             ammoRepImageViewMap.put(ammoRep, imageView);
                     }
                     mapImage.setImage(new Image("/assets/map/" + config + ".jpg"));

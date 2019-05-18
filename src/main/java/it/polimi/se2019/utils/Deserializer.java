@@ -26,10 +26,10 @@ public final class Deserializer {
      * @param light hashcode of the WeaponCard received from the client
      * @return the server reference of the WeaponCard
      */
-    public static WeaponCard getWeapon(String light) {
+    public static WeaponCard getWeapon(int light) {
         List<WeaponCard> weapons = Controller.getInstance().getPlayerManager().getCurrentPlayer().getWeaponCards();
         for (WeaponCard weaponCard : weapons) {
-            if (Integer.toString(weaponCard.hashCode()).equals(light))
+            if (Integer.toString(weaponCard.hashCode()).equals(Integer.toString(light)))
                 return weaponCard;
         }
         return null;
@@ -40,10 +40,10 @@ public final class Deserializer {
      * @param owner of the PowerUp card
      * @return the server reference of the PowerUp
      */
-    public static PowerUpCard getPowerUp(String light, String owner) {
+    public static PowerUpCard getPowerUp(int light, String owner) {
         Player player = Controller.getInstance().getGame().getPlayer(owner);
         for (PowerUpCard powerUpCard : player.getPowerUpCards()) {
-            if (Integer.toString(powerUpCard.hashCode()).equals(light))
+            if (Integer.toString(powerUpCard.hashCode()).equals(Integer.toString(light)))
                 return powerUpCard;
         }
         return null;

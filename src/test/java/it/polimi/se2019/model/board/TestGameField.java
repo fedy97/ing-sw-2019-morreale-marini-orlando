@@ -39,7 +39,7 @@ public class TestGameField {
     @Test
     public void testGetPlatform() throws InvalidPositionException {
         Platform p = gf.getPlatform(gf.getField()[0][1].getPlatformPosition());
-        if (config == 1) assertTrue(p.isGenerationSpot());
+        if (config == 1) assertTrue(!p.isGenerationSpot());
     }
 
     @Test
