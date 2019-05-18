@@ -3,6 +3,7 @@ package it.polimi.se2019.utils;
 import it.polimi.se2019.Lobby;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.Game;
+import it.polimi.se2019.model.board.GameField;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.view.server.VirtualView;
@@ -61,6 +62,15 @@ public class HandyFunctions {
      */
     public static <T> List<String> getLightCollection(List<T> elements) {
         List<String> lightVersion = new ArrayList<>();
+
+        if(elements.get(0) instanceof Platform) {
+            GameField gf = Controller.getInstance().getGame().getGameField();
+            for(T element: elements){
+                Platform p = (Platform)element;
+                lightVersion.add(gf.getPlatformPos(p));
+            }
+            return lightVersion;
+        }
 
         for (T obj : elements)
             lightVersion.add(obj.toString());
