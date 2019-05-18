@@ -2,6 +2,7 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.Lobby;
 import it.polimi.se2019.model.Game;
+import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
@@ -255,7 +256,6 @@ public class Controller implements Observer {
         if (Lobby.getSocketServer().isConnected(user))
             Lobby.getSocketServer().sendToClient(msg, user);*/
         userView.get(user).callView(msg,user);
-
     }
 
     /**

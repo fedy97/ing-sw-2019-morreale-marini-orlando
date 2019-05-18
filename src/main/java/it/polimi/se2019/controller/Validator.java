@@ -104,6 +104,18 @@ public abstract class Validator{
         return res;
     }
 
+    public List<WeaponCard> getUsableWeapons() {
+        Player currPlayer = father.getPlayerManager().getCurrentPlayer();
+        List<WeaponCard> res = currPlayer.getWeaponCards();
+
+        for (WeaponCard weapon : res) {
+            if (!weapon.isLoaded())
+                res.remove(weapon);
+        }
+
+        return res;
+    }
+
     /**
      * @return a list of the platform where the player can grab an ammo
      */
