@@ -31,12 +31,11 @@ public class SendInitPowerUpMessage extends ToServerMessage {
             PowerUpCard p = Deserializer.getPowerUp(hashChosen, this.sender);
             Color powerupColor = HandyFunctions.stringToColor(p.getAmmoCube().name());
             for (Room r : Game.getInstance().getGameField().getRooms()) {
-                if (r.hasGenerationSpot() && r.getGenSpot().getPlatformColor().equals(powerupColor)) {
+                if (r.hasGenerationSpot() && r.getGenSpot().getPlatformColor().equals(powerupColor))
                     curr.setCurrentPlatform(r.getGenSpot());
-                }
             }
             Game.getInstance().notifyChanges();
-
+            //now the current player has to choose an action
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "the power up is not valid");
         }

@@ -366,14 +366,16 @@ public class Game extends Observable {
             ammoDeck = parserAmmos.buildAmmoCards();
             JsonParser parserField = new JsonParser("/json/field.json");
             Platform[][] field = parserField.buildField(config, ammoDeck);
-            WeaponCard[] weaponCards = new WeaponCard[9];
-            for (int i = 0; i < 9; i++)
-                weaponCards[i] = new WeaponCard();
             JsonParser parser = new JsonParser("/json/powerups.json");
             powerUpDeck = parser.buildPowerupCards();
+            JsonParser parserWeapons = new JsonParser("/json/weapons.json");
+            weaponsDeck = parserWeapons.buildWeaponCards();
+            WeaponCard[] weaponCards = new WeaponCard[9];
+            for (int i = 0; i < 9; i++)
+                weaponCards[i] = weaponsDeck.drawCard();
             gameField = new GameField(field, weaponCards, new SkullsBoard(8), new ScoreBoard());
-            //TODO add weapons deck, to be parsed in json
-            initGame(gameField, null, powerUpDeck, ammoDeck);
+
+            initGame(gameField, weaponsDeck, powerUpDeck, ammoDeck);
             Controller.getInstance().setManagers();
         } catch (Exception ex) {
             HandyFunctions.LOGGER.log(Level.SEVERE, ex.toString());

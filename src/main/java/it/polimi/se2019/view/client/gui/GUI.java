@@ -63,9 +63,9 @@ public class GUI extends RemoteView {
 
     @Override
     public void showChoosePowerup(CardRep p1, CardRep p2) {
-        initChoosePowerup(p1, p2);
         Platform.runLater(
                 () -> {
+                    initChoosePowerup(p1, p2);
                     choosePowerupController.passGUI(this);
                     secondStage.setScene(sceneChoosePowerup);
                     secondStage.setResizable(false);

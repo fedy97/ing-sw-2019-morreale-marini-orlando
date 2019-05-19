@@ -1,5 +1,6 @@
 package it.polimi.se2019.model.card.weapons;
 
+import it.polimi.se2019.exceptions.InvalidNameException;
 import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.enumeration.*;
 
@@ -28,11 +29,27 @@ public class WeaponCard extends Card {
      * @param extraCost consisting of one or two AmmoCubes the player pay when he grabs the weapon
      */
     public WeaponCard(AmmoCube paidCost, AmmoCube[] extraCost) {
+
         this.paidCost = paidCost;
         this.extraCost = extraCost;
         loaded = true;
     }
 
+    /**
+     * constructor for json parser
+     * @param name
+     * @param descr
+     * @param img
+     * @param paidCost
+     * @param extraCost
+     * @throws InvalidNameException
+     */
+    public WeaponCard(String name, String descr, String img, AmmoCube paidCost, AmmoCube[] extraCost) throws InvalidNameException {
+        super(name,descr,img);
+        this.paidCost = paidCost;
+        this.extraCost = extraCost;
+        loaded = true;
+    }
 
     /**
      * Reload the weapon

@@ -5,14 +5,19 @@ import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.*;
+import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Orientation;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Deque;
 
 /**
  * @author Federico Morreale
@@ -43,7 +48,7 @@ public class JsonParser {
      * @return a deck of 36 ammos
      * @throws InvalidCardException
      */
-    public Deck<AmmoCard> buildAmmoCards() throws InvalidCardException, InvalidDeckException {
+    public Deck<AmmoCard> buildAmmoCards() throws InvalidCardException, InvalidDeckException, IOException {
         if (path.equals("/json/ammocards.json")) {
             ArrayList<AmmoCard> ammoCards = new ArrayList<>();
             AmmoCube[] arrAmmos;
@@ -55,7 +60,7 @@ public class JsonParser {
                 boolean hasPowerup = currAmmosObj.getBoolean("powerup");
                 AmmoCube a1 = AmmoCube.valueOf(currAmmosObj.getString("ammocube1"));
                 AmmoCube a2 = AmmoCube.valueOf(currAmmosObj.getString("ammocube2"));
-                pathImg = "/assets/ammos/"+ currAmmosObj.getString("image") + ".png";
+                pathImg = "/assets/ammos/" + currAmmosObj.getString("image") + ".png";
 
                 if (!hasPowerup) {
                     AmmoCube a3 = AmmoCube.valueOf(currAmmosObj.getString("ammocube3"));
@@ -122,7 +127,6 @@ public class JsonParser {
     }
 
     /**
-     *
      * @return a deck of 24 powerups
      * @throws InvalidDeckException
      * @throws IOException
@@ -130,7 +134,7 @@ public class JsonParser {
      * @throws InvalidImageException
      * @throws InvalidNameException
      */
-    public Deck<PowerUpCard> buildPowerupCards() throws InvalidDeckException,
+    public Deck<PowerUpCard> buildPowerupCards() throws InvalidDeckException, IOException,
             InvalidCubeException, InvalidNameException {
         if (path.equals("/json/powerups.json")) {
             ArrayList<PowerUpCard> powerUpCards = new ArrayList<>();
@@ -160,6 +164,42 @@ public class JsonParser {
             }
             Deck<PowerUpCard> d = new Deck<>(24);
             d.addCards(powerUpCards);
+            d.mix();
+            return d;
+        }
+        return null;
+    }
+
+    public Deck<WeaponCard> buildWeaponCards() throws InvalidDeckException, IOException,
+            InvalidCubeException, InvalidNameException {
+        if (path.equals("/json/weapons.json")) {
+            ArrayList<WeaponCard> weaponCards = new ArrayList<>();
+            AmmoCube paidCost;
+            String name;
+            String description;
+            String pathImg;
+            WeaponCard weaponCard;
+            AmmoCube[] extraCost;
+            JSONArray weaponsObj = jsonObj.getJSONArray("weapons");
+            for (int i = 0; i < weaponsObj.length(); i++) {
+                JSONObject currWeaponObj = weaponsObj.getJSONObject(i);
+                name = currWeaponObj.getString("name");
+                description = currWeaponObj.getString("description");
+                pathImg = name.replace(' ','_') + ".png";
+                paidCost = AmmoCube.valueOf(currWeaponObj.getString("paidCost"));
+                JSONArray jArrExtraCost = currWeaponObj.getJSONArray("extraCost");
+                if (!jArrExtraCost.get(0).toString().equals("")) {
+                    extraCost = new AmmoCube[jArrExtraCost.length()];
+                    for (int j = 0; j < jArrExtraCost.length(); j++)
+                        extraCost[j] = AmmoCube.valueOf((String) jArrExtraCost.get(j));
+                }
+                else extraCost = null;
+                weaponCard = new WeaponCard(name,description,pathImg,paidCost,extraCost);
+                weaponCards.add(weaponCard);
+            }
+
+            Deck<WeaponCard> d = new Deck<>(24);
+            d.addCards(weaponCards);
             d.mix();
             return d;
         }

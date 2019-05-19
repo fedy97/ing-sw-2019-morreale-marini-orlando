@@ -5,6 +5,7 @@ import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.view.client.RemoteView;
 import javafx.application.Platform;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowGameBoardMessage extends ToClientMessage {
@@ -21,7 +22,7 @@ public class ShowGameBoardMessage extends ToClientMessage {
         remoteView.showGameBoard(ammoReps);
         String rec = (String) payload;
         if (rec.equals(remoteView.getUserName())) {
-            Platform.runLater(() -> remoteView.showChoosePowerup(cardReps.get(0), cardReps.get(1)));
+            remoteView.showChoosePowerup(cardReps.get(0), cardReps.get(1));
         }
 
     }

@@ -1,0 +1,130 @@
+{
+  "weapons": [
+    {
+      "name": "distruttore",
+      "description": "effetto base: Dai 2 danni e 1 marchio a 1 bersaglio che puoi\nvedere. modalità base: Dai 1 danno a ogni altro giocatore presente\nnel quadrato in cui ti trovi.\nsecondo aggancio: Dai 1 marchio a un altro bersaglio che\npuoi vedere.",
+      "paidCost": "BLUE",
+      "extraCost": ["BLUE"]
+    },
+    {
+      "name": "falce protonica",
+      "description": "modalità base: Dai 1 danno a ogni altro giocatore presente\nnel quadrato in cui ti trovi.\nmodalità mietitore: Dai 2 danni a ogni altro giocatore\npresente nel quadrato in cui ti trovi.",
+      "paidCost": "BLUE",
+      "extraCost": [""]
+    },
+    {
+      "name": "mitragliatrice",
+      "description": "effetto base: Scegli 1 o 2 bersagli che puoi vedere e dai\n1 danno a entrambi.\ncolpo focalizzato: Dai 1 danno aggiuntivo a uno dei due\nbersagli.\ntripode di supporto: Dai 1 danno aggiuntivo all'altro dei\nbersagli e/o dai 1 danno a un bersaglio differente che puoi\nvedere.\nNota: Se hai dato entrambi i punti aggiuntivi di danno, devono\nessere dati a 2 bersagli diversi. Se puoi vedere solo 2 bersagli,\ndai 2 danni a entrambi se usi entrambi gli effetti opzionali. Se\nusi l'effetto base solo su 1 bersaglio, puoi comunque usare il\ntripode di supporto per dare 1 danno aggiuntivo",
+      "paidCost": "BLUE",
+      "extraCost": ["RED"]
+    },
+    {
+      "name": "raggio traente",
+      "description": "modalità base: Muovi un bersaglio di 0, 1 o 2 quadrati fino\na un quadrato che puoi vedere e dagli 1 danno.\nmodalità punitore: Scegli un bersaglio 0, 1, o 2 movimenti\nda te. Muovi quel bersaglio nel quadrato in cui ti trovi\nedagli 3 danni.\nNota: Puoi muovere un bersaglio anche se non puoi\nvederlo. Il bersaglio finisce in una posizione in cui puoi\nvederlo e danneggiarlo. I movimenti possono non essere\nnella stessa direzione.",
+      "paidCost": "BLUE",
+      "extraCost": [""]
+    },
+    {
+      "name": "torpedine",
+      "description": "effetto base: Dai 2 danni a 1 bersaglio che puoi vedere.\nreazione a catena: Dai 1 danno a un secondo bersaglio che\nil tuo primo bersaglio può vedere.\nalta tensione: Dai 2 danni a un terzo bersaglio che il tuo\nsecondo bersaglio può vedere. Non puoi usare questo\neffetto se prima non hai usato reazione a catena.\nNota: Questa carta limita l'ordine in cui puoi utilizzare i suoi\neffetti. (Molte carte non lo fanno.) Inoltre ogni bersaglio\ndeve essere un giocatore differente.",
+      "paidCost": "BLUE",
+      "extraCost": ["RED"]
+    },
+    {
+      "name": "cannone vortex",
+      "description": "effetto base: Scegli un quadrato che puoi vedere ad almeno\n1 movimento di distanza. Un vortice si apre in quel punto.\nScegli un bersaglio nel quadrato in cui si trova il vortice\no distante 1 movimento. Muovi il bersaglio nel quadrato in\ncui si trova il vortice e dagli 2 danni.\nbuco nero: Scegli fino ad altri 2 bersagli nel quadrato in\ncui si trova il vortice o distanti 1 movimento. Muovili nel\nquadrato in cui si trova il vortice e dai loro 1 danno ciascuno.\nNota: I 3 bersagli devono essere diversi, ma alcuni di\nloro potrebbero partire dallo stesso quadrato (anche nel\nquadrato in cui ti trovi tu). Finiscono tutti sullo stesso\nquadrato con il vortice. Non hai bisogno di vedere i bersagli.\nSpari al quadrato che puoi vedere, crei un vortice lì e i tuoi\nbersagli vi vengono risucchiati.",
+      "paidCost":"RED",
+      "extraCost": ["BLUE"]
+    },
+    {
+      "name": "vulcanizzatore",
+      "description": "modalità base: Scegli una stanza che puoi vedere, ma\nnon la stanza in cui ti trovi. Dai 1 danno a ognuno in quella\nstanza.\nmodalità fuoco confortevole: Scegli un quadrato distante\nesattamente 1 movimento. Dai 1 danno e 1 marchio a\nognuno in quel quadrato.",
+      "paidCost": "RED",
+      "extraCost": ["BLUE"]
+    },
+    {
+      "name": "fucile al plasma",
+      "description": "effetto base: Dai 2 danni a 1 bersaglio che puoi vedere.\nslittamento di fase: Muovi di 1 o 2 quadrati. Questo effetto\npuò essere usato prima o dopo l'effetto base.\ncolpo sovraccarico: Dai 1 danno aggiuntivo al tuo\nbersaglio.\nNota: I due movimenti non hanno costo in munizioni.\nNon hai bisogno di vedere il tuo bersaglio quando giochi la\ncarta. Per esempio puoi muovere di 2 quadrati e sparare al\nbersaglio che ora puoi vedere. Non puoi usare 1 movimento\nprima di sparare e 1 dopo aver sparato.",
+      "paidCost": "BLUE",
+      "extraCost": ["YELLOW"]
+    },
+    {
+      "name": "razzo termico",
+      "description": "effetto: Scegli 1 bersaglio che non puoi vedere e dagli\n3 danni.\nNota: Si, può colpire solo bersagli che non puoi vedere.",
+      "paidCost": "RED",
+      "extraCost": ["RED","YELLOW"]
+    },
+    {
+      "name": "fucile di precisione",
+      "description": "effetto: Dai 3 danni e 1 marchio a 1 bersaglio che puoi\nvedere. Il bersaglio deve essere ad almeno 2 movimenti da\nte.\nNota: Per esempio, nella stanza 2x2, non puoi sparare a un\nbersaglio in un quadrato adiacente, ma puoi sparare a un\nbersaglio lungo la diagonale. Se sei vicino a una porta non\npuoi sparare a un bersaglio dall'altra parte della porta,\nma puoi sparare a un bersaglio su un quadrato diverso in\nquella stanza.",
+      "paidCost": "BLUE",
+      "extraCost": ["BLUE","YELLOW"]
+    },
+    {
+      "name": "raggio solare",
+      "description": "modalità base: Dai 1 danno a 1 bersaglio che puoi vedere\ne distante almeno 1 movimento. Poi dai un marchio a quel\nbersaglio e a chiunque altro in quel quadrato.\nmodalità nano-traccianti: Dai 1 danno a 1 bersaglio\nche puoi vedere e distante almeno 1 movimento. Poi dai\n2 marchi a quel bersaglio e a chiunque altro in quel\nquadrato.",
+      "paidCost": "RED",
+      "extraCost": ["YELLOW"]
+    },
+    {
+      "name": "lanciafiamme",
+      "description": "modalità base: Scegli un quadrato distante 1 movimento e\npossibilmente un secondo quadrato distante ancora 1 movimento nella\nstessa direzione. In ogni quadrato puoi scegliere 1 bersaglio e dargli\n1 danno. \nmodalità barbecue: Scegli 2 quadrati come prima. Dai 2 danni\na chiunque sia nel primo quadrato e 1 danno a chiunque si trovi nel\nsecondo quadrato.\nNota: Quest'arma non può danneggiare nessuno nel tuo quadrato.\nTuttavia può a volte danneggiare un bersaglio che non vedi, le fiamme\nnon passano attraverso i muri ma passano attraverso le porte.\nImmaginatelo come una esplosione di fuoco in linea retta che si muove\ndi 2 quadrati in una direzione cardinale.",
+      "paidCost": "RED",
+      "extraCost": [""]
+    },
+    {
+      "name": "zx-2",
+      "description": "modalità base: Dai 1 danno e 2 marchi\na 1 bersaglio che puoi vedere.\nmodalità scanner: Scegli fino a 3 bersagli\nche puoi vedere e dai 1 marchio a ciascuno.\nNota: Ricorda che i 3 bersagli possono anche\nessere in 3 stanze diverse.",
+      "paidCost": "YELLOW",
+      "extraCost": ["RED"]
+    },
+    {
+      "name": "lanciagranate",
+      "description": "effetto base: Dai 1 danno a 1 bersaglio che puoi vedere. Poi puoi\nmuovere il bersaglio di 1 quadrato.\ngranata extra: Dai 1 danno a ogni giocatore in quadrato che puoi vedere.\nPuoi usare questo effetto prima o dopo il movimento dell'effetto base.\nNota: Per esempio puoi sparare a un bersaglio, muoverlo in un quadrato\ncon altri bersagli e danneggiare chiunque, incluso il primo bersaglio.\nOppure puoi dare 2 danni a un bersaglio principale e 1 a tutti gli\naltri in quel quadrato, e poi muovere il bersaglio principale. Oppure\npuoi dare 1 danno a un bersaglio isolato e 1 a chiunque in quadrato\ndiverso. Se bersagli il quadrato in cui ti trovi non potrai essere mosso\no danneggiato.",
+      "paidCost": "RED",
+      "extraCost": [""]
+    },
+    {
+      "name": "fucile a pompa",
+      "description": "modalità base: Dai 3 danni a 1 bersaglio nel\nquadrato in cui ti trovi. Se vuoi puoi muovere\nquel bersaglio di 1 quadrato.\nmodalità canna lunga: Dai 2 danni\na 1 bersaglio in un quadrato distante\nesattamente 1 movimento.",
+      "paidCost":  "YELLOW",
+      "extraCost": ["YELLOW"]
+    },
+    {
+      "name": "lanciarazzi",
+      "description": "effetto base: Dai 2 danni a 1 bersaglio che puoi vedere e che non si trova nel tuo quadrato. Poi puoi muovere il bersaglio di 1 quadrato. \nrazzi portatili: Muovi di 1 o 2 quadrati. Questo effetto può essere usato prima o dopo l'effetto base.\ntestata a frammentazione: Durante l'effetto base, dai 1 danno a ogni\ngiocatore presente nel quadrato in cui si trovava originariamente il\nbersaglio, incluso il bersaglio, anche se lo hai mosso.\nNota: Se usi i razzi portatili prima dell'effetto base considera solo\nil tuo nuovo quadrato per determinare se il bersaglio è valido. Puoi\nanche spostarti di 1 quadrato per potergli sparare. Usando la testata\na frammentazione dai danno a chiunque si trovi nel quadrato in cui il\nbersaglio si trovava prima di muoversi. Il bersaglio riceve così 3 danni in paide.",
+      "paidCost": "RED",
+      "extraCost": ["RED"]
+    },
+    {
+      "name": "cyberguanto",
+      "description": "modalità base: Scegli 1 bersaglio in un\nquadrato distante esattamente 1 movimento.\nMuovi in quel quadrato e dai al bersaglio\n1 danno e 2 marchi.\nmodalità cento pugni: Scegli un quadrato\ndistante esattamente 1 movimento. Muovi in\nquel quadrato. Puoi dare 2 danni a 1 bersaglio\nin quel quadrato. Se vuoi puoi muovere ancora\ndi 1 quadrato nella stessa direzione (ma solo\nse è un movimento valido). Puoi dare 2 danni a\nun bersaglio anche in quel quadrato.\nNota: Nella modalità cento pugni stai volando\nper 2 quadrati in linea retta, prendendo\na pugni 1 persona per quadrato.",
+      "paidCost":  "YELLOW",
+      "extraCost": ["BLUE"]
+    },
+    {
+      "name": "fucile laser",
+      "description": "modalità base : Scegli una direzione cardinale e 1 bersaglio in quella\ndirezione. Dagli 3 danni.\nmodalità perforazione: Scegli una direzione cardinale e 1 o 2 bersagli in quella direzione. Dai 2 danni a ciascuno.\nNota: In pratica spari in linea retta ignorando i muri. Non hai bisogno di scegliere un bersaglio dall'altro lato del muro, potrebbe anche essere qualcuno nel tuo stesso quadrato, ma sparare attraverso i muri è\nsicuramente divertente. Ci sono solo 4 direzioni cardinali. Immagina di\nessere di fronte a un muro o una porta, imbracciare il fucile e sparare\nin quella direzione. Chiunque si trovi su un quadrato in quella direzione (incluso il tuo) è un bersaglio valido. In modalità perforazione i 2 bersagli possono essere nello stesso quadrato o in quadrati diversi.",
+      "paidCost":  "YELLOW",
+      "extraCost": ["YELLOW","BLUE"]
+    },
+    {
+      "name": "onda d'urto",
+      "description": "modalità base: Scegli fino a 3 bersagli\nsu quadrati differenti, ognuno distante\nesattamente 1 movimento. Dai 1 danno a ogni\nbersaglio.\nmodalità tsunami: Dai 1 danno a tutti\ni bersagli che sono distanti esattamente\n1 movimento.",
+      "paidCost":  "YELLOW",
+      "extraCost": [""]
+    },
+    {
+      "name": "spada fotonica",
+      "description": "effetto base: Dai 2 danni a 1 bersaglio nel quadrato in cui ti trovi.\npasso d'ombra: Muovi di 1 quadrato prima o dopo l'effetto base.\nmodalità sminuzzare: Dai 2 danni a un bersaglio differente nel\nquadrato in cui ti trovi. Il passo d'ombra può essere usato prima o dopo\nquesto effetto.\nNota: Combinare tutti gli effetti permette di muoversi in un quadrato\ne colpire 2 persone; oppure di colpire qualcuno, muovere e colpire\nqualcun altro. Oppure ancora colpire 2 persone e poi andare via.",
+      "paidCost":  "YELLOW",
+      "extraCost": ["RED"]
+    },
+    {
+      "name": "martello ionico",
+      "description": "modalità base: Dai 2 danni a 1 bersaglio nel\nquadrato in cui ti trovi.\nmodalità polverizzare: Dai 3 danni a\n1 bersaglio nel quadrato in cui ti trovi, poi\nmuovi quel bersaglio di 0, 1 o 2 quadrati in\nuna direzione.\nNota: Ricordati che i movimenti passano\nattraverso le porte ma non attraverso le\npareti.",
+      "paidCost":  "YELLOW",
+      "extraCost": [""]
+    }
+  ]
+}

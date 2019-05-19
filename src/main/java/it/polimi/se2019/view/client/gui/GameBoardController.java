@@ -21,6 +21,16 @@ public class GameBoardController {
     @FXML
     private ImageView mapImage;
     @FXML
+    private Button sprogbutton;
+    @FXML
+    private Button bansheebutton;
+    @FXML
+    private Button distructorbutton;
+    @FXML
+    private Button dozerbutton;
+    @FXML
+    private Button violetbutton;
+    @FXML
     private Button zerozero;
     @FXML
     private Button zeroone;
@@ -44,17 +54,13 @@ public class GameBoardController {
     private Button twotwo;
     @FXML
     private Button twothree;
-
     @FXML
     private ImageView ammozerozero;
-
     @FXML
     private ImageView ammozeroone;
-
     @FXML
     private ImageView ammozerotwo;
     @FXML
-
     private ImageView ammozerothree;
     @FXML
     private ImageView ammoonezero;
@@ -64,16 +70,12 @@ public class GameBoardController {
     private ImageView ammoonetwo;
     @FXML
     private ImageView ammoonethree;
-
     @FXML
     private ImageView ammotwozero;
     @FXML
-
     private ImageView ammotwoone;
     @FXML
-
     private ImageView ammotwotwo;
-
     @FXML
     private ImageView ammotwothree;
     @FXML
@@ -207,7 +209,7 @@ public class GameBoardController {
         this.gui = gui;
     }
 
-    public void setAmmoReps(List<AmmoRep> ammoReps) {
+    protected void setAmmoReps(List<AmmoRep> ammoReps) {
         this.ammoReps = ammoReps;
     }
 
@@ -237,6 +239,7 @@ public class GameBoardController {
                     ammoRepImageViewMap = new HashMap<>();
                     playerImages = new HashMap<>();
                     posImages = new HashMap<>();
+
                     imagesDozer.add(dozerzerozero);
                     imagesDozer.add(dozerzeroone);
                     imagesDozer.add(dozerzerotwo);
@@ -401,14 +404,13 @@ public class GameBoardController {
                 });
     }
 
-    public void setConfig(String config) {
+    protected void setConfig(String config) {
         this.config = config;
     }
 
     protected void updateAll(LightGameVersion lightGameVersion) {
         //update position of players
         Map<String, String> playerPos = lightGameVersion.getPlayerPlatform();
-
         for (Map.Entry<String, String> entry : playerPos.entrySet()) {
             String player = entry.getKey();
             String pos = entry.getValue();
@@ -417,11 +419,17 @@ public class GameBoardController {
             HandyFunctions.printLineConsole(player + " " + pos);
             for (ImageView im : imagesPlayers) {
                 for (ImageView im2 : imagesPos) {
-                    if (im.equals(im2))
+                    if (im.equals(im2)) {
+                        //set all images of the char to invisible
+                        for (ImageView imm : imagesPlayers)
+                            imm.setVisible(false);
+                        //set the only right image to visible
                         im.setVisible(true);
+                    }
                 }
             }
         }
+        //TODO update other things of light model
     }
 
     public void zerozeroClick() {
