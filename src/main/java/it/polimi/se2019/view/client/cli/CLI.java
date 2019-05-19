@@ -69,13 +69,13 @@ public class CLI extends RemoteView {
         CliPrinter.welcomeMessage();
         HandyFunctions.printConsole("\n\n");
         if (chosenBoard.equals("1"))
-            CliPrinter.printMap1(map);
+            CliPrinter.printMap1(map, ammoReps);
         else if (chosenBoard.equals("2"))
-            CliPrinter.printMap2(map);
+            CliPrinter.printMap2(map, ammoReps);
         else if (chosenBoard.equals("3"))
-            CliPrinter.printMap3(map);
+            CliPrinter.printMap3(map, ammoReps);
         else
-            CliPrinter.printMap4(map);
+            CliPrinter.printMap4(map, ammoReps);
     }
 
     @Override
