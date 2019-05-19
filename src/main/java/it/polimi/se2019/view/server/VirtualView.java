@@ -45,7 +45,7 @@ public class VirtualView extends View {
     @Override
     public void update(Observable game, Object message) {
         //callView(new GameChangedMessage(message))
-        updateUsers((ToClientMessage) message);
+        callView((ToClientMessage) message);
     }
 
     @Override
@@ -96,25 +96,13 @@ public class VirtualView extends View {
     /**
      * Common method across RMI and Socket to send requests to client
      *
-     * @param msg  to the destination client
-     * @param user recipient of the message
+     * @param msg  to the destination client, the virtual view know his own user
      */
-    public void callView(ToClientMessage msg, String user) {
+    public void callView(ToClientMessage msg) {
         if (Lobby.getRmiServer().isConnected(user))
             Lobby.getRmiServer().sendToClient(msg, user);
         if (Lobby.getSocketServer().isConnected(user))
             Lobby.getSocketServer().sendToClient(msg, user);
-    }
-
-    /**
-     * update all clients connected
-     *
-     * @param message to be sent
-     */
-    private void updateUsers(ToClientMessage message) {
-        for (String user : Controller.getInstance().getTurnController().getUsers()) {
-            callView(message, user);
-        }
     }
 
 }

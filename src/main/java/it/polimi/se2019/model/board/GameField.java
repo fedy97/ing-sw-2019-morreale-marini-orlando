@@ -322,7 +322,7 @@ public class GameField {
     public String getPlatformPosLight(Platform platform) {
         if (platform !=null)
             return platform.getPlatformPosition()[0] + "," + platform.getPlatformPosition()[1];
-        return null;
+        return "null";
     }
 
     /**

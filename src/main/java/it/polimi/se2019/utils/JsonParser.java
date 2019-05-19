@@ -185,16 +185,15 @@ public class JsonParser {
                 JSONObject currWeaponObj = weaponsObj.getJSONObject(i);
                 name = currWeaponObj.getString("name");
                 description = currWeaponObj.getString("description");
-                pathImg = name.replace(' ','_') + ".png";
+                pathImg = "/assets/weapons/" + name.replace(' ', '_') + ".png";
                 paidCost = AmmoCube.valueOf(currWeaponObj.getString("paidCost"));
                 JSONArray jArrExtraCost = currWeaponObj.getJSONArray("extraCost");
                 if (!jArrExtraCost.get(0).toString().equals("")) {
                     extraCost = new AmmoCube[jArrExtraCost.length()];
                     for (int j = 0; j < jArrExtraCost.length(); j++)
                         extraCost[j] = AmmoCube.valueOf((String) jArrExtraCost.get(j));
-                }
-                else extraCost = null;
-                weaponCard = new WeaponCard(name,description,pathImg,paidCost,extraCost);
+                } else extraCost = null;
+                weaponCard = new WeaponCard(name, description, pathImg, paidCost, extraCost);
                 weaponCards.add(weaponCard);
             }
 

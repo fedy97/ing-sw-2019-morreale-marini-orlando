@@ -414,17 +414,19 @@ public class GameBoardController {
         for (Map.Entry<String, String> entry : playerPos.entrySet()) {
             String player = entry.getKey();
             String pos = entry.getValue();
-            ArrayList<ImageView> imagesPlayers = playerImages.get(player);
-            ArrayList<ImageView> imagesPos = posImages.get(pos);
-            HandyFunctions.printLineConsole(player + " " + pos);
-            for (ImageView im : imagesPlayers) {
-                for (ImageView im2 : imagesPos) {
-                    if (im.equals(im2)) {
-                        //set all images of the char to invisible
-                        for (ImageView imm : imagesPlayers)
-                            imm.setVisible(false);
-                        //set the only right image to visible
-                        im.setVisible(true);
+            if (!pos.equals("null")) {
+                ArrayList<ImageView> imagesPlayers = playerImages.get(player);
+                ArrayList<ImageView> imagesPos = posImages.get(pos);
+                HandyFunctions.printLineConsole(player + " " + pos);
+                for (ImageView im : imagesPlayers) {
+                    for (ImageView im2 : imagesPos) {
+                        if (im.equals(im2)) {
+                            //set all images of the char to invisible
+                            for (ImageView imm : imagesPlayers)
+                                imm.setVisible(false);
+                            //set the only right image to visible
+                            im.setVisible(true);
+                        }
                     }
                 }
             }

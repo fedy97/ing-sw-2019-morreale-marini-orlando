@@ -56,6 +56,7 @@ public class SocketServer implements Server {
                         output.flush();
                         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
                         String user = (String) input.readObject();
+                        //TODO change this also to the client side
                         int k = 1;
                         while (Controller.getInstance().getTurnController().getUsers().contains(user)) {
                             user = user + k;

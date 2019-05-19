@@ -244,10 +244,9 @@ public class Controller implements Observer {
      * Common method across RMI and Socket to send requests to client
      *
      * @param msg  to the destination client
-     * @param user recipient of the message
      */
     private void callView(ToClientMessage msg, String user) {
-        userView.get(user).callView(msg,user);
+        userView.get(user).callView(msg);
     }
 
     /**
