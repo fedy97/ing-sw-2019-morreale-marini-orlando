@@ -7,7 +7,6 @@ import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.board.ScoreBoard;
 import it.polimi.se2019.model.board.SkullsBoard;
 import it.polimi.se2019.model.card.AmmoCard;
-import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
@@ -19,7 +18,6 @@ import it.polimi.se2019.utils.JsonParser;
 import it.polimi.se2019.utils.TimerCharacter;
 import it.polimi.se2019.utils.TimerMap;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.logging.Level;
 
@@ -34,8 +32,8 @@ public class Game extends Observable {
     private Deck<PowerUpCard> powerUpDeck;
     private Deck<PowerUpCard> garbageDeck;
     private Deck<AmmoCard> ammoDeck;
-    private Map<Character, Player> characterPlayers;
     private int secondsLeft;
+    private Map<Character, Player> characterPlayers;
     private boolean timerStarted = false;
     private Map<Integer, Integer> mapChosen;
     private static Game instance = null;
@@ -192,12 +190,16 @@ public class Game extends Observable {
         Map<String, String> playerPlatform = new HashMap<>();
         Map<String, List<CardRep>> playerPowerups = new HashMap<>();
         Map<String, List<CardRep>> playerWeapons = new HashMap<>();
+        Map<String, BoardRep> playerBoardRep = new HashMap<>();
 
-        //associate the players (characters) with their info (platform, powerUps, weapons)
+        //associate the players (characters) with their info (platform, powerUps, weapons, boardRep)
         for (Player player : getPlayers()) {
             playerPlatform.put(player.getCharacter().name(), getGameField().getPlatformPosLight(player.getCurrentPlatform()));
             List<CardRep> powerUps = new ArrayList<>();
             List<CardRep> weapons = new ArrayList<>();
+            List<String> damages = new ArrayList<>();
+            List<String> marks = new ArrayList<>();
+
 
             for (PowerUpCard powerUp : player.getPowerUpCards())
                 powerUps.add(new CardRep(HandyFunctions.getSystemAddress(powerUp), powerUp.getName(), powerUp.getDescription(),
@@ -207,13 +209,20 @@ public class Game extends Observable {
                 weapons.add(new CardRep(HandyFunctions.getSystemAddress(weaponCard), weaponCard.getName(), weaponCard.getDescription(),
                         weaponCard.getImgPath()));
 
+            for(Character c : player.getPlayerBoard().getDamageLine())
+                damages.add(c.name());
+            for(Character c: player.getPlayerBoard().getRevengeMarks())
+                marks.add(c.name());
+
             playerPowerups.put(player.getCharacter().name(), powerUps);
             playerWeapons.put(player.getCharacter().name(), weapons);
+            playerBoardRep.put(player.getCharacter().name(), new BoardRep(damages, marks));
         }
 
         lightVersion.setPlayerPlatform(playerPlatform);
         lightVersion.setPlayerPowerups(playerPowerups);
         lightVersion.setPlatformWeapons(playerWeapons);
+        lightVersion.setPlayerBoardRep(playerBoardRep);
 
         //associate the platform with the ammo tile and the weapons
         Map<String, AmmoRep> platformAmmoTile = new HashMap<>();
@@ -238,7 +247,6 @@ public class Game extends Observable {
         }
         lightVersion.setPlatformAmmoTile(platformAmmoTile);
         lightVersion.setPlatformWeapons(platformWeapons);
-        //TODO Board rep
         return lightVersion;
     }
 

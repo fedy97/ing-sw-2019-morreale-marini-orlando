@@ -1,8 +1,6 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.Lobby;
 import it.polimi.se2019.model.Game;
-import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
@@ -26,7 +24,6 @@ public class Controller implements Observer {
     private Validator validator;
     private TurnController turnController;
     private Map<String, VirtualView> userView;
-    private VirtualView currentView;
     private List<String> validActions;
     private ControllerState state; //the state is set to processing power up or weapon when a specific message from the client (ActivateCardMessage) is received
     private List<Player> currentTargets;
@@ -109,7 +106,7 @@ public class Controller implements Observer {
      * @param powerUp composed of different stages in order to perform the final effect
      */
     public void processPowerUp(PowerUpCard powerUp) {
-        // powerUp.activate(processingStages.get(0));
+        powerUp.activate(processingStages.get(0));
         if (processingStages.isEmpty()) {
             state = ControllerState.IDLE;
             decksManager.addToGarbage(processingPowerUp);
