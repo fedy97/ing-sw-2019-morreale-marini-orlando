@@ -247,10 +247,6 @@ public class Controller implements Observer {
      * @param user recipient of the message
      */
     private void callView(ToClientMessage msg, String user) {
-        /*if (Lobby.getRmiServer().isConnected(user))
-            Lobby.getRmiServer().sendToClient(msg, user);
-        if (Lobby.getSocketServer().isConnected(user))
-            Lobby.getSocketServer().sendToClient(msg, user);*/
         userView.get(user).callView(msg,user);
     }
 

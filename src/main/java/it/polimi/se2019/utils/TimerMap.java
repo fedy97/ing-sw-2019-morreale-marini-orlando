@@ -1,12 +1,11 @@
 package it.polimi.se2019.utils;
 
-import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.Game;
 
-import java.io.IOException;
 
 public class TimerMap extends Thread {
     private int seconds;
+
     public TimerMap(int seconds) {
         this.seconds = seconds;
     }

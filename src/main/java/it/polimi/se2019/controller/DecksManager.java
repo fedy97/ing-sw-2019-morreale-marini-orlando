@@ -54,7 +54,6 @@ public class DecksManager{
     public AmmoCard getNewAmmoCard(AmmoCard oldAmmoCard) throws NoCardException {
         ammoDeck.add(oldAmmoCard);
         ammoDeck.mix();
-        ////TODO
         return ammoDeck.drawCard();
     }
 

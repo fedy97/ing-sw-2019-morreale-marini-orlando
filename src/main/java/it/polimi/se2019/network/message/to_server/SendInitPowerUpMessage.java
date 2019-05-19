@@ -1,7 +1,6 @@
 package it.polimi.se2019.network.message.to_server;
 
 import it.polimi.se2019.controller.Controller;
-import it.polimi.se2019.exceptions.InvalidCardException;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.board.Room;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;

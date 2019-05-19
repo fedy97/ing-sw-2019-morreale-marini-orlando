@@ -103,7 +103,7 @@ public class RMIClient implements Client, Observer {
         try {
             msg.performAction(actor);
         } catch (Exception e) {
-            e.printStackTrace();
+            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
     }
 

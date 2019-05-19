@@ -14,7 +14,7 @@ public class TurnController {
     private Timer turnTimer;
 
     public TurnController(){
-        turningOrder = new ArrayList<String>();
+        turningOrder = new ArrayList<>();
         turnTimer = new Timer();
     }
 
@@ -30,7 +30,7 @@ public class TurnController {
      * @param user to be added to the ordered list
      */
     public void addUser(String user){
-        if(turningOrder.size() == 0)
+        if(turningOrder.isEmpty())
             first = user;
         turningOrder.add(user);
     }
@@ -69,8 +69,5 @@ public class TurnController {
         return turnTimer;
     }
 
-    private void stopTimer() {
-        //TODO
-    }
 
 }

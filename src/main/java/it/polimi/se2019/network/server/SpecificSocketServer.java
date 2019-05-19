@@ -1,6 +1,5 @@
 package it.polimi.se2019.network.server;
 
-import it.polimi.se2019.Lobby;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;

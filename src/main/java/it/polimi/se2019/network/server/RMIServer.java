@@ -2,10 +2,7 @@ package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.Lobby;
 import it.polimi.se2019.controller.Controller;
-import it.polimi.se2019.model.Game;
 import it.polimi.se2019.network.client.Client;
-import it.polimi.se2019.network.client.RMIClient;
-import it.polimi.se2019.network.message.to_client.NewConnectionMessage;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -108,7 +105,6 @@ public class RMIServer implements Server {
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
-        //TODO lobby
     }
 
     @Override

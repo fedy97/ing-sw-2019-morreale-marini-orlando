@@ -8,15 +8,11 @@ import it.polimi.se2019.model.card.powerups.*;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Orientation;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Deque;
 
 /**
  * @author Federico Morreale
@@ -47,7 +43,7 @@ public class JsonParser {
      * @return a deck of 36 ammos
      * @throws InvalidCardException
      */
-    public Deck<AmmoCard> buildAmmoCards() throws InvalidCardException, InvalidDeckException,IOException {
+    public Deck<AmmoCard> buildAmmoCards() throws InvalidCardException, InvalidDeckException {
         if (path.equals("/json/ammocards.json")) {
             ArrayList<AmmoCard> ammoCards = new ArrayList<>();
             AmmoCube[] arrAmmos;
@@ -134,7 +130,7 @@ public class JsonParser {
      * @throws InvalidImageException
      * @throws InvalidNameException
      */
-    public Deck<PowerUpCard> buildPowerupCards() throws InvalidDeckException, IOException,
+    public Deck<PowerUpCard> buildPowerupCards() throws InvalidDeckException,
             InvalidCubeException, InvalidNameException {
         if (path.equals("/json/powerups.json")) {
             ArrayList<PowerUpCard> powerUpCards = new ArrayList<>();

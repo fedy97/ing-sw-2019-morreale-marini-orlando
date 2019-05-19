@@ -1,6 +1,5 @@
 package it.polimi.se2019.network.message.to_server;
 
-import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.network.message.Message;
 
 public abstract class ToServerMessage extends Message {
