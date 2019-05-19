@@ -1,13 +1,12 @@
 package it.polimi.se2019.view.client.cli;
 
-import it.polimi.se2019.model.enumeration.Orientation;
+import it.polimi.se2019.model.AmmoRep;
+import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.utils.HandyFunctions;
+import javafx.scene.control.cell.CheckBoxListCell;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
-
 
 /**
  * @author Simone Orlando
@@ -316,21 +315,22 @@ public final class CliPrinter {
         CliSetUp.restorePosition();
     }
 
-    public static void printMap1(int[][] map) {
+    public static void printMap1(int[][] map, List<AmmoRep> ammoReps) {
+
         CliPrinter.stamp("\t\t\t     ┏━━━━━━━━━━━┓", CliColor.TEXTRED); CliPrinter.stamp("┏━━━━━━━━━━━┓┏━━━━━━━━━━━┓\n",CliColor.TEXTCYAN);
-        CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTCYAN);
+        CliPrinter.stamp("\t\t\t     ┃    ", CliColor.TEXTRED); printAmmo(ammoReps.get(0).getType()); CliPrinter.stamp("    ┃", CliColor.TEXTRED); CliPrinter.stamp("┃    ",CliColor.TEXTCYAN); CliPrinter.printAmmo(ammoReps.get(1).getType()); CliPrinter.stamp("         ",CliColor.TEXTCYAN); CliPrinter.printAmmo(ammoReps.get(2).getType()); CliPrinter.stamp("     ┃\n", CliColor.TEXTCYAN);
         CliPrinter.stamp("\t\t\t     ┃           ┗", CliColor.TEXTRED); CliPrinter.stamp("┛                        ┃\n",CliColor.TEXTCYAN);
         CliPrinter.stamp("\t\t\t     ┃           ┏", CliColor.TEXTRED); CliPrinter.stamp("┓                        ┃\n",CliColor.TEXTCYAN);
         CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTCYAN);
         CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┗━━━━┓ ┏━━━━┛┗━━━━┓ ┏━━━━┛\n",CliColor.TEXTCYAN);
         CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┏━━━━┛ ┗━━━━━━━━━━┛ ┗━━━━┓", CliColor.TEXTPURPLE); CliPrinter.stamp("┏━━━━━━━━━━━┓\n",CliColor.TEXTYELLOW);
-        CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃    ", CliColor.TEXTRED); printAmmo(ammoReps.get(4).getType()); CliPrinter.stamp("    ┃", CliColor.TEXTRED); CliPrinter.stamp("┃   ", CliColor.TEXTPURPLE); printAmmo(ammoReps.get(5).getType()); CliPrinter.stamp("          ", CliColor.TEXTPURPLE); printAmmo(ammoReps.get(6).getType()); CliPrinter.stamp("     ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃    ",CliColor.TEXTYELLOW); printAmmo(ammoReps.get(7).getType()); CliPrinter.stamp("    ┃\n", CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┗", CliColor.TEXTPURPLE); CliPrinter.stamp("┛           ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┏", CliColor.TEXTPURPLE); CliPrinter.stamp("┓           ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┗━━━━┓ ┏━━━━┛", CliColor.TEXTRED); CliPrinter.stamp("┗━━━━┓ ┏━━━━━━━━━━━━━━━━━┛", CliColor.TEXTPURPLE); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┏━━━━┛ ┗━━━━━━━━━━┛ ┗━━━━━━━━━━━━━━━━━┓", CliColor.TEXTWHITE); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTYELLOW);
-        CliPrinter.stamp("\t\t\t     ┃                                     ┃", CliColor.TEXTWHITE); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃   ", CliColor.TEXTWHITE); printAmmo(ammoReps.get(8).getType()); CliPrinter.stamp("          ", CliColor.TEXTWHITE); printAmmo(ammoReps.get(9).getType()); CliPrinter.stamp("          ", CliColor.TEXTWHITE); printAmmo(ammoReps.get(10).getType()); CliPrinter.stamp("     ┃", CliColor.TEXTWHITE); CliPrinter.stamp("┃    ",CliColor.TEXTYELLOW); printAmmo(ammoReps.get(11).getType()); CliPrinter.stamp("    ┃\n", CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃                                     ┗", CliColor.TEXTWHITE); CliPrinter.stamp("┛           ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃                                     ┏", CliColor.TEXTWHITE); CliPrinter.stamp("┓           ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃                                     ┃", CliColor.TEXTWHITE); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTYELLOW);
@@ -338,42 +338,42 @@ public final class CliPrinter {
 
     }
 
-    public static void printMap2(int[][] map) {
+    public static void printMap2(int[][] map, List<AmmoRep> ammoReps) {
         CliPrinter.stamp("\t\t\t     ┏━━━━━━━━━━━┓┏━━━━━━━━━━━┓┏━━━━━━━━━━━┓",CliColor.TEXTCYAN); CliPrinter.stamp("┏━━━━━━━━━━━┓\n",CliColor.TEXTGREEN);
-        CliPrinter.stamp("\t\t\t     ┃                                     ┃",CliColor.TEXTCYAN); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTGREEN);
+        CliPrinter.stamp("\t\t\t     ┃    ",CliColor.TEXTCYAN); printAmmo(ammoReps.get(0).getType()); CliPrinter.stamp("          ", CliColor.TEXTCYAN); CliPrinter.printAmmo(ammoReps.get(1).getType()); CliPrinter.stamp("          ", CliColor.TEXTCYAN); CliPrinter.printAmmo(ammoReps.get(2).getType()); CliPrinter.stamp("    ┃", CliColor.TEXTCYAN); CliPrinter.stamp("┃    ",CliColor.TEXTGREEN); CliPrinter.printAmmo(ammoReps.get(3).getType()); CliPrinter.stamp("    ┃\n", CliColor.TEXTGREEN);
         CliPrinter.stamp("\t\t\t     ┃                                     ┗",CliColor.TEXTCYAN); CliPrinter.stamp("┛           ┃\n",CliColor.TEXTGREEN);
         CliPrinter.stamp("\t\t\t     ┃                                     ┏",CliColor.TEXTCYAN); CliPrinter.stamp("┓           ┃\n",CliColor.TEXTGREEN);
         CliPrinter.stamp("\t\t\t     ┃                                     ┃",CliColor.TEXTCYAN); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTGREEN);
         CliPrinter.stamp("\t\t\t     ┗━━━━┓ ┏━━━━┛┗━━━━━━━━━━━┛┗━━━━┓ ┏━━━━┛",CliColor.TEXTCYAN); CliPrinter.stamp("┗━━━━┓ ┏━━━━┛\n",CliColor.TEXTGREEN);
         CliPrinter.stamp("\t\t\t     ┏━━━━┛ ┗━━━━┓┏━━━━━━━━━━━┓",CliColor.TEXTRED); CliPrinter.stamp("┏━━━━┛ ┗━━━━━━━━━━┛ ┗━━━━┓\n",CliColor.TEXTYELLOW);
-        CliPrinter.stamp("\t\t\t     ┃                        ┃",CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃    ",CliColor.TEXTRED); printAmmo(ammoReps.get(4).getType()); CliPrinter.stamp("          ",CliColor.TEXTRED); printAmmo(ammoReps.get(5).getType()); CliPrinter.stamp("    ┃", CliColor.TEXTRED); CliPrinter.stamp("┃    ",CliColor.TEXTYELLOW); printAmmo(ammoReps.get(6).getType()); CliPrinter.stamp("          ", CliColor.TEXTYELLOW); printAmmo(ammoReps.get(7).getType()); CliPrinter.stamp("    ┃\n", CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃                        ┃",CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃                        ┃",CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃                        ┃",CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┗━━━━━━━━━━━┛┗━━━━┓ ┏━━━━┛",CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t                  ┏━━━━┛ ┗━━━━┓",CliColor.TEXTWHITE); CliPrinter.stamp("┃                        ┃ \n",CliColor.TEXTYELLOW);
-        CliPrinter.stamp("\t\t\t                  ┃           ┃",CliColor.TEXTWHITE); CliPrinter.stamp("┃                        ┃ \n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t                  ┃    ",CliColor.TEXTWHITE); printAmmo(ammoReps.get(9).getType()); CliPrinter.stamp("    ┃",CliColor.TEXTWHITE); CliPrinter.stamp("┃    ",CliColor.TEXTYELLOW); printAmmo(ammoReps.get(10).getType()); CliPrinter.stamp("          ", CliColor.TEXTYELLOW); printAmmo(ammoReps.get(11).getType()); CliPrinter.stamp("    ┃ \n", CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t                  ┃           ┗",CliColor.TEXTWHITE); CliPrinter.stamp("┛                        ┃ \n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t                  ┃           ┏",CliColor.TEXTWHITE); CliPrinter.stamp("┓                        ┃ \n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t                  ┃           ┃",CliColor.TEXTWHITE); CliPrinter.stamp("┃                        ┃ \n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t                  ┗━━━━━━━━━━━┛",CliColor.TEXTWHITE); CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━┛ \n",CliColor.TEXTYELLOW);
     }
 
-    public static void printMap3(int[][] map) {
+    public static void printMap3(int[][] map, List<AmmoRep> ammoReps) {
         CliPrinter.stamp("\t\t\t     ┏━━━━━━━━━━━┓┏━━━━━━━━━━━┓┏━━━━━━━━━━━┓\n", CliColor.TEXTCYAN);
-        CliPrinter.stamp("\t\t\t     ┃                                     ┃\n", CliColor.TEXTCYAN);
+        CliPrinter.stamp("\t\t\t     ┃    ", CliColor.TEXTCYAN); printAmmo(ammoReps.get(0).getType()); CliPrinter.stamp("          ", CliColor.TEXTCYAN); printAmmo(ammoReps.get(1).getType()); CliPrinter.stamp("          ", CliColor.TEXTCYAN); printAmmo(ammoReps.get(2).getType()); CliPrinter.stamp("    ┃\n", CliColor.TEXTCYAN);
         CliPrinter.stamp("\t\t\t     ┃                                     ┃\n", CliColor.TEXTCYAN);
         CliPrinter.stamp("\t\t\t     ┃                                     ┃\n", CliColor.TEXTCYAN);
         CliPrinter.stamp("\t\t\t     ┃                                     ┃\n", CliColor.TEXTCYAN);
         CliPrinter.stamp("\t\t\t     ┗━━━━┓ ┏━━━━┛┗━━━━━━━━━━━┛┗━━━━┓ ┏━━━━┛\n", CliColor.TEXTCYAN);
         CliPrinter.stamp("\t\t\t     ┏━━━━┛ ┗━━━━┓┏━━━━━━",CliColor.TEXTRED); CliPrinter.stamp("━━━━━┓┏━━━━┛ ┗━━━━┓", CliColor.TEXTPURPLE); CliPrinter.stamp("┏━━━━━━━━━━━┓\n", CliColor.TEXTYELLOW);
-        CliPrinter.stamp("\t\t\t     ┃                   ",CliColor.TEXTRED); CliPrinter.stamp("                  ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃           ┃\n", CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃    ",CliColor.TEXTRED); printAmmo(ammoReps.get(4).getType()); CliPrinter.stamp("          ", CliColor.TEXTRED); printAmmo(ammoReps.get(5).getType()); CliPrinter.stamp("", CliColor.TEXTRED); CliPrinter.stamp("          ", CliColor.TEXTPURPLE); printAmmo(ammoReps.get(6).getType()); CliPrinter.stamp("    ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃    ", CliColor.TEXTYELLOW); printAmmo(ammoReps.get(7).getType()); CliPrinter.stamp("    ┃\n", CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃                   ",CliColor.TEXTRED); CliPrinter.stamp("                  ┗", CliColor.TEXTPURPLE); CliPrinter.stamp("┛           ┃\n", CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃                   ",CliColor.TEXTRED); CliPrinter.stamp("                  ┏", CliColor.TEXTPURPLE); CliPrinter.stamp("┓           ┃\n", CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃                   ",CliColor.TEXTRED); CliPrinter.stamp("                  ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃           ┃\n", CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┗━━━━━━━━━━━━━━━━━┓",CliColor.TEXTRED); CliPrinter.stamp(" ┏━━━━━━━━━━━━━━━━━┛", CliColor.TEXTPURPLE); CliPrinter.stamp("┃           ┃\n", CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t                  ┏━━━━┛ ┗━━━━┓┏━━━━━━━━━━━┓",CliColor.TEXTWHITE); CliPrinter.stamp("┃           ┃\n", CliColor.TEXTYELLOW);
-        CliPrinter.stamp("\t\t\t                  ┃                        ┃",CliColor.TEXTWHITE); CliPrinter.stamp("┃           ┃\n", CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t                  ┃    ",CliColor.TEXTWHITE); printAmmo(ammoReps.get(9).getType()); CliPrinter.stamp("          ", CliColor.TEXTWHITE); printAmmo(ammoReps.get(10).getType()); CliPrinter.stamp("    ┃", CliColor.TEXTWHITE); CliPrinter.stamp("┃    ", CliColor.TEXTYELLOW); printAmmo(ammoReps.get(11).getType()); CliPrinter.stamp("    ┃\n", CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t                  ┃                        ┗",CliColor.TEXTWHITE); CliPrinter.stamp("┛           ┃\n", CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t                  ┃                        ┏",CliColor.TEXTWHITE); CliPrinter.stamp("┓           ┃\n", CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t                  ┃                        ┃",CliColor.TEXTWHITE); CliPrinter.stamp("┃           ┃\n", CliColor.TEXTYELLOW);
@@ -382,21 +382,21 @@ public final class CliPrinter {
 
     }
 
-    public static void printMap4(int[][] map) {
+    public static void printMap4(int[][] map, List<AmmoRep> ammoReps) {
         CliPrinter.stamp("\t\t\t     ┏━━━━━━━━━━━┓", CliColor.TEXTRED); CliPrinter.stamp("┏━━━━━━━━━━━┓┏━━━━━━━━━━━┓", CliColor.TEXTCYAN); CliPrinter.stamp("┏━━━━━━━━━━━┓\n",CliColor.TEXTGREEN);
-        CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃", CliColor.TEXTCYAN); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTGREEN);
+        CliPrinter.stamp("\t\t\t     ┃    ", CliColor.TEXTRED); printAmmo(ammoReps.get(0).getType()); CliPrinter.stamp("    ┃", CliColor.TEXTRED); CliPrinter.stamp("┃    ", CliColor.TEXTCYAN); printAmmo(ammoReps.get(1).getType()); CliPrinter.stamp("          ", CliColor.TEXTCYAN); printAmmo(ammoReps.get(2).getType()); CliPrinter.stamp("    ┃", CliColor.TEXTCYAN); CliPrinter.stamp("┃    ",CliColor.TEXTGREEN); printAmmo(ammoReps.get(3).getType()); CliPrinter.stamp("    ┃\n", CliColor.TEXTGREEN);
         CliPrinter.stamp("\t\t\t     ┃           ┗", CliColor.TEXTRED); CliPrinter.stamp("┛                        ┗", CliColor.TEXTCYAN); CliPrinter.stamp("┛           ┃\n",CliColor.TEXTGREEN);
         CliPrinter.stamp("\t\t\t     ┃           ┏", CliColor.TEXTRED); CliPrinter.stamp("┓                        ┏", CliColor.TEXTCYAN); CliPrinter.stamp("┓           ┃\n",CliColor.TEXTGREEN);
         CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃                        ┃", CliColor.TEXTCYAN); CliPrinter.stamp("┃           ┃\n",CliColor.TEXTGREEN);
         CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┗━━━━┓ ┏━━━━┛┗━━━━┓ ┏━━━━┛", CliColor.TEXTCYAN); CliPrinter.stamp("┗━━━━┓ ┏━━━━┛\n",CliColor.TEXTGREEN);
         CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┏━━━━┛ ┗━━━━┓", CliColor.TEXTPURPLE); CliPrinter.stamp("┏━━━━┛ ┗━━━━━━━━━━┛ ┗━━━━┓\n",CliColor.TEXTYELLOW);
-        CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃           ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃    ", CliColor.TEXTRED); printAmmo(ammoReps.get(4).getType()); CliPrinter.stamp("    ┃", CliColor.TEXTRED); CliPrinter.stamp("┃    ", CliColor.TEXTPURPLE); printAmmo(ammoReps.get(5).getType()); CliPrinter.stamp("    ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃    ",CliColor.TEXTYELLOW); printAmmo(ammoReps.get(6).getType()); CliPrinter.stamp("          ", CliColor.TEXTYELLOW); printAmmo(ammoReps.get(7).getType()); CliPrinter.stamp("    ┃\n", CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃           ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃           ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃           ┃", CliColor.TEXTRED); CliPrinter.stamp("┃           ┃", CliColor.TEXTPURPLE); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┗━━━━┓ ┏━━━━┛", CliColor.TEXTRED); CliPrinter.stamp("┗━━━━┓ ┏━━━━┛", CliColor.TEXTPURPLE); CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┏━━━━┛ ┗━━━━━━━━━━┛ ┗━━━━┓", CliColor.TEXTWHITE);  CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
-        CliPrinter.stamp("\t\t\t     ┃                        ┃", CliColor.TEXTWHITE) ; CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
+        CliPrinter.stamp("\t\t\t     ┃    ", CliColor.TEXTWHITE); printAmmo(ammoReps.get(8).getType()); CliPrinter.stamp("          ", CliColor.TEXTWHITE); printAmmo(ammoReps.get(9).getType()); CliPrinter.stamp("    ┃", CliColor.TEXTWHITE); CliPrinter.stamp("┃    ",CliColor.TEXTYELLOW); printAmmo(ammoReps.get(10).getType()); CliPrinter.stamp("          ", CliColor.TEXTYELLOW); printAmmo(ammoReps.get(11).getType()); CliPrinter.stamp("    ┃\n", CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃                        ┃", CliColor.TEXTWHITE) ; CliPrinter.stamp("┃                        ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃                        ┗", CliColor.TEXTWHITE) ; CliPrinter.stamp("┛                        ┃\n",CliColor.TEXTYELLOW);
         CliPrinter.stamp("\t\t\t     ┃                        ┏", CliColor.TEXTWHITE) ; CliPrinter.stamp("┓                        ┃\n",CliColor.TEXTYELLOW);
@@ -406,5 +406,35 @@ public final class CliPrinter {
 
     }
 
+    private static void printAmmo(String type) {
+        if(type.length() == 2) {
+            CliPrinter.stamp("★",CliColor.TEXTWHITE);
+            for(int i=0; i<2;i++) {
+                if(type.charAt(i) == 'r') {
+                    CliPrinter.stamp("■",CliColor.TEXTRED);
+                }
+                else if (type.charAt(i) == 'b') {
+                    CliPrinter.stamp("■",CliColor.TEXTBLUE);
+                }
+                else {
+                    CliPrinter.stamp("■",CliColor.TEXTYELLOW);
+                }
+            }
+        }
+        else {
+            for(int i=0; i<3;i++) {
+                if(type.charAt(i) == 'r') {
+                    CliPrinter.stamp("■",CliColor.TEXTRED);
+                }
+                else if (type.charAt(i) == 'b') {
+                    CliPrinter.stamp("■",CliColor.TEXTBLUE);
+                }
+                else {
+                    CliPrinter.stamp("■",CliColor.TEXTYELLOW);
+                }
+            }
+        }
+
+    }
 
 }
