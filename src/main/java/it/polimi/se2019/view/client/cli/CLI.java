@@ -60,7 +60,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void showChoosePowerup(CardRep p1, CardRep p2) {
-        CliPrinter.stamp("\n\n");
+        CliPrinter.stamp("\n");
         CliPrinter.choosePowerUpMessage(p1, p2);
         new Thread( () -> {
             int choosenPowerUp;
@@ -89,13 +89,13 @@ public class CLI extends RemoteView {
         CliPrinter.welcomeMessage();
         HandyFunctions.printConsole("\n\n");
         if (chosenBoard.equals("1"))
-            CliPrinter.printMap1(map, ammoReps);
+            CliPrinter.printMap1(map, ammoReps, posWeapons);
         else if (chosenBoard.equals("2"))
-            CliPrinter.printMap2(map, ammoReps);
+            CliPrinter.printMap2(map, ammoReps, posWeapons);
         else if (chosenBoard.equals("3"))
-            CliPrinter.printMap3(map, ammoReps);
+            CliPrinter.printMap3(map, ammoReps, posWeapons);
         else
-            CliPrinter.printMap4(map, ammoReps);
+            CliPrinter.printMap4(map, ammoReps, posWeapons);
     }
 
     @Override

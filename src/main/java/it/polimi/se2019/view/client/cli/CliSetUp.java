@@ -28,4 +28,9 @@ public final class CliSetUp {
     public static void restorePosition() {
         HandyFunctions.printConsole(ESC+RESTORE);
     }
+
+    public static void cursorDown(int numOfLine)
+    {
+        HandyFunctions.printConsole(ESC + numOfLine + "B");
+    }
 }
