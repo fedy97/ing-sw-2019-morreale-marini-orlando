@@ -6,9 +6,11 @@ import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.utils.HandyFunctions;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
 import javafx.scene.transform.Rotate;
 
 import java.util.ArrayList;
@@ -218,6 +220,25 @@ public class GameBoardController {
     private ImageView weapon02_2;
     @FXML
     private ImageView weapon02_3;
+    @FXML
+    private Button info10_1;
+    @FXML
+    private Button info10_2;
+    @FXML
+    private Button info10_3;
+    @FXML
+    private Button info23_1;
+    @FXML
+    private Button info23_2;
+    @FXML
+    private Button info23_3;
+    @FXML
+    private Button info02_1;
+    @FXML
+    private Button info02_2;
+    @FXML
+    private Button info02_3;
+
 
     private List<AmmoRep> ammoReps;
     private Map<String, List<CardRep>> posWeaponsReps;
@@ -225,7 +246,8 @@ public class GameBoardController {
     private Map<String, ArrayList<ImageView>> playerImages;
     private Map<String, ArrayList<ImageView>> posImages;
     private Map<String, ArrayList<ImageView>> posWeaponsImages;
-
+    private boolean firstSetup = true;
+    private LightGameVersion lightGameVersion;
 
     protected void passGUI(GUI gui) {
         this.gui = gui;
@@ -237,39 +259,16 @@ public class GameBoardController {
 
     //constructor
     public void initialize() {
-
         Platform.runLater(
                 () -> {
                     initButtons();
                     mapImage.setImage(new Image("/assets/map/" + config + ".jpg"));
+                    //TODO change this, I need a map platform,ammo
                     for (Map.Entry<ImageView, AmmoRep> entry : ammoRepImageViewMap.entrySet()) {
                         if (entry.getValue() != null)
                             entry.getKey().setImage(new Image("/assets/ammos/" + entry.getValue().getType() + ".jpg"));
                     }
-                    for (Map.Entry<String, ArrayList<ImageView>> entry : posWeaponsImages.entrySet()) {
-                        String pos = entry.getKey();
-                        List<ImageView> weaponsImagesInSpot = entry.getValue();
-                        List<CardRep> weaponsToCopy = posWeaponsReps.get(pos);
-                        for (int i = 0; i < posWeaponsReps.size(); i++) {
-                            weaponsImagesInSpot.get(i).setImage(new Image(weaponsToCopy.get(i).getPath()));
-                            double x = weaponsImagesInSpot.get(i).getX();
-                            double y = weaponsImagesInSpot.get(i).getY();
-                            if (pos.equals("1,0")){
-                                weaponsImagesInSpot.get(i).setRotate(-90);
-                                weaponsImagesInSpot.get(i).setFitWidth(97);
-                                weaponsImagesInSpot.get(i).setFitHeight(152);
-                                weaponsImagesInSpot.get(i).setX(x + 22);
-                                weaponsImagesInSpot.get(i).setY(y - 25);
-                            }
-                            else if (pos.equals("2,3")) {
-                                weaponsImagesInSpot.get(i).setRotate(90);
-                                weaponsImagesInSpot.get(i).setFitWidth(97);
-                                weaponsImagesInSpot.get(i).setFitHeight(152);
-                                weaponsImagesInSpot.get(i).setX(x+32);
-                                weaponsImagesInSpot.get(i).setY(y-25);
-                            }
-                        }
-                    }
+                    updateWeapons(null);
                 });
     }
 
@@ -475,12 +474,19 @@ public class GameBoardController {
         this.config = config;
     }
 
-    public void setPosWeaponsReps(Map<String, List<CardRep>> posWeaponsReps) {
+    protected void setPosWeaponsReps(Map<String, List<CardRep>> posWeaponsReps) {
         this.posWeaponsReps = posWeaponsReps;
     }
 
     protected void updateAll(LightGameVersion lightGameVersion) {
         //update position of players
+        updatePositionsPlayers(lightGameVersion);
+        //update the 9 weapons in the field
+        updateWeapons(lightGameVersion);
+        //TODO update other things of light model
+    }
+
+    private void updatePositionsPlayers(LightGameVersion lightGameVersion) {
         Map<String, String> playerPos = lightGameVersion.getPlayerPlatform();
         for (Map.Entry<String, String> entry : playerPos.entrySet()) {
             String player = entry.getKey();
@@ -502,7 +508,48 @@ public class GameBoardController {
                 }
             }
         }
-        //TODO update other things of light model
+    }
+
+    private void updateWeapons(LightGameVersion lightGameVersion) {
+        this.lightGameVersion = lightGameVersion;
+        for (Map.Entry<String, ArrayList<ImageView>> entry : posWeaponsImages.entrySet()) {
+            String pos = entry.getKey();
+            List<ImageView> weaponsImagesInSpot = entry.getValue();
+            List<CardRep> weaponsToCopy;
+            if (lightGameVersion == null)
+                weaponsToCopy = posWeaponsReps.get(pos);
+            else {
+                weaponsToCopy = lightGameVersion.getPlatformWeapons().get(pos);
+                firstSetup = false;
+            }
+            for (int i = 0; i < posWeaponsReps.size(); i++) {
+                weaponsImagesInSpot.get(i).setImage(new Image(weaponsToCopy.get(i).getPath()));
+                double x = weaponsImagesInSpot.get(i).getX();
+                double y = weaponsImagesInSpot.get(i).getY();
+                if (pos.equals("1,0") && firstSetup) {
+                    weaponsImagesInSpot.get(i).setRotate(-90);
+                    weaponsImagesInSpot.get(i).setFitWidth(97);
+                    weaponsImagesInSpot.get(i).setFitHeight(152);
+                    weaponsImagesInSpot.get(i).setX(x + 22);
+                    weaponsImagesInSpot.get(i).setY(y - 25);
+                } else if (pos.equals("2,3") && firstSetup) {
+                    weaponsImagesInSpot.get(i).setRotate(90);
+                    weaponsImagesInSpot.get(i).setFitWidth(97);
+                    weaponsImagesInSpot.get(i).setFitHeight(152);
+                    weaponsImagesInSpot.get(i).setX(x + 32);
+                    weaponsImagesInSpot.get(i).setY(y - 25);
+                }
+            }
+        }
+    }
+
+    private void showInstruction(CardRep cardRep){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Weapon Card");
+        alert.setHeaderText(cardRep.getTitle().toUpperCase());
+        alert.setContentText(cardRep.getDescription());
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.showAndWait();
     }
 
     public void zerozeroClick() {
@@ -555,5 +602,33 @@ public class GameBoardController {
 
     public void violetClick() {
     }
+    public void in10_1click(){
+        showInstruction(lightGameVersion.getPlatformWeapons().get("1,0").get(0));
+    }
+    public void in10_2click(){
+        showInstruction(lightGameVersion.getPlatformWeapons().get("1,0").get(1));
+    }
+    public void in10_3click(){
+        showInstruction(lightGameVersion.getPlatformWeapons().get("1,0").get(2));
+    }
+    public void in02_1click(){
+        showInstruction(lightGameVersion.getPlatformWeapons().get("0,2").get(0));
+    }
+    public void in02_2click(){
+        showInstruction(lightGameVersion.getPlatformWeapons().get("0,2").get(1));
+    }
+    public void in02_3click(){
+        showInstruction(lightGameVersion.getPlatformWeapons().get("0,2").get(2));
+    }
+    public void in23_1click(){
+        showInstruction(lightGameVersion.getPlatformWeapons().get("2,3").get(0));
+    }
+    public void in23_2click(){
+        showInstruction(lightGameVersion.getPlatformWeapons().get("2,3").get(1));
+    }
+    public void in23_3click(){
+        showInstruction(lightGameVersion.getPlatformWeapons().get("2,3").get(2));
+    }
+
 
 }

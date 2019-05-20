@@ -568,11 +568,20 @@
       <Button layoutX="803.0" mnemonicParsing="false" opacity="0.0" prefHeight="140.0" prefWidth="103.0" />
       <Button layoutX="922.0" layoutY="615.0" mnemonicParsing="false" opacity="0.0" prefHeight="97.0" prefWidth="152.0" />
       <Button layoutX="6.0" layoutY="260.0" mnemonicParsing="false" opacity="0.0" prefHeight="97.0" prefWidth="152.0" />
-      <Button layoutX="6.0" layoutY="361.0" mnemonicParsing="false" opacity="0.0" prefHeight="97.0" prefWidth="152.0" />
+      <Button layoutX="6.0" layoutY="361.0" mnemonicParsing="false" opacity="0.04" prefHeight="97.0" prefWidth="152.0" />
       <Button layoutX="6.0" layoutY="463.0" mnemonicParsing="false" opacity="0.0" prefHeight="97.0" prefWidth="152.0" />
       <Button layoutX="922.0" layoutY="509.0" mnemonicParsing="false" opacity="0.0" prefHeight="97.0" prefWidth="152.0" />
       <Button layoutX="922.0" layoutY="402.0" mnemonicParsing="false" opacity="0.0" prefHeight="97.0" prefWidth="152.0" />
       <Button layoutX="680.0" mnemonicParsing="false" opacity="0.0" prefHeight="140.0" prefWidth="103.0" />
       <Button layoutX="560.0" mnemonicParsing="false" opacity="0.0" prefHeight="140.0" prefWidth="103.0" />
+      <Button fx:id="info02_1" layoutX="631.0" layoutY="109.0" mnemonicParsing="false" onAction="#in02_1click" prefHeight="25.0" prefWidth="17.0" text="i" />
+      <Button fx:id="info02_3" layoutX="878.0" layoutY="109.0" mnemonicParsing="false" onAction="#in02_3click" prefHeight="25.0" prefWidth="17.0" text="i" />
+      <Button fx:id="info02_2" layoutX="752.0" layoutY="109.0" mnemonicParsing="false" onAction="#in02_2click" prefHeight="25.0" prefWidth="17.0" text="i" />
+      <Button fx:id="info10_1" layoutX="130.0" layoutY="327.0" mnemonicParsing="false" onAction="#in10_1click" prefHeight="25.0" prefWidth="17.0" text="i" />
+      <Button fx:id="info10_2" layoutX="130.0" layoutY="428.0" mnemonicParsing="false" onAction="#in10_2click" prefHeight="25.0" prefWidth="17.0" text="i" />
+      <Button fx:id="info10_3" layoutX="130.0" layoutY="531.0" mnemonicParsing="false" onAction="#in10_3click" prefHeight="25.0" prefWidth="17.0" text="i" />
+      <Button fx:id="info23_1" layoutX="1042.0" layoutY="469.0" mnemonicParsing="false" onAction="#in23_1click" prefHeight="25.0" prefWidth="17.0" text="i" />
+      <Button fx:id="info23_2" layoutX="1042.0" layoutY="577.0" mnemonicParsing="false" onAction="#in23_2click" prefHeight="25.0" prefWidth="17.0" text="i" />
+      <Button fx:id="info23_3" layoutX="1042.0" layoutY="683.0" mnemonicParsing="false" onAction="#in23_3click" prefHeight="25.0" prefWidth="17.0" text="i" />
    </children>
 </AnchorPane>
