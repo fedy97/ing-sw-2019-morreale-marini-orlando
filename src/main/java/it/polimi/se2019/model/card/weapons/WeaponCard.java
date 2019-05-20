@@ -4,6 +4,9 @@ import it.polimi.se2019.exceptions.InvalidNameException;
 import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.enumeration.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A class representing the weapons of the game
  *
@@ -13,7 +16,7 @@ import it.polimi.se2019.model.enumeration.*;
 public class WeaponCard extends Card {
     private AmmoCube paidCost;
     private AmmoCube[] extraCost;
-    private Effect basicEffect;
+    private List<Effect> effects;
     private boolean loaded;
 
     /**
@@ -29,7 +32,6 @@ public class WeaponCard extends Card {
      * @param extraCost consisting of one or two AmmoCubes the player pay when he grabs the weapon
      */
     public WeaponCard(AmmoCube paidCost, AmmoCube[] extraCost) {
-
         this.paidCost = paidCost;
         this.extraCost = extraCost;
         loaded = true;
@@ -48,6 +50,7 @@ public class WeaponCard extends Card {
         super(name,descr,img);
         this.paidCost = paidCost;
         this.extraCost = extraCost;
+        effects = new ArrayList<>();
         loaded = true;
     }
 
@@ -87,6 +90,10 @@ public class WeaponCard extends Card {
      */
     public boolean isLoaded() {
         return loaded;
+    }
+
+    public void addEffect(Effect effect){
+        effects.add(effect);
     }
 
 

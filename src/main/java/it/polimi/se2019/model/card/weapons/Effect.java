@@ -1,10 +1,10 @@
 package it.polimi.se2019.model.card.weapons;
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.enumeration.AmmoCube;
-import it.polimi.se2019.model.enumeration.Visibility;
-import it.polimi.se2019.model.player.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A class used to describe the weapons effects
@@ -12,29 +12,27 @@ import java.util.ArrayList;
  * @author Gabriel Raul Marini
  */
 public class Effect {
-    private ArrayList<Visibility> possibleTargets;
     private ArrayList<BasicEffect> basicEffects;
-    private AmmoCube cost;
+    private AmmoCube[] cost;
+    private List<Integer> stages;
 
-    public Effect() {
-
+    public Effect(AmmoCube[] cost) {
+        this.cost = cost;
+        stages = new ArrayList<>();
+        basicEffects = new ArrayList<>();
     }
 
-    public ArrayList<Visibility> getPossibleTargets() {
-        return possibleTargets;
+    public void activateEffect(int stage) {
+        basicEffects.get(stage).activate(Controller.getInstance());
     }
 
-    /**
-     * Build with basic effects the final effect of the card
-     *
-     * @param targets players to be damaged, marked or moved by the weapon
-     */
-    public void activateEffect(ArrayList<Player> targets) {
-        for (Player player : targets) {
-            for (BasicEffect effect : basicEffects) {
-                //     effect.applyTo(player);
-            }
-        }
+
+    public void addBasicEffect(BasicEffect effect) {
+        basicEffects.add(effect);
+    }
+
+    public void addStage(int stage) {
+        stages.add(stage);
     }
 
 }

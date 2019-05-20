@@ -410,4 +410,12 @@ public class Game extends Observable {
                 return player;
         return null;
     }
+
+    /**
+     * @param c character associated to the player
+     * @return the player corresponding to the passed character
+     */
+    public Player getPlayer(Character c){
+        return characterPlayers.get(c);
+    }
 }
