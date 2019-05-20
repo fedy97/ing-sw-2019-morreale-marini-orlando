@@ -1,6 +1,7 @@
 package it.polimi.se2019.view.client.gui;
 
 import it.polimi.se2019.model.AmmoRep;
+import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.utils.HandyFunctions;
 import javafx.application.Platform;
@@ -8,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.transform.Rotate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -198,11 +200,31 @@ public class GameBoardController {
     private ImageView dozertwotwo;
     @FXML
     private ImageView dozertwothree;
+    @FXML
+    private ImageView weapon10_1;
+    @FXML
+    private ImageView weapon10_2;
+    @FXML
+    private ImageView weapon10_3;
+    @FXML
+    private ImageView weapon23_1;
+    @FXML
+    private ImageView weapon23_2;
+    @FXML
+    private ImageView weapon23_3;
+    @FXML
+    private ImageView weapon02_1;
+    @FXML
+    private ImageView weapon02_2;
+    @FXML
+    private ImageView weapon02_3;
 
     private List<AmmoRep> ammoReps;
+    private Map<String, List<CardRep>> posWeaponsReps;
     private Map<ImageView, AmmoRep> ammoRepImageViewMap;
     private Map<String, ArrayList<ImageView>> playerImages;
     private Map<String, ArrayList<ImageView>> posImages;
+    private Map<String, ArrayList<ImageView>> posWeaponsImages;
 
 
     protected void passGUI(GUI gui) {
@@ -218,194 +240,243 @@ public class GameBoardController {
 
         Platform.runLater(
                 () -> {
-                    ArrayList<ImageView> imagesDozer = new ArrayList<>();
-                    ArrayList<ImageView> imagesSprog = new ArrayList<>();
-                    ArrayList<ImageView> imagesDistructor = new ArrayList<>();
-                    ArrayList<ImageView> imagesViolet = new ArrayList<>();
-                    ArrayList<ImageView> imagesBanshee = new ArrayList<>();
-                    ArrayList<ImageView> imagesPos00 = new ArrayList<>();
-                    ArrayList<ImageView> imagesPos01 = new ArrayList<>();
-                    ArrayList<ImageView> imagesPos02 = new ArrayList<>();
-                    ArrayList<ImageView> imagesPos03 = new ArrayList<>();
-                    ArrayList<ImageView> imagesPos10 = new ArrayList<>();
-                    ArrayList<ImageView> imagesPos11 = new ArrayList<>();
-                    ArrayList<ImageView> imagesPos12 = new ArrayList<>();
-                    ArrayList<ImageView> imagesPos13 = new ArrayList<>();
-                    ArrayList<ImageView> imagesPos20 = new ArrayList<>();
-                    ArrayList<ImageView> imagesPos21 = new ArrayList<>();
-                    ArrayList<ImageView> imagesPos22 = new ArrayList<>();
-                    ArrayList<ImageView> imagesPos23 = new ArrayList<>();
-
-                    ammoRepImageViewMap = new HashMap<>();
-                    playerImages = new HashMap<>();
-                    posImages = new HashMap<>();
-
-                    imagesDozer.add(dozerzerozero);
-                    imagesDozer.add(dozerzeroone);
-                    imagesDozer.add(dozerzerotwo);
-                    imagesDozer.add(dozerzerothree);
-                    imagesDozer.add(dozeronezero);
-                    imagesDozer.add(dozeroneone);
-                    imagesDozer.add(dozeronetwo);
-                    imagesDozer.add(dozeronethree);
-                    imagesDozer.add(dozertwozero);
-                    imagesDozer.add(dozertwoone);
-                    imagesDozer.add(dozertwotwo);
-                    imagesDozer.add(dozertwothree);
-                    imagesSprog.add(sprogzerozero);
-                    imagesSprog.add(sprogzeroone);
-                    imagesSprog.add(sprogzerotwo);
-                    imagesSprog.add(sprogzerothree);
-                    imagesSprog.add(sprogonezero);
-                    imagesSprog.add(sprogoneone);
-                    imagesSprog.add(sprogonetwo);
-                    imagesSprog.add(sprogonethree);
-                    imagesSprog.add(sprogtwozero);
-                    imagesSprog.add(sprogtwoone);
-                    imagesSprog.add(sprogtwotwo);
-                    imagesSprog.add(sprogtwothree);
-                    imagesViolet.add(violetzerozero);
-                    imagesViolet.add(violetzeroone);
-                    imagesViolet.add(violetzerotwo);
-                    imagesViolet.add(violetzerothree);
-                    imagesViolet.add(violetonezero);
-                    imagesViolet.add(violetoneone);
-                    imagesViolet.add(violetonetwo);
-                    imagesViolet.add(violetonethree);
-                    imagesViolet.add(violettwozero);
-                    imagesViolet.add(violettwoone);
-                    imagesViolet.add(violettwotwo);
-                    imagesViolet.add(violettwothree);
-                    imagesBanshee.add(bansheezerozero);
-                    imagesBanshee.add(bansheezeroone);
-                    imagesBanshee.add(bansheezerotwo);
-                    imagesBanshee.add(bansheezerothree);
-                    imagesBanshee.add(bansheeonezero);
-                    imagesBanshee.add(bansheeoneone);
-                    imagesBanshee.add(bansheeonetwo);
-                    imagesBanshee.add(bansheeonethree);
-                    imagesBanshee.add(bansheetwozero);
-                    imagesBanshee.add(bansheetwoone);
-                    imagesBanshee.add(bansheetwotwo);
-                    imagesBanshee.add(bansheetwothree);
-                    imagesDistructor.add(distructorzerozero);
-                    imagesDistructor.add(distructorzeroone);
-                    imagesDistructor.add(distructorzerotwo);
-                    imagesDistructor.add(distructorzerothree);
-                    imagesDistructor.add(distructoronezero);
-                    imagesDistructor.add(distructoroneone);
-                    imagesDistructor.add(distructoronetwo);
-                    imagesDistructor.add(distructoronethree);
-                    imagesDistructor.add(distructortwozero);
-                    imagesDistructor.add(distructortwoone);
-                    imagesDistructor.add(distructortwotwo);
-                    imagesDistructor.add(distructortwothree);
-                    playerImages.put("DOZER", imagesDozer);
-                    playerImages.put("VIOLET", imagesViolet);
-                    playerImages.put("DISTRUCTOR", imagesDistructor);
-                    playerImages.put("BANSHEE", imagesBanshee);
-                    playerImages.put("SPROG", imagesSprog);
-                    imagesPos00.add(dozerzerozero);
-                    imagesPos00.add(sprogzerozero);
-                    imagesPos00.add(bansheezerozero);
-                    imagesPos00.add(distructorzerozero);
-                    imagesPos00.add(violetzerozero);
-                    imagesPos01.add(dozerzeroone);
-                    imagesPos01.add(sprogzeroone);
-                    imagesPos01.add(bansheezeroone);
-                    imagesPos01.add(distructorzeroone);
-                    imagesPos01.add(violetzeroone);
-                    imagesPos02.add(dozerzerotwo);
-                    imagesPos02.add(sprogzerotwo);
-                    imagesPos02.add(bansheezerotwo);
-                    imagesPos02.add(distructorzerotwo);
-                    imagesPos02.add(violetzerotwo);
-                    imagesPos03.add(dozerzerothree);
-                    imagesPos03.add(sprogzerothree);
-                    imagesPos03.add(bansheezerothree);
-                    imagesPos03.add(distructorzerothree);
-                    imagesPos03.add(violetzerothree);
-                    imagesPos10.add(dozeronezero);
-                    imagesPos10.add(sprogonezero);
-                    imagesPos10.add(bansheeonezero);
-                    imagesPos10.add(distructoronezero);
-                    imagesPos10.add(violetonezero);
-                    imagesPos11.add(dozeroneone);
-                    imagesPos11.add(sprogoneone);
-                    imagesPos11.add(bansheeoneone);
-                    imagesPos11.add(distructoroneone);
-                    imagesPos11.add(violetoneone);
-                    imagesPos12.add(dozeronetwo);
-                    imagesPos12.add(sprogonetwo);
-                    imagesPos12.add(bansheeonetwo);
-                    imagesPos12.add(distructoronetwo);
-                    imagesPos12.add(violetonetwo);
-                    imagesPos13.add(dozeronethree);
-                    imagesPos13.add(sprogonethree);
-                    imagesPos13.add(bansheeonethree);
-                    imagesPos13.add(distructoronethree);
-                    imagesPos13.add(violetonethree);
-                    imagesPos20.add(dozertwozero);
-                    imagesPos20.add(sprogtwozero);
-                    imagesPos20.add(bansheetwozero);
-                    imagesPos20.add(distructortwozero);
-                    imagesPos20.add(violettwozero);
-                    imagesPos21.add(dozertwoone);
-                    imagesPos21.add(sprogtwoone);
-                    imagesPos21.add(bansheetwoone);
-                    imagesPos21.add(distructortwoone);
-                    imagesPos21.add(violettwoone);
-                    imagesPos22.add(dozertwotwo);
-                    imagesPos22.add(sprogtwotwo);
-                    imagesPos22.add(bansheetwotwo);
-                    imagesPos22.add(distructortwotwo);
-                    imagesPos22.add(violettwotwo);
-                    imagesPos23.add(dozertwothree);
-                    imagesPos23.add(sprogtwothree);
-                    imagesPos23.add(bansheetwothree);
-                    imagesPos23.add(distructortwothree);
-                    imagesPos23.add(violettwothree);
-                    posImages.put("0,0", imagesPos00);
-                    posImages.put("0,1", imagesPos01);
-                    posImages.put("0,2", imagesPos02);
-                    posImages.put("0,3", imagesPos03);
-                    posImages.put("1,0", imagesPos10);
-                    posImages.put("1,1", imagesPos11);
-                    posImages.put("1,2", imagesPos12);
-                    posImages.put("1,3", imagesPos13);
-                    posImages.put("2,0", imagesPos20);
-                    posImages.put("2,1", imagesPos21);
-                    posImages.put("2,2", imagesPos22);
-                    posImages.put("2,3", imagesPos23);
-
-                    ArrayList<ImageView> imageViews = new ArrayList<>();
-                    imageViews.add(ammozerozero);
-                    imageViews.add(ammozeroone);
-                    imageViews.add(ammozerotwo);
-                    imageViews.add(ammozerothree);
-                    imageViews.add(ammoonezero);
-                    imageViews.add(ammooneone);
-                    imageViews.add(ammoonetwo);
-                    imageViews.add(ammoonethree);
-                    imageViews.add(ammotwozero);
-                    imageViews.add(ammotwoone);
-                    imageViews.add(ammotwotwo);
-                    imageViews.add(ammotwothree);
-                    for (int i = 0; i < ammoReps.size(); i++) {
-                        AmmoRep ammoRep = ammoReps.get(i);
-                        ImageView imageView = imageViews.get(i);
-                        ammoRepImageViewMap.put(imageView, ammoRep);
-                    }
+                    initButtons();
                     mapImage.setImage(new Image("/assets/map/" + config + ".jpg"));
                     for (Map.Entry<ImageView, AmmoRep> entry : ammoRepImageViewMap.entrySet()) {
                         if (entry.getValue() != null)
                             entry.getKey().setImage(new Image("/assets/ammos/" + entry.getValue().getType() + ".jpg"));
                     }
+                    for (Map.Entry<String, ArrayList<ImageView>> entry : posWeaponsImages.entrySet()) {
+                        String pos = entry.getKey();
+                        List<ImageView> weaponsImagesInSpot = entry.getValue();
+                        List<CardRep> weaponsToCopy = posWeaponsReps.get(pos);
+                        for (int i = 0; i < posWeaponsReps.size(); i++) {
+                            weaponsImagesInSpot.get(i).setImage(new Image(weaponsToCopy.get(i).getPath()));
+                            double x = weaponsImagesInSpot.get(i).getX();
+                            double y = weaponsImagesInSpot.get(i).getY();
+                            if (pos.equals("1,0")){
+                                weaponsImagesInSpot.get(i).setRotate(-90);
+                                weaponsImagesInSpot.get(i).setFitWidth(97);
+                                weaponsImagesInSpot.get(i).setFitHeight(152);
+                                weaponsImagesInSpot.get(i).setX(x + 22);
+                                weaponsImagesInSpot.get(i).setY(y - 25);
+                            }
+                            else if (pos.equals("2,3")) {
+                                weaponsImagesInSpot.get(i).setRotate(90);
+                                weaponsImagesInSpot.get(i).setFitWidth(97);
+                                weaponsImagesInSpot.get(i).setFitHeight(152);
+                                weaponsImagesInSpot.get(i).setX(x+32);
+                                weaponsImagesInSpot.get(i).setY(y-25);
+                            }
+                        }
+                    }
                 });
+    }
+
+    private void initButtons() {
+        posWeaponsImages = new HashMap<>();
+        ArrayList<ImageView> weapons10 = new ArrayList<>();
+        ArrayList<ImageView> weapons23 = new ArrayList<>();
+        ArrayList<ImageView> weapons02 = new ArrayList<>();
+        weapons10.add(weapon10_1);
+        weapons10.add(weapon10_2);
+        weapons10.add(weapon10_3);
+        weapons23.add(weapon23_1);
+        weapons23.add(weapon23_2);
+        weapons23.add(weapon23_3);
+        weapons02.add(weapon02_1);
+        weapons02.add(weapon02_2);
+        weapons02.add(weapon02_3);
+        posWeaponsImages.put("1,0", weapons10);
+        posWeaponsImages.put("2,3", weapons23);
+        posWeaponsImages.put("0,2", weapons02);
+
+        ArrayList<ImageView> imagesDozer = new ArrayList<>();
+        ArrayList<ImageView> imagesSprog = new ArrayList<>();
+        ArrayList<ImageView> imagesDistructor = new ArrayList<>();
+        ArrayList<ImageView> imagesViolet = new ArrayList<>();
+        ArrayList<ImageView> imagesBanshee = new ArrayList<>();
+        ArrayList<ImageView> imagesPos00 = new ArrayList<>();
+        ArrayList<ImageView> imagesPos01 = new ArrayList<>();
+        ArrayList<ImageView> imagesPos02 = new ArrayList<>();
+        ArrayList<ImageView> imagesPos03 = new ArrayList<>();
+        ArrayList<ImageView> imagesPos10 = new ArrayList<>();
+        ArrayList<ImageView> imagesPos11 = new ArrayList<>();
+        ArrayList<ImageView> imagesPos12 = new ArrayList<>();
+        ArrayList<ImageView> imagesPos13 = new ArrayList<>();
+        ArrayList<ImageView> imagesPos20 = new ArrayList<>();
+        ArrayList<ImageView> imagesPos21 = new ArrayList<>();
+        ArrayList<ImageView> imagesPos22 = new ArrayList<>();
+        ArrayList<ImageView> imagesPos23 = new ArrayList<>();
+
+        ammoRepImageViewMap = new HashMap<>();
+        playerImages = new HashMap<>();
+        posImages = new HashMap<>();
+
+        imagesDozer.add(dozerzerozero);
+        imagesDozer.add(dozerzeroone);
+        imagesDozer.add(dozerzerotwo);
+        imagesDozer.add(dozerzerothree);
+        imagesDozer.add(dozeronezero);
+        imagesDozer.add(dozeroneone);
+        imagesDozer.add(dozeronetwo);
+        imagesDozer.add(dozeronethree);
+        imagesDozer.add(dozertwozero);
+        imagesDozer.add(dozertwoone);
+        imagesDozer.add(dozertwotwo);
+        imagesDozer.add(dozertwothree);
+        imagesSprog.add(sprogzerozero);
+        imagesSprog.add(sprogzeroone);
+        imagesSprog.add(sprogzerotwo);
+        imagesSprog.add(sprogzerothree);
+        imagesSprog.add(sprogonezero);
+        imagesSprog.add(sprogoneone);
+        imagesSprog.add(sprogonetwo);
+        imagesSprog.add(sprogonethree);
+        imagesSprog.add(sprogtwozero);
+        imagesSprog.add(sprogtwoone);
+        imagesSprog.add(sprogtwotwo);
+        imagesSprog.add(sprogtwothree);
+        imagesViolet.add(violetzerozero);
+        imagesViolet.add(violetzeroone);
+        imagesViolet.add(violetzerotwo);
+        imagesViolet.add(violetzerothree);
+        imagesViolet.add(violetonezero);
+        imagesViolet.add(violetoneone);
+        imagesViolet.add(violetonetwo);
+        imagesViolet.add(violetonethree);
+        imagesViolet.add(violettwozero);
+        imagesViolet.add(violettwoone);
+        imagesViolet.add(violettwotwo);
+        imagesViolet.add(violettwothree);
+        imagesBanshee.add(bansheezerozero);
+        imagesBanshee.add(bansheezeroone);
+        imagesBanshee.add(bansheezerotwo);
+        imagesBanshee.add(bansheezerothree);
+        imagesBanshee.add(bansheeonezero);
+        imagesBanshee.add(bansheeoneone);
+        imagesBanshee.add(bansheeonetwo);
+        imagesBanshee.add(bansheeonethree);
+        imagesBanshee.add(bansheetwozero);
+        imagesBanshee.add(bansheetwoone);
+        imagesBanshee.add(bansheetwotwo);
+        imagesBanshee.add(bansheetwothree);
+        imagesDistructor.add(distructorzerozero);
+        imagesDistructor.add(distructorzeroone);
+        imagesDistructor.add(distructorzerotwo);
+        imagesDistructor.add(distructorzerothree);
+        imagesDistructor.add(distructoronezero);
+        imagesDistructor.add(distructoroneone);
+        imagesDistructor.add(distructoronetwo);
+        imagesDistructor.add(distructoronethree);
+        imagesDistructor.add(distructortwozero);
+        imagesDistructor.add(distructortwoone);
+        imagesDistructor.add(distructortwotwo);
+        imagesDistructor.add(distructortwothree);
+        playerImages.put("DOZER", imagesDozer);
+        playerImages.put("VIOLET", imagesViolet);
+        playerImages.put("DISTRUCTOR", imagesDistructor);
+        playerImages.put("BANSHEE", imagesBanshee);
+        playerImages.put("SPROG", imagesSprog);
+        imagesPos00.add(dozerzerozero);
+        imagesPos00.add(sprogzerozero);
+        imagesPos00.add(bansheezerozero);
+        imagesPos00.add(distructorzerozero);
+        imagesPos00.add(violetzerozero);
+        imagesPos01.add(dozerzeroone);
+        imagesPos01.add(sprogzeroone);
+        imagesPos01.add(bansheezeroone);
+        imagesPos01.add(distructorzeroone);
+        imagesPos01.add(violetzeroone);
+        imagesPos02.add(dozerzerotwo);
+        imagesPos02.add(sprogzerotwo);
+        imagesPos02.add(bansheezerotwo);
+        imagesPos02.add(distructorzerotwo);
+        imagesPos02.add(violetzerotwo);
+        imagesPos03.add(dozerzerothree);
+        imagesPos03.add(sprogzerothree);
+        imagesPos03.add(bansheezerothree);
+        imagesPos03.add(distructorzerothree);
+        imagesPos03.add(violetzerothree);
+        imagesPos10.add(dozeronezero);
+        imagesPos10.add(sprogonezero);
+        imagesPos10.add(bansheeonezero);
+        imagesPos10.add(distructoronezero);
+        imagesPos10.add(violetonezero);
+        imagesPos11.add(dozeroneone);
+        imagesPos11.add(sprogoneone);
+        imagesPos11.add(bansheeoneone);
+        imagesPos11.add(distructoroneone);
+        imagesPos11.add(violetoneone);
+        imagesPos12.add(dozeronetwo);
+        imagesPos12.add(sprogonetwo);
+        imagesPos12.add(bansheeonetwo);
+        imagesPos12.add(distructoronetwo);
+        imagesPos12.add(violetonetwo);
+        imagesPos13.add(dozeronethree);
+        imagesPos13.add(sprogonethree);
+        imagesPos13.add(bansheeonethree);
+        imagesPos13.add(distructoronethree);
+        imagesPos13.add(violetonethree);
+        imagesPos20.add(dozertwozero);
+        imagesPos20.add(sprogtwozero);
+        imagesPos20.add(bansheetwozero);
+        imagesPos20.add(distructortwozero);
+        imagesPos20.add(violettwozero);
+        imagesPos21.add(dozertwoone);
+        imagesPos21.add(sprogtwoone);
+        imagesPos21.add(bansheetwoone);
+        imagesPos21.add(distructortwoone);
+        imagesPos21.add(violettwoone);
+        imagesPos22.add(dozertwotwo);
+        imagesPos22.add(sprogtwotwo);
+        imagesPos22.add(bansheetwotwo);
+        imagesPos22.add(distructortwotwo);
+        imagesPos22.add(violettwotwo);
+        imagesPos23.add(dozertwothree);
+        imagesPos23.add(sprogtwothree);
+        imagesPos23.add(bansheetwothree);
+        imagesPos23.add(distructortwothree);
+        imagesPos23.add(violettwothree);
+        posImages.put("0,0", imagesPos00);
+        posImages.put("0,1", imagesPos01);
+        posImages.put("0,2", imagesPos02);
+        posImages.put("0,3", imagesPos03);
+        posImages.put("1,0", imagesPos10);
+        posImages.put("1,1", imagesPos11);
+        posImages.put("1,2", imagesPos12);
+        posImages.put("1,3", imagesPos13);
+        posImages.put("2,0", imagesPos20);
+        posImages.put("2,1", imagesPos21);
+        posImages.put("2,2", imagesPos22);
+        posImages.put("2,3", imagesPos23);
+
+        ArrayList<ImageView> imageViews = new ArrayList<>();
+        imageViews.add(ammozerozero);
+        imageViews.add(ammozeroone);
+        imageViews.add(ammozerotwo);
+        imageViews.add(ammozerothree);
+        imageViews.add(ammoonezero);
+        imageViews.add(ammooneone);
+        imageViews.add(ammoonetwo);
+        imageViews.add(ammoonethree);
+        imageViews.add(ammotwozero);
+        imageViews.add(ammotwoone);
+        imageViews.add(ammotwotwo);
+        imageViews.add(ammotwothree);
+        for (int i = 0; i < ammoReps.size(); i++) {
+            AmmoRep ammoRep = ammoReps.get(i);
+            ImageView imageView = imageViews.get(i);
+            ammoRepImageViewMap.put(imageView, ammoRep);
+        }
     }
 
     protected void setConfig(String config) {
         this.config = config;
+    }
+
+    public void setPosWeaponsReps(Map<String, List<CardRep>> posWeaponsReps) {
+        this.posWeaponsReps = posWeaponsReps;
     }
 
     protected void updateAll(LightGameVersion lightGameVersion) {

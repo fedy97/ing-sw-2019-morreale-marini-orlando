@@ -327,7 +327,7 @@ public class Game extends Observable {
                     }
                 }
                 setChanged();
-                notifyObservers(new ShowGameBoardMessage(firstUser, ammoReps, cardReps));
+                notifyObservers(new ShowGameBoardMessage(firstUser, ammoReps, cardReps, getLightVersion().getPlatformWeapons()));
             } catch (Exception e) {
                 HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
             }

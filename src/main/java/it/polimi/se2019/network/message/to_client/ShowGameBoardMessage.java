@@ -7,19 +7,23 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ShowGameBoardMessage extends ToClientMessage {
     private List<AmmoRep> ammoReps;
     private List<CardRep> cardReps;
-    public ShowGameBoardMessage(Object payload, List<AmmoRep> ammoReps, List<CardRep> cardReps) {
+    private Map<String,List<CardRep>> posWeaponsReps;
+    public ShowGameBoardMessage(Object payload, List<AmmoRep> ammoReps, List<CardRep> cardReps, Map<String,List<CardRep>> posWeaponsReps) {
         super(payload);
         this.ammoReps = ammoReps;
         this.cardReps = cardReps;
+        this.posWeaponsReps = posWeaponsReps;
+
     }
 
     @Override
     public void performAction(RemoteView remoteView) {
-        remoteView.showGameBoard(ammoReps);
+        remoteView.showGameBoard(ammoReps, posWeaponsReps);
         String rec = (String) payload;
         if (rec.equals(remoteView.getUserName())) {
             remoteView.showChoosePowerup(cardReps.get(0), cardReps.get(1));
