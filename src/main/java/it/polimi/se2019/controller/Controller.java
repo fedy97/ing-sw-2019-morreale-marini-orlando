@@ -12,6 +12,8 @@ import it.polimi.se2019.utils.TimerLobby;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.util.*;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * @author Gabriel Raul Marini
@@ -26,7 +28,7 @@ public class Controller implements Observer {
     private Map<String, VirtualView> userView;
     private List<String> validActions;
     private ControllerState state; //the state is set to processing power up or weapon when a specific message from the client (ActivateCardMessage) is received
-    private List<Player> currentTargets;
+    private BlockingDeque<Player> currentTargets;
     private List<Integer> processingStages;
     private PowerUpCard processingPowerUp;
     private WeaponCard processingWeaponCard;
@@ -48,7 +50,7 @@ public class Controller implements Observer {
 
     private Controller() {
         validActions = new ArrayList<>();
-        currentTargets = new ArrayList<>();
+        currentTargets = new LinkedBlockingDeque<>();
         turnController = new TurnController();
         userView = new HashMap<>();
         state = ControllerState.SETUP;
@@ -300,7 +302,7 @@ public class Controller implements Observer {
         //BOH TODO
     }
 
-    public List<Player> getCurrentTargets() {
+    public BlockingDeque<Player> getCurrentTargets() {
         return currentTargets;
     }
 
