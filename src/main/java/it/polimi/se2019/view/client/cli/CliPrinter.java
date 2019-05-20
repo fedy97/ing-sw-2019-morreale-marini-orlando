@@ -1,6 +1,7 @@
 package it.polimi.se2019.view.client.cli;
 
 import it.polimi.se2019.model.AmmoRep;
+import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.utils.HandyFunctions;
 import javafx.scene.control.cell.CheckBoxListCell;
@@ -435,6 +436,26 @@ public final class CliPrinter {
             }
         }
 
+    }
+
+    public static void choosePowerUpMessage(CardRep p1, CardRep p2) {
+        CliPrinter.stamp("\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinter.stamp("\t\t\t ┃                    Choose a powerup:                     ┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃         <1> " + p1.getTitle());
+        for (int i=0; i < 45 - p1.getTitle().length(); i++) {
+            CliPrinter.stamp(" ");
+        }
+        CliPrinter.stamp("┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃         <2> " + p2.getTitle());
+        for (int i=0; i < 45 - p2.getTitle().length(); i++) {
+            CliPrinter.stamp(" ");
+        }
+        CliPrinter.stamp("┃\n");
+        CliPrinter.stamp("\t\t\t ┃                                                          ┃\n");
+        CliPrinter.stamp("\t\t\t ┃             press the <key> followed by enter            ┃\n");
+        CliPrinter.stamp("\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
     }
 
 }
