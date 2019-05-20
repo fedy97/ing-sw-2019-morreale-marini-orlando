@@ -83,7 +83,7 @@ public class CLI extends RemoteView {
     }
 
     @Override
-    public void showGameBoard(List<AmmoRep> ammoReps) {
+    public void showGameBoard(List<AmmoRep> ammoReps, Map<String,List<CardRep>> posWeapons) {
         CliSetUp.clear();
         CliSetUp.cursorToHome();
         CliPrinter.welcomeMessage();

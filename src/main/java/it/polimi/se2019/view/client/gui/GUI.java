@@ -97,10 +97,10 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void showGameBoard(List<AmmoRep> ammoReps) {
+    public void showGameBoard(List<AmmoRep> ammoReps,Map<String,List<CardRep>> posWeapons) {
         Platform.runLater(
                 () -> {
-                    initGameBoard(config,ammoReps);
+                    initGameBoard(config,ammoReps,posWeapons);
                     gameBoardController.passGUI(this);
                     stage.setScene(sceneGameBoard);
                     stage.setResizable(false);
@@ -144,7 +144,7 @@ public class GUI extends RemoteView {
         }
     }
 
-    private void initGameBoard(String config, List<AmmoRep> ammoReps) {
+    private void initGameBoard(String config, List<AmmoRep> ammoReps,Map<String,List<CardRep>> posWeapons) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gameBoard.fxml"));
         try {
             Parent root = loader.load();
@@ -153,6 +153,7 @@ public class GUI extends RemoteView {
             gameBoardController = loader.getController();
             gameBoardController.setConfig(config);
             gameBoardController.setAmmoReps(ammoReps);
+            gameBoardController.setPosWeaponsReps(posWeapons);
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing game board");
         }
