@@ -6,6 +6,7 @@ import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.client.SocketClient;
 import it.polimi.se2019.network.message.to_server.SendCharacterChosenMessage;
+import it.polimi.se2019.network.message.to_server.SendInitPowerUpMessage;
 import it.polimi.se2019.network.message.to_server.SendMapChosenMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.State;
@@ -59,7 +60,26 @@ public class CLI extends RemoteView {
 
     @Override
     public void showChoosePowerup(CardRep p1, CardRep p2) {
-
+        CliPrinter.stamp("\n\n");
+        CliPrinter.choosePowerUpMessage(p1, p2);
+        new Thread( () -> {
+            int choosenPowerUp;
+            Console c = System.console();
+            choosenPowerUp = Character.getNumericValue((c.readPassword())[0]);
+            ArrayList<Integer> arrayList = new ArrayList<>();
+            if (choosenPowerUp == 1) {
+                arrayList.add(p1.getId());
+                arrayList.add(p2.getId());
+            }
+            else {
+                arrayList.add(p2.getId());
+                arrayList.add(p1.getId());
+            }
+            SendInitPowerUpMessage message = new SendInitPowerUpMessage(arrayList);
+            message.setSender(userName);
+            viewSetChanged();
+            notifyObservers(message);
+        }).start();
     }
 
     @Override
