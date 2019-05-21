@@ -39,6 +39,7 @@ public class PerformActionMessage extends ToServerMessage {
             try {
                 destinations = v.getValidMoves(Action.GRAB);
             } catch (Exception e) {
+                e.printStackTrace();
                 HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
             }
             c.askFor(destinations, "position");
