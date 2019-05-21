@@ -242,10 +242,11 @@ public class GUI extends RemoteView {
         message.setSender(userName);
         viewSetChanged();
         notifyObservers(message);
+        gameBoardController.enableActionButtons();
     }
 
     protected void iWantToDoSomething(String action){
-        //gameBoardController.disableActionButtons();
+        gameBoardController.disableActionButtons();
         PerformActionMessage message = new PerformActionMessage(action);
         message.setSender(userName);
         viewSetChanged();
@@ -315,5 +316,8 @@ public class GUI extends RemoteView {
          */
     }
 
+    public String getCharInString() {
+        return charInString;
+    }
 }
 

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 public class GameBoardController {
 
@@ -538,6 +539,7 @@ public class GameBoardController {
         //update the ammo cards in the field
         updateAmmoCards(lightGameVersion);
         //TODO update other things of light model
+
     }
 
     private void updateAmmoCards(LightGameVersion lightGameVersion) {
@@ -753,6 +755,11 @@ public class GameBoardController {
     protected void disableActionButtons() {
         movebutton.setDisable(true);
         grabbutton.setDisable(true);
+    }
+
+    protected void enableActionButtons() {
+        movebutton.setDisable(false);
+        grabbutton.setDisable(false);
     }
 
 }
