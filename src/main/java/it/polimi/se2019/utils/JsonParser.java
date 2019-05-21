@@ -115,8 +115,13 @@ public class JsonParser {
                     isGenSpot = currPlatformObj.getBoolean("isGenerationSpot");
                     String nameCol = currPlatformObj.getString("platformColor");
                     platCol = HandyFunctions.stringToColor(nameCol);
-                    ammoC = deck.drawCard();
-                    Platform p = new Platform(pos, isGenSpot, ammoC, platCol, arrOr);
+                    Platform p;
+                    if (isGenSpot) {
+                        p = new Platform(pos, true, null, platCol, arrOr);
+                    } else {
+                        ammoC = deck.drawCard();
+                        p = new Platform(pos, false, ammoC, platCol, arrOr);
+                    }
                     field[pos[0]][pos[1]] = p;
                 } else
                     field[pos[0]][pos[1]] = null;

@@ -319,7 +319,7 @@ public class Game extends Observable {
                 for (int i = 0; i < gameField.getField().length; i++) {
                     for (int j = 0; j < gameField.getField()[0].length; j++) {
                         Platform p = gameField.getField()[i][j];
-                        if (p != null) {
+                        if (p != null && p.hasAmmoCard()) {
                             AmmoCard ammoCard = p.getPlatformAmmoCard();
                             ammoReps.add(new AmmoRep(HandyFunctions.getSystemAddress(ammoCard), ammoCard.toString()));
                         }
