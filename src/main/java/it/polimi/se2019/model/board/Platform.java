@@ -176,18 +176,17 @@ public class Platform {
     /**
      *
      */
-    public void addWeaponCard(WeaponCard weaponCard) throws InvalidGenerationSpotException{
+    public void addWeaponCard(WeaponCard weaponCard) throws InvalidGenerationSpotException {
         if (!this.isGenerationSpot())
             throw new InvalidGenerationSpotException();
         weapons.add(weaponCard);
     }
 
     /**
-     *
      * @param weaponCard the weapon card to be removed from the platform
      * @throws InvalidGenerationSpotException if the current platform is not a generation spot
      */
-    public void removeWeaponCard(WeaponCard weaponCard) throws InvalidGenerationSpotException{
+    public void removeWeaponCard(WeaponCard weaponCard) throws InvalidGenerationSpotException {
         if (!this.isGenerationSpot())
             throw new InvalidGenerationSpotException();
         weapons.remove(weaponCard);
@@ -202,7 +201,7 @@ public class Platform {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return getPlatformPosition()[0] + "," + getPlatformPosition()[1];
     }
 
