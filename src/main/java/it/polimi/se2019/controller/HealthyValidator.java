@@ -30,9 +30,12 @@ public class HealthyValidator extends Validator {
         if (c == Action.MOVE) {
             res = gameField.getAvailablePlatforms(currentPlayer.getCurrentPlatform(), 3);
             res.remove(currentPlayer.getCurrentPlatform());
-        } else if (c == Action.GRAB)
+        } else if (c == Action.GRAB) {
             res = gameField.getAvailablePlatforms(currentPlayer.getCurrentPlatform(), 1);
-        else
+            for (Platform p : res)
+                if (p.isGenerationSpot())
+                    res.remove(p);
+        } else
             throw new InvalidActionException("Cannot move the player in this mode with the action passed!");
 
         return res;
