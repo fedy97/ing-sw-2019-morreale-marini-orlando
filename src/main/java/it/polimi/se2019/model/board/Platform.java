@@ -201,4 +201,9 @@ public class Platform {
             throw new InvalidCardException("there is no ammos card set in this platform");
     }
 
+    @Override
+    public String toString(){
+        return getPlatformPosition()[0] + "," + getPlatformPosition()[1];
+    }
+
 }

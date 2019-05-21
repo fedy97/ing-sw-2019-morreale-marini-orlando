@@ -194,7 +194,7 @@ public class Game extends Observable {
 
         //associate the players (characters) with their info (platform, powerUps, weapons, boardRep)
         for (Player player : getPlayers()) {
-            playerPlatform.put(player.getCharacter().name(), getGameField().getPlatformPosLight(player.getCurrentPlatform()));
+            playerPlatform.put(player.getCharacter().name(), player.getCurrentPlatform().toString());
             List<CardRep> powerUps = new ArrayList<>();
             List<CardRep> weapons = new ArrayList<>();
             List<String> damages = new ArrayList<>();
@@ -209,9 +209,9 @@ public class Game extends Observable {
                 weapons.add(new CardRep(HandyFunctions.getSystemAddress(weaponCard), weaponCard.getName(), weaponCard.getDescription(),
                         weaponCard.getImgPath()));
 
-            for(Character c : player.getPlayerBoard().getDamageLine())
+            for (Character c : player.getPlayerBoard().getDamageLine())
                 damages.add(c.name());
-            for(Character c: player.getPlayerBoard().getRevengeMarks())
+            for (Character c : player.getPlayerBoard().getRevengeMarks())
                 marks.add(c.name());
 
             playerPowerups.put(player.getCharacter().name(), powerUps);
@@ -232,7 +232,7 @@ public class Game extends Observable {
             List<CardRep> weapons = new ArrayList<>();
             if (platform.hasAmmoCard()) {
                 AmmoCard ammoCard = platform.getPlatformAmmoCard();
-                platformAmmoTile.put(gameField.getPlatformPosLight(platform),
+                platformAmmoTile.put(platform.toString(),
                         new AmmoRep(HandyFunctions.getSystemAddress(ammoCard), ammoCard.toString()));
             }
 
@@ -240,7 +240,7 @@ public class Game extends Observable {
                 for (WeaponCard weaponCard : platform.getWeapons())
                     weapons.add(new CardRep(HandyFunctions.getSystemAddress(weaponCard), weaponCard.getName(), weaponCard.getDescription(),
                             weaponCard.getImgPath()));
-                platformWeapons.put(gameField.getPlatformPosLight(platform), weapons);
+                platformWeapons.put(platform.toString(), weapons);
             } catch (InvalidGenerationSpotException e) {
                 //go on
             }
@@ -322,8 +322,7 @@ public class Game extends Observable {
                         if (p != null) {
                             AmmoCard ammoCard = p.getPlatformAmmoCard();
                             ammoReps.add(new AmmoRep(HandyFunctions.getSystemAddress(ammoCard), ammoCard.toString()));
-                        }
-                        else ammoReps.add(null);
+                        } else ammoReps.add(null);
                     }
                 }
                 setChanged();
@@ -415,7 +414,7 @@ public class Game extends Observable {
      * @param c character associated to the player
      * @return the player corresponding to the passed character
      */
-    public Player getPlayer(Character c){
+    public Player getPlayer(Character c) {
         return characterPlayers.get(c);
     }
 }

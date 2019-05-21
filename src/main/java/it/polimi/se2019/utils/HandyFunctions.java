@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 //add here some recurrent functions that can be helpful
 public class HandyFunctions {
     private static Random random = new Random();
+
     private HandyFunctions() {
     }
 
@@ -63,22 +64,13 @@ public class HandyFunctions {
     public static <T> List<String> getLightCollection(List<T> elements) {
         List<String> lightVersion = new ArrayList<>();
 
-        if(elements.get(0) instanceof Platform) {
-            GameField gf = Controller.getInstance().getGame().getGameField();
-            for(T element: elements){
-                Platform p = (Platform)element;
-                lightVersion.add(gf.getPlatformPosLight(p));
-            }
-            return lightVersion;
-        }
-
         for (T obj : elements)
             lightVersion.add(obj.toString());
 
         return lightVersion;
     }
 
-    public static void checkForAtLeast2Players(VirtualView virtualView){
+    public static void checkForAtLeast2Players(VirtualView virtualView) {
         if (Controller.getInstance().getTurnController().getUsers().size() == 2 && !Game.getInstance().isTimerStarted()) {
             Game.getInstance().setTimerStarted(true);
             virtualView.viewSetChanged();
@@ -86,17 +78,18 @@ public class HandyFunctions {
         }
     }
 
-    public static int randomInteger(){
+    public static int randomInteger() {
         return random.nextInt();
     }
 
     /**
      * return a random number between first and second inclusive
-     * @param first int
+     *
+     * @param first  int
      * @param second int
      * @return random int
      */
-    public static int randomIntegerBetWeen(int first, int second){
+    public static int randomIntegerBetWeen(int first, int second) {
         if (first >= second) {
             throw new IllegalArgumentException("max must be greater than min");
         }
@@ -107,10 +100,11 @@ public class HandyFunctions {
      * @param o object to be addressed
      * @return the system address of the selected object
      */
-    public static int getSystemAddress(Object o){
+    public static int getSystemAddress(Object o) {
         return System.identityHashCode(o);
     }
-    public static Color stringToColor(String color) throws NoSuchFieldException, IllegalAccessException{
-        return  (Color) Color.class.getField(color).get(null);
+
+    public static Color stringToColor(String color) throws NoSuchFieldException, IllegalAccessException {
+        return (Color) Color.class.getField(color).get(null);
     }
 }
