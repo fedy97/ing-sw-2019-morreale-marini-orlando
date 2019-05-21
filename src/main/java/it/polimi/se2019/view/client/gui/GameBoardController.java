@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
-import javafx.scene.transform.Rotate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -238,9 +237,28 @@ public class GameBoardController {
     private Button info02_2;
     @FXML
     private Button info02_3;
-
+    @FXML
+    private Button w02_3;
+    @FXML
+    private Button w02_2;
+    @FXML
+    private Button w02_1;
+    @FXML
+    private Button w10_1;
+    @FXML
+    private Button w10_2;
+    @FXML
+    private Button w10_3;
+    @FXML
+    private Button w23_1;
+    @FXML
+    private Button w23_2;
+    @FXML
+    private Button w23_3;
 
     private List<AmmoRep> ammoReps;
+    private Map<String, ImageView> posAmmo;
+    private Map<String, Button> posPlatform;
     private Map<String, List<CardRep>> posWeaponsReps;
     private Map<ImageView, AmmoRep> ammoRepImageViewMap;
     private Map<String, ArrayList<ImageView>> playerImages;
@@ -248,6 +266,7 @@ public class GameBoardController {
     private Map<String, ArrayList<ImageView>> posWeaponsImages;
     private boolean firstSetup = true;
     private LightGameVersion lightGameVersion;
+
 
     protected void passGUI(GUI gui) {
         this.gui = gui;
@@ -262,8 +281,11 @@ public class GameBoardController {
         Platform.runLater(
                 () -> {
                     initButtons();
+                    darkenAllPlatforms();
+                    HandyFunctions.enlightenButton(w02_3);
+                    HandyFunctions.enlightenButton(zerozero);
                     mapImage.setImage(new Image("/assets/map/" + config + ".jpg"));
-                    //TODO change this, I need a map platform,ammo
+                    //TODO change this, I need a map platform,ammo, I will replace this  with updateAmmocards()
                     for (Map.Entry<ImageView, AmmoRep> entry : ammoRepImageViewMap.entrySet()) {
                         if (entry.getValue() != null)
                             entry.getKey().setImage(new Image("/assets/ammos/" + entry.getValue().getType() + ".jpg"));
@@ -289,6 +311,34 @@ public class GameBoardController {
         posWeaponsImages.put("1,0", weapons10);
         posWeaponsImages.put("2,3", weapons23);
         posWeaponsImages.put("0,2", weapons02);
+
+        posPlatform = new HashMap<>();
+        posPlatform.put("0,0", zerozero);
+        posPlatform.put("0,1", zeroone);
+        posPlatform.put("0,2", zerotwo);
+        posPlatform.put("0,3", zerothree);
+        posPlatform.put("1,0", onezero);
+        posPlatform.put("1,1", oneone);
+        posPlatform.put("1,2", onetwo);
+        posPlatform.put("1,3", onethree);
+        posPlatform.put("2,0", twozero);
+        posPlatform.put("2,1", twoone);
+        posPlatform.put("2,2", twotwo);
+        posPlatform.put("2,3", twothree);
+
+        posAmmo = new HashMap<>();
+        posAmmo.put("0,0", ammozerozero);
+        posAmmo.put("0,1", ammozeroone);
+        posAmmo.put("0,2", ammozerotwo);
+        posAmmo.put("0,3", ammozerothree);
+        posAmmo.put("1,0", ammoonezero);
+        posAmmo.put("1,1", ammooneone);
+        posAmmo.put("1,2", ammoonetwo);
+        posAmmo.put("1,3", ammoonethree);
+        posAmmo.put("2,0", ammotwozero);
+        posAmmo.put("2,1", ammotwoone);
+        posAmmo.put("2,2", ammotwotwo);
+        posAmmo.put("2,3", ammotwothree);
 
         ArrayList<ImageView> imagesDozer = new ArrayList<>();
         ArrayList<ImageView> imagesSprog = new ArrayList<>();
@@ -483,7 +533,18 @@ public class GameBoardController {
         updatePositionsPlayers(lightGameVersion);
         //update the 9 weapons in the field
         updateWeapons(lightGameVersion);
+        //update the ammo cards in the field
+        updateAmmoCards(lightGameVersion);
         //TODO update other things of light model
+    }
+
+    private void updateAmmoCards(LightGameVersion lightGameVersion) {
+        for (Map.Entry<String, AmmoRep> entry : lightGameVersion.getPlatformAmmoTile().entrySet()) {
+            String pos = entry.getKey();
+            AmmoRep ammoRep = entry.getValue();
+            posAmmo.get(pos).setImage(new Image("/assets/ammos/" + ammoRep.getType() + ".jpg"));
+        }
+
     }
 
     private void updatePositionsPlayers(LightGameVersion lightGameVersion) {
@@ -543,11 +604,16 @@ public class GameBoardController {
         }
     }
 
-    private void showInstruction(CardRep cardRep){
+    private void showInstruction(CardRep cardRep) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Weapon Card");
         alert.setHeaderText(cardRep.getTitle().toUpperCase());
         alert.setContentText(cardRep.getDescription());
+        ImageView imageView = new ImageView();
+        imageView.setFitHeight(200);
+        imageView.setFitWidth(150);
+        imageView.setImage(new Image(cardRep.getPath()));
+        alert.setGraphic(imageView);
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.showAndWait();
     }
@@ -602,33 +668,46 @@ public class GameBoardController {
 
     public void violetClick() {
     }
-    public void in10_1click(){
+
+    public void in10_1click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("1,0").get(0));
     }
-    public void in10_2click(){
+
+    public void in10_2click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("1,0").get(1));
     }
-    public void in10_3click(){
+
+    public void in10_3click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("1,0").get(2));
     }
-    public void in02_1click(){
+
+    public void in02_1click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("0,2").get(0));
     }
-    public void in02_2click(){
+
+    public void in02_2click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("0,2").get(1));
     }
-    public void in02_3click(){
+
+    public void in02_3click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("0,2").get(2));
     }
-    public void in23_1click(){
+
+    public void in23_1click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("2,3").get(0));
     }
-    public void in23_2click(){
+
+    public void in23_2click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("2,3").get(1));
     }
-    public void in23_3click(){
+
+    public void in23_3click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("2,3").get(2));
     }
 
+    private void darkenAllPlatforms() {
+        for (Map.Entry<String, Button> entry : posPlatform.entrySet())
+            HandyFunctions.darkenButton(entry.getValue());
+    }
 
 }

@@ -264,7 +264,7 @@ public class Game extends Observable {
             notifyObservers(new ShowChooseMapMessage(null));
             //starts the other timer, this timer even if is in Model , is a controller feature
             //in fact TimerMap will modify the model by calling setSecondsLeftMap
-            TimerMap t = new TimerMap(5);
+            TimerMap t = new TimerMap(2);
             t.start();
 
         }
@@ -283,7 +283,7 @@ public class Game extends Observable {
                 createAssets(config);
                 setChanged();
                 notifyObservers(new ShowChooseCharacterMessage(Integer.toString(config)));
-                TimerCharacter t = new TimerCharacter(5);
+                TimerCharacter t = new TimerCharacter(2);
                 t.start();
             } catch (Exception e) {
                 HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());

@@ -39,6 +39,7 @@ public class WeaponCard extends Card {
 
     /**
      * constructor for json parser
+     *
      * @param name
      * @param descr
      * @param img
@@ -47,7 +48,7 @@ public class WeaponCard extends Card {
      * @throws InvalidNameException
      */
     public WeaponCard(String name, String descr, String img, AmmoCube paidCost, AmmoCube[] extraCost) throws InvalidNameException {
-        super(name,descr,img);
+        super(name, descr, img);
         this.paidCost = paidCost;
         this.extraCost = extraCost;
         effects = new ArrayList<>();
@@ -79,10 +80,16 @@ public class WeaponCard extends Card {
      * @return the total cost of the weapon (used to calculate the reload cost of the weapon)
      */
     public AmmoCube[] getTotalCost() {
-        AmmoCube[] ammoCubes = new AmmoCube[extraCost.length + 1];
-        ammoCubes[0] = paidCost;
-        System.arraycopy(extraCost, 0, ammoCubes, 1, extraCost.length);
-        return ammoCubes;
+        if (extraCost != null) {
+            AmmoCube[] ammoCubes = new AmmoCube[extraCost.length + 1];
+            ammoCubes[0] = paidCost;
+            System.arraycopy(extraCost, 0, ammoCubes, 1, extraCost.length);
+            return ammoCubes;
+        } else {
+            AmmoCube[] ammoCubes = new AmmoCube[1];
+            ammoCubes[0] = paidCost;
+            return ammoCubes;
+        }
     }
 
     /**
@@ -92,7 +99,7 @@ public class WeaponCard extends Card {
         return loaded;
     }
 
-    public void addEffect(Effect effect){
+    public void addEffect(Effect effect) {
         effects.add(effect);
     }
 

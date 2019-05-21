@@ -6,6 +6,7 @@ import it.polimi.se2019.model.board.GameField;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.view.server.VirtualView;
+import javafx.scene.control.Button;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ import java.util.logging.Logger;
 //add here some recurrent functions that can be helpful
 public class HandyFunctions {
     private static Random random = new Random();
-
     private HandyFunctions() {
     }
 
@@ -70,7 +70,7 @@ public class HandyFunctions {
         return lightVersion;
     }
 
-    public static void checkForAtLeast2Players(VirtualView virtualView) {
+    public static void checkForAtLeast2Players(VirtualView virtualView){
         if (Controller.getInstance().getTurnController().getUsers().size() == 2 && !Game.getInstance().isTimerStarted()) {
             Game.getInstance().setTimerStarted(true);
             virtualView.viewSetChanged();
@@ -78,18 +78,17 @@ public class HandyFunctions {
         }
     }
 
-    public static int randomInteger() {
+    public static int randomInteger(){
         return random.nextInt();
     }
 
     /**
      * return a random number between first and second inclusive
-     *
-     * @param first  int
+     * @param first int
      * @param second int
      * @return random int
      */
-    public static int randomIntegerBetWeen(int first, int second) {
+    public static int randomIntegerBetWeen(int first, int second){
         if (first >= second) {
             throw new IllegalArgumentException("max must be greater than min");
         }
@@ -100,11 +99,25 @@ public class HandyFunctions {
      * @param o object to be addressed
      * @return the system address of the selected object
      */
-    public static int getSystemAddress(Object o) {
+    public static int getSystemAddress(Object o){
         return System.identityHashCode(o);
     }
-
-    public static Color stringToColor(String color) throws NoSuchFieldException, IllegalAccessException {
-        return (Color) Color.class.getField(color).get(null);
+    public static Color stringToColor(String color) throws NoSuchFieldException, IllegalAccessException{
+        return  (Color) Color.class.getField(color).get(null);
+    }
+    private static final String HOVERED_BUTTON_STYLE = "-fx-border-color: #f7ff00; -fx-border-width: 4px; -fx-background-color: transparent; -fx-border-radius: 15;";
+    private static final String ENLIGHTED_BUTTON_STYLE = "-fx-border-color: #ff0000; -fx-border-width: 2px; -fx-background-color: transparent;-fx-border-radius: 15;";
+    private static final String DARKED_BUTTON_STYLE = "-fx-border-width: 0px; -fx-background-color: transparent;";
+    public static void enlightenButton(Button button) {
+        button.setStyle(ENLIGHTED_BUTTON_STYLE);
+        button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
+        button.setOnMouseExited(e -> button.setStyle(HandyFunctions.ENLIGHTED_BUTTON_STYLE));
+        button.setDisable(false);
+    }
+    public static void darkenButton(Button button) {
+        button.setStyle(DARKED_BUTTON_STYLE);
+        button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.DARKED_BUTTON_STYLE));
+        button.setOnMouseExited(e -> button.setStyle(HandyFunctions.DARKED_BUTTON_STYLE));
+        button.setDisable(true);
     }
 }
