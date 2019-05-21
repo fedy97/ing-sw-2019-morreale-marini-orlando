@@ -1,6 +1,7 @@
 package it.polimi.se2019.network.message.to_server;
 
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.controller.ControllerState;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.board.Room;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
@@ -34,6 +35,7 @@ public class SendInitPowerUpMessage extends ToServerMessage {
                 if (r.hasGenerationSpot() && r.getGenSpot().getPlatformColor().equals(powerupColor))
                     curr.setCurrentPlatform(r.getGenSpot());
             }
+            c.setState(ControllerState.IDLE);
             Game.getInstance().notifyChanges();
             //now the current player has to choose an action
         } catch (Exception e) {

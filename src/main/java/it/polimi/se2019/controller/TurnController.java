@@ -24,6 +24,7 @@ public class TurnController {
     public void start(){
         curr = first;
         Controller.getInstance().getPlayerManager().setCurrentPlayer(Game.getInstance().getPlayer(first));
+
     }
 
     /**

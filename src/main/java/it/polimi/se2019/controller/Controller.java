@@ -91,7 +91,7 @@ public class Controller implements Observer {
             }
         } else {
             ((ToServerMessage) message).performAction();
-
+            //TODO change this
             if(state == ControllerState.PROCESSING_POWERUP){
                 processingStages.remove(0);
                 processPowerUp(processingPowerUp);

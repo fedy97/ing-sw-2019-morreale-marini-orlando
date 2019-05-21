@@ -31,7 +31,7 @@ public class PerformActionMessage extends ToServerMessage {
             try {
                 destinations = v.getValidMoves(Action.MOVE);
             }catch (Exception e){
-                HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+                HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
             }
             c.askFor(destinations, "position");
         }else if(choice.equals("action2")){
@@ -39,7 +39,7 @@ public class PerformActionMessage extends ToServerMessage {
             try {
                 destinations = v.getValidMoves(Action.GRAB);
             }catch (Exception e){
-                HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+                HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
             }
             c.askFor(destinations, "position");
         }else if(choice.equals("action3")){

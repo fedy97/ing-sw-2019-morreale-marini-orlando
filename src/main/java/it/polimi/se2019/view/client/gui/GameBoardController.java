@@ -255,6 +255,8 @@ public class GameBoardController {
     private Button w23_2;
     @FXML
     private Button w23_3;
+    @FXML
+    private Button movebutton;
 
     private List<AmmoRep> ammoReps;
     private Map<String, ImageView> posAmmo;
@@ -616,6 +618,9 @@ public class GameBoardController {
         alert.setGraphic(imageView);
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.showAndWait();
+    }
+    public void moveClick(){
+        gui.iWantToMove("action1");
     }
 
     public void zerozeroClick() {

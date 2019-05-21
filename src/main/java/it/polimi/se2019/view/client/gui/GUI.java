@@ -3,6 +3,7 @@ package it.polimi.se2019.view.client.gui;
 import it.polimi.se2019.model.AmmoRep;
 import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.LightGameVersion;
+import it.polimi.se2019.network.message.to_server.PerformActionMessage;
 import it.polimi.se2019.network.message.to_server.SendCharacterChosenMessage;
 import it.polimi.se2019.network.message.to_server.SendInitPowerUpMessage;
 import it.polimi.se2019.network.message.to_server.SendMapChosenMessage;
@@ -235,6 +236,13 @@ public class GUI extends RemoteView {
         arrayList.add(hashCodeChosen);
         arrayList.add(hashCodeGarbage);
         SendInitPowerUpMessage message = new SendInitPowerUpMessage(arrayList);
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
+    }
+
+    protected void iWantToMove(String action){
+        PerformActionMessage message = new PerformActionMessage(action);
         message.setSender(userName);
         viewSetChanged();
         notifyObservers(message);
