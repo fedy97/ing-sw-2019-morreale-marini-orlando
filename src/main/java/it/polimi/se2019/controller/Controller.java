@@ -311,7 +311,12 @@ public class Controller implements Observer {
         this.state = state;
     }
 
+    public ControllerState getState(){
+        return state;
+    }
+
     public void addStages(List<Integer> stages) {
         processingStages.addAll(stages);
     }
+
 }

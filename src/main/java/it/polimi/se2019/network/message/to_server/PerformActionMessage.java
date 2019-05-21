@@ -26,32 +26,32 @@ public class PerformActionMessage extends ToServerMessage {
 
         String choice = (String) payload;
 
-        if(choice.equals("action1")){
+        if (choice.equals("action1")) {
             c.setState(ControllerState.PROCESSING_ACTION_1);
             try {
                 destinations = v.getValidMoves(Action.MOVE);
-            }catch (Exception e){
+            } catch (Exception e) {
                 HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
             }
             c.askFor(destinations, "position");
-        }else if(choice.equals("action2")){
+        } else if (choice.equals("action2")) {
             c.setState(ControllerState.PROCESSING_ACTION_2);
             try {
                 destinations = v.getValidMoves(Action.GRAB);
-            }catch (Exception e){
+            } catch (Exception e) {
                 HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
             }
             c.askFor(destinations, "position");
-        }else if(choice.equals("action3")){
+        } else if (choice.equals("action3")) {
             c.setState(ControllerState.PROCESSING_ACTION_3);
             try {
                 destinations = v.getValidMoves(Action.SHOOT);
                 c.askFor(destinations, "position");
-            }catch (Exception e){
+            } catch (Exception e) {
                 HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
             }
             List<WeaponCard> weapons = v.getUsableWeapons();
-            c.askFor( weapons, "weapons");
+            c.askFor(weapons, "weapons");
         }
 
     }

@@ -1,6 +1,7 @@
 package it.polimi.se2019.network.message.to_server;
 
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.controller.ControllerState;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.utils.Deserializer;
 
@@ -21,7 +22,15 @@ public class MoveCurrPlayerMessage extends ToServerMessage {
     public void performAction() {
         Platform dest = Deserializer.getPlatform((String) payload);
         Controller actor = Controller.getInstance();
-        actor.getPlayerManager().move(dest);
+
+        if (actor.getState() == ControllerState.PROCESSING_ACTION_1)
+            actor.getPlayerManager().move(dest);
+        else if (actor.getState() == ControllerState.PROCESSING_ACTION_2) {
+            actor.getPlayerManager().move(dest);
+            actor.getPlayerManager().grabAmmoCard();
+        }
+
+        actor.setState(ControllerState.IDLE);
     }
 }
 

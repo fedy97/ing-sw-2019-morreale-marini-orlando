@@ -22,19 +22,19 @@ public class HealthyValidator extends Validator {
      * @return the list of platform destination the player can move to
      * @throws InvalidActionException if shoot action is passed, cannot move before shooting
      */
-    public List<Platform> getValidMoves(Action c) throws InvalidActionException{
+    public List<Platform> getValidMoves(Action c) throws InvalidActionException {
         GameField gameField = father.getGame().getGameField();
         Player currentPlayer = father.getPlayerManager().getCurrentPlayer();
         List<Platform> res;
 
-        if (c == Action.MOVE)
+        if (c == Action.MOVE) {
             res = gameField.getAvailablePlatforms(currentPlayer.getCurrentPlatform(), 3);
-        else if (c == Action.GRAB)
+            res.remove(currentPlayer.getCurrentPlatform());
+        } else if (c == Action.GRAB)
             res = gameField.getAvailablePlatforms(currentPlayer.getCurrentPlatform(), 1);
         else
             throw new InvalidActionException("Cannot move the player in this mode with the action passed!");
 
-        res.remove(currentPlayer.getCurrentPlatform());
         return res;
     }
 
