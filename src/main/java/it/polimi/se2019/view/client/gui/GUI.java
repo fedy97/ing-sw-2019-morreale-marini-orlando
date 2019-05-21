@@ -3,10 +3,7 @@ package it.polimi.se2019.view.client.gui;
 import it.polimi.se2019.model.AmmoRep;
 import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.LightGameVersion;
-import it.polimi.se2019.network.message.to_server.PerformActionMessage;
-import it.polimi.se2019.network.message.to_server.SendCharacterChosenMessage;
-import it.polimi.se2019.network.message.to_server.SendInitPowerUpMessage;
-import it.polimi.se2019.network.message.to_server.SendMapChosenMessage;
+import it.polimi.se2019.network.message.to_server.*;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.client.RemoteView;
 import it.polimi.se2019.view.State;
@@ -240,8 +237,15 @@ public class GUI extends RemoteView {
         viewSetChanged();
         notifyObservers(message);
     }
+    protected void sendPlatformChosen(String pos){
+        MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(pos);
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
+    }
 
-    protected void iWantToMove(String action){
+    protected void iWantToDoSomething(String action){
+        //gameBoardController.disableActionButtons();
         PerformActionMessage message = new PerformActionMessage(action);
         message.setSender(userName);
         viewSetChanged();

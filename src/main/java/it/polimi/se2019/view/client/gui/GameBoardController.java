@@ -257,6 +257,8 @@ public class GameBoardController {
     private Button w23_3;
     @FXML
     private Button movebutton;
+    @FXML
+    private Button grabbutton;
 
     private List<AmmoRep> ammoReps;
     private Map<String, ImageView> posAmmo;
@@ -623,44 +625,73 @@ public class GameBoardController {
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.showAndWait();
     }
-    public void moveClick(){
-        gui.iWantToMove("action1");
+
+    public void moveClick() {
+        gui.iWantToDoSomething("action1");
+    }
+
+    public void grabClick() {
+        gui.iWantToDoSomething("action2");
     }
 
     public void zerozeroClick() {
+        darkenAllPlatforms();
+        gui.sendPlatformChosen("0,0");
     }
 
     public void zerooneClick() {
+        darkenAllPlatforms();
+        gui.sendPlatformChosen("0,1");
     }
 
     public void zerotwoClick() {
+        darkenAllPlatforms();
+        gui.sendPlatformChosen("0,2");
     }
 
     public void zerothreeClick() {
+        darkenAllPlatforms();
+        gui.sendPlatformChosen("0,3");
     }
 
     public void onezeroClick() {
+        darkenAllPlatforms();
+        gui.sendPlatformChosen("1,0");
     }
 
     public void oneoneClick() {
+        darkenAllPlatforms();
+        gui.sendPlatformChosen("1,1");
     }
 
     public void onetwoClick() {
+        darkenAllPlatforms();
+        gui.sendPlatformChosen("1,2");
     }
 
     public void onethreeClick() {
+        darkenAllPlatforms();
+        gui.sendPlatformChosen("1,3");
     }
 
     public void twozeroClick() {
+        darkenAllPlatforms();
+        gui.sendPlatformChosen("2,0");
     }
 
     public void twooneClick() {
+        darkenAllPlatforms();
+        gui.sendPlatformChosen("2,1");
     }
 
     public void twotwoClick() {
+        darkenAllPlatforms();
+        gui.sendPlatformChosen("2,2");
     }
 
     public void twothreeClick() {
+        darkenAllPlatforms();
+        gui.sendPlatformChosen("2,3");
     }
 
     public void dozerClick() {
@@ -717,6 +748,11 @@ public class GameBoardController {
     private void darkenAllPlatforms() {
         for (Map.Entry<String, Button> entry : posPlatform.entrySet())
             HandyFunctions.darkenButton(entry.getValue());
+    }
+
+    protected void disableActionButtons() {
+        movebutton.setDisable(true);
+        grabbutton.setDisable(true);
     }
 
 }

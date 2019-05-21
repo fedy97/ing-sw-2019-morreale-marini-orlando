@@ -7,6 +7,8 @@ import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.player.Player;
 
 import java.util.List;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
 
 /**
  * Class providing service methods to match the server objects' with the corresponding
@@ -19,7 +21,15 @@ public final class Deserializer {
      * @return the reference to the target platform
      */
     public static Platform getPlatform(String light) {
-        return Controller.getInstance().getGame().getGameField().getPlatform(light);
+        try {
+            int pos[] = new int[2];
+            pos[0] = Integer.parseInt(light.substring(0, 1));
+            pos[1] = Integer.parseInt(light.substring(2, 3));
+            return Controller.getInstance().getGame().getGameField().getPlatform(pos);
+        } catch (Exception e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, e.getMessage());
+            return null;
+        }
     }
 
     /**
