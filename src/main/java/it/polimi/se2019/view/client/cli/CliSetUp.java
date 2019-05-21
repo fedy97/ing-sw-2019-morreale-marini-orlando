@@ -33,4 +33,19 @@ public final class CliSetUp {
     {
         HandyFunctions.printConsole(ESC + numOfLine + "B");
     }
+
+    public static void cursorUp(int numOfLine)
+    {
+        HandyFunctions.printConsole(ESC + numOfLine + "A");
+    }
+
+    public static void cursorRight(int numOfCol)
+    {
+        HandyFunctions.printConsole(ESC + numOfCol + "C");
+    }
+
+    public static void cursorLeft(int numOfCol)
+    {
+        HandyFunctions.printConsole(ESC + numOfCol + "D");
+    }
 }
