@@ -34,6 +34,7 @@ public class HealthyValidator extends Validator {
         else
             throw new InvalidActionException("Cannot move the player in this mode with the action passed!");
 
+        res.remove(currentPlayer.getCurrentPlatform());
         return res;
     }
 
