@@ -100,8 +100,6 @@ public class Controller implements Observer {
                 processingStages.remove(0);
                 processWeaponCard(processingWeaponCard);
             }
-
-            state = ControllerState.IDLE;
         }
     }
 
