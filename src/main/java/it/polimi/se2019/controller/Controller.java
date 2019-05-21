@@ -49,6 +49,7 @@ public class Controller implements Observer {
     }
 
     private Controller() {
+        validator = new HealthyValidator(this);
         validActions = new ArrayList<>();
         currentTargets = new LinkedBlockingDeque<>();
         turnController = new TurnController();

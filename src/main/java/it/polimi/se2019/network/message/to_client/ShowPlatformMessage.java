@@ -14,6 +14,6 @@ public class ShowPlatformMessage extends ToClientMessage {
      * Tell the remote view (CLI or GUI) to show the possible platform destination
      */
     public void performAction(RemoteView actor) {
-        //actor.lightPlatforms((ArrayList<String>) payload);
+        actor.lightPlatforms((ArrayList<String>) payload);
     }
 }

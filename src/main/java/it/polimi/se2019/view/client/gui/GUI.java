@@ -294,7 +294,8 @@ public class GUI extends RemoteView {
 
     @Override
     public void lightPlatforms(List<String> platforms) {
-        //useless
+        Platform.runLater(
+                () -> gameBoardController.enlightenPlatforms(platforms));
     }
 
 

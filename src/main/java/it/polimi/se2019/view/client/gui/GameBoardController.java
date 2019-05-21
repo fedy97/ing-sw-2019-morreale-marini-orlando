@@ -284,8 +284,6 @@ public class GameBoardController {
                 () -> {
                     initButtons();
                     darkenAllPlatforms();
-                    HandyFunctions.enlightenButton(w02_3);
-                    HandyFunctions.enlightenButton(zerozero);
                     mapImage.setImage(new Image("/assets/map/" + config + ".jpg"));
                     //TODO change this, I need a map platform,ammo, I will replace this  with updateAmmocards()
                     for (Map.Entry<ImageView, AmmoRep> entry : ammoRepImageViewMap.entrySet()) {
@@ -604,6 +602,12 @@ public class GameBoardController {
                 }
             }
         }
+    }
+
+    protected void enlightenPlatforms(List<String> plats) {
+        for (String pl : plats)
+            HandyFunctions.enlightenButton(posPlatform.get(pl));
+
     }
 
     private void showInstruction(CardRep cardRep) {
