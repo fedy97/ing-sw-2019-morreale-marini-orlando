@@ -15,6 +15,6 @@ public class ShowWeaponsMessage extends ToClientMessage {
      * @param remoteView on which actions have to be performed
      */
     public void performAction(RemoteView remoteView) {
-        remoteView.lightWeapons((ArrayList<Integer>) payload);
+        remoteView.lightWeapons((ArrayList<String>) payload);
     }
 }
