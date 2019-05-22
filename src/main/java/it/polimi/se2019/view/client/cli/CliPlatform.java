@@ -31,6 +31,8 @@ public class CliPlatform {
     }
 
     public void setAmmo(String ammo) {
+        if (ammo == null)
+            ammo = "   ";
         this.ammo = ammo;
     }
 
@@ -75,6 +77,9 @@ public class CliPlatform {
     }
 
     private void printAmmo(String ammo) {
+        if (ammo == null) {
+            ammo = "   ";
+        }
         if (ammo.equals("   ")) {
             CliPrinter.stamp(ammo);
             return;
