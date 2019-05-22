@@ -35,7 +35,7 @@ public class HealthyValidator extends Validator {
             res = gameField.getAvailablePlatforms(currentPlayer.getCurrentPlatform(), 1);
             List<Platform> garbPla = new ArrayList<>();
             for (Platform p : res) {
-                if (!p.hasAmmoCard())
+                if (!p.hasAmmoCard() && !p.isGenerationSpot())
                     garbPla.add(p);
             }
             res.removeAll(garbPla);
