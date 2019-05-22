@@ -36,10 +36,10 @@ public final class Deserializer {
      * @param light hashcode of the WeaponCard received from the client
      * @return the server reference of the WeaponCard
      */
-    public static WeaponCard getWeapon(int light) {
+    public static WeaponCard getWeapon(String light) {
         List<WeaponCard> weapons = Controller.getInstance().getPlayerManager().getCurrentPlayer().getWeaponCards();
         for (WeaponCard weaponCard : weapons) {
-            if (Integer.toString(weaponCard.hashCode()).equals(Integer.toString(light)))
+            if (weaponCard.toString().equals(light))
                 return weaponCard;
         }
         return null;
