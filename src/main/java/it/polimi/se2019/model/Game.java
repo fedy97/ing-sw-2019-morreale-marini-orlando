@@ -326,12 +326,26 @@ public class Game extends Observable {
                         else ammoReps.add(null);
                     }
                 }
+                //now I create a list of the characters in game to send to clients in order to display their board
+                List<String> arrChars = findCharactersInGame();
+
                 setChanged();
-                notifyObservers(new ShowGameBoardMessage(firstUser, ammoReps, cardReps, getLightVersion().getPlatformWeapons()));
+                notifyObservers(new ShowGameBoardMessage(firstUser, ammoReps, cardReps, getLightVersion().getPlatformWeapons(), arrChars));
             } catch (Exception e) {
                 HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
             }
         }
+    }
+
+    private List<String> findCharactersInGame() {
+        List<String> arrChars = new ArrayList<>();
+        for (Map.Entry<Character,Player> entry : characterPlayers.entrySet()){
+            if (entry.getValue() != null) {
+               String charToAdd=entry.getKey().name();
+               arrChars.add(charToAdd);
+            }
+        }
+        return arrChars;
     }
 
     private void findCharactersAvailableAndReplace() {

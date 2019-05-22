@@ -92,9 +92,9 @@ public class CLI extends RemoteView {
             notifyObservers(message);
         }).start();
     }
-
+    //TODO show the right player board given the arrChars, an arraylist of objects like "SPROG"
     @Override
-    public void showGameBoard(List<AmmoRep> ammoReps, Map<String,List<CardRep>> posWeapons) {
+    public void showGameBoard(List<AmmoRep> ammoReps, Map<String,List<CardRep>> posWeapons, List<String> arrChars) {
         CliSetUp.clear();
         CliSetUp.cursorToHome();
         CliPrinter.welcomeMessage();

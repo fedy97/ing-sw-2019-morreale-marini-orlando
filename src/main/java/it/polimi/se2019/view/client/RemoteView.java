@@ -19,7 +19,7 @@ public abstract class RemoteView extends View {
     public abstract void updateAll(LightGameVersion lightGameVersion);
     public abstract void showChooseMap();
     public abstract void showChooseCharacter(String config);
-    public abstract void showGameBoard(List<AmmoRep> ammoReps, Map<String,List<CardRep>> posWeapons);
+    public abstract void showGameBoard(List<AmmoRep> ammoReps, Map<String,List<CardRep>> posWeapons,List<String> arrChars);
     public abstract void showChoosePowerup(CardRep p1, CardRep p2);
     public abstract void setRandomChar(String randomChar);
     public abstract void updateVotesMapChosen(Map<Integer,Integer> map);

@@ -98,11 +98,11 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void showGameBoard(List<AmmoRep> ammoReps,Map<String,List<CardRep>> posWeapons) {
+    public void showGameBoard(List<AmmoRep> ammoReps,Map<String,List<CardRep>> posWeapons, List<String> arrChars) {
         Platform.runLater(
                 () -> {
                     initGameBoard(config,ammoReps,posWeapons);
-                    initStatsBoard();
+                    initStatsBoard(arrChars);
                     gameBoardController.passGUI(this);
                     statsBoardController.passGUI(this);
                     stage.setScene(sceneGameBoard);
@@ -162,7 +162,7 @@ public class GUI extends RemoteView {
         }
     }
 
-    protected void initStatsBoard(){
+    protected void initStatsBoard(List<String> arrChars){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/statsBoard.fxml"));
         try {
             Parent root = loader.load();
@@ -170,6 +170,7 @@ public class GUI extends RemoteView {
             statsStage.setTitle("Stats");
             sceneStatsBoard = new Scene(root);
             statsBoardController = loader.getController();
+            statsBoardController.setCharsInGame(arrChars);
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing stats board");
         }
