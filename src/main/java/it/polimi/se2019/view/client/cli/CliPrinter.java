@@ -386,7 +386,7 @@ public final class CliPrinter {
         weaponBox(CliColor.TEXTRED, posWeapons.get("1,0"));
         weaponBox(CliColor.TEXTBLUE, posWeapons.get("0,2"));
         weaponBox(CliColor.TEXTYELLOW, posWeapons.get("2,3"));
-        CliSetUp.cursorRight(115);
+        CliSetUp.cursorRight(111);
         CliSetUp.cursorUp(24);
         drawPlayersInfoBox();
         CliSetUp.cursorDown(20);
@@ -415,7 +415,7 @@ public final class CliPrinter {
         weaponBox(CliColor.TEXTRED, posWeapons.get("1,0"));
         weaponBox(CliColor.TEXTBLUE, posWeapons.get("0,2"));
         weaponBox(CliColor.TEXTYELLOW, posWeapons.get("2,3"));
-        CliSetUp.cursorRight(115);
+        CliSetUp.cursorRight(111);
         CliSetUp.cursorUp(24);
         drawPlayersInfoBox();
         CliSetUp.cursorDown(20);
@@ -443,7 +443,7 @@ public final class CliPrinter {
         weaponBox(CliColor.TEXTRED, posWeapons.get("1,0"));
         weaponBox(CliColor.TEXTBLUE, posWeapons.get("0,2"));
         weaponBox(CliColor.TEXTYELLOW, posWeapons.get("2,3"));
-        CliSetUp.cursorRight(115);
+        CliSetUp.cursorRight(111);
         CliSetUp.cursorUp(24);
         drawPlayersInfoBox();
         CliSetUp.cursorDown(20);
@@ -473,7 +473,7 @@ public final class CliPrinter {
         weaponBox(CliColor.TEXTRED, posWeapons.get("1,0"));
         weaponBox(CliColor.TEXTBLUE, posWeapons.get("0,2"));
         weaponBox(CliColor.TEXTYELLOW, posWeapons.get("2,3"));
-        CliSetUp.cursorRight(115);
+        CliSetUp.cursorRight(111);
         CliSetUp.cursorUp(24);
         drawPlayersInfoBox();
         CliSetUp.cursorDown(20);

@@ -57,8 +57,16 @@ public class CLI extends RemoteView {
     public void updateAll(LightGameVersion lightGameVersion) {
         CliSetUp.clear();
         CliSetUp.cursorToHome();
-        //CliPrinter.printPlatformWeapons(lightGameVersion);
+        CliPrinter.welcomeMessage();
+        CliSetUp.cursorLeft(109);
+        CliSetUp.cursorDown(2);
+        CliPrinter.printPlatformWeapons(lightGameVersion);
+        CliSetUp.cursorRight(38);
+        CliSetUp.cursorUp(23);
         CliPrinter.printMap(lightGameVersion, chosenBoard);
+        CliSetUp.cursorUp(15);
+        CliSetUp.cursorRight(5);
+        CliPrinter.drawPlayersInfoBox();
     }
 
     @Override
