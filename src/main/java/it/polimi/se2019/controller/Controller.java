@@ -29,6 +29,7 @@ public class Controller implements Observer {
     private List<String> validActions;
     private ControllerState state; //the state is set to processing power up or weapon when a specific message from the client (ActivateCardMessage) is received
     private BlockingDeque<Player> currentTargets;
+    private BlockingDeque<WeaponCard> chosenWeapons;
     private List<Integer> processingStages;
     private PowerUpCard processingPowerUp;
     private WeaponCard processingWeaponCard;
@@ -52,6 +53,7 @@ public class Controller implements Observer {
         validator = new HealthyValidator(this);
         validActions = new ArrayList<>();
         currentTargets = new LinkedBlockingDeque<>();
+        chosenWeapons = new LinkedBlockingDeque<>();
         turnController = new TurnController();
         userView = new HashMap<>();
         state = ControllerState.SETUP;
@@ -91,15 +93,18 @@ public class Controller implements Observer {
                 ((ToServerMessage) message).performAction();
             }
         } else {
-            ((ToServerMessage) message).performAction();
-            //TODO change this
-            if(state == ControllerState.PROCESSING_POWERUP){
-                processingStages.remove(0);
-                processPowerUp(processingPowerUp);
-            }else if(state == ControllerState.PROCESSING_WEAPON){
-                processingStages.remove(0);
-                processWeaponCard(processingWeaponCard);
-            }
+            new Thread(() -> {
+                ((ToServerMessage) message).performAction();
+                //TODO change this
+                if (state == ControllerState.PROCESSING_POWERUP) {
+                    processingStages.remove(0);
+                    processPowerUp(processingPowerUp);
+                } else if (state == ControllerState.PROCESSING_WEAPON) {
+                    processingStages.remove(0);
+                    processWeaponCard(processingWeaponCard);
+                }
+            }).start();
+
         }
     }
 
@@ -120,7 +125,7 @@ public class Controller implements Observer {
      */
     public void processWeaponCard(WeaponCard weapon) {
         //weaponCard.activate(processingStages.get(0));
-        if (processingStages.isEmpty()){
+        if (processingStages.isEmpty()) {
             state = ControllerState.IDLE;
             processingWeaponCard = null;
         }
@@ -244,7 +249,7 @@ public class Controller implements Observer {
     /**
      * Common method across RMI and Socket to send requests to client
      *
-     * @param msg  to the destination client
+     * @param msg to the destination client
      */
     private void callView(ToClientMessage msg, String user) {
         userView.get(user).callView(msg);
@@ -305,11 +310,15 @@ public class Controller implements Observer {
         return currentTargets;
     }
 
+    public BlockingDeque<WeaponCard> getChosenWeapons() {
+        return chosenWeapons;
+    }
+
     public void setState(ControllerState state) {
         this.state = state;
     }
 
-    public ControllerState getState(){
+    public ControllerState getState() {
         return state;
     }
 

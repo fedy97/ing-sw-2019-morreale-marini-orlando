@@ -147,10 +147,12 @@ public class PlayerManager {
      */
     public void buyWeapon(WeaponCard weapon) throws InsufficientAmmoException, MaxWeaponException {
         AmmoBox box = currentPlayer.getPlayerBoard().getAmmoBox();
-        if (box.hasAmmos(weapon.getTotalCost())) {
-            currentPlayer.addWeaponCard(weapon);
-        } else
-            throw new InsufficientAmmoException("Player hasn't enough ammos to buy the weapon");
+        currentPlayer.addWeaponCard(weapon);
+        AmmoCube[] cost = weapon.getExtraCost();
+
+        for (int i = 0; i < cost.length; i++)
+            box.removeAmmos(cost[i], 1);
+
         father.getGame().notifyChanges();
     }
 

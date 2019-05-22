@@ -108,4 +108,9 @@ public class WeaponCard extends Card {
         // TODO
     }
 
+    @Override
+    public String toString(){
+        return Integer.toString(hashCode());
+    }
+
 }

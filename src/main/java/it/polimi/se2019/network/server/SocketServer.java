@@ -112,7 +112,6 @@ public class SocketServer implements Server {
     }
 
     public void interpretMessage(ToServerMessage msg) {
-
         //virtual view associated to the right sender notifies the controller
         getVirtualView(msg.getSender()).viewSetChanged();
         getVirtualView(msg.getSender()).notifyObservers(msg);
