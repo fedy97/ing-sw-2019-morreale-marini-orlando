@@ -204,9 +204,9 @@ public class Game extends Observable {
 
             AmmoBox box = player.getPlayerBoard().getAmmoBox();
 
-            ammos.put("red", box.getRedAmmos());
-            ammos.put("blue", box.getBlueAmmos());
-            ammos.put("yellow", box.getYellowAmmos());
+            ammos.put("RED", box.getRedAmmos());
+            ammos.put("BLUE", box.getBlueAmmos());
+            ammos.put("YELLOW", box.getYellowAmmos());
 
             for (PowerUpCard powerUp : player.getPowerUpCards())
                 powerUps.add(new CardRep(HandyFunctions.getSystemAddress(powerUp), powerUp.getName(), powerUp.getDescription(),
@@ -237,7 +237,7 @@ public class Game extends Observable {
 
         for (Platform platform : gameField.getPlatforms()) {
             List<CardRep> weapons = new ArrayList<>();
-            if (platform.hasAmmoCard()) {
+            if (!platform.isGenerationSpot()) {
                 AmmoCard ammoCard = platform.getPlatformAmmoCard();
                 if (ammoCard != null)
                     platformAmmoTile.put(gameField.getPlatformPosLight(platform),
