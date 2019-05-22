@@ -194,8 +194,10 @@ public class Platform {
 
     public AmmoCard grabAmmoCard() throws InvalidCardException {
         if (hasAmmoCard) {
+            AmmoCard res = platformAmmoCard;
             hasAmmoCard = false;
-            return this.platformAmmoCard;
+            platformAmmoCard = null;
+            return res;
         } else
             throw new InvalidCardException("there is no ammos card set in this platform");
     }

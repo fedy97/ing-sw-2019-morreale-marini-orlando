@@ -17,6 +17,7 @@ public class CollectWeaponsMessage extends ToServerMessage {
 
     @Override
     public void performAction() {
+        //TODO for me
         List<Integer> lightVersion = (ArrayList<Integer>) payload;
         List<WeaponCard> weapons = new ArrayList<>();
         for (int weapon : lightVersion)

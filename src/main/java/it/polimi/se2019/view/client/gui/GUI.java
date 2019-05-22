@@ -315,7 +315,7 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void lightWeapons(List<String> weapons) {
+    public void lightWeapons(List<Integer> weapons) {
         //useless
     }
 

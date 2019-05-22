@@ -283,7 +283,7 @@ public class CLI extends RemoteView {
     }
 
     @Override
-    public void lightWeapons(List<String> weapons) {
+    public void lightWeapons(List<Integer> weapons) {
         //TODO
     }
 

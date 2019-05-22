@@ -75,7 +75,7 @@ public class PlayerManager {
     public void grabAmmoCard() {
         try {
             AmmoCard ammo = currentPlayer.getCurrentPlatform().grabAmmoCard();
-            AmmoCard newAmmo = father.getDecksManager().getNewAmmoCard(ammo);
+            father.getDecksManager().addToFill(currentPlayer.getCurrentPlatform());
 
             if (ammo.hasPowerUp()) {
                 currentPlayer.addPowerUpCard(father.getDecksManager().drawPowerUp());
@@ -85,7 +85,7 @@ public class PlayerManager {
             for (int i = 0; i < ammoCubes.length; i++)
                 currentPlayer.getPlayerBoard().getAmmoBox().addAmmos(ammoCubes[i], 1);
 
-            currentPlayer.getCurrentPlatform().setPlatformAmmoCard(newAmmo);
+            father.getDecksManager().discardAmmo(ammo);
             father.getGame().notifyChanges();
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());

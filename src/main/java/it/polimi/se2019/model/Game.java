@@ -11,6 +11,7 @@ import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
+import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.*;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -199,7 +200,13 @@ public class Game extends Observable {
             List<CardRep> weapons = new ArrayList<>();
             List<String> damages = new ArrayList<>();
             List<String> marks = new ArrayList<>();
+            Map<String, Integer> ammos = new HashMap<>();
 
+            AmmoBox box = player.getPlayerBoard().getAmmoBox();
+
+            ammos.put("red", box.getRedAmmos());
+            ammos.put("blue", box.getBlueAmmos());
+            ammos.put("yellow", box.getYellowAmmos());
 
             for (PowerUpCard powerUp : player.getPowerUpCards())
                 powerUps.add(new CardRep(HandyFunctions.getSystemAddress(powerUp), powerUp.getName(), powerUp.getDescription(),
@@ -209,15 +216,14 @@ public class Game extends Observable {
                 weapons.add(new CardRep(HandyFunctions.getSystemAddress(weaponCard), weaponCard.getName(), weaponCard.getDescription(),
                         weaponCard.getImgPath()));
 
-            for(Character c : player.getPlayerBoard().getDamageLine())
+            for (Character c : player.getPlayerBoard().getDamageLine())
                 damages.add(c.name());
-            for(Character c: player.getPlayerBoard().getRevengeMarks())
+            for (Character c : player.getPlayerBoard().getRevengeMarks())
                 marks.add(c.name());
 
             playerPowerups.put(player.getCharacter().name(), powerUps);
             playerWeapons.put(player.getCharacter().name(), weapons);
-            //TODO create colorQty
-            playerBoardRep.put(player.getCharacter().name(), new BoardRep(damages, marks,null));
+            playerBoardRep.put(player.getCharacter().name(), new BoardRep(damages, marks, ammos));
         }
 
         lightVersion.setPlayerPlatform(playerPlatform);
@@ -233,8 +239,12 @@ public class Game extends Observable {
             List<CardRep> weapons = new ArrayList<>();
             if (platform.hasAmmoCard()) {
                 AmmoCard ammoCard = platform.getPlatformAmmoCard();
-                platformAmmoTile.put(gameField.getPlatformPosLight(platform),
-                        new AmmoRep(HandyFunctions.getSystemAddress(ammoCard), ammoCard.toString()));
+                if (ammoCard != null)
+                    platformAmmoTile.put(gameField.getPlatformPosLight(platform),
+                            new AmmoRep(HandyFunctions.getSystemAddress(ammoCard), ammoCard.toString()));
+                else
+                    platformAmmoTile.put(gameField.getPlatformPosLight(platform),
+                            new AmmoRep(0, "null"));
             }
 
             try {
@@ -323,8 +333,7 @@ public class Game extends Observable {
                         if (p != null && p.hasAmmoCard()) {
                             AmmoCard ammoCard = p.getPlatformAmmoCard();
                             ammoReps.add(new AmmoRep(HandyFunctions.getSystemAddress(ammoCard), ammoCard.toString()));
-                        }
-                        else ammoReps.add(null);
+                        } else ammoReps.add(null);
                     }
                 }
                 //now I create a list of the characters in game to send to clients in order to display their board
@@ -340,10 +349,10 @@ public class Game extends Observable {
 
     private List<String> findCharactersInGame() {
         List<String> arrChars = new ArrayList<>();
-        for (Map.Entry<Character,Player> entry : characterPlayers.entrySet()){
+        for (Map.Entry<Character, Player> entry : characterPlayers.entrySet()) {
             if (entry.getValue() != null) {
-               String charToAdd=entry.getKey().name();
-               arrChars.add(charToAdd);
+                String charToAdd = entry.getKey().name();
+                arrChars.add(charToAdd);
             }
         }
         return arrChars;
@@ -433,7 +442,7 @@ public class Game extends Observable {
      * @param c character associated to the player
      * @return the player corresponding to the passed character
      */
-    public Player getPlayer(Character c){
+    public Player getPlayer(Character c) {
         return characterPlayers.get(c);
     }
 }

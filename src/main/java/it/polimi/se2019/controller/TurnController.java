@@ -1,8 +1,12 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.Game;
+import it.polimi.se2019.model.board.Platform;
+import it.polimi.se2019.model.card.AmmoCard;
+import it.polimi.se2019.utils.HandyFunctions;
 
 import java.util.*;
+import java.util.logging.Level;
 
 /**
  * @author Gabriel Raul Marini
@@ -13,7 +17,7 @@ public class TurnController {
     private List<String> turningOrder;
     private Timer turnTimer;
 
-    public TurnController(){
+    public TurnController() {
         turningOrder = new ArrayList<>();
         turnTimer = new Timer();
     }
@@ -21,7 +25,7 @@ public class TurnController {
     /**
      * Init the game logic
      */
-    public void start(){
+    public void start() {
         curr = first;
         Controller.getInstance().getPlayerManager().setCurrentPlayer(Game.getInstance().getPlayer(first));
 
@@ -30,8 +34,8 @@ public class TurnController {
     /**
      * @param user to be added to the ordered list
      */
-    public void addUser(String user){
-        if(turningOrder.isEmpty())
+    public void addUser(String user) {
+        if (turningOrder.isEmpty())
             first = user;
         turningOrder.add(user);
     }
@@ -39,11 +43,23 @@ public class TurnController {
     /**
      * End the turn of the current user and switch to the next
      */
-    public void endTurn(){
+    public void endTurn() {
+        Controller c = Controller.getInstance();
         int currIndex = turningOrder.indexOf(curr);
-        if((currIndex + 1) == turningOrder.size())
+        if ((currIndex + 1) == turningOrder.size()) {
             curr = turningOrder.get(0);
-        else
+
+            for (int i = 0; i < c.getDecksManager().getToFill().size(); i++) {
+                try {
+                    AmmoCard newAmmo = c.getDecksManager().getNewAmmoCard(c.getDecksManager().getAmmoGarbageDeck().get(i));
+                    c.getDecksManager().getToFill().get(i).setPlatformAmmoCard(newAmmo);
+                } catch (Exception e) {
+                    HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
+                }
+            }
+            c.getDecksManager().getToFill().clear();
+            c.getDecksManager().getAmmoGarbageDeck().clear();
+        } else
             curr = turningOrder.get(currIndex + 1);
         Controller.getInstance().getPlayerManager().setCurrentPlayer(Game.getInstance().getPlayer(curr));
     }
@@ -55,11 +71,11 @@ public class TurnController {
         return curr;
     }
 
-    public List<String> getUsers(){
+    public List<String> getUsers() {
         return turningOrder;
     }
 
-    public void removeUser(String user){
+    public void removeUser(String user) {
         turningOrder.remove(user);
     }
 
