@@ -266,6 +266,40 @@ public final class CliPrinter {
         CliSetUp.restorePosition();
     }
 
+    public static void standardActionsMessage() {
+        CliPrinter.stamp("\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                      Choose an action:                                     ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                  <1> move                                                  ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                  <2> grab                                                  ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                  <3> shoot                                                 ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                               press the <key> followed by enter                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+    }
+
     public static void possibleCharMessage(int timer, ArrayList<String> chosen, int myChoice) {
 
         char cBan = ' ';
@@ -500,7 +534,7 @@ public final class CliPrinter {
         CliPrinter.stamp("\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
     }
 
-    public static void drawPlayersInfoBox() {
+    public static void drawPlayersInfoBox(LightGameVersion lightGameVersion) {
         stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(40);
         CliSetUp.cursorDown(1);

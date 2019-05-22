@@ -1,6 +1,5 @@
 package it.polimi.se2019.view.client.cli;
 
-import it.polimi.se2019.utils.HandyFunctions;
 
 public class CliPlatform {
 
@@ -31,7 +30,7 @@ public class CliPlatform {
     }
 
     public void setAmmo(String ammo) {
-        if (ammo == null)
+        if (ammo == null || ammo.equals("null"))
             ammo = "   ";
         this.ammo = ammo;
     }
@@ -206,6 +205,5 @@ public class CliPlatform {
 
         CliSetUp.cursorRight(7);
         CliSetUp.cursorUp(3);
-        //System.out.print("c");
     }
 }

@@ -64,9 +64,12 @@ public class CLI extends RemoteView {
         CliSetUp.cursorRight(38);
         CliSetUp.cursorUp(23);
         CliPrinter.printMap(lightGameVersion, chosenBoard);
-        CliSetUp.cursorUp(15);
-        CliSetUp.cursorRight(5);
-        CliPrinter.drawPlayersInfoBox();
+        CliSetUp.cursorDown(9);
+        CliSetUp.cursorLeft(110);
+        CliPrinter.standardActionsMessage();
+        CliSetUp.cursorUp(34);
+        CliSetUp.cursorRight(10);
+        CliPrinter.drawPlayersInfoBox(lightGameVersion);
     }
 
     @Override
