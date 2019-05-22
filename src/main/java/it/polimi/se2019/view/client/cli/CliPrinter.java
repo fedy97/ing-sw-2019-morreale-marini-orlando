@@ -857,6 +857,301 @@ public final class CliPrinter {
         CliMap2 map2 = new CliMap2();
         Map<String, AmmoRep> platformAmmoTile = lightGameVersion.getPlatformAmmoTile();
         Map<String, String> playerPlatform = lightGameVersion.getPlayerPlatform();
+        String bansheePos = playerPlatform.get("BANSHEE");
+        String sprogPos = playerPlatform.get("SPROG");
+        String dozerPos = playerPlatform.get("DOZER");
+        String violetPos = playerPlatform.get("VIOLET");
+        String distructorPos = playerPlatform.get("DISTRUCTOR");
+
+        if(bansheePos != null) {
+            if (bansheePos.equals("0,0")) {
+                map2.plat1.setBansheeInside();
+            } else {
+                map2.plat1.noBansheeInside();
+            }
+            if (bansheePos.equals("0,1")) {
+                map2.plat2.setBansheeInside();
+            } else {
+                map2.plat2.noBansheeInside();
+            }
+            if (bansheePos.equals("0,2")) {
+                map2.plat3.setBansheeInside();
+            } else {
+                map2.plat3.noBansheeInside();
+            }
+            if (bansheePos.equals("0,3")) {
+                map2.plat4.setBansheeInside();
+            } else {
+                map2.plat4.noBansheeInside();
+            }
+            if (bansheePos.equals("1,0")) {
+                map2.plat5.setBansheeInside();
+            } else {
+                map2.plat5.noBansheeInside();
+            }
+            if (bansheePos.equals("1,1")) {
+                map2.plat6.setBansheeInside();
+            } else {
+                map2.plat6.noBansheeInside();
+            }
+            if (bansheePos.equals("1,2")) {
+                map2.plat7.setBansheeInside();
+            } else {
+                map2.plat7.noBansheeInside();
+            }
+            if (bansheePos.equals("1,3")) {
+                map2.plat8.setBansheeInside();
+            } else {
+                map2.plat8.noBansheeInside();
+            }
+            if (bansheePos.equals("2,1")) {
+                map2.plat9.setBansheeInside();
+            } else {
+                map2.plat9.noBansheeInside();
+            }
+            if (bansheePos.equals("2,2")) {
+                map2.plat10.setBansheeInside();
+            } else {
+                map2.plat10.noBansheeInside();
+            }
+            if (bansheePos.equals("2,3")) {
+                map2.plat11.setBansheeInside();
+            } else {
+                map2.plat11.noBansheeInside();
+            }
+        }
+
+        if (sprogPos != null) {
+            if (sprogPos.equals("0,0")) {
+                map2.plat1.setSprogInside();
+            } else {
+                map2.plat1.noSprogInside();
+            }
+            if (sprogPos.equals("0,1")) {
+                map2.plat2.setSprogInside();
+            } else {
+                map2.plat2.noSprogInside();
+            }
+            if (sprogPos.equals("0,2")) {
+                map2.plat3.setSprogInside();
+            } else {
+                map2.plat3.noSprogInside();
+            }
+            if (sprogPos.equals("0,3")) {
+                map2.plat4.setSprogInside();
+            } else {
+                map2.plat4.noSprogInside();
+            }
+            if (sprogPos.equals("1,0")) {
+                map2.plat5.setSprogInside();
+            } else {
+                map2.plat5.noSprogInside();
+            }
+            if (sprogPos.equals("1,1")) {
+                map2.plat6.setSprogInside();
+            } else {
+                map2.plat6.noSprogInside();
+            }
+            if (sprogPos.equals("1,2")) {
+                map2.plat7.setSprogInside();
+            } else {
+                map2.plat7.noSprogInside();
+            }
+            if (sprogPos.equals("1,3")) {
+                map2.plat8.setSprogInside();
+            } else {
+                map2.plat8.noSprogInside();
+            }
+            if (sprogPos.equals("2,1")) {
+                map2.plat9.setSprogInside();
+            } else {
+                map2.plat9.noSprogInside();
+            }
+            if (sprogPos.equals("2,2")) {
+                map2.plat10.setSprogInside();
+            } else {
+                map2.plat10.noSprogInside();
+            }
+            if (sprogPos.equals("2,3")) {
+                map2.plat11.setSprogInside();
+            } else {
+                map2.plat11.noSprogInside();
+            }
+        }
+
+        if (dozerPos != null) {
+            if (dozerPos.equals("0,0")) {
+                map2.plat1.setDozerInside();
+            } else {
+                map2.plat1.noDozerInside();
+            }
+            if (dozerPos.equals("0,1")) {
+                map2.plat2.setDozerInside();
+            } else {
+                map2.plat2.noDozerInside();
+            }
+            if (dozerPos.equals("0,2")) {
+                map2.plat3.setDozerInside();
+            } else {
+                map2.plat3.noDozerInside();
+            }
+            if (dozerPos.equals("0,3")) {
+                map2.plat4.setDozerInside();
+            } else {
+                map2.plat4.noDozerInside();
+            }
+            if (dozerPos.equals("1,0")) {
+                map2.plat5.setDozerInside();
+            } else {
+                map2.plat5.noDozerInside();
+            }
+            if (dozerPos.equals("1,1")) {
+                map2.plat6.setDozerInside();
+            } else {
+                map2.plat6.noDozerInside();
+            }
+            if (dozerPos.equals("1,2")) {
+                map2.plat7.setDozerInside();
+            } else {
+                map2.plat7.noDozerInside();
+            }
+            if (dozerPos.equals("1,3")) {
+                map2.plat8.setDozerInside();
+            } else {
+                map2.plat8.noDozerInside();
+            }
+            if (dozerPos.equals("2,1")) {
+                map2.plat9.setDozerInside();
+            } else {
+                map2.plat9.noDozerInside();
+            }
+            if (dozerPos.equals("2,2")) {
+                map2.plat10.setDozerInside();
+            } else {
+                map2.plat10.noDozerInside();
+            }
+            if (dozerPos.equals("2,3")) {
+                map2.plat11.setDozerInside();
+            } else {
+                map2.plat11.noDozerInside();
+            }
+        }
+
+        if (violetPos != null) {
+            if (violetPos.equals("0,0")) {
+                map2.plat1.setVioletInside();
+            } else {
+                map2.plat1.noVioletInside();
+            }
+            if (violetPos.equals("0,1")) {
+                map2.plat2.setVioletInside();
+            } else {
+                map2.plat2.noVioletInside();
+            }
+            if (violetPos.equals("0,2")) {
+                map2.plat3.setVioletInside();
+            } else {
+                map2.plat3.noVioletInside();
+            }
+            if (violetPos.equals("0,3")) {
+                map2.plat4.setVioletInside();
+            } else {
+                map2.plat4.noVioletInside();
+            }
+            if (violetPos.equals("1,0")) {
+                map2.plat5.setVioletInside();
+            } else {
+                map2.plat5.noVioletInside();
+            }
+            if (violetPos.equals("1,1")) {
+                map2.plat6.setVioletInside();
+            } else {
+                map2.plat6.noVioletInside();
+            }
+            if (violetPos.equals("1,2")) {
+                map2.plat7.setVioletInside();
+            } else {
+                map2.plat7.noVioletInside();
+            }
+            if (violetPos.equals("1,3")) {
+                map2.plat8.setVioletInside();
+            } else {
+                map2.plat8.noVioletInside();
+            }
+            if (violetPos.equals("2,1")) {
+                map2.plat9.setVioletInside();
+            } else {
+                map2.plat9.noVioletInside();
+            }
+            if (violetPos.equals("2,2")) {
+                map2.plat10.setVioletInside();
+            } else {
+                map2.plat10.noVioletInside();
+            }
+            if (violetPos.equals("2,3")) {
+                map2.plat11.setVioletInside();
+            } else {
+                map2.plat11.noVioletInside();
+            }
+        }
+
+        if (distructorPos != null) {
+            if (distructorPos.equals("0,0")) {
+                map2.plat1.setDistructorInside();
+            } else {
+                map2.plat1.noDistructorInside();
+            }
+            if (distructorPos.equals("0,1")) {
+                map2.plat2.setDistructorInside();
+            } else {
+                map2.plat2.noDistructorInside();
+            }
+            if (distructorPos.equals("0,2")) {
+                map2.plat3.setDistructorInside();
+            } else {
+                map2.plat3.noDistructorInside();
+            }
+            if (distructorPos.equals("0,3")) {
+                map2.plat4.setDistructorInside();
+            } else {
+                map2.plat4.noDistructorInside();
+            }
+            if (distructorPos.equals("1,0")) {
+                map2.plat5.setDistructorInside();
+            } else {
+                map2.plat5.noDistructorInside();
+            }
+            if (distructorPos.equals("1,1")) {
+                map2.plat6.setDistructorInside();
+            } else {
+                map2.plat6.noDistructorInside();
+            }
+            if (distructorPos.equals("1,2")) {
+                map2.plat7.setDistructorInside();
+            } else {
+                map2.plat7.noDistructorInside();
+            }
+            if (distructorPos.equals("1,3")) {
+                map2.plat8.setDistructorInside();
+            } else {
+                map2.plat8.noDistructorInside();
+            }
+            if (distructorPos.equals("2,1")) {
+                map2.plat9.setDistructorInside();
+            } else {
+                map2.plat9.noDistructorInside();
+            }
+            if (distructorPos.equals("2,2")) {
+                map2.plat10.setDistructorInside();
+            } else {
+                map2.plat10.noDistructorInside();
+            }
+            if (distructorPos.equals("2,3")) {
+                map2.plat11.setDistructorInside();
+            } else {
+                map2.plat11.noDistructorInside();
+            }
+        }
 
         map2.plat1.setAmmo(platformAmmoTile.get("0,0").getType());
         map2.plat2.setAmmo(platformAmmoTile.get("0,1").getType());
@@ -874,6 +1169,276 @@ public final class CliPrinter {
         CliMap3 map3 = new CliMap3();
         Map<String, AmmoRep> platformAmmoTile = lightGameVersion.getPlatformAmmoTile();
         Map<String, String> playerPlatform = lightGameVersion.getPlayerPlatform();
+        String bansheePos = playerPlatform.get("BANSHEE");
+        String sprogPos = playerPlatform.get("SPROG");
+        String dozerPos = playerPlatform.get("DOZER");
+        String violetPos = playerPlatform.get("VIOLET");
+        String distructorPos = playerPlatform.get("DISTRUCTOR");
+
+        if(bansheePos != null) {
+            if (bansheePos.equals("0,0")) {
+                map3.plat1.setBansheeInside();
+            } else {
+                map3.plat1.noBansheeInside();
+            }
+            if (bansheePos.equals("0,1")) {
+                map3.plat2.setBansheeInside();
+            } else {
+                map3.plat2.noBansheeInside();
+            }
+            if (bansheePos.equals("0,2")) {
+                map3.plat3.setBansheeInside();
+            } else {
+                map3.plat3.noBansheeInside();
+            }
+            if (bansheePos.equals("1,0")) {
+                map3.plat4.setBansheeInside();
+            } else {
+                map3.plat4.noBansheeInside();
+            }
+            if (bansheePos.equals("1,1")) {
+                map3.plat5.setBansheeInside();
+            } else {
+                map3.plat5.noBansheeInside();
+            }
+            if (bansheePos.equals("1,2")) {
+                map3.plat6.setBansheeInside();
+            } else {
+                map3.plat6.noBansheeInside();
+            }
+            if (bansheePos.equals("1,3")) {
+                map3.plat7.setBansheeInside();
+            } else {
+                map3.plat7.noBansheeInside();
+            }
+            if (bansheePos.equals("2,1")) {
+                map3.plat8.setBansheeInside();
+            } else {
+                map3.plat8.noBansheeInside();
+            }
+            if (bansheePos.equals("2,2")) {
+                map3.plat9.setBansheeInside();
+            } else {
+                map3.plat9.noBansheeInside();
+            }
+            if (bansheePos.equals("2,3")) {
+                map3.plat10.setBansheeInside();
+            } else {
+                map3.plat10.noBansheeInside();
+            }
+        }
+
+        if (sprogPos != null) {
+            if (sprogPos.equals("0,0")) {
+                map3.plat1.setSprogInside();
+            } else {
+                map3.plat1.noSprogInside();
+            }
+            if (sprogPos.equals("0,1")) {
+                map3.plat2.setSprogInside();
+            } else {
+                map3.plat2.noSprogInside();
+            }
+            if (sprogPos.equals("0,2")) {
+                map3.plat3.setSprogInside();
+            } else {
+                map3.plat3.noSprogInside();
+            }
+            if (sprogPos.equals("1,0")) {
+                map3.plat4.setSprogInside();
+            } else {
+                map3.plat4.noSprogInside();
+            }
+            if (sprogPos.equals("1,1")) {
+                map3.plat5.setSprogInside();
+            } else {
+                map3.plat5.noSprogInside();
+            }
+            if (sprogPos.equals("1,2")) {
+                map3.plat6.setSprogInside();
+            } else {
+                map3.plat6.noSprogInside();
+            }
+            if (sprogPos.equals("1,3")) {
+                map3.plat7.setSprogInside();
+            } else {
+                map3.plat7.noSprogInside();
+            }
+            if (sprogPos.equals("2,1")) {
+                map3.plat8.setSprogInside();
+            } else {
+                map3.plat8.noSprogInside();
+            }
+            if (sprogPos.equals("2,2")) {
+                map3.plat9.setSprogInside();
+            } else {
+                map3.plat9.noSprogInside();
+            }
+            if (sprogPos.equals("2,3")) {
+                map3.plat10.setSprogInside();
+            } else {
+                map3.plat10.noSprogInside();
+            }
+        }
+
+        if (dozerPos != null) {
+            if (dozerPos.equals("0,0")) {
+                map3.plat1.setDozerInside();
+            } else {
+                map3.plat1.noDozerInside();
+            }
+            if (dozerPos.equals("0,1")) {
+                map3.plat2.setDozerInside();
+            } else {
+                map3.plat2.noDozerInside();
+            }
+            if (dozerPos.equals("0,2")) {
+                map3.plat3.setDozerInside();
+            } else {
+                map3.plat3.noDozerInside();
+            }
+            if (dozerPos.equals("1,0")) {
+                map3.plat4.setDozerInside();
+            } else {
+                map3.plat4.noDozerInside();
+            }
+            if (dozerPos.equals("1,1")) {
+                map3.plat5.setDozerInside();
+            } else {
+                map3.plat5.noDozerInside();
+            }
+            if (dozerPos.equals("1,2")) {
+                map3.plat6.setDozerInside();
+            } else {
+                map3.plat6.noDozerInside();
+            }
+            if (dozerPos.equals("1,3")) {
+                map3.plat7.setDozerInside();
+            } else {
+                map3.plat7.noDozerInside();
+            }
+            if (dozerPos.equals("2,1")) {
+                map3.plat8.setDozerInside();
+            } else {
+                map3.plat8.noDozerInside();
+            }
+            if (dozerPos.equals("2,2")) {
+                map3.plat9.setDozerInside();
+            } else {
+                map3.plat9.noDozerInside();
+            }
+            if (dozerPos.equals("2,3")) {
+                map3.plat10.setDozerInside();
+            } else {
+                map3.plat10.noDozerInside();
+            }
+        }
+
+        if (violetPos != null) {
+            if (violetPos.equals("0,0")) {
+                map3.plat1.setVioletInside();
+            } else {
+                map3.plat1.noVioletInside();
+            }
+            if (violetPos.equals("0,1")) {
+                map3.plat2.setVioletInside();
+            } else {
+                map3.plat2.noVioletInside();
+            }
+            if (violetPos.equals("0,2")) {
+                map3.plat3.setVioletInside();
+            } else {
+                map3.plat3.noVioletInside();
+            }
+            if (violetPos.equals("1,0")) {
+                map3.plat4.setVioletInside();
+            } else {
+                map3.plat4.noVioletInside();
+            }
+            if (violetPos.equals("1,1")) {
+                map3.plat5.setVioletInside();
+            } else {
+                map3.plat5.noVioletInside();
+            }
+            if (violetPos.equals("1,2")) {
+                map3.plat6.setVioletInside();
+            } else {
+                map3.plat6.noVioletInside();
+            }
+            if (violetPos.equals("1,3")) {
+                map3.plat7.setVioletInside();
+            } else {
+                map3.plat7.noVioletInside();
+            }
+            if (violetPos.equals("2,1")) {
+                map3.plat8.setVioletInside();
+            } else {
+                map3.plat8.noVioletInside();
+            }
+            if (violetPos.equals("2,2")) {
+                map3.plat9.setVioletInside();
+            } else {
+                map3.plat9.noVioletInside();
+            }
+            if (violetPos.equals("2,3")) {
+                map3.plat10.setVioletInside();
+            } else {
+                map3.plat10.noVioletInside();
+            }
+        }
+
+        if (distructorPos != null) {
+            if (distructorPos.equals("0,0")) {
+                map3.plat1.setDistructorInside();
+            } else {
+                map3.plat1.noDistructorInside();
+            }
+            if (distructorPos.equals("0,1")) {
+                map3.plat2.setDistructorInside();
+            } else {
+                map3.plat2.noDistructorInside();
+            }
+            if (distructorPos.equals("0,2")) {
+                map3.plat3.setDistructorInside();
+            } else {
+                map3.plat3.noDistructorInside();
+            }
+            if (distructorPos.equals("1,0")) {
+                map3.plat4.setDistructorInside();
+            } else {
+                map3.plat4.noDistructorInside();
+            }
+            if (distructorPos.equals("1,1")) {
+                map3.plat5.setDistructorInside();
+            } else {
+                map3.plat5.noDistructorInside();
+            }
+            if (distructorPos.equals("1,2")) {
+                map3.plat6.setDistructorInside();
+            } else {
+                map3.plat6.noDistructorInside();
+            }
+            if (distructorPos.equals("1,3")) {
+                map3.plat7.setDistructorInside();
+            } else {
+                map3.plat7.noDistructorInside();
+            }
+            if (distructorPos.equals("2,1")) {
+                map3.plat8.setDistructorInside();
+            } else {
+                map3.plat8.noDistructorInside();
+            }
+            if (distructorPos.equals("2,2")) {
+                map3.plat9.setDistructorInside();
+            } else {
+                map3.plat9.noDistructorInside();
+            }
+            if (distructorPos.equals("2,3")) {
+                map3.plat10.setDistructorInside();
+            } else {
+                map3.plat10.noDistructorInside();
+            }
+        }
 
         map3.plat1.setAmmo(platformAmmoTile.get("0,0").getType());
         map3.plat2.setAmmo(platformAmmoTile.get("0,1").getType());
@@ -890,6 +1455,326 @@ public final class CliPrinter {
         CliMap4 map4 = new CliMap4();
         Map<String, AmmoRep> platformAmmoTile = lightGameVersion.getPlatformAmmoTile();
         Map<String, String> playerPlatform = lightGameVersion.getPlayerPlatform();
+        String bansheePos = playerPlatform.get("BANSHEE");
+        String sprogPos = playerPlatform.get("SPROG");
+        String dozerPos = playerPlatform.get("DOZER");
+        String violetPos = playerPlatform.get("VIOLET");
+        String distructorPos = playerPlatform.get("DISTRUCTOR");
+
+        if(bansheePos != null) {
+            if (bansheePos.equals("0,0")) {
+                map4.plat1.setBansheeInside();
+            } else {
+                map4.plat1.noBansheeInside();
+            }
+            if (bansheePos.equals("0,1")) {
+                map4.plat2.setBansheeInside();
+            } else {
+                map4.plat2.noBansheeInside();
+            }
+            if (bansheePos.equals("0,2")) {
+                map4.plat3.setBansheeInside();
+            } else {
+                map4.plat3.noBansheeInside();
+            }
+            if (bansheePos.equals("0,3")) {
+                map4.plat4.setBansheeInside();
+            } else {
+                map4.plat4.noBansheeInside();
+            }
+            if (bansheePos.equals("1,0")) {
+                map4.plat5.setBansheeInside();
+            } else {
+                map4.plat5.noBansheeInside();
+            }
+            if (bansheePos.equals("1,1")) {
+                map4.plat6.setBansheeInside();
+            } else {
+                map4.plat6.noBansheeInside();
+            }
+            if (bansheePos.equals("1,2")) {
+                map4.plat7.setBansheeInside();
+            } else {
+                map4.plat7.noBansheeInside();
+            }
+            if (bansheePos.equals("1,3")) {
+                map4.plat8.setBansheeInside();
+            } else {
+                map4.plat8.noBansheeInside();
+            }
+            if (bansheePos.equals("2,0")) {
+                map4.plat9.setBansheeInside();
+            } else {
+                map4.plat9.noBansheeInside();
+            }
+            if (bansheePos.equals("2,1")) {
+                map4.plat10.setBansheeInside();
+            } else {
+                map4.plat10.noBansheeInside();
+            }
+            if (bansheePos.equals("2,2")) {
+                map4.plat11.setBansheeInside();
+            } else {
+                map4.plat11.noBansheeInside();
+            }
+            if (bansheePos.equals("2,3")) {
+                map4.plat12.setBansheeInside();
+            } else {
+                map4.plat12.noBansheeInside();
+            }
+        }
+
+        if (sprogPos != null) {
+            if (sprogPos.equals("0,0")) {
+                map4.plat1.setSprogInside();
+            } else {
+                map4.plat1.noSprogInside();
+            }
+            if (sprogPos.equals("0,1")) {
+                map4.plat2.setSprogInside();
+            } else {
+                map4.plat2.noSprogInside();
+            }
+            if (sprogPos.equals("0,2")) {
+                map4.plat3.setSprogInside();
+            } else {
+                map4.plat3.noSprogInside();
+            }
+            if (sprogPos.equals("0,3")) {
+                map4.plat4.setSprogInside();
+            } else {
+                map4.plat4.noSprogInside();
+            }
+            if (sprogPos.equals("1,0")) {
+                map4.plat5.setSprogInside();
+            } else {
+                map4.plat5.noSprogInside();
+            }
+            if (sprogPos.equals("1,1")) {
+                map4.plat6.setSprogInside();
+            } else {
+                map4.plat6.noSprogInside();
+            }
+            if (sprogPos.equals("1,2")) {
+                map4.plat7.setSprogInside();
+            } else {
+                map4.plat7.noSprogInside();
+            }
+            if (sprogPos.equals("1,3")) {
+                map4.plat8.setSprogInside();
+            } else {
+                map4.plat8.noSprogInside();
+            }
+            if (sprogPos.equals("2,0")) {
+                map4.plat9.setSprogInside();
+            } else {
+                map4.plat9.noSprogInside();
+            }
+            if (sprogPos.equals("2,1")) {
+                map4.plat10.setSprogInside();
+            } else {
+                map4.plat10.noSprogInside();
+            }
+            if (sprogPos.equals("2,2")) {
+                map4.plat11.setSprogInside();
+            } else {
+                map4.plat11.noSprogInside();
+            }
+            if (sprogPos.equals("2,3")) {
+                map4.plat12.setSprogInside();
+            } else {
+                map4.plat12.noSprogInside();
+            }
+        }
+
+        if (dozerPos != null) {
+            if (dozerPos.equals("0,0")) {
+                map4.plat1.setDozerInside();
+            } else {
+                map4.plat1.noDozerInside();
+            }
+            if (dozerPos.equals("0,1")) {
+                map4.plat2.setDozerInside();
+            } else {
+                map4.plat2.noDozerInside();
+            }
+            if (dozerPos.equals("0,2")) {
+                map4.plat3.setDozerInside();
+            } else {
+                map4.plat3.noDozerInside();
+            }
+            if (dozerPos.equals("0,3")) {
+                map4.plat4.setDozerInside();
+            } else {
+                map4.plat4.noDozerInside();
+            }
+            if (dozerPos.equals("1,0")) {
+                map4.plat5.setDozerInside();
+            } else {
+                map4.plat5.noDozerInside();
+            }
+            if (dozerPos.equals("1,1")) {
+                map4.plat6.setDozerInside();
+            } else {
+                map4.plat6.noDozerInside();
+            }
+            if (dozerPos.equals("1,2")) {
+                map4.plat7.setDozerInside();
+            } else {
+                map4.plat7.noDozerInside();
+            }
+            if (dozerPos.equals("1,3")) {
+                map4.plat8.setDozerInside();
+            } else {
+                map4.plat8.noDozerInside();
+            }
+            if (dozerPos.equals("2,0")) {
+                map4.plat9.setDozerInside();
+            } else {
+                map4.plat9.noDozerInside();
+            }
+            if (dozerPos.equals("2,1")) {
+                map4.plat10.setDozerInside();
+            } else {
+                map4.plat10.noDozerInside();
+            }
+            if (dozerPos.equals("2,2")) {
+                map4.plat11.setDozerInside();
+            } else {
+                map4.plat11.noDozerInside();
+            }
+            if (dozerPos.equals("2,3")) {
+                map4.plat12.setDozerInside();
+            } else {
+                map4.plat12.noDozerInside();
+            }
+        }
+
+        if (violetPos != null) {
+            if (violetPos.equals("0,0")) {
+                map4.plat1.setVioletInside();
+            } else {
+                map4.plat1.noVioletInside();
+            }
+            if (violetPos.equals("0,1")) {
+                map4.plat2.setVioletInside();
+            } else {
+                map4.plat2.noVioletInside();
+            }
+            if (violetPos.equals("0,2")) {
+                map4.plat3.setVioletInside();
+            } else {
+                map4.plat3.noVioletInside();
+            }
+            if (violetPos.equals("0,3")) {
+                map4.plat4.setVioletInside();
+            } else {
+                map4.plat4.noVioletInside();
+            }
+            if (violetPos.equals("1,0")) {
+                map4.plat5.setVioletInside();
+            } else {
+                map4.plat5.noVioletInside();
+            }
+            if (violetPos.equals("1,1")) {
+                map4.plat6.setVioletInside();
+            } else {
+                map4.plat6.noVioletInside();
+            }
+            if (violetPos.equals("1,2")) {
+                map4.plat7.setVioletInside();
+            } else {
+                map4.plat7.noVioletInside();
+            }
+            if (violetPos.equals("1,3")) {
+                map4.plat8.setVioletInside();
+            } else {
+                map4.plat8.noVioletInside();
+            }
+            if (violetPos.equals("2,0")) {
+                map4.plat9.setVioletInside();
+            } else {
+                map4.plat9.noVioletInside();
+            }
+            if (violetPos.equals("2,1")) {
+                map4.plat10.setVioletInside();
+            } else {
+                map4.plat10.noVioletInside();
+            }
+            if (violetPos.equals("2,2")) {
+                map4.plat11.setVioletInside();
+            } else {
+                map4.plat11.noVioletInside();
+            }
+            if (violetPos.equals("2,3")) {
+                map4.plat12.setVioletInside();
+            } else {
+                map4.plat12.noVioletInside();
+            }
+        }
+
+        if (distructorPos != null) {
+            if (distructorPos.equals("0,0")) {
+                map4.plat1.setDistructorInside();
+            } else {
+                map4.plat1.noDistructorInside();
+            }
+            if (distructorPos.equals("0,1")) {
+                map4.plat2.setDistructorInside();
+            } else {
+                map4.plat2.noDistructorInside();
+            }
+            if (distructorPos.equals("0,2")) {
+                map4.plat3.setDistructorInside();
+            } else {
+                map4.plat3.noDistructorInside();
+            }
+            if (distructorPos.equals("0,3")) {
+                map4.plat4.setDistructorInside();
+            } else {
+                map4.plat4.noDistructorInside();
+            }
+            if (distructorPos.equals("1,0")) {
+                map4.plat5.setDistructorInside();
+            } else {
+                map4.plat5.noDistructorInside();
+            }
+            if (distructorPos.equals("1,1")) {
+                map4.plat6.setDistructorInside();
+            } else {
+                map4.plat6.noDistructorInside();
+            }
+            if (distructorPos.equals("1,2")) {
+                map4.plat7.setDistructorInside();
+            } else {
+                map4.plat7.noDistructorInside();
+            }
+            if (distructorPos.equals("1,3")) {
+                map4.plat8.setDistructorInside();
+            } else {
+                map4.plat8.noDistructorInside();
+            }
+            if (distructorPos.equals("2,0")) {
+                map4.plat9.setDistructorInside();
+            } else {
+                map4.plat9.noDistructorInside();
+            }
+            if (distructorPos.equals("2,1")) {
+                map4.plat10.setDistructorInside();
+            } else {
+                map4.plat10.noDistructorInside();
+            }
+            if (distructorPos.equals("2,2")) {
+                map4.plat11.setDistructorInside();
+            } else {
+                map4.plat11.noDistructorInside();
+            }
+            if (distructorPos.equals("2,3")) {
+                map4.plat12.setDistructorInside();
+            } else {
+                map4.plat12.noDistructorInside();
+            }
+        }
 
         map4.plat1.setAmmo(platformAmmoTile.get("0,0").getType());
         map4.plat2.setAmmo(platformAmmoTile.get("0,1").getType());
