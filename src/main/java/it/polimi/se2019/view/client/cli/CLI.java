@@ -294,4 +294,9 @@ public class CLI extends RemoteView {
         }
         //TODO
     }
+
+    @Override
+    public void setRandomChar(String randomChar) {
+        myCharEnumString = randomChar;
+    }
 }

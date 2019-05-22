@@ -337,6 +337,11 @@ public class GUI extends RemoteView {
          */
     }
 
+    @Override
+    public void setRandomChar(String randomChar) {
+        charInString = randomChar;
+    }
+
     public String getCharInString() {
         return charInString;
     }

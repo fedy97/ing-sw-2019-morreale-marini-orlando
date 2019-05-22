@@ -350,6 +350,9 @@ public class Game extends Observable {
                     Player p = new Player(user, c, null);
                     players.add(p);
                     characterPlayers.put(c, p);
+                    SetRandomCharacterMessage message = new SetRandomCharacterMessage(c.name(), user);
+                    setChanged();
+                    notifyObservers(message);
                 }
             } catch (Exception e) {
                 HandyFunctions.LOGGER.log(Level.SEVERE, "error in creating random character");
