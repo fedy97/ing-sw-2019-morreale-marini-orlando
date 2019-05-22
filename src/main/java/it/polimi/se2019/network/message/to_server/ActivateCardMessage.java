@@ -26,8 +26,8 @@ public class ActivateCardMessage extends ToServerMessage {
             actor.processPowerUp(powerUp);
         }
 
-        if(Deserializer.getWeapon(id) != null) {
-            WeaponCard weapon = Deserializer.getWeapon(id);
+        if(Deserializer.getWeapon(Integer.toString(id)) != null) {
+            WeaponCard weapon = Deserializer.getWeapon(Integer.toString(id));
             actor.setState(ControllerState.PROCESSING_WEAPON);
             //actor.addStages(weapon);
             actor.processWeaponCard(weapon);

@@ -21,9 +21,9 @@ public class ReloadWeaponsMessage extends ToServerMessage {
     @Override
     public void performAction() {
         Controller actor = Controller.getInstance();
-        List<Integer> lightVersion = (ArrayList<Integer>) payload;
+        List<String> lightVersion = (ArrayList<String>) payload;
         List<WeaponCard> weapons = new ArrayList<>();
-        for (int weapon : lightVersion)
+        for (String weapon : lightVersion)
             weapons.add(Deserializer.getWeapon(weapon));
 
         PlayerManager manager = actor.getPlayerManager();
