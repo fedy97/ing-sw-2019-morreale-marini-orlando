@@ -5,9 +5,7 @@ import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.client.SocketClient;
-import it.polimi.se2019.network.message.to_server.SendCharacterChosenMessage;
-import it.polimi.se2019.network.message.to_server.SendInitPowerUpMessage;
-import it.polimi.se2019.network.message.to_server.SendMapChosenMessage;
+import it.polimi.se2019.network.message.to_server.*;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.client.RemoteView;
@@ -70,6 +68,37 @@ public class CLI extends RemoteView {
         CliSetUp.cursorUp(34);
         CliSetUp.cursorRight(10);
         CliPrinter.drawPlayersInfoBox(lightGameVersion);
+        CliSetUp.cursorDown(20);
+        CliSetUp.cursorLeft(106);
+        new Thread( () -> {
+            Console c = System.console();
+            int choise;
+            choise = Character.getNumericValue((c.readPassword())[0]);
+            if (choise == 1)
+                iWantToMove();
+            else if(choise == 2)
+                iWantToGrab();
+            else
+                iWantToShoot();
+        }).start();
+    }
+
+    public void iWantToMove() {
+        PerformActionMessage message = new PerformActionMessage("action1");
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
+    }
+
+    public void iWantToGrab() {
+        PerformActionMessage message = new PerformActionMessage("action2");
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
+    }
+
+    public void iWantToShoot() {
+
     }
 
     @Override
@@ -292,10 +321,16 @@ public class CLI extends RemoteView {
 
     @Override
     public void lightPlatforms(List<String> platforms) {
-        for (String platform : platforms) {
-            HandyFunctions.printLineConsole("Platform" + platform + "was lighted!");
-        }
-        //TODO
+        CliPrinter.printPossiblePlatform(platforms);
+        new Thread( () -> {
+            String platform;
+            Scanner c = new Scanner(System.in);
+            platform = c.next();
+            MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(platform);
+            message.setSender(userName);
+            viewSetChanged();
+            notifyObservers(message);
+        }).start();
     }
 
     @Override

@@ -564,6 +564,46 @@ public final class CliPrinter {
         CliPrinter.weaponBox(CliColor.TEXTYELLOW,lightGameVersion.getPlatformWeapons().get("2,3"));
     }
 
+    public static void printPossiblePlatform(List<String> platforms) {
+        CliPrinter.stamp("\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                     Choose a platform:                                     ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliSetUp.cursorLeft(78);
+        CliSetUp.cursorUp(6);
+        for (String s: platforms) {
+            stamp("("+s+")"+ " ");
+        }
+        stamp(": ");
+    }
+
     public static void printMap(LightGameVersion lightGameVersion, String choosenBoard) {
         if(choosenBoard.equals("1"))
             printLightMap1(lightGameVersion);
