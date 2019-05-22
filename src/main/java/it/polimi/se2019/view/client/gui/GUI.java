@@ -29,14 +29,17 @@ public class GUI extends RemoteView {
     private ChooseCharacterController chooseCharacterController;
     private GameBoardController gameBoardController;
     private ChoosePowerupController choosePowerupController;
+    private StatsBoardController statsBoardController;
 
     private Scene sceneWaitingLobby;
     private Scene sceneChooseMap;
     private Scene sceneChooseCharacter;
     private Scene sceneGameBoard;
     private Scene sceneChoosePowerup;
+    private Scene sceneStatsBoard;
     private Stage stage;
     private Stage secondStage;
+    private Stage statsStage;
     private String charInString;
     private String config;
 
@@ -99,7 +102,9 @@ public class GUI extends RemoteView {
         Platform.runLater(
                 () -> {
                     initGameBoard(config,ammoReps,posWeapons);
+                    initStatsBoard();
                     gameBoardController.passGUI(this);
+                    statsBoardController.passGUI(this);
                     stage.setScene(sceneGameBoard);
                     stage.setResizable(false);
                     stage.show();
@@ -157,6 +162,19 @@ public class GUI extends RemoteView {
         }
     }
 
+    protected void initStatsBoard(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/statsBoard.fxml"));
+        try {
+            Parent root = loader.load();
+            statsStage = new Stage();
+            statsStage.setTitle("Stats");
+            sceneStatsBoard = new Scene(root);
+            statsBoardController = loader.getController();
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing stats board");
+        }
+    }
+
     private void initChoosePowerup(CardRep p1, CardRep p2) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/choosePowerup.fxml"));
         try {
@@ -210,7 +228,10 @@ public class GUI extends RemoteView {
     @Override
     public void updateAll(LightGameVersion lightGameVersion) {
         Platform.runLater(
-                () -> gameBoardController.updateAll(lightGameVersion));
+                () -> {
+                    gameBoardController.updateAll(lightGameVersion);
+                    statsBoardController.updateAll(lightGameVersion);
+                });
     }
 
     protected void sendMapChosenByPlayer(int config) {
@@ -318,6 +339,14 @@ public class GUI extends RemoteView {
 
     public String getCharInString() {
         return charInString;
+    }
+
+    public Stage getStatsStage() {
+        return statsStage;
+    }
+
+    public Scene getSceneStatsBoard() {
+        return sceneStatsBoard;
     }
 }
 

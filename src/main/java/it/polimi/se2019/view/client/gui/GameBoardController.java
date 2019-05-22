@@ -25,15 +25,7 @@ public class GameBoardController {
     @FXML
     private ImageView mapImage;
     @FXML
-    private Button sprogbutton;
-    @FXML
-    private Button bansheebutton;
-    @FXML
-    private Button distructorbutton;
-    @FXML
-    private Button dozerbutton;
-    @FXML
-    private Button violetbutton;
+    private Button statsbutton;
     @FXML
     private Button zerozero;
     @FXML
@@ -260,6 +252,8 @@ public class GameBoardController {
     private Button movebutton;
     @FXML
     private Button grabbutton;
+    @FXML
+    private Button shootbutton;
 
     private List<AmmoRep> ammoReps;
     private Map<String, ImageView> posAmmo;
@@ -532,6 +526,7 @@ public class GameBoardController {
     }
 
     protected void updateAll(LightGameVersion lightGameVersion) {
+        this.lightGameVersion = lightGameVersion;
         //update position of players
         updatePositionsPlayers(lightGameVersion);
         //update the 9 weapons in the field
@@ -576,7 +571,6 @@ public class GameBoardController {
     }
 
     private void updateWeapons(LightGameVersion lightGameVersion) {
-        this.lightGameVersion = lightGameVersion;
         for (Map.Entry<String, ArrayList<ImageView>> entry : posWeaponsImages.entrySet()) {
             String pos = entry.getKey();
             List<ImageView> weaponsImagesInSpot = entry.getValue();
@@ -634,6 +628,18 @@ public class GameBoardController {
 
     public void grabClick() {
         gui.iWantToDoSomething("action2");
+    }
+    public void shootClick(){
+        //TODO i want to do action 3
+    }
+
+    public void statsClick(){
+        Platform.runLater(
+                () -> {
+                    gui.getStatsStage().setScene(gui.getSceneStatsBoard());
+                    gui.getStatsStage().setResizable(false);
+                    gui.getStatsStage().show();
+                });
     }
 
     public void zerozeroClick() {
@@ -696,21 +702,6 @@ public class GameBoardController {
         gui.sendPlatformChosen("2,3");
     }
 
-    public void dozerClick() {
-    }
-
-    public void bansheeClick() {
-    }
-
-    public void sprogClick() {
-    }
-
-    public void distructorClick() {
-    }
-
-    public void violetClick() {
-    }
-
     public void in10_1click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("1,0").get(0));
     }
@@ -755,11 +746,13 @@ public class GameBoardController {
     protected void disableActionButtons() {
         movebutton.setDisable(true);
         grabbutton.setDisable(true);
+        shootbutton.setDisable(true);
     }
 
     protected void enableActionButtons() {
         movebutton.setDisable(false);
         grabbutton.setDisable(false);
+        shootbutton.setDisable(false);
     }
 
 }

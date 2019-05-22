@@ -466,50 +466,10 @@
          <image>
             <Image url="@assets/powerups/AD_powerups_IT_02.jpg" />
          </image></ImageView>
-      <Button fx:id="dozerbutton" layoutX="430.0" layoutY="649.0" mnemonicParsing="false" onAction="#dozerClick" prefHeight="63.0" prefWidth="64.0">
-         <graphic>
-            <ImageView fitHeight="51.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/characters/dozer2.jpg" />
-               </image>
-            </ImageView>
-         </graphic></Button>
-      <Button fx:id="violetbutton" layoutX="514.0" layoutY="649.0" mnemonicParsing="false" onAction="#violetClick" prefHeight="63.0" prefWidth="64.0">
-         <graphic>
-            <ImageView fitHeight="48.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/characters/violet.jpg" />
-               </image>
-            </ImageView>
-         </graphic></Button>
-      <Button fx:id="distructorbutton" layoutX="599.0" layoutY="649.0" mnemonicParsing="false" onAction="#distructorClick" prefHeight="63.0" prefWidth="64.0">
-         <graphic>
-            <ImageView fitHeight="48.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/characters/distructor2.jpg" />
-               </image>
-            </ImageView>
-         </graphic></Button>
-      <Button fx:id="sprogbutton" layoutX="680.0" layoutY="649.0" mnemonicParsing="false" onAction="#sprogClick" prefHeight="63.0" prefWidth="64.0">
-         <graphic>
-            <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/characters/sprog2.jpg" />
-               </image>
-            </ImageView>
-         </graphic></Button>
-      <Button fx:id="bansheebutton" layoutX="763.0" layoutY="649.0" mnemonicParsing="false" onAction="#bansheeClick" prefHeight="63.0" prefWidth="64.0">
-         <graphic>
-            <ImageView fitHeight="52.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/characters/banshee2.jpg" />
-               </image>
-            </ImageView>
-         </graphic></Button>
       <ImageView fitHeight="162.0" fitWidth="116.0" layoutX="933.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="movebutton" layoutX="30.0" layoutY="603.0" mnemonicParsing="false" onAction="#moveClick" text="move" />
       <Button fx:id="grabbutton" layoutX="31.0" layoutY="637.0" mnemonicParsing="false" onAction="#grabClick" prefHeight="25.0" prefWidth="54.0" text="grab" />
-      <Button layoutX="30.0" layoutY="671.0" mnemonicParsing="false" text="shoot" />
+      <Button fx:id="shootbutton" layoutX="30.0" layoutY="671.0" mnemonicParsing="false" onAction="#shootClick" text="shoot" />
       <ImageView fitHeight="162.0" fitWidth="122.0" layoutX="931.0" layoutY="185.0" pickOnBounds="true">
          <image>
             <Image url="@assets/weapons/back.png" />
@@ -583,5 +543,6 @@
       </GridPane>
       <Button fx:id="zerozero" layoutX="171.0" layoutY="151.0" mnemonicParsing="false" onAction="#zerozeroClick" prefHeight="162.0" prefWidth="184.0" style="-fx-background-color: transparent;" />
       <Button fx:id="oneone" layoutX="355.0" layoutY="313.0" mnemonicParsing="false" onAction="#oneoneClick" prefHeight="162.0" prefWidth="184.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="statsbutton" layoutX="416.0" layoutY="659.0" mnemonicParsing="false" onAction="#statsClick" prefHeight="38.0" prefWidth="306.0" text="Stats" />
    </children>
 </AnchorPane>

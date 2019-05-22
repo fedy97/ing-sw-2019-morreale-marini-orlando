@@ -28,6 +28,7 @@ public class SendInitPowerUpMessage extends ToServerMessage {
             Player curr = c.getPlayerManager().getCurrentPlayer();
             //move the card not chosen from the user's power ups to the garbage deck
             Controller.getInstance().getDecksManager().addToGarbage(Deserializer.getPowerUp(hashGarbage, this.sender));
+            curr.removePowerUpCard(Deserializer.getPowerUp(hashGarbage, this.sender));
             //now we want to set the right generation spot to the player
             PowerUpCard p = Deserializer.getPowerUp(hashChosen, this.sender);
             Color powerupColor = HandyFunctions.stringToColor(p.getAmmoCube().name());
