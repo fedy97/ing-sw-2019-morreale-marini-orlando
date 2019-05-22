@@ -216,7 +216,8 @@ public class Game extends Observable {
 
             playerPowerups.put(player.getCharacter().name(), powerUps);
             playerWeapons.put(player.getCharacter().name(), weapons);
-            playerBoardRep.put(player.getCharacter().name(), new BoardRep(damages, marks));
+            //TODO create colorQty
+            playerBoardRep.put(player.getCharacter().name(), new BoardRep(damages, marks,null));
         }
 
         lightVersion.setPlayerPlatform(playerPlatform);
