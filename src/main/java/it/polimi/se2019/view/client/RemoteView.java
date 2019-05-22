@@ -24,7 +24,7 @@ public abstract class RemoteView extends View {
     public abstract void setRandomChar(String randomChar);
     public abstract void updateVotesMapChosen(Map<Integer,Integer> map);
     public abstract void updateVotesCharacterChosen(String c);
-    public abstract void lightWeapons(List<String> weapons);
+    public abstract void lightWeapons(List<Integer> weapons);
     public abstract void lightPlatforms(List<String> platforms);
 
 }

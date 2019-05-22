@@ -541,7 +541,10 @@ public class GameBoardController {
         for (Map.Entry<String, AmmoRep> entry : lightGameVersion.getPlatformAmmoTile().entrySet()) {
             String pos = entry.getKey();
             AmmoRep ammoRep = entry.getValue();
-            posAmmo.get(pos).setImage(new Image("/assets/ammos/" + ammoRep.getType() + ".jpg"));
+            if (ammoRep.getId() != 0)
+                posAmmo.get(pos).setImage(new Image("/assets/ammos/" + ammoRep.getType() + ".jpg"));
+            else
+                posAmmo.get(pos).setImage(new Image("/assets/ammos/back.png"));
         }
 
     }
