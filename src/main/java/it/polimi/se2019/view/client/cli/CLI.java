@@ -34,6 +34,7 @@ public class CLI extends RemoteView {
     private String myCharEnumString;
     private String chosenBoard;
     private int[][] map;
+    private boolean isAsking;
 
     public CLI() {
         try {
@@ -49,6 +50,7 @@ public class CLI extends RemoteView {
         vote[3] = 0;
         charChosen = new ArrayList<>();
         map = new int[3][4];
+        isAsking = false;
     }
 
     @Override
@@ -70,17 +72,21 @@ public class CLI extends RemoteView {
         CliPrinter.drawPlayersInfoBox(lightGameVersion);
         CliSetUp.cursorDown(20);
         CliSetUp.cursorLeft(106);
-        new Thread( () -> {
-            Console c = System.console();
-            int choise;
-            choise = Character.getNumericValue((c.readPassword())[0]);
-            if (choise == 1)
-                iWantToMove();
-            else if(choise == 2)
-                iWantToGrab();
-            else
-                iWantToShoot();
-        }).start();
+        if (!isAsking) {
+            new Thread(() -> {
+                isAsking = true;
+                Console c = System.console();
+                int choise;
+                choise = Character.getNumericValue((c.readPassword())[0]);
+                isAsking = false;
+                if (choise == 1)
+                    iWantToMove();
+                else if (choise == 2)
+                    iWantToGrab();
+                else
+                    iWantToShoot();
+            }).start();
+        }
     }
 
     public void iWantToMove() {
@@ -324,8 +330,8 @@ public class CLI extends RemoteView {
         CliPrinter.printPossiblePlatform(platforms);
         new Thread( () -> {
             String platform;
-            Scanner c = new Scanner(System.in);
-            platform = c.next();
+            Console c = System.console();
+            platform = c.readLine();
             MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(platform);
             message.setSender(userName);
             viewSetChanged();
