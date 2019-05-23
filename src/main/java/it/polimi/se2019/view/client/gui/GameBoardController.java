@@ -607,7 +607,10 @@ public class GameBoardController {
                 firstSetup = false;
             }
             for (int i = 0; i < posWeaponsReps.size(); i++) {
-                weaponsImagesInSpot.get(i).setImage(new Image(weaponsToCopy.get(i).getPath()));
+                if (weaponsToCopy.get(i).getId() != 0)
+                    weaponsImagesInSpot.get(i).setImage(new Image(weaponsToCopy.get(i).getPath()));
+                else
+                    weaponsImagesInSpot.get(i).setImage(new Image("/assets/weapons/back.png"));
                 double x = weaponsImagesInSpot.get(i).getX();
                 double y = weaponsImagesInSpot.get(i).getY();
                 if (pos.equals("1,0") && firstSetup) {
@@ -678,75 +681,100 @@ public class GameBoardController {
                 });
     }
 
+    public void w02_1Click(){
+        darkenAllWeapons();
+        gui.sendWeaponGrabbed(buttonsHashes.get(w02_1));
+    }
+    public void w02_2Click(){
+        darkenAllWeapons();
+        gui.sendWeaponGrabbed(buttonsHashes.get(w02_2));
+    }
+    public void w02_3Click(){
+        darkenAllWeapons();
+        gui.sendWeaponGrabbed(buttonsHashes.get(w02_3));
+    }
+    public void w10_1Click(){
+        darkenAllWeapons();
+        gui.sendWeaponGrabbed(buttonsHashes.get(w10_1));
+    }
+    public void w10_2Click(){
+        darkenAllWeapons();
+        gui.sendWeaponGrabbed(buttonsHashes.get(w10_2));
+    }
+    public void w10_3Click(){
+        darkenAllWeapons();
+        gui.sendWeaponGrabbed(buttonsHashes.get(w10_3));
+    }
+    public void w23_1Click(){
+        darkenAllWeapons();
+        gui.sendWeaponGrabbed(buttonsHashes.get(w23_1));
+    }
+    public void w23_2Click(){
+        darkenAllWeapons();
+        gui.sendWeaponGrabbed(buttonsHashes.get(w23_2));
+    }
+    public void w23_3Click(){
+        darkenAllWeapons();
+        gui.sendWeaponGrabbed(buttonsHashes.get(w23_3));
+    }
+
     public void zerozeroClick() {
         darkenAllPlatforms();
-
         gui.sendPlatformChosen("0,0");
     }
 
     public void zerooneClick() {
         darkenAllPlatforms();
-
         gui.sendPlatformChosen("0,1");
     }
 
     public void zerotwoClick() {
         darkenAllPlatforms();
-
         gui.sendPlatformChosen("0,2");
     }
 
     public void zerothreeClick() {
         darkenAllPlatforms();
-
         gui.sendPlatformChosen("0,3");
     }
 
     public void onezeroClick() {
         darkenAllPlatforms();
-
         gui.sendPlatformChosen("1,0");
     }
 
     public void oneoneClick() {
         darkenAllPlatforms();
-
         gui.sendPlatformChosen("1,1");
     }
 
     public void onetwoClick() {
         darkenAllPlatforms();
-
         gui.sendPlatformChosen("1,2");
     }
 
     public void onethreeClick() {
         darkenAllPlatforms();
-
         gui.sendPlatformChosen("1,3");
     }
 
     public void twozeroClick() {
         darkenAllPlatforms();
-
         gui.sendPlatformChosen("2,0");
     }
 
     public void twooneClick() {
         darkenAllPlatforms();
-
         gui.sendPlatformChosen("2,1");
     }
 
     public void twotwoClick() {
         darkenAllPlatforms();
-
         gui.sendPlatformChosen("2,2");
     }
 
     public void twothreeClick() {
         darkenAllPlatforms();
-
         gui.sendPlatformChosen("2,3");
     }
 
@@ -789,6 +817,11 @@ public class GameBoardController {
     private void darkenAllPlatforms() {
         for (Map.Entry<String, Button> entry : posPlatform.entrySet())
             HandyFunctions.darkenButton(entry.getValue());
+    }
+    private void darkenAllWeapons(){
+        for (Map.Entry<Button,String> entry: buttonsHashes.entrySet()){
+            HandyFunctions.darkenButton(entry.getKey());
+        }
     }
 
     protected void disableActionButtons() {

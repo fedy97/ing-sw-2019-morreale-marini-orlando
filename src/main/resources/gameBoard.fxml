@@ -484,15 +484,15 @@
       <ImageView fx:id="weapon02_1" fitHeight="140.0" fitWidth="103.0" layoutX="560.0" pickOnBounds="true" />
       <ImageView fx:id="weapon02_2" fitHeight="140.0" fitWidth="103.0" layoutX="680.0" pickOnBounds="true" />
       <ImageView fx:id="weapon02_3" fitHeight="140.0" fitWidth="103.0" layoutX="803.0" pickOnBounds="true" />
-      <Button fx:id="w02_3" layoutX="803.0" mnemonicParsing="false" prefHeight="140.0" prefWidth="103.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="w23_3" layoutX="922.0" layoutY="615.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="w10_1" layoutX="6.0" layoutY="260.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="w10_2" layoutX="6.0" layoutY="361.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="w10_3" layoutX="6.0" layoutY="463.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="w23_2" layoutX="922.0" layoutY="509.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="w23_1" layoutX="922.0" layoutY="402.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="w02_2" layoutX="680.0" mnemonicParsing="false" prefHeight="140.0" prefWidth="103.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="w02_1" layoutX="560.0" mnemonicParsing="false" prefHeight="140.0" prefWidth="103.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="w02_3" layoutX="803.0" mnemonicParsing="false" onAction="#w02_3Click" prefHeight="140.0" prefWidth="103.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="w23_3" layoutX="922.0" layoutY="615.0" mnemonicParsing="false" onAction="#w23_3Click" prefHeight="97.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="w10_1" layoutX="6.0" layoutY="260.0" mnemonicParsing="false" onAction="#w10_1Click" prefHeight="97.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="w10_2" layoutX="6.0" layoutY="361.0" mnemonicParsing="false" onAction="#w10_2Click" prefHeight="97.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="w10_3" layoutX="6.0" layoutY="463.0" mnemonicParsing="false" onAction="#w10_3Click" prefHeight="97.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="w23_2" layoutX="922.0" layoutY="509.0" mnemonicParsing="false" onAction="#w23_2Click" prefHeight="97.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="w23_1" layoutX="922.0" layoutY="402.0" mnemonicParsing="false" onAction="#w23_1Click" prefHeight="97.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="w02_2" layoutX="680.0" mnemonicParsing="false" onAction="#w02_2Click" prefHeight="140.0" prefWidth="103.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="w02_1" layoutX="560.0" mnemonicParsing="false" onAction="#w02_1Click" prefHeight="140.0" prefWidth="103.0" style="-fx-background-color: transparent;" />
       <Button fx:id="info02_1" layoutX="631.0" layoutY="109.0" mnemonicParsing="false" onAction="#in02_1click" prefHeight="25.0" prefWidth="17.0" text="i" />
       <Button fx:id="info02_3" layoutX="878.0" layoutY="109.0" mnemonicParsing="false" onAction="#in02_3click" prefHeight="25.0" prefWidth="17.0" text="i" />
       <Button fx:id="info02_2" layoutX="752.0" layoutY="109.0" mnemonicParsing="false" onAction="#in02_2click" prefHeight="25.0" prefWidth="17.0" text="i" />

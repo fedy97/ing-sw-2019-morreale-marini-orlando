@@ -145,14 +145,15 @@ public class PlayerManager {
      * @throws MaxWeaponException        when the player has already three weapons, he can choose to discard one
      *                                   or not buying the current one
      */
-    public void buyWeapon(WeaponCard weapon) throws InsufficientAmmoException, MaxWeaponException {
+    public void buyWeapon(WeaponCard weapon) throws InsufficientAmmoException, MaxWeaponException,InvalidGenerationSpotException {
         AmmoBox box = currentPlayer.getPlayerBoard().getAmmoBox();
         currentPlayer.addWeaponCard(weapon);
+        currentPlayer.getCurrentPlatform().removeWeaponCard(weapon);
         AmmoCube[] cost = weapon.getExtraCost();
-
-        for (int i = 0; i < cost.length; i++)
-            box.removeAmmos(cost[i], 1);
-
+        if (cost != null) {
+            for (int i = 0; i < cost.length; i++)
+                box.removeAmmos(cost[i], 1);
+        }
         father.getGame().notifyChanges();
     }
 

@@ -268,6 +268,14 @@ public class GUI extends RemoteView {
         gameBoardController.enableActionButtons();
     }
 
+    protected void sendWeaponGrabbed(String hashWeapon) {
+        CollectWeaponMessage message = new CollectWeaponMessage(hashWeapon);
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
+        gameBoardController.enableActionButtons();
+    }
+
     protected void iWantToDoSomething(String action) {
         gameBoardController.disableActionButtons();
         PerformActionMessage message = new PerformActionMessage(action);

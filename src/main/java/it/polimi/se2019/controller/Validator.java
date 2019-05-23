@@ -56,7 +56,7 @@ public abstract class Validator{
      * according to the ammo qty in his AmmoBox
      */
     public List<WeaponCard> getGrabableWeapons() throws InvalidGenerationSpotException {
-        List<WeaponCard> res;
+        List<WeaponCard> res = new ArrayList<>();
         Player currPlayer = father.getPlayerManager().getCurrentPlayer();
         AmmoBox ammoBox = currPlayer.getPlayerBoard().getAmmoBox();
         Platform p = currPlayer.getCurrentPlatform();
@@ -64,11 +64,9 @@ public abstract class Validator{
         if (!p.isGenerationSpot())
             throw new InvalidGenerationSpotException();
 
-        res = new ArrayList<>(p.getWeapons());
-
-        for (WeaponCard weapon : res) {
-            if (!ammoBox.hasAmmos(weapon.getExtraCost()))
-                res.remove(weapon);
+        for (WeaponCard weapon : p.getWeapons()) {
+            if (ammoBox.hasAmmos(weapon.getExtraCost()))
+                res.add(weapon);
         }
 
         return res;
