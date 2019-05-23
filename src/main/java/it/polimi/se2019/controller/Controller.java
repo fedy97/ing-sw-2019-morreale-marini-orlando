@@ -106,9 +106,10 @@ public class Controller implements Observer {
                 }
             }).start();
         }
-
-        if(playerManager.getActionsLeft() == 0){
-            DisableActionButtonMessage msg = new DisableActionButtonMessage(null);
+        if (playerManager != null) {
+            if (playerManager.getActionsLeft() == 0) {
+                DisableActionButtonMessage msg = new DisableActionButtonMessage(null);
+            }
         }
     }
 

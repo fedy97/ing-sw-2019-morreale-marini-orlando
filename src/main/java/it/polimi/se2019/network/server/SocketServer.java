@@ -75,6 +75,7 @@ public class SocketServer implements Server {
 
                     } catch (Exception e) {
                         HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
+                        e.printStackTrace();
                     }
                 }
             }).start();
