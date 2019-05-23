@@ -1,6 +1,8 @@
 package it.polimi.se2019.utils;
 
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.exceptions.InvalidGenerationSpotException;
+import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
@@ -42,6 +44,16 @@ public final class Deserializer {
             if (weaponCard.toString().equals(light))
                 return weaponCard;
         }
+        for (Platform platform : Game.getInstance().getGameField().getPlatforms()) {
+            try {
+                for (WeaponCard weaponCard : platform.getWeapons()) {
+                    if (weaponCard.toString().equals(light))
+                        return weaponCard;
+                }
+            } catch (InvalidGenerationSpotException ex) {}
+
+        }
+
         return null;
     }
 

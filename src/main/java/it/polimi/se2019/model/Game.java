@@ -248,9 +248,15 @@ public class Game extends Observable {
             } else {
                 try {
                     List<CardRep> weapons = new ArrayList<>();
+
                     for (WeaponCard weaponCard : platform.getWeapons())
                         weapons.add(new CardRep(HandyFunctions.getSystemAddress(weaponCard), weaponCard.getName(), weaponCard.getDescription(),
                                 weaponCard.getImgPath()));
+                    if (platform.getWeapons().size() < 3) {
+                        for (int j = platform.getWeapons().size(); j < 3; j++) {
+                            weapons.add(new CardRep(0, "", "", ""));
+                        }
+                    }
                     platformWeapons.put(gameField.getPlatformPosLight(platform), weapons);
                 } catch (InvalidGenerationSpotException ex) {
                     HandyFunctions.LOGGER.log(Level.SEVERE, ex.getMessage());
