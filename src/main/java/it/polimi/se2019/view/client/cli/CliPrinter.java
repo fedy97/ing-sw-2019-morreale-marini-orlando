@@ -8,9 +8,7 @@ import it.polimi.se2019.utils.HandyFunctions;
 import javafx.scene.control.cell.CheckBoxListCell;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Simone Orlando
@@ -604,12 +602,13 @@ public final class CliPrinter {
         stamp(": ");
     }
 
-    public static ArrayList<Integer> printPossibleWeapon(LightGameVersion lightGameVersion, List<String> weapons) {
+    public static Map<Integer, Integer> printPossibleWeapon(LightGameVersion lightGameVersion, List<String> weapons) {
         Map<String, List<CardRep>> platformWeapons = lightGameVersion.getPlatformWeapons();
         List<CardRep> plat1 = platformWeapons.get("0,2");
         List<CardRep> plat2 = platformWeapons.get("1,0");
         List<CardRep> plat3 = platformWeapons.get("2,3");
-        ArrayList<Integer> hashes = new ArrayList<>();
+        Map<Integer, Integer> hashes = new HashMap<>();
+
 
         CliSetUp.cursorLeft(5);
         CliSetUp.cursorDown(1);
@@ -651,7 +650,7 @@ public final class CliPrinter {
             for (String w: weapons) {
                 if(c.getId() == Integer.parseInt(w)) {
                     CliPrinter.stamp(c.getTitle());
-                    hashes.add(c.getId());
+                    hashes.put(counter,c.getId());
                     if (counter < 2)
                         CliPrinter.stamp(", ");
                     counter ++;
@@ -662,7 +661,7 @@ public final class CliPrinter {
             for (String w: weapons) {
                 if(c.getId() == Integer.parseInt(w)) {
                     CliPrinter.stamp(c.getTitle());
-                    hashes.add(c.getId());
+                    hashes.put(counter,c.getId());
                     if (counter < 2)
                         CliPrinter.stamp(", ");
                     counter++;
@@ -673,7 +672,7 @@ public final class CliPrinter {
             for (String w: weapons) {
                 if(c.getId() == Integer.parseInt(w)) {
                     CliPrinter.stamp(c.getTitle());
-                    hashes.add(c.getId());
+                    hashes.put(counter,c.getId());
                     if (counter < 2)
                         CliPrinter.stamp(", ");
                     counter++;

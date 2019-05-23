@@ -80,6 +80,7 @@ public class CLI extends RemoteView {
                 Console c = System.console();
                 int choise;
                 choise = Character.getNumericValue((c.readPassword())[0]);
+                isAsking = false;
                 if (choise == 1)
                     iWantToMove();
                 else if (choise == 2)
@@ -98,6 +99,7 @@ public class CLI extends RemoteView {
     }
 
     public void iWantToGrab() {
+        isAsking = true;
         PerformActionMessage message = new PerformActionMessage("action2");
         message.setSender(userName);
         viewSetChanged();
@@ -323,33 +325,16 @@ public class CLI extends RemoteView {
 
     @Override
     public void lightWeapons(List<String> weapons) {
-        ArrayList<Integer> hashes;
+        Map<Integer, Integer> hashes;
         hashes = CliPrinter.printPossibleWeapon(lightGameVersion, weapons);
         new Thread( () -> {
             int choise;
             Scanner s = new Scanner(System.in);
             choise = s.nextInt();
-            if (choise == 1) {
-                CollectWeaponMessage message = new CollectWeaponMessage(Integer.toString(hashes.get(0).intValue()));
-                System.out.println(Integer.toString(hashes.get(0).intValue()));
-                message.setSender(userName);
-                viewSetChanged();
-                notifyObservers(message);
-            }
-            else if (choise == 2) {
-                CollectWeaponMessage message = new CollectWeaponMessage(Integer.toString(hashes.get(1).intValue()));
-                System.out.println(Integer.toString(hashes.get(1).intValue()));
-                message.setSender(userName);
-                viewSetChanged();
-                notifyObservers(message);
-            }
-            else {
-                CollectWeaponMessage message = new CollectWeaponMessage(Integer.toString(hashes.get(2).intValue()));
-                System.out.println(Integer.toString(hashes.get(2).intValue()));
-                message.setSender(userName);
-                viewSetChanged();
-                notifyObservers(message);
-            }
+            CollectWeaponMessage message = new CollectWeaponMessage(Integer.toString(hashes.get(choise).intValue()));
+            message.setSender(userName);
+            viewSetChanged();
+            notifyObservers(message);
             isAsking = false;
         }).start();
     }
