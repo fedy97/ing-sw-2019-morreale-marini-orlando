@@ -317,7 +317,8 @@ public class GUI extends RemoteView {
 
     @Override
     public void lightWeapons(List<String> weapons) {
-        //useless
+        Platform.runLater(
+                () -> gameBoardController.enlightenWeapons(weapons));
     }
 
     @Override

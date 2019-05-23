@@ -236,7 +236,7 @@ public class Game extends Observable {
         Map<String, List<CardRep>> platformWeapons = new HashMap<>();
 
         for (Platform platform : gameField.getPlatforms()) {
-            List<CardRep> weapons = new ArrayList<>();
+
             if (!platform.isGenerationSpot()) {
                 AmmoCard ammoCard = platform.getPlatformAmmoCard();
                 if (ammoCard != null)
@@ -245,15 +245,16 @@ public class Game extends Observable {
                 else
                     platformAmmoTile.put(gameField.getPlatformPosLight(platform),
                             new AmmoRep(0, "null"));
-            }
-
-            try {
-                for (WeaponCard weaponCard : platform.getWeapons())
-                    weapons.add(new CardRep(HandyFunctions.getSystemAddress(weaponCard), weaponCard.getName(), weaponCard.getDescription(),
-                            weaponCard.getImgPath()));
-                platformWeapons.put(gameField.getPlatformPosLight(platform), weapons);
-            } catch (InvalidGenerationSpotException e) {
-                //go on
+            } else {
+                try {
+                    List<CardRep> weapons = new ArrayList<>();
+                    for (WeaponCard weaponCard : platform.getWeapons())
+                        weapons.add(new CardRep(HandyFunctions.getSystemAddress(weaponCard), weaponCard.getName(), weaponCard.getDescription(),
+                                weaponCard.getImgPath()));
+                    platformWeapons.put(gameField.getPlatformPosLight(platform), weapons);
+                } catch (InvalidGenerationSpotException ex) {
+                    HandyFunctions.LOGGER.log(Level.SEVERE, ex.getMessage());
+                }
             }
         }
         lightVersion.setPlatformAmmoTile(platformAmmoTile);

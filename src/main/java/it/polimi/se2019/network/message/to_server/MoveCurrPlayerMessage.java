@@ -36,6 +36,7 @@ public class MoveCurrPlayerMessage extends ToServerMessage {
                     return;
                 } catch (Exception e) {
                     HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
+                    e.printStackTrace();
                 }
             } else {
                 actor.getPlayerManager().grabAmmoCard();
