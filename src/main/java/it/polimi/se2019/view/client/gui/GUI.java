@@ -98,10 +98,10 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void showGameBoard(List<AmmoRep> ammoReps,Map<String,List<CardRep>> posWeapons, List<String> arrChars) {
+    public void showGameBoard(List<AmmoRep> ammoReps, Map<String, List<CardRep>> posWeapons, List<String> arrChars) {
         Platform.runLater(
                 () -> {
-                    initGameBoard(config,ammoReps,posWeapons);
+                    initGameBoard(config, ammoReps, posWeapons);
                     initStatsBoard(arrChars);
                     gameBoardController.passGUI(this);
                     statsBoardController.passGUI(this);
@@ -147,7 +147,7 @@ public class GUI extends RemoteView {
         }
     }
 
-    private void initGameBoard(String config, List<AmmoRep> ammoReps,Map<String,List<CardRep>> posWeapons) {
+    private void initGameBoard(String config, List<AmmoRep> ammoReps, Map<String, List<CardRep>> posWeapons) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gameBoard.fxml"));
         try {
             Parent root = loader.load();
@@ -162,7 +162,7 @@ public class GUI extends RemoteView {
         }
     }
 
-    protected void initStatsBoard(List<String> arrChars){
+    protected void initStatsBoard(List<String> arrChars) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/statsBoard.fxml"));
         try {
             Parent root = loader.load();
@@ -259,7 +259,8 @@ public class GUI extends RemoteView {
         viewSetChanged();
         notifyObservers(message);
     }
-    protected void sendPlatformChosen(String pos){
+
+    protected void sendPlatformChosen(String pos) {
         MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(pos);
         message.setSender(userName);
         viewSetChanged();
@@ -267,7 +268,7 @@ public class GUI extends RemoteView {
         gameBoardController.enableActionButtons();
     }
 
-    protected void iWantToDoSomething(String action){
+    protected void iWantToDoSomething(String action) {
         gameBoardController.disableActionButtons();
         PerformActionMessage message = new PerformActionMessage(action);
         message.setSender(userName);
@@ -341,6 +342,11 @@ public class GUI extends RemoteView {
     @Override
     public void setRandomChar(String randomChar) {
         charInString = randomChar;
+    }
+
+    @Override
+    public void disableActions() {
+        //TODO
     }
 
     public String getCharInString() {

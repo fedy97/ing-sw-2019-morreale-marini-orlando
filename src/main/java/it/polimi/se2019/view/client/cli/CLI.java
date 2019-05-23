@@ -337,4 +337,9 @@ public class CLI extends RemoteView {
     public void setRandomChar(String randomChar) {
         myCharEnumString = randomChar;
     }
+
+    @Override
+    public void disableActions(){
+        //TODO
+    }
 }
