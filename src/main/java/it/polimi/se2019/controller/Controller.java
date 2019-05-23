@@ -10,6 +10,7 @@ import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.utils.TimerLobby;
 import it.polimi.se2019.view.server.VirtualView;
+import sun.security.util.DisabledAlgorithmConstraints;
 
 import java.util.*;
 import java.util.concurrent.BlockingDeque;
@@ -104,7 +105,11 @@ public class Controller implements Observer {
                     processWeaponCard(processingWeaponCard);
                 }
             }).start();
-
+        }
+        if (playerManager != null) {
+            if (playerManager.getActionsLeft() == 0) {
+                DisableActionButtonMessage msg = new DisableActionButtonMessage(null);
+            }
         }
     }
 

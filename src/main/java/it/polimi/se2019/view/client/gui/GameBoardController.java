@@ -12,10 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 
 public class GameBoardController {
@@ -255,6 +252,7 @@ public class GameBoardController {
     @FXML
     private Button shootbutton;
 
+    private Map<Button,String> buttonsHashes;
     private List<AmmoRep> ammoReps;
     private Map<String, ImageView> posAmmo;
     private Map<String, Button> posPlatform;
@@ -308,6 +306,17 @@ public class GameBoardController {
         posWeaponsImages.put("1,0", weapons10);
         posWeaponsImages.put("2,3", weapons23);
         posWeaponsImages.put("0,2", weapons02);
+
+        buttonsHashes = new HashMap<>();
+        buttonsHashes.put(w10_1,"");
+        buttonsHashes.put(w10_2,"");
+        buttonsHashes.put(w10_3,"");
+        buttonsHashes.put(w02_1,"");
+        buttonsHashes.put(w02_2,"");
+        buttonsHashes.put(w02_3,"");
+        buttonsHashes.put(w23_1,"");
+        buttonsHashes.put(w23_2,"");
+        buttonsHashes.put(w23_3,"");
 
         posPlatform = new HashMap<>();
         posPlatform.put("0,0", zerozero);
@@ -574,6 +583,19 @@ public class GameBoardController {
     }
 
     private void updateWeapons(LightGameVersion lightGameVersion) {
+        if (lightGameVersion != null) {
+            //associate buttons to hashcodes
+            posWeaponsReps = lightGameVersion.getPlatformWeapons();
+            buttonsHashes.put(w10_1, Integer.toString(posWeaponsReps.get("1,0").get(0).getId()));
+            buttonsHashes.put(w10_2, Integer.toString(posWeaponsReps.get("1,0").get(1).getId()));
+            buttonsHashes.put(w10_3, Integer.toString(posWeaponsReps.get("1,0").get(2).getId()));
+            buttonsHashes.put(w23_1, Integer.toString(posWeaponsReps.get("2,3").get(0).getId()));
+            buttonsHashes.put(w23_2, Integer.toString(posWeaponsReps.get("2,3").get(1).getId()));
+            buttonsHashes.put(w23_3, Integer.toString(posWeaponsReps.get("2,3").get(2).getId()));
+            buttonsHashes.put(w02_1, Integer.toString(posWeaponsReps.get("0,2").get(0).getId()));
+            buttonsHashes.put(w02_2, Integer.toString(posWeaponsReps.get("0,2").get(1).getId()));
+            buttonsHashes.put(w02_3, Integer.toString(posWeaponsReps.get("0,2").get(2).getId()));
+        }
         for (Map.Entry<String, ArrayList<ImageView>> entry : posWeaponsImages.entrySet()) {
             String pos = entry.getKey();
             List<ImageView> weaponsImagesInSpot = entry.getValue();
@@ -611,6 +633,16 @@ public class GameBoardController {
 
     }
 
+    protected void enlightenWeapons(List<String> hashes) {
+        for (Map.Entry<Button,String> entry : buttonsHashes.entrySet()){
+            Button currButt = entry.getKey();
+            String currHash = entry.getValue();
+            if (hashes.contains(currHash)) {
+                HandyFunctions.enlightenButton(currButt);
+            }
+        }
+    }
+
     private void showInstruction(CardRep cardRep) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Weapon Card");
@@ -632,11 +664,12 @@ public class GameBoardController {
     public void grabClick() {
         gui.iWantToDoSomething("action2");
     }
-    public void shootClick(){
+
+    public void shootClick() {
         //TODO i want to do action 3
     }
 
-    public void statsClick(){
+    public void statsClick() {
         Platform.runLater(
                 () -> {
                     gui.getStatsStage().setScene(gui.getSceneStatsBoard());
@@ -647,61 +680,73 @@ public class GameBoardController {
 
     public void zerozeroClick() {
         darkenAllPlatforms();
+
         gui.sendPlatformChosen("0,0");
     }
 
     public void zerooneClick() {
         darkenAllPlatforms();
+
         gui.sendPlatformChosen("0,1");
     }
 
     public void zerotwoClick() {
         darkenAllPlatforms();
+
         gui.sendPlatformChosen("0,2");
     }
 
     public void zerothreeClick() {
         darkenAllPlatforms();
+
         gui.sendPlatformChosen("0,3");
     }
 
     public void onezeroClick() {
         darkenAllPlatforms();
+
         gui.sendPlatformChosen("1,0");
     }
 
     public void oneoneClick() {
         darkenAllPlatforms();
+
         gui.sendPlatformChosen("1,1");
     }
 
     public void onetwoClick() {
         darkenAllPlatforms();
+
         gui.sendPlatformChosen("1,2");
     }
 
     public void onethreeClick() {
         darkenAllPlatforms();
+
         gui.sendPlatformChosen("1,3");
     }
 
     public void twozeroClick() {
         darkenAllPlatforms();
+
         gui.sendPlatformChosen("2,0");
     }
 
     public void twooneClick() {
         darkenAllPlatforms();
+
         gui.sendPlatformChosen("2,1");
     }
 
     public void twotwoClick() {
         darkenAllPlatforms();
+
         gui.sendPlatformChosen("2,2");
     }
 
     public void twothreeClick() {
         darkenAllPlatforms();
+
         gui.sendPlatformChosen("2,3");
     }
 
