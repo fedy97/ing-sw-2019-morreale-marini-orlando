@@ -31,7 +31,7 @@ public class MoveCurrPlayerMessage extends ToServerMessage {
             actor.getPlayerManager().move(dest);
             if (dest.isGenerationSpot()) {
                 try {
-                    actor.askFor(actor.getValidator().getGrabableAmmos(), "weapons");
+                    actor.askFor(actor.getValidator().getGrabableWeapons(), "weapons");
                     actor.getPlayerManager().buyWeapon(actor.getChosenWeapons().take());
                     return;
                 } catch (Exception e) {
