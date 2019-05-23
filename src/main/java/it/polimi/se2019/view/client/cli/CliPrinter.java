@@ -604,6 +604,86 @@ public final class CliPrinter {
         stamp(": ");
     }
 
+    public static ArrayList<Integer> printPossibleWeapon(LightGameVersion lightGameVersion, List<String> weapons) {
+        Map<String, List<CardRep>> platformWeapons = lightGameVersion.getPlatformWeapons();
+        List<CardRep> plat1 = platformWeapons.get("0,2");
+        List<CardRep> plat2 = platformWeapons.get("1,0");
+        List<CardRep> plat3 = platformWeapons.get("2,3");
+        ArrayList<Integer> hashes = new ArrayList<>();
+
+        CliSetUp.cursorLeft(5);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                      Choose a weapon:                                      ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliSetUp.cursorLeft(78);
+        CliSetUp.cursorUp(6);
+        int counter = 0;
+        for (CardRep c: plat1) {
+            for (String w: weapons) {
+                if(c.getId() == Integer.parseInt(w)) {
+                    CliPrinter.stamp(c.getTitle());
+                    hashes.add(c.getId());
+                    if (counter < 2)
+                        CliPrinter.stamp(", ");
+                    counter ++;
+                }
+            }
+        }
+        for (CardRep c: plat2) {
+            for (String w: weapons) {
+                if(c.getId() == Integer.parseInt(w)) {
+                    CliPrinter.stamp(c.getTitle());
+                    hashes.add(c.getId());
+                    if (counter < 2)
+                        CliPrinter.stamp(", ");
+                    counter++;
+                }
+            }
+        }
+        for (CardRep c: plat3) {
+            for (String w: weapons) {
+                if(c.getId() == Integer.parseInt(w)) {
+                    CliPrinter.stamp(c.getTitle());
+                    hashes.add(c.getId());
+                    if (counter < 2)
+                        CliPrinter.stamp(", ");
+                    counter++;
+                }
+            }
+        }
+        stamp(" <0,1,2>: ");
+        return hashes;
+    }
+
     public static void printMap(LightGameVersion lightGameVersion, String choosenBoard) {
         if(choosenBoard.equals("1"))
             printLightMap1(lightGameVersion);

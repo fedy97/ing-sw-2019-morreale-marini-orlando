@@ -35,6 +35,7 @@ public class CLI extends RemoteView {
     private String chosenBoard;
     private int[][] map;
     private boolean isAsking;
+    private LightGameVersion lightGameVersion;
 
     public CLI() {
         try {
@@ -55,6 +56,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void updateAll(LightGameVersion lightGameVersion) {
+        this.lightGameVersion = lightGameVersion;
         CliSetUp.clear();
         CliSetUp.cursorToHome();
         CliPrinter.welcomeMessage();
@@ -78,7 +80,6 @@ public class CLI extends RemoteView {
                 Console c = System.console();
                 int choise;
                 choise = Character.getNumericValue((c.readPassword())[0]);
-                isAsking = false;
                 if (choise == 1)
                     iWantToMove();
                 else if (choise == 2)
@@ -322,7 +323,35 @@ public class CLI extends RemoteView {
 
     @Override
     public void lightWeapons(List<String> weapons) {
-        //TODO
+        ArrayList<Integer> hashes;
+        hashes = CliPrinter.printPossibleWeapon(lightGameVersion, weapons);
+        new Thread( () -> {
+            int choise;
+            Scanner s = new Scanner(System.in);
+            choise = s.nextInt();
+            if (choise == 1) {
+                CollectWeaponMessage message = new CollectWeaponMessage(Integer.toString(hashes.get(0).intValue()));
+                System.out.println(Integer.toString(hashes.get(0).intValue()));
+                message.setSender(userName);
+                viewSetChanged();
+                notifyObservers(message);
+            }
+            else if (choise == 2) {
+                CollectWeaponMessage message = new CollectWeaponMessage(Integer.toString(hashes.get(1).intValue()));
+                System.out.println(Integer.toString(hashes.get(1).intValue()));
+                message.setSender(userName);
+                viewSetChanged();
+                notifyObservers(message);
+            }
+            else {
+                CollectWeaponMessage message = new CollectWeaponMessage(Integer.toString(hashes.get(2).intValue()));
+                System.out.println(Integer.toString(hashes.get(2).intValue()));
+                message.setSender(userName);
+                viewSetChanged();
+                notifyObservers(message);
+            }
+            isAsking = false;
+        }).start();
     }
 
     @Override
@@ -336,6 +365,9 @@ public class CLI extends RemoteView {
             message.setSender(userName);
             viewSetChanged();
             notifyObservers(message);
+            if (!platform.equals("0,2") && !platform.equals("1,0") && !platform.equals("2,3")) {
+                isAsking = false;
+            }
         }).start();
     }
 
