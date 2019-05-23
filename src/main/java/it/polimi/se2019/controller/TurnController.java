@@ -1,7 +1,5 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.model.Game;
-import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.utils.HandyFunctions;
 
@@ -27,8 +25,7 @@ public class TurnController {
      */
     public void start() {
         curr = first;
-        Controller.getInstance().getPlayerManager().setCurrentPlayer(Game.getInstance().getPlayer(first));
-
+        Controller.getInstance().getPlayerManager().setCurrentPlayer(Controller.getInstance().getGame().getPlayer(first));
     }
 
     /**
@@ -61,7 +58,7 @@ public class TurnController {
             c.getDecksManager().getAmmoGarbageDeck().clear();
         } else
             curr = turningOrder.get(currIndex + 1);
-        Controller.getInstance().getPlayerManager().setCurrentPlayer(Game.getInstance().getPlayer(curr));
+        c.getPlayerManager().setCurrentPlayer(c.getGame().getPlayer(curr));
     }
 
     /**

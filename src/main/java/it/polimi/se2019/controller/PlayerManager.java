@@ -195,6 +195,7 @@ public class PlayerManager {
      */
     public void setCurrentPlayer(Player player) {
         currentPlayer = player;
+        actionsLeft = 2;
     }
 
     public List<Player> getTempPlayers() {

@@ -55,5 +55,6 @@ public class PerformActionMessage extends ToServerMessage {
             c.askFor(weapons, "weapons");
         }
 
+        c.getPlayerManager().useAction();
     }
 }
