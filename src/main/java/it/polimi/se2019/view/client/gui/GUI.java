@@ -124,9 +124,12 @@ public class GUI extends RemoteView {
             Parent root = loader.load();
             playerBoardStage = new Stage();
             playerBoardStage.setTitle("Player Board");
+            playerBoardStage.initOwner(stage);
+            playerBoardStage.initModality(Modality.APPLICATION_MODAL);
             scenePlayerBoard = new Scene(root);
             playerBoardController = loader.getController();
             playerBoardController.setCharsInGame(arrChars);
+            playerBoardStage.setOnCloseRequest(event -> playerBoardController.setCurrPlayerDisplay(null));
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing player board");
         }

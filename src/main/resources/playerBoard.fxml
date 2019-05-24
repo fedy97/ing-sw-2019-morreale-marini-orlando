@@ -13,12 +13,12 @@
          </image>
       </ImageView>
       <ImageView fx:id="boardImage" fitHeight="255.0" fitWidth="826.0" layoutX="45.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="wImage1" fitHeight="230.0" fitWidth="148.0" layoutX="14.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="wImage2" fitHeight="230.0" fitWidth="148.0" layoutX="180.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="wImage3" fitHeight="230.0" fitWidth="148.0" layoutX="346.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="pImage1" fitHeight="230.0" fitWidth="148.0" layoutX="589.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="pImage2" fitHeight="230.0" fitWidth="148.0" layoutX="753.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="pImage3" fitHeight="230.0" fitWidth="148.0" layoutX="918.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="wImage1" fitHeight="230.0" fitWidth="148.0" layoutX="14.0" layoutY="389.0" pickOnBounds="true" />
+      <ImageView fx:id="wImage2" fitHeight="230.0" fitWidth="148.0" layoutX="180.0" layoutY="389.0" pickOnBounds="true" />
+      <ImageView fx:id="wImage3" fitHeight="230.0" fitWidth="148.0" layoutX="346.0" layoutY="389.0" pickOnBounds="true" />
+      <ImageView fx:id="pImage1" fitHeight="230.0" fitWidth="148.0" layoutX="589.0" layoutY="389.0" pickOnBounds="true" />
+      <ImageView fx:id="pImage2" fitHeight="230.0" fitWidth="148.0" layoutX="753.0" layoutY="389.0" pickOnBounds="true" />
+      <ImageView fx:id="pImage3" fitHeight="230.0" fitWidth="148.0" layoutX="918.0" layoutY="389.0" pickOnBounds="true" />
       <ImageView fx:id="yellowAmmo1" fitHeight="38.0" fitWidth="37.0" layoutX="900.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@assets/ammos/yellowAmmo.png" />

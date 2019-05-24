@@ -125,7 +125,11 @@ public class PlayerBoardController {
 
     void updateAll(LightGameVersion lightGameVersion) {
         this.lightGameVersion = lightGameVersion;
-        //setRightAssets(currPlayerDisplay);
+        if (currPlayerDisplay!= null)
+            setRightAssets(currPlayerDisplay);
     }
 
+    public void setCurrPlayerDisplay(String currPlayerDisplay) {
+        this.currPlayerDisplay = currPlayerDisplay;
+    }
 }
