@@ -48,10 +48,10 @@ public class LoginController {
             alert.setHeaderText("Invalid username");
             alert.showAndWait();
         } else {
-            GUI gui = new GUI(getUsername(),(Stage)loginButton.getScene().getWindow());
+            GUI gui = new GUI(getUsername(), (Stage) loginButton.getScene().getWindow());
             gui.setUserName();
             if (getConnection().equals("RMI")) {
-                RMIClient client = new RMIClient(gui, HandyFunctions.randomIntegerBetWeen(1500,3000), getUsername());
+                RMIClient client = new RMIClient(gui, HandyFunctions.randomIntegerBetWeen(1500, 3000), getUsername());
                 client.connect(getIp(), 1099);
                 gui.addObserver(client);
             } else {
@@ -82,8 +82,13 @@ public class LoginController {
      * @return the text of the button selected
      */
     private String getConnection() {
-        ToggleButton selectedButton = (ToggleButton) connectionType.getSelectedToggle();
-        return selectedButton.getText();
-    }
+        ToggleButton selectedButton;
+        if (connectionType.getSelectedToggle() != null) {
+            selectedButton = (ToggleButton) connectionType.getSelectedToggle();
+            return selectedButton.getText();
+        } else {
+            return "SOCKET";
+        }
 
+    }
 }

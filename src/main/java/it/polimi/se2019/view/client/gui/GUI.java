@@ -30,6 +30,7 @@ public class GUI extends RemoteView {
     private GameBoardController gameBoardController;
     private ChoosePowerupController choosePowerupController;
     private StatsBoardController statsBoardController;
+    private PlayerBoardController playerBoardController;
 
     private Scene sceneWaitingLobby;
     private Scene sceneChooseMap;
@@ -37,10 +38,13 @@ public class GUI extends RemoteView {
     private Scene sceneGameBoard;
     private Scene sceneChoosePowerup;
     private Scene sceneStatsBoard;
+    private Scene scenePlayerBoard;
     private Stage stage;
     private Stage secondStage;
     private Stage statsStage;
+    private Stage playerBoardStage;
     private String charInString;
+    private List<String> charsInGame;
     private String config;
 
     public GUI(String user, Stage stage) {
@@ -102,13 +106,30 @@ public class GUI extends RemoteView {
         Platform.runLater(
                 () -> {
                     initGameBoard(config, ammoReps, posWeapons);
+                    this.charsInGame = arrChars;
                     initStatsBoard(arrChars);
+                    initPlayerBoard(arrChars);
                     gameBoardController.passGUI(this);
                     statsBoardController.passGUI(this);
+                    playerBoardController.passGUI(this);
                     stage.setScene(sceneGameBoard);
                     stage.setResizable(false);
                     stage.show();
                 });
+    }
+
+    private void initPlayerBoard(List<String> arrChars) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/playerBoard.fxml"));
+        try {
+            Parent root = loader.load();
+            playerBoardStage = new Stage();
+            playerBoardStage.setTitle("Player Board");
+            scenePlayerBoard = new Scene(root);
+            playerBoardController = loader.getController();
+            playerBoardController.setCharsInGame(arrChars);
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing player board");
+        }
     }
 
     private void initChooseCharacter() {
@@ -232,6 +253,7 @@ public class GUI extends RemoteView {
                 () -> {
                     gameBoardController.updateAll(lightGameVersion);
                     statsBoardController.updateAll(lightGameVersion);
+                    playerBoardController.updateAll(lightGameVersion);
                 });
     }
 
@@ -368,6 +390,22 @@ public class GUI extends RemoteView {
 
     public Scene getSceneStatsBoard() {
         return sceneStatsBoard;
+    }
+
+    public Scene getScenePlayerBoard() {
+        return scenePlayerBoard;
+    }
+
+    public Stage getPlayerBoardStage() {
+        return playerBoardStage;
+    }
+
+    public PlayerBoardController getPlayerBoardController() {
+        return playerBoardController;
+    }
+
+    public List<String> getCharsInGame() {
+        return charsInGame;
     }
 }
 

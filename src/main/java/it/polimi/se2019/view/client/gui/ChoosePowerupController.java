@@ -2,6 +2,7 @@ package it.polimi.se2019.view.client.gui;
 
 import it.polimi.se2019.model.CardRep;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -39,6 +40,7 @@ public class ChoosePowerupController {
                     im2.setImage(new Image(im2rep.getPath()));
                 });
     }
+
 
     public void chooseFirstPowerup() {
         Stage stage = (Stage) info1button.getScene().getWindow();

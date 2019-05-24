@@ -82,7 +82,6 @@ public class StatsBoardController {
     protected void updateAll(LightGameVersion lightGameVersion) {
         this.lightGameVersion = lightGameVersion;
         Map<String, List<CardRep>> charPowerupsReps = lightGameVersion.getPlayerPowerups();
-        //HandyFunctions.printLineConsole(myChar);
         List<CardRep> myPowerupsReps = charPowerupsReps.get(myChar);
         for (CardRep myPowerup : myPowerupsReps)
             powerupsImages.get(myPowerupsReps.indexOf(myPowerup)).setImage(new Image(myPowerup.getPath()));

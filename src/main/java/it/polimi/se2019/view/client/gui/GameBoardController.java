@@ -20,6 +20,16 @@ public class GameBoardController {
     private GUI gui;
     private String config;
     @FXML
+    private Button bansheestats;
+    @FXML
+    private Button violetstats;
+    @FXML
+    private Button distructorstats;
+    @FXML
+    private Button sprogstats;
+    @FXML
+    private Button dozerstats;
+    @FXML
     private ImageView mapImage;
     @FXML
     private Button statsbutton;
@@ -252,7 +262,7 @@ public class GameBoardController {
     @FXML
     private Button shootbutton;
 
-    private Map<Button,String> buttonsHashes;
+    private Map<Button, String> buttonsHashes;
     private List<AmmoRep> ammoReps;
     private Map<String, ImageView> posAmmo;
     private Map<String, Button> posPlatform;
@@ -261,6 +271,7 @@ public class GameBoardController {
     private Map<String, ArrayList<ImageView>> playerImages;
     private Map<String, ArrayList<ImageView>> posImages;
     private Map<String, ArrayList<ImageView>> posWeaponsImages;
+    private Map<String,Button> playersButtonBoards;
     private boolean firstSetup = true;
     private LightGameVersion lightGameVersion;
 
@@ -308,15 +319,15 @@ public class GameBoardController {
         posWeaponsImages.put("0,2", weapons02);
 
         buttonsHashes = new HashMap<>();
-        buttonsHashes.put(w10_1,"");
-        buttonsHashes.put(w10_2,"");
-        buttonsHashes.put(w10_3,"");
-        buttonsHashes.put(w02_1,"");
-        buttonsHashes.put(w02_2,"");
-        buttonsHashes.put(w02_3,"");
-        buttonsHashes.put(w23_1,"");
-        buttonsHashes.put(w23_2,"");
-        buttonsHashes.put(w23_3,"");
+        buttonsHashes.put(w10_1, "");
+        buttonsHashes.put(w10_2, "");
+        buttonsHashes.put(w10_3, "");
+        buttonsHashes.put(w02_1, "");
+        buttonsHashes.put(w02_2, "");
+        buttonsHashes.put(w02_3, "");
+        buttonsHashes.put(w23_1, "");
+        buttonsHashes.put(w23_2, "");
+        buttonsHashes.put(w23_3, "");
 
         posPlatform = new HashMap<>();
         posPlatform.put("0,0", zerozero);
@@ -519,6 +530,17 @@ public class GameBoardController {
         imageViews.add(ammotwoone);
         imageViews.add(ammotwotwo);
         imageViews.add(ammotwothree);
+
+        playersButtonBoards = new HashMap<>();
+        playersButtonBoards.put("DOZER", dozerstats);
+        playersButtonBoards.put("DISTRUCTOR", distructorstats);
+        playersButtonBoards.put("VIOLET", violetstats);
+        playersButtonBoards.put("SPROG", sprogstats);
+        playersButtonBoards.put("BANSHEE", bansheestats);
+        for (String player : gui.getCharsInGame())
+            HandyFunctions.enlightenButton(playersButtonBoards.get(player));
+
+
         for (int i = 0; i < ammoReps.size(); i++) {
             AmmoRep ammoRep = ammoReps.get(i);
             ImageView imageView = imageViews.get(i);
@@ -637,7 +659,7 @@ public class GameBoardController {
     }
 
     protected void enlightenWeapons(List<String> hashes) {
-        for (Map.Entry<Button,String> entry : buttonsHashes.entrySet()){
+        for (Map.Entry<Button, String> entry : buttonsHashes.entrySet()) {
             Button currButt = entry.getKey();
             String currHash = entry.getValue();
             if (hashes.contains(currHash)) {
@@ -647,17 +669,19 @@ public class GameBoardController {
     }
 
     private void showInstruction(CardRep cardRep) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Weapon Card");
-        alert.setHeaderText(cardRep.getTitle().toUpperCase());
-        alert.setContentText(cardRep.getDescription());
-        ImageView imageView = new ImageView();
-        imageView.setFitHeight(200);
-        imageView.setFitWidth(150);
-        imageView.setImage(new Image(cardRep.getPath()));
-        alert.setGraphic(imageView);
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-        alert.showAndWait();
+        if (cardRep.getId() != 0) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Weapon Card");
+            alert.setHeaderText(cardRep.getTitle().toUpperCase());
+            alert.setContentText(cardRep.getDescription());
+            ImageView imageView = new ImageView();
+            imageView.setFitHeight(200);
+            imageView.setFitWidth(150);
+            imageView.setImage(new Image(cardRep.getPath()));
+            alert.setGraphic(imageView);
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.showAndWait();
+        }
     }
 
     public void moveClick() {
@@ -669,7 +693,7 @@ public class GameBoardController {
     }
 
     public void shootClick() {
-        //TODO i want to do action 3
+        //gui.iWantToDoSomething("action3");
     }
 
     public void statsClick() {
@@ -681,39 +705,93 @@ public class GameBoardController {
                 });
     }
 
-    public void w02_1Click(){
+    public void dozerClick(){
+        Platform.runLater(
+                () -> {
+                    gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
+                    gui.getPlayerBoardStage().setResizable(false);
+                    gui.getPlayerBoardController().setRightAssets("DOZER");
+                    gui.getPlayerBoardStage().show();
+                });
+    }
+    public void violetClick(){
+        Platform.runLater(
+                () -> {
+                    gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
+                    gui.getPlayerBoardStage().setResizable(false);
+                    gui.getPlayerBoardController().setRightAssets("VIOLET");
+                    gui.getPlayerBoardStage().show();
+                });
+    }
+    public void distructorClick(){
+        Platform.runLater(
+                () -> {
+                    gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
+                    gui.getPlayerBoardStage().setResizable(false);
+                    gui.getPlayerBoardController().setRightAssets("DISTRUCTOR");
+                    gui.getPlayerBoardStage().show();
+                });
+    }
+    public void sprogClick(){
+        Platform.runLater(
+                () -> {
+                    gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
+                    gui.getPlayerBoardStage().setResizable(false);
+                    gui.getPlayerBoardController().setRightAssets("SPROG");
+                    gui.getPlayerBoardStage().show();
+                });
+    }
+    public void bansheeClick(){
+        Platform.runLater(
+                () -> {
+                    gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
+                    gui.getPlayerBoardStage().setResizable(false);
+                    gui.getPlayerBoardController().setRightAssets("BANSHEE");
+                    gui.getPlayerBoardStage().show();
+                });
+    }
+
+    public void w02_1Click() {
         darkenAllWeapons();
         gui.sendWeaponGrabbed(buttonsHashes.get(w02_1));
     }
-    public void w02_2Click(){
+
+    public void w02_2Click() {
         darkenAllWeapons();
         gui.sendWeaponGrabbed(buttonsHashes.get(w02_2));
     }
-    public void w02_3Click(){
+
+    public void w02_3Click() {
         darkenAllWeapons();
         gui.sendWeaponGrabbed(buttonsHashes.get(w02_3));
     }
-    public void w10_1Click(){
+
+    public void w10_1Click() {
         darkenAllWeapons();
         gui.sendWeaponGrabbed(buttonsHashes.get(w10_1));
     }
-    public void w10_2Click(){
+
+    public void w10_2Click() {
         darkenAllWeapons();
         gui.sendWeaponGrabbed(buttonsHashes.get(w10_2));
     }
-    public void w10_3Click(){
+
+    public void w10_3Click() {
         darkenAllWeapons();
         gui.sendWeaponGrabbed(buttonsHashes.get(w10_3));
     }
-    public void w23_1Click(){
+
+    public void w23_1Click() {
         darkenAllWeapons();
         gui.sendWeaponGrabbed(buttonsHashes.get(w23_1));
     }
-    public void w23_2Click(){
+
+    public void w23_2Click() {
         darkenAllWeapons();
         gui.sendWeaponGrabbed(buttonsHashes.get(w23_2));
     }
-    public void w23_3Click(){
+
+    public void w23_3Click() {
         darkenAllWeapons();
         gui.sendWeaponGrabbed(buttonsHashes.get(w23_3));
     }
@@ -818,8 +896,9 @@ public class GameBoardController {
         for (Map.Entry<String, Button> entry : posPlatform.entrySet())
             HandyFunctions.darkenButton(entry.getValue());
     }
-    private void darkenAllWeapons(){
-        for (Map.Entry<Button,String> entry: buttonsHashes.entrySet()){
+
+    private void darkenAllWeapons() {
+        for (Map.Entry<Button, String> entry : buttonsHashes.entrySet()) {
             HandyFunctions.darkenButton(entry.getKey());
         }
     }

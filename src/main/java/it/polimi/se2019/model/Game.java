@@ -226,9 +226,9 @@ public class Game extends Observable {
             playerBoardRep.put(player.getCharacter().name(), new BoardRep(damages, marks, ammos));
         }
 
+        lightVersion.setPlayerWeapons(playerWeapons);
         lightVersion.setPlayerPlatform(playerPlatform);
         lightVersion.setPlayerPowerups(playerPowerups);
-        lightVersion.setPlatformWeapons(playerWeapons);
         lightVersion.setPlayerBoardRep(playerBoardRep);
 
         //associate the platform with the ammo tile and the weapons
