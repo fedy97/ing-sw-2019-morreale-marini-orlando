@@ -114,7 +114,7 @@ public class CLI extends RemoteView {
     public void showChoosePowerup(CardRep p1, CardRep p2) {
         CliPrinter.stamp("\n");
         CliPrinter.choosePowerUpMessage(p1, p2);
-        new Thread( () -> {
+        new Thread(() -> {
             int choosenPowerUp;
             Console c = System.console();
             choosenPowerUp = Character.getNumericValue((c.readPassword())[0]);
@@ -122,8 +122,7 @@ public class CLI extends RemoteView {
             if (choosenPowerUp == 1) {
                 arrayList.add(p1.getId());
                 arrayList.add(p2.getId());
-            }
-            else {
+            } else {
                 arrayList.add(p2.getId());
                 arrayList.add(p1.getId());
             }
@@ -133,9 +132,10 @@ public class CLI extends RemoteView {
             notifyObservers(message);
         }).start();
     }
+
     //TODO show the right player board given the arrChars, an arraylist of objects like "SPROG"
     @Override
-    public void showGameBoard(List<AmmoRep> ammoReps, Map<String,List<CardRep>> posWeapons, List<String> arrChars) {
+    public void showGameBoard(List<AmmoRep> ammoReps, Map<String, List<CardRep>> posWeapons, List<String> arrChars) {
         CliSetUp.clear();
         CliSetUp.cursorToHome();
         CliPrinter.welcomeMessage();
@@ -166,8 +166,8 @@ public class CLI extends RemoteView {
     @Override
     public void showChooseCharacter(String config) {
         chosenBoard = config;
-        if(!firstTime) {
-            new Thread( () -> {
+        if (!firstTime) {
+            new Thread(() -> {
                 boolean okChar = false;
                 Console c = System.console();
                 while (!okChar) {
@@ -200,7 +200,7 @@ public class CLI extends RemoteView {
         CliSetUp.cursorToHome();
         CliPrinter.welcomeMessage();
         HandyFunctions.printConsole("\n\n");
-        CliPrinter.possibleCharMessage(timeLeftForChar,charChosen,myChar);
+        CliPrinter.possibleCharMessage(timeLeftForChar, charChosen, myChar);
     }
 
     @Override
@@ -211,16 +211,16 @@ public class CLI extends RemoteView {
 
     @Override
     public void updateVotesMapChosen(Map<Integer, Integer> map) {
-        for(int i=1; i<=4;i++) {
-            vote[i-1] = map.get(i);
+        for (int i = 1; i <= 4; i++) {
+            vote[i - 1] = map.get(i);
         }
         showChooseMap();
     }
 
     @Override
     public void showChooseMap() {
-        if(firstTime) {
-            new Thread( () -> {
+        if (firstTime) {
+            new Thread(() -> {
                 Console c = System.console();
                 mapChosen = Character.getNumericValue((c.readPassword())[0]);
                 SendMapChosenMessage message = new SendMapChosenMessage(mapChosen);
@@ -234,7 +234,7 @@ public class CLI extends RemoteView {
         CliSetUp.cursorToHome();
         CliPrinter.welcomeMessage();
         HandyFunctions.printConsole("\n\n");
-        CliPrinter.possibleMapsMessage(timeLeftForMaps,vote);
+        CliPrinter.possibleMapsMessage(timeLeftForMaps, vote);
     }
 
     @Override
@@ -275,15 +275,14 @@ public class CLI extends RemoteView {
     @Override
     public void startConnection() {
         final int SOCKET = 1;
-        if(connectionChosen == SOCKET) {
+        if (connectionChosen == SOCKET) {
             SocketClient client = new SocketClient(this, userName);
-            client.connect(ip,1100);
+            client.connect(ip, 1100);
             this.addObserver(client);
-        }
-        else {
+        } else {
 
-            RMIClient client = new RMIClient(this,HandyFunctions.randomIntegerBetWeen(1500,2000),userName);
-            client.connect(ip,1099);
+            RMIClient client = new RMIClient(this, HandyFunctions.randomIntegerBetWeen(1500, 2000), userName);
+            client.connect(ip, 1099);
             this.addObserver(client);
         }
     }
@@ -342,7 +341,7 @@ public class CLI extends RemoteView {
     @Override
     public void lightPlatforms(List<String> platforms) {
         CliPrinter.printPossiblePlatform(platforms);
-        new Thread( () -> {
+        new Thread(() -> {
             String platform;
             Console c = System.console();
             platform = c.readLine();
@@ -362,7 +361,12 @@ public class CLI extends RemoteView {
     }
 
     @Override
-    public void disableActions(){
+    public void disableActions() {
+        //TODO
+    }
+
+    @Override
+    public void showMessage(String msg) {
         //TODO
     }
 }

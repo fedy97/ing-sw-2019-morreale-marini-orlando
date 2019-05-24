@@ -13,7 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -294,7 +293,7 @@ public class GUI extends RemoteView {
     }
 
     protected void sendWeaponGrabbed(String hashWeapon) {
-        CollectWeaponMessage message = new CollectWeaponMessage(hashWeapon);
+        ChosenWeaponMessage message = new ChosenWeaponMessage(hashWeapon);
         message.setSender(userName);
         viewSetChanged();
         notifyObservers(message);
@@ -380,6 +379,12 @@ public class GUI extends RemoteView {
 
     @Override
     public void disableActions() {
+        //TODO
+    }
+
+    @Override
+    public void showMessage(String msg){
+        HandyFunctions.LOGGER.log(Level.INFO, msg);
         //TODO
     }
 

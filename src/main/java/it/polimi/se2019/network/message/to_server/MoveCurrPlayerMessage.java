@@ -3,6 +3,8 @@ package it.polimi.se2019.network.message.to_server;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.ControllerState;
 import it.polimi.se2019.model.board.Platform;
+import it.polimi.se2019.model.card.weapons.WeaponCard;
+import it.polimi.se2019.network.message.to_client.AskToDiscardMessage;
 import it.polimi.se2019.utils.Deserializer;
 import it.polimi.se2019.utils.HandyFunctions;
 
@@ -31,6 +33,16 @@ public class MoveCurrPlayerMessage extends ToServerMessage {
             actor.getPlayerManager().move(dest);
             if (dest.isGenerationSpot()) {
                 try {
+                    if (actor.getPlayerManager().getCurrentPlayer().getWeaponCards().size() == 3) {
+                        actor.callView(new AskToDiscardMessage(null), sender);
+                        WeaponCard card = actor.getChosenWeapons().take();
+
+                        if (card == null)
+                            return;
+                        else
+                            actor.getPlayerManager().getCurrentPlayer().removeWeaponCard(card);
+                    }
+
                     actor.askFor(actor.getValidator().getGrabableWeapons(), "weapons");
                     actor.getPlayerManager().buyWeapon(actor.getChosenWeapons().take());
                     return;

@@ -4,9 +4,9 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.utils.Deserializer;
 
-public class CollectWeaponMessage extends ToServerMessage {
+public class DiscardWeaponMessage extends ToServerMessage {
 
-    public CollectWeaponMessage(Object payload) {
+    public DiscardWeaponMessage(Object payload) {
         super(payload);
     }
 

@@ -40,6 +40,10 @@ public final class Deserializer {
      */
     public static WeaponCard getWeapon(String light) {
         List<WeaponCard> weapons = Controller.getInstance().getPlayerManager().getCurrentPlayer().getWeaponCards();
+
+        if (light.equals("null"))
+            return null;
+
         for (WeaponCard weaponCard : weapons) {
             if (weaponCard.toString().equals(light))
                 return weaponCard;

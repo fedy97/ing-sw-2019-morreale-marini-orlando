@@ -78,7 +78,11 @@ public class PlayerManager {
             father.getDecksManager().addToFill(currentPlayer.getCurrentPlatform());
 
             if (ammo.hasPowerUp()) {
-                currentPlayer.addPowerUpCard(father.getDecksManager().drawPowerUp());
+                PowerUpCard powerUp = father.getDecksManager().drawPowerUp();
+                if (currentPlayer.getPowerUpCards().size() < 3)
+                    currentPlayer.addPowerUpCard(powerUp);
+                else
+                    father.getDecksManager().addToGarbage(powerUp);
             }
 
             AmmoCube[] ammoCubes = ammo.getAmmoCubes();
@@ -145,7 +149,7 @@ public class PlayerManager {
      * @throws MaxWeaponException        when the player has already three weapons, he can choose to discard one
      *                                   or not buying the current one
      */
-    public void buyWeapon(WeaponCard weapon) throws InsufficientAmmoException, MaxWeaponException,InvalidGenerationSpotException {
+    public void buyWeapon(WeaponCard weapon) throws InsufficientAmmoException, MaxWeaponException, InvalidGenerationSpotException {
         AmmoBox box = currentPlayer.getPlayerBoard().getAmmoBox();
         currentPlayer.addWeaponCard(weapon);
         currentPlayer.getCurrentPlatform().removeWeaponCard(weapon);
