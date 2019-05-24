@@ -5,9 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="it.polimi.se2019.view.client.gui.PlayerBoardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.view.client.gui.PlayerBoardController">
    <children>
       <ImageView fitHeight="720.0" fitWidth="1080.0" pickOnBounds="true">
          <image>
@@ -21,12 +19,30 @@ fx:controller="it.polimi.se2019.view.client.gui.PlayerBoardController">
       <ImageView fx:id="pImage1" fitHeight="230.0" fitWidth="148.0" layoutX="589.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="pImage2" fitHeight="230.0" fitWidth="148.0" layoutX="753.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="pImage3" fitHeight="230.0" fitWidth="148.0" layoutX="918.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="yellowAmmo1" fitHeight="38.0" fitWidth="37.0" layoutX="900.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="blueAmmo1" fitHeight="38.0" fitWidth="37.0" layoutX="955.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="redAmmo1" fitHeight="38.0" fitWidth="37.0" layoutX="1008.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="redAmmo2" fitHeight="38.0" fitWidth="37.0" layoutX="1009.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="blueAmmo2" fitHeight="38.0" fitWidth="37.0" layoutX="956.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="yellowAmmo2" fitHeight="38.0" fitWidth="37.0" layoutX="901.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="yellowAmmo1" fitHeight="38.0" fitWidth="37.0" layoutX="900.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/yellowAmmo.png" />
+         </image></ImageView>
+      <ImageView fx:id="blueAmmo1" fitHeight="38.0" fitWidth="37.0" layoutX="955.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/blueAmmo.png" />
+         </image></ImageView>
+      <ImageView fx:id="redAmmo1" fitHeight="38.0" fitWidth="37.0" layoutX="1008.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/redAmmo.png" />
+         </image></ImageView>
+      <ImageView fx:id="redAmmo2" fitHeight="38.0" fitWidth="37.0" layoutX="1009.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/redAmmo.png" />
+         </image></ImageView>
+      <ImageView fx:id="blueAmmo2" fitHeight="38.0" fitWidth="37.0" layoutX="956.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/blueAmmo.png" />
+         </image></ImageView>
+      <ImageView fx:id="yellowAmmo2" fitHeight="38.0" fitWidth="37.0" layoutX="901.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/yellowAmmo.png" />
+         </image></ImageView>
       <Button layoutX="14.0" layoutY="389.0" mnemonicParsing="false" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
       <Button layoutX="180.0" layoutY="389.0" mnemonicParsing="false" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
       <Button layoutX="346.0" layoutY="389.0" mnemonicParsing="false" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
