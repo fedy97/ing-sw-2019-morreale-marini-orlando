@@ -1,5 +1,6 @@
 package it.polimi.se2019.view.client.cli;
 
+import it.polimi.se2019.exceptions.NoInputException;
 import it.polimi.se2019.model.AmmoRep;
 import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.LightGameVersion;
@@ -11,6 +12,7 @@ import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.client.RemoteView;
 
 import java.io.Console;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
@@ -43,7 +45,7 @@ public class CLI extends RemoteView {
         } catch (UnknownHostException e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
-        reader = new CliReader(5);
+        reader = new CliReader(1);
         vote = new int[4];
         vote[0] = 0;
         vote[1] = 0;
@@ -136,6 +138,7 @@ public class CLI extends RemoteView {
     //TODO show the right player board given the arrChars, an arraylist of objects like "SPROG"
     @Override
     public void showGameBoard(List<AmmoRep> ammoReps, Map<String, List<CardRep>> posWeapons, List<String> arrChars) {
+        CliPrinter.reset();
         CliSetUp.clear();
         CliSetUp.cursorToHome();
         CliPrinter.welcomeMessage();
@@ -165,34 +168,42 @@ public class CLI extends RemoteView {
 
     @Override
     public void showChooseCharacter(String config) {
+        CliPrinter.reset();
         chosenBoard = config;
         if (!firstTime) {
             new Thread(() -> {
                 boolean okChar = false;
-                Console c = System.console();
+                //Console c = System.console();
                 while (!okChar) {
                     int temp;
-                    temp = Character.getNumericValue((c.readPassword())[0]);
-                    if (temp == 1) {
-                        myCharEnumString = "BANSHEE";
-                    } else if (temp == 2) {
-                        myCharEnumString = "SPROG";
-                    } else if (temp == 3) {
-                        myCharEnumString = "DOZER";
-                    } else if (temp == 4) {
-                        myCharEnumString = "VIOLET";
-                    } else {
-                        myCharEnumString = "DISTRUCTOR";
+                    //temp = Character.getNumericValue((c.readPassword())[0]);
+                    try {
+                        temp = reader.getTimedInt();
+                        if (temp == 1) {
+                            myCharEnumString = "BANSHEE";
+                        } else if (temp == 2) {
+                            myCharEnumString = "SPROG";
+                        } else if (temp == 3) {
+                            myCharEnumString = "DOZER";
+                        } else if (temp == 4) {
+                            myCharEnumString = "VIOLET";
+                        } else {
+                            myCharEnumString = "DISTRUCTOR";
+                        }
+                        if (!charChosen.contains(myCharEnumString)) {
+                            okChar = true;
+                            myChar = temp;
+                        }
                     }
-                    if (!charChosen.contains(myCharEnumString)) {
-                        okChar = true;
-                        myChar = temp;
+                    catch (NoInputException|IOException e) {
+
                     }
                 }
                 SendCharacterChosenMessage message = new SendCharacterChosenMessage(myCharEnumString);
                 message.setSender(userName);
                 viewSetChanged();
                 notifyObservers(message);
+
             }).start();
             firstTime = true;
         }
@@ -219,22 +230,29 @@ public class CLI extends RemoteView {
 
     @Override
     public void showChooseMap() {
-        if (firstTime) {
-            new Thread(() -> {
-                Console c = System.console();
-                mapChosen = Character.getNumericValue((c.readPassword())[0]);
-                SendMapChosenMessage message = new SendMapChosenMessage(mapChosen);
-                message.setSender(userName);
-                viewSetChanged();
-                notifyObservers(message);
-            }).start();
-            firstTime = false;
-        }
+        CliPrinter.reset();
         CliSetUp.clear();
         CliSetUp.cursorToHome();
         CliPrinter.welcomeMessage();
         HandyFunctions.printConsole("\n\n");
         CliPrinter.possibleMapsMessage(timeLeftForMaps, vote);
+        if (firstTime) {
+            new Thread(() -> {
+                //Console c = System.console();
+                //mapChosen = Character.getNumericValue((c.readPassword())[0]);
+                try {
+                    mapChosen = reader.getTimedInt();
+                    SendMapChosenMessage message = new SendMapChosenMessage(mapChosen);
+                    message.setSender(userName);
+                    viewSetChanged();
+                    notifyObservers(message);
+                }
+                catch (NoInputException| IOException e) {
+
+                }
+            }).start();
+            firstTime = false;
+        }
     }
 
     @Override

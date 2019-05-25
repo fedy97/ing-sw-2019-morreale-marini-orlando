@@ -23,6 +23,26 @@ public final class CliPrinter {
         HandyFunctions.printConsole(msg + RESET);
     }
 
+    public static void noResetStamp(String msg, CliColor textColor, CliColor backColor) {
+        String out;
+        out = backColor.getCode() + msg;
+        noResetStamp(out,textColor);
+    }
+
+    public static void noResetStamp(String msg, CliColor textColor) {
+        String out;
+        out = textColor.getCode() + msg;
+        noResetStamp(out);
+    }
+
+    public static void noResetStamp(String msg) {
+        HandyFunctions.printConsole(msg);
+    }
+
+    public static void reset() {
+        HandyFunctions.printConsole(RESET);
+    }
+
     public static void stamp(String msg, CliColor textColor) {
         String out;
         out = textColor.getCode() + msg;
@@ -263,6 +283,8 @@ public final class CliPrinter {
         CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         CliPrinter.stamp("\t\t\t\t\t  Time left: "+timer);
         CliSetUp.restorePosition();
+        CliPrinter.noResetStamp("c",CliColor.TEXTWHITE, CliColor.BACKWHITE);
+        CliSetUp.cursorLeft(1);
     }
 
     public static void standardActionsMessage() {
@@ -350,6 +372,8 @@ public final class CliPrinter {
         CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         CliPrinter.stamp("\t\t\t\t\t  Time left: "+timer);
         CliSetUp.restorePosition();
+        CliPrinter.noResetStamp("c",CliColor.TEXTWHITE, CliColor.BACKWHITE);
+        CliSetUp.cursorLeft(1);
     }
 
     public static void weaponBox(CliColor color, List<CardRep> powWeapons) {

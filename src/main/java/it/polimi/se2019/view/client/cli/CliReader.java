@@ -37,7 +37,7 @@ public class CliReader {
         }
     }
 
-    public int getTimedInt() throws IOException, NoInputException{
+    public int getTimedInt() throws IOException, NoInputException {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         long startTime = System.currentTimeMillis();
         while ((System.currentTimeMillis() - startTime) < seconds * 1000 && !in.ready()) {
