@@ -43,11 +43,11 @@
          <image>
             <Image url="@assets/ammos/yellowAmmo.png" />
          </image></ImageView>
-      <Button layoutX="14.0" layoutY="389.0" mnemonicParsing="false" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
-      <Button layoutX="180.0" layoutY="389.0" mnemonicParsing="false" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
-      <Button layoutX="346.0" layoutY="389.0" mnemonicParsing="false" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
-      <Button layoutX="589.0" layoutY="389.0" mnemonicParsing="false" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
-      <Button layoutX="753.0" layoutY="389.0" mnemonicParsing="false" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
-      <Button layoutX="918.0" layoutY="389.0" mnemonicParsing="false" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="infoW1" layoutX="14.0" layoutY="389.0" mnemonicParsing="false" onAction="#infoW1Click" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="infoW2" layoutX="180.0" layoutY="389.0" mnemonicParsing="false" onAction="#infoW2Click" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="infoW3" layoutX="346.0" layoutY="389.0" mnemonicParsing="false" onAction="#infoW3Click" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="infoP1" layoutX="589.0" layoutY="389.0" mnemonicParsing="false" onAction="#infoP1Click" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="infoP2" layoutX="753.0" layoutY="389.0" mnemonicParsing="false" onAction="#infoP2Click" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="infoP3" layoutX="918.0" layoutY="389.0" mnemonicParsing="false" onAction="#infoP3Click" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
    </children>
 </AnchorPane>

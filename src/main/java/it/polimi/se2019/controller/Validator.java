@@ -73,6 +73,26 @@ public abstract class Validator{
     }
 
     /**
+     * @param p generation spot selected
+     * @return the list of weapons that can be grabbed by the player in the specified platform
+     */
+    public List<WeaponCard> getGrabableWeapons(Platform p) throws InvalidGenerationSpotException {
+        List<WeaponCard> res = new ArrayList<>();
+        Player currPlayer = father.getPlayerManager().getCurrentPlayer();
+        AmmoBox ammoBox = currPlayer.getPlayerBoard().getAmmoBox();
+
+        if (!p.isGenerationSpot())
+            throw new InvalidGenerationSpotException();
+
+        for (WeaponCard weapon : p.getWeapons()) {
+            if (ammoBox.hasAmmos(weapon.getExtraCost()))
+                res.add(weapon);
+        }
+
+        return res;
+    }
+
+    /**
      * @return the list of weapons the current player can reload according to his ammos
      */
     public List<WeaponCard> getReloadableWeapons() {

@@ -13,10 +13,8 @@ public class Lobby {
     private static Controller controller = Controller.getInstance();
 
     public static void main(String[] args) {
-
         rmiServer.start();
         socketServer.start();
-
     }
 
     public static void addUser(String user) {

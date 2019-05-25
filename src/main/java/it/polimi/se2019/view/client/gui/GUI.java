@@ -172,6 +172,9 @@ public class GUI extends RemoteView {
             stage.setTitle("Waiting Lobby");
             sceneWaitingLobby = new Scene(root);
             waitingLobbyController = loader.getController();
+            stage.setOnCloseRequest(event -> Platform.runLater(
+                    () -> stage.show()
+            ));
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing waiting lobby");
         }
@@ -217,6 +220,9 @@ public class GUI extends RemoteView {
             choosePowerupController = loader.getController();
             choosePowerupController.im1rep = p1;
             choosePowerupController.im2rep = p2;
+            secondStage.setOnCloseRequest(event -> Platform.runLater(
+                    () -> secondStage.show()
+            ));
 
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose power up");
@@ -258,7 +264,7 @@ public class GUI extends RemoteView {
     public void updateAll(LightGameVersion lightGameVersion) {
         Platform.runLater(
                 () -> {
-                    this.lightGameVersion=lightGameVersion;
+                    this.lightGameVersion = lightGameVersion;
                     gameBoardController.updateAll(lightGameVersion);
                     playerBoardController.updateAll(lightGameVersion);
                 });
@@ -304,7 +310,8 @@ public class GUI extends RemoteView {
         notifyObservers(message);
         gameBoardController.enableActionButtons();
     }
-    protected void sendWeaponToSwitch(String hashWeapon){
+
+    protected void sendWeaponToSwitch(String hashWeapon) {
         DiscardWeaponMessage message = new DiscardWeaponMessage(hashWeapon);
         message.setSender(userName);
         viewSetChanged();
@@ -395,16 +402,16 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void showMessage(String msg){
-       if (msg.equals("You have already three weapons! Do you want to discard one?")) {
-           Platform.runLater(
-                   () -> {
-                       switchWeaponController.updateMyWeapons(lightGameVersion);
-                       switchWeaponStage.setScene(sceneSwitchWeapon);
-                       switchWeaponStage.setResizable(false);
-                       switchWeaponStage.show();
-                   });
-       }
+    public void showMessage(String msg) {
+        if (msg.equals("You have already three weapons! Do you want to discard one?")) {
+            Platform.runLater(
+                    () -> {
+                        switchWeaponController.updateMyWeapons(lightGameVersion);
+                        switchWeaponStage.setScene(sceneSwitchWeapon);
+                        switchWeaponStage.setResizable(false);
+                        switchWeaponStage.show();
+                    });
+        }
 
     }
 

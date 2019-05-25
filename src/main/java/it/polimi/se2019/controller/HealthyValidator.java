@@ -8,6 +8,7 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.HandyFunctions;
 
 import java.util.*;
+import java.util.logging.Level;
 
 /**
  * @author Gabriel Raul Marini
@@ -34,10 +35,19 @@ public class HealthyValidator extends Validator {
         } else if (c == Action.GRAB) {
             res = gameField.getAvailablePlatforms(currentPlayer.getCurrentPlatform(), 1);
             List<Platform> garbPla = new ArrayList<>();
-            for (Platform p : res) {
-                if (!p.hasAmmoCard() && !p.isGenerationSpot())
-                    garbPla.add(p);
+
+            try {
+                for (Platform p : res) {
+                    if ((!p.hasAmmoCard() && !p.isGenerationSpot()))
+                        garbPla.add(p);
+                    else if(p.isGenerationSpot() && getGrabableWeapons(p).isEmpty())
+                        garbPla.add(p);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
             }
+
             res.removeAll(garbPla);
         } else
             throw new InvalidActionException("Cannot move the player in this mode with the action passed!");
