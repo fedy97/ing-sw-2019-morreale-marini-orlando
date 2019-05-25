@@ -1,6 +1,7 @@
 package it.polimi.se2019.view.client.cli;
 
 import it.polimi.se2019.model.AmmoRep;
+import it.polimi.se2019.model.BoardRep;
 import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.model.enumeration.AmmoCube;
@@ -533,27 +534,486 @@ public final class CliPrinter {
     }
 
     public static void drawPlayersInfoBox(LightGameVersion lightGameVersion) {
-        stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-        CliSetUp.cursorLeft(40);
+
+        int playerCounter = 0;
+
+        Map<String, List<CardRep>> playerPowerups;
+        Map<String, List<CardRep>> playerWeapons;
+        Map<String, BoardRep> playerBoardRep;
+
+        BoardRep bansheeRep;
+        BoardRep sprogRep;
+        BoardRep dozerRep;
+        BoardRep violetRep;
+        BoardRep distructorRep;
+
+        List<String> bansheeDamages;
+        List<String> bansheemarks;
+        Map<String,Integer> bansheeAmmos;
+        List<CardRep> bansheePowerUp;
+        List<CardRep> bansheeWeapons;
+
+        List<String> sprogDamages;
+        List<String> sprogmarks;
+        Map<String,Integer> sprogAmmos;
+        List<CardRep> sprogPowerUp;
+        List<CardRep> sprogWeapons;
+
+        List<String> dozerDamages;
+        List<String> dozermarks;
+        Map<String,Integer> dozerAmmos;
+        List<CardRep> dozerPowerUp;
+        List<CardRep> dozerWeapons;
+
+        List<String> violetDamages;
+        List<String> violetmarks;
+        Map<String,Integer> violetAmmos;
+        List<CardRep> violetPowerUp;
+        List<CardRep> violetWeapons;
+
+        List<String> distructorDamages;
+        List<String> distructormarks;
+        Map<String,Integer> distructorAmmos;
+        List<CardRep> distructorPowerUp;
+        List<CardRep> distructorWeapons;
+
+
+        stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(54);
         CliSetUp.cursorDown(1);
-        for (int i=0;i<30;i++) {
+        for (int i=0;i<40;i++) {
             stamp("┃");
             CliSetUp.cursorLeft(1);
             CliSetUp.cursorDown(1);
         }
-        stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-        CliSetUp.cursorUp(30);
+        stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliSetUp.cursorUp(40);
         CliSetUp.cursorLeft(1);
-        for (int i=0;i<30;i++) {
+        for (int i=0;i<40;i++) {
             stamp("┃");
             CliSetUp.cursorLeft(1);
             CliSetUp.cursorDown(1);
         }
-        CliSetUp.cursorUp(30);
-        CliSetUp.cursorLeft(26);
+        CliSetUp.cursorUp(40);
+        CliSetUp.cursorLeft(33);
         CliPrinter.stamp("PLAYERS' INFO");
         CliSetUp.cursorDown(2);
-        CliSetUp.cursorLeft(24);
+        CliSetUp.cursorLeft(30);
+        CliSetUp.savePosition(); // per poter scrivere sempre all'inizio del box, basta scendere di uno
+
+        if (lightGameVersion != null) {
+            playerPowerups = lightGameVersion.getPlayerPowerups();
+            playerWeapons = lightGameVersion.getPlayerWeapons();
+            playerBoardRep = lightGameVersion.getPlayerBoardRep();
+
+            bansheeRep = playerBoardRep.get("BANSHEE");
+            if (bansheeRep != null) {
+                playerCounter++;
+
+                CliPrinter.stamp("BANSHEE:", CliColor.TEXTBLUE);
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+
+                bansheeDamages = bansheeRep.getDamages();
+                bansheemarks = bansheeRep.getMarks();
+                bansheeAmmos = bansheeRep.getColorQtyAmmos();
+                bansheePowerUp = playerPowerups.get("BANSHEE");
+                bansheeWeapons = playerWeapons.get("BANSHEE");
+
+                int redAmmos = bansheeAmmos.get("RED");
+                int blueAmmos = bansheeAmmos.get("BLUE");
+                int yellowAmmos = bansheeAmmos.get("YELLOW");
+
+                CliSetUp.savePosition();
+                CliPrinter.stamp("damages: ");
+                for (String d: bansheeDamages) {
+                    if (d.equals("BANSHEE"))
+                        CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+                    if (d.equals("SPROG"))
+                        CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+                    if(d.equals("DOZER"))
+                        CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+                    if(d.equals("VIOLET"))
+                        CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+                    if(d.equals("DISTRUCTOR"))
+                        CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("marks: ");
+                for (String d: bansheemarks) {
+                    if (d.equals("BANSHEE"))
+                        CliPrinter.stamp("◀", CliColor.TEXTBLUE);
+                    if (d.equals("SPROG"))
+                        CliPrinter.stamp("◀", CliColor.TEXTGREEN);
+                    if(d.equals("DOZER"))
+                        CliPrinter.stamp("◀", CliColor.TEXTWHITE);
+                    if(d.equals("VIOLET"))
+                        CliPrinter.stamp("◀", CliColor.TEXTPURPLE);
+                    if(d.equals("DISTRUCTOR"))
+                        CliPrinter.stamp("◀", CliColor.TEXTYELLOW);
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Ammos: ");
+                CliPrinter.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
+                CliPrinter.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
+                CliPrinter.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("powerups: ");
+                for (CardRep c: bansheePowerUp) {
+                    CliPrinter.stamp(c.getTitle() + ", ");
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("weapons: ");
+                for (CardRep c: bansheeWeapons) {
+                    CliPrinter.stamp(c.getTitle() + ", ");
+                }
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(2);
+                CliSetUp.savePosition();
+
+            }
+
+            sprogRep = playerBoardRep.get("SPROG");
+            if(sprogRep != null) {
+                playerCounter++;
+
+                CliPrinter.stamp("SPROG:", CliColor.TEXTGREEN);
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+
+                sprogDamages = sprogRep.getDamages();
+                sprogmarks = sprogRep.getMarks();
+                sprogAmmos = sprogRep.getColorQtyAmmos();
+                sprogPowerUp = playerPowerups.get("SPROG");
+                sprogWeapons = playerWeapons.get("SPROG");
+
+                int redAmmos = sprogAmmos.get("RED");
+                int blueAmmos = sprogAmmos.get("BLUE");
+                int yellowAmmos = sprogAmmos.get("YELLOW");
+
+                CliSetUp.savePosition();
+                CliPrinter.stamp("damages: ");
+                for (String d: sprogDamages) {
+                    if (d.equals("BANSHEE"))
+                        CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+                    if (d.equals("SPROG"))
+                        CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+                    if(d.equals("DOZER"))
+                        CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+                    if(d.equals("VIOLET"))
+                        CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+                    if(d.equals("DISTRUCTOR"))
+                        CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("marks: ");
+                for (String d: sprogmarks) {
+                    if (d.equals("BANSHEE"))
+                        CliPrinter.stamp("◀", CliColor.TEXTBLUE);
+                    if (d.equals("SPROG"))
+                        CliPrinter.stamp("◀", CliColor.TEXTGREEN);
+                    if(d.equals("DOZER"))
+                        CliPrinter.stamp("◀", CliColor.TEXTWHITE);
+                    if(d.equals("VIOLET"))
+                        CliPrinter.stamp("◀", CliColor.TEXTPURPLE);
+                    if(d.equals("DISTRUCTOR"))
+                        CliPrinter.stamp("◀", CliColor.TEXTYELLOW);
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Ammos: ");
+                CliPrinter.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
+                CliPrinter.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
+                CliPrinter.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("powerups: ");
+                for (CardRep c: sprogPowerUp) {
+                    CliPrinter.stamp(c.getTitle() + ", ");
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("weapons: ");
+                for (CardRep c: sprogWeapons) {
+                    CliPrinter.stamp(c.getTitle() + ", ");
+                }
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(2);
+                CliSetUp.savePosition();
+            }
+
+            dozerRep = playerBoardRep.get("DOZER");
+            if (dozerRep != null) {
+                playerCounter++;
+
+                CliPrinter.stamp("DOZER:", CliColor.TEXTWHITE);
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+
+                dozerDamages = dozerRep.getDamages();
+                dozermarks = dozerRep.getMarks();
+                dozerAmmos = dozerRep.getColorQtyAmmos();
+                dozerPowerUp = playerPowerups.get("DOZER");
+                dozerWeapons = playerWeapons.get("DOZER");
+
+                int redAmmos = dozerAmmos.get("RED");
+                int blueAmmos = dozerAmmos.get("BLUE");
+                int yellowAmmos = dozerAmmos.get("YELLOW");
+
+                CliSetUp.savePosition();
+                CliPrinter.stamp("damages: ");
+                for (String d: dozerDamages) {
+                    if (d.equals("BANSHEE"))
+                        CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+                    if (d.equals("SPROG"))
+                        CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+                    if(d.equals("DOZER"))
+                        CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+                    if(d.equals("VIOLET"))
+                        CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+                    if(d.equals("DISTRUCTOR"))
+                        CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("marks: ");
+                for (String d: dozermarks) {
+                    if (d.equals("BANSHEE"))
+                        CliPrinter.stamp("◀", CliColor.TEXTBLUE);
+                    if (d.equals("SPROG"))
+                        CliPrinter.stamp("◀", CliColor.TEXTGREEN);
+                    if(d.equals("DOZER"))
+                        CliPrinter.stamp("◀", CliColor.TEXTWHITE);
+                    if(d.equals("VIOLET"))
+                        CliPrinter.stamp("◀", CliColor.TEXTPURPLE);
+                    if(d.equals("DISTRUCTOR"))
+                        CliPrinter.stamp("◀", CliColor.TEXTYELLOW);
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Ammos: ");
+                CliPrinter.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
+                CliPrinter.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
+                CliPrinter.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("powerups: ");
+                for (CardRep c: dozerPowerUp) {
+                    CliPrinter.stamp(c.getTitle() + ", ");
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("weapons: ");
+                for (CardRep c: dozerWeapons) {
+                    CliPrinter.stamp(c.getTitle() + ", ");
+                }
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(2);
+                CliSetUp.savePosition();
+            }
+
+            violetRep = playerBoardRep.get("VIOLET");
+            if (violetRep != null) {
+                playerCounter++;
+
+                CliPrinter.stamp("VIOLET:", CliColor.TEXTPURPLE);
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+
+                violetDamages = violetRep.getDamages();
+                violetmarks = violetRep.getMarks();
+                violetAmmos = violetRep.getColorQtyAmmos();
+                violetPowerUp = playerPowerups.get("VIOLET");
+                violetWeapons = playerWeapons.get("VIOLET");
+
+                int redAmmos = violetAmmos.get("RED");
+                int blueAmmos = violetAmmos.get("BLUE");
+                int yellowAmmos = violetAmmos.get("YELLOW");
+
+                CliSetUp.savePosition();
+                CliPrinter.stamp("damages: ");
+                for (String d: violetDamages) {
+                    if (d.equals("BANSHEE"))
+                        CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+                    if (d.equals("SPROG"))
+                        CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+                    if(d.equals("DOZER"))
+                        CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+                    if(d.equals("VIOLET"))
+                        CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+                    if(d.equals("DISTRUCTOR"))
+                        CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("marks: ");
+                for (String d: violetmarks) {
+                    if (d.equals("BANSHEE"))
+                        CliPrinter.stamp("◀", CliColor.TEXTBLUE);
+                    if (d.equals("SPROG"))
+                        CliPrinter.stamp("◀", CliColor.TEXTGREEN);
+                    if(d.equals("DOZER"))
+                        CliPrinter.stamp("◀", CliColor.TEXTWHITE);
+                    if(d.equals("VIOLET"))
+                        CliPrinter.stamp("◀", CliColor.TEXTPURPLE);
+                    if(d.equals("DISTRUCTOR"))
+                        CliPrinter.stamp("◀", CliColor.TEXTYELLOW);
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Ammos: ");
+                CliPrinter.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
+                CliPrinter.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
+                CliPrinter.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("powerups: ");
+                for (CardRep c: violetPowerUp) {
+                    CliPrinter.stamp(c.getTitle() + ", ");
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("weapons: ");
+                for (CardRep c: violetWeapons) {
+                    CliPrinter.stamp(c.getTitle() + ", ");
+                }
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(2);
+                CliSetUp.savePosition();
+            }
+
+            distructorRep = playerBoardRep.get("DISTRUCTOR");
+            if (distructorRep != null) {
+                playerCounter++;
+
+                CliPrinter.stamp("DISTRUCTOR:", CliColor.TEXTYELLOW);
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+
+                distructorDamages = distructorRep.getDamages();
+                distructormarks = distructorRep.getMarks();
+                distructorAmmos = distructorRep.getColorQtyAmmos();
+                distructorPowerUp = playerPowerups.get("DISTRUCTOR");
+                distructorWeapons = playerWeapons.get("DISTRUCTOR");
+
+                int redAmmos = distructorAmmos.get("RED");
+                int blueAmmos = distructorAmmos.get("BLUE");
+                int yellowAmmos = distructorAmmos.get("YELLOW");
+
+                CliSetUp.savePosition();
+                CliPrinter.stamp("damages: ");
+                for (String d: distructorDamages) {
+                    if (d.equals("BANSHEE"))
+                        CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+                    if (d.equals("SPROG"))
+                        CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+                    if(d.equals("DOZER"))
+                        CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+                    if(d.equals("VIOLET"))
+                        CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+                    if(d.equals("DISTRUCTOR"))
+                        CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("marks: ");
+                for (String d: distructormarks) {
+                    if (d.equals("BANSHEE"))
+                        CliPrinter.stamp("◀", CliColor.TEXTBLUE);
+                    if (d.equals("SPROG"))
+                        CliPrinter.stamp("◀", CliColor.TEXTGREEN);
+                    if(d.equals("DOZER"))
+                        CliPrinter.stamp("◀", CliColor.TEXTWHITE);
+                    if(d.equals("VIOLET"))
+                        CliPrinter.stamp("◀", CliColor.TEXTPURPLE);
+                    if(d.equals("DISTRUCTOR"))
+                        CliPrinter.stamp("◀", CliColor.TEXTYELLOW);
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Ammos: ");
+                CliPrinter.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
+                CliPrinter.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
+                CliPrinter.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("powerups: ");
+                for (CardRep c: distructorPowerUp) {
+                    CliPrinter.stamp(c.getTitle() + ", ");
+                }
+
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("weapons: ");
+                for (CardRep c: distructorWeapons) {
+                    CliPrinter.stamp(c.getTitle() + ", ");
+                }
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(2);
+                CliSetUp.savePosition();
+            }
+
+            CliSetUp.cursorUp(7*playerCounter);
+            if (playerCounter == 1) {
+
+            }
+            else if (playerCounter == 2) {
+
+            }
+            else if (playerCounter == 3) {
+
+            }
+            else if (playerCounter == 4) {
+
+            }
+            else {
+
+            }
+        }
     }
 
     public static void printPlatformWeapons(LightGameVersion lightGameVersion) {

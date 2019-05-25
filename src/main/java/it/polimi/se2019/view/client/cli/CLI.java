@@ -330,7 +330,7 @@ public class CLI extends RemoteView {
             int choise;
             Scanner s = new Scanner(System.in);
             choise = s.nextInt();
-            CollectWeaponMessage message = new CollectWeaponMessage(Integer.toString(hashes.get(choise).intValue()));
+            ChosenWeaponMessage message = new ChosenWeaponMessage(Integer.toString(hashes.get(choise).intValue()));
             message.setSender(userName);
             viewSetChanged();
             notifyObservers(message);
