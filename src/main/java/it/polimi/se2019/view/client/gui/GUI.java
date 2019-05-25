@@ -28,23 +28,26 @@ public class GUI extends RemoteView {
     private ChooseCharacterController chooseCharacterController;
     private GameBoardController gameBoardController;
     private ChoosePowerupController choosePowerupController;
-    private StatsBoardController statsBoardController;
     private PlayerBoardController playerBoardController;
+    private SwitchWeaponController switchWeaponController;
 
     private Scene sceneWaitingLobby;
     private Scene sceneChooseMap;
     private Scene sceneChooseCharacter;
     private Scene sceneGameBoard;
     private Scene sceneChoosePowerup;
-    private Scene sceneStatsBoard;
     private Scene scenePlayerBoard;
+    private Scene sceneSwitchWeapon;
+
     private Stage stage;
     private Stage secondStage;
-    private Stage statsStage;
     private Stage playerBoardStage;
+    private Stage switchWeaponStage;
+
     private String charInString;
     private List<String> charsInGame;
     private String config;
+    private LightGameVersion lightGameVersion;
 
     public GUI(String user, Stage stage) {
         this.stage = stage;
@@ -106,15 +109,31 @@ public class GUI extends RemoteView {
                 () -> {
                     initGameBoard(config, ammoReps, posWeapons);
                     this.charsInGame = arrChars;
-                    initStatsBoard(arrChars);
                     initPlayerBoard(arrChars);
+                    initSwitchWeapon();
+                    switchWeaponController.passGUI(this);
                     gameBoardController.passGUI(this);
-                    statsBoardController.passGUI(this);
                     playerBoardController.passGUI(this);
                     stage.setScene(sceneGameBoard);
                     stage.setResizable(false);
                     stage.show();
                 });
+    }
+
+    private void initSwitchWeapon() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/switchWeapon.fxml"));
+        try {
+            Parent root = loader.load();
+            switchWeaponStage = new Stage();
+            switchWeaponStage.setTitle("Chose a weapon to switch");
+            switchWeaponStage.initOwner(stage);
+            switchWeaponStage.initModality(Modality.APPLICATION_MODAL);
+            sceneSwitchWeapon = new Scene(root);
+            switchWeaponController = loader.getController();
+            switchWeaponStage.setOnCloseRequest(event -> sendWeaponToSwitch("null"));
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing switch weapon");
+        }
     }
 
     private void initPlayerBoard(List<String> arrChars) {
@@ -185,20 +204,6 @@ public class GUI extends RemoteView {
         }
     }
 
-    protected void initStatsBoard(List<String> arrChars) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/statsBoard.fxml"));
-        try {
-            Parent root = loader.load();
-            statsStage = new Stage();
-            statsStage.setTitle("Stats");
-            sceneStatsBoard = new Scene(root);
-            statsBoardController = loader.getController();
-            statsBoardController.setCharsInGame(arrChars);
-        } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing stats board");
-        }
-    }
-
     private void initChoosePowerup(CardRep p1, CardRep p2) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/choosePowerup.fxml"));
         try {
@@ -253,8 +258,8 @@ public class GUI extends RemoteView {
     public void updateAll(LightGameVersion lightGameVersion) {
         Platform.runLater(
                 () -> {
+                    this.lightGameVersion=lightGameVersion;
                     gameBoardController.updateAll(lightGameVersion);
-                    statsBoardController.updateAll(lightGameVersion);
                     playerBoardController.updateAll(lightGameVersion);
                 });
     }
@@ -298,6 +303,13 @@ public class GUI extends RemoteView {
         viewSetChanged();
         notifyObservers(message);
         gameBoardController.enableActionButtons();
+    }
+    protected void sendWeaponToSwitch(String hashWeapon){
+        DiscardWeaponMessage message = new DiscardWeaponMessage(hashWeapon);
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
+        switchWeaponStage.close();
     }
 
     protected void iWantToDoSomething(String action) {
@@ -384,20 +396,20 @@ public class GUI extends RemoteView {
 
     @Override
     public void showMessage(String msg){
-        HandyFunctions.LOGGER.log(Level.INFO, msg);
-        //TODO
+       if (msg.equals("You have already three weapons! Do you want to discard one?")) {
+           Platform.runLater(
+                   () -> {
+                       switchWeaponController.updateMyWeapons(lightGameVersion);
+                       switchWeaponStage.setScene(sceneSwitchWeapon);
+                       switchWeaponStage.setResizable(false);
+                       switchWeaponStage.show();
+                   });
+       }
+
     }
 
     public String getCharInString() {
         return charInString;
-    }
-
-    public Stage getStatsStage() {
-        return statsStage;
-    }
-
-    public Scene getSceneStatsBoard() {
-        return sceneStatsBoard;
     }
 
     public Scene getScenePlayerBoard() {

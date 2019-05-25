@@ -20,8 +20,8 @@
       </ImageView>
         <ImageView fx:id="im1" fitHeight="186.0" fitWidth="146.0" layoutX="56.0" layoutY="65.0" pickOnBounds="true" />
         <ImageView fx:id="im2" fitHeight="186.0" fitWidth="146.0" layoutX="261.0" layoutY="65.0" pickOnBounds="true" />
-        <Button fx:id="powerup1" layoutX="56.0" layoutY="65.0" mnemonicParsing="false" onAction="#chooseFirstPowerup" opacity="0.0" prefHeight="186.0" prefWidth="146.0" />
-        <Button fx:id="powerup2" layoutX="261.0" layoutY="65.0" mnemonicParsing="false" onAction="#chooseSecondPowerup" opacity="0.0" prefHeight="186.0" prefWidth="146.0" />
+        <Button fx:id="powerup1" layoutX="56.0" layoutY="65.0" mnemonicParsing="false" onAction="#chooseFirstPowerup" prefHeight="186.0" prefWidth="146.0" style="-fx-background-color: transparent;" />
+        <Button fx:id="powerup2" layoutX="261.0" layoutY="65.0" mnemonicParsing="false" onAction="#chooseSecondPowerup" prefHeight="186.0" prefWidth="146.0" style="-fx-background-color: transparent;" />
       <Label layoutX="126.0" layoutY="14.0" text="Choose a Power Up" textFill="WHITE">
          <font>
             <Font name="Ubuntu" size="24.0" />

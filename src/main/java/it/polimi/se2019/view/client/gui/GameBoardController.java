@@ -32,8 +32,6 @@ public class GameBoardController {
     @FXML
     private ImageView mapImage;
     @FXML
-    private Button statsbutton;
-    @FXML
     private Button zerozero;
     @FXML
     private Button zeroone;
@@ -564,7 +562,6 @@ public class GameBoardController {
         updateWeapons(lightGameVersion);
         //update the ammo cards in the field
         updateAmmoCards(lightGameVersion);
-        //TODO update other things of light model
 
     }
 
@@ -694,15 +691,6 @@ public class GameBoardController {
 
     public void shootClick() {
         //gui.iWantToDoSomething("action3");
-    }
-
-    public void statsClick() {
-        Platform.runLater(
-                () -> {
-                    gui.getStatsStage().setScene(gui.getSceneStatsBoard());
-                    gui.getStatsStage().setResizable(false);
-                    gui.getStatsStage().show();
-                });
     }
 
     public void dozerClick(){

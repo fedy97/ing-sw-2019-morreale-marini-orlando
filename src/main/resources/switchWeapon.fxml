@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.view.client.gui.SwitchWeaponController">
+   <children>
+      <ImageView fitHeight="350.0" fitWidth="716.0" pickOnBounds="true">
+         <image>
+            <Image url="@assets/backgrounds/bgchoose.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="weapon1image" fitHeight="272.0" fitWidth="180.0" layoutX="39.0" layoutY="39.0" pickOnBounds="true" />
+      <ImageView fx:id="weapon2image" fitHeight="272.0" fitWidth="180.0" layoutX="268.0" layoutY="39.0" pickOnBounds="true" />
+      <ImageView fx:id="weapon3image" fitHeight="272.0" fitWidth="180.0" layoutX="497.0" layoutY="39.0" pickOnBounds="true" />
+      <Button fx:id="weapon1" layoutX="39.0" layoutY="39.0" mnemonicParsing="false" onAction="#weapon1Click" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="weapon2" layoutX="268.0" layoutY="39.0" mnemonicParsing="false" onAction="#weapon2Click" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="weapon3" layoutX="497.0" layoutY="39.0" mnemonicParsing="false" onAction="#weapon3Click" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
+   </children>
+</AnchorPane>

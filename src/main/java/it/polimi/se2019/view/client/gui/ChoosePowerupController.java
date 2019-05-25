@@ -1,6 +1,7 @@
 package it.polimi.se2019.view.client.gui;
 
 import it.polimi.se2019.model.CardRep;
+import it.polimi.se2019.utils.HandyFunctions;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,6 +39,10 @@ public class ChoosePowerupController {
                 () -> {
                     im1.setImage(new Image(im1rep.getPath()));
                     im2.setImage(new Image(im2rep.getPath()));
+                    HandyFunctions.enlightenButton(info1button);
+                    HandyFunctions.enlightenButton(info2button);
+                    HandyFunctions.enlightenButton(powerup1);
+                    HandyFunctions.enlightenButton(powerup2);
                 });
     }
 
