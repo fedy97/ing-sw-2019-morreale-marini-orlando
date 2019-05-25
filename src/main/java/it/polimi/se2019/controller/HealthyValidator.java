@@ -38,10 +38,13 @@ public class HealthyValidator extends Validator {
 
             try {
                 for (Platform p : res) {
-                    if ((!p.hasAmmoCard() && !p.isGenerationSpot()) || (getGrabableWeapons(p).isEmpty()))
+                    if ((!p.hasAmmoCard() && !p.isGenerationSpot()))
+                        garbPla.add(p);
+                    else if(p.isGenerationSpot() && getGrabableWeapons(p).isEmpty())
                         garbPla.add(p);
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
             }
 
