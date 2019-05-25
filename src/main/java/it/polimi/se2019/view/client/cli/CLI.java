@@ -327,10 +327,10 @@ public class CLI extends RemoteView {
         Map<Integer, Integer> hashes;
         hashes = CliPrinter.printPossibleWeapon(lightGameVersion, weapons);
         new Thread( () -> {
-            int choise;
+            int choice;
             Scanner s = new Scanner(System.in);
-            choise = s.nextInt();
-            CollectWeaponMessage message = new CollectWeaponMessage(Integer.toString(hashes.get(choise).intValue()));
+            choice = s.nextInt();
+            ChosenWeaponMessage message = new ChosenWeaponMessage(Integer.toString(hashes.get(choice).intValue()));
             message.setSender(userName);
             viewSetChanged();
             notifyObservers(message);

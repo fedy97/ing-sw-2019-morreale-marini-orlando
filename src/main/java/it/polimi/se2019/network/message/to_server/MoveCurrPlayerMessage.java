@@ -37,7 +37,7 @@ public class MoveCurrPlayerMessage extends ToServerMessage {
                         actor.callView(new AskToDiscardMessage(null), sender);
                         WeaponCard card = actor.getChosenWeapons().take();
 
-                        if (card == null)
+                        if (card.getName().equals("null"))
                             return;
                         else
                             actor.getPlayerManager().getCurrentPlayer().removeWeaponCard(card);
