@@ -5,8 +5,12 @@ import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.utils.HandyFunctions;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +45,18 @@ public class PlayerBoardController {
     private ImageView redAmmo1;
     @FXML
     private ImageView redAmmo2;
+    @FXML
+    private Button infoW1;
+    @FXML
+    private Button infoW2;
+    @FXML
+    private Button infoW3;
+    @FXML
+    private Button infoP1;
+    @FXML
+    private Button infoP2;
+    @FXML
+    private Button infoP3;
 
     private GUI gui;
     private List<String> charsInGame;
@@ -51,9 +67,13 @@ public class PlayerBoardController {
     private List<ImageView> yellowAmmosImages;
     private List<ImageView> blueAmmosImages;
     private List<ImageView> redAmmosImages;
+    private List<Button> infoWeaponsButtons;
+    private List<Button> infoPowerupsButtons;
     private String currPlayerDisplay;
 
     public void initialize() {
+        infoWeaponsButtons=new ArrayList<>();
+        infoPowerupsButtons=new ArrayList<>();
         weaponsImages = new ArrayList<>();
         powerupsImages = new ArrayList<>();
         yellowAmmosImages = new ArrayList<>();
@@ -71,6 +91,12 @@ public class PlayerBoardController {
         powerupsImages.add(pImage1);
         powerupsImages.add(pImage2);
         powerupsImages.add(pImage3);
+        infoWeaponsButtons.add(infoW1);
+        infoWeaponsButtons.add(infoW2);
+        infoWeaponsButtons.add(infoW3);
+        infoPowerupsButtons.add(infoP1);
+        infoPowerupsButtons.add(infoP2);
+        infoPowerupsButtons.add(infoP3);
     }
 
     void setRightAssets(String playerToDisplay) {
@@ -84,14 +110,22 @@ public class PlayerBoardController {
         Map<String, List<CardRep>> charPowerupsReps = lightGameVersion.getPlayerPowerups();
         List<CardRep> myPowerupsReps = charPowerupsReps.get(playerToDisplay);
         if (myChar.equals(playerToDisplay)) {
-            for (CardRep myPowerup : myPowerupsReps)
+            for (CardRep myPowerup : myPowerupsReps) {
                 powerupsImages.get(myPowerupsReps.indexOf(myPowerup)).setImage(new Image(myPowerup.getPath()));
+                HandyFunctions.enlightenButton(infoPowerupsButtons.get(myPowerupsReps.indexOf(myPowerup)));
+            }
+            for (int j = myPowerupsReps.size(); j < 3; j++)
+                HandyFunctions.darkenButton(infoPowerupsButtons.get(j));
         }
         //update weapons
         Map<String, List<CardRep>> charWeapons = lightGameVersion.getPlayerWeapons();
         List<CardRep> myWeaponsReps = charWeapons.get(playerToDisplay);
-        for (CardRep myWeapon : myWeaponsReps)
+        for (CardRep myWeapon : myWeaponsReps) {
             weaponsImages.get(myWeaponsReps.indexOf(myWeapon)).setImage(new Image(myWeapon.getPath()));
+            HandyFunctions.enlightenButton(infoWeaponsButtons.get(myWeaponsReps.indexOf(myWeapon)));
+        }
+        for (int j = myWeaponsReps.size(); j < 3; j++)
+            HandyFunctions.darkenButton(infoWeaponsButtons.get(j));
         //update ammos
         Map<String, Integer> colorQuantity = lightGameVersion.getPlayerBoardRep().get(playerToDisplay).getColorQtyAmmos();
         int red = colorQuantity.get("RED");
@@ -131,5 +165,38 @@ public class PlayerBoardController {
 
     public void setCurrPlayerDisplay(String currPlayerDisplay) {
         this.currPlayerDisplay = currPlayerDisplay;
+    }
+
+    public void infoW1Click(){
+        CardRep cardRep = lightGameVersion.getPlayerWeapons().get(gui.getCharInString()).get(0);
+        showInstruction(cardRep);
+    }
+    public void infoW2Click(){
+        CardRep cardRep = lightGameVersion.getPlayerWeapons().get(gui.getCharInString()).get(1);
+        showInstruction(cardRep);
+    }
+    public void infoW3Click(){
+        CardRep cardRep = lightGameVersion.getPlayerWeapons().get(gui.getCharInString()).get(2);
+        showInstruction(cardRep);
+    }
+    public void infoP1Click(){
+        CardRep cardRep = lightGameVersion.getPlayerPowerups().get(gui.getCharInString()).get(0);
+        showInstruction(cardRep);
+    }
+    public void infoP2Click(){
+        CardRep cardRep = lightGameVersion.getPlayerPowerups().get(gui.getCharInString()).get(1);
+        showInstruction(cardRep);
+    }
+    public void infoP3Click(){
+        CardRep cardRep = lightGameVersion.getPlayerPowerups().get(gui.getCharInString()).get(2);
+        showInstruction(cardRep);
+    }
+    private void showInstruction(CardRep cardRep){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info");
+        alert.setHeaderText(cardRep.getTitle().toUpperCase());
+        alert.setContentText(cardRep.getDescription());
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.showAndWait();
     }
 }
