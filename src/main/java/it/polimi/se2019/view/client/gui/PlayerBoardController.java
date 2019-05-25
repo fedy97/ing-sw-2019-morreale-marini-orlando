@@ -114,9 +114,9 @@ public class PlayerBoardController {
                 powerupsImages.get(myPowerupsReps.indexOf(myPowerup)).setImage(new Image(myPowerup.getPath()));
                 HandyFunctions.enlightenButton(infoPowerupsButtons.get(myPowerupsReps.indexOf(myPowerup)));
             }
-            for (int j = myPowerupsReps.size(); j < 3; j++)
-                HandyFunctions.darkenButton(infoPowerupsButtons.get(j));
         }
+        for (int j = myPowerupsReps.size(); j < 3; j++)
+            HandyFunctions.darkenButton(infoPowerupsButtons.get(j));
         //update weapons
         Map<String, List<CardRep>> charWeapons = lightGameVersion.getPlayerWeapons();
         List<CardRep> myWeaponsReps = charWeapons.get(playerToDisplay);
