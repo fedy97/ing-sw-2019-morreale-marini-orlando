@@ -324,6 +324,8 @@ public class CLI extends RemoteView {
 
     @Override
     public void lightWeapons(List<String> weapons) {
+        if (weapons.isEmpty())
+            return;
         Map<Integer, Integer> hashes;
         hashes = CliPrinter.printPossibleWeapon(lightGameVersion, weapons);
         new Thread( () -> {
@@ -340,6 +342,8 @@ public class CLI extends RemoteView {
 
     @Override
     public void lightPlatforms(List<String> platforms) {
+        if (platforms.isEmpty())
+            return;
         CliPrinter.printPossiblePlatform(platforms);
         new Thread(() -> {
             String platform;
