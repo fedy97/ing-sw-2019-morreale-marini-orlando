@@ -998,22 +998,58 @@ public final class CliPrinter {
             }
 
             CliSetUp.cursorUp(7*playerCounter);
-            if (playerCounter == 1) {
-
-            }
-            else if (playerCounter == 2) {
-
-            }
-            else if (playerCounter == 3) {
-
-            }
-            else if (playerCounter == 4) {
-
-            }
-            else {
-
-            }
         }
+    }
+
+    public static void discartWeaponMessage(LightGameVersion lightGameVersion, String myChar) {
+        CliSetUp.savePosition();
+        Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
+        List<CardRep> myWeapons = playerWeapons.get(myChar);
+
+        CliSetUp.cursorLeft(5);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                  Choose a weapon to discart:                               ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┃                                                                                            ┃");
+        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliSetUp.cursorLeft(78);
+        CliSetUp.cursorUp(6);
+        int counter = 0;
+        for (CardRep c: myWeapons) {
+            CliPrinter.stamp(c.getTitle());
+            if (counter <2) {
+                CliPrinter.stamp(", ");
+            }
+            counter++;
+        }
+        stamp(" <0,1,2>: ");
     }
 
     public static void printPlatformWeapons(LightGameVersion lightGameVersion) {
