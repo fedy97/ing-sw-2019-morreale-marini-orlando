@@ -168,27 +168,27 @@ public class PlayerBoardController {
     }
 
     public void infoW1Click(){
-        CardRep cardRep = lightGameVersion.getPlayerWeapons().get(gui.getCharInString()).get(0);
+        CardRep cardRep = lightGameVersion.getPlayerWeapons().get(currPlayerDisplay).get(0);
         showInstruction(cardRep);
     }
     public void infoW2Click(){
-        CardRep cardRep = lightGameVersion.getPlayerWeapons().get(gui.getCharInString()).get(1);
+        CardRep cardRep = lightGameVersion.getPlayerWeapons().get(currPlayerDisplay).get(1);
         showInstruction(cardRep);
     }
     public void infoW3Click(){
-        CardRep cardRep = lightGameVersion.getPlayerWeapons().get(gui.getCharInString()).get(2);
+        CardRep cardRep = lightGameVersion.getPlayerWeapons().get(currPlayerDisplay).get(2);
         showInstruction(cardRep);
     }
     public void infoP1Click(){
-        CardRep cardRep = lightGameVersion.getPlayerPowerups().get(gui.getCharInString()).get(0);
+        CardRep cardRep = lightGameVersion.getPlayerPowerups().get(currPlayerDisplay).get(0);
         showInstruction(cardRep);
     }
     public void infoP2Click(){
-        CardRep cardRep = lightGameVersion.getPlayerPowerups().get(gui.getCharInString()).get(1);
+        CardRep cardRep = lightGameVersion.getPlayerPowerups().get(currPlayerDisplay).get(1);
         showInstruction(cardRep);
     }
     public void infoP3Click(){
-        CardRep cardRep = lightGameVersion.getPlayerPowerups().get(gui.getCharInString()).get(2);
+        CardRep cardRep = lightGameVersion.getPlayerPowerups().get(currPlayerDisplay).get(2);
         showInstruction(cardRep);
     }
     private void showInstruction(CardRep cardRep){
