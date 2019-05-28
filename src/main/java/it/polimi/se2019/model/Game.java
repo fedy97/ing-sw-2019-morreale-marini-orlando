@@ -155,6 +155,16 @@ public class Game extends Observable {
         //set the skulls
         LightGameVersion lightVersion = new LightGameVersion(null);
         lightVersion.setSkullsNum(getGameField().getSkullsBoard().getCurrentSkulls());
+        List<String> characterThatKilled = new ArrayList<>();
+        List<Integer> quantityOfMarks = new ArrayList<>();
+
+        for (Character c : gameField.getSkullsBoard().getCharacterThatKilledInPos())
+            characterThatKilled.add(c.name());
+
+        quantityOfMarks.addAll(gameField.getSkullsBoard().getMarksInPos());
+
+        lightVersion.setCharactersThatKilled(characterThatKilled);
+        lightVersion.setQuantityOfMarks(quantityOfMarks);
 
         Map<String, String> playerPlatform = new HashMap<>();
         Map<String, List<CardRep>> playerPowerups = new HashMap<>();

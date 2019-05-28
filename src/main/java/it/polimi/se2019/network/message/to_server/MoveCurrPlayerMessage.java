@@ -37,15 +37,16 @@ public class MoveCurrPlayerMessage extends ToServerMessage {
                         actor.callView(new AskToDiscardMessage(null), sender);
                         WeaponCard card = actor.getChosenWeapons().take();
 
-                        if (card.getName().equals("null"))
+                        if (card.getName().equals("null")) {
+                            actor.setState(ControllerState.IDLE);
                             return;
+                        }
                         else
                             actor.getPlayerManager().getCurrentPlayer().removeWeaponCard(card);
                     }
 
                     actor.askFor(actor.getValidator().getGrabableWeapons(), "weapons");
                     actor.getPlayerManager().buyWeapon(actor.getChosenWeapons().take());
-                    return;
                 } catch (Exception e) {
                     HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
                     e.printStackTrace();

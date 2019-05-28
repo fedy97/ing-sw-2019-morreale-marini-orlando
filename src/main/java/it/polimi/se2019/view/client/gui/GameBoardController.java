@@ -957,25 +957,11 @@ public class GameBoardController {
         }
     }
 
-    protected void disableActionsActivateReload() {
-        movebutton.setDisable(true);
-        grabbutton.setDisable(true);
-        shootbutton.setDisable(true);
-        reloadbutton.setDisable(false);
+    protected void setActiveButtons(boolean[] actives){
+        movebutton.setDisable(!actives[0]);
+        grabbutton.setDisable(!actives[1]);
+        shootbutton.setDisable(!actives[2]);
+        reloadbutton.setDisable(!actives[3]);
+        endturnbutton.setDisable(!actives[4]);
     }
-
-    protected void disableAllActionButtons() {
-        movebutton.setDisable(true);
-        grabbutton.setDisable(true);
-        shootbutton.setDisable(true);
-        reloadbutton.setDisable(true);
-    }
-
-    protected void enableActionButtonsDeactivateReload() {
-        movebutton.setDisable(false);
-        grabbutton.setDisable(false);
-        shootbutton.setDisable(false);
-        reloadbutton.setDisable(true);
-    }
-
 }

@@ -292,13 +292,13 @@ public class GUI extends RemoteView {
     protected void sendPlatformChosen(String pos) {
         MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(pos);
         notifyListeners(message);
-        gameBoardController.enableActionButtonsDeactivateReload();
+        gameBoardController.setActiveButtons(new boolean[]{true, true, true, false, true});
     }
 
     protected void sendWeaponGrabbed(String hashWeapon) {
         ChosenWeaponMessage message = new ChosenWeaponMessage(hashWeapon);
         notifyListeners(message);
-        gameBoardController.enableActionButtonsDeactivateReload();
+        gameBoardController.setActiveButtons(new boolean[]{true, true, true, false, true});
     }
 
     protected void sendWeaponToSwitch(String hashWeapon) {
@@ -313,7 +313,7 @@ public class GUI extends RemoteView {
     }
 
     protected void iWantToDoSomething(String action) {
-        gameBoardController.disableAllActionButtons();
+        gameBoardController.setActiveButtons(new boolean[]{false, false, false, false, false});
         PerformActionMessage message = new PerformActionMessage(action);
         notifyListeners(message);
     }
@@ -395,14 +395,10 @@ public class GUI extends RemoteView {
     /*
         if the player has 0 actions left, can only reload
      */
-    @Override
-    public void disableActions() {
-        Platform.runLater(() -> gameBoardController.disableActionsActivateReload());
-    }
 
     @Override
-    public void enableActions() {
-        Platform.runLater(() -> gameBoardController.enableActionButtonsDeactivateReload());
+    public void setValidActions(boolean[] actives){
+        Platform.runLater(() -> gameBoardController.setActiveButtons(actives));
     }
 
     @Override
