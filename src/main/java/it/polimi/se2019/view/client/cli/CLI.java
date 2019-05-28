@@ -408,4 +408,9 @@ public class CLI extends RemoteView {
             }).start();
         }
     }
+
+    @Override
+    public void switchWeapon() {
+
+    }
 }

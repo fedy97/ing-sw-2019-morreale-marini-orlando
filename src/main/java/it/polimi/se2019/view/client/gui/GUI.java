@@ -272,17 +272,13 @@ public class GUI extends RemoteView {
 
     protected void sendMapChosenByPlayer(int config) {
         SendMapChosenMessage message = new SendMapChosenMessage(config);
-        message.setSender(userName);
-        viewSetChanged();
-        notifyObservers(message);
+        notifyListeners(message);
     }
 
     protected void sendCharacterChosenByPlayer(String characterEnuminString) {
         charInString = characterEnuminString;
         SendCharacterChosenMessage message = new SendCharacterChosenMessage(characterEnuminString);
-        message.setSender(userName);
-        viewSetChanged();
-        notifyObservers(message);
+        notifyListeners(message);
     }
 
     protected void sendPowerupChosen(int hashCodeChosen, int hashCodeGarbage) {
@@ -290,38 +286,39 @@ public class GUI extends RemoteView {
         arrayList.add(hashCodeChosen);
         arrayList.add(hashCodeGarbage);
         SendInitPowerUpMessage message = new SendInitPowerUpMessage(arrayList);
-        message.setSender(userName);
-        viewSetChanged();
-        notifyObservers(message);
+        notifyListeners(message);
     }
 
     protected void sendPlatformChosen(String pos) {
         MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(pos);
-        message.setSender(userName);
-        viewSetChanged();
-        notifyObservers(message);
+        notifyListeners(message);
         gameBoardController.enableActionButtons();
     }
 
     protected void sendWeaponGrabbed(String hashWeapon) {
         ChosenWeaponMessage message = new ChosenWeaponMessage(hashWeapon);
-        message.setSender(userName);
-        viewSetChanged();
-        notifyObservers(message);
+        notifyListeners(message);
         gameBoardController.enableActionButtons();
     }
 
     protected void sendWeaponToSwitch(String hashWeapon) {
         DiscardWeaponMessage message = new DiscardWeaponMessage(hashWeapon);
-        message.setSender(userName);
-        viewSetChanged();
-        notifyObservers(message);
+        notifyListeners(message);
         switchWeaponStage.close();
+    }
+
+    protected void sendEndMyTurn() {
+        EndTurnMessage message = new EndTurnMessage(null);
+        notifyListeners(message);
     }
 
     protected void iWantToDoSomething(String action) {
         gameBoardController.disableActionButtons();
         PerformActionMessage message = new PerformActionMessage(action);
+        notifyListeners(message);
+    }
+
+    private void notifyListeners(ToServerMessage message) {
         message.setSender(userName);
         viewSetChanged();
         notifyObservers(message);
@@ -403,16 +400,18 @@ public class GUI extends RemoteView {
 
     @Override
     public void showMessage(String msg) {
-        if (msg.equals("You have already three weapons! Do you want to discard one?")) {
-            Platform.runLater(
-                    () -> {
-                        switchWeaponController.updateMyWeapons(lightGameVersion);
-                        switchWeaponStage.setScene(sceneSwitchWeapon);
-                        switchWeaponStage.setResizable(false);
-                        switchWeaponStage.show();
-                    });
-        }
+        gameBoardController.showMessage(msg);
+    }
 
+    @Override
+    public void switchWeapon() {
+        Platform.runLater(
+                () -> {
+                    switchWeaponController.updateMyWeapons(lightGameVersion);
+                    switchWeaponStage.setScene(sceneSwitchWeapon);
+                    switchWeaponStage.setResizable(false);
+                    switchWeaponStage.show();
+                });
     }
 
     public String getCharInString() {

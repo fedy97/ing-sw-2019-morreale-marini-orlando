@@ -668,6 +668,13 @@ public class GameBoardController {
             }
         }
     }
+    protected void showMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info Message");
+        alert.setContentText(message);
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.showAndWait();
+    }
 
     private void showInstruction(CardRep cardRep) {
         if (cardRep.getId() != 0) {
@@ -697,7 +704,9 @@ public class GameBoardController {
         //gui.iWantToDoSomething("action3");
     }
     public void reloadClick(){}
-    public void endturnClick(){}
+    public void endturnClick(){
+
+    }
 
     public void dozerClick(){
         Platform.runLater(

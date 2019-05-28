@@ -46,7 +46,7 @@ public class SpecificSocketServer extends Thread {
                     input.close();
                     output.close();
                     socket.close();
-                    Controller.getInstance().getTurnController().removeUser(user);
+                    //Controller.getInstance().getTurnController().removeUser(user);
                 } catch (IOException ex) {
                     HandyFunctions.LOGGER.log(Level.INFO, user + " stream of " + user + " already closed");
                 }
