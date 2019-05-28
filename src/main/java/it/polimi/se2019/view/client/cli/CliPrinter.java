@@ -306,10 +306,10 @@ public final class CliPrinter {
         CliPrinter.stamp("┃                                        <4> reload                                                      ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                        <5> end turn                                                    ┃");
+        CliPrinter.stamp("┃                                        <5> use power up                                                ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinter.stamp("┃                                        <6> end turn                                                    ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
         CliPrinter.stamp("┃                                     press the <key> followed by enter                                  ┃");
@@ -1184,7 +1184,7 @@ public final class CliPrinter {
         Map<Integer, Integer> hashes = new HashMap<>();
 
 
-        CliSetUp.cursorLeft(7);
+        CliSetUp.cursorLeft(8);
         CliSetUp.cursorDown(1);
 
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");

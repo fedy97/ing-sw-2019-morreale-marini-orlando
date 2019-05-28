@@ -99,6 +99,8 @@ public class CLI extends RemoteView {
                     iWantToShoot();
                 else if (choise == 4)
                     iWantToReload();
+                else if (choise == 5)
+                    iWantToUsePowerUp();
                 else
                     endTurn();
             }).start();
@@ -133,6 +135,10 @@ public class CLI extends RemoteView {
     }
 
     public void iWantToReload() {
+
+    }
+
+    public void iWantToUsePowerUp() {
 
     }
 
