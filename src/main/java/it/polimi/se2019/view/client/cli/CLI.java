@@ -38,6 +38,7 @@ public class CLI extends RemoteView {
     private int[][] map;
     private boolean isAsking;
     private LightGameVersion lightGameVersion;
+    private boolean[] actives;
 
     public CLI() {
         try {
@@ -54,6 +55,9 @@ public class CLI extends RemoteView {
         charChosen = new ArrayList<>();
         map = new int[3][4];
         isAsking = false;
+        actives = new boolean[5];
+        for (int i=0; i<5; i++)
+            actives[i] = false;
     }
 
     @Override
@@ -80,7 +84,7 @@ public class CLI extends RemoteView {
         CliPrinter.drawPlayersInfoBox(lightGameVersion);
         CliSetUp.cursorDown(20);
         CliSetUp.cursorLeft(106);
-        if (!isAsking) {
+        if (!isAsking && isMyTurn()) {
             new Thread(() -> {
                 isAsking = true;
                 Console c = System.console();
@@ -99,6 +103,14 @@ public class CLI extends RemoteView {
                     endTurn();
             }).start();
         }
+    }
+
+    public boolean isMyTurn () {
+        for (int i=0; i<5; i++) {
+            if (actives[i] == true)
+                return true;
+        }
+        return false;
     }
 
     public void iWantToMove() {
@@ -415,7 +427,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void setValidActions(boolean[] actives) {
-
+        this.actives = actives;
     }
 
     @Override
