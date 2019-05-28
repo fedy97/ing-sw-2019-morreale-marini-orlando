@@ -1,5 +1,6 @@
 package it.polimi.se2019.view.client.gui;
 
+import it.polimi.se2019.model.BoardRep;
 import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -63,6 +64,30 @@ public class PlayerBoardController {
     private Button infoP2;
     @FXML
     private Button infoP3;
+    @FXML
+    private ImageView damage1;
+    @FXML
+    private ImageView damage2;
+    @FXML
+    private ImageView damage3;
+    @FXML
+    private ImageView damage4;
+    @FXML
+    private ImageView damage5;
+    @FXML
+    private ImageView damage6;
+    @FXML
+    private ImageView damage7;
+    @FXML
+    private ImageView damage8;
+    @FXML
+    private ImageView damage9;
+    @FXML
+    private ImageView damage10;
+    @FXML
+    private ImageView damage11;
+    @FXML
+    private ImageView damage12;
 
     private GUI gui;
     private List<String> charsInGame;
@@ -73,6 +98,7 @@ public class PlayerBoardController {
     private List<ImageView> yellowAmmosImages;
     private List<ImageView> blueAmmosImages;
     private List<ImageView> redAmmosImages;
+    private List<ImageView> damagesImages;
     private List<Button> infoWeaponsButtons;
     private List<Button> infoPowerupsButtons;
     private String currPlayerDisplay;
@@ -85,6 +111,7 @@ public class PlayerBoardController {
         yellowAmmosImages = new ArrayList<>();
         blueAmmosImages = new ArrayList<>();
         redAmmosImages = new ArrayList<>();
+        damagesImages = new ArrayList<>();
         yellowAmmosImages.add(yellowAmmo1);
         yellowAmmosImages.add(yellowAmmo2);
         yellowAmmosImages.add(yellowAmmo3);
@@ -106,6 +133,18 @@ public class PlayerBoardController {
         infoPowerupsButtons.add(infoP1);
         infoPowerupsButtons.add(infoP2);
         infoPowerupsButtons.add(infoP3);
+        damagesImages.add(damage1);
+        damagesImages.add(damage2);
+        damagesImages.add(damage3);
+        damagesImages.add(damage4);
+        damagesImages.add(damage5);
+        damagesImages.add(damage6);
+        damagesImages.add(damage7);
+        damagesImages.add(damage8);
+        damagesImages.add(damage9);
+        damagesImages.add(damage10);
+        damagesImages.add(damage11);
+        damagesImages.add(damage12);
     }
 
     void setRightAssets(String playerToDisplay) {
@@ -118,6 +157,19 @@ public class PlayerBoardController {
         updatePlayerWeapons();
         //update ammos
         updatePlayerAmmos();
+        //updates damages
+        updateDamages();
+    }
+
+    private void updateDamages() {
+        BoardRep boardRep = lightGameVersion.getPlayerBoardRep().get(currPlayerDisplay);
+        List<String> charactersDamages = boardRep.getDamages();
+        for (String currChar : charactersDamages) {
+            damagesImages.get(charactersDamages.indexOf(currChar)).setVisible(true);
+            damagesImages.get(charactersDamages.indexOf(currChar)).setImage(new Image("1mark" + currChar + ".png"));
+        }
+        for (int i = charactersDamages.size(); i < 12; i++)
+            damagesImages.get(i).setVisible(false);
     }
 
     private void updatePlayerAmmos() {
