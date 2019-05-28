@@ -412,8 +412,8 @@ public class CLI extends RemoteView {
     }
 
     @Override
-    public void disableActions() {
-        //TODO
+    public void setValidActions(boolean[] actives) {
+        
     }
 
     @Override
@@ -445,8 +445,4 @@ public class CLI extends RemoteView {
         }).start();
     }
 
-    @Override
-    public void enableActions() {
-
-    }
 }
