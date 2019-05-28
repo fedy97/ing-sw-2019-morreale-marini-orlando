@@ -392,10 +392,12 @@ public class GUI extends RemoteView {
     public void setRandomChar(String randomChar) {
         charInString = randomChar;
     }
-
+    /*
+        if the player has 0 actions left, can only reload
+     */
     @Override
     public void disableActions() {
-        Platform.runLater(() -> gameBoardController.disableAllActionButtons());
+        Platform.runLater(() -> gameBoardController.disableActionsActivateReload());
     }
 
     @Override

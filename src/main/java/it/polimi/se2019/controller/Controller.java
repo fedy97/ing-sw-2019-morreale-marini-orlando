@@ -132,6 +132,7 @@ public class Controller implements Observer {
         if (playerManager != null) {
             if (playerManager.getActionsLeft() == 0) {
                 DisableActionButtonMessage msg = new DisableActionButtonMessage(null);
+                //callView(msg, playerManager.getCurrentPlayer().getName());
             }
         }
     }
