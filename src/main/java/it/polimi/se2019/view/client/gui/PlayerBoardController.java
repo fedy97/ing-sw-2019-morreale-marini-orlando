@@ -46,6 +46,12 @@ public class PlayerBoardController {
     @FXML
     private ImageView redAmmo2;
     @FXML
+    private ImageView redAmmo3;
+    @FXML
+    private ImageView yellowAmmo3;
+    @FXML
+    private ImageView blueAmmo3;
+    @FXML
     private Button infoW1;
     @FXML
     private Button infoW2;
@@ -81,10 +87,13 @@ public class PlayerBoardController {
         redAmmosImages = new ArrayList<>();
         yellowAmmosImages.add(yellowAmmo1);
         yellowAmmosImages.add(yellowAmmo2);
+        yellowAmmosImages.add(yellowAmmo3);
         blueAmmosImages.add(blueAmmo1);
         blueAmmosImages.add(blueAmmo2);
+        blueAmmosImages.add(blueAmmo3);
         redAmmosImages.add(redAmmo1);
         redAmmosImages.add(redAmmo2);
+        redAmmosImages.add(redAmmo3);
         weaponsImages.add(wImage1);
         weaponsImages.add(wImage2);
         weaponsImages.add(wImage3);
@@ -131,17 +140,17 @@ public class PlayerBoardController {
         int red = colorQuantity.get("RED");
         int blue = colorQuantity.get("BLUE");
         int yellow = colorQuantity.get("YELLOW");
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             redAmmosImages.get(i).setVisible(true);
             if (i >= red)
                 redAmmosImages.get(i).setVisible(false);
         }
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             blueAmmosImages.get(i).setVisible(true);
             if (i >= blue)
                 blueAmmosImages.get(i).setVisible(false);
         }
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             yellowAmmosImages.get(i).setVisible(true);
             if (i >= yellow)
                 yellowAmmosImages.get(i).setVisible(false);

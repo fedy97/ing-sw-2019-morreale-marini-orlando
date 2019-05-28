@@ -172,9 +172,9 @@ public class GUI extends RemoteView {
             stage.setTitle("Waiting Lobby");
             sceneWaitingLobby = new Scene(root);
             waitingLobbyController = loader.getController();
-            stage.setOnCloseRequest(event -> Platform.runLater(
+            /*stage.setOnCloseRequest(event -> Platform.runLater(
                     () -> stage.show()
-            ));
+            ));*/
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing waiting lobby");
         }

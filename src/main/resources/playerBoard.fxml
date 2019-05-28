@@ -19,35 +19,50 @@
       <ImageView fx:id="pImage1" fitHeight="230.0" fitWidth="148.0" layoutX="589.0" layoutY="389.0" pickOnBounds="true" />
       <ImageView fx:id="pImage2" fitHeight="230.0" fitWidth="148.0" layoutX="753.0" layoutY="389.0" pickOnBounds="true" />
       <ImageView fx:id="pImage3" fitHeight="230.0" fitWidth="148.0" layoutX="918.0" layoutY="389.0" pickOnBounds="true" />
-      <ImageView fx:id="yellowAmmo1" fitHeight="38.0" fitWidth="37.0" layoutX="900.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@assets/ammos/yellowAmmo.png" />
-         </image></ImageView>
-      <ImageView fx:id="blueAmmo1" fitHeight="38.0" fitWidth="37.0" layoutX="955.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@assets/ammos/blueAmmo.png" />
-         </image></ImageView>
-      <ImageView fx:id="redAmmo1" fitHeight="38.0" fitWidth="37.0" layoutX="1008.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@assets/ammos/redAmmo.png" />
-         </image></ImageView>
-      <ImageView fx:id="redAmmo2" fitHeight="38.0" fitWidth="37.0" layoutX="1009.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@assets/ammos/redAmmo.png" />
-         </image></ImageView>
-      <ImageView fx:id="blueAmmo2" fitHeight="38.0" fitWidth="37.0" layoutX="956.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@assets/ammos/blueAmmo.png" />
-         </image></ImageView>
-      <ImageView fx:id="yellowAmmo2" fitHeight="38.0" fitWidth="37.0" layoutX="901.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@assets/ammos/yellowAmmo.png" />
-         </image></ImageView>
       <Button fx:id="infoW1" layoutX="14.0" layoutY="389.0" mnemonicParsing="false" onAction="#infoW1Click" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
       <Button fx:id="infoW2" layoutX="180.0" layoutY="389.0" mnemonicParsing="false" onAction="#infoW2Click" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
       <Button fx:id="infoW3" layoutX="346.0" layoutY="389.0" mnemonicParsing="false" onAction="#infoW3Click" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
       <Button fx:id="infoP1" layoutX="589.0" layoutY="389.0" mnemonicParsing="false" onAction="#infoP1Click" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
       <Button fx:id="infoP2" layoutX="753.0" layoutY="389.0" mnemonicParsing="false" onAction="#infoP2Click" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
       <Button fx:id="infoP3" layoutX="918.0" layoutY="389.0" mnemonicParsing="false" onAction="#infoP3Click" prefHeight="230.0" prefWidth="148.0" style="-fx-background-color: transparent;" />
+      <ImageView fx:id="blueAmmo2" fitHeight="38.0" fitWidth="37.0" layoutX="956.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/blueAmmo.png" />
+         </image></ImageView>
+      <ImageView fx:id="redAmmo2" fitHeight="38.0" fitWidth="37.0" layoutX="1009.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/redAmmo.png" />
+         </image></ImageView>
+      <ImageView fx:id="redAmmo3" fitHeight="38.0" fitWidth="37.0" layoutX="1010.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/redAmmo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="redAmmo1" fitHeight="38.0" fitWidth="37.0" layoutX="1011.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/redAmmo.png" />
+         </image></ImageView>
+      <ImageView fx:id="yellowAmmo2" fitHeight="38.0" fitWidth="37.0" layoutX="901.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/yellowAmmo.png" />
+         </image></ImageView>
+      <ImageView fx:id="yellowAmmo3" fitHeight="38.0" fitWidth="37.0" layoutX="903.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/yellowAmmo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="blueAmmo1" fitHeight="38.0" fitWidth="37.0" layoutX="958.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/blueAmmo.png" />
+         </image></ImageView>
+      <ImageView fx:id="yellowAmmo1" fitHeight="38.0" fitWidth="37.0" layoutX="903.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/yellowAmmo.png" />
+         </image></ImageView>
+      <ImageView fx:id="blueAmmo3" fitHeight="38.0" fitWidth="37.0" layoutX="958.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/ammos/blueAmmo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
