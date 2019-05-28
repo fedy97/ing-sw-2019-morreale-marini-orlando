@@ -273,7 +273,7 @@ public class GameBoardController {
     private Map<String, ArrayList<ImageView>> playerImages;
     private Map<String, ArrayList<ImageView>> posImages;
     private Map<String, ArrayList<ImageView>> posWeaponsImages;
-    private Map<String,Button> playersButtonBoards;
+    private Map<String, Button> playersButtonBoards;
     private boolean firstSetup = true;
     private LightGameVersion lightGameVersion;
 
@@ -548,6 +548,8 @@ public class GameBoardController {
             ImageView imageView = imageViews.get(i);
             ammoRepImageViewMap.put(imageView, ammoRep);
         }
+
+        disableAllActionButtons();
     }
 
     protected void setConfig(String config) {
@@ -668,6 +670,7 @@ public class GameBoardController {
             }
         }
     }
+
     protected void showMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info Message");
@@ -703,12 +706,15 @@ public class GameBoardController {
     public void shootClick() {
         //gui.iWantToDoSomething("action3");
     }
-    public void reloadClick(){}
-    public void endturnClick(){
 
+    public void reloadClick() {
     }
 
-    public void dozerClick(){
+    public void endturnClick() {
+        gui.sendEndMyTurn();
+    }
+
+    public void dozerClick() {
         Platform.runLater(
                 () -> {
                     gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
@@ -717,7 +723,8 @@ public class GameBoardController {
                     gui.getPlayerBoardStage().show();
                 });
     }
-    public void violetClick(){
+
+    public void violetClick() {
         Platform.runLater(
                 () -> {
                     gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
@@ -726,7 +733,8 @@ public class GameBoardController {
                     gui.getPlayerBoardStage().show();
                 });
     }
-    public void distructorClick(){
+
+    public void distructorClick() {
         Platform.runLater(
                 () -> {
                     gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
@@ -735,7 +743,8 @@ public class GameBoardController {
                     gui.getPlayerBoardStage().show();
                 });
     }
-    public void sprogClick(){
+
+    public void sprogClick() {
         Platform.runLater(
                 () -> {
                     gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
@@ -744,7 +753,8 @@ public class GameBoardController {
                     gui.getPlayerBoardStage().show();
                 });
     }
-    public void bansheeClick(){
+
+    public void bansheeClick() {
         Platform.runLater(
                 () -> {
                     gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
@@ -906,16 +916,25 @@ public class GameBoardController {
         }
     }
 
-    protected void disableActionButtons() {
+    protected void disableActionsActivateReload() {
         movebutton.setDisable(true);
         grabbutton.setDisable(true);
         shootbutton.setDisable(true);
+        reloadbutton.setDisable(false);
     }
 
-    protected void enableActionButtons() {
+    protected void disableAllActionButtons() {
+        movebutton.setDisable(true);
+        grabbutton.setDisable(true);
+        shootbutton.setDisable(true);
+        reloadbutton.setDisable(true);
+    }
+
+    protected void enableActionButtonsDeactivateReload() {
         movebutton.setDisable(false);
         grabbutton.setDisable(false);
         shootbutton.setDisable(false);
+        reloadbutton.setDisable(true);
     }
 
 }

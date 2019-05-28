@@ -1,5 +1,6 @@
 package it.polimi.se2019.network.message.to_server;
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.Game;
 
 public class SendMapChosenMessage extends ToServerMessage {
@@ -8,6 +9,6 @@ public class SendMapChosenMessage extends ToServerMessage {
 
     @Override
     public void performAction() {
-        Game.getInstance().setVoteMapChosen((int) payload);
+        Controller.getInstance().setVoteMapChosen((int) payload);
     }
 }

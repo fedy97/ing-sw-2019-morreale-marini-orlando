@@ -175,8 +175,7 @@ public class JsonParser {
         return null;
     }
 
-    public Deck<WeaponCard> buildWeaponCards() throws InvalidDeckException, IOException,
-            InvalidCubeException, InvalidNameException {
+    public Deck<WeaponCard> buildWeaponCards() throws InvalidDeckException, InvalidNameException {
         if (path.equals("/json/weapons.json")) {
             ArrayList<WeaponCard> weaponCards = new ArrayList<>();
             AmmoCube paidCost;

@@ -413,4 +413,9 @@ public class CLI extends RemoteView {
     public void switchWeapon() {
 
     }
+
+    @Override
+    public void enableActions() {
+
+    }
 }

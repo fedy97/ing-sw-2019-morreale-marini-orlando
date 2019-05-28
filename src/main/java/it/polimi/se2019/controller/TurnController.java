@@ -1,6 +1,9 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.card.AmmoCard;
+import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.message.to_client.EnablePlayerMessage;
+import it.polimi.se2019.network.message.to_client.ShowMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 
 import java.util.*;
@@ -25,7 +28,15 @@ public class TurnController {
      */
     public void start() {
         curr = first;
-        Controller.getInstance().getPlayerManager().setCurrentPlayer(Controller.getInstance().getGame().getPlayer(first));
+        Controller c = Controller.getInstance();
+        c.getPlayerManager().setCurrentPlayer(Controller.getInstance().getGame().getPlayer(first));
+
+    }
+
+    public void notifyFirst(){
+        Controller c = Controller.getInstance();
+        c.callView(new EnablePlayerMessage(true), c.getPlayerManager().getCurrentPlayer().getName());
+        c.callView(new ShowMessage("It's your turn!"), c.getPlayerManager().getCurrentPlayer().getName());
     }
 
     /**
@@ -59,6 +70,16 @@ public class TurnController {
         } else
             curr = turningOrder.get(currIndex + 1);
         c.getPlayerManager().setCurrentPlayer(c.getGame().getPlayer(curr));
+
+        for (Player player : c.getGame().getPlayers()) {
+            if (player.equals(c.getPlayerManager().getCurrentPlayer())) {
+                c.callView(new EnablePlayerMessage(true), player.getName());
+                c.callView(new ShowMessage("It's your turn!"), player.getName());
+            } else {
+                c.callView(new EnablePlayerMessage(false), player.getName());
+                c.callView(new ShowMessage("It's ".concat(c.getPlayerManager().getCurrentPlayer().getName()).concat(" turn!")), player.getName());
+            }
+        }
     }
 
     /**

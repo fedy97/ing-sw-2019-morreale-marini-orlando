@@ -292,13 +292,13 @@ public class GUI extends RemoteView {
     protected void sendPlatformChosen(String pos) {
         MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(pos);
         notifyListeners(message);
-        gameBoardController.enableActionButtons();
+        gameBoardController.enableActionButtonsDeactivateReload();
     }
 
     protected void sendWeaponGrabbed(String hashWeapon) {
         ChosenWeaponMessage message = new ChosenWeaponMessage(hashWeapon);
         notifyListeners(message);
-        gameBoardController.enableActionButtons();
+        gameBoardController.enableActionButtonsDeactivateReload();
     }
 
     protected void sendWeaponToSwitch(String hashWeapon) {
@@ -313,7 +313,7 @@ public class GUI extends RemoteView {
     }
 
     protected void iWantToDoSomething(String action) {
-        gameBoardController.disableActionButtons();
+        gameBoardController.disableAllActionButtons();
         PerformActionMessage message = new PerformActionMessage(action);
         notifyListeners(message);
     }
@@ -395,12 +395,17 @@ public class GUI extends RemoteView {
 
     @Override
     public void disableActions() {
-        //TODO
+        Platform.runLater(() -> gameBoardController.disableAllActionButtons());
+    }
+
+    @Override
+    public void enableActions() {
+        Platform.runLater(() -> gameBoardController.enableActionButtonsDeactivateReload());
     }
 
     @Override
     public void showMessage(String msg) {
-        gameBoardController.showMessage(msg);
+        Platform.runLater(() -> gameBoardController.showMessage(msg));
     }
 
     @Override
