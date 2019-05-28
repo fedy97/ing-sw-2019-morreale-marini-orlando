@@ -259,6 +259,10 @@ public class GameBoardController {
     private Button grabbutton;
     @FXML
     private Button shootbutton;
+    @FXML
+    private Button endturnbutton;
+    @FXML
+    private Button reloadbutton;
 
     private Map<Button, String> buttonsHashes;
     private List<AmmoRep> ammoReps;
@@ -585,7 +589,7 @@ public class GameBoardController {
             if (!pos.equals("null")) {
                 ArrayList<ImageView> imagesPlayers = playerImages.get(player);
                 ArrayList<ImageView> imagesPos = posImages.get(pos);
-                HandyFunctions.printLineConsole(player + " " + pos);
+                //HandyFunctions.printLineConsole(player + " " + pos);
                 for (ImageView im : imagesPlayers) {
                     for (ImageView im2 : imagesPos) {
                         if (im.equals(im2)) {
@@ -692,6 +696,8 @@ public class GameBoardController {
     public void shootClick() {
         //gui.iWantToDoSomething("action3");
     }
+    public void reloadClick(){}
+    public void endturnClick(){}
 
     public void dozerClick(){
         Platform.runLater(
