@@ -575,5 +575,38 @@
       <Button fx:id="dozerstats" disable="true" layoutX="613.0" layoutY="648.0" mnemonicParsing="false" onAction="#dozerClick" prefHeight="55.0" prefWidth="54.0" style="-fx-background-color: transparent;" />
       <Button fx:id="reloadbutton" disable="true" layoutX="110.0" layoutY="636.0" mnemonicParsing="false" onAction="#reloadClick" text="reload" />
       <Button fx:id="endturnbutton" layoutX="111.0" layoutY="671.0" mnemonicParsing="false" onAction="#endturnClick" text="end turn" />
+      <ImageView fx:id="skull1" fitHeight="55.0" fitWidth="44.0" layoutX="75.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image></ImageView>
+      <ImageView fx:id="skull2" fitHeight="55.0" fitWidth="44.0" layoutX="122.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image></ImageView>
+      <ImageView fx:id="skull3" fitHeight="55.0" fitWidth="44.0" layoutX="167.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image></ImageView>
+      <ImageView fx:id="skull4" fitHeight="55.0" fitWidth="44.0" layoutX="209.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image></ImageView>
+      <ImageView fx:id="skull5" fitHeight="55.0" fitWidth="44.0" layoutX="253.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image></ImageView>
+      <ImageView fx:id="skull6" fitHeight="55.0" fitWidth="44.0" layoutX="298.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image></ImageView>
+      <ImageView fx:id="skull7" fitHeight="55.0" fitWidth="44.0" layoutX="342.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image></ImageView>
+      <ImageView fx:id="skull8" fitHeight="55.0" fitWidth="44.0" layoutX="386.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image></ImageView>
+      <Button fx:id="powerupsbutton" layoutX="207.0" layoutY="671.0" mnemonicParsing="false" onAction="#powerupsClick" text="powerups" />
    </children>
 </AnchorPane>
