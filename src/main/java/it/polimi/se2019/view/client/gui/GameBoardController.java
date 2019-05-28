@@ -218,6 +218,22 @@ public class GameBoardController {
     @FXML
     private ImageView weapon02_3;
     @FXML
+    private ImageView skull1;
+    @FXML
+    private ImageView skull2;
+    @FXML
+    private ImageView skull3;
+    @FXML
+    private ImageView skull4;
+    @FXML
+    private ImageView skull5;
+    @FXML
+    private ImageView skull6;
+    @FXML
+    private ImageView skull7;
+    @FXML
+    private ImageView skull8;
+    @FXML
     private Button info10_1;
     @FXML
     private Button info10_2;
@@ -263,6 +279,8 @@ public class GameBoardController {
     private Button endturnbutton;
     @FXML
     private Button reloadbutton;
+    @FXML
+    private Button powerupsbutton;
 
     private Map<Button, String> buttonsHashes;
     private List<AmmoRep> ammoReps;
@@ -273,7 +291,8 @@ public class GameBoardController {
     private Map<String, ArrayList<ImageView>> playerImages;
     private Map<String, ArrayList<ImageView>> posImages;
     private Map<String, ArrayList<ImageView>> posWeaponsImages;
-    private Map<String,Button> playersButtonBoards;
+    private Map<String, Button> playersButtonBoards;
+    private List<ImageView> skullsImages;
     private boolean firstSetup = true;
     private LightGameVersion lightGameVersion;
 
@@ -293,12 +312,11 @@ public class GameBoardController {
                     initButtons();
                     darkenAllPlatforms();
                     mapImage.setImage(new Image("/assets/map/" + config + ".jpg"));
-                    //TODO change this, I need a map platform,ammo, I will replace this  with updateAmmocards()
                     for (Map.Entry<ImageView, AmmoRep> entry : ammoRepImageViewMap.entrySet()) {
                         if (entry.getValue() != null)
                             entry.getKey().setImage(new Image("/assets/ammos/" + entry.getValue().getType() + ".jpg"));
                     }
-                    updateWeapons(null);
+                    updateWeapons();
                 });
     }
 
@@ -319,6 +337,16 @@ public class GameBoardController {
         posWeaponsImages.put("1,0", weapons10);
         posWeaponsImages.put("2,3", weapons23);
         posWeaponsImages.put("0,2", weapons02);
+
+        skullsImages = new ArrayList<>();
+        skullsImages.add(skull8);
+        skullsImages.add(skull7);
+        skullsImages.add(skull6);
+        skullsImages.add(skull5);
+        skullsImages.add(skull4);
+        skullsImages.add(skull3);
+        skullsImages.add(skull2);
+        skullsImages.add(skull1);
 
         buttonsHashes = new HashMap<>();
         buttonsHashes.put(w10_1, "");
@@ -548,6 +576,7 @@ public class GameBoardController {
             ImageView imageView = imageViews.get(i);
             ammoRepImageViewMap.put(imageView, ammoRep);
         }
+
     }
 
     protected void setConfig(String config) {
@@ -561,15 +590,27 @@ public class GameBoardController {
     protected void updateAll(LightGameVersion lightGameVersion) {
         this.lightGameVersion = lightGameVersion;
         //update position of players
-        updatePositionsPlayers(lightGameVersion);
+        updatePositionsPlayers();
         //update the 9 weapons in the field
-        updateWeapons(lightGameVersion);
+        updateWeapons();
         //update the ammo cards in the field
-        updateAmmoCards(lightGameVersion);
+        updateAmmoCards();
+        //update the number of current skulls
+        updateSkulls();
 
     }
 
-    private void updateAmmoCards(LightGameVersion lightGameVersion) {
+    private void updateSkulls() {
+        int skullsToSet = lightGameVersion.getSkullsNum();
+        for (int i = 0; i < 8; i++){
+            if (i < skullsToSet)
+                skullsImages.get(i).setVisible(true);
+            else
+                skullsImages.get(i).setVisible(false);
+        }
+    }
+
+    private void updateAmmoCards() {
         for (Map.Entry<String, AmmoRep> entry : lightGameVersion.getPlatformAmmoTile().entrySet()) {
             String pos = entry.getKey();
             AmmoRep ammoRep = entry.getValue();
@@ -581,7 +622,7 @@ public class GameBoardController {
 
     }
 
-    private void updatePositionsPlayers(LightGameVersion lightGameVersion) {
+    private void updatePositionsPlayers() {
         Map<String, String> playerPos = lightGameVersion.getPlayerPlatform();
         for (Map.Entry<String, String> entry : playerPos.entrySet()) {
             String player = entry.getKey();
@@ -605,7 +646,7 @@ public class GameBoardController {
         }
     }
 
-    private void updateWeapons(LightGameVersion lightGameVersion) {
+    private void updateWeapons() {
         if (lightGameVersion != null) {
             //associate buttons to hashcodes
             posWeaponsReps = lightGameVersion.getPlatformWeapons();
@@ -668,6 +709,7 @@ public class GameBoardController {
             }
         }
     }
+
     protected void showMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info Message");
@@ -703,12 +745,17 @@ public class GameBoardController {
     public void shootClick() {
         //gui.iWantToDoSomething("action3");
     }
-    public void reloadClick(){}
-    public void endturnClick(){
 
+    public void reloadClick() {
     }
 
-    public void dozerClick(){
+    public void powerupsClick(){}
+
+    public void endturnClick() {
+        gui.sendEndMyTurn();
+    }
+
+    public void dozerClick() {
         Platform.runLater(
                 () -> {
                     gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
@@ -717,7 +764,8 @@ public class GameBoardController {
                     gui.getPlayerBoardStage().show();
                 });
     }
-    public void violetClick(){
+
+    public void violetClick() {
         Platform.runLater(
                 () -> {
                     gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
@@ -726,7 +774,8 @@ public class GameBoardController {
                     gui.getPlayerBoardStage().show();
                 });
     }
-    public void distructorClick(){
+
+    public void distructorClick() {
         Platform.runLater(
                 () -> {
                     gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
@@ -735,7 +784,8 @@ public class GameBoardController {
                     gui.getPlayerBoardStage().show();
                 });
     }
-    public void sprogClick(){
+
+    public void sprogClick() {
         Platform.runLater(
                 () -> {
                     gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
@@ -744,7 +794,8 @@ public class GameBoardController {
                     gui.getPlayerBoardStage().show();
                 });
     }
-    public void bansheeClick(){
+
+    public void bansheeClick() {
         Platform.runLater(
                 () -> {
                     gui.getPlayerBoardStage().setScene(gui.getScenePlayerBoard());
@@ -906,16 +957,25 @@ public class GameBoardController {
         }
     }
 
-    protected void disableActionButtons() {
+    protected void disableActionsActivateReload() {
         movebutton.setDisable(true);
         grabbutton.setDisable(true);
         shootbutton.setDisable(true);
+        reloadbutton.setDisable(false);
     }
 
-    protected void enableActionButtons() {
+    protected void disableAllActionButtons() {
+        movebutton.setDisable(true);
+        grabbutton.setDisable(true);
+        shootbutton.setDisable(true);
+        reloadbutton.setDisable(true);
+    }
+
+    protected void enableActionButtonsDeactivateReload() {
         movebutton.setDisable(false);
         grabbutton.setDisable(false);
         shootbutton.setDisable(false);
+        reloadbutton.setDisable(true);
     }
 
 }

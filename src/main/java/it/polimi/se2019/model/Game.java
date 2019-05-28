@@ -33,10 +33,9 @@ public class Game extends Observable {
     private Deck<PowerUpCard> powerUpDeck;
     private Deck<PowerUpCard> garbageDeck;
     private Deck<AmmoCard> ammoDeck;
-    private int secondsLeft;
+
     private Map<Character, Player> characterPlayers;
-    private boolean timerStarted = false;
-    private Map<Integer, Integer> mapChosen;
+
     private static Game instance = null;
 
     /**
@@ -48,59 +47,20 @@ public class Game extends Observable {
         if (instance == null) {
             instance = new Game();
             instance.players = new ArrayList<>();
-            instance.mapChosen = new HashMap<>();
+
             instance.characterPlayers = new EnumMap<>(Character.class);
             instance.characterPlayers.put(Character.BANSHEE, null);
             instance.characterPlayers.put(Character.VIOLET, null);
             instance.characterPlayers.put(Character.SPROG, null);
             instance.characterPlayers.put(Character.DISTRUCTOR, null);
             instance.characterPlayers.put(Character.DOZER, null);
-            instance.mapChosen.put(1, 0);
-            instance.mapChosen.put(2, 0);
-            instance.mapChosen.put(3, 0);
-            instance.mapChosen.put(4, 0);
         }
         return instance;
     }
 
-    /**
-     * @param gameField
-     * @param weaponsDeck
-     * @param powerUpDeck
-     * @param ammoDeck
-     */
-    private void initGame(GameField gameField, Deck<WeaponCard> weaponsDeck, Deck<PowerUpCard> powerUpDeck, Deck<AmmoCard> ammoDeck) {
-        this.gameField = gameField;
-        this.powerUpDeck = powerUpDeck;
-        this.weaponsDeck = weaponsDeck;
-        this.ammoDeck = ammoDeck;
-    }
-
-    public boolean isTimerStarted() {
-        return timerStarted;
-    }
-
-    public void setTimerStarted(boolean timerStarted) {
-        this.timerStarted = timerStarted;
-    }
 
     public GameField getGameField() {
         return gameField;
-    }
-
-    public void setVoteMapChosen(int voteMapChosen) {
-        mapChosen.put(voteMapChosen, mapChosen.get(voteMapChosen) + 1);
-        setChanged();
-        //the virtual view will be notified by running the update() method
-        notifyObservers(new UpdateVotesMapChosenMessage(mapChosen));
-    }
-
-    public void setCharacterChosen(String name, String characterChosen) throws InvalidCharacterException, InvalidPositionException {
-        Player player = new Player(name, Character.valueOf(characterChosen), null);
-        players.add(player);
-        characterPlayers.put(Character.valueOf(characterChosen), player);
-        setChanged();
-        notifyObservers(new UpdateVotesCharacterChosenMessage(characterChosen));
     }
 
     /**
@@ -172,6 +132,14 @@ public class Game extends Observable {
      */
     public void setPowerUpDeck(Deck<PowerUpCard> powerUps) {
         powerUpDeck = powerUps;
+    }
+
+    public void setAmmoDeck(Deck<AmmoCard> ammoDeck) {
+        this.ammoDeck = ammoDeck;
+    }
+
+    public void setGameField(GameField gameField) {
+        this.gameField = gameField;
     }
 
     /**
@@ -266,172 +234,6 @@ public class Game extends Observable {
         lightVersion.setPlatformAmmoTile(platformAmmoTile);
         lightVersion.setPlatformWeapons(platformWeapons);
         return lightVersion;
-    }
-
-    /**
-     * every time ths method is called by the timer, (this) will notify the virtual view
-     *
-     * @param secondsLeft to the chooseMap page
-     */
-    public synchronized void setSecondsLeftLobby(int secondsLeft) {
-        this.secondsLeft = secondsLeft;
-        setChanged();
-        notifyObservers(new UpdateTimerLobbyMessage(secondsLeft));
-        if (secondsLeft == 0) {
-            setChanged();
-            notifyObservers(new ShowChooseMapMessage(null));
-            //starts the other timer, this timer even if is in Model , is a controller feature
-            //in fact TimerMap will modify the model by calling setSecondsLeftMap
-            TimerMap t = new TimerMap(2);
-            t.start();
-
-        }
-    }
-
-    /**
-     * @param secondsLeft to the choose character page
-     */
-    public synchronized void setSecondsLeftMap(int secondsLeft) {
-        this.secondsLeft = secondsLeft;
-        setChanged();
-        notifyObservers(new UpdateTimerMapMessage(secondsLeft));
-        if (secondsLeft == 0) {
-            try {
-                int config = findWhichMapWon();
-                createAssets(config);
-                setChanged();
-                notifyObservers(new ShowChooseCharacterMessage(Integer.toString(config)));
-                TimerCharacter t = new TimerCharacter(2);
-                t.start();
-            } catch (Exception e) {
-                HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
-            }
-        }
-    }
-
-    /**
-     * @param secondsLeft to the game field page
-     */
-    public synchronized void setSecondsLeftCharacter(int secondsLeft) {
-        this.secondsLeft = secondsLeft;
-        setChanged();
-        notifyObservers(new UpdateTimerCharacterMessage(secondsLeft));
-        if (secondsLeft == 0) {
-            //if a player did not chose a character, assign a random one
-            try {
-                findCharactersAvailableAndReplace();
-                Controller.getInstance().startGame();
-                Controller.getInstance().getTurnController().start();
-                List<CardRep> cardReps = new ArrayList<>();
-                String firstUser = Controller.getInstance().getTurnController().getTurnUser();
-                //the first user will recieve 2 reps of powerups
-                PowerUpCard p1 = powerUpDeck.drawCard();
-                PowerUpCard p2 = powerUpDeck.drawCard();
-                Controller.getInstance().getPlayerManager().getCurrentPlayer().addPowerUpCard(p1);
-                Controller.getInstance().getPlayerManager().getCurrentPlayer().addPowerUpCard(p2);
-                cardReps.add(new CardRep(HandyFunctions.getSystemAddress(p1), p1.getName(), p1.getDescription(), p1.getImgPath()));
-                cardReps.add(new CardRep(HandyFunctions.getSystemAddress(p2), p2.getName(), p2.getDescription(), p2.getImgPath()));
-
-                List<AmmoRep> ammoReps = new ArrayList<>();
-                //set for each platform an ammocard, than add it to the array of ammoreps
-                for (int i = 0; i < gameField.getField().length; i++) {
-                    for (int j = 0; j < gameField.getField()[0].length; j++) {
-                        Platform p = gameField.getField()[i][j];
-                        if (p != null && p.hasAmmoCard()) {
-                            AmmoCard ammoCard = p.getPlatformAmmoCard();
-                            ammoReps.add(new AmmoRep(HandyFunctions.getSystemAddress(ammoCard), ammoCard.toString()));
-                        } else ammoReps.add(null);
-                    }
-                }
-                //now I create a list of the characters in game to send to clients in order to display their board
-                List<String> arrChars = findCharactersInGame();
-
-                setChanged();
-                notifyObservers(new ShowGameBoardMessage(firstUser, ammoReps, cardReps, getLightVersion().getPlatformWeapons(), arrChars));
-            } catch (Exception e) {
-                HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
-            }
-        }
-    }
-
-    private List<String> findCharactersInGame() {
-        List<String> arrChars = new ArrayList<>();
-        for (Map.Entry<Character, Player> entry : characterPlayers.entrySet()) {
-            if (entry.getValue() != null) {
-                String charToAdd = entry.getKey().name();
-                arrChars.add(charToAdd);
-            }
-        }
-        return arrChars;
-    }
-
-    private void findCharactersAvailableAndReplace() {
-        ArrayList<Character> arr = new ArrayList<>();
-        for (Map.Entry<Character, Player> entry : characterPlayers.entrySet()) {
-            if (entry.getValue() == null) arr.add(entry.getKey());
-        }
-        for (String user : Controller.getInstance().getTurnController().getUsers()) {
-            boolean isFound = false;
-            for (Player p : players) {
-                if (user.equals(p.getName())) isFound = true;
-            }
-            try {
-                if (!isFound) {
-                    Character c = arr.remove(arr.size() - 1);
-                    Player p = new Player(user, c, null);
-                    players.add(p);
-                    characterPlayers.put(c, p);
-                    SetRandomCharacterMessage message = new SetRandomCharacterMessage(c.name(), user);
-                    setChanged();
-                    notifyObservers(message);
-                }
-            } catch (Exception e) {
-                HandyFunctions.LOGGER.log(Level.SEVERE, "error in creating random character");
-            }
-        }
-    }
-
-    /**
-     * we can now build the field and the decks
-     */
-    private void createAssets(int config) {
-        try {
-            JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
-            ammoDeck = parserAmmos.buildAmmoCards();
-            JsonParser parserField = new JsonParser("/json/field.json");
-            Platform[][] field = parserField.buildField(config, ammoDeck);
-            JsonParser parser = new JsonParser("/json/powerups.json");
-            powerUpDeck = parser.buildPowerupCards();
-            JsonParser parserWeapons = new JsonParser("/json/weapons.json");
-            weaponsDeck = parserWeapons.buildWeaponCards();
-            WeaponCard[] weaponCards = new WeaponCard[9];
-            for (int i = 0; i < 9; i++)
-                weaponCards[i] = weaponsDeck.drawCard();
-            gameField = new GameField(field, weaponCards, new SkullsBoard(8), new ScoreBoard());
-
-            initGame(gameField, weaponsDeck, powerUpDeck, ammoDeck);
-            Controller.getInstance().setManagers();
-        } catch (Exception ex) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, ex.toString());
-        }
-
-    }
-
-    /**
-     * if there is a draw, the first between them will be chosen.
-     *
-     * @return the config of the map that won the votations.
-     */
-    private int findWhichMapWon() {
-        int max = -1;
-        int config = -1;
-        for (int i : mapChosen.keySet()) {
-            if (mapChosen.get(i) > max) {
-                max = mapChosen.get(i);
-                config = i;
-            }
-        }
-        return config;
     }
 
     /**

@@ -434,4 +434,9 @@ public class CLI extends RemoteView {
             notifyObservers(message);
         }).start();
     }
+
+    @Override
+    public void enableActions() {
+
+    }
 }

@@ -44,6 +44,8 @@ public abstract class RemoteView extends View {
 
     public abstract void disableActions();
 
+    public abstract void enableActions();
+
     public abstract void showMessage(String msg);
 
 }

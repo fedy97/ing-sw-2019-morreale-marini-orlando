@@ -1,6 +1,6 @@
 package it.polimi.se2019.network.message.to_server;
 
-import it.polimi.se2019.model.Game;
+import it.polimi.se2019.controller.Controller;
 
 public class SendCharacterChosenMessage extends ToServerMessage {
 
@@ -11,7 +11,7 @@ public class SendCharacterChosenMessage extends ToServerMessage {
     @Override
     public void performAction() {
         try {
-            Game.getInstance().setCharacterChosen(this.sender, (String) payload);
+            Controller.getInstance().setCharacterChosen(this.sender, (String) payload);
         } catch (Exception ex) {
         }
     }
