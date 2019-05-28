@@ -42,9 +42,7 @@ public abstract class RemoteView extends View {
 
     public abstract void lightPlatforms(List<String> platforms);
 
-    public abstract void disableActions();
-
-    public abstract void enableActions();
+    public abstract void setValidActions(boolean[] actives);
 
     public abstract void showMessage(String msg);
 

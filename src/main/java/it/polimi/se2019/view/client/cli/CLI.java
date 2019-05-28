@@ -379,13 +379,12 @@ public class CLI extends RemoteView {
     }
 
     @Override
-    public void disableActions() {
+    public void setValidActions(boolean[] actives) {
         //TODO
     }
 
     @Override
     public void showMessage(String msg) {
-        /*
         if (msg.equals("You have already three weapons! Do you want to discard one?")) {
             CliPrinter.discartWeaponMessage(lightGameVersion, myCharEnumString);
             new Thread(() -> {
@@ -408,35 +407,10 @@ public class CLI extends RemoteView {
                 notifyObservers(message);
             }).start();
         }
-        */
     }
 
     @Override
     public void switchWeapon() {
-        CliPrinter.discartWeaponMessage(lightGameVersion, myCharEnumString);
-        new Thread(() -> {
-            int choise;
-            Scanner s = new Scanner(System.in);
-            choise = s.nextInt();
-            CliSetUp.restorePosition();
-            Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
-            List<CardRep> myWeapons = playerWeapons.get(myCharEnumString);
-            int idCard;
-            if(choise == 0 || choise == 1 || choise == 2) {
-                idCard = myWeapons.get(choise).getId();
-            }
-            else {
-                idCard = myWeapons.get(2).getId();
-            }
-            DiscardWeaponMessage message = new DiscardWeaponMessage(Integer.toString(idCard));
-            message.setSender(userName);
-            viewSetChanged();
-            notifyObservers(message);
-        }).start();
-    }
-
-    @Override
-    public void enableActions() {
 
     }
 }

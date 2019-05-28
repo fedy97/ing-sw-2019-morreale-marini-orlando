@@ -13,14 +13,12 @@ import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
-import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.*;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.*;
 import it.polimi.se2019.view.server.VirtualView;
-import sun.security.util.DisabledAlgorithmConstraints;
 
 import java.util.*;
 import java.util.concurrent.BlockingDeque;
@@ -46,12 +44,10 @@ public class Controller implements Observer {
     private List<Integer> processingStages;
     private PowerUpCard processingPowerUp;
     private WeaponCard processingWeaponCard;
-    private boolean lock;
     private int secondsLeft;
     private boolean timerStarted = false;
     private Map<Integer, Integer> mapChosen;
     private static Controller instance = null;
-
 
     /**
      * Controller singleton constructor
@@ -81,7 +77,6 @@ public class Controller implements Observer {
         turnController = new TurnController();
         userView = new HashMap<>();
         state = ControllerState.SETUP;
-        lock = false;
     }
 
     /**
@@ -94,7 +89,6 @@ public class Controller implements Observer {
         this.game = Game.getInstance();
         this.decksManager = new DecksManager(game.getPowerUpDeck(), game.getAmmoDeck());
         this.gameManager = new GameManager();
-
     }
 
 
@@ -129,12 +123,6 @@ public class Controller implements Observer {
                 }
             }).start();
         }
-        if (playerManager != null) {
-            if (playerManager.getActionsLeft() == 0) {
-                DisableActionButtonMessage msg = new DisableActionButtonMessage(null);
-                //callView(msg, playerManager.getCurrentPlayer().getName());
-            }
-        }
     }
 
     /**
@@ -153,61 +141,13 @@ public class Controller implements Observer {
      * @param weapon composed of different stages in order to perform the final effect
      */
     public void processWeaponCard(WeaponCard weapon) {
-        //weaponCard.activate(processingStages.get(0));
+        /**weaponCard.activate(processingStages.get(0));*/
         if (processingStages.isEmpty()) {
             state = ControllerState.IDLE;
             processingWeaponCard = null;
         }
     }
 
-    /**
-     * @return The current game
-     */
-    public Game getGame() {
-        return game;
-    }
-
-    /**
-     * @return The manager of all decks used in the game
-     */
-    public DecksManager getDecksManager() {
-        return decksManager;
-    }
-
-    /**
-     * @param deckManager The manager of all decks used in the game
-     */
-    public void setDecksManager(DecksManager deckManager) {
-        this.decksManager = deckManager;
-    }
-
-    /**
-     * @return the game manager
-     */
-    public GameManager getGameManager() {
-        return gameManager;
-    }
-
-    /**
-     * @param gameManager The game manager
-     */
-    public void setGameManager(GameManager gameManager) {
-        this.gameManager = gameManager;
-    }
-
-    /**
-     * @return the manager of the players in the game
-     */
-    public PlayerManager getPlayerManager() {
-        return playerManager;
-    }
-
-    /**
-     * @param playerManager The manager of the players in the game
-     */
-    public void setPlayerManager(PlayerManager playerManager) {
-        this.playerManager = playerManager;
-    }
 
     /**
      *
@@ -229,6 +169,7 @@ public class Controller implements Observer {
     public void endGame() {
         //TODO
     }
+
     public boolean isTimerStarted() {
         return timerStarted;
     }
@@ -266,22 +207,6 @@ public class Controller implements Observer {
         callView(msg, currPlayer.getName());
     }
 
-    public Validator getValidator() {
-        return validator;
-    }
-
-    public void setValidator(Validator validator) {
-        this.validator = validator;
-    }
-
-    /**
-     * @return the cube chosen by the player in order to perform an action
-     */
-    public AmmoCube askForTribute() {
-        //TODO
-        return null;
-    }
-
     /**
      * Common method across RMI and Socket to send requests to client
      *
@@ -290,82 +215,6 @@ public class Controller implements Observer {
     public void callView(ToClientMessage msg, String user) {
         userView.get(user).callView(msg);
     }
-
-    /**
-     * @param virtualView fake instance of the remote view of the player
-     * @param user        of the remote view
-     */
-    public void addVirtualView(VirtualView virtualView, String user) {
-        userView.put(user, virtualView);
-    }
-
-    /**
-     * @param action that can be validated by the controller once received a command message
-     *               from the client
-     */
-    public void addValidAction(String action) {
-        validActions.add(action);
-    }
-
-    /**
-     * @param action to be removed
-     */
-    public void removeValidAction(String action) {
-        validActions.remove(action);
-    }
-
-    /**
-     * @param action to be validated
-     * @return if the action is valid in the current state of the game
-     */
-    public boolean isValidAction(String action) {
-        return validActions.contains(action);
-    }
-
-
-    public TurnController getTurnController() {
-        return turnController;
-    }
-
-    public boolean getLock() {
-        if (lock)
-            return false;
-        lock = true;
-        return true;
-    }
-
-    public void releaseLock() {
-        lock = false;
-    }
-
-    public void waitForResponse() {
-        //BOH TODO
-    }
-
-    public BlockingDeque<Player> getCurrentTargets() {
-        return currentTargets;
-    }
-
-    public BlockingDeque<WeaponCard> getChosenWeapons() {
-        return chosenWeapons;
-    }
-
-    public BlockingDeque<Boolean> getWantToDiscard() {
-        return wantToDiscard;
-    }
-
-    public void setState(ControllerState state) {
-        this.state = state;
-    }
-
-    public ControllerState getState() {
-        return state;
-    }
-
-    public void addStages(List<Integer> stages) {
-        processingStages.addAll(stages);
-    }
-
 
     public void setVoteMapChosen(int voteMapChosen) {
         mapChosen.put(voteMapChosen, mapChosen.get(voteMapChosen) + 1);
@@ -456,7 +305,6 @@ public class Controller implements Observer {
                 turnController.notifyFirst();
 
             } catch (Exception e) {
-                e.printStackTrace();
                 HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
             }
         }
@@ -518,7 +366,6 @@ public class Controller implements Observer {
             game.setGameField(new GameField(field, weaponCards, new SkullsBoard(8), new ScoreBoard()));
             setManagers();
         } catch (Exception ex) {
-            ex.printStackTrace();
             HandyFunctions.LOGGER.log(Level.SEVERE, ex.toString());
         }
 
@@ -541,10 +388,138 @@ public class Controller implements Observer {
         return config;
     }
 
-    private void notifyAll(ToClientMessage msg){
+    private void notifyAll(ToClientMessage msg) {
         for (String user : userView.keySet()) {
             callView(msg, user);
         }
+    }
+
+    /**
+     * @param virtualView fake instance of the remote view of the player
+     * @param user        of the remote view
+     */
+    public void addVirtualView(VirtualView virtualView, String user) {
+        userView.put(user, virtualView);
+    }
+
+    /**
+     * @param action that can be validated by the controller once received a command message
+     *               from the client
+     */
+    public void addValidAction(String action) {
+        validActions.add(action);
+    }
+
+    /**
+     * @param action to be removed
+     */
+    public void removeValidAction(String action) {
+        validActions.remove(action);
+    }
+
+    /**
+     * @param action to be validated
+     * @return if the action is valid in the current state of the game
+     */
+    public boolean isValidAction(String action) {
+        return validActions.contains(action);
+    }
+
+    /**
+     * @return The current game
+     */
+    public Game getGame() {
+        return game;
+    }
+
+    /**
+     * @return The manager of all decks used in the game
+     */
+    public DecksManager getDecksManager() {
+        return decksManager;
+    }
+
+    /**
+     * @param deckManager The manager of all decks used in the game
+     */
+    public void setDecksManager(DecksManager deckManager) {
+        this.decksManager = deckManager;
+    }
+
+    /**
+     * @return the game manager
+     */
+    public GameManager getGameManager() {
+        return gameManager;
+    }
+
+    /**
+     * @param gameManager The game manager
+     */
+    public void setGameManager(GameManager gameManager) {
+        this.gameManager = gameManager;
+    }
+
+    /**
+     * @return the manager of the players in the game
+     */
+    public PlayerManager getPlayerManager() {
+        return playerManager;
+    }
+
+    /**
+     * @param playerManager The manager of the players in the game
+     */
+    public void setPlayerManager(PlayerManager playerManager) {
+        this.playerManager = playerManager;
+    }
+
+    public TurnController getTurnController() {
+        return turnController;
+    }
+
+    public void addStages(List<Integer> stages) {
+        processingStages.addAll(stages);
+    }
+
+    public BlockingDeque<Player> getCurrentTargets() {
+        return currentTargets;
+    }
+
+    public BlockingDeque<WeaponCard> getChosenWeapons() {
+        return chosenWeapons;
+    }
+
+    public BlockingDeque<Boolean> getWantToDiscard() {
+        return wantToDiscard;
+    }
+
+    public void setState(ControllerState newState) {
+        if (newState == ControllerState.IDLE){
+            if ((state == ControllerState.PROCESSING_ACTION_1
+                    || state == ControllerState.PROCESSING_ACTION_2
+                    || state == ControllerState.PROCESSING_ACTION_3))
+                playerManager.useAction();
+            System.out.println(playerManager.getActionsLeft());
+            if(playerManager.getActionsLeft() == 0){
+                callView(new ShowMessage("You've finished your basic action! Now you can use your powerup, " +
+                        "reload or pass the turn"), playerManager.getCurrentPlayer().getName());
+                callView(new DisableActionButtonMessage(null), playerManager.getCurrentPlayer().getName());
+            }
+        }
+        state = newState;
+    }
+
+    public ControllerState getState() {
+        return state;
+    }
+
+    public Validator getValidator() {
+        return validator;
+    }
+
+    public void setValidator(Validator validator) {
+        this.validator = validator;
     }
 
 }
