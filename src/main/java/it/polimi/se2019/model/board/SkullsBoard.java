@@ -18,6 +18,8 @@ public class SkullsBoard {
     private int currentSkulls;
     private int totalSkulls;
     private Map<Character, Integer> killMarks;
+    private ArrayList<Integer> marksInPos;
+    private ArrayList<Character> characterThatKilledInPos;
 
     /**
      * @param totalSkulls is the number set at the beginning of a game,
@@ -31,6 +33,8 @@ public class SkullsBoard {
             throw new InvalidQuantityException("number of skulls must be between 1 and 8");
         this.totalSkulls = totalSkulls;
         this.currentSkulls = totalSkulls;
+        marksInPos = new ArrayList<>();
+        characterThatKilledInPos = new ArrayList<>();
     }
 
     /**
@@ -54,6 +58,14 @@ public class SkullsBoard {
         return killMarks;
     }
 
+    public ArrayList<Integer> getMarksInPos() {
+        return marksInPos;
+    }
+
+    public ArrayList<Character> getCharacterThatKilledInPos() {
+        return characterThatKilledInPos;
+    }
+
     /**
      * @param character to get the killmarks
      * @return the number of killmarks of the selected character
@@ -72,11 +84,14 @@ public class SkullsBoard {
      * @throws InvalidCharacterException if the character does not exist
      * @throws InvalidQuantityException  if trying to add more than 2 or less than 1 skulls
      */
-    public Integer addKillMarks(Character character, int quantity) throws InvalidCharacterException, InvalidQuantityException {
+    public void addKillMarks(Character character, int quantity) throws InvalidCharacterException, InvalidQuantityException {
         if (!HandyFunctions.characterExists(character))
             throw new InvalidCharacterException("Invalid character!");
         if (quantity > 2 || quantity < 1)
             throw new InvalidQuantityException("you cannot add more than 2 or less than 1 marks");
-        return killMarks.replace(character, killMarks.get(character) + quantity);
+        killMarks.replace(character, killMarks.get(character) + quantity);
+        marksInPos.add(quantity);
+        characterThatKilledInPos.add(character);
+        currentSkulls--;
     }
 }
