@@ -10,7 +10,7 @@ public class AskToDiscardMessage extends ToClientMessage {
 
     @Override
     public void performAction(RemoteView remoteView) {
-        remoteView.showMessage("You have already three weapons! Do you want to discard one?");
+        remoteView.switchWeapon();
     }
 
 }
