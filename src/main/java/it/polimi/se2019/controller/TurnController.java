@@ -65,6 +65,7 @@ public class TurnController {
                 try {
                     AmmoCard newAmmo = c.getDecksManager().getNewAmmoCard(c.getDecksManager().getAmmoGarbageDeck().get(i));
                     c.getDecksManager().getToFill().get(i).setPlatformAmmoCard(newAmmo);
+                    c.getGame().notifyChanges();
                 } catch (Exception e) {
                     HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
                 }
