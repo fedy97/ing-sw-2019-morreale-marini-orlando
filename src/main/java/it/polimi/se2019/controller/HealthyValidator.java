@@ -40,7 +40,7 @@ public class HealthyValidator extends Validator {
                 for (Platform p : res) {
                     if ((!p.hasAmmoCard() && !p.isGenerationSpot()))
                         garbPla.add(p);
-                    else if(p.isGenerationSpot() && getGrabableWeapons(p).isEmpty())
+                    if(p.isGenerationSpot() && getGrabableWeapons(p).isEmpty())
                         garbPla.add(p);
                 }
             } catch (Exception e) {
