@@ -602,11 +602,19 @@ public class GameBoardController {
 
     private void updateSkulls() {
         int skullsToSet = lightGameVersion.getSkullsNum();
-        for (int i = 0; i < 8; i++){
-            if (i < skullsToSet)
+        int totalSkulls = lightGameVersion.getTotalSkulls();
+        List<Integer> quantityMarks = lightGameVersion.getQuantityOfMarks();
+        List<String> charactersKillers = lightGameVersion.getCharactersThatKilled();
+
+        for (int i = 0; i < 8; i++) {
+            if (i < totalSkulls)
                 skullsImages.get(i).setVisible(true);
             else
                 skullsImages.get(i).setVisible(false);
+        }
+        for (int i = skullsToSet; i < totalSkulls; i++) {
+            skullsImages.get(i).setVisible(true);
+            skullsImages.get(i).setImage(new Image(quantityMarks.get(totalSkulls - i - 1) + "mark" + charactersKillers.get(totalSkulls - i - 1) + ".png"));
         }
     }
 
@@ -749,7 +757,8 @@ public class GameBoardController {
     public void reloadClick() {
     }
 
-    public void powerupsClick(){}
+    public void powerupsClick() {
+    }
 
     public void endturnClick() {
         gui.sendEndMyTurn();
@@ -957,11 +966,12 @@ public class GameBoardController {
         }
     }
 
-    protected void setActiveButtons(boolean[] actives){
+    protected void setActiveButtons(boolean[] actives) {
         movebutton.setDisable(!actives[0]);
         grabbutton.setDisable(!actives[1]);
         shootbutton.setDisable(!actives[2]);
         reloadbutton.setDisable(!actives[3]);
         endturnbutton.setDisable(!actives[4]);
+        powerupsbutton.setDisable(!actives[5]);
     }
 }

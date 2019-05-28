@@ -155,6 +155,7 @@ public class Game extends Observable {
         //set the skulls
         LightGameVersion lightVersion = new LightGameVersion(null);
         lightVersion.setSkullsNum(getGameField().getSkullsBoard().getCurrentSkulls());
+        lightVersion.setTotalSkulls(getGameField().getSkullsBoard().getTotalSkulls());
         List<String> characterThatKilled = new ArrayList<>();
         List<Integer> quantityOfMarks = new ArrayList<>();
 

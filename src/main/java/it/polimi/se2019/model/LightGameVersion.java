@@ -14,6 +14,7 @@ public class LightGameVersion extends ToClientMessage implements Serializable {
     }
 
     private int skullsNum;
+    private int totalSkulls;
     private List<String> charactersThatKilled;
     private List<Integer> quantityOfMarks;
     private Map<String, String> playerPlatform; //character MAIUSCOLO - platform ("0,0")
@@ -22,6 +23,14 @@ public class LightGameVersion extends ToClientMessage implements Serializable {
     private Map<String, AmmoRep> platformAmmoTile; //platform - AmmoRep
     private Map<String, BoardRep> playerBoardRep; //character - BoardRep
     private Map<String, List<CardRep>> platformWeapons; // platform - CardRep
+
+    public int getTotalSkulls() {
+        return totalSkulls;
+    }
+
+    public void setTotalSkulls(int totalSkulls) {
+        this.totalSkulls = totalSkulls;
+    }
 
     public List<String> getCharactersThatKilled() {
         return charactersThatKilled;

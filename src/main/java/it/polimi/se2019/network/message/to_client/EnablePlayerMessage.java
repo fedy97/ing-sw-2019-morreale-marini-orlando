@@ -9,9 +9,9 @@ public class EnablePlayerMessage extends ToClientMessage {
     }
 
     @Override
-    public void performAction(RemoteView remoteView){
+    public void performAction(RemoteView remoteView) {
         Boolean isCurr = (Boolean) payload;
-        if (isCurr) remoteView.setValidActions(new boolean[]{true, true, true, true, true});
-        else remoteView.setValidActions(new boolean[]{false, false, false, false, false});
+        if (isCurr) remoteView.setValidActions(new boolean[]{true, true, true, true, true, true});
+        else remoteView.setValidActions(new boolean[]{false, false, false, false, false, false});
     }
 }
