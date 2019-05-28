@@ -549,7 +549,6 @@ public class GameBoardController {
             ammoRepImageViewMap.put(imageView, ammoRep);
         }
 
-        disableAllActionButtons();
     }
 
     protected void setConfig(String config) {

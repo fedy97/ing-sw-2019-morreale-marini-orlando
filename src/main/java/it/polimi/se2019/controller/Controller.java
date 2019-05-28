@@ -431,8 +431,8 @@ public class Controller implements Observer {
                 String firstUser = turnController.getTurnUser();
                 //the first user will recieve 2 reps of powerups
 
-                PowerUpCard p1 = game.getPowerUpDeck().drawCard();
-                PowerUpCard p2 = game.getPowerUpDeck().drawCard();
+                PowerUpCard p1 = decksManager.drawPowerUp();
+                PowerUpCard p2 = decksManager.drawPowerUp();
                 playerManager.getCurrentPlayer().addPowerUpCard(p1);
                 playerManager.getCurrentPlayer().addPowerUpCard(p2);
                 cardReps.add(new CardRep(HandyFunctions.getSystemAddress(p1), p1.getName(), p1.getDescription(), p1.getImgPath()));
