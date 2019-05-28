@@ -4,10 +4,7 @@ import it.polimi.se2019.model.AmmoRep;
 import it.polimi.se2019.model.BoardRep;
 import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.LightGameVersion;
-import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.utils.HandyFunctions;
-import javafx.scene.control.cell.CheckBoxListCell;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.util.*;
 
@@ -288,37 +285,37 @@ public final class CliPrinter {
     }
 
     public static void standardActionsMessage() {
-        CliPrinter.stamp("\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                      Choose an action:                                     ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                            Choose an action:                                           ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                  <1> move                                                  ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                        <1> move                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                  <2> grab                                                  ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                        <2> grab                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                  <3> shoot                                                 ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                        <3> shoot                                                       ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                  <4> reload                                                ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                        <4> reload                                                      ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                  <5> end turn                                              ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                        <5> end turn                                                    ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                               press the <key> followed by enter                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                     press the <key> followed by enter                                  ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
     }
 
     public static void possibleCharMessage(int timer, ArrayList<String> chosen, int myChoice) {
@@ -538,23 +535,79 @@ public final class CliPrinter {
 
 
     public static void choosePowerUpMessage(CardRep p1, CardRep p2) {
-        CliPrinter.stamp("\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-        CliPrinter.stamp("\t ┃                                 Choose a powerup:                                          ┃\n");
-        CliPrinter.stamp("\t ┃                                                                                            ┃\n");
-        CliPrinter.stamp("\t ┃                                      <1> " + p1.getTitle());
-        for (int i=0; i < 50 - p1.getTitle().length(); i++) {
+        CliSetUp.cursorRight(2);
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliSetUp.cursorRight(2);
+        CliPrinter.stamp("┃                                             Choose a powerup:                                          ┃\n");
+        CliSetUp.cursorRight(2);
+        CliPrinter.stamp("┃                                                                                                        ┃\n");
+        CliSetUp.cursorRight(2);
+        CliPrinter.stamp("┃                                                                                                        ┃\n");
+        CliSetUp.cursorRight(2);
+        CliPrinter.stamp("┃                                      <1> " + p1.getTitle());
+        for (int i=0; i < 62 - p1.getTitle().length(); i++) {
             CliPrinter.stamp(" ");
         }
         CliPrinter.stamp("┃\n");
-        CliPrinter.stamp("\t ┃                                                                                            ┃\n");
-        CliPrinter.stamp("\t ┃                                      <2> " + p2.getTitle());
-        for (int i=0; i < 50 - p2.getTitle().length(); i++) {
+        CliSetUp.cursorRight(2);
+        CliPrinter.stamp("┃                                                                                                        ┃\n");
+        CliSetUp.cursorRight(2);
+        CliPrinter.stamp("┃                                      <2> " + p2.getTitle());
+        for (int i=0; i < 62 - p2.getTitle().length(); i++) {
             CliPrinter.stamp(" ");
         }
         CliPrinter.stamp("┃\n");
-        CliPrinter.stamp("\t ┃                                                                                            ┃\n");
-        CliPrinter.stamp("\t ┃                                 press the <key> followed by enter                          ┃\n");
-        CliPrinter.stamp("\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliSetUp.cursorRight(2);
+        CliPrinter.stamp("┃                                                                                                        ┃\n");
+        CliSetUp.cursorRight(2);
+        CliPrinter.stamp("┃                                                                                                        ┃\n");
+        CliSetUp.cursorRight(2);
+        CliPrinter.stamp("┃                                      press the <key> followed by enter                                 ┃\n");
+        CliSetUp.cursorRight(2);
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+    }
+
+    public static void boxMessage(String msg) {
+        CliSetUp.savePosition();
+        CliSetUp.cursorLeft(7);
+        CliSetUp.cursorDown(2);
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                 Messages:                                              ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliSetUp.cursorLeft(78);
+        CliSetUp.cursorUp(6);
+        if (msg != null) {
+
+        }
+        CliSetUp.restorePosition();
     }
 
     public static void drawPlayersInfoBox(LightGameVersion lightGameVersion) {
@@ -602,27 +655,27 @@ public final class CliPrinter {
         List<CardRep> distructorWeapons;
 
 
-        stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-        CliSetUp.cursorLeft(54);
+        stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(61);
         CliSetUp.cursorDown(1);
-        for (int i=0;i<40;i++) {
+        for (int i=0;i<45;i++) {
             stamp("┃");
             CliSetUp.cursorLeft(1);
             CliSetUp.cursorDown(1);
         }
-        stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-        CliSetUp.cursorUp(40);
+        stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliSetUp.cursorUp(45);
         CliSetUp.cursorLeft(1);
-        for (int i=0;i<40;i++) {
+        for (int i=0;i<45;i++) {
             stamp("┃");
             CliSetUp.cursorLeft(1);
             CliSetUp.cursorDown(1);
         }
-        CliSetUp.cursorUp(40);
-        CliSetUp.cursorLeft(33);
+        CliSetUp.cursorUp(45);
+        CliSetUp.cursorLeft(36);
         CliPrinter.stamp("PLAYERS' INFO");
         CliSetUp.cursorDown(2);
-        CliSetUp.cursorLeft(30);
+        CliSetUp.cursorLeft(34);
         CliSetUp.savePosition(); // per poter scrivere sempre all'inizio del box, basta scendere di uno
 
         if (lightGameVersion != null) {
@@ -1030,39 +1083,39 @@ public final class CliPrinter {
         Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
         List<CardRep> myWeapons = playerWeapons.get(myChar);
 
-        CliSetUp.cursorLeft(5);
+        CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                  Choose a weapon to discart:                               ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                          Choose a weapon to discart:                                   ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         CliSetUp.cursorLeft(78);
         CliSetUp.cursorUp(6);
         int counter = 0;
@@ -1083,37 +1136,38 @@ public final class CliPrinter {
     }
 
     public static void printPossiblePlatform(List<String> platforms) {
-        CliPrinter.stamp("\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-        CliSetUp.cursorLeft(100);
+        CliSetUp.cursorRight(2);
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                     Choose a platform:                                     ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                             Choose a platform:                                         ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         CliSetUp.cursorLeft(78);
         CliSetUp.cursorUp(6);
         for (String s: platforms) {
@@ -1130,39 +1184,40 @@ public final class CliPrinter {
         Map<Integer, Integer> hashes = new HashMap<>();
 
 
-        CliSetUp.cursorLeft(5);
+        CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-        CliSetUp.cursorLeft(100);
+
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                      Choose a weapon:                                      ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                              Choose a weapon:                                          ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┃                                                                                            ┃");
-        CliSetUp.cursorLeft(100);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         CliSetUp.cursorLeft(78);
         CliSetUp.cursorUp(6);
         int counter = 0;

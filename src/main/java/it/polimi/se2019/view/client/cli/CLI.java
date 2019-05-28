@@ -69,10 +69,14 @@ public class CLI extends RemoteView {
         CliSetUp.cursorUp(23);
         CliPrinter.printMap(lightGameVersion, chosenBoard);
         CliSetUp.cursorDown(9);
-        CliSetUp.cursorLeft(110);
+        CliSetUp.cursorLeft(106);
         CliPrinter.standardActionsMessage();
+        CliSetUp.savePosition();
+        CliSetUp.cursorLeft(99);
+        CliPrinter.boxMessage(null);
+        CliSetUp.restorePosition();
         CliSetUp.cursorUp(34);
-        CliSetUp.cursorRight(10);
+        CliSetUp.cursorRight(104);
         CliPrinter.drawPlayersInfoBox(lightGameVersion);
         CliSetUp.cursorDown(20);
         CliSetUp.cursorLeft(106);
@@ -87,8 +91,12 @@ public class CLI extends RemoteView {
                     iWantToMove();
                 else if (choise == 2)
                     iWantToGrab();
-                else
+                else if (choise == 3)
                     iWantToShoot();
+                else if (choise == 4)
+                    iWantToReload();
+                else
+                    endTurn();
             }).start();
         }
     }
@@ -112,10 +120,24 @@ public class CLI extends RemoteView {
 
     }
 
+    public void iWantToReload() {
+
+    }
+
+    public void endTurn() {
+        EndTurnMessage message = new EndTurnMessage(null);
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
+    }
+
     @Override
     public void showChoosePowerup(CardRep p1, CardRep p2) {
         CliPrinter.stamp("\n");
         CliPrinter.choosePowerUpMessage(p1, p2);
+        CliSetUp.cursorRight(9);
+        CliSetUp.cursorUp(1);
+        CliPrinter.boxMessage(null);
         new Thread(() -> {
             int choosenPowerUp;
             Console c = System.console();
@@ -242,10 +264,19 @@ public class CLI extends RemoteView {
                 //mapChosen = Character.getNumericValue((c.readPassword())[0]);
                 try {
                     mapChosen = reader.getTimedInt();
-                    SendMapChosenMessage message = new SendMapChosenMessage(mapChosen);
-                    message.setSender(userName);
-                    viewSetChanged();
-                    notifyObservers(message);
+                    if (mapChosen == 1 || mapChosen == 2 || mapChosen == 3 || mapChosen == 4) {
+                        SendMapChosenMessage message = new SendMapChosenMessage(mapChosen);
+                        message.setSender(userName);
+                        viewSetChanged();
+                        notifyObservers(message);
+                    }
+                    else {
+                        mapChosen = 1;
+                        SendMapChosenMessage message = new SendMapChosenMessage(mapChosen);
+                        message.setSender(userName);
+                        viewSetChanged();
+                        notifyObservers(message);
+                    }
                 }
                 catch (NoInputException| IOException e) {
 
@@ -288,6 +319,8 @@ public class CLI extends RemoteView {
         HandyFunctions.printConsole("\n\n");
         CliPrinter.boxConnectionMessage();
         connectionChosen = reader.getInt();
+        if (connectionChosen != 1 && connectionChosen != 2)
+            connectionChosen = 1;
     }
 
     @Override
@@ -385,30 +418,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void showMessage(String msg) {
-        /*
-        if (msg.equals("You have already three weapons! Do you want to discard one?")) {
-            CliPrinter.discartWeaponMessage(lightGameVersion, myCharEnumString);
-            new Thread(() -> {
-                int choise;
-                Scanner s = new Scanner(System.in);
-                choise = s.nextInt();
-                CliSetUp.restorePosition();
-                Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
-                List<CardRep> myWeapons = playerWeapons.get(myCharEnumString);
-                int idCard;
-                if(choise == 0 || choise == 1 || choise == 2) {
-                    idCard = myWeapons.get(choise).getId();
-                }
-                else {
-                    idCard = myWeapons.get(2).getId();
-                }
-                DiscardWeaponMessage message = new DiscardWeaponMessage(Integer.toString(idCard));
-                message.setSender(userName);
-                viewSetChanged();
-                notifyObservers(message);
-            }).start();
-        }
-        */
+
     }
 
     @Override
