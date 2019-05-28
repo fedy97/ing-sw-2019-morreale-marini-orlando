@@ -138,6 +138,8 @@ public class CLI extends RemoteView {
         CliSetUp.cursorRight(9);
         CliSetUp.cursorUp(1);
         CliPrinter.boxMessage(null);
+        CliSetUp.cursorUp(10);
+        CliSetUp.cursorLeft(10);
         new Thread(() -> {
             int choosenPowerUp;
             Console c = System.console();
@@ -413,12 +415,16 @@ public class CLI extends RemoteView {
 
     @Override
     public void setValidActions(boolean[] actives) {
-        
+
     }
 
     @Override
     public void showMessage(String msg) {
-
+        CliSetUp.savePosition();
+        CliSetUp.cursorDown(15);
+        CliSetUp.cursorRight(5);
+        HandyFunctions.printConsole(msg);
+        CliSetUp.restorePosition();
     }
 
     @Override
