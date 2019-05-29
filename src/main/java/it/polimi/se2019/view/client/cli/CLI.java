@@ -55,8 +55,8 @@ public class CLI extends RemoteView {
         charChosen = new ArrayList<>();
         map = new int[3][4];
         isAsking = false;
-        actives = new boolean[5];
-        for (int i=0; i<5; i++)
+        actives = new boolean[6];
+        for (int i=0; i<6; i++)
             actives[i] = false;
     }
 
@@ -84,6 +84,8 @@ public class CLI extends RemoteView {
         CliPrinter.drawPlayersInfoBox(lightGameVersion);
         CliSetUp.cursorDown(20);
         CliSetUp.cursorLeft(106);
+        /*
+        System.out.print(isAsking + " "+ isMyTurn());
         if (!isAsking && isMyTurn()) {
             new Thread(() -> {
                 isAsking = true;
@@ -91,15 +93,40 @@ public class CLI extends RemoteView {
                 int choise;
                 choise = Character.getNumericValue((c.readPassword())[0]);
                 isAsking = false;
-                if (choise == 1)
+                if (choise == 1 && actives[0])
                     iWantToMove();
-                else if (choise == 2)
+                else if (choise == 2 && actives[1])
                     iWantToGrab();
-                else if (choise == 3)
+                else if (choise == 3 && actives[2])
                     iWantToShoot();
-                else if (choise == 4)
+                else if (choise == 4 && actives[3])
                     iWantToReload();
-                else if (choise == 5)
+                else if (choise == 5 && actives[4])
+                    iWantToUsePowerUp();
+                else
+                    endTurn();
+            }).start();
+        }
+        */
+    }
+
+    private void getActionInput() {
+        if (!isAsking && isMyTurn()) {
+            new Thread(() -> {
+                isAsking = true;
+                Console c = System.console();
+                int choise;
+                choise = Character.getNumericValue((c.readPassword())[0]);
+                isAsking = false;
+                if (choise == 1 && actives[0])
+                    iWantToMove();
+                else if (choise == 2 && actives[1])
+                    iWantToGrab();
+                else if (choise == 3 && actives[2])
+                    iWantToShoot();
+                else if (choise == 4 && actives[3])
+                    iWantToReload();
+                else if (choise == 5 && actives[4])
                     iWantToUsePowerUp();
                 else
                     endTurn();
@@ -108,7 +135,7 @@ public class CLI extends RemoteView {
     }
 
     public boolean isMyTurn () {
-        for (int i=0; i<5; i++) {
+        for (int i=0; i<6; i++) {
             if (actives[i] == true)
                 return true;
         }
@@ -434,6 +461,10 @@ public class CLI extends RemoteView {
     @Override
     public void setValidActions(boolean[] actives) {
         this.actives = actives;
+        isAsking = false;
+        if (isMyTurn()) {
+            getActionInput();
+        }
     }
 
     @Override
