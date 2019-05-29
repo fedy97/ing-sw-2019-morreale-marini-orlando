@@ -39,6 +39,7 @@ public class CLI extends RemoteView {
     private boolean isAsking;
     private LightGameVersion lightGameVersion;
     private boolean[] actives;
+    private int begin;
 
     public CLI() {
         try {
@@ -58,6 +59,7 @@ public class CLI extends RemoteView {
         actives = new boolean[6];
         for (int i=0; i<6; i++)
             actives[i] = false;
+        begin = 1;
     }
 
     @Override
@@ -201,6 +203,7 @@ public class CLI extends RemoteView {
             message.setSender(userName);
             viewSetChanged();
             notifyObservers(message);
+            begin = 0;
         }).start();
     }
 
@@ -462,7 +465,7 @@ public class CLI extends RemoteView {
     public void setValidActions(boolean[] actives) {
         this.actives = actives;
         isAsking = false;
-        if (isMyTurn()) {
+        if (isMyTurn() && begin == 0) {
             getActionInput();
         }
     }
