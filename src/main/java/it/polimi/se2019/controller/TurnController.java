@@ -5,7 +5,7 @@ import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.network.message.to_client.EnablePlayerMessage;
+import it.polimi.se2019.network.message.to_client.EnablePlayerActionsMessage;
 import it.polimi.se2019.network.message.to_client.ShowChoosePowerUpMessage;
 import it.polimi.se2019.network.message.to_client.ShowMessage;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -39,7 +39,7 @@ public class TurnController {
 
     public void notifyFirst() {
         Controller c = Controller.getInstance();
-        c.callView(new EnablePlayerMessage(true), c.getPlayerManager().getCurrentPlayer().getName());
+        c.callView(new EnablePlayerActionsMessage(UserValidActions.ALL.getActions()), c.getPlayerManager().getCurrentPlayer().getName());
         c.callView(new ShowMessage("It's your turn!"), c.getPlayerManager().getCurrentPlayer().getName());
     }
 
@@ -78,7 +78,7 @@ public class TurnController {
         Player currPlayer = c.getPlayerManager().getCurrentPlayer();
         for (Player player : c.getGame().getPlayers()) {
             if (player.equals(currPlayer)) {
-                c.callView(new EnablePlayerMessage(true), player.getName());
+                c.callView(new EnablePlayerActionsMessage(UserValidActions.ALL.getActions()), player.getName());
                 c.callView(new ShowMessage("It's your turn!"), player.getName());
                 if (currPlayer.getCurrentPlatform() == null) {
                     try {
@@ -97,7 +97,7 @@ public class TurnController {
 
                 }
             } else {
-                c.callView(new EnablePlayerMessage(false), player.getName());
+                c.callView(new EnablePlayerActionsMessage(UserValidActions.NONE.getActions()), player.getName());
                 c.callView(new ShowMessage("It's ".concat(c.getPlayerManager().getCurrentPlayer().getName()).concat(" turn!")), player.getName());
             }
         }

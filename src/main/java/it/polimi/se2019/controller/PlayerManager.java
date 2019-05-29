@@ -200,7 +200,7 @@ public class PlayerManager {
      */
     public void setCurrentPlayer(Player player) {
         currentPlayer = player;
-        actionsLeft = 2;
+        resetActionLeft();
     }
 
     public List<Player> getTempPlayers() {

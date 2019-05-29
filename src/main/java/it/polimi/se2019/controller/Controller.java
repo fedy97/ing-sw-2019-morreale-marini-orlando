@@ -1,5 +1,6 @@
 package it.polimi.se2019.controller;
 
+import com.sun.deploy.util.ArrayUtil;
 import it.polimi.se2019.exceptions.InvalidCharacterException;
 import it.polimi.se2019.exceptions.InvalidPositionException;
 import it.polimi.se2019.model.AmmoRep;
@@ -495,17 +496,24 @@ public class Controller implements Observer {
     }
 
     public void setState(ControllerState newState) {
-        if (newState == ControllerState.IDLE){
+        System.out.println(state);
+        if (newState == ControllerState.IDLE) {
             if ((state == ControllerState.PROCESSING_ACTION_1
                     || state == ControllerState.PROCESSING_ACTION_2
                     || state == ControllerState.PROCESSING_ACTION_3))
                 playerManager.useAction();
             System.out.println(playerManager.getActionsLeft());
-            if(playerManager.getActionsLeft() == 0){
+            if (playerManager.getActionsLeft() == 0) {
                 callView(new ShowMessage("You've finished your basic action! Now you can use your powerup, " +
                         "reload or pass the turn"), playerManager.getCurrentPlayer().getName());
-                callView(new DisableActionButtonMessage(null), playerManager.getCurrentPlayer().getName());
+                callView(new EnablePlayerActionsMessage(UserValidActions.NO_BASIC.getActions()), playerManager.getCurrentPlayer().getName());
+            } else {
+                callView(new EnablePlayerActionsMessage(UserValidActions.ALL.getActions()), playerManager.getCurrentPlayer().getName());
             }
+        } else if ((newState == ControllerState.PROCESSING_ACTION_1
+                || state == ControllerState.PROCESSING_ACTION_2
+                || state == ControllerState.PROCESSING_ACTION_3)) {
+            callView(new EnablePlayerActionsMessage(UserValidActions.NONE.getActions()), playerManager.getCurrentPlayer().getName());
         }
         state = newState;
     }
