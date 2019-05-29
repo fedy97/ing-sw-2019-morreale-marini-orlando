@@ -201,8 +201,9 @@ public class PlayerBoardController {
             weaponsImages.get(myWeaponsReps.indexOf(myWeapon)).setImage(new Image(myWeapon.getPath()));
             HandyFunctions.enlightenButton(infoWeaponsButtons.get(myWeaponsReps.indexOf(myWeapon)));
         }
-        for (int j = myWeaponsReps.size(); j < 3; j++)
+        for (int j = myWeaponsReps.size(); j < 3; j++) {
             HandyFunctions.darkenButton(infoWeaponsButtons.get(j));
+        }
     }
 
     private void updatePlayerPowerUps() {
@@ -217,8 +218,9 @@ public class PlayerBoardController {
             for (CardRep myPowerup : myPowerupsReps)
                 HandyFunctions.darkenButton(infoPowerupsButtons.get(myPowerupsReps.indexOf(myPowerup)));
 
-        for (int j = myPowerupsReps.size(); j < 3; j++)
+        for (int j = myPowerupsReps.size(); j < 3; j++) {
             HandyFunctions.darkenButton(infoPowerupsButtons.get(j));
+        }
     }
 
     private void setRightBoard() {

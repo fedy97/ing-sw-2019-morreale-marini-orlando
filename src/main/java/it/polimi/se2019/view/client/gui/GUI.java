@@ -30,6 +30,7 @@ public class GUI extends RemoteView {
     private ChoosePowerupController choosePowerupController;
     private PlayerBoardController playerBoardController;
     private SwitchWeaponController switchWeaponController;
+    private UsePowerupController usePowerupController;
 
     private Scene sceneWaitingLobby;
     private Scene sceneChooseMap;
@@ -38,11 +39,13 @@ public class GUI extends RemoteView {
     private Scene sceneChoosePowerup;
     private Scene scenePlayerBoard;
     private Scene sceneSwitchWeapon;
+    private Scene sceneUsePowerup;
 
     private Stage stage;
     private Stage secondStage;
     private Stage playerBoardStage;
     private Stage switchWeaponStage;
+    private Stage usePowerupStage;
 
     private String charInString;
     private List<String> charsInGame;
@@ -111,7 +114,9 @@ public class GUI extends RemoteView {
                     this.charsInGame = arrChars;
                     initPlayerBoard(arrChars);
                     initSwitchWeapon();
+                    initUsePowerup();
                     switchWeaponController.passGUI(this);
+                    usePowerupController.passGUI(this);
                     gameBoardController.passGUI(this);
                     playerBoardController.passGUI(this);
                     stage.setScene(sceneGameBoard);
@@ -120,12 +125,27 @@ public class GUI extends RemoteView {
                 });
     }
 
+    private void initUsePowerup() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/usePowerups.fxml"));
+        try {
+            Parent root = loader.load();
+            usePowerupStage = new Stage();
+            usePowerupStage.setTitle("Choose a powerup to use");
+            usePowerupStage.initOwner(stage);
+            usePowerupStage.initModality(Modality.APPLICATION_MODAL);
+            sceneUsePowerup = new Scene(root);
+            usePowerupController = loader.getController();
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing use powerup");
+        }
+    }
+
     private void initSwitchWeapon() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/switchWeapon.fxml"));
         try {
             Parent root = loader.load();
             switchWeaponStage = new Stage();
-            switchWeaponStage.setTitle("Chose a weapon to switch");
+            switchWeaponStage.setTitle("Choose a weapon to switch");
             switchWeaponStage.initOwner(stage);
             switchWeaponStage.initModality(Modality.APPLICATION_MODAL);
             sceneSwitchWeapon = new Scene(root);
@@ -318,6 +338,11 @@ public class GUI extends RemoteView {
         notifyListeners(message);
     }
 
+    protected void usePowerup(String hashPowerup) {
+        usePowerupStage.close();
+        //TODO
+    }
+
     private void notifyListeners(ToServerMessage message) {
         message.setSender(userName);
         viewSetChanged();
@@ -435,6 +460,18 @@ public class GUI extends RemoteView {
 
     public List<String> getCharsInGame() {
         return charsInGame;
+    }
+
+    public Scene getSceneUsePowerup() {
+        return sceneUsePowerup;
+    }
+
+    public Stage getUsePowerupStage() {
+        return usePowerupStage;
+    }
+
+    public UsePowerupController getUsePowerupController() {
+        return usePowerupController;
     }
 }
 

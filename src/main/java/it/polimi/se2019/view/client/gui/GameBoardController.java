@@ -758,6 +758,13 @@ public class GameBoardController {
     }
 
     public void powerupsClick() {
+        Platform.runLater(
+                () -> {
+                    gui.getUsePowerupStage().setScene(gui.getSceneUsePowerup());
+                    gui.getUsePowerupStage().setResizable(false);
+                    gui.getUsePowerupController().updateMyPowerups(lightGameVersion);
+                    gui.getUsePowerupStage().show();
+                });
     }
 
     public void endturnClick() {

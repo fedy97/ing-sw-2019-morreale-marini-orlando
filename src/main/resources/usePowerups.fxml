@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="it.polimi.se2019.view.client.gui.UsePowerupController">
+   <children>
+      <ImageView fitHeight="350.0" fitWidth="716.0" pickOnBounds="true">
+         <image>
+            <Image url="@assets/backgrounds/bgchoose.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="powerup1image" fitHeight="272.0" fitWidth="180.0" layoutX="39.0" layoutY="39.0" pickOnBounds="true" />
+      <ImageView fx:id="powerup2image" fitHeight="272.0" fitWidth="180.0" layoutX="268.0" layoutY="39.0" pickOnBounds="true" />
+      <ImageView fx:id="powerup3image" fitHeight="272.0" fitWidth="180.0" layoutX="497.0" layoutY="39.0" pickOnBounds="true" />
+      <Button fx:id="powerup1button" layoutX="39.0" layoutY="39.0" mnemonicParsing="false" onAction="#powerup1Click" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="powerup2button" layoutX="268.0" layoutY="39.0" mnemonicParsing="false" onAction="#powerup2Click" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="powerup3button" layoutX="497.0" layoutY="39.0" mnemonicParsing="false" onAction="#powerup3Click" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
+   </children>
+</AnchorPane>
