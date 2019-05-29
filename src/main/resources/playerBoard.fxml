@@ -76,5 +76,35 @@
       <ImageView fx:id="damage10" fitHeight="68.0" fitWidth="47.0" layoutX="533.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="damage11" fitHeight="68.0" fitWidth="47.0" layoutX="581.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="damage12" fitHeight="68.0" fitWidth="47.0" layoutX="628.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="life1" fitHeight="68.0" fitWidth="53.0" layoutX="213.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="life2" fitHeight="68.0" fitWidth="53.0" layoutX="258.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="life3" fitHeight="68.0" fitWidth="53.0" layoutX="302.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="life4" fitHeight="68.0" fitWidth="53.0" layoutX="346.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="life5" fitHeight="68.0" fitWidth="53.0" layoutX="389.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="life6" fitHeight="68.0" fitWidth="53.0" layoutX="432.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
