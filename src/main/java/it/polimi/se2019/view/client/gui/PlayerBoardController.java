@@ -4,17 +4,14 @@ import it.polimi.se2019.model.BoardRep;
 import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.utils.HandyFunctions;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -101,9 +98,7 @@ public class PlayerBoardController {
     @FXML
     private ImageView life6;
 
-
     private GUI gui;
-    private List<String> charsInGame;
     private String myChar;
     private LightGameVersion lightGameVersion;
     private List<ImageView> weaponsImages;
@@ -254,10 +249,6 @@ public class PlayerBoardController {
     void passGUI(GUI gui) {
         this.gui = gui;
         myChar = gui.getCharInString();
-    }
-
-    void setCharsInGame(List<String> charsInGame) {
-        this.charsInGame = charsInGame;
     }
 
     void updateAll(LightGameVersion lightGameVersion) {

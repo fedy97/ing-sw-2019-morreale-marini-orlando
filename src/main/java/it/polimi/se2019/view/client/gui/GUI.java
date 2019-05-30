@@ -31,6 +31,7 @@ public class GUI extends RemoteView {
     private PlayerBoardController playerBoardController;
     private SwitchWeaponController switchWeaponController;
     private UsePowerupController usePowerupController;
+    private UseWeaponController useWeaponController;
 
     private Scene sceneWaitingLobby;
     private Scene sceneChooseMap;
@@ -40,12 +41,14 @@ public class GUI extends RemoteView {
     private Scene scenePlayerBoard;
     private Scene sceneSwitchWeapon;
     private Scene sceneUsePowerup;
+    private Scene sceneUseWeapon;
 
     private Stage stage;
     private Stage secondStage;
     private Stage playerBoardStage;
     private Stage switchWeaponStage;
     private Stage usePowerupStage;
+    private Stage useWeaponStage;
 
     private String charInString;
     private List<String> charsInGame;
@@ -112,17 +115,34 @@ public class GUI extends RemoteView {
                 () -> {
                     initGameBoard(config, ammoReps, posWeapons);
                     this.charsInGame = arrChars;
-                    initPlayerBoard(arrChars);
+                    initPlayerBoard();
                     initSwitchWeapon();
                     initUsePowerup();
+                    initUseWeapon();
                     switchWeaponController.passGUI(this);
                     usePowerupController.passGUI(this);
+                    useWeaponController.passGUI(this);
                     gameBoardController.passGUI(this);
                     playerBoardController.passGUI(this);
                     stage.setScene(sceneGameBoard);
                     stage.setResizable(false);
                     stage.show();
                 });
+    }
+
+    private void initUseWeapon() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/useWeapons.fxml"));
+        try {
+            Parent root = loader.load();
+            useWeaponStage = new Stage();
+            useWeaponStage.setTitle("Choose a weapon to use");
+            useWeaponStage.initOwner(stage);
+            useWeaponStage.initModality(Modality.APPLICATION_MODAL);
+            sceneUseWeapon = new Scene(root);
+            useWeaponController = loader.getController();
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing use weapon");
+        }
     }
 
     private void initUsePowerup() {
@@ -156,7 +176,7 @@ public class GUI extends RemoteView {
         }
     }
 
-    private void initPlayerBoard(List<String> arrChars) {
+    private void initPlayerBoard() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/playerBoard.fxml"));
         try {
             Parent root = loader.load();
@@ -166,7 +186,6 @@ public class GUI extends RemoteView {
             playerBoardStage.initModality(Modality.APPLICATION_MODAL);
             scenePlayerBoard = new Scene(root);
             playerBoardController = loader.getController();
-            playerBoardController.setCharsInGame(arrChars);
             playerBoardStage.setOnCloseRequest(event -> playerBoardController.setCurrPlayerDisplay(null));
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing player board");
@@ -192,9 +211,6 @@ public class GUI extends RemoteView {
             stage.setTitle("Waiting Lobby");
             sceneWaitingLobby = new Scene(root);
             waitingLobbyController = loader.getController();
-            /*stage.setOnCloseRequest(event -> Platform.runLater(
-                    () -> stage.show()
-            ));*/
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing waiting lobby");
         }
@@ -292,13 +308,13 @@ public class GUI extends RemoteView {
 
     protected void sendMapChosenByPlayer(int config) {
         SendMapChosenMessage message = new SendMapChosenMessage(config);
-        notifyListeners(message);
+        notifyController(message);
     }
 
     protected void sendCharacterChosenByPlayer(String characterEnuminString) {
         charInString = characterEnuminString;
         SendCharacterChosenMessage message = new SendCharacterChosenMessage(characterEnuminString);
-        notifyListeners(message);
+        notifyController(message);
     }
 
     protected void sendPowerupChosen(int hashCodeChosen, int hashCodeGarbage) {
@@ -306,36 +322,36 @@ public class GUI extends RemoteView {
         arrayList.add(hashCodeChosen);
         arrayList.add(hashCodeGarbage);
         SendInitPowerUpMessage message = new SendInitPowerUpMessage(arrayList);
-        notifyListeners(message);
+        notifyController(message);
     }
 
     protected void sendPlatformChosen(String pos) {
         MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(pos);
-        notifyListeners(message);
-        gameBoardController.setActiveButtons(new boolean[]{true, true, true, false, true,true});
+        notifyController(message);
+        gameBoardController.setActiveButtons(new boolean[]{true, true, true, false, true, true});
     }
 
     protected void sendWeaponGrabbed(String hashWeapon) {
         ChosenWeaponMessage message = new ChosenWeaponMessage(hashWeapon);
-        notifyListeners(message);
-        gameBoardController.setActiveButtons(new boolean[]{true, true, true, false, true,true});
+        notifyController(message);
+        gameBoardController.setActiveButtons(new boolean[]{true, true, true, false, true, true});
     }
 
     protected void sendWeaponToSwitch(String hashWeapon) {
         DiscardWeaponMessage message = new DiscardWeaponMessage(hashWeapon);
-        notifyListeners(message);
+        notifyController(message);
         switchWeaponStage.close();
     }
 
     protected void sendEndMyTurn() {
         EndTurnMessage message = new EndTurnMessage(null);
-        notifyListeners(message);
+        notifyController(message);
     }
 
     protected void iWantToDoSomething(String action) {
-        gameBoardController.setActiveButtons(new boolean[]{false, false, false, false, false,false});
+        gameBoardController.setActiveButtons(new boolean[]{false, false, false, false, false, false});
         PerformActionMessage message = new PerformActionMessage(action);
-        notifyListeners(message);
+        notifyController(message);
     }
 
     protected void usePowerup(String hashPowerup) {
@@ -343,7 +359,7 @@ public class GUI extends RemoteView {
         //TODO
     }
 
-    private void notifyListeners(ToServerMessage message) {
+    private void notifyController(ToServerMessage message) {
         message.setSender(userName);
         viewSetChanged();
         notifyObservers(message);
@@ -422,7 +438,7 @@ public class GUI extends RemoteView {
      */
 
     @Override
-    public void setValidActions(boolean[] actives){
+    public void setValidActions(boolean[] actives) {
         Platform.runLater(() -> gameBoardController.setActiveButtons(actives));
     }
 
@@ -472,6 +488,18 @@ public class GUI extends RemoteView {
 
     public UsePowerupController getUsePowerupController() {
         return usePowerupController;
+    }
+
+    public UseWeaponController getUseWeaponController() {
+        return useWeaponController;
+    }
+
+    public Scene getSceneUseWeapon() {
+        return sceneUseWeapon;
+    }
+
+    public Stage getUseWeaponStage() {
+        return useWeaponStage;
     }
 }
 

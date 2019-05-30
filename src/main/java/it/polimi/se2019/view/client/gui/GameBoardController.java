@@ -723,6 +723,7 @@ public class GameBoardController {
         alert.setTitle("Info Message");
         alert.setContentText(message);
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+
         alert.showAndWait();
     }
 
@@ -752,6 +753,13 @@ public class GameBoardController {
 
     public void shootClick() {
         //gui.iWantToDoSomething("action3");
+        Platform.runLater(
+                () -> {
+                    gui.getUseWeaponStage().setScene(gui.getSceneUseWeapon());
+                    gui.getUseWeaponStage().setResizable(false);
+                    gui.getUseWeaponController().updateMyWeapons(lightGameVersion);
+                    gui.getUseWeaponStage().show();
+                });
     }
 
     public void reloadClick() {
