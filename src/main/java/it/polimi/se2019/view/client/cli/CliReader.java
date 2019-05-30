@@ -16,10 +16,12 @@ public class CliReader {
 
     private int seconds;
     private Scanner scanner;
+    private boolean stop;
 
     public CliReader(int seconds) {
         this.seconds = seconds;
         scanner = new Scanner(System.in);
+        stop = false;
     }
 
     public String getTimedString() throws IOException, NoInputException {
@@ -40,7 +42,7 @@ public class CliReader {
     public int getTimedInt() throws IOException, NoInputException {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         long startTime = System.currentTimeMillis();
-        while ((System.currentTimeMillis() - startTime) < seconds * 1000 && !in.ready()) {
+        while ((System.currentTimeMillis() - startTime) < seconds * 1000 && !in.ready() && !stop) {
             //TODO
         }
         if (in.ready()) {
@@ -48,6 +50,9 @@ public class CliReader {
             return Integer.parseInt(temp);
         }
         else {
+            stopReader();
+            System.out.print("ESCO");
+
             throw new NoInputException("Time out for input!");
         }
     }
@@ -62,6 +67,10 @@ public class CliReader {
 
     public void setSeconds(int seconds) {
         this.seconds = seconds;
+    }
+
+    public void stopReader() {
+        this.stop = true;
     }
 
 }

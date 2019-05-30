@@ -86,30 +86,6 @@ public class CLI extends RemoteView {
         CliPrinter.drawPlayersInfoBox(lightGameVersion);
         CliSetUp.cursorDown(20);
         CliSetUp.cursorLeft(106);
-        /*
-        System.out.print(isAsking + " "+ isMyTurn());
-        if (!isAsking && isMyTurn()) {
-            new Thread(() -> {
-                isAsking = true;
-                Console c = System.console();
-                int choise;
-                choise = Character.getNumericValue((c.readPassword())[0]);
-                isAsking = false;
-                if (choise == 1 && actives[0])
-                    iWantToMove();
-                else if (choise == 2 && actives[1])
-                    iWantToGrab();
-                else if (choise == 3 && actives[2])
-                    iWantToShoot();
-                else if (choise == 4 && actives[3])
-                    iWantToReload();
-                else if (choise == 5 && actives[4])
-                    iWantToUsePowerUp();
-                else
-                    endTurn();
-            }).start();
-        }
-        */
     }
 
     private void getActionInput() {
@@ -246,11 +222,12 @@ public class CLI extends RemoteView {
             new Thread(() -> {
                 boolean okChar = false;
                 //Console c = System.console();
-                while (!okChar) {
+                CliReader reader2 = new CliReader(1);
+                //while (!okChar) {
                     int temp;
                     //temp = Character.getNumericValue((c.readPassword())[0]);
                     try {
-                        temp = reader.getTimedInt();
+                        temp = reader2.getTimedInt();
                         if (temp == 1) {
                             myCharEnumString = "BANSHEE";
                         } else if (temp == 2) {
@@ -266,15 +243,15 @@ public class CLI extends RemoteView {
                             okChar = true;
                             myChar = temp;
                         }
+                        SendCharacterChosenMessage message = new SendCharacterChosenMessage(myCharEnumString);
+                        message.setSender(userName);
+                        viewSetChanged();
+                        notifyObservers(message);
                     }
                     catch (NoInputException|IOException e) {
 
                     }
-                }
-                SendCharacterChosenMessage message = new SendCharacterChosenMessage(myCharEnumString);
-                message.setSender(userName);
-                viewSetChanged();
-                notifyObservers(message);
+                //}
 
             }).start();
             firstTime = true;
@@ -302,6 +279,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void showChooseMap() {
+
         CliPrinter.reset();
         CliSetUp.clear();
         CliSetUp.cursorToHome();
@@ -312,8 +290,9 @@ public class CLI extends RemoteView {
             new Thread(() -> {
                 //Console c = System.console();
                 //mapChosen = Character.getNumericValue((c.readPassword())[0]);
+                CliReader reader1 = new CliReader(1);
                 try {
-                    mapChosen = reader.getTimedInt();
+                    mapChosen = reader1.getTimedInt();
                     if (mapChosen == 1 || mapChosen == 2 || mapChosen == 3 || mapChosen == 4) {
                         SendMapChosenMessage message = new SendMapChosenMessage(mapChosen);
                         message.setSender(userName);
