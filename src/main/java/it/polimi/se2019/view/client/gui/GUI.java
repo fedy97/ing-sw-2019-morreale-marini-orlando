@@ -317,7 +317,7 @@ public class GUI extends RemoteView {
         notifyController(message);
     }
 
-    protected void sendPowerupChosen(int hashCodeChosen, int hashCodeGarbage) {
+    protected void sendInitPowerupChosen(int hashCodeChosen, int hashCodeGarbage) {
         ArrayList<Integer> arrayList = new ArrayList<>();
         arrayList.add(hashCodeChosen);
         arrayList.add(hashCodeGarbage);
@@ -356,6 +356,11 @@ public class GUI extends RemoteView {
 
     protected void usePowerup(String hashPowerup) {
         usePowerupStage.close();
+        //TODO
+    }
+
+    protected void useWeapon(String hashWeapon) {
+        useWeaponStage.close();
         //TODO
     }
 

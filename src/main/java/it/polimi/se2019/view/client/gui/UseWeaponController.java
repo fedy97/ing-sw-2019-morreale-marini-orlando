@@ -61,17 +61,17 @@ public class UseWeaponController {
 
     public void weapon1Click() {
         int hash = lightGameVersion.getPlayerWeapons().get(gui.getCharInString()).get(0).getId();
-        //TODO
+        gui.useWeapon(Integer.toString(hash));
     }
 
     public void weapon2Click() {
         int hash = lightGameVersion.getPlayerWeapons().get(gui.getCharInString()).get(1).getId();
-        //TODO
+        gui.useWeapon(Integer.toString(hash));
     }
 
     public void weapon3Click() {
         int hash = lightGameVersion.getPlayerWeapons().get(gui.getCharInString()).get(2).getId();
-        //TODO
+        gui.useWeapon(Integer.toString(hash));
     }
 
 }
