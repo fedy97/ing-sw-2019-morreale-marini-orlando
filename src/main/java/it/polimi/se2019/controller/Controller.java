@@ -1,6 +1,5 @@
 package it.polimi.se2019.controller;
 
-import com.sun.deploy.util.ArrayUtil;
 import it.polimi.se2019.exceptions.InvalidCharacterException;
 import it.polimi.se2019.exceptions.InvalidPositionException;
 import it.polimi.se2019.model.AmmoRep;
