@@ -31,7 +31,6 @@ public class BuyWithPowerupController {
     private Button sendbutton;
 
     private GUI gui;
-    private LightGameVersion lightGameVersion;
     private List<ImageView> powerupsImages;
     private List<ToggleButton> powerupsButtons;
 
@@ -51,7 +50,7 @@ public class BuyWithPowerupController {
     }
 
     protected void updateRightPowerups(LightGameVersion lightGameVersion, List<String> hashPowerups) {
-        this.lightGameVersion = lightGameVersion;
+
 
     }
     @FXML

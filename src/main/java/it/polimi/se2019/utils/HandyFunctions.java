@@ -7,6 +7,7 @@ import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.view.server.VirtualView;
 import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -109,6 +110,12 @@ public class HandyFunctions {
     private static final String ENLIGHTED_BUTTON_STYLE = "-fx-border-color: #ff0000; -fx-border-width: 2px; -fx-background-color: transparent;-fx-border-radius: 15;";
     private static final String DARKED_BUTTON_STYLE = "-fx-border-width: 0px; -fx-background-color: transparent;";
     public static void enlightenButton(Button button) {
+        button.setStyle(ENLIGHTED_BUTTON_STYLE);
+        button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
+        button.setOnMouseExited(e -> button.setStyle(HandyFunctions.ENLIGHTED_BUTTON_STYLE));
+        button.setDisable(false);
+    }
+    public static void enlightenToggleButton(ToggleButton button) {
         button.setStyle(ENLIGHTED_BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
         button.setOnMouseExited(e -> button.setStyle(HandyFunctions.ENLIGHTED_BUTTON_STYLE));
