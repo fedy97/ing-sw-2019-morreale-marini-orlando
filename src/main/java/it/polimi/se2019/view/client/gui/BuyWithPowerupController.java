@@ -50,11 +50,25 @@ public class BuyWithPowerupController {
     }
 
     protected void updateRightPowerups(LightGameVersion lightGameVersion, List<String> hashPowerups) {
-
+        for (ToggleButton toggleButton : powerupsButtons)
+            powerupsImages.get(powerupsButtons.indexOf(toggleButton)).setImage(new Image(""));
+        List<CardRep> allMyPowerups = lightGameVersion.getPlayerPowerups().get(gui.getCharInString());
+        for (String hash : hashPowerups) {
+            for (CardRep cardRep : allMyPowerups) {
+                if (cardRep.getId() == Integer.parseInt(hash)) {
+                    powerupsImages.get(hashPowerups.indexOf(hash)).setImage(new Image(cardRep.getPath()));
+                    HandyFunctions.enlightenToggleButton(powerupsButtons.get(hashPowerups.indexOf(hash)));
+                    break;
+                }
+            }
+        }
 
     }
-    @FXML
-    public void sendClick(){
 
+    @FXML
+    public void sendClick() {
+        List<String> hashes = new ArrayList<>();
+        //TODO
+        //gui.sendPowerupsToBuyWith(hashes);
     }
 }

@@ -763,7 +763,7 @@ public class GameBoardController {
     }
 
     public void reloadClick() {
-
+        //gui.iWantToDoSomething("action4");
     }
 
     public void powerupsClick() {

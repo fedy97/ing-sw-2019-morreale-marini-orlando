@@ -5,8 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="it.polimi.se2019.view.client.gui.BuyWithPowerupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.view.client.gui.BuyWithPowerupController">
    <children>
       <ImageView fitHeight="402.0" fitWidth="716.0" pickOnBounds="true">
          <image>
@@ -16,9 +15,9 @@ fx:controller="it.polimi.se2019.view.client.gui.BuyWithPowerupController">
       <ImageView fx:id="powerup1image" fitHeight="272.0" fitWidth="180.0" layoutX="39.0" layoutY="39.0" pickOnBounds="true" />
       <ImageView fx:id="powerup2image" fitHeight="272.0" fitWidth="180.0" layoutX="268.0" layoutY="39.0" pickOnBounds="true" />
       <ImageView fx:id="powerup3image" fitHeight="272.0" fitWidth="180.0" layoutX="497.0" layoutY="39.0" pickOnBounds="true" />
-      <ToggleButton fx:id="toggle1" layoutX="39.0" layoutY="39.0" mnemonicParsing="false" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
-      <ToggleButton fx:id="toggle2" layoutX="268.0" layoutY="39.0" mnemonicParsing="false" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
-      <ToggleButton fx:id="toggle3" layoutX="497.0" layoutY="39.0" mnemonicParsing="false" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
+      <ToggleButton fx:id="toggle1" disable="true" layoutX="39.0" layoutY="39.0" mnemonicParsing="false" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
+      <ToggleButton fx:id="toggle2" disable="true" layoutX="268.0" layoutY="39.0" mnemonicParsing="false" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
+      <ToggleButton fx:id="toggle3" disable="true" layoutX="497.0" layoutY="39.0" mnemonicParsing="false" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
       <Button fx:id="sendbutton" layoutX="333.0" layoutY="350.0" mnemonicParsing="false" onAction="#sendClick" text="send" />
    </children>
 </AnchorPane>

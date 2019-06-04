@@ -363,6 +363,12 @@ public class GUI extends RemoteView {
         switchWeaponStage.close();
     }
 
+    protected void sendPowerupsToBuyWith(List<String> hashes) {
+        BuyWithPowerupsMessage message = new BuyWithPowerupsMessage(hashes);
+        notifyController(message);
+        buyWithPowerupsStage.close();
+    }
+
     protected void sendEndMyTurn() {
         EndTurnMessage message = new EndTurnMessage(null);
         notifyController(message);
