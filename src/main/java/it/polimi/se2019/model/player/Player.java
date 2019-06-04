@@ -188,9 +188,10 @@ public class Player {
     public void addPowerUpCard(PowerUpCard card) throws InvalidCardException {
         if (card == null)
             throw new InvalidCardException("Card cannot be null!");
-        if (powerUpCards.size() < 3)
+        if (powerUpCards.size() < 3) {
             powerUpCards.add(card);
-
+            playerBoard.getAmmoBox().addOptionalAmmo(card.getAmmoCube());
+        }
     }
 
     /**
@@ -203,6 +204,7 @@ public class Player {
         if (card == null)
             throw new InvalidCardException("Card cannot be null!");
         powerUpCards.remove(card);
+        playerBoard.getAmmoBox().removeOptionalAmmo(card.getAmmoCube());
     }
 
     /**

@@ -15,6 +15,7 @@ public class AmmoBox {
     private int redAmmos;
     private int blueAmmos;
     private int yellowAmmos;
+    private List<AmmoCube> optionals;
 
     /**
      * Class constructor that initializes the number of ammunition to two for each color
@@ -23,6 +24,7 @@ public class AmmoBox {
         redAmmos = 1;
         blueAmmos = 1;
         yellowAmmos = 1;
+        optionals = new ArrayList<>();
     }
 
     /**
@@ -138,12 +140,12 @@ public class AmmoBox {
      */
     public boolean hasAmmos(AmmoCube[] ammos) {
         if (ammos == null) return true;
-        int red;
-        int blue;
-        int yellow;
-        red = 0;
-        blue = 0;
-        yellow = 0;
+        int red = 0;
+        int blue = 0;
+        int yellow = 0;
+        int optRed = 0;
+        int optBlue = 0;
+        int optYellow = 0;
 
         for (AmmoCube cube : ammos) {
             if (cube == AmmoCube.YELLOW)
@@ -154,7 +156,17 @@ public class AmmoBox {
                 red++;
         }
 
-        return blueAmmos >= blue && redAmmos >= red && yellowAmmos >= yellow;
+        for (AmmoCube optional : optionals) {
+            if (optional == AmmoCube.BLUE)
+                optBlue++;
+            if (optional == AmmoCube.RED)
+                optRed++;
+            if (optional == AmmoCube.YELLOW)
+                optYellow++;
+        }
+
+
+        return (blueAmmos + optBlue) >= blue && (redAmmos + optRed) >= red && (yellowAmmos + optYellow) >= yellow;
     }
 
     /**
@@ -171,5 +183,13 @@ public class AmmoBox {
             cubes.add(AmmoCube.YELLOW);
 
         return cubes;
+    }
+
+    public void addOptionalAmmo(AmmoCube ammoCube) {
+        optionals.add(ammoCube);
+    }
+
+    public void removeOptionalAmmo(AmmoCube ammoCube) {
+        optionals.remove(ammoCube);
     }
 }
