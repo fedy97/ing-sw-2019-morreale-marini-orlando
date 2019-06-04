@@ -40,6 +40,7 @@ public class Controller implements Observer {
     private ControllerState state; //the state is set to processing power up or weapon when a specific message from the client (ActivateCardMessage) is received
     private BlockingDeque<Player> currentTargets;
     private BlockingDeque<WeaponCard> chosenWeapons;
+    private BlockingDeque<Platform> chosenDestination;
     private BlockingDeque<Boolean> wantToDiscard;
     private List<Integer> processingStages;
     private PowerUpCard processingPowerUp;
@@ -73,6 +74,7 @@ public class Controller implements Observer {
         currentTargets = new LinkedBlockingDeque<>();
         chosenWeapons = new LinkedBlockingDeque<>();
         wantToDiscard = new LinkedBlockingDeque<>();
+        chosenDestination = new LinkedBlockingDeque<>();
         playerManager = new PlayerManager(this);
         turnController = new TurnController();
         userView = new HashMap<>();
@@ -488,6 +490,10 @@ public class Controller implements Observer {
 
     public BlockingDeque<WeaponCard> getChosenWeapons() {
         return chosenWeapons;
+    }
+
+    public BlockingDeque<Platform> getChosenDestination() {
+        return chosenDestination;
     }
 
     public BlockingDeque<Boolean> getWantToDiscard() {

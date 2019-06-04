@@ -2,6 +2,8 @@ package it.polimi.se2019.network.message.to_client;
 
 import it.polimi.se2019.view.client.RemoteView;
 
+import java.util.List;
+
 public class ShowPowerUpMessage extends ToClientMessage {
     public ShowPowerUpMessage(Object payload) {
         super(payload);
@@ -12,6 +14,6 @@ public class ShowPowerUpMessage extends ToClientMessage {
      * Control if the action "move" is valid and move the character of the current player
      */
     public void performAction(RemoteView actor) {
-        //TODO
+        actor.buyWithPowerups((List<String>) payload);
     }
 }

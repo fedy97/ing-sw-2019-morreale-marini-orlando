@@ -25,37 +25,7 @@ public class MoveCurrPlayerMessage extends ToServerMessage {
      */
     public void performAction() {
         Platform dest = Deserializer.getPlatform((String) payload);
-        Controller actor = Controller.getInstance();
-
-        if (actor.getState() == ControllerState.PROCESSING_ACTION_1)
-            actor.getPlayerManager().move(dest);
-        else if (actor.getState() == ControllerState.PROCESSING_ACTION_2) {
-            actor.getPlayerManager().move(dest);
-            if (dest.isGenerationSpot()) {
-                try {
-                    if (actor.getPlayerManager().getCurrentPlayer().getWeaponCards().size() == 3) {
-                        actor.callView(new AskToDiscardMessage(null), sender);
-                        WeaponCard card = actor.getChosenWeapons().take();
-
-                        if (card.getName().equals("null")) {
-                            actor.setState(ControllerState.IDLE);
-                            return;
-                        }
-                        else
-                            actor.getPlayerManager().getCurrentPlayer().removeWeaponCard(card);
-                    }
-
-                    actor.askFor(actor.getValidator().getGrabableWeapons(), "weapons");
-                    actor.getPlayerManager().buyWeapon(actor.getChosenWeapons().take());
-                } catch (Exception e) {
-                    HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
-                    e.printStackTrace();
-                }
-            } else {
-                actor.getPlayerManager().grabAmmoCard();
-            }
-        }
-        actor.setState(ControllerState.IDLE);
+        Controller.getInstance().getChosenDestination().add(dest);
     }
 }
 
