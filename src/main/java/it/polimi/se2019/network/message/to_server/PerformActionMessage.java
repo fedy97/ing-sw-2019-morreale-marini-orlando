@@ -39,6 +39,7 @@ public class PerformActionMessage extends ToServerMessage {
                     c.askFor(destinations, "position");
                     Platform dest = c.getChosenDestination().take();
                     c.getPlayerManager().move(dest);
+
                     if (dest.isGenerationSpot()) {
                         try {
                             if (c.getPlayerManager().getCurrentPlayer().getWeaponCards().size() == 3) {
@@ -53,7 +54,9 @@ public class PerformActionMessage extends ToServerMessage {
                             }
 
                             c.askFor(c.getValidator().getGrabableWeapons(), "weapons");
-                            c.getPlayerManager().buyWeapon(c.getChosenWeapons().take());
+                            WeaponCard chosen = c.getChosenWeapons().take();
+
+                            c.getPlayerManager().buyWeapon(chosen);
                         } catch (Exception e) {
                             HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
                             e.printStackTrace();
@@ -61,6 +64,7 @@ public class PerformActionMessage extends ToServerMessage {
                     } else {
                         c.getPlayerManager().grabAmmoCard();
                     }
+
                 } else if (choice.equals("action3")) {
                     c.setState(ControllerState.PROCESSING_ACTION_3);
                     destinations = v.getValidMoves(Action.SHOOT);

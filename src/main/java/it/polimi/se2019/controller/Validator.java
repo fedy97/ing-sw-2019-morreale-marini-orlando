@@ -6,6 +6,7 @@ import it.polimi.se2019.exceptions.InvalidGenerationSpotException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
+import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.HandyFunctions;
@@ -120,6 +121,28 @@ public abstract class Validator{
                 res.add(powerUp);
 
         return res;
+    }
+
+    /**
+     * @return the list of PowerUp cards the player can use to buy or reload weapons
+     */
+    public Map<PowerUpCard, Boolean> getUsablePowerUps(WeaponCard weaponCard, boolean reload) {
+        Player currPlayer = father.getPlayerManager().getCurrentPlayer();
+        List<PowerUpCard> res = new ArrayList<>();
+        AmmoCube[] cost;
+
+        if(reload)
+            cost = weaponCard.getTotalCost();
+        else
+            cost = weaponCard.getExtraCost();
+
+        for (PowerUpCard powerUp : currPlayer.getPowerUpCards())
+            if(reload)
+
+            if (powerUp.isUsable(currPlayer))
+                res.add(powerUp);
+        return null; //TODO
+
     }
 
     public List<WeaponCard> getUsableWeapons() {

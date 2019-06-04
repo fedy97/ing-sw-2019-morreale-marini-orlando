@@ -138,7 +138,7 @@ public class AmmoBox {
      * @param ammos to be checked
      * @return if the AmmoBox has enough ammos
      */
-    public boolean hasAmmos(AmmoCube[] ammos) {
+    public boolean hasTotalAmmos(AmmoCube[] ammos) {
         if (ammos == null) return true;
         int red = 0;
         int blue = 0;
@@ -167,6 +167,24 @@ public class AmmoBox {
 
 
         return (blueAmmos + optBlue) >= blue && (redAmmos + optRed) >= red && (yellowAmmos + optYellow) >= yellow;
+    }
+
+    public boolean hasAmmos(AmmoCube[] ammos) {
+        if (ammos == null) return true;
+        int red = 0;
+        int blue = 0;
+        int yellow = 0;
+
+        for (AmmoCube cube : ammos) {
+            if (cube == AmmoCube.YELLOW)
+                yellow++;
+            if (cube == AmmoCube.BLUE)
+                blue++;
+            if (cube == AmmoCube.RED)
+                red++;
+        }
+
+        return blueAmmos >= blue && redAmmos >= red && yellowAmmos >= yellow;
     }
 
     /**
