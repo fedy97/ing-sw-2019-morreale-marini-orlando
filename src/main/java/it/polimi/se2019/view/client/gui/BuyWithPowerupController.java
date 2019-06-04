@@ -32,11 +32,15 @@ public class BuyWithPowerupController {
 
     private GUI gui;
     private List<ImageView> powerupsImages;
+    private LightGameVersion lightGameVersion;
     private List<ToggleButton> powerupsButtons;
+    private Map<String, Boolean> hashes;
+    private List<String> hashesToSend;
 
     public void initialize() {
         powerupsImages = new ArrayList<>();
         powerupsButtons = new ArrayList<>();
+        hashesToSend = new ArrayList<>();
         powerupsImages.add(powerup1image);
         powerupsImages.add(powerup2image);
         powerupsImages.add(powerup3image);
@@ -49,15 +53,19 @@ public class BuyWithPowerupController {
         this.gui = gui;
     }
 
-    protected void updateRightPowerups(LightGameVersion lightGameVersion, List<String> hashPowerups) {
+    protected void updateRightPowerups(LightGameVersion lightGameVersion, Map<String, Boolean> hashPowerups) {
+        this.lightGameVersion = lightGameVersion;
+        this.hashes = hashPowerups;
         for (ToggleButton toggleButton : powerupsButtons)
             powerupsImages.get(powerupsButtons.indexOf(toggleButton)).setImage(new Image(""));
         List<CardRep> allMyPowerups = lightGameVersion.getPlayerPowerups().get(gui.getCharInString());
-        for (String hash : hashPowerups) {
+        int n = 0;
+        for (String hash : hashPowerups.keySet()) {
             for (CardRep cardRep : allMyPowerups) {
                 if (cardRep.getId() == Integer.parseInt(hash)) {
-                    powerupsImages.get(hashPowerups.indexOf(hash)).setImage(new Image(cardRep.getPath()));
-                    HandyFunctions.enlightenToggleButton(powerupsButtons.get(hashPowerups.indexOf(hash)));
+                    powerupsImages.get(n).setImage(new Image(cardRep.getPath()));
+                    powerupsButtons.get(n).setDisable(false);
+                    n++;
                     break;
                 }
             }
@@ -67,8 +75,25 @@ public class BuyWithPowerupController {
 
     @FXML
     public void sendClick() {
-        List<String> hashes = new ArrayList<>();
-        //TODO
-        //gui.sendPowerupsToBuyWith(hashes);
+        //gui.sendPowerupsToBuyWith(hashesToSend);
+    }
+
+    @FXML
+    public void toggle1Click() {
+        if (toggle1.isSelected()) {
+            HandyFunctions.enlightenToggleButton(toggle1);
+            //hashesToSend.add(hashes.g);
+        } else {
+            HandyFunctions.darkenToggleButton(toggle1);
+            hashesToSend.remove(hashes.get(0));
+        }
+    }
+
+    @FXML
+    public void toggle2Click() {
+    }
+
+    @FXML
+    public void toggle3Click() {
     }
 }

@@ -490,7 +490,7 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void buyWithPowerups(List<String> powerups) {
+    public void buyWithPowerups(Map<String, Boolean> powerups) {
         Platform.runLater(
                 () -> {
                     buyWithPowerupController.updateRightPowerups(lightGameVersion, powerups);

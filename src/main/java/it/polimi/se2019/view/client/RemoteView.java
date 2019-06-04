@@ -40,7 +40,7 @@ public abstract class RemoteView extends View {
 
     public abstract void switchWeapon();
 
-    public abstract void buyWithPowerups(List<String> powerups);
+    public abstract void buyWithPowerups(Map<String, Boolean> powerups);
 
     public abstract void lightPlatforms(List<String> platforms);
 
