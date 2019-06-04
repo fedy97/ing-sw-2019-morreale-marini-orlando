@@ -48,8 +48,7 @@ public class PerformActionMessage extends ToServerMessage {
                                 if (card.getName().equals("null")) {
                                     c.setState(ControllerState.IDLE);
                                     return;
-                                }
-                                else
+                                } else
                                     c.getPlayerManager().getCurrentPlayer().removeWeaponCard(card);
                             }
 
@@ -68,12 +67,13 @@ public class PerformActionMessage extends ToServerMessage {
                     c.askFor(destinations, "position");
                     List<WeaponCard> weapons = v.getUsableWeapons();
                     c.askFor(weapons, "weapons");
-                }else if(choice.equals("action4")){
+                } else if (choice.equals("action4")) {
                     //TODO
                 }
             } catch (Exception e) {
                 HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
             }
         }
+        c.setState(ControllerState.IDLE);
     }
 }
