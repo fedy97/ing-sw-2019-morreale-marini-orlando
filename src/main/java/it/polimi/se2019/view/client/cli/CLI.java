@@ -482,4 +482,8 @@ public class CLI extends RemoteView {
         }).start();
     }
 
+    @Override
+    public void buyWithPowerups(List<String> powerups) {
+
+    }
 }

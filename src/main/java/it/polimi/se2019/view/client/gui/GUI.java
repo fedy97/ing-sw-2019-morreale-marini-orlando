@@ -32,6 +32,7 @@ public class GUI extends RemoteView {
     private SwitchWeaponController switchWeaponController;
     private UsePowerupController usePowerupController;
     private UseWeaponController useWeaponController;
+    private BuyWithPowerupController buyWithPowerupController;
 
     private Scene sceneWaitingLobby;
     private Scene sceneChooseMap;
@@ -42,6 +43,7 @@ public class GUI extends RemoteView {
     private Scene sceneSwitchWeapon;
     private Scene sceneUsePowerup;
     private Scene sceneUseWeapon;
+    private Scene sceneBuyWithPowerups;
 
     private Stage stage;
     private Stage secondStage;
@@ -49,6 +51,7 @@ public class GUI extends RemoteView {
     private Stage switchWeaponStage;
     private Stage usePowerupStage;
     private Stage useWeaponStage;
+    private Stage buyWithPowerupsStage;
 
     private String charInString;
     private List<String> charsInGame;
@@ -119,6 +122,8 @@ public class GUI extends RemoteView {
                     initSwitchWeapon();
                     initUsePowerup();
                     initUseWeapon();
+                    initBuyWithPowerup();
+                    buyWithPowerupController.passGUI(this);
                     switchWeaponController.passGUI(this);
                     usePowerupController.passGUI(this);
                     useWeaponController.passGUI(this);
@@ -157,6 +162,21 @@ public class GUI extends RemoteView {
             usePowerupController = loader.getController();
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing use powerup");
+        }
+    }
+
+    private void initBuyWithPowerup() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/buyWithPowerups.fxml"));
+        try {
+            Parent root = loader.load();
+            buyWithPowerupsStage = new Stage();
+            buyWithPowerupsStage.setTitle("Choose powerups to buy with");
+            buyWithPowerupsStage.initOwner(stage);
+            buyWithPowerupsStage.initModality(Modality.APPLICATION_MODAL);
+            sceneBuyWithPowerups = new Scene(root);
+            buyWithPowerupController = loader.getController();
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing buy with powerups");
         }
     }
 
@@ -460,6 +480,17 @@ public class GUI extends RemoteView {
                     switchWeaponStage.setScene(sceneSwitchWeapon);
                     switchWeaponStage.setResizable(false);
                     switchWeaponStage.show();
+                });
+    }
+
+    @Override
+    public void buyWithPowerups(List<String> powerups) {
+        Platform.runLater(
+                () -> {
+                    buyWithPowerupController.updateRightPowerups(lightGameVersion, powerups);
+                    buyWithPowerupsStage.setScene(sceneSwitchWeapon);
+                    buyWithPowerupsStage.setResizable(false);
+                    buyWithPowerupsStage.show();
                 });
     }
 

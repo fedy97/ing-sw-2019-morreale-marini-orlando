@@ -763,6 +763,7 @@ public class GameBoardController {
     }
 
     public void reloadClick() {
+
     }
 
     public void powerupsClick() {
