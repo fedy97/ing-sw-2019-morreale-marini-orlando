@@ -176,6 +176,20 @@ public class PlayerManager {
     }
 
     /**
+     * @param powerUpCard to be converted into the corresponding ammo cube
+     * @throws InvalidCardException if the card doesn't belong to the current player
+     */
+    public void convertPowerUpToAmmo(PowerUpCard powerUpCard) throws InvalidCardException {
+        if (!currentPlayer.getPowerUpCards().contains(powerUpCard))
+            throw new InvalidCardException("The PowerUp doesn't belong to the current player, something went wrong!");
+
+        currentPlayer.getPlayerBoard().getAmmoBox().addOptionalAmmo(powerUpCard.getAmmoCube());
+        currentPlayer.removePowerUpCard(powerUpCard);
+        father.getDecksManager().addToGarbage(powerUpCard);
+        father.getGame().notifyChanges();
+    }
+
+    /**
      * @param weapons collection of weapons to be recharged
      * @throws InsufficientAmmoException if the player hasn't enough ammos to pay the reload cost
      *                                   of the weapon

@@ -93,6 +93,15 @@ public class AmmoBox {
      * @param num  The number of ammunition to remove
      */
     public void removeAmmos(AmmoCube type, int num) {
+        List<AmmoCube> toRemove = new ArrayList<>();
+
+        for (AmmoCube cube : optionals)
+            if (cube == type) {
+                toRemove.add(cube);
+                num--;
+            }
+        optionals.removeAll(toRemove);
+
         if (type == AmmoCube.RED) {
             if (redAmmos - num < 0)
                 redAmmos = 0;
@@ -169,23 +178,6 @@ public class AmmoBox {
         return (blueAmmos + optBlue) >= blue && (redAmmos + optRed) >= red && (yellowAmmos + optYellow) >= yellow;
     }
 
-    public boolean hasAmmos(AmmoCube[] ammos) {
-        if (ammos == null) return true;
-        int red = 0;
-        int blue = 0;
-        int yellow = 0;
-
-        for (AmmoCube cube : ammos) {
-            if (cube == AmmoCube.YELLOW)
-                yellow++;
-            if (cube == AmmoCube.BLUE)
-                blue++;
-            if (cube == AmmoCube.RED)
-                red++;
-        }
-
-        return blueAmmos >= blue && redAmmos >= red && yellowAmmos >= yellow;
-    }
 
     /**
      * @return the list of cubes of the AmmoBox
