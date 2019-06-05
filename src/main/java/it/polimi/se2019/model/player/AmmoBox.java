@@ -147,7 +147,7 @@ public class AmmoBox {
      * @param ammos to be checked
      * @return if the AmmoBox has enough ammos
      */
-    public boolean hasTotalAmmos(AmmoCube[] ammos) {
+    public boolean hasAmmos(AmmoCube[] ammos) {
         if (ammos == null) return true;
         int red = 0;
         int blue = 0;
