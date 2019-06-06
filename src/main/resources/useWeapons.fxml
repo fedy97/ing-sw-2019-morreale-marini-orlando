@@ -5,10 +5,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="it.polimi.se2019.view.client.gui.UseWeaponController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.view.client.gui.UseWeaponController">
    <children>
-      <ImageView fitHeight="350.0" fitWidth="716.0" pickOnBounds="true">
+      <ImageView fitHeight="433.0" fitWidth="716.0" pickOnBounds="true">
          <image>
             <Image url="@assets/backgrounds/bgchoose.jpg" />
          </image>
@@ -16,8 +15,17 @@ fx:controller="it.polimi.se2019.view.client.gui.UseWeaponController">
       <ImageView fx:id="weapon1image" fitHeight="272.0" fitWidth="180.0" layoutX="39.0" layoutY="39.0" pickOnBounds="true" />
       <ImageView fx:id="weapon2image" fitHeight="272.0" fitWidth="180.0" layoutX="268.0" layoutY="39.0" pickOnBounds="true" />
       <ImageView fx:id="weapon3image" fitHeight="272.0" fitWidth="180.0" layoutX="497.0" layoutY="39.0" pickOnBounds="true" />
-      <Button fx:id="weapon1" layoutX="39.0" layoutY="39.0" mnemonicParsing="false" onAction="#weapon1Click" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="weapon2" layoutX="268.0" layoutY="39.0" mnemonicParsing="false" onAction="#weapon2Click" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="weapon3" layoutX="497.0" layoutY="39.0" mnemonicParsing="false" onAction="#weapon3Click" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="weapon1" disable="true" layoutX="39.0" layoutY="39.0" mnemonicParsing="false" onAction="#weapon1Click" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="weapon2" disable="true" layoutX="268.0" layoutY="39.0" mnemonicParsing="false" onAction="#weapon2Click" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="weapon3" disable="true" layoutX="497.0" layoutY="39.0" mnemonicParsing="false" onAction="#weapon3Click" prefHeight="272.0" prefWidth="180.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="w1eff1" disable="true" layoutX="95.0" layoutY="332.0" mnemonicParsing="false" onAction="#w1eff1Click" text="Effect 1" />
+      <Button fx:id="w1eff2" disable="true" layoutX="95.0" layoutY="363.0" mnemonicParsing="false" onAction="#w1eff2Click" text="Effect 2" />
+      <Button fx:id="w1eff3" disable="true" layoutX="95.0" layoutY="394.0" mnemonicParsing="false" onAction="#w1eff3Click" text="Effect 3" />
+      <Button fx:id="w2eff3" disable="true" layoutX="324.0" layoutY="394.0" mnemonicParsing="false" onAction="#w2eff3Click" text="Effect 3" />
+      <Button fx:id="w2eff2" disable="true" layoutX="324.0" layoutY="363.0" mnemonicParsing="false" onAction="#w2eff2Click" text="Effect 2" />
+      <Button fx:id="w2eff1" disable="true" layoutX="324.0" layoutY="332.0" mnemonicParsing="false" onAction="#w2eff1Click" text="Effect 1" />
+      <Button fx:id="w3eff1" disable="true" layoutX="553.0" layoutY="332.0" mnemonicParsing="false" onAction="#w3eff1Click" text="Effect 1" />
+      <Button fx:id="w3eff2" disable="true" layoutX="553.0" layoutY="363.0" mnemonicParsing="false" onAction="#w3eff2Click" text="Effect 2" />
+      <Button fx:id="w3eff3" disable="true" layoutX="553.0" layoutY="394.0" mnemonicParsing="false" onAction="#w3eff3Click" text="Effect 3" />
    </children>
 </AnchorPane>

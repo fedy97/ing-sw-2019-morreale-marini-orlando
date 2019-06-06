@@ -22,19 +22,18 @@ public class BuyWithPowerupController {
     @FXML
     private ImageView powerup3image;
     @FXML
-    private ToggleButton toggle1;
+    private Button toggle1;
     @FXML
-    private ToggleButton toggle2;
+    private Button toggle2;
     @FXML
-    private ToggleButton toggle3;
+    private Button toggle3;
     @FXML
     private Button sendbutton;
 
     private GUI gui;
     private List<ImageView> powerupsImages;
     private LightGameVersion lightGameVersion;
-    private List<ToggleButton> powerupsButtons;
-    private Map<String, Boolean> hashes;
+    private List<Button> powerupsButtons;
     private List<String> hashesToSend;
 
     public void initialize() {
@@ -53,40 +52,25 @@ public class BuyWithPowerupController {
         this.gui = gui;
     }
 
-    protected void updateRightPowerups(LightGameVersion lightGameVersion, Map<String, Boolean> hashPowerups) {
+    protected void updateRightPowerups(LightGameVersion lightGameVersion, List<String> hashPowerups) {
         this.lightGameVersion = lightGameVersion;
-        this.hashes = hashPowerups;
-        for (ToggleButton toggleButton : powerupsButtons)
-            powerupsImages.get(powerupsButtons.indexOf(toggleButton)).setImage(new Image(""));
-        List<CardRep> allMyPowerups = lightGameVersion.getPlayerPowerups().get(gui.getCharInString());
-        int n = 0;
-        for (String hash : hashPowerups.keySet()) {
-            for (CardRep cardRep : allMyPowerups) {
-                if (cardRep.getId() == Integer.parseInt(hash)) {
-                    powerupsImages.get(n).setImage(new Image(cardRep.getPath()));
-                    powerupsButtons.get(n).setDisable(false);
-                    n++;
-                    break;
-                }
-            }
+
+        Map<String, List<CardRep>> charPowerupsReps = lightGameVersion.getPlayerPowerups();
+        List<CardRep> myPowerupsReps = charPowerupsReps.get(gui.getCharInString());
+        for (CardRep myPowerup : myPowerupsReps) {
+            powerupsImages.get(myPowerupsReps.indexOf(myPowerup)).setImage(new Image(myPowerup.getPath()));
+            HandyFunctions.enlightenButton(powerupsButtons.get(myPowerupsReps.indexOf(myPowerup)));
+        }
+        for (int j = myPowerupsReps.size(); j < 3; j++) {
+            powerupsImages.get(j).setImage(new Image("/assets/powerups/AD_powerups_IT_02.jpg"));
+            HandyFunctions.darkenButton(powerupsButtons.get(j));
         }
 
-    }
-
-    @FXML
-    public void sendClick() {
-        //gui.sendPowerupsToBuyWith(hashesToSend);
     }
 
     @FXML
     public void toggle1Click() {
-        if (toggle1.isSelected()) {
-            HandyFunctions.enlightenToggleButton(toggle1);
-            //hashesToSend.add(hashes.g);
-        } else {
-            HandyFunctions.darkenToggleButton(toggle1);
-            hashesToSend.remove(hashes.get(0));
-        }
+
     }
 
     @FXML

@@ -20,6 +20,24 @@ public class UseWeaponController {
     @FXML
     private Button weapon3;
     @FXML
+    private Button w1eff1;
+    @FXML
+    private Button w1eff2;
+    @FXML
+    private Button w1eff3;
+    @FXML
+    private Button w2eff1;
+    @FXML
+    private Button w2eff2;
+    @FXML
+    private Button w2eff3;
+    @FXML
+    private Button w3eff1;
+    @FXML
+    private Button w3eff2;
+    @FXML
+    private Button w3eff3;
+    @FXML
     private ImageView weapon1image;
     @FXML
     private ImageView weapon2image;
@@ -51,7 +69,8 @@ public class UseWeaponController {
         List<CardRep> myWeaponsReps = lightGameVersion.getPlayerWeapons().get(gui.getCharInString());
         for (CardRep myWeapon : myWeaponsReps) {
             weaponsImages.get(myWeaponsReps.indexOf(myWeapon)).setImage(new Image(myWeapon.getPath()));
-            HandyFunctions.enlightenButton(weaponsButtons.get(myWeaponsReps.indexOf(myWeapon)));
+            if (myWeapon.isLoaded()) HandyFunctions.enlightenButton(weaponsButtons.get(myWeaponsReps.indexOf(myWeapon)));
+            else HandyFunctions.darkenButton(weaponsButtons.get(myWeaponsReps.indexOf(myWeapon)));
         }
         for (int j = myWeaponsReps.size(); j < 3; j++) {
             weaponsImages.get(j).setImage(new Image("/assets/weapons/back.png"));
@@ -72,6 +91,33 @@ public class UseWeaponController {
     public void weapon3Click() {
         int hash = lightGameVersion.getPlayerWeapons().get(gui.getCharInString()).get(2).getId();
         gui.useWeapon(Integer.toString(hash));
+    }
+
+    public void w1eff1Click() {
+    }
+
+    public void w1eff2Click() {
+    }
+
+    public void w1eff3Click() {
+    }
+
+    public void w2eff1Click() {
+    }
+
+    public void w2eff2Click() {
+    }
+
+    public void w2eff3Click() {
+    }
+
+    public void w3eff1Click() {
+    }
+
+    public void w3eff2Click() {
+    }
+
+    public void w3eff3Click() {
     }
 
 }

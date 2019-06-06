@@ -121,6 +121,12 @@ public class HandyFunctions {
         button.setOnMouseExited(e -> button.setStyle(HandyFunctions.ENLIGHTED_BUTTON_STYLE));
         button.setDisable(false);
     }
+    public static void forceLightToggleButton(ToggleButton button) {
+        button.setStyle(HOVERED_BUTTON_STYLE);
+        button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
+        button.setOnMouseExited(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
+        button.setDisable(false);
+    }
     public static void darkenButton(Button button) {
         button.setStyle(DARKED_BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.DARKED_BUTTON_STYLE));

@@ -33,6 +33,7 @@ public class GUI extends RemoteView {
     private UsePowerupController usePowerupController;
     private UseWeaponController useWeaponController;
     private BuyWithPowerupController buyWithPowerupController;
+    private ChooseTargetsController chooseTargetsController;
 
     private Scene sceneWaitingLobby;
     private Scene sceneChooseMap;
@@ -44,6 +45,7 @@ public class GUI extends RemoteView {
     private Scene sceneUsePowerup;
     private Scene sceneUseWeapon;
     private Scene sceneBuyWithPowerups;
+    private Scene sceneChooseTargets;
 
     private Stage stage;
     private Stage secondStage;
@@ -52,6 +54,7 @@ public class GUI extends RemoteView {
     private Stage usePowerupStage;
     private Stage useWeaponStage;
     private Stage buyWithPowerupsStage;
+    private Stage chooseTargetsStage;
 
     private String charInString;
     private List<String> charsInGame;
@@ -123,6 +126,8 @@ public class GUI extends RemoteView {
                     initUsePowerup();
                     initUseWeapon();
                     initBuyWithPowerup();
+                    initChooseTargets();
+                    chooseTargetsController.passGUI(this);
                     buyWithPowerupController.passGUI(this);
                     switchWeaponController.passGUI(this);
                     usePowerupController.passGUI(this);
@@ -162,6 +167,21 @@ public class GUI extends RemoteView {
             usePowerupController = loader.getController();
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing use powerup");
+        }
+    }
+
+    private void initChooseTargets() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chooseTargets.fxml"));
+        try {
+            Parent root = loader.load();
+            chooseTargetsStage = new Stage();
+            chooseTargetsStage.setTitle("Choose some targets");
+            chooseTargetsStage.initOwner(stage);
+            chooseTargetsStage.initModality(Modality.APPLICATION_MODAL);
+            sceneChooseTargets = new Scene(root);
+            chooseTargetsController = loader.getController();
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose targets");
         }
     }
 
@@ -369,6 +389,12 @@ public class GUI extends RemoteView {
         buyWithPowerupsStage.close();
     }
 
+    protected void sendTargets(List<String> targets) {
+        SendTargetsMessage message = new SendTargetsMessage(targets);
+        notifyController(message);
+        chooseTargetsStage.close();
+    }
+
     protected void sendEndMyTurn() {
         EndTurnMessage message = new EndTurnMessage(null);
         notifyController(message);
@@ -386,8 +412,9 @@ public class GUI extends RemoteView {
     }
 
     protected void useWeapon(String hashWeapon) {
+        ActivateCardMessage message = new ActivateCardMessage(hashWeapon);
+        notifyController(message);
         useWeaponStage.close();
-        //TODO
     }
 
     private void notifyController(ToServerMessage message) {
@@ -490,13 +517,24 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void buyWithPowerups(Map<String, Boolean> powerups) {
+    public void buyWithPowerups(List<String> powerups) {
         Platform.runLater(
                 () -> {
                     buyWithPowerupController.updateRightPowerups(lightGameVersion, powerups);
                     buyWithPowerupsStage.setScene(sceneSwitchWeapon);
                     buyWithPowerupsStage.setResizable(false);
                     buyWithPowerupsStage.show();
+                });
+    }
+
+    @Override
+    public void showTargets(List<String> targets) {
+        Platform.runLater(
+                () -> {
+                    chooseTargetsController.enlightenRightTargets(targets);
+                    chooseTargetsStage.setScene(sceneChooseTargets);
+                    chooseTargetsStage.setResizable(false);
+                    chooseTargetsStage.show();
                 });
     }
 

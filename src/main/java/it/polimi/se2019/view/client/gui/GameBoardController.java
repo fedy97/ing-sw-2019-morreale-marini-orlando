@@ -752,7 +752,7 @@ public class GameBoardController {
     }
 
     public void shootClick() {
-        //gui.iWantToDoSomething("action3");
+        gui.iWantToDoSomething("action3");
         Platform.runLater(
                 () -> {
                     gui.getUseWeaponStage().setScene(gui.getSceneUseWeapon());

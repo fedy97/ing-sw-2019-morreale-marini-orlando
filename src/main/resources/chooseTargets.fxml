@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="464.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.view.client.gui.ChooseTargetsController">
+   <children>
+      <ImageView fitHeight="464.0" fitWidth="600.0" pickOnBounds="true">
+         <image>
+            <Image url="@assets/backgrounds/bgchoose.jpg" />
+         </image>
+      </ImageView>
+      <ToggleButton fx:id="bansheebutton" disable="true" layoutX="14.0" layoutY="73.0" mnemonicParsing="false" onAction="#chooseBanshee" prefHeight="127.0" prefWidth="107.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="132.0" fitWidth="124.0">
+               <image>
+                  <Image url="@assets/characters/banshee.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <ToggleButton fx:id="violetbutton" disable="true" layoutX="120.0" layoutY="251.0" mnemonicParsing="false" onAction="#chooseViolet" prefHeight="141.0" prefWidth="142.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="131.0" fitWidth="126.0">
+               <image>
+                  <Image url="@assets/characters/violet.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <ToggleButton fx:id="distructorbutton" disable="true" layoutX="340.0" layoutY="251.0" mnemonicParsing="false" onAction="#chooseDistructor" prefHeight="141.0" prefWidth="148.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="120.0" fitWidth="130.0">
+               <image>
+                  <Image url="@assets/characters/distructor.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <ToggleButton fx:id="sprogbutton" disable="true" layoutX="229.0" layoutY="72.0" mnemonicParsing="false" onAction="#chooseSprog" prefHeight="121.0" prefWidth="141.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="133.0" fitWidth="124.0">
+               <image>
+                  <Image url="@assets/characters/sprog.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <ToggleButton fx:id="dozerbutton" disable="true" layoutX="443.0" layoutY="73.0" mnemonicParsing="false" onAction="#chooseDozer" prefHeight="121.0" prefWidth="141.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="132.0" fitWidth="125.0">
+               <image>
+                  <Image url="@assets/characters/dozer.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <Label layoutX="194.0" layoutY="14.0" text="Choose Targets:" textFill="WHITE">
+         <font>
+            <Font name="Ubuntu" size="29.0" />
+         </font>
+      </Label>
+      <Button fx:id="firebutton" layoutX="279.0" layoutY="413.0" mnemonicParsing="false" onAction="#fireClick" text="Fire" />
+   </children>
+</AnchorPane>
