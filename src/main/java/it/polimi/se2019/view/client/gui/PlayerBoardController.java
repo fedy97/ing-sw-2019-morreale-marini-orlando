@@ -50,6 +50,24 @@ public class PlayerBoardController {
     @FXML
     private ImageView blueAmmo3;
     @FXML
+    private ImageView yellowAmmo11;
+    @FXML
+    private ImageView yellowAmmo21;
+    @FXML
+    private ImageView blueAmmo11;
+    @FXML
+    private ImageView blueAmmo21;
+    @FXML
+    private ImageView redAmmo11;
+    @FXML
+    private ImageView redAmmo21;
+    @FXML
+    private ImageView redAmmo31;
+    @FXML
+    private ImageView yellowAmmo31;
+    @FXML
+    private ImageView blueAmmo31;
+    @FXML
     private Button infoW1;
     @FXML
     private Button infoW2;
