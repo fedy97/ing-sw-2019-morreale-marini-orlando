@@ -7,12 +7,14 @@ public final class CardRep implements Serializable {
     private String title;
     private String description;
     private String path;
+    private boolean loaded;
 
-    public CardRep(int id, String title, String description, String path){
+    public CardRep(int id, String title, String description, String path) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.path = path;
+        loaded = false;
     }
 
     public int getId() {
@@ -29,5 +31,13 @@ public final class CardRep implements Serializable {
 
     public String getPath() {
         return path;
+    }
+
+    public boolean isLoaded() {
+        return loaded;
+    }
+
+    public void setLoaded(boolean loaded) {
+        this.loaded = loaded;
     }
 }

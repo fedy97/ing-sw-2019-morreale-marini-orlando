@@ -191,9 +191,12 @@ public class Game extends Observable {
                 powerUps.add(new CardRep(HandyFunctions.getSystemAddress(powerUp), powerUp.getName(), powerUp.getDescription(),
                         powerUp.getImgPath()));
 
-            for (WeaponCard weaponCard : player.getWeaponCards())
-                weapons.add(new CardRep(HandyFunctions.getSystemAddress(weaponCard), weaponCard.getName(), weaponCard.getDescription(),
-                        weaponCard.getImgPath()));
+            for (WeaponCard weaponCard : player.getWeaponCards()){
+                CardRep weaponRep = new CardRep(HandyFunctions.getSystemAddress(weaponCard), weaponCard.getName(), weaponCard.getDescription(),
+                        weaponCard.getImgPath());
+                weaponRep.setLoaded(weaponCard.isLoaded());
+                weapons.add(weaponRep);
+            }
 
             for (Character c : player.getPlayerBoard().getDamageLine())
                 damages.add(c.name());
