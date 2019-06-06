@@ -19,7 +19,7 @@ public final class Shotgun extends WeaponCard {
 
 
     public Shotgun(AmmoCube paidCost, AmmoCube[] extraCost) {
-        super(paidCost, extraCost);
+      /*  super(paidCost, extraCost);
         Effect eff1 = new Effect(new AmmoCube[]{});
         Effect eff2 = new Effect(new AmmoCube[]{AmmoCube.RED, AmmoCube.BLUE});
         PlayerManager playerManager = Controller.getInstance().getPlayerManager();
@@ -42,7 +42,7 @@ public final class Shotgun extends WeaponCard {
 
         eff1.addBasicEffect(be1);
 
-        addEffect(eff1);
+        addEffect(eff1);*/
         //TODO
     }
 

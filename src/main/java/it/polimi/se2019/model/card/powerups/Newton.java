@@ -17,7 +17,7 @@ public final class Newton extends PowerUpCard {
 
     public Newton(AmmoCube ammoCube, String name, String description, String img) throws InvalidNameException, InvalidCubeException {
         super(ammoCube, name, description, img);
-
+        /*
         BasicEffect eff1 = c -> {
             c.askFor(c.getValidator().getValidTargets(this), "targets");
             Player target = null;
@@ -29,7 +29,7 @@ public final class Newton extends PowerUpCard {
             c.askFor(c.getGame().getGameField().getPlatformDir(target.getCurrentPlatform()), "positionForOther");
         };
 
-        effects.add(eff1);
+        effects.add(eff1);*/
         stages.add(0);
     }
 

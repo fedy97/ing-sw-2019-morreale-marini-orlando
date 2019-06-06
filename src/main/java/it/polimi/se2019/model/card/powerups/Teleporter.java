@@ -16,9 +16,9 @@ public final class Teleporter extends PowerUpCard {
 
     public Teleporter(AmmoCube ammoCube, String name, String description, String img) throws InvalidNameException, InvalidCubeException {
         super(ammoCube, name, description, img);
-        BasicEffect eff1 = c -> c.askFor(c.getGame().getGameField().getPlatforms(), "position");
+     /*   BasicEffect eff1 = c -> c.askFor(c.getGame().getGameField().getPlatforms(), "position");
         effects.add(eff1);
-        stages.add(0);
+        stages.add(0);*/
     }
 
     /**

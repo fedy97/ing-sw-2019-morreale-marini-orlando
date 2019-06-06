@@ -18,7 +18,7 @@ public final class TargettingScope extends PowerUpCard {
 
     public TargettingScope(AmmoCube ammoCube, String name, String description, String img) throws InvalidNameException, InvalidCubeException {
         super(ammoCube, name, description, img);
-
+/*
         BasicEffect eff2 = c -> c.askFor(c.getPlayerManager().getCurrentPlayer().getPlayerBoard().getAmmoBox().getCubes(), "tribute");
         BasicEffect eff1 = c -> c.askFor(c.getValidator().getValidTargets(this), "targets");
         BasicEffect eff3 = c -> {
@@ -32,7 +32,7 @@ public final class TargettingScope extends PowerUpCard {
         effects.add(eff3);
         stages.add(0);
         stages.add(1);
-        stages.add(2);
+        stages.add(2);*/
     }
 
 

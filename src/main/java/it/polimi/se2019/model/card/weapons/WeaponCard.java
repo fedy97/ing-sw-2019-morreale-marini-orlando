@@ -5,7 +5,6 @@ import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.enumeration.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A class representing the weapons of the game
@@ -16,7 +15,7 @@ import java.util.List;
 public class WeaponCard extends Card {
     private AmmoCube paidCost;
     private AmmoCube[] extraCost;
-    private List<Effect> effects;
+    private Effect basicEffect;
     private boolean loaded;
 
     /**
@@ -51,7 +50,6 @@ public class WeaponCard extends Card {
         super(name, descr, img);
         this.paidCost = paidCost;
         this.extraCost = extraCost;
-        effects = new ArrayList<>();
         loaded = true;
     }
 
@@ -99,10 +97,6 @@ public class WeaponCard extends Card {
         return loaded;
     }
 
-    public void addEffect(Effect effect) {
-        effects.add(effect);
-    }
-
 
     public void activateBasicEffect() {
         // TODO
@@ -113,4 +107,11 @@ public class WeaponCard extends Card {
         return Integer.toString(hashCode());
     }
 
+    public Effect getBasicEffect() {
+        return basicEffect;
+    }
+
+    public void setBasicEffect(Effect basicEffect) {
+        this.basicEffect = basicEffect;
+    }
 }
