@@ -230,4 +230,9 @@ public class JsonParser {
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("timerSetup");
     }
+    public int getMinimumPlayers(){
+        JSONArray settingsObj = jsonObj.getJSONArray("settings");
+        JSONObject obj = settingsObj.getJSONObject(0);
+        return obj.getInt("minPlayers");
+    }
 }
