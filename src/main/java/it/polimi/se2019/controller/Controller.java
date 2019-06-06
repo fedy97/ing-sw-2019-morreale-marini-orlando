@@ -47,6 +47,7 @@ public class Controller implements Observer {
     private WeaponCard processingWeaponCard;
     private int secondsLeft;
     private boolean timerStarted = false;
+    private int timerSetup;
     private Map<Integer, Integer> mapChosen;
     private static Controller instance = null;
 
@@ -79,6 +80,7 @@ public class Controller implements Observer {
         turnController = new TurnController();
         userView = new HashMap<>();
         state = ControllerState.SETUP;
+        timerSetup = HandyFunctions.parserSettings.getTimerSetup();
     }
 
     /**
@@ -107,7 +109,7 @@ public class Controller implements Observer {
                 }
             } else if (message.equals("we are at least 2")) {
                 //this timer will modify the model(Game) where the seconds integer is hold
-                TimerLobby t = new TimerLobby(2);
+                TimerLobby t = new TimerLobby(timerSetup);
                 t.start();
             } else {
                 ((ToServerMessage) message).performAction();
@@ -242,7 +244,7 @@ public class Controller implements Observer {
             notifyAll(new ShowChooseMapMessage(null));
             //starts the other timer, this timer even if is in Model , is a controller feature
             //in fact TimerMap will modify the model by calling setSecondsLeftMap
-            TimerMap t = new TimerMap(2);
+            TimerMap t = new TimerMap(timerSetup);
             t.start();
 
         }
@@ -259,7 +261,7 @@ public class Controller implements Observer {
                 int config = findWhichMapWon();
                 createAssets(config);
                 notifyAll(new ShowChooseCharacterMessage(Integer.toString(config)));
-                TimerCharacter t = new TimerCharacter(2);
+                TimerCharacter t = new TimerCharacter(timerSetup);
                 t.start();
             } catch (Exception e) {
                 HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
@@ -365,7 +367,9 @@ public class Controller implements Observer {
             WeaponCard[] weaponCards = new WeaponCard[9];
             for (int i = 0; i < 9; i++)
                 weaponCards[i] = game.getWeaponsDeck().drawCard();
-            game.setGameField(new GameField(field, weaponCards, new SkullsBoard(8), new ScoreBoard()));
+            int skulls = HandyFunctions.parserSettings.numOfSkulls();
+            System.out.println(skulls);
+            game.setGameField(new GameField(field, weaponCards, new SkullsBoard(skulls), new ScoreBoard()));
             setManagers();
         } catch (Exception ex) {
             HandyFunctions.LOGGER.log(Level.SEVERE, ex.toString());

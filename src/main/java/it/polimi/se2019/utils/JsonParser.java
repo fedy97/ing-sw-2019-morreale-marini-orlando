@@ -219,4 +219,15 @@ public class JsonParser {
         }
         weaponCards.add(weaponCard);
     }
+
+    public int numOfSkulls() {
+        JSONArray settingsObj = jsonObj.getJSONArray("settings");
+        JSONObject obj = settingsObj.getJSONObject(0);
+        return obj.getInt("skulls");
+    }
+    public int getTimerSetup(){
+        JSONArray settingsObj = jsonObj.getJSONArray("settings");
+        JSONObject obj = settingsObj.getJSONObject(0);
+        return obj.getInt("timerSetup");
+    }
 }

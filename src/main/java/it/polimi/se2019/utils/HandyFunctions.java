@@ -19,7 +19,7 @@ public class HandyFunctions {
     private static final String ENLIGHTED_BUTTON_STYLE = "-fx-border-color: #ff0000; -fx-border-width: 2px; -fx-background-color: transparent;-fx-border-radius: 15;";
     private static final String DARKED_BUTTON_STYLE = "-fx-border-width: 0px; -fx-background-color: transparent;";
     private static Random random = new Random();
-
+    public static final JsonParser parserSettings = new JsonParser("/json/settings.json");
     private HandyFunctions() {
     }
 
