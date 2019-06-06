@@ -416,6 +416,13 @@ public class GUI extends RemoteView {
         notifyController(message);
     }
 
+    @Override
+    public void enlightenEffects(List<Integer> effects) {
+        Platform.runLater(
+                () ->
+                        useWeaponController.enlightenRightEffects(effects));
+    }
+
     private void notifyController(ToServerMessage message) {
         message.setSender(userName);
         viewSetChanged();

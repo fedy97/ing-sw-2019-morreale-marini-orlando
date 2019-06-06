@@ -491,4 +491,9 @@ public class CLI extends RemoteView {
     public void showTargets(List<String> targets) {
 
     }
+
+    @Override
+    public void enlightenEffects(List<Integer> effects) {
+
+    }
 }

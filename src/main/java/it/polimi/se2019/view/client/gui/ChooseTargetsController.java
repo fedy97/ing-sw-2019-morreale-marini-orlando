@@ -46,12 +46,12 @@ public class ChooseTargetsController {
 
     }
 
-    protected void enlightenRightTargets(List<String> targetsToEnlighten){
+    protected void enlightenRightTargets(List<String> targetsToEnlighten) {
         for (String target : targetsToEnlighten)
             HandyFunctions.enlightenToggleButton(buttons.get(target));
     }
 
-    public void fireClick(){
+    public void fireClick() {
         gui.sendTargets(targets);
     }
 
@@ -59,8 +59,7 @@ public class ChooseTargetsController {
         if (bansheebutton.isSelected()) {
             targets.add("BANSHEE");
             HandyFunctions.forceLightToggleButton(bansheebutton);
-        }
-        else {
+        } else {
             targets.remove("BANSHEE");
             HandyFunctions.enlightenToggleButton(bansheebutton);
         }
@@ -70,8 +69,7 @@ public class ChooseTargetsController {
         if (sprogbutton.isSelected()) {
             targets.add("SPROG");
             HandyFunctions.forceLightToggleButton(sprogbutton);
-        }
-        else {
+        } else {
             targets.remove("SPROG");
             HandyFunctions.enlightenToggleButton(sprogbutton);
         }
