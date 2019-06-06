@@ -5,6 +5,7 @@ import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.*;
+import it.polimi.se2019.model.card.weapons.Electroscythe;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Orientation;
@@ -197,7 +198,14 @@ public class JsonParser {
                     for (int j = 0; j < jArrExtraCost.length(); j++)
                         extraCost[j] = AmmoCube.valueOf((String) jArrExtraCost.get(j));
                 } else extraCost = null;
-                weaponCard = new WeaponCard(name, description, pathImg, paidCost, extraCost);
+                switch (name) {
+                    case "falce protonica":
+                        weaponCard = new Electroscythe(name, description, pathImg, paidCost, extraCost);
+                        break;
+                    default:
+                        weaponCard = new WeaponCard(name, description, pathImg, paidCost, extraCost);
+                        break;
+                }
                 weaponCards.add(weaponCard);
             }
 
