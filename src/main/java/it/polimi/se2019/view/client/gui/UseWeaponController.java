@@ -78,19 +78,27 @@ public class UseWeaponController {
         }
     }
 
+    protected void enlightenRightEffects(List<Integer> effects){
+        //TODO
+    }
+
     public void weapon1Click() {
         int hash = lightGameVersion.getPlayerWeapons().get(gui.getCharInString()).get(0).getId();
         gui.useWeapon(Integer.toString(hash));
+        deactivateAll();
     }
 
     public void weapon2Click() {
         int hash = lightGameVersion.getPlayerWeapons().get(gui.getCharInString()).get(1).getId();
         gui.useWeapon(Integer.toString(hash));
+        deactivateAll();
+
     }
 
     public void weapon3Click() {
         int hash = lightGameVersion.getPlayerWeapons().get(gui.getCharInString()).get(2).getId();
         gui.useWeapon(Integer.toString(hash));
+        deactivateAll();
     }
 
     public void w1eff1Click() {
@@ -118,6 +126,12 @@ public class UseWeaponController {
     }
 
     public void w3eff3Click() {
+    }
+
+    private void deactivateAll() {
+        HandyFunctions.darkenButton(weapon1);
+        HandyFunctions.darkenButton(weapon2);
+        HandyFunctions.darkenButton(weapon3);
     }
 
 }

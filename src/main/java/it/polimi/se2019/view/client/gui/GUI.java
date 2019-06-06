@@ -414,7 +414,6 @@ public class GUI extends RemoteView {
     protected void useWeapon(String hashWeapon) {
         ActivateCardMessage message = new ActivateCardMessage(hashWeapon);
         notifyController(message);
-        useWeaponStage.close();
     }
 
     private void notifyController(ToServerMessage message) {
