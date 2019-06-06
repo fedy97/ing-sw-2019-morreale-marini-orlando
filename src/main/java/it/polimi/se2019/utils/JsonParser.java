@@ -10,15 +10,14 @@ import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Orientation;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Deque;
 
 /**
  * @author Federico Morreale
@@ -183,7 +182,6 @@ public class JsonParser {
             String name;
             String description;
             String pathImg;
-            WeaponCard weaponCard;
             AmmoCube[] extraCost;
             JSONArray weaponsObj = jsonObj.getJSONArray("weapons");
             for (int i = 0; i < weaponsObj.length(); i++) {
@@ -198,22 +196,27 @@ public class JsonParser {
                     for (int j = 0; j < jArrExtraCost.length(); j++)
                         extraCost[j] = AmmoCube.valueOf((String) jArrExtraCost.get(j));
                 } else extraCost = null;
-                switch (name) {
-                    case "falce protonica":
-                        weaponCard = new Electroscythe(name, description, pathImg, paidCost, extraCost);
-                        break;
-                    default:
-                        weaponCard = new WeaponCard(name, description, pathImg, paidCost, extraCost);
-                        break;
-                }
-                weaponCards.add(weaponCard);
+                createWeapon(name, description, pathImg, paidCost, extraCost, weaponCards);
             }
 
-            Deck<WeaponCard> d = new Deck<>(24);
+            Deck<WeaponCard> d = new Deck<>(21);
             d.addCards(weaponCards);
             d.mix();
             return d;
         }
         return null;
+    }
+
+    private void createWeapon(String name, String description, String pathImg, AmmoCube paidCost, AmmoCube[] extraCost, ArrayList<WeaponCard> weaponCards) throws InvalidNameException {
+        WeaponCard weaponCard;
+        switch (name) {
+            case "falce protonica":
+                weaponCard = new Electroscythe(name, description, pathImg, paidCost, extraCost);
+                break;
+            default:
+                weaponCard = new WeaponCard(name, description, pathImg, paidCost, extraCost);
+                break;
+        }
+        weaponCards.add(weaponCard);
     }
 }
