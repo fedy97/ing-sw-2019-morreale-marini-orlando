@@ -608,5 +608,6 @@
             <Image url="@assets/boards/skull.png" />
          </image></ImageView>
       <Button fx:id="powerupsbutton" layoutX="207.0" layoutY="671.0" mnemonicParsing="false" onAction="#powerupsClick" text="powerups" />
+      <Button fx:id="convertbutton" layoutX="732.0" layoutY="663.0" mnemonicParsing="false" onAction="#convertClick" text="convert powerups" />
    </children>
 </AnchorPane>

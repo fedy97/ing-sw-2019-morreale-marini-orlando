@@ -27,8 +27,6 @@ public class BuyWithPowerupController {
     private Button toggle2;
     @FXML
     private Button toggle3;
-    @FXML
-    private Button sendbutton;
 
     private GUI gui;
     private List<ImageView> powerupsImages;
@@ -52,7 +50,7 @@ public class BuyWithPowerupController {
         this.gui = gui;
     }
 
-    protected void updateRightPowerups(LightGameVersion lightGameVersion, List<String> hashPowerups) {
+    protected void updateRightPowerups(LightGameVersion lightGameVersion) {
         this.lightGameVersion = lightGameVersion;
 
         Map<String, List<CardRep>> charPowerupsReps = lightGameVersion.getPlayerPowerups();
@@ -70,14 +68,19 @@ public class BuyWithPowerupController {
 
     @FXML
     public void toggle1Click() {
-
+        int hash = lightGameVersion.getPlayerPowerups().get(gui.getCharInString()).get(0).getId();
+        gui.sendPowerupsToBuyWith(Integer.toString(hash));
     }
 
     @FXML
     public void toggle2Click() {
+        int hash = lightGameVersion.getPlayerPowerups().get(gui.getCharInString()).get(1).getId();
+        gui.sendPowerupsToBuyWith(Integer.toString(hash));
     }
 
     @FXML
     public void toggle3Click() {
+        int hash = lightGameVersion.getPlayerPowerups().get(gui.getCharInString()).get(2).getId();
+        gui.sendPowerupsToBuyWith(Integer.toString(hash));
     }
 }

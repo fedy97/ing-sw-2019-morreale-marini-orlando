@@ -383,8 +383,8 @@ public class GUI extends RemoteView {
         switchWeaponStage.close();
     }
 
-    protected void sendPowerupsToBuyWith(List<String> hashes) {
-        BuyWithPowerupsMessage message = new BuyWithPowerupsMessage(hashes);
+    protected void sendPowerupsToBuyWith(String hash) {
+        BuyWithPowerupsMessage message = new BuyWithPowerupsMessage(hash);
         notifyController(message);
         buyWithPowerupsStage.close();
     }
@@ -523,17 +523,6 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void buyWithPowerups(List<String> powerups) {
-        Platform.runLater(
-                () -> {
-                    buyWithPowerupController.updateRightPowerups(lightGameVersion, powerups);
-                    buyWithPowerupsStage.setScene(sceneSwitchWeapon);
-                    buyWithPowerupsStage.setResizable(false);
-                    buyWithPowerupsStage.show();
-                });
-    }
-
-    @Override
     public void showTargets(List<String> targets) {
         Platform.runLater(
                 () -> {
@@ -586,6 +575,18 @@ public class GUI extends RemoteView {
 
     public Stage getUseWeaponStage() {
         return useWeaponStage;
+    }
+
+    public Scene getSceneBuyWithPowerups() {
+        return sceneBuyWithPowerups;
+    }
+
+    public Stage getBuyWithPowerupsStage() {
+        return buyWithPowerupsStage;
+    }
+
+    public BuyWithPowerupController getBuyWithPowerupController() {
+        return buyWithPowerupController;
     }
 }
 

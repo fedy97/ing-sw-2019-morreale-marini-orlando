@@ -483,11 +483,6 @@ public class CLI extends RemoteView {
     }
 
     @Override
-    public void buyWithPowerups(List<String> powerups) {
-
-    }
-
-    @Override
     public void showTargets(List<String> targets) {
 
     }

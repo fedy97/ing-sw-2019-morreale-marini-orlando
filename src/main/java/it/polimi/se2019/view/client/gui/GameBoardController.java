@@ -283,6 +283,8 @@ public class GameBoardController {
     private Button reloadbutton;
     @FXML
     private Button powerupsbutton;
+    @FXML
+    private Button convertbutton;
 
     private Map<Button, String> buttonsHashes;
     private List<AmmoRep> ammoReps;
@@ -780,6 +782,16 @@ public class GameBoardController {
 
     public void endturnClick() {
         gui.sendEndMyTurn();
+    }
+
+    public void convertClick() {
+        Platform.runLater(
+                () -> {
+                    gui.getBuyWithPowerupController().updateRightPowerups(lightGameVersion);
+                    gui.getBuyWithPowerupsStage().setScene(gui.getSceneBuyWithPowerups());
+                    gui.getBuyWithPowerupsStage().setResizable(false);
+                    gui.getBuyWithPowerupsStage().show();
+                });
     }
 
     public void dozerClick() {

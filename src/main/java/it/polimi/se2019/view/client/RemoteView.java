@@ -40,8 +40,6 @@ public abstract class RemoteView extends View {
 
     public abstract void switchWeapon();
 
-    public abstract void buyWithPowerups(List<String> powerups);
-
     public abstract void lightPlatforms(List<String> platforms);
 
     public abstract void setValidActions(boolean[] actives);
