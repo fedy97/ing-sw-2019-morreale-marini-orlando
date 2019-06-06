@@ -69,8 +69,8 @@ public class PerformActionMessage extends ToServerMessage {
                     c.setState(ControllerState.PROCESSING_ACTION_3);
                     destinations = v.getValidMoves(Action.SHOOT);
                     c.askFor(destinations, "position");
-                    List<WeaponCard> weapons = v.getUsableWeapons();
-                    c.askFor(weapons, "weapons");
+                    //List<WeaponCard> weapons = v.getUsableWeapons();
+                    //c.askFor(weapons, "weapons");
                 } else if (choice.equals("action4")) {
                     //TODO
                 }
