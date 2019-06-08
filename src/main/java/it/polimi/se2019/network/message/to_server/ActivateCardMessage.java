@@ -22,7 +22,6 @@ public class ActivateCardMessage extends ToServerMessage {
         if(Deserializer.getPowerUp(id, sender) != null) {
             PowerUpCard powerUp = Deserializer.getPowerUp(id, sender);
             actor.setState(ControllerState.PROCESSING_POWERUP);
-            actor.addStages(powerUp.getStages());
             actor.processPowerUp(powerUp);
         }
 

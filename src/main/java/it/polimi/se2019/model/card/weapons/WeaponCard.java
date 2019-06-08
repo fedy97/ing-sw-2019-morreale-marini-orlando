@@ -2,9 +2,10 @@ package it.polimi.se2019.model.card.weapons;
 
 import it.polimi.se2019.exceptions.InvalidNameException;
 import it.polimi.se2019.model.card.Card;
-import it.polimi.se2019.model.enumeration.*;
+import it.polimi.se2019.model.enumeration.AmmoCube;
+import it.polimi.se2019.model.enumeration.Character;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A class representing the weapons of the game
@@ -13,9 +14,11 @@ import java.util.ArrayList;
  */
 
 public class WeaponCard extends Card {
+    protected boolean[] availableEffects;
+    protected boolean[] usableEffects;
     private AmmoCube paidCost;
     private AmmoCube[] extraCost;
-    private Effect basicEffect;
+    private List<Effect> effects;
     private boolean loaded;
 
     /**
@@ -103,15 +106,35 @@ public class WeaponCard extends Card {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return Integer.toString(hashCode());
     }
 
-    public Effect getBasicEffect() {
-        return basicEffect;
+    public List<Effect> getEffects() {
+        return effects;
     }
 
-    public void setBasicEffect(Effect basicEffect) {
-        this.basicEffect = basicEffect;
+    public void setEffects(List<Effect> basicEffect) {
+        this.effects = basicEffect;
+    }
+
+    public boolean[] getAvailableEffects() {
+        return availableEffects;
+    }
+
+    public void setAvailableEffects(boolean[] availableEffects) {
+        this.availableEffects = availableEffects;
+    }
+
+    public boolean[] getUsableEffects() {
+        return usableEffects;
+    }
+
+    public void setUsableEffects(boolean[] usableEffects) {
+        this.usableEffects = usableEffects;
+    }
+
+    public void activateEffect(int index, List<Character> targets) {
+        effects.get(index).activateEffect(targets, this);
     }
 }

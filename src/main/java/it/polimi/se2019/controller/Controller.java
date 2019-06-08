@@ -12,6 +12,7 @@ import it.polimi.se2019.model.board.SkullsBoard;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
+import it.polimi.se2019.model.card.weapons.Effect;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
@@ -23,12 +24,12 @@ import it.polimi.se2019.view.server.VirtualView;
 import java.util.*;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
-import java.util.logging.Level;
 
 /**
  * @author Gabriel Raul Marini
  */
 public class Controller implements Observer {
+    private static Controller instance = null;
     private Game game;
     private DecksManager decksManager;
     private GameManager gameManager;
@@ -38,18 +39,31 @@ public class Controller implements Observer {
     private Map<String, VirtualView> userView;
     private List<String> validActions;
     private ControllerState state; //the state is set to processing power up or weapon when a specific message from the client (ActivateCardMessage) is received
-    private BlockingDeque<Player> currentTargets;
+    private BlockingDeque<Character> currentTargets;
     private BlockingDeque<WeaponCard> chosenWeapons;
     private BlockingDeque<Platform> chosenDestination;
+    private BlockingDeque<Integer> chosenEffect;
     private BlockingDeque<Boolean> wantToDiscard;
-    private List<Integer> processingStages;
     private PowerUpCard processingPowerUp;
     private WeaponCard processingWeaponCard;
     private int secondsLeft;
     private boolean timerStarted = false;
-    private int timerSetup;
     private Map<Integer, Integer> mapChosen;
-    private static Controller instance = null;
+
+    private Controller() {
+        game = Game.getInstance();
+        validator = new HealthyValidator(this);
+        validActions = new ArrayList<>();
+        currentTargets = new LinkedBlockingDeque<>();
+        chosenWeapons = new LinkedBlockingDeque<>();
+        wantToDiscard = new LinkedBlockingDeque<>();
+        chosenDestination = new LinkedBlockingDeque<>();
+        chosenEffect = new LinkedBlockingDeque<>();
+        playerManager = new PlayerManager(this);
+        turnController = new TurnController();
+        userView = new HashMap<>();
+        state = ControllerState.SETUP;
+    }
 
     /**
      * Controller singleton constructor
@@ -66,21 +80,6 @@ public class Controller implements Observer {
             instance.mapChosen.put(4, 0);
         }
         return instance;
-    }
-
-    private Controller() {
-        game = Game.getInstance();
-        validator = new HealthyValidator(this);
-        validActions = new ArrayList<>();
-        currentTargets = new LinkedBlockingDeque<>();
-        chosenWeapons = new LinkedBlockingDeque<>();
-        wantToDiscard = new LinkedBlockingDeque<>();
-        chosenDestination = new LinkedBlockingDeque<>();
-        playerManager = new PlayerManager(this);
-        turnController = new TurnController();
-        userView = new HashMap<>();
-        state = ControllerState.SETUP;
-        timerSetup = HandyFunctions.parserSettings.getTimerSetup();
     }
 
     /**
@@ -109,7 +108,7 @@ public class Controller implements Observer {
                 }
             } else if (message.equals("we are at least 2")) {
                 //this timer will modify the model(Game) where the seconds integer is hold
-                TimerLobby t = new TimerLobby(timerSetup);
+                TimerLobby t = new TimerLobby(2);
                 t.start();
             } else {
                 ((ToServerMessage) message).performAction();
@@ -117,14 +116,6 @@ public class Controller implements Observer {
         } else {
             new Thread(() -> {
                 ((ToServerMessage) message).performAction();
-                //TODO change this
-                if (state == ControllerState.PROCESSING_POWERUP) {
-                    processingStages.remove(0);
-                    processPowerUp(processingPowerUp);
-                } else if (state == ControllerState.PROCESSING_WEAPON) {
-                    processingStages.remove(0);
-                    processWeaponCard(processingWeaponCard);
-                }
             }).start();
         }
     }
@@ -133,25 +124,53 @@ public class Controller implements Observer {
      * @param powerUp composed of different stages in order to perform the final effect
      */
     public void processPowerUp(PowerUpCard powerUp) {
-        powerUp.activate(processingStages.get(0));
-        if (processingStages.isEmpty()) {
-            state = ControllerState.IDLE;
-            decksManager.addToGarbage(processingPowerUp);
-            processingPowerUp = null;
-        }
+        /** powerUp.activate(processingStages.get(0));
+         if (processingStages.isEmpty()) {
+         state = ControllerState.IDLE;
+         decksManager.addToGarbage(processingPowerUp);
+         processingPowerUp = null;
+         }*/
     }
 
     /**
      * @param weapon composed of different stages in order to perform the final effect
      */
     public void processWeaponCard(WeaponCard weapon) {
-        /**weaponCard.activate(processingStages.get(0));*/
-        if (processingStages.isEmpty()) {
-            state = ControllerState.IDLE;
-            processingWeaponCard = null;
-        }
-    }
+        state = ControllerState.PROCESSING_WEAPON;
+        List<Integer> usableEffectsIndex = new ArrayList<>();
+        boolean[] defaultEffects = weapon.getAvailableEffects();
+        boolean[] usableEffects = weapon.getUsableEffects();
 
+        while (state == ControllerState.PROCESSING_WEAPON) {
+            for (int i = 0; i < 0; i++) {
+                if (defaultEffects[i] && usableEffects[i]) {
+                    Effect effect = weapon.getEffects().get(i);
+                    if (effect.getCost() == null ||
+                            playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().hasAmmos(effect.getCost()))
+                        usableEffectsIndex.add(i);
+                }
+            }
+
+            try {
+                int effectIndex = chosenEffect.take();
+                Effect currEffect = weapon.getEffects().get(effectIndex);
+
+                if (currEffect.getPossibleTargets() != null) {
+                    askFor(currEffect.getPossibleTargets(), "targets");
+                    List<Character> targets = new ArrayList<>();
+                    for (int i = 0; i < currEffect.getMaxTargets(); i++) {
+                        targets.add(currentTargets.take());
+                    }
+                    weapon.activateEffect(effectIndex, targets);
+                } else
+                    weapon.activateEffect(effectIndex, null);
+
+            } catch (Exception e) {
+                CustomLogger.logException(getClass().getName(), e);
+            }
+        }
+
+    }
 
     /**
      *
@@ -244,7 +263,7 @@ public class Controller implements Observer {
             notifyAll(new ShowChooseMapMessage(null));
             //starts the other timer, this timer even if is in Model , is a controller feature
             //in fact TimerMap will modify the model by calling setSecondsLeftMap
-            TimerMap t = new TimerMap(timerSetup);
+            TimerMap t = new TimerMap(2);
             t.start();
 
         }
@@ -261,10 +280,10 @@ public class Controller implements Observer {
                 int config = findWhichMapWon();
                 createAssets(config);
                 notifyAll(new ShowChooseCharacterMessage(Integer.toString(config)));
-                TimerCharacter t = new TimerCharacter(timerSetup);
+                TimerCharacter t = new TimerCharacter(2);
                 t.start();
             } catch (Exception e) {
-                HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
+                CustomLogger.logException(getClass().getName(), e);
             }
         }
     }
@@ -309,7 +328,7 @@ public class Controller implements Observer {
                 turnController.notifyFirst();
 
             } catch (Exception e) {
-                HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
+                CustomLogger.logException(getClass().getName(), e);
             }
         }
     }
@@ -345,7 +364,7 @@ public class Controller implements Observer {
                     notifyAll(message);
                 }
             } catch (Exception e) {
-                HandyFunctions.LOGGER.log(Level.SEVERE, "error in creating random character");
+                CustomLogger.logException(getClass().getName(), e);
             }
         }
     }
@@ -367,12 +386,10 @@ public class Controller implements Observer {
             WeaponCard[] weaponCards = new WeaponCard[9];
             for (int i = 0; i < 9; i++)
                 weaponCards[i] = game.getWeaponsDeck().drawCard();
-            int skulls = HandyFunctions.parserSettings.numOfSkulls();
-            System.out.println(skulls);
-            game.setGameField(new GameField(field, weaponCards, new SkullsBoard(skulls), new ScoreBoard()));
+            game.setGameField(new GameField(field, weaponCards, new SkullsBoard(8), new ScoreBoard()));
             setManagers();
-        } catch (Exception ex) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, ex.toString());
+        } catch (Exception e) {
+            CustomLogger.logException(getClass().getName(), e);
         }
 
     }
@@ -484,11 +501,7 @@ public class Controller implements Observer {
         return turnController;
     }
 
-    public void addStages(List<Integer> stages) {
-        processingStages.addAll(stages);
-    }
-
-    public BlockingDeque<Player> getCurrentTargets() {
+    public BlockingDeque<Character> getCurrentTargets() {
         return currentTargets;
     }
 
@@ -504,8 +517,11 @@ public class Controller implements Observer {
         return wantToDiscard;
     }
 
+    public ControllerState getState() {
+        return state;
+    }
+
     public void setState(ControllerState newState) {
-        System.out.println(state);
         if (newState == ControllerState.IDLE) {
             if ((state == ControllerState.PROCESSING_ACTION_1
                     || state == ControllerState.PROCESSING_ACTION_2
@@ -525,10 +541,6 @@ public class Controller implements Observer {
             callView(new EnablePlayerActionsMessage(UserValidActions.NONE.getActions()), playerManager.getCurrentPlayer().getName());
         }
         state = newState;
-    }
-
-    public ControllerState getState() {
-        return state;
     }
 
     public Validator getValidator() {

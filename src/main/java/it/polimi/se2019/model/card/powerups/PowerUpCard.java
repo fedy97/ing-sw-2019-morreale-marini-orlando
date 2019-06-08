@@ -4,7 +4,6 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.exceptions.InvalidCubeException;
 import it.polimi.se2019.exceptions.InvalidNameException;
 import it.polimi.se2019.model.card.Card;
-import it.polimi.se2019.model.card.weapons.BasicEffect;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.Player;
 
@@ -19,7 +18,6 @@ import java.util.List;
 public abstract class PowerUpCard extends Card {
 
     protected AmmoCube value;
-    protected List<BasicEffect> effects;
     protected List<Integer> stages;
 
     /**
@@ -33,7 +31,6 @@ public abstract class PowerUpCard extends Card {
         if (ammoCube == null)
             throw new InvalidCubeException("ammocube cannot be null");
         this.value = ammoCube;
-        effects = new ArrayList<>();
         stages = new ArrayList<>();
     }
 
@@ -51,9 +48,6 @@ public abstract class PowerUpCard extends Card {
      *
      * @param stage the game state in which the card is being processed
      */
-    public void activate(Integer stage) {
-        effects.get(stage).activate(Controller.getInstance());
-    }
 
     /**
      * Return if the player in his current state can use the power up or not

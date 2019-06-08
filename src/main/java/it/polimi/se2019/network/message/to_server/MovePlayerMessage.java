@@ -20,7 +20,7 @@ public class MovePlayerMessage extends ToServerMessage {
         Controller c = Controller.getInstance();
         Platform destination = Deserializer.getPlatform((String) payload);
         try {
-            c.getCurrentTargets().take().setCurrentPlatform(destination);
+          //  c.getCurrentTargets().take().setCurrentPlatform(destination);
         }catch (Exception e){
             HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
         }

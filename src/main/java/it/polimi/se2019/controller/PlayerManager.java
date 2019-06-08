@@ -10,7 +10,9 @@ import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.HandyFunctions;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -169,7 +171,6 @@ public class PlayerManager {
         if (!currentPlayer.getPowerUpCards().contains(powerUp))
             throw new InvalidCardException("The PowerUp doesn't belong to the current player, something went wrong!");
 
-        powerUp.activate(0);
         currentPlayer.removePowerUpCard(powerUp);
         father.getDecksManager().addToGarbage(powerUp);
         father.getGame().notifyChanges();

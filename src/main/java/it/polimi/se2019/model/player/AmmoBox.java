@@ -121,6 +121,39 @@ public class AmmoBox {
     }
 
     /**
+     * Remove ammo from the player's box
+     *
+     * @param cubes ammos to be discarded
+     */
+    public void removeAmmos(AmmoCube[] cubes) {
+        List<AmmoCube> toRemove = new ArrayList<>();
+
+        int i = 0;
+        while (optionals.contains(cubes[i])) {
+            optionals.remove(cubes[i]);
+            i++;
+        }
+
+        for (int j = i; j < cubes.length; j++)
+            if (cubes[j] == AmmoCube.RED) {
+                if (redAmmos - 1 < 0)
+                    redAmmos = 0;
+                else
+                    redAmmos = redAmmos - 1;
+            } else if (cubes[j] == AmmoCube.BLUE) {
+                if (blueAmmos - 1 < 0)
+                    blueAmmos = 0;
+                else
+                    blueAmmos = blueAmmos - 1;
+            } else {
+                if (yellowAmmos - 1 < 0)
+                    yellowAmmos = 0;
+                else
+                    yellowAmmos = yellowAmmos - 1;
+            }
+    }
+
+    /**
      * @return if the AmmoBox of the player is totally empty
      */
     public boolean isEmpty() {

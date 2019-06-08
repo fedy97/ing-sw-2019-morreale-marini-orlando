@@ -1,8 +1,8 @@
 package it.polimi.se2019.model.card.weapons;
 
-import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
+import it.polimi.se2019.model.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,45 +12,21 @@ import java.util.List;
  *
  * @author Gabriel Raul Marini
  */
-public class Effect {
-    private ArrayList<BasicEffect> basicEffects;
+public abstract class Effect {
     private AmmoCube[] cost;
-    private List<Integer> stages;
     private List<Character> possibleTargets;
+    private List<Character> lastEffectTargets;
     private int maxTargets;
 
     public Effect(AmmoCube[] cost) {
         this.cost = cost;
-        stages = new ArrayList<>();
-        basicEffects = new ArrayList<>();
+        lastEffectTargets = new ArrayList<>();
     }
 
     /**
-     * @param stage
+     * @param targets selected targets to apply the effect
      */
-    public void activateEffect(int stage) {
-        basicEffects.get(stage).activate(Controller.getInstance());
-    }
-
-    /**
-     *
-     * @param effect
-     */
-    public void addBasicEffect(BasicEffect effect) {
-        basicEffects.add(effect);
-    }
-
-    public void addStage(int stage) {
-        stages.add(stage);
-    }
-
-    public ArrayList<BasicEffect> getBasicEffects() {
-        return basicEffects;
-    }
-
-    public void setBasicEffects(ArrayList<BasicEffect> basicEffects) {
-        this.basicEffects = basicEffects;
-    }
+    public abstract void activateEffect(List<Character> targets, WeaponCard card);
 
     public List<Character> getPossibleTargets() {
         return possibleTargets;
@@ -66,5 +42,23 @@ public class Effect {
 
     public void setMaxTargets(int maxTargets) {
         this.maxTargets = maxTargets;
+    }
+
+    public AmmoCube[] getCost() {
+        return cost;
+    }
+
+    public void setCost(AmmoCube[] cost) {
+        this.cost = cost;
+    }
+
+    public abstract void setupTargets();
+
+    public List<Character> getLastEffectTargets() {
+        return lastEffectTargets;
+    }
+
+    public void setLastEffectTargets(List<Character> lastEffectTargets) {
+        this.lastEffectTargets = lastEffectTargets;
     }
 }
