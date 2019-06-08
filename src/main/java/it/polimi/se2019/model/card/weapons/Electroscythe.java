@@ -13,36 +13,54 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class Electroscythe extends WeaponAlternativeFire{
-
+public final class Electroscythe extends WeaponAlternativeFire {
 
     public Electroscythe(String name, String descr, String img, AmmoCube paidCost, AmmoCube[] extraCost) throws InvalidNameException {
         super(name, descr, img, paidCost, extraCost);
-        Effect eff1 = new Effect(new AmmoCube[]{});
-        Effect eff2 = new Effect(new AmmoCube[]{AmmoCube.RED, AmmoCube.BLUE});
         PlayerManager playerManager = Controller.getInstance().getPlayerManager();
         Game game = Controller.getInstance().getGame();
 
-        Map<Player, Integer> damages = new HashMap<>();
-        BasicEffect be1 = payload -> {
-            List<Character> targets = (List<Character>) payload;
-            for(Character target: targets)
-                damages.put(game.getPlayer(target), 1);
-            playerManager.addDamage(damages);
+
+        Effect eff1 = new Effect(new AmmoCube[]{}) {
+            @Override
+            public void activateEffect(List<Character> chosenTargets, WeaponCard card) {
+                Map<Player, Integer> damages = new HashMap<>();
+                for (Character character : playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform())
+                    damages.put(game.getPlayer(character), 1);
+                playerManager.addDamage(damages);
+
+                usableEffects = new boolean[]{false, true, true};
+                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
+            }
+
+            @Override
+            public void setupTargets() {
+                this.setPossibleTargets(null);
+            }
         };
-        eff1.addBasicEffect(be1);
 
+        Effect eff2 = new Effect(new AmmoCube[]{AmmoCube.RED, AmmoCube.BLUE}) {
+            @Override
+            public void activateEffect(List<Character> targets, WeaponCard card) {
+                Map<Player, Integer> damages = new HashMap<>();
+                for (Character character : playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform())
+                    damages.put(game.getPlayer(character), 2);
+                playerManager.addDamage(damages);
 
+                usableEffects = new boolean[]{false, false, true};
+                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
+            }
 
-        BasicEffect be2 = payload -> {
-            List<Character> targets = (List<Character>) payload;
-            for(Character target: targets)
-                damages.put(game.getPlayer(target), 1);
-            playerManager.addDamage(damages);
+            @Override
+            public void setupTargets() {
+                this.setPossibleTargets(null);
+            }
         };
-        eff2.addBasicEffect(be2);
 
-        setBasicEffect(eff1);
-        setAlternativeEffect(eff2);
+        availableEffects = new boolean[]{true, true, false};
+        usableEffects = new boolean[]{true, true, true};
+
+        getEffects().add(eff1);
+        getEffects().add(eff2);
     }
 }
