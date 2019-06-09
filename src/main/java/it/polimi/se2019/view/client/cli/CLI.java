@@ -491,4 +491,9 @@ public class CLI extends RemoteView {
     public void enlightenEffects(List<Integer> effects) {
 
     }
+
+    @Override
+    public void showBinaryOption(String message) {
+
+    }
 }

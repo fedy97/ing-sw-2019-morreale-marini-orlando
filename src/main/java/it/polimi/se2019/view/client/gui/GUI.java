@@ -400,6 +400,11 @@ public class GUI extends RemoteView {
         notifyController(message);
     }
 
+    protected void sendBinaryAnswer(boolean answer) {
+        ResponseToBinaryOption message = new ResponseToBinaryOption(answer);
+        notifyController(message);
+    }
+
     protected void iWantToDoSomething(String action) {
         gameBoardController.setActiveButtons(new boolean[]{false, false, false, false, false, false});
         PerformActionMessage message = new PerformActionMessage(action);
@@ -531,6 +536,11 @@ public class GUI extends RemoteView {
                     chooseTargetsStage.setResizable(false);
                     chooseTargetsStage.show();
                 });
+    }
+
+    @Override
+    public void showBinaryOption(String message) {
+        Platform.runLater(() -> gameBoardController.showBinaryMessage(message));
     }
 
     public String getCharInString() {

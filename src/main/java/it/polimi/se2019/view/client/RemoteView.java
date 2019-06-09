@@ -50,4 +50,6 @@ public abstract class RemoteView extends View {
 
     public abstract void enlightenEffects(List<Integer> effects);
 
+    public abstract void showBinaryOption(String message);
+
 }
