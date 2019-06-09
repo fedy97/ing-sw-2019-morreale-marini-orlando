@@ -76,14 +76,32 @@ public class ChooseTargetsController {
     }
 
     public void chooseDozer() {
-
+        if (dozerbutton.isSelected()) {
+            targets.add("DOZER");
+            HandyFunctions.forceLightToggleButton(dozerbutton);
+        } else {
+            targets.remove("DOZER");
+            HandyFunctions.enlightenToggleButton(dozerbutton);
+        }
     }
 
     public void chooseDistructor() {
-
+        if (distructorbutton.isSelected()) {
+            targets.add("DISTRUCTOR");
+            HandyFunctions.forceLightToggleButton(distructorbutton);
+        } else {
+            targets.remove("DISTRUCTOR");
+            HandyFunctions.enlightenToggleButton(distructorbutton);
+        }
     }
 
     public void chooseViolet() {
-
+        if (violetbutton.isSelected()) {
+            targets.add("VIOLET");
+            HandyFunctions.forceLightToggleButton(violetbutton);
+        } else {
+            targets.remove("VIOLET");
+            HandyFunctions.enlightenToggleButton(violetbutton);
+        }
     }
 }
