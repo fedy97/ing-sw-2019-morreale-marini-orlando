@@ -496,4 +496,9 @@ public class CLI extends RemoteView {
     public void showBinaryOption(String message) {
 
     }
+
+    @Override
+    public void showReconnectedGameBoard(int config, LightGameVersion lightGameVersion, List<String> arr, String myChar) {
+
+    }
 }

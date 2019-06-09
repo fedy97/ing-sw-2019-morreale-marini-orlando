@@ -3,11 +3,14 @@ package it.polimi.se2019.network.server;
 import it.polimi.se2019.Lobby;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.network.message.to_server.ReconnectedClientMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -56,22 +59,26 @@ public class SocketServer implements Server {
                         output.flush();
                         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
                         String user = (String) input.readObject();
-                        //TODO change this also to the client side
-                        int k = 1;
-                        while (Controller.getInstance().getTurnController().getUsers().contains(user)) {
-                            user = user + k;
-                            k++;
+                        boolean newConnection = true;
+                        VirtualView virtualView;
+                        if (!actors.containsKey(user)) {
+                            virtualView = new VirtualView(this, user);
+                            actors.put(user, virtualView);
+                            Lobby.addUser(user);
+                        } else {
+                            virtualView = actors.get(user);
+                            newConnection = false;
                         }
-                        VirtualView virtualView = new VirtualView(this, user);
-                        actors.put(user, virtualView);
-                        Lobby.addUser(user);
                         SpecificSocketServer specificSocketServer = new SpecificSocketServer(this, socket, input, output, virtualView);
                         specificSocketServer.start();
                         connections.put(user, specificSocketServer);
                         HandyFunctions.LOGGER.log(Level.INFO, user + " connected to the socket server!");
                         virtualView.viewSetChanged();
-                        virtualView.notifyObservers("new client connected");
-                        HandyFunctions.checkForAtLeast2Players(virtualView);
+                        if (newConnection) {
+                            virtualView.notifyObservers("new client connected");
+                            HandyFunctions.checkForAtLeast2Players(virtualView);
+                        } else
+                            virtualView.notifyObservers(new ReconnectedClientMessage(user));
 
                     } catch (Exception e) {
                         HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());

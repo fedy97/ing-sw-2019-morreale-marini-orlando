@@ -4,6 +4,7 @@ import it.polimi.se2019.Lobby;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.network.message.to_server.ReconnectedClientMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
@@ -89,18 +90,23 @@ public class RMIServer implements Server {
     public void registerClient(String host, int port, String username) {
         try {
             Registry registry = LocateRegistry.getRegistry(host, port);
-            int k = 1;
-            while (Controller.getInstance().getTurnController().getUsers().contains(username)) {
-                username = username + k;
-                k++;
+            boolean newConnection = true;
+            VirtualView virtualView;
+            if (!clientActor.containsKey(username)) {
+                virtualView = new VirtualView(this, username);
+                clientActor.put(username, virtualView);
+                Lobby.addUser(username);
+            } else {
+                virtualView = clientActor.get(username);
+                newConnection = false;
             }
-            VirtualView virtualView = new VirtualView(this, username);
             skeletons.put(username, (Client) registry.lookup("RemoteView"));
-            clientActor.put(username, virtualView);
-            Lobby.addUser(username);
             virtualView.viewSetChanged();
-            virtualView.notifyObservers("new client connected");
-            HandyFunctions.checkForAtLeast2Players(virtualView);
+            if (newConnection) {
+                virtualView.notifyObservers("new client connected");
+                HandyFunctions.checkForAtLeast2Players(virtualView);
+            } else
+                virtualView.notifyObservers(new ReconnectedClientMessage(username));
             HandyFunctions.LOGGER.log(Level.INFO, username + " connected to the RMI server!");
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());

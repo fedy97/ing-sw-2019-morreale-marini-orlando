@@ -10,7 +10,9 @@ import it.polimi.se2019.network.message.to_client.ShowChoosePowerUpMessage;
 import it.polimi.se2019.network.message.to_client.ShowMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
 import java.util.logging.Level;
 
 /**
@@ -61,7 +63,11 @@ public class TurnController {
         c.getPlayerManager().getCurrentPlayer().getPlayerBoard().getAmmoBox().getOptionals().clear();
         c.getGame().notifyChanges();
         if ((currIndex + 1) == turningOrder.size()) {
-            curr = turningOrder.get(0);
+            int n = 0;
+            do {
+                curr = turningOrder.get(n);
+                n++;
+            } while (!c.getGame().getPlayer(curr).isConnected());
 
             for (int i = 0; i < c.getDecksManager().getToFill().size(); i++) {
                 try {
@@ -74,8 +80,13 @@ public class TurnController {
             }
             c.getDecksManager().getToFill().clear();
             c.getDecksManager().getAmmoGarbageDeck().clear();
-        } else
-            curr = turningOrder.get(currIndex + 1);
+        } else {
+            int n = 1;
+            do {
+                curr = turningOrder.get(currIndex + n);
+                n++;
+            } while (!c.getGame().getPlayer(curr).isConnected());
+        }
         c.getPlayerManager().setCurrentPlayer(c.getGame().getPlayer(curr));
         Player currPlayer = c.getPlayerManager().getCurrentPlayer();
         for (Player player : c.getGame().getPlayers()) {

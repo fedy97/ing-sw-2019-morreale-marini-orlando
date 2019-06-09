@@ -287,6 +287,7 @@ public class GameBoardController {
     @FXML
     private Button convertbutton;
 
+    private boolean reconnected = false;
     private Map<Button, String> buttonsHashes;
     private List<AmmoRep> ammoReps;
     private Map<String, ImageView> posAmmo;
@@ -299,6 +300,7 @@ public class GameBoardController {
     private Map<String, Button> playersButtonBoards;
     private List<ImageView> skullsImages;
     private boolean firstSetup = true;
+    private boolean firstSetupReconnected = false;
     private LightGameVersion lightGameVersion;
 
 
@@ -317,9 +319,11 @@ public class GameBoardController {
                     initButtons();
                     darkenAllPlatforms();
                     mapImage.setImage(new Image("/assets/map/" + config + ".jpg"));
-                    for (Map.Entry<ImageView, AmmoRep> entry : ammoRepImageViewMap.entrySet()) {
-                        if (entry.getValue() != null)
-                            entry.getKey().setImage(new Image("/assets/ammos/" + entry.getValue().getType() + ".jpg"));
+                    if (!reconnected) {
+                        for (Map.Entry<ImageView, AmmoRep> entry : ammoRepImageViewMap.entrySet()) {
+                            if (entry.getValue() != null)
+                                entry.getKey().setImage(new Image("/assets/ammos/" + entry.getValue().getType() + ".jpg"));
+                        }
                     }
                     updateWeapons();
                 });
@@ -575,11 +579,12 @@ public class GameBoardController {
         for (String player : gui.getCharsInGame())
             HandyFunctions.enlightenButton(playersButtonBoards.get(player));
 
-
-        for (int i = 0; i < ammoReps.size(); i++) {
-            AmmoRep ammoRep = ammoReps.get(i);
-            ImageView imageView = imageViews.get(i);
-            ammoRepImageViewMap.put(imageView, ammoRep);
+        if (!reconnected) {
+            for (int i = 0; i < ammoReps.size(); i++) {
+                AmmoRep ammoRep = ammoReps.get(i);
+                ImageView imageView = imageViews.get(i);
+                ammoRepImageViewMap.put(imageView, ammoRep);
+            }
         }
 
     }
@@ -677,9 +682,14 @@ public class GameBoardController {
             String pos = entry.getKey();
             List<ImageView> weaponsImagesInSpot = entry.getValue();
             List<CardRep> weaponsToCopy;
-            if (lightGameVersion == null)
+            if (lightGameVersion == null) {
                 weaponsToCopy = posWeaponsReps.get(pos);
-            else {
+            } else if (!reconnected) {
+                weaponsToCopy = lightGameVersion.getPlatformWeapons().get(pos);
+                firstSetup = false;
+            } else if (firstSetupReconnected) {
+                weaponsToCopy = lightGameVersion.getPlatformWeapons().get(pos);
+            } else {
                 weaponsToCopy = lightGameVersion.getPlatformWeapons().get(pos);
                 firstSetup = false;
             }
@@ -702,8 +712,10 @@ public class GameBoardController {
                     weaponsImagesInSpot.get(i).setFitHeight(152);
                     weaponsImagesInSpot.get(i).setX(x + 32);
                     weaponsImagesInSpot.get(i).setY(y - 25);
+                    firstSetupReconnected=false;
                 }
             }
+
         }
     }
 
@@ -1024,5 +1036,14 @@ public class GameBoardController {
         reloadbutton.setDisable(!actives[3]);
         endturnbutton.setDisable(!actives[4]);
         powerupsbutton.setDisable(!actives[5]);
+    }
+
+    public void setReconnected(boolean reconnected) {
+        this.reconnected = reconnected;
+        firstSetupReconnected = true;
+    }
+
+    public void setLightGameVersion(LightGameVersion lightGameVersion) {
+        this.lightGameVersion = lightGameVersion;
     }
 }

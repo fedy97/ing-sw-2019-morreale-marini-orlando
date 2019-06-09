@@ -31,6 +31,7 @@ public class Player {
     private boolean underAttack;
     private List<Player> currentTargets;
     private boolean attacking;
+    private boolean isConnected;
 
     /**
      * Class constructor that initializes data structures that will be used
@@ -56,6 +57,7 @@ public class Player {
         frenzyModeType = 0;
         underAttack = false;
         attacking = false;
+        isConnected = true;
     }
 
     /**
@@ -267,5 +269,13 @@ public class Player {
 
     public boolean isAttacking() {
         return attacking;
+    }
+
+    public boolean isConnected() {
+        return isConnected;
+    }
+
+    public void setConnected(boolean connected) {
+        isConnected = connected;
     }
 }

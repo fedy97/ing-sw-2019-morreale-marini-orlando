@@ -52,4 +52,6 @@ public abstract class RemoteView extends View {
 
     public abstract void showBinaryOption(String message);
 
+    public abstract void showReconnectedGameBoard(int config, LightGameVersion lightGameVersion, List<String> arr, String myChar);
+
 }

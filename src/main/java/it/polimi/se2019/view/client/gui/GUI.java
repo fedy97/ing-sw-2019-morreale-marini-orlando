@@ -5,8 +5,8 @@ import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.network.message.to_server.*;
 import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.view.client.RemoteView;
 import it.polimi.se2019.view.State;
+import it.polimi.se2019.view.client.RemoteView;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -268,6 +268,20 @@ public class GUI extends RemoteView {
         }
     }
 
+    private void initGameBoardReconnected(String config) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gameBoard.fxml"));
+        try {
+            Parent root = loader.load();
+            stage.setTitle("Adrenaline");
+            sceneGameBoard = new Scene(root);
+            gameBoardController = loader.getController();
+            this.config = config;
+            gameBoardController.setConfig(config);
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing reconnected game board");
+        }
+    }
+
     private void initGameBoard(String config, List<AmmoRep> ammoReps, Map<String, List<CardRep>> posWeapons) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gameBoard.fxml"));
         try {
@@ -426,6 +440,36 @@ public class GUI extends RemoteView {
         Platform.runLater(
                 () ->
                         useWeaponController.enlightenRightEffects(effects));
+    }
+
+    @Override
+    public void showReconnectedGameBoard(int config, LightGameVersion lightGameVersion, List<String> charsInGame, String myChar) {
+        Platform.runLater(
+                () -> {
+                    this.charsInGame = charsInGame;
+                    this.charInString = myChar;
+                    initGameBoardReconnected(Integer.toString(config));
+                    initPlayerBoard();
+                    initSwitchWeapon();
+                    initUsePowerup();
+                    initUseWeapon();
+                    initBuyWithPowerup();
+                    initChooseTargets();
+                    chooseTargetsController.passGUI(this);
+                    buyWithPowerupController.passGUI(this);
+                    switchWeaponController.passGUI(this);
+                    usePowerupController.passGUI(this);
+                    useWeaponController.passGUI(this);
+                    gameBoardController.passGUI(this);
+                    playerBoardController.passGUI(this);
+                    gameBoardController.setReconnected(true);
+                    gameBoardController.setLightGameVersion(lightGameVersion);
+                    updateAll(lightGameVersion);
+                    stage.setScene(sceneGameBoard);
+                    stage.setResizable(false);
+                    stage.show();
+                });
+
     }
 
     private void notifyController(ToServerMessage message) {

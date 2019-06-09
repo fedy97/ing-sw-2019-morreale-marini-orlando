@@ -50,6 +50,7 @@ public class Controller implements Observer {
     private int timerSetup;
     private boolean timerStarted = false;
     private Map<Integer, Integer> mapChosen;
+    private int configMap;
 
     private Controller() {
         game = Game.getInstance();
@@ -112,7 +113,8 @@ public class Controller implements Observer {
                 //this timer will modify the model(Game) where the seconds integer is hold
                 TimerLobby t = new TimerLobby(timerSetup);
                 t.start();
-            } else {
+            }
+            else {
                 ((ToServerMessage) message).performAction();
             }
         } else {
@@ -336,7 +338,7 @@ public class Controller implements Observer {
         }
     }
 
-    private List<String> findCharactersInGame() {
+    public List<String> findCharactersInGame() {
         List<String> arrChars = new ArrayList<>();
         for (Map.Entry<Character, Player> entry : game.getCharacterPlayers().entrySet()) {
             if (entry.getValue() != null) {
@@ -433,6 +435,7 @@ public class Controller implements Observer {
                 config = i;
             }
         }
+        configMap = config;
         return config;
     }
 
@@ -576,4 +579,7 @@ public class Controller implements Observer {
         this.validator = validator;
     }
 
+    public int getConfigMap() {
+        return configMap;
+    }
 }
