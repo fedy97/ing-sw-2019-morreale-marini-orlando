@@ -5,6 +5,7 @@ import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  * @author Gabriel Raul Marini
  */
 
-public abstract class WeaponCard extends Card {
+public class WeaponCard extends Card {
     protected boolean[] availableEffects;
     protected boolean[] usableEffects;
     protected boolean loaded;
@@ -54,12 +55,14 @@ public abstract class WeaponCard extends Card {
         this.paidCost = paidCost;
         this.extraCost = extraCost;
         loaded = true;
+        effects = new ArrayList<>();
     }
 
     /**
      * Reload the weapon
      */
-    public abstract void reload();
+
+    public void reload() {}
 
     /**
      * @retun the paid cost of the weapon

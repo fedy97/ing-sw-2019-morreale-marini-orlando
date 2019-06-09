@@ -16,6 +16,6 @@ public class SendTargetsMessage extends ToServerMessage {
         Controller c = Controller.getInstance();
         List<String> targets = (ArrayList<String>) payload;
         for (String target : targets)
-            c.getCurrentTargets().add(c.getGame().getPlayer(Character.valueOf(target)));
+            c.getCurrentTargets().add(Character.valueOf(target));
     }
 }

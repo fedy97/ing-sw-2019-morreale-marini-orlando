@@ -8,4 +8,8 @@ public final class Whisper extends WeaponCard {
 
     }
 
+    @Override
+    public void reload() {
+        super.reload();
+    }
 }

@@ -27,4 +27,9 @@ public class WeaponAddingEffect extends WeaponCard {
     public ArrayList<Effect> getAddigEffects() {
         return addingEffects;
     }
+
+    @Override
+    public void reload() {
+
+    }
 }
