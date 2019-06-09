@@ -9,6 +9,6 @@ public class SendBinaryOption extends ToClientMessage {
 
     @Override
     public void performAction(RemoteView remoteView){
-        //TODO method in remote view
+        remoteView.showBinaryOption((String) payload);
     }
 }

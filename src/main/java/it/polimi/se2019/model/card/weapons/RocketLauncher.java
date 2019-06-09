@@ -35,7 +35,7 @@ public final class RocketLauncher extends WeaponAlternativeFire {
 
                 //"Then you may move the target 1 square"
                 c.sendMessage("You can move the target one move away", playerManager.getCurrentPlayer().getName());
-                c.callView(new SendBinaryOption(null), playerManager.getCurrentPlayer().getName());
+                c.callView(new SendBinaryOption("You can move the target one move away"), playerManager.getCurrentPlayer().getName());
 
                 try {
                     if (c.getChosenBinaryOption().take()) {
