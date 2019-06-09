@@ -582,4 +582,8 @@ public class Controller implements Observer {
     public int getConfigMap() {
         return configMap;
     }
+
+    public Map<String, VirtualView> getUserView() {
+        return userView;
+    }
 }

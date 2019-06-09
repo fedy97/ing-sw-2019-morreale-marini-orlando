@@ -92,12 +92,19 @@ public class RMIServer implements Server {
             Registry registry = LocateRegistry.getRegistry(host, port);
             boolean newConnection = true;
             VirtualView virtualView;
-            if (!clientActor.containsKey(username)) {
+            if (!Controller.getInstance().getUserView().containsKey(username)) {
                 virtualView = new VirtualView(this, username);
                 clientActor.put(username, virtualView);
                 Lobby.addUser(username);
-            } else {
+            } else if (clientActor.containsKey(username)){
                 virtualView = clientActor.get(username);
+                newConnection = false;
+            }
+            else {
+                virtualView = Controller.getInstance().getUserView().get(username);
+                Lobby.getSocketServer().getActors().remove(username);
+                Lobby.getSocketServer().getConnections().remove(username);
+                clientActor.put(username, virtualView);
                 newConnection = false;
             }
             skeletons.put(username, (Client) registry.lookup("RemoteView"));
@@ -153,5 +160,13 @@ public class RMIServer implements Server {
      */
     public boolean isConnected(String user) {
         return skeletons.containsKey(user);
+    }
+
+    public Map<String, VirtualView> getClientActor() {
+        return clientActor;
+    }
+
+    public Map<String, Client> getSkeletons() {
+        return skeletons;
     }
 }

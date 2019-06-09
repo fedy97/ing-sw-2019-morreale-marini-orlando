@@ -116,6 +116,7 @@ public class RMIClient implements Client, Observer {
         try {
             stub.interpretMessage(msg);
         } catch (Exception e) {
+            e.printStackTrace();
             HandyFunctions.LOGGER.log(Level.INFO, e.toString());
         }
     }

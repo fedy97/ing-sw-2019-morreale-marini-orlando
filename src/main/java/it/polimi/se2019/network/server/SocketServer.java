@@ -61,12 +61,19 @@ public class SocketServer implements Server {
                         String user = (String) input.readObject();
                         boolean newConnection = true;
                         VirtualView virtualView;
-                        if (!actors.containsKey(user)) {
+                        if (!Controller.getInstance().getUserView().containsKey(user)) {
                             virtualView = new VirtualView(this, user);
                             actors.put(user, virtualView);
                             Lobby.addUser(user);
-                        } else {
+                        } else if (actors.containsKey(user)){
                             virtualView = actors.get(user);
+                            newConnection = false;
+                        }
+                        else {
+                            virtualView = Controller.getInstance().getUserView().get(user);
+                            Lobby.getRmiServer().getClientActor().remove(user);
+                            Lobby.getRmiServer().getSkeletons().remove(user);
+                            actors.put(user,virtualView);
                             newConnection = false;
                         }
                         SpecificSocketServer specificSocketServer = new SpecificSocketServer(this, socket, input, output, virtualView);
@@ -138,4 +145,6 @@ public class SocketServer implements Server {
     public VirtualView getVirtualView(String user) {
         return actors.get(user);
     }
+
+
 }
