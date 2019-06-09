@@ -180,7 +180,9 @@ public class Game extends Observable {
             ammos.put("YELLOW", box.getYellowAmmos());
             //add optional ammos
             for (AmmoCube ammoCube : box.getOptionals())
-                ammos.put(ammoCube.name(), ammos.get(ammoCube.name()) + 1);
+            {
+                System.out.println(ammoCube.name());
+                ammos.put(ammoCube.name(), ammos.get(ammoCube.name()) + 1);}
 
 
             for (PowerUpCard powerUp : player.getPowerUpCards())
