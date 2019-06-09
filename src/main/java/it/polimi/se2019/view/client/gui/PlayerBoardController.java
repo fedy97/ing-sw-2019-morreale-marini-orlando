@@ -149,6 +149,15 @@ public class PlayerBoardController {
         redAmmosImages.add(redAmmo1);
         redAmmosImages.add(redAmmo2);
         redAmmosImages.add(redAmmo3);
+        yellowAmmosImages.add(yellowAmmo11);
+        yellowAmmosImages.add(yellowAmmo21);
+        yellowAmmosImages.add(yellowAmmo31);
+        blueAmmosImages.add(blueAmmo11);
+        blueAmmosImages.add(blueAmmo21);
+        blueAmmosImages.add(blueAmmo31);
+        redAmmosImages.add(redAmmo11);
+        redAmmosImages.add(redAmmo21);
+        redAmmosImages.add(redAmmo31);
         weaponsImages.add(wImage1);
         weaponsImages.add(wImage2);
         weaponsImages.add(wImage3);
@@ -212,17 +221,17 @@ public class PlayerBoardController {
         int red = colorQuantity.get("RED");
         int blue = colorQuantity.get("BLUE");
         int yellow = colorQuantity.get("YELLOW");
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 6; i++) {
             redAmmosImages.get(i).setVisible(true);
             if (i >= red)
                 redAmmosImages.get(i).setVisible(false);
         }
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 6; i++) {
             blueAmmosImages.get(i).setVisible(true);
             if (i >= blue)
                 blueAmmosImages.get(i).setVisible(false);
         }
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 6; i++) {
             yellowAmmosImages.get(i).setVisible(true);
             if (i >= yellow)
                 yellowAmmosImages.get(i).setVisible(false);

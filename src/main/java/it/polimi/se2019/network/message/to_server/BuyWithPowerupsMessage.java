@@ -15,12 +15,9 @@ public class BuyWithPowerupsMessage extends ToServerMessage {
 
     @Override
     public void performAction() {
-        List<String> hashesPowerups = (List<String>) payload;
-        List<PowerUpCard> powerUpCards = new ArrayList<>();
-
+        String hashPowerup = (String) payload;
         try {
-            for (String hash : hashesPowerups)
-                Controller.getInstance().getPlayerManager().convertPowerUpToAmmo(Deserializer.getPowerUp(Integer.parseInt(hash), sender));
+                Controller.getInstance().getPlayerManager().convertPowerUpToAmmo(Deserializer.getPowerUp(Integer.parseInt(hashPowerup), sender));
         } catch (Exception e) {
 
         }

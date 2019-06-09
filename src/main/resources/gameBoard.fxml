@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.*?>
@@ -21,6 +22,9 @@
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
+         <image>
+            <Image url="@assets/map/1.jpg" />
+         </image>
         
       </ImageView>
       <GridPane layoutX="355.0" layoutY="151.0" prefHeight="162.0" prefWidth="184.0">
@@ -608,6 +612,11 @@
             <Image url="@assets/boards/skull.png" />
          </image></ImageView>
       <Button fx:id="powerupsbutton" layoutX="207.0" layoutY="671.0" mnemonicParsing="false" onAction="#powerupsClick" text="powerups" />
-      <Button fx:id="convertbutton" layoutX="732.0" layoutY="663.0" mnemonicParsing="false" onAction="#convertClick" text="convert powerups" />
+      <Button fx:id="convertbutton" layoutX="19.0" layoutY="207.0" mnemonicParsing="false" onAction="#convertClick" text="convert powerups" />
+      <Label fx:id="messageLabel" layoutX="59.0" layoutY="91.0" prefHeight="55.0" prefWidth="485.0" textFill="#bbff08" wrapText="true">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

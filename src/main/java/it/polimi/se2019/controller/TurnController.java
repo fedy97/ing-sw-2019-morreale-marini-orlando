@@ -58,6 +58,8 @@ public class TurnController {
     public void endTurn() {
         Controller c = Controller.getInstance();
         int currIndex = turningOrder.indexOf(curr);
+        c.getPlayerManager().getCurrentPlayer().getPlayerBoard().getAmmoBox().getOptionals().clear();
+        c.getGame().notifyChanges();
         if ((currIndex + 1) == turningOrder.size()) {
             curr = turningOrder.get(0);
 

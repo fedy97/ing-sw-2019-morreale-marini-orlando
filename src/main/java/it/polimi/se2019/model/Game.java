@@ -1,23 +1,17 @@
 package it.polimi.se2019.model;
 
-import it.polimi.se2019.controller.Controller;
-import it.polimi.se2019.exceptions.*;
+import it.polimi.se2019.exceptions.InvalidGenerationSpotException;
 import it.polimi.se2019.model.board.GameField;
 import it.polimi.se2019.model.board.Platform;
-import it.polimi.se2019.model.board.ScoreBoard;
-import it.polimi.se2019.model.board.SkullsBoard;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
+import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.network.message.to_client.*;
 import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.utils.JsonParser;
-import it.polimi.se2019.utils.TimerCharacter;
-import it.polimi.se2019.utils.TimerMap;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -27,16 +21,14 @@ import java.util.logging.Level;
  */
 public class Game extends Observable {
 
+    private static Game instance = null;
     private GameField gameField;
     private ArrayList<Player> players;
     private Deck<WeaponCard> weaponsDeck;
     private Deck<PowerUpCard> powerUpDeck;
     private Deck<PowerUpCard> garbageDeck;
     private Deck<AmmoCard> ammoDeck;
-
     private Map<Character, Player> characterPlayers;
-
-    private static Game instance = null;
 
     /**
      * Game singleton constructor
@@ -63,6 +55,10 @@ public class Game extends Observable {
         return gameField;
     }
 
+    public void setGameField(GameField gameField) {
+        this.gameField = gameField;
+    }
+
     /**
      * @return the players
      */
@@ -85,6 +81,13 @@ public class Game extends Observable {
     }
 
     /**
+     * @param powerUps The deck containing the power up cards
+     */
+    public void setPowerUpDeck(Deck<PowerUpCard> powerUps) {
+        powerUpDeck = powerUps;
+    }
+
+    /**
      * @return The power up cards already used
      */
     public Deck<PowerUpCard> getGarbageDeck() {
@@ -96,6 +99,10 @@ public class Game extends Observable {
      */
     public Deck<AmmoCard> getAmmoDeck() {
         return ammoDeck;
+    }
+
+    public void setAmmoDeck(Deck<AmmoCard> ammoDeck) {
+        this.ammoDeck = ammoDeck;
     }
 
     /**
@@ -125,21 +132,6 @@ public class Game extends Observable {
      */
     public void setWeaponDeck(Deck<WeaponCard> weapons) {
         weaponsDeck = weapons;
-    }
-
-    /**
-     * @param powerUps The deck containing the power up cards
-     */
-    public void setPowerUpDeck(Deck<PowerUpCard> powerUps) {
-        powerUpDeck = powerUps;
-    }
-
-    public void setAmmoDeck(Deck<AmmoCard> ammoDeck) {
-        this.ammoDeck = ammoDeck;
-    }
-
-    public void setGameField(GameField gameField) {
-        this.gameField = gameField;
     }
 
     /**
@@ -186,12 +178,16 @@ public class Game extends Observable {
             ammos.put("RED", box.getRedAmmos());
             ammos.put("BLUE", box.getBlueAmmos());
             ammos.put("YELLOW", box.getYellowAmmos());
+            //add optional ammos
+            for (AmmoCube ammoCube : box.getOptionals())
+                ammos.put(ammoCube.name(), ammos.get(ammoCube.name()) + 1);
+
 
             for (PowerUpCard powerUp : player.getPowerUpCards())
                 powerUps.add(new CardRep(HandyFunctions.getSystemAddress(powerUp), powerUp.getName(), powerUp.getDescription(),
                         powerUp.getImgPath()));
 
-            for (WeaponCard weaponCard : player.getWeaponCards()){
+            for (WeaponCard weaponCard : player.getWeaponCards()) {
                 CardRep weaponRep = new CardRep(HandyFunctions.getSystemAddress(weaponCard), weaponCard.getName(), weaponCard.getDescription(),
                         weaponCard.getImgPath());
                 weaponRep.setLoaded(weaponCard.isLoaded());

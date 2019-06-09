@@ -6,6 +6,7 @@ import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.*;
 import it.polimi.se2019.model.card.weapons.Electroscythe;
+import it.polimi.se2019.model.card.weapons.THOR;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Orientation;
@@ -212,6 +213,12 @@ public class JsonParser {
         switch (name) {
             case "falce protonica":
                 weaponCard = new Electroscythe(name, description, pathImg, paidCost, extraCost);
+                break;
+            case "torpedine":
+                weaponCard = new THOR(name, description, pathImg, paidCost, extraCost);
+                break;
+            case "":
+                weaponCard = new THOR(name, description, pathImg, paidCost, extraCost);
                 break;
             default:
                 weaponCard = new WeaponCard(name, description, pathImg, paidCost, extraCost);

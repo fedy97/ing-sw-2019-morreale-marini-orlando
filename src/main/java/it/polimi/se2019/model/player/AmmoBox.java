@@ -235,4 +235,8 @@ public class AmmoBox {
     public void removeOptionalAmmo(AmmoCube ammoCube) {
         optionals.remove(ammoCube);
     }
+
+    public List<AmmoCube> getOptionals() {
+        return optionals;
+    }
 }
