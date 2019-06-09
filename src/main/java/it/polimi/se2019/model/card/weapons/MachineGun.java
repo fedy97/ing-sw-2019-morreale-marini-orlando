@@ -90,11 +90,18 @@ public final class MachineGun extends WeaponAlternativeFire {
         usableEffects = new boolean[]{true, true, true};
 
         eff1.setMaxTargets(2);
-        eff1.setMaxTargets(1);
+        eff2.setMaxTargets(1);
         eff3.setMaxTargets(1);
 
         getEffects().add(eff1);
         getEffects().add(eff2);
         getEffects().add(eff3);
+    }
+
+    @Override
+    public void reload() {
+        cleanCache();
+        usableEffects = new boolean[]{true, true, true};
+        loaded = true;
     }
 }

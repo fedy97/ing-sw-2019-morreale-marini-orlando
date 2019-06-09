@@ -13,13 +13,13 @@ import java.util.List;
  * @author Gabriel Raul Marini
  */
 
-public class WeaponCard extends Card {
+public abstract class WeaponCard extends Card {
     protected boolean[] availableEffects;
     protected boolean[] usableEffects;
+    protected boolean loaded;
     private AmmoCube paidCost;
     private AmmoCube[] extraCost;
     private List<Effect> effects;
-    private boolean loaded;
 
     /**
      * Creates an anonymous weapon
@@ -59,9 +59,7 @@ public class WeaponCard extends Card {
     /**
      * Reload the weapon
      */
-    public void reload() {
-        loaded = true;
-    }
+    public abstract void reload();
 
     /**
      * @retun the paid cost of the weapon
@@ -136,5 +134,13 @@ public class WeaponCard extends Card {
 
     public void activateEffect(int index, List<Character> targets) {
         effects.get(index).activateEffect(targets, this);
+    }
+
+    /**
+     * Clean the last action memory once the card was used
+     */
+    protected void cleanCache() {
+        for (Effect effect : effects)
+            effect.getLastEffectTargets().clear();
     }
 }

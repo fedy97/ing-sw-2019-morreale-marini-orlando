@@ -19,8 +19,9 @@ public final class PlasmaGun extends WeaponAlternativeFire {
 
     public PlasmaGun(String name, String descr, String img, AmmoCube paidCost, AmmoCube[] extraCost) throws InvalidNameException {
         super(name, descr, img, paidCost, extraCost);
-        PlayerManager playerManager = Controller.getInstance().getPlayerManager();
-        Game game = Controller.getInstance().getGame();
+        Controller c = Controller.getInstance();
+        PlayerManager playerManager = c.getPlayerManager();
+        Game game = c.getGame();
 
         Effect eff1 = new Effect(new AmmoCube[]{}) {
             @Override
@@ -35,7 +36,7 @@ public final class PlasmaGun extends WeaponAlternativeFire {
                 usableEffects[2] = true;
 
                 //setting targets for the next additional effect
-                getEffects().get(1).getLastEffectTargets().add(chosenTargets.get(0));
+                getEffects().get(2).getLastEffectTargets().add(chosenTargets.get(0));
             }
 
 
@@ -48,12 +49,13 @@ public final class PlasmaGun extends WeaponAlternativeFire {
         Effect eff2 = new Effect(new AmmoCube[]{}) {
             @Override
             public void activateEffect(List<Character> targets, WeaponCard card) {
-                Controller c = Controller.getInstance();
+                c.sendMessage("Where do you want to move?", playerManager.getCurrentPlayer().getName());
                 c.askFor(game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 2), "position");
 
                 try {
                     Platform destination = c.getChosenDestination().take();
                     playerManager.move(destination);
+                    c.broadcastMessage(playerManager.getCurrentPlayer().getCharacter().name() + " moved  to " + destination.toString());
                 } catch (Exception e) {
                     CustomLogger.logException(getClass().getName(), e);
                 }
@@ -90,11 +92,18 @@ public final class PlasmaGun extends WeaponAlternativeFire {
         usableEffects = new boolean[]{true, true, false};
 
         eff1.setMaxTargets(2);
-        eff1.setMaxTargets(1);
+        eff2.setMaxTargets(1);
         eff3.setMaxTargets(1);
 
         getEffects().add(eff1);
         getEffects().add(eff2);
         getEffects().add(eff3);
+    }
+
+    @Override
+    public void reload() {
+        cleanCache();
+        usableEffects = new boolean[]{true, true, false};
+        loaded = true;
     }
 }

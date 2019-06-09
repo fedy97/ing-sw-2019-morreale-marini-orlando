@@ -63,4 +63,11 @@ public final class Electroscythe extends WeaponAlternativeFire {
         getEffects().add(eff1);
         getEffects().add(eff2);
     }
+
+    @Override
+    public void reload() {
+        cleanCache();
+        usableEffects = new boolean[]{true, true, true};
+        loaded = true;
+    }
 }

@@ -43,7 +43,7 @@ public class Controller implements Observer {
     private BlockingDeque<WeaponCard> chosenWeapons;
     private BlockingDeque<Platform> chosenDestination;
     private BlockingDeque<Integer> chosenEffect;
-    private BlockingDeque<Boolean> wantToDiscard;
+    private BlockingDeque<Boolean> chosenBinaryOption;
     private PowerUpCard processingPowerUp;
     private WeaponCard processingWeaponCard;
     private int secondsLeft;
@@ -56,7 +56,7 @@ public class Controller implements Observer {
         validActions = new ArrayList<>();
         currentTargets = new LinkedBlockingDeque<>();
         chosenWeapons = new LinkedBlockingDeque<>();
-        wantToDiscard = new LinkedBlockingDeque<>();
+        chosenBinaryOption = new LinkedBlockingDeque<>();
         chosenDestination = new LinkedBlockingDeque<>();
         chosenEffect = new LinkedBlockingDeque<>();
         playerManager = new PlayerManager(this);
@@ -395,6 +395,27 @@ public class Controller implements Observer {
     }
 
     /**
+     * Send general info to the selected player
+     *
+     * @param msg       content of the communication
+     * @param recipient destination of the message
+     */
+    public void sendMessage(String msg, String recipient) {
+        callView(new ShowMessage(msg), recipient);
+    }
+
+    /**
+     * Send general info to all the players
+     *
+     * @param msg content of the communication
+     */
+    public void broadcastMessage(String msg) {
+        for (Player player : game.getPlayers()) {
+            callView(new ShowMessage(msg), player.getName());
+        }
+    }
+
+    /**
      * if there is a draw, the first between them will be chosen.
      *
      * @return the config of the map that won the votations.
@@ -513,8 +534,8 @@ public class Controller implements Observer {
         return chosenDestination;
     }
 
-    public BlockingDeque<Boolean> getWantToDiscard() {
-        return wantToDiscard;
+    public BlockingDeque<Boolean> getChosenBinaryOption() {
+        return chosenBinaryOption;
     }
 
     public ControllerState getState() {
