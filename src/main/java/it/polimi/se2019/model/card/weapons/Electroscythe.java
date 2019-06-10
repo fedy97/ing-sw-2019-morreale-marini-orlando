@@ -44,7 +44,7 @@ public final class Electroscythe extends WeaponAlternativeFire {
             public void activateEffect(List<Character> targets, WeaponCard card) {
                 Map<Player, Integer> damages = new HashMap<>();
                 for (Character character : playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform())
-                    damages.put(game.getPlayer(character), 2);
+                    damages.put(game.getPlayer(character), 1);
                 playerManager.addDamage(damages);
 
                 usableEffects = new boolean[]{false, false, true};
@@ -58,7 +58,7 @@ public final class Electroscythe extends WeaponAlternativeFire {
         };
 
         availableEffects = new boolean[]{true, true, false};
-        usableEffects = new boolean[]{true, true, true};
+        usableEffects = new boolean[]{true, false, true};
 
         getEffects().add(eff1);
         getEffects().add(eff2);

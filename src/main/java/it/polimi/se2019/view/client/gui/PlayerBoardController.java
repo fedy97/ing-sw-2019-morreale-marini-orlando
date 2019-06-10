@@ -221,9 +221,9 @@ public class PlayerBoardController {
     private void updateMarks() {
         BoardRep boardRep = lightGameVersion.getPlayerBoardRep().get(currPlayerDisplay);
         List<String> characterMarks = boardRep.getMarks();
-        for (String currChar : characterMarks) {
-            marksImages.get(characterMarks.indexOf(currChar)).setVisible(true);
-            marksImages.get(characterMarks.indexOf(currChar)).setImage(new Image("/assets/boards/1mark" + currChar + ".png"));
+        for (int i = 0; i < characterMarks.size(); i++) {
+            marksImages.get(i).setVisible(true);
+            marksImages.get(i).setImage(new Image("/assets/boards/1mark" + characterMarks.get(i) + ".png"));
         }
         for (int i = characterMarks.size(); i < 3; i++)
             marksImages.get(i).setVisible(false);
@@ -232,9 +232,9 @@ public class PlayerBoardController {
     private void updateDamages() {
         BoardRep boardRep = lightGameVersion.getPlayerBoardRep().get(currPlayerDisplay);
         List<String> charactersDamages = boardRep.getDamages();
-        for (String currChar : charactersDamages) {
-            damagesImages.get(charactersDamages.indexOf(currChar)).setVisible(true);
-            damagesImages.get(charactersDamages.indexOf(currChar)).setImage(new Image("/assets/boards/1mark" + currChar + ".png"));
+        for (int i = 0; i < charactersDamages.size(); i++) {
+            damagesImages.get(i).setVisible(true);
+            damagesImages.get(i).setImage(new Image("/assets/boards/1mark" + charactersDamages.get(i) + ".png"));
         }
         for (int i = charactersDamages.size(); i < 12; i++)
             damagesImages.get(i).setVisible(false);

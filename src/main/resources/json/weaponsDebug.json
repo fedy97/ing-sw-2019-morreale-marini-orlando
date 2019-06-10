@@ -1,0 +1,10 @@
+{
+  "weapons": [
+    {
+      "name": "falce protonica",
+      "description": "modalità base: Dai 1 danno a ogni altro giocatore presente\nnel quadrato in cui ti trovi.\nmodalità mietitore: Dai 2 danni a ogni altro giocatore\npresente nel quadrato in cui ti trovi.",
+      "paidCost": "BLUE",
+      "extraCost": [""]
+    }
+  ]
+}

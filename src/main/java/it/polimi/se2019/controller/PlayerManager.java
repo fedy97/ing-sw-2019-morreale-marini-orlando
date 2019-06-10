@@ -125,7 +125,8 @@ public class PlayerManager {
     }
 
     /**
-     * @param targetsMap containing the damage values for each player
+     * @param targetsMap containing the damage values for each player.
+     *                   keys are the characters that have been shot
      */
     public void addDamage(Map<Player, Integer> targetsMap) {
         Iterator hmIterator = targetsMap.entrySet().iterator();

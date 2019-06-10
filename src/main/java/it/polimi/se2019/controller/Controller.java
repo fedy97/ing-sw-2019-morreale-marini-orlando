@@ -405,7 +405,7 @@ public class Controller implements Observer {
             JsonParser parser = new JsonParser("/json/powerups.json");
             Deck<PowerUpCard> powerUpCardDeck = parser.buildPowerupCards();
             game.setPowerUpDeck(powerUpCardDeck);
-            JsonParser parserWeapons = new JsonParser("/json/weapons.json");
+            JsonParser parserWeapons = new JsonParser("/json/weaponsDebug.json");
             game.setWeaponDeck(parserWeapons.buildWeaponCards());
             WeaponCard[] weaponCards = new WeaponCard[9];
             for (int i = 0; i < 9; i++)
