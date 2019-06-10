@@ -209,7 +209,6 @@ public class PlayerBoardController {
         BoardRep boardRep = lightGameVersion.getPlayerBoardRep().get(currPlayerDisplay);
         List<String> charactersDamages = boardRep.getDamages();
         for (String currChar : charactersDamages) {
-            System.out.println("lol");
             damagesImages.get(charactersDamages.indexOf(currChar)).setVisible(true);
             damagesImages.get(charactersDamages.indexOf(currChar)).setImage(new Image("1mark" + currChar + ".png"));
         }
