@@ -91,7 +91,7 @@ public final class PlasmaGun extends WeaponAlternativeFire {
         availableEffects = new boolean[]{true, true, true};
         usableEffects = new boolean[]{true, true, false};
 
-        eff1.setMaxTargets(2);
+        eff1.setMaxTargets(1);
         eff2.setMaxTargets(1);
         eff3.setMaxTargets(1);
 

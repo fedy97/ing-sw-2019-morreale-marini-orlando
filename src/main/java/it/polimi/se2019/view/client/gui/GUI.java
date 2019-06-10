@@ -146,8 +146,8 @@ public class GUI extends RemoteView {
             Parent root = loader.load();
             useWeaponStage = new Stage();
             useWeaponStage.setTitle("Choose a weapon to use");
-            useWeaponStage.initOwner(stage);
-            useWeaponStage.initModality(Modality.APPLICATION_MODAL);
+            //useWeaponStage.initOwner(stage);
+            //useWeaponStage.initModality(Modality.APPLICATION_MODAL);
             sceneUseWeapon = new Scene(root);
             useWeaponController = loader.getController();
         } catch (IOException e) {
