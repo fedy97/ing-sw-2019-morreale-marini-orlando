@@ -45,7 +45,7 @@ public class WaitingLobbyController {
     public void updateTimer(int count) {
         if (progress.getProgress() == -1) {
             timerInt = count;
-            progress.setProgress(0);
+            progress.setProgress(1/timerInt);
         } else progress.setProgress(progress.getProgress() + (1/timerInt));
     }
 
