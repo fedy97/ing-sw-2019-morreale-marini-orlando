@@ -122,38 +122,47 @@ public class UseWeaponController {
     }
 
     public void w1eff1Click() {
+        gui.sendEffectChosen(1);
         deactivateAll();
     }
 
     public void w1eff2Click() {
+        gui.sendEffectChosen(2);
         deactivateAll();
     }
 
     public void w1eff3Click() {
+        gui.sendEffectChosen(3);
         deactivateAll();
     }
 
     public void w2eff1Click() {
+        gui.sendEffectChosen(1);
         deactivateAll();
     }
 
     public void w2eff2Click() {
+        gui.sendEffectChosen(2);
         deactivateAll();
     }
 
     public void w2eff3Click() {
+        gui.sendEffectChosen(3);
         deactivateAll();
     }
 
     public void w3eff1Click() {
+        gui.sendEffectChosen(1);
         deactivateAll();
     }
 
     public void w3eff2Click() {
+        gui.sendEffectChosen(2);
         deactivateAll();
     }
 
     public void w3eff3Click() {
+        gui.sendEffectChosen(3);
         deactivateAll();
     }
 
