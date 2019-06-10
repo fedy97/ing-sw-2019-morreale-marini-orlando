@@ -12,7 +12,7 @@ public final class CustomLogger {
 
     public static void logInfo(String className, String msg) {
         Logger logger = Logger.getLogger(className);
-        logger.log(Level.INFO, msg);
+        logger.log(Level.INFO, "Logged id " + className + " " + msg);
     }
 
     public static void logException(String className, Exception e) {

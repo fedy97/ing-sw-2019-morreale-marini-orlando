@@ -17,18 +17,16 @@ public class ActivateCardMessage extends ToServerMessage {
      */
     public void performAction(){
         Controller actor = Controller.getInstance();
-        int id = (int) payload;
+        String id = (String) payload;
         //TODO
-        if(Deserializer.getPowerUp(id, sender) != null) {
-            PowerUpCard powerUp = Deserializer.getPowerUp(id, sender);
+        if(Deserializer.getPowerUp(Integer.parseInt(id), sender) != null) {
+            PowerUpCard powerUp = Deserializer.getPowerUp(Integer.parseInt(id), sender);
             actor.setState(ControllerState.PROCESSING_POWERUP);
             actor.processPowerUp(powerUp);
         }
 
-        if(Deserializer.getWeapon(Integer.toString(id)) != null) {
-            WeaponCard weapon = Deserializer.getWeapon(Integer.toString(id));
-            actor.setState(ControllerState.PROCESSING_WEAPON);
-            //actor.addStages(weapon);
+        if(Deserializer.getWeapon(id) != null) {
+            WeaponCard weapon = Deserializer.getWeapon(id);
             actor.processWeaponCard(weapon);
         }
     }

@@ -4,9 +4,11 @@ import it.polimi.se2019.Action;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.ControllerState;
 import it.polimi.se2019.controller.Validator;
+import it.polimi.se2019.exceptions.InvalidActionException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.network.message.to_client.AskToDiscardMessage;
+import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 
 import java.util.List;
@@ -67,15 +69,22 @@ public class PerformActionMessage extends ToServerMessage {
 
                 } else if (choice.equals("action3")) {
                     c.setState(ControllerState.PROCESSING_ACTION_3);
-                    destinations = v.getValidMoves(Action.SHOOT);
-                    c.askFor(destinations, "position");
-                    //List<WeaponCard> weapons = v.getUsableWeapons();
-                    //c.askFor(weapons, "weapons");
+
+                    try {
+                        destinations = v.getValidMoves(Action.SHOOT);
+                        c.askFor(destinations, "position");
+                        c.getPlayerManager().move(c.getChosenDestination().take());
+                    }catch (InvalidActionException e){
+                        CustomLogger.logInfo(this.getClass().getName(), "You cannot move before shooting!");
+                    }
+
+                    while(c.getState() == ControllerState.PROCESSING_ACTION_3)
+                        Thread.sleep(200);
                 } else if (choice.equals("action4")) {
                     //TODO
                 }
             } catch (Exception e) {
-                HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
+                CustomLogger.logException(this.getClass().getName(), e);
             }
         }
         c.setState(ControllerState.IDLE);

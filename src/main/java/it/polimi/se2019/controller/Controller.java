@@ -113,8 +113,7 @@ public class Controller implements Observer {
                 //this timer will modify the model(Game) where the seconds integer is hold
                 TimerLobby t = new TimerLobby(timerSetup);
                 t.start();
-            }
-            else {
+            } else {
                 ((ToServerMessage) message).performAction();
             }
         } else {
@@ -140,31 +139,52 @@ public class Controller implements Observer {
      * @param weapon composed of different stages in order to perform the final effect
      */
     public void processWeaponCard(WeaponCard weapon) {
-        state = ControllerState.PROCESSING_WEAPON;
         List<Integer> usableEffectsIndex = new ArrayList<>();
-        boolean[] defaultEffects = weapon.getAvailableEffects();
-        boolean[] usableEffects = weapon.getUsableEffects();
+        int usedEffects = 0;
 
-        while (state == ControllerState.PROCESSING_WEAPON) {
-            for (int i = 0; i < 0; i++) {
+        while (state == ControllerState.PROCESSING_ACTION_3) {
+            boolean[] defaultEffects = weapon.getAvailableEffects();
+            boolean[] usableEffects = weapon.getUsableEffects();
+
+            for (int i = 0; i < 3; i++) {
                 if (defaultEffects[i] && usableEffects[i]) {
                     Effect effect = weapon.getEffects().get(i);
-                    if (effect.getCost() == null ||
+                    if (effect.getCost().length == 0 ||
                             playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().hasAmmos(effect.getCost()))
                         usableEffectsIndex.add(i);
                 }
             }
 
+            if (usableEffectsIndex.isEmpty()) {
+                setState(ControllerState.IDLE);
+                break;
+            }
+
             try {
+
+                if (usedEffects > 0) {
+                    callView(new SendBinaryOption("Do you want to use another effect?"), playerManager.getCurrentPlayer().getName());
+                    if (!chosenBinaryOption.take()) {
+                        setState(ControllerState.IDLE);
+                        break;
+                    }
+                }
+
+                callView(new ShowUsableEffectsMessage(usableEffectsIndex), playerManager.getCurrentPlayer().getName());
+                usableEffectsIndex.clear();
+
                 int effectIndex = chosenEffect.take();
                 Effect currEffect = weapon.getEffects().get(effectIndex);
+                currEffect.setupTargets();
 
                 if (currEffect.getPossibleTargets() != null) {
                     askFor(currEffect.getPossibleTargets(), "targets");
                     List<Character> targets = new ArrayList<>();
+
                     for (int i = 0; i < currEffect.getMaxTargets(); i++) {
                         targets.add(currentTargets.take());
                     }
+
                     weapon.activateEffect(effectIndex, targets);
                 } else
                     weapon.activateEffect(effectIndex, null);
@@ -172,8 +192,9 @@ public class Controller implements Observer {
             } catch (Exception e) {
                 CustomLogger.logException(getClass().getName(), e);
             }
-        }
 
+            usedEffects++;
+        }
     }
 
     /**
@@ -220,8 +241,6 @@ public class Controller implements Observer {
             msg = new ShowWeaponsMessage(lightVersion);
         else if (choice.equals("position"))
             msg = new ShowPlatformMessage(lightVersion);
-        else if (choice.equals("positionForOther"))
-            msg = new ShowPlatformMessageForOther(lightVersion);
         else if (choice.equals("targets"))
             msg = new ShowPossibleTargetsMessage(lightVersion);
         else if (choice.equals("discard"))
@@ -545,11 +564,17 @@ public class Controller implements Observer {
         return chosenBinaryOption;
     }
 
+    public BlockingDeque<Integer> getChosenEffect() {
+        return chosenEffect;
+    }
+
     public ControllerState getState() {
         return state;
     }
 
     public void setState(ControllerState newState) {
+        CustomLogger.logInfo("Old state", state.toString());
+        CustomLogger.logInfo("New State", newState.toString());
         if (newState == ControllerState.IDLE) {
             if ((state == ControllerState.PROCESSING_ACTION_1
                     || state == ControllerState.PROCESSING_ACTION_2
