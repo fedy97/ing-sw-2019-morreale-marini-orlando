@@ -153,6 +153,10 @@ public class Platform {
         playersOnThePlatform.add(character);
     }
 
+    public void removePlayerOnPlatform(Character character) {
+        playersOnThePlatform.remove(character);
+    }
+
     /**
      * @param adjacentPlatforms to link to this platform
      * @throws InvalidAdjacentPlatformsException if adjacentPlatforms is null
