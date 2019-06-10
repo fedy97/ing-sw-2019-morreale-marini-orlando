@@ -712,7 +712,7 @@ public class GameBoardController {
                     weaponsImagesInSpot.get(i).setFitHeight(152);
                     weaponsImagesInSpot.get(i).setX(x + 32);
                     weaponsImagesInSpot.get(i).setY(y - 25);
-                    firstSetupReconnected=false;
+                    firstSetupReconnected = false;
                 }
             }
 
@@ -776,8 +776,10 @@ public class GameBoardController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == buttonTypeOne)
             gui.sendBinaryAnswer(true);
-        else
+        else {
+            gui.getUseWeaponStage().close();
             gui.sendBinaryAnswer(false);
+        }
     }
 
     public void moveClick() {
