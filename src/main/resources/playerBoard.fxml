@@ -12,7 +12,10 @@
             <Image url="@assets/backgrounds/bgchoose.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="boardImage" fitHeight="255.0" fitWidth="826.0" layoutX="45.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="boardImage" fitHeight="255.0" fitWidth="826.0" layoutX="45.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/boards/banshee.png" />
+         </image></ImageView>
       <ImageView fx:id="wImage1" fitHeight="230.0" fitWidth="148.0" layoutX="14.0" layoutY="389.0" pickOnBounds="true" />
       <ImageView fx:id="wImage2" fitHeight="230.0" fitWidth="148.0" layoutX="180.0" layoutY="389.0" pickOnBounds="true" />
       <ImageView fx:id="wImage3" fitHeight="230.0" fitWidth="148.0" layoutX="346.0" layoutY="389.0" pickOnBounds="true" />
@@ -151,5 +154,8 @@
             <Image url="@assets/ammos/yellowAmmo.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="mark1" fitHeight="44.0" fitWidth="37.0" layoutX="478.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="mark2" fitHeight="44.0" fitWidth="37.0" layoutX="531.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="mark3" fitHeight="44.0" fitWidth="37.0" layoutX="586.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

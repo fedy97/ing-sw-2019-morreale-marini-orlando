@@ -115,6 +115,12 @@ public class PlayerBoardController {
     private ImageView life5;
     @FXML
     private ImageView life6;
+    @FXML
+    private ImageView mark1;
+    @FXML
+    private ImageView mark2;
+    @FXML
+    private ImageView mark3;
 
     private GUI gui;
     private String myChar;
@@ -126,6 +132,7 @@ public class PlayerBoardController {
     private List<ImageView> redAmmosImages;
     private List<ImageView> damagesImages;
     private List<ImageView> livesImages;
+    private List<ImageView> marksImages;
     private List<Button> infoWeaponsButtons;
     private List<Button> infoPowerupsButtons;
     private String currPlayerDisplay;
@@ -140,6 +147,10 @@ public class PlayerBoardController {
         redAmmosImages = new ArrayList<>();
         damagesImages = new ArrayList<>();
         livesImages = new ArrayList<>();
+        marksImages = new ArrayList<>();
+        marksImages.add(mark1);
+        marksImages.add(mark2);
+        marksImages.add(mark3);
         yellowAmmosImages.add(yellowAmmo1);
         yellowAmmosImages.add(yellowAmmo2);
         yellowAmmosImages.add(yellowAmmo3);
@@ -203,6 +214,19 @@ public class PlayerBoardController {
         updatePlayerAmmos();
         //updates damages
         updateDamages();
+        //updates marks
+        updateMarks();
+    }
+
+    private void updateMarks() {
+        BoardRep boardRep = lightGameVersion.getPlayerBoardRep().get(currPlayerDisplay);
+        List<String> characterMarks = boardRep.getMarks();
+        for (String currChar : characterMarks) {
+            marksImages.get(characterMarks.indexOf(currChar)).setVisible(true);
+            marksImages.get(characterMarks.indexOf(currChar)).setImage(new Image("/assets/boards/1mark" + currChar + ".png"));
+        }
+        for (int i = characterMarks.size(); i < 3; i++)
+            marksImages.get(i).setVisible(false);
     }
 
     private void updateDamages() {
