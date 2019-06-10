@@ -66,7 +66,7 @@ public class PlayerManager {
      *
      * @param platform platform destination
      */
-    public void move(Platform platform) {
+    public void move(Platform platform) throws InvalidCharacterException {
         currentPlayer.setCurrentPlatform(platform);
         father.getGame().notifyChanges();
     }

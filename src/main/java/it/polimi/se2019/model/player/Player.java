@@ -87,8 +87,9 @@ public class Player {
      *
      * @param platform the new position of the player
      */
-    public void setCurrentPlatform(Platform platform) {
+    public void setCurrentPlatform(Platform platform) throws InvalidCharacterException {
         currentPlatform = platform;
+        platform.setPlayerOnPlatform(this.getCharacter());
     }
 
     /**
