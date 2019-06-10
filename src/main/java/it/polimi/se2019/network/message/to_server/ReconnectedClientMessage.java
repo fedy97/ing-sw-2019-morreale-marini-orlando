@@ -15,7 +15,7 @@ public class ReconnectedClientMessage extends ToServerMessage {
     public void performAction() {
         Controller actor = Controller.getInstance();
         String user = (String) payload;
-        //actor.broadcastMessage(user + " reconnected!");
         actor.callView(new ShowReconnectedGameBoard(actor.getConfigMap(), actor.getGame().getLightVersion(), actor.findCharactersInGame(), actor.getGame().getPlayer(user).getCharacter().name()), user);
+        actor.broadcastMessage(user + " reconnected!");
     }
 }
