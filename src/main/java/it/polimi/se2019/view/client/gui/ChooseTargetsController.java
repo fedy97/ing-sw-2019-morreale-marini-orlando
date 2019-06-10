@@ -49,6 +49,11 @@ public class ChooseTargetsController {
     protected void enlightenRightTargets(List<String> targetsToEnlighten) {
         for (String target : targetsToEnlighten)
             HandyFunctions.enlightenToggleButton(buttons.get(target));
+        for (Map.Entry<String,ToggleButton> entry : buttons.entrySet()) {
+            if (!targetsToEnlighten.contains(entry.getKey()))
+                HandyFunctions.darkenToggleButton(entry.getValue());
+            targets.remove(entry.getKey());
+        }
     }
 
     public void fireClick() {
