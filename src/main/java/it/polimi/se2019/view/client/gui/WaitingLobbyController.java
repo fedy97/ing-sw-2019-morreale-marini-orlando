@@ -1,8 +1,8 @@
 package it.polimi.se2019.view.client.gui;
 
-import it.polimi.se2019.utils.HandyFunctions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,8 @@ public class WaitingLobbyController {
     @FXML
     private Label player5;
     @FXML
-    private Label timer;
+    private ProgressIndicator progress;
+    private float timerInt;
 
     public void initialize() {
         playerLabels.add(player1);
@@ -30,7 +31,6 @@ public class WaitingLobbyController {
         playerLabels.add(player3);
         playerLabels.add(player4);
         playerLabels.add(player5);
-        timer.setText("");
     }
 
     public void updateLoggedPlayers(List<String> users) {
@@ -43,7 +43,10 @@ public class WaitingLobbyController {
     }
 
     public void updateTimer(int count) {
-        timer.setText(Integer.toString(count));
+        if (progress.getProgress() == -1) {
+            timerInt = count;
+            progress.setProgress(0);
+        } else progress.setProgress(progress.getProgress() + (1/timerInt));
     }
 
 

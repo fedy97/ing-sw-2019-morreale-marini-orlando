@@ -17,7 +17,7 @@
             <Image url="@assets/backgrounds/bgchoose.jpg" />
          </image>
       </ImageView>
-      <ProgressIndicator layoutX="150.0" layoutY="153.0" prefHeight="94.0" prefWidth="104.0" />
+      <ProgressIndicator fx:id="progress" layoutX="150.0" layoutY="153.0" prefHeight="94.0" prefWidth="104.0" />
       <Label layoutX="54.0" layoutY="34.0" prefHeight="62.0" prefWidth="291.0" text="Waiting for players..." textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Ubuntu" size="31.0" />
@@ -28,14 +28,5 @@
       <Label fx:id="player3" layoutX="27.0" layoutY="320.0" prefHeight="15.0" prefWidth="345.0" textAlignment="CENTER" textFill="WHITE" />
       <Label fx:id="player4" layoutX="27.0" layoutY="340.0" prefHeight="15.0" prefWidth="345.0" textAlignment="CENTER" textFill="WHITE" />
       <Label fx:id="player5" layoutX="27.0" layoutY="360.0" prefHeight="15.0" prefWidth="345.0" textAlignment="CENTER" textFill="WHITE" />
-      <Label layoutX="105.0" layoutY="113.0" text="Countdown:" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font></Label>
-      <Label fx:id="timer" layoutX="254.0" layoutY="113.0" text="5" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>
