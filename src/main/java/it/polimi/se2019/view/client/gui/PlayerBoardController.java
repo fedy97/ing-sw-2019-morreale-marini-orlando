@@ -210,7 +210,7 @@ public class PlayerBoardController {
         List<String> charactersDamages = boardRep.getDamages();
         for (String currChar : charactersDamages) {
             damagesImages.get(charactersDamages.indexOf(currChar)).setVisible(true);
-            damagesImages.get(charactersDamages.indexOf(currChar)).setImage(new Image("1mark" + currChar + ".png"));
+            damagesImages.get(charactersDamages.indexOf(currChar)).setImage(new Image("/assets/boards/1mark" + currChar + ".png"));
         }
         for (int i = charactersDamages.size(); i < 12; i++)
             damagesImages.get(i).setVisible(false);
