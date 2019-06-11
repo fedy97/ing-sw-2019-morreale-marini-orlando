@@ -1038,6 +1038,7 @@ public class GameBoardController {
         reloadbutton.setDisable(!actives[3]);
         endturnbutton.setDisable(!actives[4]);
         powerupsbutton.setDisable(!actives[5]);
+        convertbutton.setDisable(!actives[6]);
     }
 
     public void setReconnected(boolean reconnected) {

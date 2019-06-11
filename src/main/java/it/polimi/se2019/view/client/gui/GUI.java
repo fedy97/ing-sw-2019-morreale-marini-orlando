@@ -382,13 +382,13 @@ public class GUI extends RemoteView {
     protected void sendPlatformChosen(String pos) {
         MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(pos);
         notifyController(message);
-        gameBoardController.setActiveButtons(new boolean[]{true, true, true, false, true, true});
+        //gameBoardController.setActiveButtons(new boolean[]{true, true, true, false, true, true});
     }
 
     protected void sendWeaponGrabbed(String hashWeapon) {
         ChosenWeaponMessage message = new ChosenWeaponMessage(hashWeapon);
         notifyController(message);
-        gameBoardController.setActiveButtons(new boolean[]{true, true, true, false, true, true});
+        //gameBoardController.setActiveButtons(new boolean[]{true, true, true, false, true, true});
     }
 
     protected void sendWeaponToSwitch(String hashWeapon) {
@@ -420,7 +420,7 @@ public class GUI extends RemoteView {
     }
 
     protected void iWantToDoSomething(String action) {
-        gameBoardController.setActiveButtons(new boolean[]{false, false, false, false, false, false});
+        //gameBoardController.setActiveButtons(new boolean[]{false, false, false, false, false, false});
         PerformActionMessage message = new PerformActionMessage(action);
         notifyController(message);
     }

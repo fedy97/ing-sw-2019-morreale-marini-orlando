@@ -121,7 +121,7 @@ public class SocketServer implements Server {
             outStream.writeObject(msg);
             outStream.reset();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            //HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
     }
 

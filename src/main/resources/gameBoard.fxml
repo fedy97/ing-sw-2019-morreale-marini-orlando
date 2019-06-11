@@ -22,9 +22,6 @@
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
-         <image>
-            <Image url="@assets/map/1.jpg" />
-         </image>
         
       </ImageView>
       <GridPane layoutX="355.0" layoutY="151.0" prefHeight="162.0" prefWidth="184.0">
@@ -578,7 +575,7 @@
       <Button fx:id="distructorstats" disable="true" layoutX="550.0" layoutY="648.0" mnemonicParsing="false" onAction="#distructorClick" prefHeight="55.0" prefWidth="54.0" style="-fx-background-color: transparent;" />
       <Button fx:id="dozerstats" disable="true" layoutX="613.0" layoutY="648.0" mnemonicParsing="false" onAction="#dozerClick" prefHeight="55.0" prefWidth="54.0" style="-fx-background-color: transparent;" />
       <Button fx:id="reloadbutton" disable="true" layoutX="110.0" layoutY="636.0" mnemonicParsing="false" onAction="#reloadClick" text="reload" />
-      <Button fx:id="endturnbutton" layoutX="111.0" layoutY="671.0" mnemonicParsing="false" onAction="#endturnClick" text="end turn" />
+      <Button fx:id="endturnbutton" disable="true" layoutX="111.0" layoutY="671.0" mnemonicParsing="false" onAction="#endturnClick" text="end turn" />
       <ImageView fx:id="skull1" fitHeight="55.0" fitWidth="44.0" layoutX="75.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@assets/boards/skull.png" />
@@ -611,8 +608,8 @@
          <image>
             <Image url="@assets/boards/skull.png" />
          </image></ImageView>
-      <Button fx:id="powerupsbutton" layoutX="207.0" layoutY="671.0" mnemonicParsing="false" onAction="#powerupsClick" text="powerups" />
-      <Button fx:id="convertbutton" layoutX="19.0" layoutY="207.0" mnemonicParsing="false" onAction="#convertClick" text="convert powerups" />
+      <Button fx:id="powerupsbutton" disable="true" layoutX="207.0" layoutY="671.0" mnemonicParsing="false" onAction="#powerupsClick" text="powerups" />
+      <Button fx:id="convertbutton" disable="true" layoutX="19.0" layoutY="207.0" mnemonicParsing="false" onAction="#convertClick" text="convert powerups" />
       <Label fx:id="messageLabel" layoutX="59.0" layoutY="91.0" prefHeight="55.0" prefWidth="485.0" textFill="#bbff08" wrapText="true">
          <font>
             <Font name="System Bold" size="13.0" />
