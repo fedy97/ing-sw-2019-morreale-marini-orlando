@@ -75,7 +75,6 @@ public class PerformActionMessage extends ToServerMessage {
                         c.askFor(destinations, "position");
                         c.getPlayerManager().move(c.getChosenDestination().take());
                     }catch (InvalidActionException e){
-                        e.printStackTrace();
                         CustomLogger.logInfo(this.getClass().getName(), "You cannot move before shooting!");
                     }
 

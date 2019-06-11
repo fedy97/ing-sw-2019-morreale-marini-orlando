@@ -1,6 +1,7 @@
 package it.polimi.se2019;
 
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.network.server.RMIServer;
 import it.polimi.se2019.network.server.SocketServer;
 import it.polimi.se2019.utils.HandyFunctions;

@@ -185,18 +185,26 @@ public class Controller implements Observer {
 
                     for (int i = 0; i < currEffect.getMaxTargets(); i++) {
                         targets.add(currentTargets.take());
+                        if(currentTargets.isEmpty())
+                            break;
                     }
                     //HandyFunctions.printList(targets);
                     weapon.activateEffect(effectIndex, targets);
-                } else
+                    CustomLogger.logInfo(getClass().getName(), "Action performed!");
+                } else{
                     weapon.activateEffect(effectIndex, null);
+                    CustomLogger.logInfo(getClass().getName(), "Action performed with null!");
+                }
 
             } catch (Exception e) {
+                e.printStackTrace();
                 CustomLogger.logException(getClass().getName(), e);
             }
 
             usedEffects++;
         }
+
+        weapon.discard();
     }
 
     /**

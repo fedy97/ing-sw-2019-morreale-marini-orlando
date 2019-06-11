@@ -5,6 +5,7 @@ import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.enumeration.Character;
+import it.polimi.se2019.utils.CustomLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,10 +88,13 @@ public class Player {
      *
      * @param platform the new position of the player
      */
-    public void setCurrentPlatform(Platform platform) throws InvalidCharacterException {
-        if (currentPlatform != null) currentPlatform.removePlayerOnPlatform(this.getCharacter());
+    public void setCurrentPlatform(Platform platform) {
         currentPlatform = platform;
-        currentPlatform.setPlayerOnPlatform(this.getCharacter());
+        try {
+            currentPlatform.setPlayerOnPlatform(this.getCharacter());
+        }catch (Exception e){
+            CustomLogger.logException(this.getClass().getName(), e);
+        }
     }
 
     /**

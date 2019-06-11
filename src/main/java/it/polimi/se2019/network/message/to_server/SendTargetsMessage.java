@@ -16,8 +16,10 @@ public class SendTargetsMessage extends ToServerMessage {
     public void performAction() {
         Controller c = Controller.getInstance();
         List<String> targets = (ArrayList<String>) payload;
+        List<Character> characters = new ArrayList<>();
         HandyFunctions.printList(targets);
         for (String target : targets)
-            c.getCurrentTargets().add(Character.valueOf(target));
+            characters.add(Character.valueOf(target));
+        c.getCurrentTargets().addAll(characters);
     }
 }

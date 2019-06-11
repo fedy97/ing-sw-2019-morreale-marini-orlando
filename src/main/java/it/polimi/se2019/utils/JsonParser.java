@@ -231,7 +231,7 @@ public class JsonParser {
             case "spada fotonica":
                 weaponCard = new Cyberblade(name, description, pathImg, paidCost, extraCost);
                 break;
-            case "lancia razzi":
+            case "lanciarazzi":
                 weaponCard = new RocketLauncher(name, description, pathImg, paidCost, extraCost);
                 break;
             /*case "fucile di precisione":

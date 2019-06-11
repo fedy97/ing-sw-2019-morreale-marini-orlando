@@ -62,7 +62,8 @@ public class WeaponCard extends Card {
      * Reload the weapon
      */
 
-    public void reload() {}
+    public void reload() {
+    }
 
     /**
      * @retun the paid cost of the weapon
@@ -137,6 +138,10 @@ public class WeaponCard extends Card {
 
     public void activateEffect(int index, List<Character> targets) {
         effects.get(index).activateEffect(targets, this);
+    }
+
+    public void discard() {
+        loaded = false;
     }
 
     /**
