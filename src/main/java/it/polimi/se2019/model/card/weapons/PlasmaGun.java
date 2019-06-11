@@ -77,7 +77,7 @@ public final class PlasmaGun extends WeaponAlternativeFire {
                 //Deal 1 additional damage to your target
                 damages.put(game.getPlayer(getLastEffectTargets().get(0)), 1);
                 playerManager.addDamage(damages);
-                usableEffects[3] = false;
+                usableEffects[2] = false;
 
                 playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }

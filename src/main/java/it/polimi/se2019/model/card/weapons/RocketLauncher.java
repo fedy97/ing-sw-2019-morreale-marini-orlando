@@ -101,7 +101,7 @@ public final class RocketLauncher extends WeaponAlternativeFire {
                     damages.put(game.getPlayer(target), 1);
                 playerManager.addDamage(damages);
 
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[2] = false;
                 playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
