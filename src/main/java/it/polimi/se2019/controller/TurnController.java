@@ -76,8 +76,6 @@ public class TurnController {
             c.getDecksManager().getAmmoGarbageDeck().clear();
         }
         curr = nextUser();
-        while (!c.getGame().getPlayer(curr).isConnected())
-            curr = nextUser();
         c.getPlayerManager().setCurrentPlayer(c.getGame().getPlayer(curr));
         Player currPlayer = c.getPlayerManager().getCurrentPlayer();
         for (Player player : c.getGame().getPlayers()) {

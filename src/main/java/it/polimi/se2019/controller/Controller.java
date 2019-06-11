@@ -51,6 +51,7 @@ public class Controller implements Observer {
     private boolean timerStarted = false;
     private Map<Integer, Integer> mapChosen;
     private List<String> pingsList;
+    private List<String> alreadyNotified = new ArrayList<>();
     private int configMap;
 
     private Controller() {
@@ -261,7 +262,8 @@ public class Controller implements Observer {
      * @param msg to the destination client
      */
     public void callView(ToClientMessage msg, String user) {
-        userView.get(user).callView(msg);
+        if (game.getPlayers().isEmpty() || game.getPlayer(user).isConnected())
+            userView.get(user).callView(msg);
     }
 
     public void setVoteMapChosen(int voteMapChosen) {
@@ -352,6 +354,7 @@ public class Controller implements Observer {
                 notifyAll(new ShowGameBoardMessage(firstUser, ammoReps, cardReps, game.getLightVersion().getPlatformWeapons(), arrChars));
                 turnController.notifyFirst();
                 List<String> chars = new ArrayList<>();
+
                 for (Player p : game.getPlayers())
                     chars.add(p.getCharacter().name());
                 new Thread(() -> {
@@ -366,7 +369,10 @@ public class Controller implements Observer {
                                     game.deleteObserver(userView.get(game.getPlayer(Character.valueOf(charCurr)).getName()));
                                     Player toDisconnect = game.getPlayer(Character.valueOf(charCurr));
                                     toDisconnect.setConnected(false);
-                                    broadcastMessage(toDisconnect.getName() + " disconnected!");
+                                    if (!alreadyNotified.contains(charCurr)) {
+                                        alreadyNotified.add(charCurr);
+                                        broadcastMessage(toDisconnect.getName() + " disconnected!");
+                                    }
                                     if (turnController.getTurnUser().equals(game.getPlayer(Character.valueOf(charCurr)).getName()))
                                         turnController.endTurn();
                                 }
@@ -643,5 +649,9 @@ public class Controller implements Observer {
 
     public List<String> getPingsList() {
         return pingsList;
+    }
+
+    public List<String> getAlreadyNotified() {
+        return alreadyNotified;
     }
 }
