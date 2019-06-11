@@ -29,7 +29,7 @@ public final class Electroscythe extends WeaponAlternativeFire {
                     damages.put(game.getPlayer(character), 1);
                 playerManager.addDamage(damages);
 
-                usableEffects = new boolean[]{false, true, true};
+                usableEffects = new boolean[]{false, false, false};
                 playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
@@ -47,7 +47,7 @@ public final class Electroscythe extends WeaponAlternativeFire {
                     damages.put(game.getPlayer(character), 1);
                 playerManager.addDamage(damages);
 
-                usableEffects = new boolean[]{false, false, true};
+                usableEffects = new boolean[]{false, false, false};
                 playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
@@ -67,7 +67,7 @@ public final class Electroscythe extends WeaponAlternativeFire {
     @Override
     public void reload() {
         cleanCache();
-        usableEffects = new boolean[]{true, true, true};
+        usableEffects = new boolean[]{true, true, false};
         loaded = true;
     }
 }
