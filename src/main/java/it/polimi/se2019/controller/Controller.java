@@ -5,10 +5,7 @@ import it.polimi.se2019.exceptions.InvalidPositionException;
 import it.polimi.se2019.model.AmmoRep;
 import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.Game;
-import it.polimi.se2019.model.board.GameField;
-import it.polimi.se2019.model.board.Platform;
-import it.polimi.se2019.model.board.ScoreBoard;
-import it.polimi.se2019.model.board.SkullsBoard;
+import it.polimi.se2019.model.board.*;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
@@ -21,7 +18,9 @@ import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.*;
 import it.polimi.se2019.view.server.VirtualView;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -372,15 +371,25 @@ public class Controller implements Observer {
                                     if (!alreadyNotified.contains(charCurr)) {
                                         alreadyNotified.add(charCurr);
                                         broadcastMessage(toDisconnect.getName() + " disconnected!");
+                                        if (toDisconnect.getCurrentPlatform() == null) {
+                                            PowerUpCard p = decksManager.drawPowerUp();
+                                            toDisconnect.addPowerUpCard(p);
+                                            Color powerupColor = HandyFunctions.stringToColor(p.getAmmoCube().name());
+                                            for (Room r : Game.getInstance().getGameField().getRooms()) {
+                                                if (r.hasGenerationSpot() && r.getGenSpot().getPlatformColor().equals(powerupColor))
+                                                    toDisconnect.setCurrentPlatform(r.getGenSpot());
+                                            }
+                                        }
                                     }
-                                    if (turnController.getTurnUser().equals(game.getPlayer(Character.valueOf(charCurr)).getName()))
+                                    if (turnController.getTurnUser().equals(toDisconnect.getName())) {
                                         turnController.endTurn();
+                                    }
                                 }
                             }
                             Thread.sleep(1000);
                         }
                     } catch (InterruptedException ex) {
-                    }
+                    } catch (Exception ex) {}
 
                 }).start();
 
