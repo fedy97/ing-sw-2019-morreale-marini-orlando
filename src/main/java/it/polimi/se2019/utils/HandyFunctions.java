@@ -109,6 +109,12 @@ public class HandyFunctions {
         return (Color) Color.class.getField(color).get(null);
     }
 
+    public static <T> void printList(List<T> list) {
+        for (T el : list) {
+            System.out.println(el.toString());
+        }
+    }
+
     public static void enlightenButton(Button button) {
         button.setStyle(ENLIGHTED_BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
@@ -141,5 +147,6 @@ public class HandyFunctions {
         button.setStyle(DARKED_BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.DARKED_BUTTON_STYLE));
         button.setOnMouseExited(e -> button.setStyle(HandyFunctions.DARKED_BUTTON_STYLE));
+        button.setDisable(true);
     }
 }

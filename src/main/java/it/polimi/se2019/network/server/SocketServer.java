@@ -2,8 +2,10 @@ package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.Lobby;
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.model.Game;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.network.message.to_server.ReconnectedClientMessage;
+import it.polimi.se2019.network.message.to_server.ResponseToPingMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
@@ -67,10 +69,14 @@ public class SocketServer implements Server {
                             Lobby.addUser(user);
                         } else if (actors.containsKey(user)){
                             virtualView = actors.get(user);
+                            Game.getInstance().addObserver(virtualView);
+                            Game.getInstance().getPlayer(user).setConnected(true);
                             newConnection = false;
                         }
                         else {
                             virtualView = Controller.getInstance().getUserView().get(user);
+                            Game.getInstance().addObserver(virtualView);
+                            Game.getInstance().getPlayer(user).setConnected(true);
                             Lobby.getRmiServer().getClientActor().remove(user);
                             Lobby.getRmiServer().getSkeletons().remove(user);
                             actors.put(user,virtualView);
@@ -84,8 +90,9 @@ public class SocketServer implements Server {
                         if (newConnection) {
                             virtualView.notifyObservers("new client connected");
                             HandyFunctions.checkForAtLeast2Players(virtualView);
-                        } else
+                        } else {
                             virtualView.notifyObservers(new ReconnectedClientMessage(user));
+                        }
 
                     } catch (Exception e) {
                         HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());

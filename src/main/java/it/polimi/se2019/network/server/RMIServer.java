@@ -2,9 +2,11 @@ package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.Lobby;
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.model.Game;
 import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.network.message.to_server.ReconnectedClientMessage;
+import it.polimi.se2019.network.message.to_server.ResponseToPingMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
@@ -98,10 +100,14 @@ public class RMIServer implements Server {
                 Lobby.addUser(username);
             } else if (clientActor.containsKey(username)){
                 virtualView = clientActor.get(username);
+                Game.getInstance().addObserver(virtualView);
+                Game.getInstance().getPlayer(username).setConnected(true);
                 newConnection = false;
             }
             else {
                 virtualView = Controller.getInstance().getUserView().get(username);
+                Game.getInstance().addObserver(virtualView);
+                Game.getInstance().getPlayer(username).setConnected(true);
                 Lobby.getSocketServer().getActors().remove(username);
                 Lobby.getSocketServer().getConnections().remove(username);
                 clientActor.put(username, virtualView);
@@ -112,8 +118,9 @@ public class RMIServer implements Server {
             if (newConnection) {
                 virtualView.notifyObservers("new client connected");
                 HandyFunctions.checkForAtLeast2Players(virtualView);
-            } else
+            } else {
                 virtualView.notifyObservers(new ReconnectedClientMessage(username));
+            }
             HandyFunctions.LOGGER.log(Level.INFO, username + " connected to the RMI server!");
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());

@@ -478,6 +478,12 @@ public class GUI extends RemoteView {
 
     }
 
+    @Override
+    public void receivePingFromServer() {
+        ResponseToPingMessage message = new ResponseToPingMessage(getCharInString());
+        notifyController(message);
+    }
+
     private void notifyController(ToServerMessage message) {
         message.setSender(userName);
         viewSetChanged();

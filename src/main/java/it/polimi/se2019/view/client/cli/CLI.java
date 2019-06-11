@@ -501,4 +501,9 @@ public class CLI extends RemoteView {
     public void showReconnectedGameBoard(int config, LightGameVersion lightGameVersion, List<String> arr, String myChar) {
 
     }
+
+    @Override
+    public void receivePingFromServer() {
+
+    }
 }

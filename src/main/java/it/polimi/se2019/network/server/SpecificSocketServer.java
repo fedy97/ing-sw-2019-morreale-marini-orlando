@@ -1,11 +1,9 @@
 package it.polimi.se2019.network.server;
 
-import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -32,7 +30,7 @@ public class SpecificSocketServer extends Thread {
 
     @Override
     public void run() {
-        while (!socket.isClosed())  {
+        while (!socket.isClosed()) {
             try {
                 ToServerMessage msg;
                 msg = (ToServerMessage) input.readObject();
@@ -41,7 +39,7 @@ public class SpecificSocketServer extends Thread {
                     ss.interpretMessage(msg);
 
                 Thread.sleep(100);
-            } catch (EOFException e) {
+            } catch (Exception e) {
                 try {
                     input.close();
                     output.close();
@@ -51,8 +49,7 @@ public class SpecificSocketServer extends Thread {
                     HandyFunctions.LOGGER.log(Level.INFO, user + " stream of " + user + " already closed");
                 }
                 HandyFunctions.LOGGER.log(Level.FINE, user + " closed the connection");
-            } catch (Exception e) {
-                HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
+
             }
         }
     }

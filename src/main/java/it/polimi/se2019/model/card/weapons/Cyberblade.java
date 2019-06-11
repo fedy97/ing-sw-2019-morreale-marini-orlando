@@ -36,7 +36,7 @@ public final class Cyberblade extends WeaponAlternativeFire {
 
                 //setting targets for the next additional effect
                 List<Character> targets = playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform();
-                targets.remove(playerManager.getCurrentPlayer().getCharacter());
+                //targets.remove(playerManager.getCurrentPlayer().getCharacter());
                 targets.remove(chosenTargets.get(0));
                 getEffects().get(2).getLastEffectTargets().addAll(targets);
             }
@@ -78,7 +78,7 @@ public final class Cyberblade extends WeaponAlternativeFire {
                 Map<Player, Integer> damages = new HashMap<>();
 
                 //"Deal 2 damage to a different target on your square"
-                damages.put(game.getPlayer(getLastEffectTargets().get(0)), 2);
+                damages.put(game.getPlayer(targets.get(0)), 2);
                 playerManager.addDamage(damages);
                 usableEffects[3] = false;
 

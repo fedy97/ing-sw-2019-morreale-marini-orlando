@@ -63,12 +63,6 @@ public class TurnController {
         c.getPlayerManager().getCurrentPlayer().getPlayerBoard().getAmmoBox().getOptionals().clear();
         c.getGame().notifyChanges();
         if ((currIndex + 1) == turningOrder.size()) {
-            int n = 0;
-            do {
-                curr = turningOrder.get(n);
-                n++;
-            } while (!c.getGame().getPlayer(curr).isConnected());
-
             for (int i = 0; i < c.getDecksManager().getToFill().size(); i++) {
                 try {
                     AmmoCard newAmmo = c.getDecksManager().getNewAmmoCard(c.getDecksManager().getAmmoGarbageDeck().get(i));
@@ -80,13 +74,10 @@ public class TurnController {
             }
             c.getDecksManager().getToFill().clear();
             c.getDecksManager().getAmmoGarbageDeck().clear();
-        } else {
-            int n = 1;
-            do {
-                curr = turningOrder.get(currIndex + n);
-                n++;
-            } while (!c.getGame().getPlayer(curr).isConnected());
         }
+        curr = nextUser();
+        while (!c.getGame().getPlayer(curr).isConnected())
+            curr = nextUser();
         c.getPlayerManager().setCurrentPlayer(c.getGame().getPlayer(curr));
         Player currPlayer = c.getPlayerManager().getCurrentPlayer();
         for (Player player : c.getGame().getPlayers()) {
@@ -114,6 +105,15 @@ public class TurnController {
                 c.callView(new ShowMessage("It's ".concat(c.getPlayerManager().getCurrentPlayer().getName()).concat(" turn!")), player.getName());
             }
         }
+    }
+
+    private String nextUser() {
+        int currIndex = turningOrder.indexOf(curr);
+        if (currIndex + 1 == turningOrder.size())
+            currIndex=0;
+        else
+            currIndex++;
+        return turningOrder.get(currIndex);
     }
 
     /**

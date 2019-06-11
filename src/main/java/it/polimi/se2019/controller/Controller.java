@@ -50,6 +50,7 @@ public class Controller implements Observer {
     private int timerSetup;
     private boolean timerStarted = false;
     private Map<Integer, Integer> mapChosen;
+    private List<String> pingsList;
     private int configMap;
 
     private Controller() {
@@ -66,6 +67,7 @@ public class Controller implements Observer {
         userView = new HashMap<>();
         state = ControllerState.SETUP;
         timerSetup = HandyFunctions.parserSettings.getTimerSetup();
+        pingsList = new ArrayList<>();
     }
 
     /**
@@ -184,7 +186,7 @@ public class Controller implements Observer {
                     for (int i = 0; i < currEffect.getMaxTargets(); i++) {
                         targets.add(currentTargets.take());
                     }
-
+                    //HandyFunctions.printList(targets);
                     weapon.activateEffect(effectIndex, targets);
                 } else
                     weapon.activateEffect(effectIndex, null);
@@ -349,6 +351,33 @@ public class Controller implements Observer {
                 List<String> arrChars = findCharactersInGame();
                 notifyAll(new ShowGameBoardMessage(firstUser, ammoReps, cardReps, game.getLightVersion().getPlatformWeapons(), arrChars));
                 turnController.notifyFirst();
+                List<String> chars = new ArrayList<>();
+                for (Player p : game.getPlayers())
+                    chars.add(p.getCharacter().name());
+                new Thread(() -> {
+                    try {
+                        while (true) {
+                            pingsList.clear();
+                            notifyAll(new PingClientsMessage(null));
+                            Thread.sleep(1000);
+                            //HandyFunctions.printList(pingsList);
+                            for (String charCurr : chars) {
+                                if (!pingsList.contains(charCurr)) {
+                                    game.deleteObserver(userView.get(game.getPlayer(Character.valueOf(charCurr)).getName()));
+                                    Player toDisconnect = game.getPlayer(Character.valueOf(charCurr));
+                                    toDisconnect.setConnected(false);
+                                    broadcastMessage(toDisconnect.getName() + " disconnected!");
+                                    if (turnController.getTurnUser().equals(game.getPlayer(Character.valueOf(charCurr)).getName()))
+                                        turnController.endTurn();
+                                }
+                            }
+                            Thread.sleep(1000);
+                        }
+                    } catch (InterruptedException ex) {
+                    }
+
+                }).start();
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -435,9 +464,7 @@ public class Controller implements Observer {
      * @param msg content of the communication
      */
     public void broadcastMessage(String msg) {
-        for (Player player : game.getPlayers()) {
-            callView(new ShowMessage(msg), player.getName());
-        }
+        notifyAll(new ShowMessage(msg));
     }
 
     /**
@@ -460,7 +487,9 @@ public class Controller implements Observer {
 
     private void notifyAll(ToClientMessage msg) {
         for (String user : userView.keySet()) {
-            callView(msg, user);
+            if (game.getGameField() == null || game.getPlayers().isEmpty() || game.getPlayer(user).isConnected()) {
+                callView(msg, user);
+            }
         }
     }
 
@@ -610,5 +639,9 @@ public class Controller implements Observer {
 
     public Map<String, VirtualView> getUserView() {
         return userView;
+    }
+
+    public List<String> getPingsList() {
+        return pingsList;
     }
 }
