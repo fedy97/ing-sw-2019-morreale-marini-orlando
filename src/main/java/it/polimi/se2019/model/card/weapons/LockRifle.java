@@ -29,8 +29,9 @@ public final class LockRifle extends WeaponAlternativeFire {
                 playerManager.addDamage(damages);
                 playerManager.mark(game.getPlayer(chosenTarget), 1);
 
-                usableEffects = new boolean[]{false, true, true};
-                getEffects().get(1).getPossibleTargets().remove(chosenTarget);
+                usableEffects[0] = false;
+                usableEffects[1] = true;
+                getEffects().get(1).getLastEffectTargets().add(chosenTarget);
             }
 
             @Override
@@ -44,18 +45,19 @@ public final class LockRifle extends WeaponAlternativeFire {
             public void activateEffect(List<Character> targets, WeaponCard card) {
                 playerManager.mark(game.getPlayer(targets.get(0)), 1);
 
-                usableEffects = new boolean[]{false, false, true};
+                usableEffects[1] = false;
                 playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
             @Override
             public void setupTargets() {
                 this.setPossibleTargets(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform()));
+                this.getPossibleTargets().remove(this.getLastEffectTargets().get(0));
             }
         };
 
         availableEffects = new boolean[]{true, true, false};
-        usableEffects = new boolean[]{true, true, true};
+        usableEffects = new boolean[]{true, false, false};
 
         eff1.setMaxTargets(1);
         eff2.setMaxTargets(1);
@@ -67,7 +69,7 @@ public final class LockRifle extends WeaponAlternativeFire {
     @Override
     public void reload() {
         cleanCache();
-        usableEffects = new boolean[]{true, true, true};
+        usableEffects = new boolean[]{true, false, false};
         loaded = true;
     }
 }
