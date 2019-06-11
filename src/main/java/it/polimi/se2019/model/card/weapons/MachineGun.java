@@ -44,7 +44,7 @@ public final class MachineGun extends WeaponAlternativeFire {
             }
         };
 
-        Effect eff2 = new Effect(new AmmoCube[]{AmmoCube.RED}) {
+        Effect eff2 = new Effect(new AmmoCube[]{AmmoCube.YELLOW}) {
             @Override
             public void activateEffect(List<Character> targets, WeaponCard card) {
                 Map<Player, Integer> damages = new HashMap<>();
@@ -53,7 +53,7 @@ public final class MachineGun extends WeaponAlternativeFire {
                 damages.put(game.getPlayer(targets.get(0)), 1);
                 playerManager.addDamage(damages);
 
-                usableEffects = new boolean[]{false, false, true};
+                usableEffects[1] = false;
                 playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
 
                 //setting targets for the next additional effect
@@ -69,14 +69,14 @@ public final class MachineGun extends WeaponAlternativeFire {
             }
         };
 
-        Effect eff3 = new Effect(new AmmoCube[]{AmmoCube.RED}) {
+        Effect eff3 = new Effect(new AmmoCube[]{AmmoCube.BLUE}) {
             @Override
             public void activateEffect(List<Character> targets, WeaponCard card) {
                 Map<Player, Integer> damages = new HashMap<>();
                 damages.put(game.getPlayer(targets.get(0)), 1);
                 playerManager.addDamage(damages);
 
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[2] = false;
                 playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
@@ -87,7 +87,7 @@ public final class MachineGun extends WeaponAlternativeFire {
         };
 
         availableEffects = new boolean[]{true, true, true};
-        usableEffects = new boolean[]{true, true, true};
+        usableEffects = new boolean[]{true, false, false};
 
         eff1.setMaxTargets(2);
         eff2.setMaxTargets(1);
@@ -101,7 +101,7 @@ public final class MachineGun extends WeaponAlternativeFire {
     @Override
     public void reload() {
         cleanCache();
-        usableEffects = new boolean[]{true, true, true};
+        usableEffects = new boolean[]{true, false, false};
         loaded = true;
     }
 }
