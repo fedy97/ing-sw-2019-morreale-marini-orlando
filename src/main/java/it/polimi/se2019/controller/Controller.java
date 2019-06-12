@@ -515,7 +515,7 @@ public class Controller implements Observer {
 
     protected void notifyAll(ToClientMessage msg) {
         for (String user : userView.keySet()) {
-            if (game.getGameField() == null || game.getPlayers().isEmpty() || game.getPlayer(user).isConnected()) {
+            if (game.getGameField() == null || game.getPlayers().isEmpty() || (game.getPlayer(user) != null && game.getPlayer(user).isConnected())) {
                 callView(msg, user);
             }
         }
