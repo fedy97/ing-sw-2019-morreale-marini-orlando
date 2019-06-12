@@ -777,7 +777,8 @@ public class GameBoardController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == buttonTypeOne) {
-            gui.getUseWeaponStage().show();
+            if (message.equals("Do you want to use another effect?"))
+                gui.getUseWeaponStage().show();
             gui.sendBinaryAnswer(true);
         }
         else {
