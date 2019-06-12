@@ -57,7 +57,7 @@ public class PlayerManager {
      * @param amount of mark value
      */
     public void mark(Player target, int amount) {
-        target.getPlayerBoard().addRevengeMark(target.getCharacter(), amount);
+        target.getPlayerBoard().addRevengeMark(currentPlayer.getCharacter(), amount);
         father.getGame().notifyChanges();
     }
 

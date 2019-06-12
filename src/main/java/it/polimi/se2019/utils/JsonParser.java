@@ -231,8 +231,20 @@ public class JsonParser {
             /*case "cannone vortex":
                 weaponCard = new VortexCannon(name, description, pathImg, paidCost, extraCost);
                 break;*/
+            case "zx-2":
+                weaponCard = new ZX2(name, description, pathImg, paidCost, extraCost);
+                break;
             case "spada fotonica":
                 weaponCard = new Cyberblade(name, description, pathImg, paidCost, extraCost);
+                break;
+            case "fucile a pompa":
+                weaponCard = new Shotgun(name, description, pathImg, paidCost, extraCost);
+                break;
+            case "vulcanizzatore":
+                weaponCard = new Furnace(name, description, pathImg, paidCost, extraCost);
+                break;
+            case "raggio solare":
+                weaponCard = new Hellion(name, description, pathImg, paidCost, extraCost);
                 break;
             case "lanciarazzi":
                 weaponCard = new RocketLauncher(name, description, pathImg, paidCost, extraCost);
@@ -252,27 +264,32 @@ public class JsonParser {
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("skulls");
     }
-    public int getTimerSetup(){
+
+    public int getTimerSetup() {
         JSONArray settingsObj = jsonObj.getJSONArray("settings");
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("timerSetup");
     }
-    public int getMinimumPlayers(){
+
+    public int getMinimumPlayers() {
         JSONArray settingsObj = jsonObj.getJSONArray("settings");
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("minPlayers");
     }
-    public int getSocketServerPort(){
+
+    public int getSocketServerPort() {
         JSONArray settingsObj = jsonObj.getJSONArray("settings");
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("socketServerPort");
     }
-    public int getRmiServerPort(){
+
+    public int getRmiServerPort() {
         JSONArray settingsObj = jsonObj.getJSONArray("settings");
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("rmiServerPort");
     }
-    public int getTurnTimer(){
+
+    public int getTurnTimer() {
         JSONArray settingsObj = jsonObj.getJSONArray("settings");
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("timerTurn");

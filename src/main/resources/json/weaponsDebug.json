@@ -1,10 +1,10 @@
 {
   "weapons": [
     {
-      "name": "raggio traente",
-      "description": "modalità base: Muovi un bersaglio di 0, 1 o 2 quadrati fino\na un quadrato che puoi vedere e dagli 1 danno.\nmodalità punitore: Scegli un bersaglio 0, 1, o 2 movimenti\nda te. Muovi quel bersaglio nel quadrato in cui ti trovi\nedagli 3 danni.\nNota: Puoi muovere un bersaglio anche se non puoi\nvederlo. Il bersaglio finisce in una posizione in cui puoi\nvederlo e danneggiarlo. I movimenti possono non essere\nnella stessa direzione.",
-      "paidCost": "BLUE",
-      "extraCost": [""]
+      "name": "fucile a pompa",
+      "description": "modalità base: Dai 3 danni a 1 bersaglio nel\nquadrato in cui ti trovi. Se vuoi puoi muovere\nquel bersaglio di 1 quadrato.\nmodalità canna lunga: Dai 2 danni\na 1 bersaglio in un quadrato distante\nesattamente 1 movimento.",
+      "paidCost":  "YELLOW",
+      "extraCost": ["YELLOW"]
     }
   ]
 }
