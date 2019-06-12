@@ -56,4 +56,8 @@ public abstract class RemoteView extends View {
 
     public abstract void receivePingFromServer();
 
+    public abstract void updateTimerTurn(int count);
+
+    public abstract void disconnectClient();
+
 }

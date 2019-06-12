@@ -148,7 +148,7 @@ public class RMIServer implements Server {
         try {
             skeletons.get(username).interpretMessage(msg);
         } catch (Exception e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            //HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
     }
 

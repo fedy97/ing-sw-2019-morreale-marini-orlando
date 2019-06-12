@@ -506,4 +506,14 @@ public class CLI extends RemoteView {
     public void receivePingFromServer() {
 
     }
+
+    @Override
+    public void updateTimerTurn(int count) {
+
+    }
+
+    @Override
+    public void disconnectClient() {
+
+    }
 }

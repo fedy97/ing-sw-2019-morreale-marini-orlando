@@ -3,7 +3,8 @@
     {
       "skulls": 1,
       "timerSetup": 1,
-      "minPlayers": 1,
+      "timerTurn": 100,
+      "minPlayers": 2,
       "socketServerPort": 1100,
       "rmiServerPort": 1099
     }

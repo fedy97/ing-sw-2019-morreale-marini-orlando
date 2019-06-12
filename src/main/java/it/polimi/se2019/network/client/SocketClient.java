@@ -50,6 +50,7 @@ public class SocketClient implements Client, Observer {
                             interpretMessage(msg);
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
                 }
             }).start();

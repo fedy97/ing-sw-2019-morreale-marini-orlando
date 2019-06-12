@@ -369,6 +369,13 @@ public class Controller implements Observer {
             }
         }
     }
+    public void setTurnTimer(int secondsLeft) {
+        notifyAll(new UpdateTimerTurnMessage(secondsLeft));
+        if (secondsLeft == 0) {
+            DisconnectClientMessage message = new DisconnectClientMessage(null);
+            callView(message, turnController.getTurnUser());
+        }
+    }
 
     private void startPinging() {
         List<String> chars = new ArrayList<>();
@@ -382,7 +389,7 @@ public class Controller implements Observer {
                     pingsList.clear();
                     notifyAll(new PingClientsMessage(null));
                     Thread.sleep(1000);
-                    //HandyFunctions.printList(pingsList);
+                    HandyFunctions.printList(pingsList);
                     for (String charCurr : chars) {
                         if (!pingsList.contains(charCurr)) {
                             game.deleteObserver(userView.get(game.getPlayer(Character.valueOf(charCurr)).getName()));

@@ -269,4 +269,9 @@ public class JsonParser {
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("rmiServerPort");
     }
+    public int getTurnTimer(){
+        JSONArray settingsObj = jsonObj.getJSONArray("settings");
+        JSONObject obj = settingsObj.getJSONObject(0);
+        return obj.getInt("timerTurn");
+    }
 }

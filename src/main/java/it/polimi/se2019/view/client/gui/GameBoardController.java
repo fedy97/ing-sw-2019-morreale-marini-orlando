@@ -286,6 +286,8 @@ public class GameBoardController {
     private Button powerupsbutton;
     @FXML
     private Button convertbutton;
+    @FXML
+    private Label timer;
 
     private boolean reconnected = false;
     private Map<Button, String> buttonsHashes;
@@ -780,6 +782,10 @@ public class GameBoardController {
             gui.getUseWeaponStage().close();
             gui.sendBinaryAnswer(false);
         }
+    }
+
+    protected void updateTurnTimer(int count) {
+        timer.setText(Integer.toString(count));
     }
 
     public void moveClick() {

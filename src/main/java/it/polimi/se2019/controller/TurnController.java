@@ -9,6 +9,7 @@ import it.polimi.se2019.network.message.to_client.EnablePlayerActionsMessage;
 import it.polimi.se2019.network.message.to_client.ShowChoosePowerUpMessage;
 import it.polimi.se2019.network.message.to_client.ShowMessage;
 import it.polimi.se2019.utils.HandyFunctions;
+import it.polimi.se2019.utils.TimerTurn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,13 @@ public class TurnController {
     private String curr;
     private String first;
     private List<String> turningOrder;
-    private Timer turnTimer;
+    private TimerTurn timerTurn;
+    private int seconds;
 
     public TurnController() {
         turningOrder = new ArrayList<>();
-        turnTimer = new Timer();
+        seconds = HandyFunctions.parserSettings.getTurnTimer();
+        timerTurn = new TimerTurn(seconds);
     }
 
     /**
@@ -36,7 +39,7 @@ public class TurnController {
         curr = first;
         Controller c = Controller.getInstance();
         c.getPlayerManager().setCurrentPlayer(Controller.getInstance().getGame().getPlayer(first));
-
+        timerTurn.start();
     }
 
     public void notifyFirst() {
@@ -103,6 +106,9 @@ public class TurnController {
                 c.callView(new ShowMessage("It's ".concat(c.getPlayerManager().getCurrentPlayer().getName()).concat(" turn!")), player.getName());
             }
         }
+        timerTurn.interrupt();
+        timerTurn = new TimerTurn(seconds);
+        timerTurn.start();
     }
 
     private String nextUser() {
@@ -127,13 +133,6 @@ public class TurnController {
 
     public void removeUser(String user) {
         turningOrder.remove(user);
-    }
-
-    /**
-     * @return The current value of the timer
-     */
-    public Timer getTurnTimer() {
-        return turnTimer;
     }
 
 

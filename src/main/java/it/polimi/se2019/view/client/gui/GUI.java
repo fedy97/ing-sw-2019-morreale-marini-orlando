@@ -7,6 +7,7 @@ import it.polimi.se2019.network.message.to_server.*;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.client.RemoteView;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,6 +36,7 @@ public class GUI extends RemoteView {
     private BuyWithPowerupController buyWithPowerupController;
     private ChooseTargetsController chooseTargetsController;
 
+    private Scene sceneLogin;
     private Scene sceneWaitingLobby;
     private Scene sceneChooseMap;
     private Scene sceneChooseCharacter;
@@ -61,9 +63,10 @@ public class GUI extends RemoteView {
     private String config;
     private LightGameVersion lightGameVersion;
 
-    public GUI(String user, Stage stage) {
+    public GUI(String user, Stage stage, Scene login) {
         this.stage = stage;
         this.userName = user;
+        sceneLogin = login;
     }
 
     @Override
@@ -382,13 +385,11 @@ public class GUI extends RemoteView {
     protected void sendPlatformChosen(String pos) {
         MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(pos);
         notifyController(message);
-        //gameBoardController.setActiveButtons(new boolean[]{true, true, true, false, true, true});
     }
 
     protected void sendWeaponGrabbed(String hashWeapon) {
         ChosenWeaponMessage message = new ChosenWeaponMessage(hashWeapon);
         notifyController(message);
-        //gameBoardController.setActiveButtons(new boolean[]{true, true, true, false, true, true});
     }
 
     protected void sendWeaponToSwitch(String hashWeapon) {
@@ -420,7 +421,6 @@ public class GUI extends RemoteView {
     }
 
     protected void iWantToDoSomething(String action) {
-        //gameBoardController.setActiveButtons(new boolean[]{false, false, false, false, false, false});
         PerformActionMessage message = new PerformActionMessage(action);
         notifyController(message);
     }
@@ -435,10 +435,9 @@ public class GUI extends RemoteView {
         notifyController(message);
     }
 
-    protected void sendEffectChosen(int effect){
+    protected void sendEffectChosen(int effect) {
         ChosenEffectMessage message = new ChosenEffectMessage(effect);
         notifyController(message);
-        //useWeaponStage.close();
     }
 
     @Override
@@ -597,6 +596,16 @@ public class GUI extends RemoteView {
     @Override
     public void showBinaryOption(String message) {
         Platform.runLater(() -> gameBoardController.showBinaryMessage(message));
+    }
+
+    @Override
+    public void updateTimerTurn(int count) {
+        Platform.runLater(() -> gameBoardController.updateTurnTimer(count));
+    }
+
+    @Override
+    public void disconnectClient() {
+        System.exit(0);
     }
 
     public String getCharInString() {
