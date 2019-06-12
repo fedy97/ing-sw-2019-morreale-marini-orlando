@@ -75,7 +75,7 @@ public final class Shotgun extends WeaponAlternativeFire {
 
                 for (Platform p : game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 1))
                     possibleTargets.addAll(p.getPlayersOnThePlatform());
-
+                possibleTargets.removeAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
                 this.setPossibleTargets(possibleTargets);
             }
         };
