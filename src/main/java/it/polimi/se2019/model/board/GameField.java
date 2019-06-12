@@ -7,8 +7,8 @@ import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.utils.HandyFunctions;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 /**
  * GameField is a matrix of Platform (3x4) in which characters can move.
@@ -18,9 +18,9 @@ import java.util.List;
  */
 public class GameField {
 
+    protected WeaponCard[] initWeapons;
     private ArrayList<Room> rooms;
     private Platform[][] field;
-    protected WeaponCard[] initWeapons;
     private SkullsBoard skullsBoard;
     private ScoreBoard scoreBoard;
 
@@ -37,7 +37,8 @@ public class GameField {
                      SkullsBoard skullsBoard, ScoreBoard scoreBoard) throws InvalidFieldException, InvalidRoomException,
             InvalidAdjacentPlatformsException, InvalidDeckException, InvalidGenerationSpotException {
         if (hasMoreThan2Nulls(field)) {
-            throw new InvalidFieldException();}
+            throw new InvalidFieldException();
+        }
         this.field = field;
         //build the adjacency list of every platform in the field
         for (int i = 0; i < field.length; i++) {
@@ -216,7 +217,7 @@ public class GameField {
                     }
                 }
             }
-            Room r = new Room(listOfPlat,currentColor);
+            Room r = new Room(listOfPlat, currentColor);
             listOfColors.remove(currentColor);
             this.rooms.add(r);
         }
@@ -276,6 +277,23 @@ public class GameField {
     }
 
     /**
+     * @param platform in which calculate all the visible platform
+     * @return an arraylist of visible platform from that platform
+     */
+    public List<Platform> getVisiblePlatforms(Platform platform) {
+        List<Platform> platformsArrayList = new ArrayList<>();
+        for (Platform p : platform.getPlatformRoom().getPlatformsInRoom()) {
+            platformsArrayList.add(p);
+        }
+        for (Orientation or : platform.getDoorLocation()) {
+            for (Platform p : platform.getAdjacentPlatform(or).getPlatformRoom().getPlatformsInRoom()) {
+                platformsArrayList.add(p);
+            }
+        }
+        return platformsArrayList;
+    }
+
+    /**
      * @param platform whre the current player stands
      * @param dirXY    is equal to "x" if the player wants to target every player in his "x" position,
      *                 otherwise every target in "y" postion will be targeted
@@ -320,7 +338,7 @@ public class GameField {
 
     //TODO test
     public String getPlatformPosLight(Platform platform) {
-        if (platform !=null)
+        if (platform != null)
             return platform.getPlatformPosition()[0] + "," + platform.getPlatformPosition()[1];
         return "null";
     }

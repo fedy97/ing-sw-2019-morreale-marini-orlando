@@ -222,6 +222,9 @@ public class JsonParser {
             case "mitragliatrice":
                 weaponCard = new MachineGun(name, description, pathImg, paidCost, extraCost);
                 break;
+            case "raggio traente":
+                weaponCard = new TractorBeam(name, description, pathImg, paidCost, extraCost);
+                break;
             case "fucile al plasma":
                 weaponCard = new PlasmaGun(name, description, pathImg, paidCost, extraCost);
                 break;
