@@ -5,6 +5,7 @@ import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.network.message.to_server.*;
 import it.polimi.se2019.utils.HandyFunctions;
+import it.polimi.se2019.utils.TimerTurn;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.client.RemoteView;
 import javafx.application.Application;
@@ -62,6 +63,7 @@ public class GUI extends RemoteView {
     private List<String> charsInGame;
     private String config;
     private LightGameVersion lightGameVersion;
+    private TimerTurn timerTurn;
 
     public GUI(String user, Stage stage, Scene login) {
         this.stage = stage;
@@ -600,8 +602,21 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void updateTimerTurn(int count) {
-        Platform.runLater(() -> gameBoardController.updateTurnTimer(count));
+    public void updateTimerTurn(int count, String currToDisconnect) {
+        try {
+            timerTurn.interrupt();
+        } catch (Exception ex) {}
+        timerTurn = new TimerTurn(count,this, currToDisconnect);
+        timerTurn.start();
+    }
+
+    public void updateTimerTurnLabel(int seconds, String curr){
+        if (seconds == 0 && curr.equals(getUserName())) {
+            timerTurn.interrupt();
+            disconnectClient();
+        }
+        Platform.runLater(() ->
+                gameBoardController.updateTurnTimer(seconds));
     }
 
     @Override

@@ -1,12 +1,16 @@
 package it.polimi.se2019.utils;
 
-import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.view.client.gui.GUI;
 
 public class TimerTurn extends Thread {
     private int seconds;
-
-    public TimerTurn(int seconds) {
+    private GUI gui;
+    private String curr;
+    public TimerTurn(int seconds, GUI gui, String curr) {
         this.seconds = seconds;
+        this.gui = gui;
+        this.curr = curr;
+
     }
 
     @Override
@@ -17,7 +21,7 @@ public class TimerTurn extends Thread {
                 sleep(1000);
                 slept = slept + 1000;
 
-                Controller.getInstance().setTurnTimer(seconds - slept / 1000);
+                gui.updateTimerTurnLabel(seconds - slept / 1000, curr);
 
             }
         } catch (InterruptedException ex) {

@@ -369,13 +369,6 @@ public class Controller implements Observer {
             }
         }
     }
-    public void setTurnTimer(int secondsLeft) {
-        notifyAll(new UpdateTimerTurnMessage(secondsLeft));
-        if (secondsLeft == 0) {
-            DisconnectClientMessage message = new DisconnectClientMessage(null);
-            callView(message, turnController.getTurnUser());
-        }
-    }
 
     private void startPinging() {
         List<String> chars = new ArrayList<>();
@@ -520,7 +513,7 @@ public class Controller implements Observer {
         return config;
     }
 
-    private void notifyAll(ToClientMessage msg) {
+    protected void notifyAll(ToClientMessage msg) {
         for (String user : userView.keySet()) {
             if (game.getGameField() == null || game.getPlayers().isEmpty() || game.getPlayer(user).isConnected()) {
                 callView(msg, user);
