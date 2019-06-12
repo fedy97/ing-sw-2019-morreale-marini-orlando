@@ -80,7 +80,7 @@ public final class Cyberblade extends WeaponAlternativeFire {
                 //"Deal 2 damage to a different target on your square"
                 damages.put(game.getPlayer(targets.get(0)), 2);
                 playerManager.addDamage(damages);
-                usableEffects[3] = false;
+                usableEffects[2] = false;
 
                 playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }

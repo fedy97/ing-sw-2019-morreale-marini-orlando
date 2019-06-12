@@ -438,6 +438,7 @@ public class GUI extends RemoteView {
     protected void sendEffectChosen(int effect) {
         ChosenEffectMessage message = new ChosenEffectMessage(effect);
         notifyController(message);
+        getUseWeaponStage().close();
     }
 
     @Override

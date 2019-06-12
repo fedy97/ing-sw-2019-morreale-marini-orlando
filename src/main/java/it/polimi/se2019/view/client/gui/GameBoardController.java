@@ -776,8 +776,10 @@ public class GameBoardController {
         alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == buttonTypeOne)
+        if (result.isPresent() && result.get() == buttonTypeOne) {
+            gui.getUseWeaponStage().show();
             gui.sendBinaryAnswer(true);
+        }
         else {
             gui.getUseWeaponStage().close();
             gui.sendBinaryAnswer(false);

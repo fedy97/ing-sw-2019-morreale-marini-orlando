@@ -389,7 +389,7 @@ public class Controller implements Observer {
                     pingsList.clear();
                     notifyAll(new PingClientsMessage(null));
                     Thread.sleep(1000);
-                    HandyFunctions.printList(pingsList);
+                    //HandyFunctions.printList(pingsList);
                     for (String charCurr : chars) {
                         if (!pingsList.contains(charCurr)) {
                             game.deleteObserver(userView.get(game.getPlayer(Character.valueOf(charCurr)).getName()));

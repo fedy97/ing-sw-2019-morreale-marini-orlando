@@ -39,7 +39,7 @@ public class TurnController {
         curr = first;
         Controller c = Controller.getInstance();
         c.getPlayerManager().setCurrentPlayer(Controller.getInstance().getGame().getPlayer(first));
-        timerTurn.start();
+        //timerTurn.start();
     }
 
     public void notifyFirst() {
@@ -106,9 +106,9 @@ public class TurnController {
                 c.callView(new ShowMessage("It's ".concat(c.getPlayerManager().getCurrentPlayer().getName()).concat(" turn!")), player.getName());
             }
         }
-        timerTurn.interrupt();
-        timerTurn = new TimerTurn(seconds);
-        timerTurn.start();
+        //timerTurn.interrupt();
+        //timerTurn = new TimerTurn(seconds);
+        //timerTurn.start();
     }
 
     private String nextUser() {
