@@ -35,10 +35,8 @@ public final class Cyberblade extends WeaponAlternativeFire {
                 usableEffects[2] = true;
 
                 //setting targets for the next additional effect
-                List<Character> targets = playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform();
                 //targets.remove(playerManager.getCurrentPlayer().getCharacter());
-                targets.remove(chosenTargets.get(0));
-                getEffects().get(2).getLastEffectTargets().addAll(targets);
+                getEffects().get(2).getLastEffectTargets().add(chosenTargets.get(0));
             }
 
 
@@ -90,7 +88,8 @@ public final class Cyberblade extends WeaponAlternativeFire {
                 List<Character> targets;
 
                 if (usableEffects[1]) {
-                    targets = getLastEffectTargets();
+                    targets = playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform();
+                    targets.removeAll(getLastEffectTargets());
                 } else {
                     targets = playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform();
                     //commentata per testare effetto 3

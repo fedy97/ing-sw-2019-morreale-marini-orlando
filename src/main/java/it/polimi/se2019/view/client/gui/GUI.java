@@ -181,8 +181,8 @@ public class GUI extends RemoteView {
             Parent root = loader.load();
             chooseTargetsStage = new Stage();
             chooseTargetsStage.setTitle("Choose some targets");
-            chooseTargetsStage.initOwner(stage);
-            chooseTargetsStage.initModality(Modality.APPLICATION_MODAL);
+            //chooseTargetsStage.initOwner(stage);
+            //chooseTargetsStage.initModality(Modality.APPLICATION_MODAL);
             sceneChooseTargets = new Scene(root);
             chooseTargetsController = loader.getController();
         } catch (IOException e) {
@@ -409,6 +409,7 @@ public class GUI extends RemoteView {
     protected void sendTargets(List<String> targets) {
         SendTargetsMessage message = new SendTargetsMessage(targets);
         notifyController(message);
+        HandyFunctions.printList(targets);
         chooseTargetsStage.close();
     }
 
