@@ -22,9 +22,6 @@
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
-         <image>
-            <Image url="@assets/map/1.jpg" />
-         </image>
         
       </ImageView>
       <GridPane layoutX="355.0" layoutY="151.0" prefHeight="162.0" prefWidth="184.0">
@@ -618,7 +615,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="timer" layoutX="785.0" layoutY="654.0" text="60" textFill="#9ec61b">
+      <Label fx:id="timer" layoutX="785.0" layoutY="654.0" textFill="#9ec61b">
          <font>
             <Font size="29.0" />
          </font>
