@@ -38,13 +38,12 @@ public class SpecificSocketServer extends Thread {
                 if (msg != null)
                     ss.interpretMessage(msg);
 
-                //Thread.sleep(100);
+                Thread.sleep(100);
             } catch (Exception e) {
                 try {
                     input.close();
                     output.close();
                     socket.close();
-                    //Controller.getInstance().getTurnController().removeUser(user);
                 } catch (IOException ex) {
                     HandyFunctions.LOGGER.log(Level.INFO, user + " stream of " + user + " already closed");
                 }
