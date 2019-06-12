@@ -123,6 +123,7 @@ public class HandyFunctions {
     }
 
     public static void enlightenToggleButton(ToggleButton button) {
+        button.setSelected(false);
         button.setStyle(ENLIGHTED_BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
         button.setOnMouseExited(e -> button.setStyle(HandyFunctions.ENLIGHTED_BUTTON_STYLE));

@@ -2,6 +2,7 @@ package it.polimi.se2019.view.client.gui;
 
 import it.polimi.se2019.utils.HandyFunctions;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class ChooseTargetsController {
     private ToggleButton sprogbutton;
     @FXML
     private ToggleButton dozerbutton;
+    @FXML
+    private Button firebutton;
 
     private GUI gui;
     private Map<String, ToggleButton> buttons;
@@ -54,6 +57,7 @@ public class ChooseTargetsController {
                 HandyFunctions.darkenToggleButton(entry.getValue());
             targets.remove(entry.getKey());
         }
+        checkFire();
     }
 
     public void fireClick() {
@@ -68,6 +72,7 @@ public class ChooseTargetsController {
             targets.remove("BANSHEE");
             HandyFunctions.enlightenToggleButton(bansheebutton);
         }
+        checkFire();
     }
 
     public void chooseSprog() {
@@ -78,6 +83,7 @@ public class ChooseTargetsController {
             targets.remove("SPROG");
             HandyFunctions.enlightenToggleButton(sprogbutton);
         }
+        checkFire();
     }
 
     public void chooseDozer() {
@@ -88,6 +94,7 @@ public class ChooseTargetsController {
             targets.remove("DOZER");
             HandyFunctions.enlightenToggleButton(dozerbutton);
         }
+        checkFire();
     }
 
     public void chooseDistructor() {
@@ -98,6 +105,7 @@ public class ChooseTargetsController {
             targets.remove("DISTRUCTOR");
             HandyFunctions.enlightenToggleButton(distructorbutton);
         }
+        checkFire();
     }
 
     public void chooseViolet() {
@@ -108,5 +116,14 @@ public class ChooseTargetsController {
             targets.remove("VIOLET");
             HandyFunctions.enlightenToggleButton(violetbutton);
         }
+        checkFire();
     }
+
+    private void checkFire() {
+        if (targets.size() > 0)
+            firebutton.setDisable(false);
+        else
+            firebutton.setDisable(true);
+    }
+
 }
