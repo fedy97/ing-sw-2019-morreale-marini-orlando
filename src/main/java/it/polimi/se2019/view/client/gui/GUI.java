@@ -409,7 +409,6 @@ public class GUI extends RemoteView {
     protected void sendTargets(List<String> targets) {
         SendTargetsMessage message = new SendTargetsMessage(targets);
         notifyController(message);
-        HandyFunctions.printList(targets);
         chooseTargetsStage.close();
     }
 

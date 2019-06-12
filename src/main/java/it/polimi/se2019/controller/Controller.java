@@ -188,7 +188,6 @@ public class Controller implements Observer {
                         if(currentTargets.isEmpty())
                             break;
                     }
-                    //HandyFunctions.printList(targets);
                     weapon.activateEffect(effectIndex, targets);
                     CustomLogger.logInfo(getClass().getName(), "Action performed!");
                 } else{

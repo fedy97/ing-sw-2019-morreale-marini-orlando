@@ -38,7 +38,7 @@ public class SpecificSocketServer extends Thread {
                 if (msg != null)
                     ss.interpretMessage(msg);
 
-                Thread.sleep(100);
+                //Thread.sleep(100);
             } catch (Exception e) {
                 try {
                     input.close();
