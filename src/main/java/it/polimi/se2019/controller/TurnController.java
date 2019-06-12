@@ -8,13 +8,11 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.EnablePlayerActionsMessage;
 import it.polimi.se2019.network.message.to_client.ShowChoosePowerUpMessage;
 import it.polimi.se2019.network.message.to_client.ShowMessage;
-import it.polimi.se2019.network.message.to_client.UpdateTimerTurnMessage;
+import it.polimi.se2019.network.message.to_client.StartTimerTurnMessage;
 import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.utils.TimerTurn;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 import java.util.logging.Level;
 
 /**
@@ -38,7 +36,7 @@ public class TurnController {
         curr = first;
         Controller c = Controller.getInstance();
         c.getPlayerManager().setCurrentPlayer(Controller.getInstance().getGame().getPlayer(first));
-        c.notifyAll(new UpdateTimerTurnMessage(seconds, getTurnUser()));
+        c.notifyAll(new StartTimerTurnMessage(seconds, getTurnUser()));
     }
 
     public void notifyFirst() {
@@ -104,7 +102,7 @@ public class TurnController {
                 c.callView(new EnablePlayerActionsMessage(UserValidActions.NONE.getActions()), player.getName());
                 c.callView(new ShowMessage("It's ".concat(c.getPlayerManager().getCurrentPlayer().getName()).concat(" turn!")), player.getName());
             }
-            c.callView(new UpdateTimerTurnMessage(seconds, getTurnUser()), player.getName());
+            c.callView(new StartTimerTurnMessage(seconds, getTurnUser()), player.getName());
         }
     }
 

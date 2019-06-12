@@ -602,7 +602,7 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void updateTimerTurn(int count, String currToDisconnect) {
+    public void startTimerTurn(int count, String currToDisconnect) {
         try {
             timerTurn.interrupt();
         } catch (Exception ex) {}
@@ -613,15 +613,10 @@ public class GUI extends RemoteView {
     public void updateTimerTurnLabel(int seconds, String curr){
         if (seconds == 0 && curr.equals(getUserName())) {
             timerTurn.interrupt();
-            disconnectClient();
+            System.exit(0);
         }
         Platform.runLater(() ->
                 gameBoardController.updateTurnTimer(seconds));
-    }
-
-    @Override
-    public void disconnectClient() {
-        System.exit(0);
     }
 
     public String getCharInString() {

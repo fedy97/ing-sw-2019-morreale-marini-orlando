@@ -508,12 +508,7 @@ public class CLI extends RemoteView {
     }
 
     @Override
-    public void updateTimerTurn(int count,String curr) {
-
-    }
-
-    @Override
-    public void disconnectClient() {
+    public void startTimerTurn(int count,String curr) {
 
     }
 }
