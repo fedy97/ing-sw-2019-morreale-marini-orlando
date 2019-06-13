@@ -8,7 +8,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChooseCharacterController {
 
@@ -30,6 +31,7 @@ public class ChooseCharacterController {
     private GUI gui;
     private Map<String, ToggleButton> buttons;
     private DropShadow shadow = new DropShadow();
+
     /**
      * here I need the reference to GUI in order to notify it for the click of a button
      *
@@ -41,57 +43,67 @@ public class ChooseCharacterController {
 
     public void initialize() {
         connectionType.getToggles().addAll(violetbutton, bluebutton, yellowbutton, greenbutton, greybutton);
-        buttons=new HashMap<>();
-        buttons.put("DOZER",greybutton);
+        buttons = new HashMap<>();
+        buttons.put("DOZER", greybutton);
         buttons.put("DISTRUCTOR", yellowbutton);
-        buttons.put("SPROG",greenbutton);
+        buttons.put("SPROG", greenbutton);
         buttons.put("BANSHEE", bluebutton);
         buttons.put("VIOLET", violetbutton);
+        HandyFunctions.enlightenToggleButton(greybutton);
+        HandyFunctions.enlightenToggleButton(greenbutton);
+        HandyFunctions.enlightenToggleButton(yellowbutton);
+        HandyFunctions.enlightenToggleButton(violetbutton);
+        HandyFunctions.enlightenToggleButton(bluebutton);
     }
 
-    public void chooseBlue(){
+    public void chooseBlue() {
         gui.sendCharacterChosenByPlayer("BANSHEE");
         setEffectToButton(bluebutton);
         disableButtons();
     }
-    public void chooseGreen(){
+
+    public void chooseGreen() {
         gui.sendCharacterChosenByPlayer("SPROG");
         setEffectToButton(greenbutton);
         disableButtons();
     }
-    public void chooseGrey(){
+
+    public void chooseGrey() {
         gui.sendCharacterChosenByPlayer("DOZER");
         setEffectToButton(greybutton);
         disableButtons();
     }
-    public void chooseYellow(){
+
+    public void chooseYellow() {
         gui.sendCharacterChosenByPlayer("DISTRUCTOR");
         setEffectToButton(yellowbutton);
         disableButtons();
     }
-    public void chooseViolet(){
+
+    public void chooseViolet() {
         gui.sendCharacterChosenByPlayer("VIOLET");
         setEffectToButton(violetbutton);
         disableButtons();
     }
 
     private void disableButtons() {
-        violetbutton.setDisable(true);
-        bluebutton.setDisable(true);
-        yellowbutton.setDisable(true);
-        greenbutton.setDisable(true);
-        greybutton.setDisable(true);
+        HandyFunctions.darkenToggleButton(violetbutton);
+        HandyFunctions.darkenToggleButton(greenbutton);
+        HandyFunctions.darkenToggleButton(greybutton);
+        HandyFunctions.darkenToggleButton(yellowbutton);
+        HandyFunctions.darkenToggleButton(bluebutton);
     }
+
     public void updateTimer(int count) {
         timer.setText(Integer.toString(count));
     }
 
     public void updateCharacters(String c) {
-        buttons.get(c).setDisable(true);
+        HandyFunctions.darkenToggleButton(buttons.get(c));
     }
 
-    private void setEffectToButton(ToggleButton toggleButton){
-        shadow.setColor(new Color(1, 1,0,1));
+    private void setEffectToButton(ToggleButton toggleButton) {
+        shadow.setColor(new Color(1, 1, 0, 1));
         toggleButton.setEffect(shadow);
     }
 }

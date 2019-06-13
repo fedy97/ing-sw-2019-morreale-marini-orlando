@@ -121,9 +121,9 @@ public class ChooseTargetsController {
 
     private void checkFire() {
         if (targets.size() > 0)
-            firebutton.setDisable(false);
+            HandyFunctions.enlightenButton(firebutton);
         else
-            firebutton.setDisable(true);
+            HandyFunctions.darkenButton(firebutton);
     }
 
 }

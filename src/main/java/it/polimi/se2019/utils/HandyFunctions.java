@@ -124,6 +124,7 @@ public class HandyFunctions {
     }
 
     public static void enlightenToggleButton(ToggleButton button) {
+        button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
         button.setSelected(false);
         button.setStyle(ENLIGHTED_BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));

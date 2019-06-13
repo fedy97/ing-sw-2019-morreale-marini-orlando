@@ -1,5 +1,6 @@
 package it.polimi.se2019.view.client.gui;
 
+import it.polimi.se2019.utils.HandyFunctions;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -51,6 +52,11 @@ public class ChooseMapController {
             voteLabels.add(map4vote);
             bgImg.setImage(new Image("/assets/backgrounds/bgchoose.jpg"));
             connectionType.getToggles().addAll(map1button, map2button, map3button, map4button);
+            HandyFunctions.enlightenToggleButton(map1button);
+            HandyFunctions.enlightenToggleButton(map2button);
+            HandyFunctions.enlightenToggleButton(map3button);
+            HandyFunctions.enlightenToggleButton(map4button);
+
         });
 
     }
@@ -89,10 +95,10 @@ public class ChooseMapController {
     }
 
     private void disableButtons() {
-        map1button.setDisable(true);
-        map2button.setDisable(true);
-        map3button.setDisable(true);
-        map4button.setDisable(true);
+        HandyFunctions.darkenToggleButton(map1button);
+        HandyFunctions.darkenToggleButton(map2button);
+        HandyFunctions.darkenToggleButton(map3button);
+        HandyFunctions.darkenToggleButton(map4button);
     }
 
     public void updateVotes(Map<Integer, Integer> map) {
