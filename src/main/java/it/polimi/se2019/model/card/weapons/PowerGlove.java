@@ -101,8 +101,6 @@ public final class PowerGlove extends WeaponAlternativeFire {
 
                 for (Platform p : game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 1))
                     possibleTargets.addAll(p.getPlayersOnThePlatform());
-                HandyFunctions.printList(possibleTargets);
-                HandyFunctions.printConsole(" e dopo remove:");
                 possibleTargets.removeAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
                 this.setPossibleTargets(possibleTargets);
             }
