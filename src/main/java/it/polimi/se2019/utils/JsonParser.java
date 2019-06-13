@@ -264,6 +264,9 @@ public class JsonParser {
             case "razzo termico":
                 weaponCard = new HeatSeeker(name, description, pathImg, paidCost, extraCost);
                 break;
+            case "fucile laser":
+                weaponCard = new RailGun(name, description, pathImg, paidCost, extraCost);
+                break;
             default:
                 weaponCard = new WeaponCard(name, description, pathImg, paidCost, extraCost);
                 break;
