@@ -79,7 +79,7 @@ public final class PowerGlove extends WeaponAlternativeFire {
                             targets2.addAll(toCheck.getPlayersOnThePlatform());
 
                             c.askFor(targets2, "targets");
-
+                            damages.clear();
                             damages.put(game.getPlayer(c.getCurrentTargets().take()), 2);
                             playerManager.addDamage(damages);
                             playerManager.getCurrentPlayer().setCurrentPlatform(toCheck);
@@ -101,6 +101,8 @@ public final class PowerGlove extends WeaponAlternativeFire {
 
                 for (Platform p : game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 1))
                     possibleTargets.addAll(p.getPlayersOnThePlatform());
+                HandyFunctions.printList(possibleTargets);
+                HandyFunctions.printConsole(" e dopo remove:");
                 possibleTargets.removeAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
                 this.setPossibleTargets(possibleTargets);
             }
