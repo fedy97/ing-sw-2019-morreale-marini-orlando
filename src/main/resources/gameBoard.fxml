@@ -470,7 +470,7 @@
       <ImageView fitHeight="162.0" fitWidth="116.0" layoutX="933.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="movebutton" disable="true" layoutX="30.0" layoutY="603.0" mnemonicParsing="false" onAction="#moveClick" style="-fx-background-color: transparent;" text="move" />
       <Button fx:id="grabbutton" disable="true" layoutX="31.0" layoutY="637.0" mnemonicParsing="false" onAction="#grabClick" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: transparent;" text="grab" />
-      <Button fx:id="shootbutton" disable="true" layoutX="30.0" layoutY="671.0" mnemonicParsing="false" onAction="#shootClick" style="-fx-background-color: trnsparent;" text="shoot" />
+      <Button fx:id="shootbutton" disable="true" layoutX="30.0" layoutY="671.0" mnemonicParsing="false" onAction="#shootClick" style="-fx-background-color: transparent;" text="shoot" />
       <ImageView fitHeight="162.0" fitWidth="122.0" layoutX="931.0" layoutY="185.0" pickOnBounds="true">
          <image>
             <Image url="@assets/weapons/back.png" />
