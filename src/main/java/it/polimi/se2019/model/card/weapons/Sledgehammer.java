@@ -12,6 +12,7 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.SendBinaryOption;
 import it.polimi.se2019.utils.CustomLogger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,10 @@ public final class Sledgehammer extends WeaponAlternativeFire {
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
+                List<Character> possibleTargets = new ArrayList<>();
+                possibleTargets.addAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
+                possibleTargets.remove(playerManager.getCurrentPlayer().getCharacter());
+                this.setPossibleTargets(possibleTargets);
             }
         };
 
@@ -53,7 +57,18 @@ public final class Sledgehammer extends WeaponAlternativeFire {
                 try {
                     c.callView(new SendBinaryOption("Do you want to move the target away?"), playerManager.getCurrentPlayer().getName());
                     if (c.getChosenBinaryOption().take()) {
-                        List<Platform> destinations = game.getGameField().getPlatformDir(playerManager.getCurrentPlayer().getCurrentPlatform());
+                        List<Platform> destinations = game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 2);
+                        int[] pos = playerManager.getCurrentPlayer().getCurrentPlatform().getPlatformPosition();
+                        int myX = pos[0];
+                        int myY = pos[1];
+                        List<Platform> toDelete = new ArrayList<>();
+                        for (Platform platform : destinations) {
+                            int currX = platform.getPlatformPosition()[0];
+                            int currY = platform.getPlatformPosition()[1];
+                            if (myX != currX && myY != currY)
+                                toDelete.add(platform);
+                        }
+                        destinations.removeAll(toDelete);
                         c.sendMessage("Where do you want to move your target?", playerManager.getCurrentPlayer().getName());
                         c.askFor(destinations, "position");
                         target.setCurrentPlatform(c.getChosenDestination().take());
@@ -69,7 +84,10 @@ public final class Sledgehammer extends WeaponAlternativeFire {
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
+                List<Character> possibleTargets = new ArrayList<>();
+                possibleTargets.addAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
+                possibleTargets.remove(playerManager.getCurrentPlayer().getCharacter());
+                this.setPossibleTargets(possibleTargets);
             }
         };
 

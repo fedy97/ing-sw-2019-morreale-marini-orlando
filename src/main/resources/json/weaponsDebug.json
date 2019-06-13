@@ -1,10 +1,10 @@
 {
   "weapons": [
     {
-      "name": "fucile di precisione",
-      "description": "effetto: Dai 3 danni e 1 marchio a 1 bersaglio che puoi\nvedere. Il bersaglio deve essere ad almeno 2 movimenti da\nte.\nNota: Per esempio, nella stanza 2x2, non puoi sparare a un\nbersaglio in un quadrato adiacente, ma puoi sparare a un\nbersaglio lungo la diagonale. Se sei vicino a una porta non\npuoi sparare a un bersaglio dall'altra parte della porta,\nma puoi sparare a un bersaglio su un quadrato diverso in\nquella stanza.",
-      "paidCost": "BLUE",
-      "extraCost": ["BLUE","YELLOW"]
+      "name": "martello ionico",
+      "description": "modalità base: Dai 2 danni a 1 bersaglio nel\nquadrato in cui ti trovi.\nmodalità polverizzare: Dai 3 danni a\n1 bersaglio nel quadrato in cui ti trovi, poi\nmuovi quel bersaglio di 0, 1 o 2 quadrati in\nuna direzione.\nNota: Ricordati che i movimenti passano\nattraverso le porte ma non attraverso le\npareti.",
+      "paidCost":  "YELLOW",
+      "extraCost": [""]
     }
   ]
 }
