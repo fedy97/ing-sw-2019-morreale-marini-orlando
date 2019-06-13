@@ -252,9 +252,18 @@ public class JsonParser {
             case "cyberguanto":
                 weaponCard = new PowerGlove(name, description, pathImg, paidCost, extraCost);
                 break;
-            /*case "fucile di precisione":
+            case "onda d'urto":
+                weaponCard = new Shockwave(name, description, pathImg, paidCost, extraCost);
+                break;
+            case "martello ionico":
+                weaponCard = new Sledgehammer(name, description, pathImg, paidCost, extraCost);
+                break;
+            case "fucile di precisione":
                 weaponCard = new Whisper(name, description, pathImg, paidCost, extraCost);
-                break;*/
+                break;
+            case "razzo termico":
+                weaponCard = new HeatSeeker(name, description, pathImg, paidCost, extraCost);
+                break;
             default:
                 weaponCard = new WeaponCard(name, description, pathImg, paidCost, extraCost);
                 break;

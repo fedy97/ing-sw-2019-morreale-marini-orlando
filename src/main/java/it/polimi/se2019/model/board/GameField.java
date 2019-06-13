@@ -348,6 +348,7 @@ public class GameField {
      * @return the platforms in the directions selected of max distance from curr = 2, used by Newton
      */
     public List<Platform> getPlatformDir(Platform curr) {
+        //TODO verificare di non passare attraverso muri
         List<Platform> platformArrayList = new ArrayList<>();
         int row = curr.getPlatformPosition()[0];
         int column = curr.getPlatformPosition()[1];

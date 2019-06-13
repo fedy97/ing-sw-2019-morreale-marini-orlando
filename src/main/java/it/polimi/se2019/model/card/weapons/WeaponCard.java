@@ -56,6 +56,7 @@ public class WeaponCard extends Card {
         this.extraCost = extraCost;
         loaded = true;
         effects = new ArrayList<>();
+        availableEffects = new boolean[]{true, false, false};
     }
 
     /**
