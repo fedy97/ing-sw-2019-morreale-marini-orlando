@@ -94,8 +94,8 @@ public class SocketClient implements Client, Observer {
     private void callServer(ToServerMessage msg) {
         try {
             objectOutputStream.writeObject(msg);
+            objectOutputStream.flush();
             objectOutputStream.reset();
-            //objectOutputStream.flush();
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "Error sending message to the server using socket");
         }

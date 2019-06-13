@@ -249,6 +249,9 @@ public class JsonParser {
             case "lanciarazzi":
                 weaponCard = new RocketLauncher(name, description, pathImg, paidCost, extraCost);
                 break;
+            case "cyberguanto":
+                weaponCard = new PowerGlove(name, description, pathImg, paidCost, extraCost);
+                break;
             /*case "fucile di precisione":
                 weaponCard = new Whisper(name, description, pathImg, paidCost, extraCost);
                 break;*/
