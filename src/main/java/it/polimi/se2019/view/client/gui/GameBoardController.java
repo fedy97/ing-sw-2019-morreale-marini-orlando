@@ -1041,13 +1041,20 @@ public class GameBoardController {
     }
 
     protected void setActiveButtons(boolean[] actives) {
-        movebutton.setDisable(!actives[0]);
-        grabbutton.setDisable(!actives[1]);
-        shootbutton.setDisable(!actives[2]);
-        reloadbutton.setDisable(!actives[3]);
-        endturnbutton.setDisable(!actives[4]);
-        powerupsbutton.setDisable(!actives[5]);
-        convertbutton.setDisable(!actives[6]);
+        if (actives[0]) HandyFunctions.enlightenButton(movebutton);
+        else HandyFunctions.darkenButton(movebutton);
+        if (actives[1]) HandyFunctions.enlightenButton(grabbutton);
+        else HandyFunctions.darkenButton(grabbutton);
+        if (actives[2]) HandyFunctions.enlightenButton(shootbutton);
+        else HandyFunctions.darkenButton(shootbutton);
+        if (actives[3]) HandyFunctions.enlightenButton(reloadbutton);
+        else HandyFunctions.darkenButton(reloadbutton);
+        if (actives[4]) HandyFunctions.enlightenButton(endturnbutton);
+        else HandyFunctions.darkenButton(endturnbutton);
+        if (actives[5]) HandyFunctions.enlightenButton(powerupsbutton);
+        else HandyFunctions.darkenButton(powerupsbutton);
+        if (actives[6]) HandyFunctions.enlightenButton(convertbutton);
+        else HandyFunctions.darkenButton(convertbutton);
     }
 
     public void setReconnected(boolean reconnected) {

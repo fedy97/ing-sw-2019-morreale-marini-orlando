@@ -116,6 +116,7 @@ public class HandyFunctions {
     }
 
     public static void enlightenButton(Button button) {
+        button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
         button.setStyle(ENLIGHTED_BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
         button.setOnMouseExited(e -> button.setStyle(HandyFunctions.ENLIGHTED_BUTTON_STYLE));
