@@ -89,6 +89,8 @@ public class Player {
      * @param platform the new position of the player
      */
     public void setCurrentPlatform(Platform platform) {
+        if (currentPlatform != null)
+            currentPlatform.removePlayerOnPlatform(getCharacter());
         currentPlatform = platform;
         try {
             currentPlatform.setPlayerOnPlatform(this.getCharacter());
