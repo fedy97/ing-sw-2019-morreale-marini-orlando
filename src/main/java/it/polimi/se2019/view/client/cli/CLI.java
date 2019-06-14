@@ -498,7 +498,7 @@ public class CLI extends RemoteView {
     }
 
     @Override
-    public void showReconnectedGameBoard(int config, LightGameVersion lightGameVersion, List<String> arr, String myChar) {
+    public void showReconnectedGameBoard(int configMap, LightGameVersion lightGameVersion, List<String> charsInGame, String myChar) {
 
     }
 
@@ -508,7 +508,12 @@ public class CLI extends RemoteView {
     }
 
     @Override
-    public void startTimerTurn(int count,String curr) {
+    public void startTimerTurn(int count,String currPlayer) {
+
+    }
+
+    @Override
+    public void showReloadableWeapons(List<String> weapons) {
 
     }
 }

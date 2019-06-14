@@ -20,6 +20,7 @@ public class ReloadWeaponsMessage extends ToServerMessage {
 
     @Override
     public void performAction() {
+        //TODO change list to a single hash
         Controller actor = Controller.getInstance();
         List<String> lightVersion = (ArrayList<String>) payload;
         List<WeaponCard> weapons = new ArrayList<>();

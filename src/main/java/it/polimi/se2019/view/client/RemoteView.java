@@ -58,4 +58,6 @@ public abstract class RemoteView extends View {
 
     public abstract void startTimerTurn(int count,String curr);
 
+    public abstract void showReloadableWeapons(List<String> weapons);
+
 }

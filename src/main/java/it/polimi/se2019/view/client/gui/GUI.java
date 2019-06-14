@@ -36,6 +36,7 @@ public class GUI extends RemoteView {
     private UseWeaponController useWeaponController;
     private BuyWithPowerupController buyWithPowerupController;
     private ChooseTargetsController chooseTargetsController;
+    private ReloadWeaponsController reloadWeaponsController;
 
     private Scene sceneLogin;
     private Scene sceneWaitingLobby;
@@ -49,6 +50,7 @@ public class GUI extends RemoteView {
     private Scene sceneUseWeapon;
     private Scene sceneBuyWithPowerups;
     private Scene sceneChooseTargets;
+    private Scene sceneReloadWeapons;
 
     private Stage stage;
     private Stage secondStage;
@@ -58,6 +60,7 @@ public class GUI extends RemoteView {
     private Stage useWeaponStage;
     private Stage buyWithPowerupsStage;
     private Stage chooseTargetsStage;
+    private Stage reloadWeaponsStage;
 
     private String charInString;
     private List<String> charsInGame;
@@ -132,6 +135,8 @@ public class GUI extends RemoteView {
                     initUseWeapon();
                     initBuyWithPowerup();
                     initChooseTargets();
+                    initReloadWeapons();
+                    reloadWeaponsController.passGUI(this);
                     chooseTargetsController.passGUI(this);
                     buyWithPowerupController.passGUI(this);
                     switchWeaponController.passGUI(this);
@@ -218,6 +223,22 @@ public class GUI extends RemoteView {
             switchWeaponStage.setOnCloseRequest(event -> sendWeaponToSwitch("null"));
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing switch weapon");
+        }
+    }
+
+    private void initReloadWeapons() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/reloadWeapons.fxml"));
+        try {
+            Parent root = loader.load();
+            reloadWeaponsStage = new Stage();
+            reloadWeaponsStage.setTitle("Choose a weapon to reload");
+            //switchWeaponStage.initOwner(stage);
+            //switchWeaponStage.initModality(Modality.APPLICATION_MODAL);
+            sceneReloadWeapons = new Scene(root);
+            reloadWeaponsController = loader.getController();
+            reloadWeaponsStage.setOnCloseRequest(event -> sendWeaponToReload("null"));
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing reload weapon");
         }
     }
 
@@ -440,7 +461,13 @@ public class GUI extends RemoteView {
     protected void sendEffectChosen(int effect) {
         ChosenEffectMessage message = new ChosenEffectMessage(effect);
         notifyController(message);
-        getUseWeaponStage().close();
+        useWeaponStage.close();
+    }
+
+    protected void sendWeaponToReload(String hash) {
+        ReloadWeaponsMessage message = new ReloadWeaponsMessage(hash);
+        notifyController(message);
+        reloadWeaponsStage.close();
     }
 
     @Override
@@ -463,6 +490,8 @@ public class GUI extends RemoteView {
                     initUseWeapon();
                     initBuyWithPowerup();
                     initChooseTargets();
+                    initReloadWeapons();
+                    reloadWeaponsController.passGUI(this);
                     chooseTargetsController.passGUI(this);
                     buyWithPowerupController.passGUI(this);
                     switchWeaponController.passGUI(this);
@@ -582,6 +611,17 @@ public class GUI extends RemoteView {
                     switchWeaponStage.setScene(sceneSwitchWeapon);
                     switchWeaponStage.setResizable(false);
                     switchWeaponStage.show();
+                });
+    }
+
+    @Override
+    public void showReloadableWeapons(List<String> weapons) {
+        Platform.runLater(
+                () -> {
+                    reloadWeaponsController.updateMyWeapons(lightGameVersion, weapons);
+                    reloadWeaponsStage.setScene(sceneReloadWeapons);
+                    reloadWeaponsStage.setResizable(false);
+                    reloadWeaponsStage.show();
                 });
     }
 
