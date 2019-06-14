@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class LockRifle extends WeaponAlternativeFire {
+public final class LockRifle extends WeaponOneAddingEffect {
 
     public LockRifle(String name, String descr, String img, AmmoCube paidCost, AmmoCube[] extraCost) throws InvalidNameException {
         super(name, descr, img, paidCost, extraCost);
@@ -56,8 +56,8 @@ public final class LockRifle extends WeaponAlternativeFire {
             }
         };
 
-        availableEffects = new boolean[]{true, true, false};
-        usableEffects = new boolean[]{true, false, false};
+        usableEffects[0] = true;
+        usableEffects[1] = false;
 
         eff1.setMaxTargets(1);
         eff2.setMaxTargets(1);
@@ -68,8 +68,8 @@ public final class LockRifle extends WeaponAlternativeFire {
 
     @Override
     public void reload() {
-        cleanCache();
-        usableEffects = new boolean[]{true, false, false};
-        loaded = true;
+        super.reload();
+        usableEffects[0] = true;
+        usableEffects[1] = false;
     }
 }

@@ -49,7 +49,8 @@ public final class Shotgun extends WeaponAlternativeFire {
                     CustomLogger.logException(this.getClass().getName(), e);
                 }
 
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[0] = false;
+                usableEffects[1] = false;
             }
 
             @Override
@@ -66,7 +67,8 @@ public final class Shotgun extends WeaponAlternativeFire {
                 damages.put(game.getPlayer(targets.get(0)), 2);
                 playerManager.addDamage(damages);
 
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[0] = false;
+                usableEffects[1] = false;
             }
 
             @Override
@@ -80,19 +82,10 @@ public final class Shotgun extends WeaponAlternativeFire {
             }
         };
 
-        usableEffects = new boolean[]{true, true, false};
-
         eff1.setMaxTargets(1);
         eff2.setMaxTargets(1);
 
         getEffects().add(eff1);
         getEffects().add(eff2);
-    }
-
-    @Override
-    public void reload() {
-        cleanCache();
-        usableEffects = new boolean[]{true, true, false};
-        loaded = true;
     }
 }

@@ -46,7 +46,8 @@ public final class Furnace extends WeaponAlternativeFire {
 
                 playerManager.addDamage(damages);
 
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[0] = false;
+                usableEffects[1] = false;
             }
 
             @Override
@@ -79,7 +80,8 @@ public final class Furnace extends WeaponAlternativeFire {
 
                 playerManager.addDamage(damages);
 
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[0] = false;
+                usableEffects[1] = false;
             }
 
             @Override
@@ -88,16 +90,8 @@ public final class Furnace extends WeaponAlternativeFire {
             }
         };
 
-        usableEffects = new boolean[]{true, true, false};
-
         getEffects().add(eff1);
         getEffects().add(eff2);
     }
 
-    @Override
-    public void reload() {
-        cleanCache();
-        usableEffects = new boolean[]{true, true, false};
-        loaded = true;
-    }
 }

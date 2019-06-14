@@ -9,7 +9,6 @@ import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.utils.CustomLogger;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,10 +26,11 @@ public final class Shockwave extends WeaponAlternativeFire {
         Effect eff1 = new Effect(new AmmoCube[]{}) {
             @Override
             public void activateEffect(List<Character> chosenTargets, WeaponCard card) {
-               //TODO
+                //TODO
 
 
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[0] = false;
+                usableEffects[1] = false;
             }
 
             @Override
@@ -54,7 +54,8 @@ public final class Shockwave extends WeaponAlternativeFire {
                 }
 
                 playerManager.addDamage(damages);
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[0] = false;
+                usableEffects[1] = false;
             }
 
             @Override
@@ -63,16 +64,8 @@ public final class Shockwave extends WeaponAlternativeFire {
             }
         };
 
-        usableEffects = new boolean[]{true, true, false};
-
         getEffects().add(eff1);
         getEffects().add(eff2);
     }
 
-    @Override
-    public void reload() {
-        cleanCache();
-        usableEffects = new boolean[]{true, true, false};
-        loaded = true;
-    }
 }

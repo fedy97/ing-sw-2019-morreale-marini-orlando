@@ -267,6 +267,9 @@ public class JsonParser {
             case "fucile laser":
                 weaponCard = new RailGun(name, description, pathImg, paidCost, extraCost);
                 break;
+            case "lanciagranate":
+                weaponCard = new GrenadeLauncher(name, description, pathImg, paidCost, extraCost);
+                break;
             default:
                 weaponCard = new WeaponCard(name, description, pathImg, paidCost, extraCost);
                 break;

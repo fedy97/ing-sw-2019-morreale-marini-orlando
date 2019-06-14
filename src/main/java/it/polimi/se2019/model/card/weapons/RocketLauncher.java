@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class RocketLauncher extends WeaponAlternativeFire {
+public final class RocketLauncher extends WeaponTwoAddingEffect {
 
     public RocketLauncher(String name, String descr, String img, AmmoCube paidCost, AmmoCube[] extraCost) throws InvalidNameException {
         super(name, descr, img, paidCost, extraCost);
@@ -111,8 +111,9 @@ public final class RocketLauncher extends WeaponAlternativeFire {
             }
         };
 
-        availableEffects = new boolean[]{true, true, true};
-        usableEffects = new boolean[]{true, true, false};
+        usableEffects[0] = true;
+        usableEffects[1] = true;
+        usableEffects[2] = false;
 
         eff1.setMaxTargets(1);
 
@@ -123,9 +124,10 @@ public final class RocketLauncher extends WeaponAlternativeFire {
 
     @Override
     public void reload() {
-        cleanCache();
-        usableEffects = new boolean[]{true, true, false};
-        loaded = true;
+        super.reload();
+        usableEffects[0] = true;
+        usableEffects[1] = true;
+        usableEffects[2] = false;
     }
 
 }

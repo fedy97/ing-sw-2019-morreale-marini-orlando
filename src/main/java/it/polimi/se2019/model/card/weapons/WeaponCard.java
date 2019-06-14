@@ -15,7 +15,6 @@ import java.util.List;
  */
 
 public class WeaponCard extends Card {
-    protected boolean[] availableEffects;
     protected boolean[] usableEffects;
     protected boolean loaded;
     private AmmoCube paidCost;
@@ -56,7 +55,7 @@ public class WeaponCard extends Card {
         this.extraCost = extraCost;
         loaded = true;
         effects = new ArrayList<>();
-        availableEffects = new boolean[]{true, false, false};
+        usableEffects = new boolean[]{true};
     }
 
     /**
@@ -64,6 +63,9 @@ public class WeaponCard extends Card {
      */
 
     public void reload() {
+        cleanCache();
+        usableEffects[0] = true;
+        loaded = true;
     }
 
     /**
@@ -119,14 +121,6 @@ public class WeaponCard extends Card {
 
     public void setEffects(List<Effect> basicEffect) {
         this.effects = basicEffect;
-    }
-
-    public boolean[] getAvailableEffects() {
-        return availableEffects;
-    }
-
-    public void setAvailableEffects(boolean[] availableEffects) {
-        this.availableEffects = availableEffects;
     }
 
     public boolean[] getUsableEffects() {

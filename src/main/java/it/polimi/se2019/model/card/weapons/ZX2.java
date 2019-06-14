@@ -32,7 +32,8 @@ public final class ZX2 extends WeaponAlternativeFire {
                 playerManager.addDamage(damages);
                 playerManager.mark(target, 2);
 
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[0] = false;
+                usableEffects[1] = false;
             }
 
             @Override
@@ -47,7 +48,8 @@ public final class ZX2 extends WeaponAlternativeFire {
                 for (Character character : chosenTargets) {
                     playerManager.mark(game.getPlayer(character), 1);
                 }
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[0] = false;
+                usableEffects[1] = false;
             }
 
             @Override
@@ -56,19 +58,10 @@ public final class ZX2 extends WeaponAlternativeFire {
             }
         };
 
-        usableEffects = new boolean[]{true, true, false};
-
         eff1.setMaxTargets(1);
         eff2.setMaxTargets(3);
 
         getEffects().add(eff1);
         getEffects().add(eff2);
-    }
-
-    @Override
-    public void reload() {
-        cleanCache();
-        usableEffects = new boolean[]{true, true, false};
-        loaded = true;
     }
 }

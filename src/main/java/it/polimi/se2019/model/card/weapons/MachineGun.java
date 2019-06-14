@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class MachineGun extends WeaponAlternativeFire {
+public final class MachineGun extends WeaponTwoAddingEffect {
 
     public MachineGun(String name, String descr, String img, AmmoCube paidCost, AmmoCube[] extraCost) throws InvalidNameException {
         super(name, descr, img, paidCost, extraCost);
@@ -31,8 +31,9 @@ public final class MachineGun extends WeaponAlternativeFire {
                     damages.put(game.getPlayer(character), 1);
                 playerManager.addDamage(damages);
 
-                usableEffects = new boolean[]{false, true, true};
-
+                usableEffects[0] = false;
+                usableEffects[1] = true;
+                usableEffects[2] = true;
                 //setting targets for the next additional effect
                 getEffects().get(1).setPossibleTargets(chosenTargets);
             }
@@ -86,8 +87,9 @@ public final class MachineGun extends WeaponAlternativeFire {
             }
         };
 
-        availableEffects = new boolean[]{true, true, true};
-        usableEffects = new boolean[]{true, false, false};
+        usableEffects[0] = true;
+        usableEffects[1] = false;
+        usableEffects[2] = false;
 
         eff1.setMaxTargets(2);
         eff2.setMaxTargets(1);
@@ -100,8 +102,9 @@ public final class MachineGun extends WeaponAlternativeFire {
 
     @Override
     public void reload() {
-        cleanCache();
-        usableEffects = new boolean[]{true, false, false};
-        loaded = true;
+        super.reload();
+        usableEffects[0] = true;
+        usableEffects[1] = false;
+        usableEffects[2] = false;
     }
 }

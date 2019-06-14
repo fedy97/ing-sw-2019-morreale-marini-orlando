@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class HeatSeeker extends WeaponAlternativeFire {
+public final class HeatSeeker extends WeaponCard {
 
     public HeatSeeker(String name, String descr, String img, AmmoCube paidCost, AmmoCube[] extraCost) throws InvalidNameException {
         super(name, descr, img, paidCost, extraCost);
@@ -41,16 +41,7 @@ public final class HeatSeeker extends WeaponAlternativeFire {
             }
         };
 
-        usableEffects = new boolean[]{true, false, false};
-
         eff1.setMaxTargets(1);
         getEffects().add(eff1);
-    }
-
-    @Override
-    public void reload() {
-        cleanCache();
-        usableEffects = new boolean[]{true, false, false};
-        loaded = true;
     }
 }

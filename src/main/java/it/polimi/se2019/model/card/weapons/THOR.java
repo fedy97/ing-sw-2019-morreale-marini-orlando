@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class THOR extends WeaponAlternativeFire {
+public final class THOR extends WeaponTwoAddingEffect {
 
     public THOR(String name, String descr, String img, AmmoCube paidCost, AmmoCube[] extraCost) throws InvalidNameException {
         super(name, descr, img, paidCost, extraCost);
@@ -29,7 +29,8 @@ public final class THOR extends WeaponAlternativeFire {
                 damages.put(game.getPlayer(chosenTargets.get(0)), 2);
                 playerManager.addDamage(damages);
 
-                usableEffects = new boolean[]{false, true, false};
+                usableEffects[0] = false;
+                usableEffects[1] = true;
 
                 //setting targets for the next additional effect
                 getEffects().get(1).getLastEffectTargets().add(chosenTargets.get(0));
@@ -51,7 +52,7 @@ public final class THOR extends WeaponAlternativeFire {
                 damages.put(game.getPlayer(targets.get(0)), 1);
                 playerManager.addDamage(damages);
 
-                usableEffects = new boolean[]{false, false, true};
+                usableEffects[1] = false;
                 playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
 
                 getEffects().get(2).getLastEffectTargets().add(targets.get(0));
@@ -70,7 +71,7 @@ public final class THOR extends WeaponAlternativeFire {
                 damages.put(game.getPlayer(targets.get(0)), 2);
                 playerManager.addDamage(damages);
 
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[2] = false;
                 playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
@@ -80,8 +81,9 @@ public final class THOR extends WeaponAlternativeFire {
             }
         };
 
-        availableEffects = new boolean[]{true, true, true};
-        usableEffects = new boolean[]{true, false, false};
+        usableEffects[0] = true;
+        usableEffects[1] = false;
+        usableEffects[2] = false;
 
         eff1.setMaxTargets(1);
         eff2.setMaxTargets(1);
@@ -94,9 +96,10 @@ public final class THOR extends WeaponAlternativeFire {
 
     @Override
     public void reload() {
-        cleanCache();
-        usableEffects = new boolean[]{true, false, false};
-        loaded = true;
+        super.reload();
+        usableEffects[0] = true;
+        usableEffects[1] = false;
+        usableEffects[2] = false;
     }
 
 }

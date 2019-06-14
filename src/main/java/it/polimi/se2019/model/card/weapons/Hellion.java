@@ -35,7 +35,8 @@ public final class Hellion extends WeaponAlternativeFire {
                     playerManager.mark(game.getPlayer(character), 1);
                 }
 
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[0] = false;
+                usableEffects[1] = false;
             }
 
             @Override
@@ -59,7 +60,8 @@ public final class Hellion extends WeaponAlternativeFire {
                     playerManager.mark(game.getPlayer(character), 2);
                 }
 
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[0] = false;
+                usableEffects[1] = false;
                 playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
@@ -71,19 +73,10 @@ public final class Hellion extends WeaponAlternativeFire {
             }
         };
 
-        usableEffects = new boolean[]{true, true, false};
-
         eff1.setMaxTargets(1);
         eff2.setMaxTargets(1);
 
         getEffects().add(eff1);
         getEffects().add(eff2);
-    }
-
-    @Override
-    public void reload() {
-        cleanCache();
-        usableEffects = new boolean[]{true, true, false};
-        loaded = true;
     }
 }

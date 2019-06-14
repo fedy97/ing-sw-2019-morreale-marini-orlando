@@ -19,8 +19,8 @@ import it.polimi.se2019.utils.*;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -145,11 +145,10 @@ public class Controller implements Observer {
         int usedEffects = 0;
 
         while (state == ControllerState.PROCESSING_ACTION_3) {
-            boolean[] defaultEffects = weapon.getAvailableEffects();
             boolean[] usableEffects = weapon.getUsableEffects();
 
-            for (int i = 0; i < 3; i++) {
-                if (defaultEffects[i] && usableEffects[i]) {
+            for (int i = 0; i < usableEffects.length; i++) {
+                if (usableEffects[i]) {
                     Effect effect = weapon.getEffects().get(i);
                     if (effect.getCost().length == 0 ||
                             playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().hasAmmos(effect.getCost()))
@@ -185,12 +184,12 @@ public class Controller implements Observer {
 
                     for (int i = 0; i < currEffect.getMaxTargets(); i++) {
                         targets.add(currentTargets.take());
-                        if(currentTargets.isEmpty())
+                        if (currentTargets.isEmpty())
                             break;
                     }
                     weapon.activateEffect(effectIndex, targets);
                     CustomLogger.logInfo(getClass().getName(), "Action performed!");
-                } else{
+                } else {
                     weapon.activateEffect(effectIndex, null);
                     CustomLogger.logInfo(getClass().getName(), "Action performed with null!");
                 }
@@ -408,7 +407,8 @@ public class Controller implements Observer {
                     Thread.sleep(1000);
                 }
             } catch (InterruptedException ex) {
-            } catch (Exception ex) {}
+            } catch (Exception ex) {
+            }
 
         }).start();
     }

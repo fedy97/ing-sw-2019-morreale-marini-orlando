@@ -12,7 +12,6 @@ import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.SendBinaryOption;
 import it.polimi.se2019.utils.CustomLogger;
-import it.polimi.se2019.utils.HandyFunctions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,7 +40,8 @@ public final class PowerGlove extends WeaponAlternativeFire {
                 playerManager.getCurrentPlayer().setCurrentPlatform(target.getCurrentPlatform());
                 game.notifyChanges();
 
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[0] = false;
+                usableEffects[1] = false;
             }
 
             @Override
@@ -91,8 +91,8 @@ public final class PowerGlove extends WeaponAlternativeFire {
                     }
                 }
 
-
-                usableEffects = new boolean[]{false, false, false};
+                usableEffects[0] = false;
+                usableEffects[1] = false;
             }
 
             @Override
@@ -106,8 +106,6 @@ public final class PowerGlove extends WeaponAlternativeFire {
             }
         };
 
-        usableEffects = new boolean[]{true, true, false};
-
         eff1.setMaxTargets(1);
         eff2.setMaxTargets(1);
 
@@ -115,10 +113,4 @@ public final class PowerGlove extends WeaponAlternativeFire {
         getEffects().add(eff2);
     }
 
-    @Override
-    public void reload() {
-        cleanCache();
-        usableEffects = new boolean[]{true, true, false};
-        loaded = true;
-    }
 }
