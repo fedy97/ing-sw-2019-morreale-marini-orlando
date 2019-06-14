@@ -103,7 +103,7 @@ public class SocketClient implements Client, Observer {
             objectOutputStream.reset();
         } catch (IOException e) {
             try {
-                HandyFunctions.LOGGER.log(Level.SEVERE, "Error sending message to the server using socket");
+                HandyFunctions.LOGGER.log(Level.SEVERE, e.getMessage());
                 objectOutputStream.writeObject(msg);
                 objectOutputStream.flush();
                 objectOutputStream.reset();
