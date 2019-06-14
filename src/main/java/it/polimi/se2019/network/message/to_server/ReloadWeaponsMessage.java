@@ -2,7 +2,9 @@ package it.polimi.se2019.network.message.to_server;
 
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.PlayerManager;
+import it.polimi.se2019.controller.UserValidActions;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
+import it.polimi.se2019.network.message.to_client.EnablePlayerActionsMessage;
 import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.Deserializer;
 
@@ -21,7 +23,8 @@ public class ReloadWeaponsMessage extends ToServerMessage {
         if (!light.equals("null")) {
             WeaponCard weapon = Deserializer.getWeapon(light);
             PlayerManager manager = Controller.getInstance().getPlayerManager();
-
+            EnablePlayerActionsMessage message = new EnablePlayerActionsMessage(UserValidActions.NO_BASIC.getActions());
+            Controller.getInstance().callView(message, manager.getCurrentPlayer().getName());
             try {
                 manager.reload(weapon);
             } catch (Exception e) {

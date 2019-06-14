@@ -232,8 +232,8 @@ public class GUI extends RemoteView {
             Parent root = loader.load();
             reloadWeaponsStage = new Stage();
             reloadWeaponsStage.setTitle("Choose a weapon to reload");
-            //switchWeaponStage.initOwner(stage);
-            //switchWeaponStage.initModality(Modality.APPLICATION_MODAL);
+            reloadWeaponsStage.initOwner(stage);
+            reloadWeaponsStage.initModality(Modality.APPLICATION_MODAL);
             sceneReloadWeapons = new Scene(root);
             reloadWeaponsController = loader.getController();
             reloadWeaponsStage.setOnCloseRequest(event -> sendWeaponToReload("null"));

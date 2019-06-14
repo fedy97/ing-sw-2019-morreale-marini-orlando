@@ -5,16 +5,21 @@ import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.client.RemoteView;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.SynchronousQueue;
 import java.util.logging.Level;
 
 /**
  * Socket implementation of remote client
  */
 public class SocketClient implements Client, Observer {
+    BlockingQueue queue = new SynchronousQueue();
     private boolean connected;
     private RemoteView actor;
     private Socket socket;
@@ -95,9 +100,16 @@ public class SocketClient implements Client, Observer {
         try {
             objectOutputStream.writeObject(msg);
             objectOutputStream.flush();
-            //objectOutputStream.reset();
+            objectOutputStream.reset();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "Error sending message to the server using socket");
+            try {
+                HandyFunctions.LOGGER.log(Level.SEVERE, "Error sending message to the server using socket");
+                objectOutputStream.writeObject(msg);
+                objectOutputStream.flush();
+                objectOutputStream.reset();
+            } catch (Exception ex) {
+
+            }
         }
     }
 
