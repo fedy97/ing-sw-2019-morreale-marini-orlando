@@ -48,6 +48,7 @@ public class ReloadWeaponsController {
 
     protected void updateMyWeapons(LightGameVersion lightGameVersion, List<String> hashes) {
         this.lightGameVersion = lightGameVersion;
+
         for (int j = 0; j < 3; j++) {
             weaponsImages.get(j).setImage(new Image("/assets/weapons/back.png"));
             HandyFunctions.darkenButton(weaponsButtons.get(j));
@@ -56,7 +57,7 @@ public class ReloadWeaponsController {
         for (CardRep myWeapon : myWeaponsReps) {
             weaponsImages.get(myWeaponsReps.indexOf(myWeapon)).setImage(new Image(myWeapon.getPath()));
             if (hashes.contains(Integer.toString(myWeapon.getId())))
-                HandyFunctions.enlightenButton(weaponsButtons.get(weaponsButtons.indexOf(myWeapon)));
+                HandyFunctions.enlightenButton(weaponsButtons.get(myWeaponsReps.indexOf(myWeapon)));
         }
 
 
