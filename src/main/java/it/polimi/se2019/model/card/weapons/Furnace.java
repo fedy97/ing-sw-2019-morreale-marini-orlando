@@ -39,13 +39,18 @@ public final class Furnace extends WeaponAlternativeFire {
 
                 c.sendMessage("What room do you want to burn?", playerManager.getCurrentPlayer().getName());
                 c.askFor(destinations, "position");
-
+                StringBuilder targetsDamaged = new StringBuilder();
                 try {
                     Platform target = c.getChosenDestination().take();
                     for (Platform p : target.getPlatformRoom().getPlatformsInRoom()) {
-                        for (Character character : p.getPlayersOnThePlatform())
+                        for (Character character : p.getPlayersOnThePlatform()) {
                             damages.put(game.getPlayer(character), 1);
+                            targetsDamaged.append(character.name());
+                            targetsDamaged.append(", ");
+                        }
                     }
+                    targetsDamaged.append("damaged");
+                    c.broadcastMessage(targetsDamaged.toString());
                 } catch (Exception e) {
                     CustomLogger.logException(this.getClass().getName(), e);
                 }
