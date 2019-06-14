@@ -11,13 +11,15 @@ import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.HandyFunctions;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
  * @author Gabriel Raul Marini
  */
-public abstract class Validator{
+public abstract class Validator {
     protected Controller father;
 
     /**
@@ -100,12 +102,14 @@ public abstract class Validator{
         Player currPlayer = father.getPlayerManager().getCurrentPlayer();
         List<WeaponCard> res = currPlayer.getWeaponCards();
         AmmoBox ammoBox = currPlayer.getPlayerBoard().getAmmoBox();
+        List<WeaponCard> toRemove = new ArrayList<>();
 
         for (WeaponCard weapon : res) {
             if (!ammoBox.hasAmmos(weapon.getTotalCost()))
-                res.remove(weapon);
+                toRemove.add(weapon);
         }
 
+        res.removeAll(toRemove);
         return res;
     }
 
@@ -131,16 +135,16 @@ public abstract class Validator{
         List<PowerUpCard> res = new ArrayList<>();
         AmmoCube[] cost;
 
-        if(reload)
+        if (reload)
             cost = weaponCard.getTotalCost();
         else
             cost = weaponCard.getExtraCost();
 
         for (PowerUpCard powerUp : currPlayer.getPowerUpCards())
-            if(reload)
+            if (reload)
 
-            if (powerUp.isUsable(currPlayer))
-                res.add(powerUp);
+                if (powerUp.isUsable(currPlayer))
+                    res.add(powerUp);
         return null; //TODO
 
     }

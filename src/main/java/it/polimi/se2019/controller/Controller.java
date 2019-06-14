@@ -255,6 +255,8 @@ public class Controller implements Observer {
             msg = new AskForCubeMessage(lightVersion);
         else if (choice.equals("cube"))
             msg = new AskForCubeMessage(lightVersion);
+        else if (choice.equals("recharge"))
+            msg = new ShowReloadableWeaponsMessage(lightVersion);
         else
             msg = null; // OTHER options
 
