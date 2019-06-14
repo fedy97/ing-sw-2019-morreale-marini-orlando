@@ -133,6 +133,7 @@ public class HandyFunctions {
     }
 
     public static void forceLightToggleButton(ToggleButton button) {
+        button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
         button.setStyle(HOVERED_BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
         button.setOnMouseExited(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));

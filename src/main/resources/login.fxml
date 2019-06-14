@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false"
-            prefHeight="318.0" prefWidth="612.0" scaleShape="false" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.view.client.gui.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="318.0" prefWidth="612.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.view.client.gui.LoginController">
     <children>
         <ImageView fitHeight="318.0" fitWidth="612.0" pickOnBounds="true">
             <image>
-                <Image url="@assets/adrenaline.jpg"/>
+                <Image url="@assets/adrenaline.jpg" />
             </image>
         </ImageView>
-        <TextField fx:id="userTextField" layoutX="214.0" layoutY="90.0" promptText="Username"/>
-        <TextField fx:id="ipTextField" layoutX="214.0" layoutY="134.0" promptText="IP: 127.0.0.1"/>
-        <Button fx:id="loginButton" layoutX="214.0" layoutY="250.0" mnemonicParsing="false" onAction="#login"
-                prefHeight="33.0" prefWidth="171.0" style="-fx-font-size: 22;" text="LOGIN">
+        <TextField fx:id="userTextField" layoutX="214.0" layoutY="90.0" promptText="Username" />
+        <TextField fx:id="ipTextField" layoutX="214.0" layoutY="134.0" promptText="IP: 127.0.0.1" />
+        <Button fx:id="loginButton" layoutX="214.0" layoutY="250.0" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="171.0" text="LOGIN">
             <font>
-                <Font name="System Bold" size="90.0"/>
+                <Font name="System Bold" size="20.0" />
             </font>
         </Button>
-        <ToggleButton fx:id="socketButton" layoutX="214.0" layoutY="205.0" mnemonicParsing="false" text="SOCKET"/>
-        <ToggleButton fx:id="rmiButton" layoutX="314.0" layoutY="205.0" mnemonicParsing="false" prefHeight="25.0"
-                      prefWidth="71.0" text="RMI"/>
+        <ToggleButton fx:id="socketButton" layoutX="214.0" layoutY="205.0" mnemonicParsing="false" onAction="#socketClick" text="SOCKET" />
+        <ToggleButton fx:id="rmiButton" layoutX="314.0" layoutY="205.0" mnemonicParsing="false" onAction="#rmiClick" prefHeight="25.0" prefWidth="71.0" text="RMI" />
     </children>
 </AnchorPane>

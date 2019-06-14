@@ -1,23 +1,16 @@
 package it.polimi.se2019.view.client.gui;
 
-import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.client.SocketClient;
 import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.view.client.RemoteView;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.rmi.RemoteException;
-
-import java.util.Random;
-import java.util.logging.Level;
 
 public class LoginController {
 
@@ -31,12 +24,14 @@ public class LoginController {
     private ToggleButton socketButton;
     @FXML
     private Button loginButton;
-
-    private ToggleGroup connectionType = new ToggleGroup();
+    private String selection;
 
     public void initialize() {
-        connectionType.getToggles().addAll(rmiButton, socketButton);
         socketButton.setSelected(true);
+        HandyFunctions.forceLightToggleButton(socketButton);
+        HandyFunctions.enlightenToggleButton(rmiButton);
+        selection = socketButton.getText();
+        HandyFunctions.enlightenButton(loginButton);
     }
 
     @FXML
@@ -50,7 +45,7 @@ public class LoginController {
         } else {
             GUI gui = new GUI(getUsername(), (Stage) loginButton.getScene().getWindow(), loginButton.getScene());
             gui.setUserName();
-            if (getConnection().equals("RMI")) {
+            if (selection.equals("RMI")) {
                 RMIClient client = new RMIClient(gui, HandyFunctions.randomIntegerBetWeen(1500, 3000), getUsername());
                 client.connect(getIp(), 1099);
                 gui.addObserver(client);
@@ -76,19 +71,14 @@ public class LoginController {
         return ipTextField.getText();
     }
 
-    /**
-     * Gets the connection type (socket or RMI)
-     *
-     * @return the text of the button selected
-     */
-    private String getConnection() {
-        ToggleButton selectedButton;
-        if (connectionType.getSelectedToggle() != null) {
-            selectedButton = (ToggleButton) connectionType.getSelectedToggle();
-            return selectedButton.getText();
-        } else {
-            return "SOCKET";
-        }
-
+    public void socketClick(){
+        HandyFunctions.enlightenToggleButton(rmiButton);
+        HandyFunctions.forceLightToggleButton(socketButton);
+        selection = socketButton.getText();
+    }
+    public void rmiClick(){
+        HandyFunctions.enlightenToggleButton(socketButton);
+        HandyFunctions.forceLightToggleButton(rmiButton);
+        selection = rmiButton.getText();
     }
 }
