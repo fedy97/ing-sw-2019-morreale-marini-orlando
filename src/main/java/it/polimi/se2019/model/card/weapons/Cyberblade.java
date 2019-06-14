@@ -11,6 +11,7 @@ import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.CustomLogger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,14 +36,16 @@ public final class Cyberblade extends WeaponAlternativeFire {
                 usableEffects[2] = true;
 
                 //setting targets for the next additional effect
-                //targets.remove(playerManager.getCurrentPlayer().getCharacter());
                 getEffects().get(2).getLastEffectTargets().add(chosenTargets.get(0));
             }
 
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
+                List<Character> targets = new ArrayList<>();
+                targets.addAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
+                targets.remove(playerManager.getCurrentPlayer().getCharacter());
+                this.setPossibleTargets(targets);
             }
         };
 
@@ -92,10 +95,8 @@ public final class Cyberblade extends WeaponAlternativeFire {
                     targets.removeAll(getLastEffectTargets());
                 } else {
                     targets = playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform();
-                    //commentata per testare effetto 3
-                    //targets.remove(playerManager.getCurrentPlayer().getCharacter());
                 }
-
+                targets.remove(playerManager.getCurrentPlayer().getCharacter());
                 this.setPossibleTargets(targets);
             }
         };
