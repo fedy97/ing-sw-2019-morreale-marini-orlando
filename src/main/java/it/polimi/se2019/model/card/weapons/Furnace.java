@@ -8,9 +8,11 @@ import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
+import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.CustomLogger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,17 +31,21 @@ public final class Furnace extends WeaponAlternativeFire {
             public void activateEffect(List<Character> chosenTargets, WeaponCard card) {
                 Map<Player, Integer> damages = new HashMap<>();
 
-                List<Platform> destinations = game.getGameField().getVisiblePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform());
-                destinations.remove(playerManager.getCurrentPlayer().getCurrentPlatform());
+                List<Platform> destinations = new ArrayList<>();
+                for (Orientation or : playerManager.getCurrentPlayer().getCurrentPlatform().getDoorLocation()) {
+                    Platform platNewRoom = playerManager.getCurrentPlayer().getCurrentPlatform().getAdjacentPlatform(or);
+                    destinations.add(platNewRoom);
+                }
 
-
-                c.sendMessage("What platform do you want to burn?", playerManager.getCurrentPlayer().getName());
+                c.sendMessage("What room do you want to burn?", playerManager.getCurrentPlayer().getName());
                 c.askFor(destinations, "position");
 
                 try {
                     Platform target = c.getChosenDestination().take();
-                    for (Character character : target.getPlayersOnThePlatform())
-                        damages.put(game.getPlayer(character), 1);
+                    for (Platform p : target.getPlatformRoom().getPlatformsInRoom()) {
+                        for (Character character : p.getPlayersOnThePlatform())
+                            damages.put(game.getPlayer(character), 1);
+                    }
                 } catch (Exception e) {
                     CustomLogger.logException(this.getClass().getName(), e);
                 }
