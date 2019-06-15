@@ -588,7 +588,15 @@ public class GameBoardController {
                 ammoRepImageViewMap.put(imageView, ammoRep);
             }
         }
-
+        movebutton.setFont(gui.normale);
+        reloadbutton.setFont(gui.normale);
+        shootbutton.setFont(gui.normale);
+        grabbutton.setFont(gui.normale);
+        convertbutton.setFont(gui.normale);
+        messageLabel.setFont(gui.normale);
+        endturnbutton.setFont(gui.normale);
+        powerupsbutton.setFont(gui.normale);
+        timer.setFont(gui.grande);
     }
 
     protected void setConfig(String config) {

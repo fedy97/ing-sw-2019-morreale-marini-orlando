@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -68,7 +69,12 @@ public class GUI extends RemoteView {
     private LightGameVersion lightGameVersion;
     private TimerTurn timerTurn;
 
-    public GUI(String user, Stage stage, Scene login) {
+    protected Font normale;
+    protected Font grande;
+
+    public GUI(String user, Stage stage, Scene login, Font normale, Font grande) {
+        this.normale = normale;
+        this.grande = grande;
         this.stage = stage;
         this.userName = user;
         sceneLogin = login;

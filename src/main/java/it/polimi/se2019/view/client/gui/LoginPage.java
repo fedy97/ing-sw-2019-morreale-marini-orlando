@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class LoginPage extends Application {
@@ -13,7 +14,8 @@ public class LoginPage extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
         primaryStage.setTitle("Adrenaline");
-        primaryStage.setScene(new Scene(root, 612, 318));
+        Scene scene = new Scene(root, 612, 318);
+        primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
         primaryStage.setOnCloseRequest(event -> {
