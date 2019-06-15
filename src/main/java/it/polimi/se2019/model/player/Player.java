@@ -2,8 +2,8 @@ package it.polimi.se2019.model.player;
 
 import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.board.Platform;
-import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
+import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.utils.CustomLogger;
 
@@ -94,7 +94,7 @@ public class Player {
         currentPlatform = platform;
         try {
             currentPlatform.setPlayerOnPlatform(this.getCharacter());
-        }catch (Exception e){
+        } catch (Exception e) {
             CustomLogger.logException(this.getClass().getName(), e);
         }
     }
@@ -104,6 +104,13 @@ public class Player {
      */
     public int getFrenzyModeType() {
         return frenzyModeType;
+    }
+
+    /**
+     * @param type The new player mode
+     */
+    public void setFrenzyModeType(int type) {
+        frenzyModeType = type;
     }
 
     /**
@@ -239,13 +246,27 @@ public class Player {
         weaponCards.remove(card);
     }
 
+    //TODO test
     /**
-     * @param type The new player mode
+     * @return if the player has more than 3 damage tokens but less than 6
      */
-    public void setFrenzyModeType(int type) {
-        frenzyModeType = type;
+    public boolean isDamaged() {
+        if (playerBoard.getDamageLine().size() >= 3 && playerBoard.getDamageLine().size() < 6)
+            return true;
+        else
+            return false;
     }
 
+    //TODO test
+    /**
+     * @return if the player has more than 6 damage tokens
+     */
+    public boolean isSeriouslyDamaged() {
+        if (playerBoard.getDamageLine().size() >= 6)
+            return true;
+        else
+            return false;
+    }
 
     public void setUnderAttack() {
         underAttack = true;
