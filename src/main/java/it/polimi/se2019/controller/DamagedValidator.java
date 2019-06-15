@@ -24,6 +24,7 @@ public class DamagedValidator extends Validator {
      * @throws InvalidActionException if the player cannot move in the current health state with the
      * selected action
      */
+    @Override
     public List<Platform> getValidMoves(Action c) throws InvalidActionException {
         List<Platform> res;
         GameField gameField = father.getGame().getGameField();

@@ -203,6 +203,7 @@ public class Controller implements Observer {
         }
 
         weapon.discard();
+        game.notifyChanges();
     }
 
     /**

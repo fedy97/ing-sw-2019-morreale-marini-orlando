@@ -81,6 +81,7 @@ public class PerformActionMessage extends ToServerMessage {
                     while(c.getState() == ControllerState.PROCESSING_ACTION_3)
                         Thread.sleep(200);
                 } else if (choice.equals("action4")) {
+                    HandyFunctions.printList(c.getValidator().getReloadableWeapons());
                     c.askFor(c.getValidator().getReloadableWeapons(), "recharge");
                 }
             } catch (Exception e) {

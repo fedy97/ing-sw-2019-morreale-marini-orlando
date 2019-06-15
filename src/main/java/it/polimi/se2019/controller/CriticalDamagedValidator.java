@@ -21,6 +21,7 @@ public class CriticalDamagedValidator extends Validator {
      * @param c command received by the player
      * @return the list of platform destination the player can move to
      */
+    @Override
     public List<Platform> getValidMoves(Action c) {
         List<Platform> res = null;
         GameField gameField = father.getGame().getGameField();

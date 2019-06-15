@@ -9,6 +9,7 @@ import it.polimi.se2019.network.message.to_client.EnablePlayerActionsMessage;
 import it.polimi.se2019.network.message.to_client.ShowChoosePowerUpMessage;
 import it.polimi.se2019.network.message.to_client.ShowMessage;
 import it.polimi.se2019.network.message.to_client.StartTimerTurnMessage;
+import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 
 import java.util.ArrayList;
@@ -75,13 +76,24 @@ public class TurnController {
             c.getDecksManager().getToFill().clear();
             c.getDecksManager().getAmmoGarbageDeck().clear();
         }
+
         curr = nextUser();
-        c.getPlayerManager().setCurrentPlayer(c.getGame().getPlayer(curr));
-        Player currPlayer = c.getPlayerManager().getCurrentPlayer();
+
+        Player currPlayer = c.getGame().getPlayer(curr);
+        c.getPlayerManager().setCurrentPlayer(currPlayer);
+
+        if(currPlayer.isDamaged())
+            c.setValidator(new DamagedValidator(c));
+        else if(currPlayer.isSeriouslyDamaged())
+            c.setValidator(new CriticalDamagedValidator(c));
+        else
+            c.setValidator(new HealthyValidator(c));
+
         for (Player player : c.getGame().getPlayers()) {
             if (player.equals(currPlayer)) {
                 c.callView(new EnablePlayerActionsMessage(UserValidActions.ALL.getActions()), player.getName());
-                c.callView(new ShowMessage("It's your turn!"), player.getName());
+                c.sendMessage("It's your turn!", player.getName());
+
                 if (currPlayer.getCurrentPlatform() == null) {
                     try {
                         List<CardRep> cardReps = new ArrayList<>();
@@ -93,14 +105,14 @@ public class TurnController {
                         cardReps.add(new CardRep(HandyFunctions.getSystemAddress(p2), p2.getName(), p2.getDescription(), p2.getImgPath()));
                         ShowChoosePowerUpMessage message = new ShowChoosePowerUpMessage(cardReps);
                         c.callView(message, currPlayer.getName());
-                    } catch (InvalidCardException ex) {
-                        HandyFunctions.LOGGER.log(Level.SEVERE, ex.getMessage());
+                    } catch (InvalidCardException e) {
+                        CustomLogger.logException(this.getClass().getName(), e);
                     }
-
                 }
+
             } else {
                 c.callView(new EnablePlayerActionsMessage(UserValidActions.NONE.getActions()), player.getName());
-                c.callView(new ShowMessage("It's ".concat(c.getPlayerManager().getCurrentPlayer().getName()).concat(" turn!")), player.getName());
+                c.sendMessage("It's ".concat(c.getPlayerManager().getCurrentPlayer().getName()).concat(" turn!"), player.getName());
             }
             c.callView(new StartTimerTurnMessage(seconds, getTurnUser()), player.getName());
         }
@@ -109,7 +121,7 @@ public class TurnController {
     private String nextUser() {
         int currIndex = turningOrder.indexOf(curr);
         if (currIndex + 1 == turningOrder.size())
-            currIndex=0;
+            currIndex = 0;
         else
             currIndex++;
         return turningOrder.get(currIndex);

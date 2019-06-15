@@ -198,8 +198,10 @@ public class PlayerManager {
      */
     public void reload(WeaponCard weaponCard) throws InsufficientAmmoException {
         AmmoBox box = currentPlayer.getPlayerBoard().getAmmoBox();
-        if (box.hasAmmos(weaponCard.getTotalCost()))
+        if (box.hasAmmos(weaponCard.getTotalCost())){
             weaponCard.reload();
+            box.removeAmmos(weaponCard.getTotalCost());
+        }
         else
             throw new InsufficientAmmoException("CurrentPlayer hasn't enough ammos to recharge the weapons");
         father.getGame().notifyChanges();

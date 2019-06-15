@@ -5,6 +5,7 @@ import it.polimi.se2019.exceptions.InvalidActionException;
 import it.polimi.se2019.exceptions.InvalidGenerationSpotException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
+import it.polimi.se2019.model.card.weapons.Effect;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.AmmoBox;
@@ -105,7 +106,7 @@ public abstract class Validator {
         List<WeaponCard> toRemove = new ArrayList<>();
 
         for (WeaponCard weapon : res) {
-            if (!ammoBox.hasAmmos(weapon.getTotalCost()))
+            if (!ammoBox.hasAmmos(weapon.getTotalCost()) || weapon.isLoaded())
                 toRemove.add(weapon);
         }
 
@@ -149,15 +150,36 @@ public abstract class Validator {
 
     }
 
+    /**
+     * @return the weapons the player can use according to the current state of the game
+     */
     public List<WeaponCard> getUsableWeapons() {
         Player currPlayer = father.getPlayerManager().getCurrentPlayer();
         List<WeaponCard> res = currPlayer.getWeaponCards();
+        List<WeaponCard> toRemove = new ArrayList<>();
 
         for (WeaponCard weapon : res) {
             if (!weapon.isLoaded())
-                res.remove(weapon);
+                toRemove.add(weapon);
+            else {
+                boolean usable = true;
+                boolean[] usableEffect = weapon.getUsableEffects();
+
+                for (int i = 0; i < usableEffect.length; i++) {
+                    if (usableEffect[i]) {
+                        Effect effect = weapon.getEffects().get(i);
+                        effect.setupTargets();
+                        if (effect.getPossibleTargets() != null && effect.getPossibleTargets().isEmpty())
+                            usable = false;
+                    }
+                }
+
+                if (!usable)
+                    toRemove.add(weapon);
+            }
         }
 
+        res.removeAll(toRemove);
         return res;
     }
 
