@@ -5,9 +5,9 @@ import it.polimi.se2019.view.client.RemoteView;
 
 import java.util.ArrayList;
 
-public class ShowWeaponsMessage extends ToClientMessage {
+public class ShowUsableWeaponsMessage extends ToClientMessage {
 
-    public ShowWeaponsMessage(Object payload) {
+    public ShowUsableWeaponsMessage(Object payload) {
         super(payload);
     }
 
@@ -15,8 +15,6 @@ public class ShowWeaponsMessage extends ToClientMessage {
      * @param remoteView on which actions have to be performed
      */
     public void performAction(RemoteView remoteView) {
-
-
-        remoteView.lightWeapons((ArrayList<String>) payload);
+        remoteView.showUsableWeapons((ArrayList<String>) payload);
     }
 }

@@ -3,6 +3,7 @@ package it.polimi.se2019.model.board;
 import it.polimi.se2019.exceptions.InvalidRoomException;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.*;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  *
  * @author Federico Morreale
  */
-public class Room {
+public class Room implements Serializable {
 
     private ArrayList<Platform> platformsInRoom;
     private boolean hasGenerationSpot;

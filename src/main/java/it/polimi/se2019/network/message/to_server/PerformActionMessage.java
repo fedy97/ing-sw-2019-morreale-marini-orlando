@@ -78,7 +78,7 @@ public class PerformActionMessage extends ToServerMessage {
                         CustomLogger.logInfo(this.getClass().getName(), "You cannot move before shooting!");
                     }
 
-                    c.askFor(c.getValidator().getReloadableWeapons(), "weapons");
+                    c.askFor(c.getValidator().getUsableWeapons(), "weaponsToUse");
 
                     while(c.getState() == ControllerState.PROCESSING_ACTION_3)
                         Thread.sleep(200);

@@ -7,6 +7,7 @@ import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.utils.HandyFunctions;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.*;
 
@@ -16,7 +17,7 @@ import java.util.*;
  *
  * @author Federico Morreale
  */
-public class GameField {
+public class GameField implements Serializable {
 
     protected WeaponCard[] initWeapons;
     private ArrayList<Room> rooms;

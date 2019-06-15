@@ -13,13 +13,14 @@ import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.HandyFunctions;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.logging.Level;
 
 /**
  * @author Federico Morreale
  */
-public class Game extends Observable {
+public class Game extends Observable implements Serializable {
 
     private static Game instance = null;
     private GameField gameField;

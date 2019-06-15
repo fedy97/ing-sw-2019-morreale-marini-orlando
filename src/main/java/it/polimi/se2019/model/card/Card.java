@@ -4,6 +4,7 @@ import it.polimi.se2019.exceptions.InvalidImageException;
 import it.polimi.se2019.exceptions.InvalidNameException;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * A generic class representing a card
@@ -12,7 +13,7 @@ import java.awt.*;
  */
 
 
-public abstract class Card {
+public abstract class Card implements Serializable {
 
     protected String name;
     protected String description;

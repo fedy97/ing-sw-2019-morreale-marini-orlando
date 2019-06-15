@@ -66,12 +66,12 @@ public class UseWeaponController {
         this.gui = gui;
     }
 
-    protected void updateMyWeapons(LightGameVersion lightGameVersion) {
+    protected void updateMyWeapons(LightGameVersion lightGameVersion, List<String> hashes) {
         this.lightGameVersion = lightGameVersion;
         List<CardRep> myWeaponsReps = lightGameVersion.getPlayerWeapons().get(gui.getCharInString());
         for (CardRep myWeapon : myWeaponsReps) {
             weaponsImages.get(myWeaponsReps.indexOf(myWeapon)).setImage(new Image(myWeapon.getPath()));
-            if (myWeapon.isLoaded())
+            if (hashes.contains(Integer.toString(myWeapon.getId())))
                 HandyFunctions.enlightenButton(weaponsButtons.get(myWeaponsReps.indexOf(myWeapon)));
             else HandyFunctions.darkenButton(weaponsButtons.get(myWeaponsReps.indexOf(myWeapon)));
         }

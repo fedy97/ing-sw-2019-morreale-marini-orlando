@@ -5,6 +5,7 @@ import it.polimi.se2019.exceptions.InvalidQuantityException;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.utils.HandyFunctions;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -13,7 +14,7 @@ import java.util.*;
  *
  * @author Federico Morreale
  */
-public class SkullsBoard {
+public class SkullsBoard implements Serializable {
 
     private int currentSkulls;
     private int totalSkulls;

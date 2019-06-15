@@ -4,6 +4,7 @@ import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author Gabriel Raul Marini
  */
-public abstract class Effect {
+public abstract class Effect implements Serializable {
     private AmmoCube[] cost;
     private List<Character> possibleTargets;
     private List<Character> lastEffectTargets;

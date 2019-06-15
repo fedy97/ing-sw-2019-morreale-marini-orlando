@@ -7,6 +7,7 @@ import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.utils.CustomLogger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
  *
  * @author Simone Orlando
  */
-public class Player {
+public class Player implements Serializable {
 
     private String name;
     private Character character;

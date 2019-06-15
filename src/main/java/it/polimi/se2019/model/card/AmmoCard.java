@@ -6,12 +6,13 @@ import it.polimi.se2019.model.AmmoRep;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 
 import java.awt.*;
+import java.io.Serializable;
 
 
 /**
  * A class representing an AmmoCard the player can use to grab cubes and PowerUp cards
  */
-public final class AmmoCard extends Card {
+public final class AmmoCard extends Card implements Serializable {
 
     private AmmoCube[] ammoCubes;
     private boolean hasPowerUp;

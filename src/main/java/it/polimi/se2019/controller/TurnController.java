@@ -12,6 +12,7 @@ import it.polimi.se2019.network.message.to_client.StartTimerTurnMessage;
 import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,7 +20,7 @@ import java.util.logging.Level;
 /**
  * @author Gabriel Raul Marini
  */
-public class TurnController {
+public class TurnController implements Serializable {
     private String curr;
     private String first;
     private List<String> turningOrder;

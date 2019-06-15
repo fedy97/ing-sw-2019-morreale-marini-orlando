@@ -1,6 +1,7 @@
 package it.polimi.se2019.model.board;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.*;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import it.polimi.se2019.utils.HandyFunctions;
  *
  * @author Federico Morreale
  */
-public class Platform {
+public class Platform implements Serializable {
 
     private Room platformRoom;
     private Color platformColor;

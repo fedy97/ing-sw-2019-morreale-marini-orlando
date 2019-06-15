@@ -5,6 +5,7 @@ import it.polimi.se2019.exceptions.InvalidQuantityException;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.utils.HandyFunctions;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -12,7 +13,7 @@ import java.util.*;
  *
  * @author Federico Morreale
  */
-public class ScoreBoard {
+public class ScoreBoard implements Serializable {
 
     private Map<Character, Integer> ranking;
 

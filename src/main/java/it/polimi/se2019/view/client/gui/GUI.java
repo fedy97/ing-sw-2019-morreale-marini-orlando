@@ -632,6 +632,17 @@ public class GUI extends RemoteView {
     }
 
     @Override
+    public void showUsableWeapons(List<String> weapons) {
+        Platform.runLater(
+                () -> {
+                    getUseWeaponStage().setScene(getSceneUseWeapon());
+                    getUseWeaponStage().setResizable(false);
+                    getUseWeaponController().updateMyWeapons(lightGameVersion, weapons);
+                    getUseWeaponStage().show();
+                });
+    }
+
+    @Override
     public void showTargets(List<String> targets) {
         Platform.runLater(
                 () -> {

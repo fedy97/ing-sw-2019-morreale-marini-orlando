@@ -60,4 +60,6 @@ public abstract class RemoteView extends View {
 
     public abstract void showReloadableWeapons(List<String> weapons);
 
+    public abstract void showUsableWeapons(List<String> weapons);
+
 }

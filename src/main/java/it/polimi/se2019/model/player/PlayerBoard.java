@@ -2,6 +2,8 @@ package it.polimi.se2019.model.player;
 
 import it.polimi.se2019.exceptions.InvalidCharacterException;
 import it.polimi.se2019.model.enumeration.Character;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
  * the points obtainable at the player's next death
  * @author Simone Orlando
  */
-public class PlayerBoard {
+public class PlayerBoard implements Serializable {
 
     private ArrayList<Character> damageLine;
     private ArrayList<Character> revengeMarks;

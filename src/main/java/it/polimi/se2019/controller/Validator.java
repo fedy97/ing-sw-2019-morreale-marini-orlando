@@ -12,6 +12,7 @@ import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.HandyFunctions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ import java.util.logging.Level;
 /**
  * @author Gabriel Raul Marini
  */
-public abstract class Validator {
+public abstract class Validator implements Serializable {
     protected Controller father;
 
     /**

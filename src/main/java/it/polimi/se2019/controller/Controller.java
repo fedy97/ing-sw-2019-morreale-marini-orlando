@@ -19,6 +19,7 @@ import it.polimi.se2019.utils.*;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.awt.*;
+import java.io.*;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.BlockingDeque;
@@ -27,7 +28,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 /**
  * @author Gabriel Raul Marini
  */
-public class Controller implements Observer {
+public class Controller implements Observer, Serializable {
     private static Controller instance = null;
     private Game game;
     private DecksManager decksManager;
@@ -248,6 +249,8 @@ public class Controller implements Observer {
 
         if (choice.equals("weapons"))
             msg = new ShowWeaponsMessage(lightVersion);
+        else if (choice.equals("weaponsToUse"))
+            msg = new ShowUsableWeaponsMessage(lightVersion);
         else if (choice.equals("position"))
             msg = new ShowPlatformMessage(lightVersion);
         else if (choice.equals("targets"))
@@ -361,7 +364,11 @@ public class Controller implements Observer {
                 List<String> arrChars = findCharactersInGame();
                 notifyAll(new ShowGameBoardMessage(firstUser, ammoReps, cardReps, game.getLightVersion().getPlatformWeapons(), arrChars));
                 turnController.notifyFirst();
-
+                /*FileOutputStream f = new FileOutputStream(new File("myModel2.txt"));
+                ObjectOutputStream o = new ObjectOutputStream(f);
+                o.writeObject(game.getGameField());
+                o.close();
+                f.close();*/
                 startPinging();
 
             } catch (Exception e) {
@@ -470,6 +477,11 @@ public class Controller implements Observer {
             for (int i = 0; i < 9; i++)
                 weaponCards[i] = game.getWeaponsDeck().drawCard();
             game.setGameField(new GameField(field, weaponCards, new SkullsBoard(HandyFunctions.parserSettings.numOfSkulls()), new ScoreBoard()));
+            /*FileInputStream fi = new FileInputStream(new File("myModel2.txt"));
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            game.setGameField((GameField) oi.readObject());
+            oi.close();
+            fi.close();*/
             setManagers();
         } catch (Exception e) {
             e.printStackTrace();

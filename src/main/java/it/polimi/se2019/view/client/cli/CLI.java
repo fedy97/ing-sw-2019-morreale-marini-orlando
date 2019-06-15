@@ -516,4 +516,9 @@ public class CLI extends RemoteView {
     public void showReloadableWeapons(List<String> weapons) {
 
     }
+
+    @Override
+    public void showUsableWeapons(List<String> weapons) {
+
+    }
 }

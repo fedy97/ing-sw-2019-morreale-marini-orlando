@@ -1,5 +1,6 @@
 package it.polimi.se2019.controller;
 
+import java.io.Serializable;
 import java.util.*;
 
 import it.polimi.se2019.model.board.*;
@@ -8,7 +9,7 @@ import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.enumeration.*;
 
 
-public class GameManager {
+public class GameManager implements Serializable {
 
     private GameField gameField;
     private GameState gameState;

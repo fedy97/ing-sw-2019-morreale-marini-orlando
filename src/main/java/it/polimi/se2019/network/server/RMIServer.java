@@ -95,7 +95,7 @@ public class RMIServer implements Server {
             boolean newConnection = true;
             VirtualView virtualView;
             if (!Controller.getInstance().getUserView().containsKey(username)) {
-                virtualView = new VirtualView(this, username);
+                virtualView = new VirtualView(username);
                 clientActor.put(username, virtualView);
                 Lobby.addUser(username);
             } else if (clientActor.containsKey(username)){

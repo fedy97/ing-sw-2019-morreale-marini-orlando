@@ -13,6 +13,7 @@ import it.polimi.se2019.view.server.VirtualView;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -24,7 +25,7 @@ import java.util.logging.Level;
  *
  * @author Gabriel Raul Marini
  */
-public class SocketServer implements Server {
+public class SocketServer implements Server, Serializable {
     private Map<String, SpecificSocketServer> connections;
     private ServerSocket serverSocket;
     private Map<String, VirtualView> actors;
@@ -64,7 +65,7 @@ public class SocketServer implements Server {
                         boolean newConnection = true;
                         VirtualView virtualView;
                         if (!Controller.getInstance().getUserView().containsKey(user)) {
-                            virtualView = new VirtualView(this, user);
+                            virtualView = new VirtualView(user);
                             actors.put(user, virtualView);
                             Lobby.addUser(user);
                         } else if (actors.containsKey(user)){

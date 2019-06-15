@@ -16,15 +16,13 @@ import java.util.Observable;
 
 public class VirtualView extends View {
     private Game game;
-    private Server virtualServer;
     private String user;
 
     /**
      * @param virtualServer either RMIServer or SocketServer
      * @param user
      */
-    public VirtualView(Server virtualServer, String user) {
-        this.virtualServer = virtualServer;
+    public VirtualView(String user) {
         this.user = user;
         this.game = Game.getInstance();
         //virtual view(this) observs model(Game)

@@ -2,6 +2,7 @@ package it.polimi.se2019.model.player;
 
 import it.polimi.se2019.model.enumeration.AmmoCube;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  *
  * @author Simone Orlando
  */
-public class AmmoBox {
+public class AmmoBox implements Serializable {
 
     private int redAmmos;
     private int blueAmmos;
