@@ -1,6 +1,9 @@
 package it.polimi.se2019.model.card.weapons;
 
+import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.controller.PlayerManager;
 import it.polimi.se2019.exceptions.InvalidNameException;
+import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
@@ -17,6 +20,9 @@ import java.util.List;
 public class WeaponCard extends Card {
     protected boolean[] usableEffects;
     protected boolean loaded;
+    protected Controller c;
+    protected Game game;
+    protected PlayerManager playerManager;
     private AmmoCube paidCost;
     private AmmoCube[] extraCost;
     private List<Effect> effects;
@@ -36,6 +42,9 @@ public class WeaponCard extends Card {
     public WeaponCard(AmmoCube paidCost, AmmoCube[] extraCost) {
         this.paidCost = paidCost;
         this.extraCost = extraCost;
+        c = Controller.getInstance();
+        game = c.getGame();
+        playerManager = c.getPlayerManager();
         loaded = true;
     }
 

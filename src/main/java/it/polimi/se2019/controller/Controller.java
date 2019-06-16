@@ -19,7 +19,7 @@ import it.polimi.se2019.utils.*;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.awt.*;
-import java.io.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.BlockingDeque;
@@ -44,8 +44,6 @@ public class Controller implements Observer, Serializable {
     private BlockingDeque<Platform> chosenDestination;
     private BlockingDeque<Integer> chosenEffect;
     private BlockingDeque<Boolean> chosenBinaryOption;
-    private PowerUpCard processingPowerUp;
-    private WeaponCard processingWeaponCard;
     private int secondsLeft;
     private int timerSetup;
     private boolean timerStarted = false;
@@ -130,12 +128,22 @@ public class Controller implements Observer, Serializable {
      * @param powerUp composed of different stages in order to perform the final effect
      */
     public void processPowerUp(PowerUpCard powerUp) {
-        /** powerUp.activate(processingStages.get(0));
-         if (processingStages.isEmpty()) {
-         state = ControllerState.IDLE;
-         decksManager.addToGarbage(processingPowerUp);
-         processingPowerUp = null;
-         }*/
+        state = ControllerState.PROCESSING_POWERUP;
+
+        try {
+            if (powerUp.getPossibleTargets() != null) {
+                askFor(powerUp.getPossibleTargets(), "targets");
+                powerUp.activate(currentTargets.take());
+            } else {
+                powerUp.activate(null);
+            }
+
+            playerManager.getCurrentPlayer().removePowerUpCard(powerUp);
+            decksManager.addToGarbage(powerUp);
+        } catch (Exception e) {
+            CustomLogger.logException(this.getClass().getName(), e);
+        }
+        game.notifyChanges();
     }
 
     /**

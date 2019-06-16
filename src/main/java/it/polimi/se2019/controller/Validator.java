@@ -49,14 +49,6 @@ public abstract class Validator implements Serializable {
     }
 
     /**
-     * @param powerUpCard chosen by the player to perform an action
-     * @return the list of player that can be the targets of the powerUp according to its effect
-     */
-    public List<Player> getValidTargets(PowerUpCard powerUpCard) {
-        return powerUpCard.getPossibleTargets(father);
-    }
-
-    /**
      * @return the list of weapons that can be grabbed by the player in his current position
      * according to the ammo qty in his AmmoBox
      */
@@ -163,15 +155,15 @@ public abstract class Validator implements Serializable {
             if (!weapon.isLoaded())
                 toRemove.add(weapon);
             else {
-                boolean usable = true;
+                boolean usable = false;
                 boolean[] usableEffect = weapon.getUsableEffects();
 
                 for (int i = 0; i < usableEffect.length; i++) {
                     if (usableEffect[i]) {
                         Effect effect = weapon.getEffects().get(i);
                         effect.setupTargets();
-                        if (effect.getPossibleTargets() != null && effect.getPossibleTargets().isEmpty())
-                            usable = false;
+                        if (effect.getPossibleTargets() == null || !effect.getPossibleTargets().isEmpty())
+                            usable = true;
                     }
                 }
 

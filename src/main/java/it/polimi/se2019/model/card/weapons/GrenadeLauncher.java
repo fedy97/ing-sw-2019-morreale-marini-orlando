@@ -1,10 +1,7 @@
 package it.polimi.se2019.model.card.weapons;
 
 
-import it.polimi.se2019.controller.Controller;
-import it.polimi.se2019.controller.PlayerManager;
 import it.polimi.se2019.exceptions.InvalidNameException;
-import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
@@ -21,9 +18,6 @@ public final class GrenadeLauncher extends WeaponOneAddingEffect {
 
     public GrenadeLauncher(String name, String descr, String img, AmmoCube paidCost, AmmoCube[] extraCost) throws InvalidNameException {
         super(name, descr, img, paidCost, extraCost);
-        Controller c = Controller.getInstance();
-        PlayerManager playerManager = c.getPlayerManager();
-        Game game = Controller.getInstance().getGame();
 
         Effect eff1 = new Effect(new AmmoCube[]{}) {
             @Override

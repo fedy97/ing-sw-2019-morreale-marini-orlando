@@ -3,11 +3,12 @@ package it.polimi.se2019.model.card.powerups;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.exceptions.InvalidCubeException;
 import it.polimi.se2019.exceptions.InvalidNameException;
+import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.enumeration.AmmoCube;
+import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +19,8 @@ import java.util.List;
 public abstract class PowerUpCard extends Card {
 
     protected AmmoCube value;
-    protected List<Integer> stages;
+    protected Controller c;
+    protected Game game;
 
     /**
      * Instantiate an anonymous PowerUp card
@@ -31,9 +33,11 @@ public abstract class PowerUpCard extends Card {
         if (ammoCube == null)
             throw new InvalidCubeException("ammocube cannot be null");
         this.value = ammoCube;
-        stages = new ArrayList<>();
+        c = Controller.getInstance();
+        game = c.getGame();
     }
 
+    public abstract void activate(Character target);
 
     /**
      * @return the AmmoCube value the player can take instead of using the effect
@@ -44,22 +48,12 @@ public abstract class PowerUpCard extends Card {
     }
 
     /**
-     * Activate the effect of the card at the current stage
-     *
-     * @param stage the game state in which the card is being processed
-     */
-
-    /**
-     * Return if the player in his current state can use the power up or not
+     * Return if the player can use the power up or not
      */
     public abstract boolean isUsable(Player player);
 
     /**
      * @return a collection of players that can be the target
      */
-    public abstract List<Player> getPossibleTargets(Controller c);
-
-    public List<Integer> getStages() {
-        return stages;
-    }
+    public abstract List<Character> getPossibleTargets();
 }
