@@ -60,6 +60,7 @@ public class Player implements Serializable {
         underAttack = false;
         attacking = false;
         isConnected = true;
+        currentTargets = new ArrayList<>();
     }
 
     /**

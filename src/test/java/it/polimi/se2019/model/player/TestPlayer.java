@@ -216,4 +216,55 @@ public class TestPlayer {
         assertEquals(2, player.getFrenzyModeType());
     }
 
+    @Test
+    public void testIsDamaged() throws NoCardException, InvalidCardException, InvalidPositionException, InvalidCharacterException{
+        int[] pos = {1, 0};
+        AmmoCard card = deckAmmos.drawCard();
+        ArrayList<Orientation> orient = new ArrayList<>();
+        Platform start = new Platform(pos, true, card, Color.BLUE, orient);
+        Player player = new Player("ciao",Character.BANSHEE, start);
+
+        player.getPlayerBoard().addDamage(Character.BANSHEE,5);
+        assertTrue(player.isDamaged());
+
+        player.getPlayerBoard().resetDamageLine();
+        player.getPlayerBoard().addDamage(Character.BANSHEE,2);
+        assertTrue(!player.isDamaged());
+
+        player.getPlayerBoard().resetDamageLine();
+        player.getPlayerBoard().addDamage(Character.BANSHEE, 7);
+        assertTrue(!player.isDamaged());
+    }
+
+    @Test
+    public void testIsSeriouslyDamaged() throws NoCardException, InvalidCardException, InvalidPositionException, InvalidCharacterException{
+        int[] pos = {1, 0};
+        AmmoCard card = deckAmmos.drawCard();
+        ArrayList<Orientation> orient = new ArrayList<>();
+        Platform start = new Platform(pos, true, card, Color.BLUE, orient);
+        Player player = new Player("ciao",Character.BANSHEE, start);
+
+        player.getPlayerBoard().addDamage(Character.BANSHEE,7);
+        assertTrue(player.isSeriouslyDamaged());
+
+        player.getPlayerBoard().resetDamageLine();
+        player.getPlayerBoard().addDamage(Character.BANSHEE,2);
+        assertTrue(!player.isSeriouslyDamaged());
+    }
+
+    @Test
+    public void testAddTarget() throws NoCardException, InvalidCardException, InvalidPositionException, InvalidCharacterException{
+        int[] pos = {1, 0};
+
+        AmmoCard card = deckAmmos.drawCard();
+        ArrayList<Orientation> orient = new ArrayList<>();
+        Platform start = new Platform(pos, true, card, Color.BLUE, orient);
+        Player player = new Player("ciao",Character.BANSHEE, start);
+        Player target = new Player("target",Character.DOZER, start);
+
+        player.addTarget(target);
+
+        assertTrue(player.getCurrentTargets().contains(target));
+    }
+
 }
