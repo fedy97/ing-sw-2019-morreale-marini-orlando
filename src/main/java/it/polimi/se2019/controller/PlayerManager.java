@@ -6,8 +6,10 @@ import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
+import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 
 import java.io.Serializable;
@@ -137,10 +139,18 @@ public class PlayerManager implements Serializable {
             Map.Entry mapElement = (Map.Entry) hmIterator.next();
             int damage = ((int) mapElement.getValue());
             p = (Player) mapElement.getKey();
+            List<Character> marks = currentPlayer.getPlayerBoard().getRevengeMarks();
+
             try {
+                if (marks.contains(p.getCharacter())) {
+                    for (Character mark : marks)
+                        p.getPlayerBoard().addDamage(currentPlayer.getCharacter(), 1);
+                    currentPlayer.getPlayerBoard().clearMarks();
+                }
+
                 p.getPlayerBoard().addDamage(currentPlayer.getCharacter(), damage);
             } catch (InvalidCharacterException e) {
-                HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+                CustomLogger.logException(this.getClass().getName(), e);
             }
         }
 
@@ -199,11 +209,10 @@ public class PlayerManager implements Serializable {
      */
     public void reload(WeaponCard weaponCard) throws InsufficientAmmoException {
         AmmoBox box = currentPlayer.getPlayerBoard().getAmmoBox();
-        if (box.hasAmmos(weaponCard.getTotalCost())){
+        if (box.hasAmmos(weaponCard.getTotalCost())) {
             weaponCard.reload();
             box.removeAmmos(weaponCard.getTotalCost());
-        }
-        else
+        } else
             throw new InsufficientAmmoException("CurrentPlayer hasn't enough ammos to recharge the weapons");
         father.getGame().notifyChanges();
     }

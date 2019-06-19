@@ -43,6 +43,10 @@ public class PlayerBoard implements Serializable {
         return new ArrayList<>(revengeMarks);
     }
 
+    public void clearMarks(){
+        revengeMarks.clear();
+    }
+
     /**
      * Get the damage suffered by the player
      * @return A list with the damages suffered
