@@ -1,8 +1,6 @@
 package it.polimi.se2019.model.player;
 
 
-import com.sun.org.glassfish.external.amx.AMX;
-import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import org.junit.Test;
 
@@ -92,7 +90,7 @@ public class TestAmmoBox {
 
         assertTrue(myAmmoBox.isEmpty());
 
-        myAmmoBox.addAmmos(AmmoCube.BLUE,1);
+        myAmmoBox.addAmmos(AmmoCube.BLUE, 1);
         assertTrue(!myAmmoBox.isEmpty());
     }
 
@@ -104,22 +102,22 @@ public class TestAmmoBox {
         assertTrue(myAmmoBox.hasAmmo(AmmoCube.YELLOW));
         assertTrue(myAmmoBox.hasAmmo(AmmoCube.BLUE));
 
-        myAmmoBox.removeAmmos(AmmoCube.BLUE,1);
+        myAmmoBox.removeAmmos(AmmoCube.BLUE, 1);
         assertTrue(!myAmmoBox.hasAmmo(AmmoCube.BLUE));
 
-        myAmmoBox.removeAmmos(AmmoCube.YELLOW,1);
+        myAmmoBox.removeAmmos(AmmoCube.YELLOW, 1);
         assertTrue(!myAmmoBox.hasAmmo(AmmoCube.YELLOW));
 
-        myAmmoBox.removeAmmos(AmmoCube.RED,1);
+        myAmmoBox.removeAmmos(AmmoCube.RED, 1);
         assertTrue(!myAmmoBox.hasAmmo(AmmoCube.RED));
     }
 
     @Test
     public void testHasAmmos() {
         AmmoBox myAmmoBox = new AmmoBox();
-        myAmmoBox.addAmmos(AmmoCube.BLUE,3);
-        myAmmoBox.addAmmos(AmmoCube.RED,3);
-        myAmmoBox.addAmmos(AmmoCube.YELLOW,3);
+        myAmmoBox.addAmmos(AmmoCube.BLUE, 3);
+        myAmmoBox.addAmmos(AmmoCube.RED, 3);
+        myAmmoBox.addAmmos(AmmoCube.YELLOW, 3);
 
         AmmoCube[] list = new AmmoCube[4];
         list[0] = AmmoCube.BLUE;
@@ -144,10 +142,11 @@ public class TestAmmoBox {
     public void testGetCubes() {
         AmmoBox myAmmoBox = new AmmoBox();
         List<AmmoCube> list = myAmmoBox.getCubes();
-        assertEquals(AmmoCube.RED,list.get(0));
-        assertEquals(AmmoCube.BLUE,list.get(1));
-        assertEquals(AmmoCube.YELLOW,list.get(2));
+        assertEquals(AmmoCube.RED, list.get(0));
+        assertEquals(AmmoCube.BLUE, list.get(1));
+        assertEquals(AmmoCube.YELLOW, list.get(2));
     }
+
     /**
      * @author Gabriel Raul Marini
      */
