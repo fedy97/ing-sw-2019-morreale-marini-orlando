@@ -1,5 +1,6 @@
 package it.polimi.se2019.model;
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.exceptions.InvalidGenerationSpotException;
 import it.polimi.se2019.model.board.GameField;
 import it.polimi.se2019.model.board.Platform;
@@ -11,9 +12,10 @@ import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
 
@@ -22,6 +24,7 @@ import java.util.logging.Level;
  */
 public class Game extends Observable implements Serializable {
 
+    private static final long serialVersionUID = -8611008619219526728L;
     private static Game instance = null;
     private GameField gameField;
     private ArrayList<Player> players;
@@ -51,6 +54,9 @@ public class Game extends Observable implements Serializable {
         return instance;
     }
 
+    public static void setInstance(Game instance) {
+        Game.instance = instance;
+    }
 
     public GameField getGameField() {
         return gameField;
@@ -141,8 +147,18 @@ public class Game extends Observable implements Serializable {
     public void notifyChanges() {
         setChanged();
         notifyObservers(getLightVersion());
+        try {
+            FileOutputStream f = new FileOutputStream(new File("server.txt"));
+            ObjectOutputStream o = new ObjectOutputStream(f);
+            o.writeObject(Controller.getInstance());
+            o.writeObject(Game.getInstance());
+            o.close();
+            f.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            CustomLogger.logException(this.getClass().getName(), ex);
+        }
     }
-
 
     public LightGameVersion getLightVersion() {
         //set the skulls

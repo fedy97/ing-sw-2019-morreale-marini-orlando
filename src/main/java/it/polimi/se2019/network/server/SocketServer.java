@@ -76,6 +76,7 @@ public class SocketServer implements Server {
                         }
                         else {
                             virtualView = Controller.getInstance().getUserView().get(user);
+                            virtualView.addObserver(Controller.getInstance());
                             Game.getInstance().addObserver(virtualView);
                             Game.getInstance().getPlayer(user).setConnected(true);
                             Lobby.getRmiServer().getClientActor().remove(user);

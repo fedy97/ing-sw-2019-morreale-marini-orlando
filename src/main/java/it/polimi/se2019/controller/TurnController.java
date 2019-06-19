@@ -83,9 +83,9 @@ public class TurnController implements Serializable {
         Player currPlayer = c.getGame().getPlayer(curr);
         c.getPlayerManager().setCurrentPlayer(currPlayer);
 
-        if(currPlayer.isDamaged())
+        if (currPlayer.isDamaged())
             c.setValidator(new DamagedValidator(c));
-        else if(currPlayer.isSeriouslyDamaged())
+        else if (currPlayer.isSeriouslyDamaged())
             c.setValidator(new CriticalDamagedValidator(c));
         else
             c.setValidator(new HealthyValidator(c));

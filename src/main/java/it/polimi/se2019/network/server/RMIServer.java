@@ -106,6 +106,7 @@ public class RMIServer implements Server {
             }
             else {
                 virtualView = Controller.getInstance().getUserView().get(username);
+                virtualView.addObserver(Controller.getInstance());
                 Game.getInstance().addObserver(virtualView);
                 Game.getInstance().getPlayer(username).setConnected(true);
                 Lobby.getSocketServer().getActors().remove(username);

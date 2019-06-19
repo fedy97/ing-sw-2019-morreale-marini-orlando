@@ -29,6 +29,8 @@ import java.util.concurrent.LinkedBlockingDeque;
  * @author Gabriel Raul Marini
  */
 public class Controller implements Observer, Serializable {
+
+    private static final long serialVersionUID = 1625882819211300529L;
     private static Controller instance = null;
     private Game game;
     private DecksManager decksManager;
@@ -43,7 +45,6 @@ public class Controller implements Observer, Serializable {
     private BlockingDeque<Platform> chosenDestination;
     private BlockingDeque<Integer> chosenEffect;
     private BlockingDeque<Boolean> chosenBinaryOption;
-    private int secondsLeft;
     private int timerSetup;
     private boolean timerStarted = false;
     private Map<Integer, Integer> mapChosen;
@@ -85,17 +86,9 @@ public class Controller implements Observer, Serializable {
         return instance;
     }
 
-    /**
-     * now we need the managers,
-     * this method is thrown
-     * after we set all parameters to the Game,
-     * when the game starts
-     */
-    public void setManagers() {
-        this.game = Game.getInstance();
-        this.decksManager = new DecksManager(game.getPowerUpDeck(), game.getAmmoDeck());
+    public static void setInstance(Controller instance) {
+        Controller.instance = instance;
     }
-
 
     @Override
     /**
@@ -116,9 +109,8 @@ public class Controller implements Observer, Serializable {
                 ((ToServerMessage) message).performAction();
             }
         } else {
-            new Thread(() -> {
-                ((ToServerMessage) message).performAction();
-            }).start();
+            new Thread(() ->
+                    ((ToServerMessage) message).performAction()).start();
         }
     }
 
@@ -302,7 +294,6 @@ public class Controller implements Observer, Serializable {
      * @param secondsLeft to the chooseMap page
      */
     public synchronized void setSecondsLeftLobby(int secondsLeft) {
-        this.secondsLeft = secondsLeft;
         notifyAll(new UpdateTimerLobbyMessage(secondsLeft));
         if (secondsLeft == 0) {
             notifyAll(new ShowChooseMapMessage(null));
@@ -318,7 +309,6 @@ public class Controller implements Observer, Serializable {
      * @param secondsLeft to the choose character page
      */
     public synchronized void setSecondsLeftMap(int secondsLeft) {
-        this.secondsLeft = secondsLeft;
         notifyAll(new UpdateTimerMapMessage(secondsLeft));
         if (secondsLeft == 0) {
             try {
@@ -337,7 +327,6 @@ public class Controller implements Observer, Serializable {
      * @param secondsLeft to the game field page
      */
     public synchronized void setSecondsLeftCharacter(int secondsLeft) {
-        this.secondsLeft = secondsLeft;
         notifyAll(new UpdateTimerCharacterMessage(secondsLeft));
         if (secondsLeft == 0) {
             //if a player did not chose a character, assign a random one
@@ -371,11 +360,6 @@ public class Controller implements Observer, Serializable {
                 List<String> arrChars = findCharactersInGame();
                 notifyAll(new ShowGameBoardMessage(firstUser, ammoReps, cardReps, game.getLightVersion().getPlatformWeapons(), arrChars));
                 turnController.notifyFirst();
-                /*FileOutputStream f = new FileOutputStream(new File("myModel2.txt"));
-                ObjectOutputStream o = new ObjectOutputStream(f);
-                o.writeObject(game.getGameField());
-                o.close();
-                f.close();*/
                 startPinging();
 
             } catch (Exception e) {
@@ -385,7 +369,7 @@ public class Controller implements Observer, Serializable {
         }
     }
 
-    private void startPinging() {
+    public void startPinging() {
         List<String> chars = new ArrayList<>();
 
         for (Player p : game.getPlayers())
@@ -416,9 +400,8 @@ public class Controller implements Observer, Serializable {
                                     }
                                 }
                             }
-                            if (turnController.getTurnUser().equals(toDisconnect.getName())) {
+                            if (!pingsList.isEmpty() && turnController.getTurnUser().equals(toDisconnect.getName()))
                                 turnController.endTurn();
-                            }
                         }
                     }
                     Thread.sleep(1000);
@@ -489,7 +472,7 @@ public class Controller implements Observer, Serializable {
             game.setGameField((GameField) oi.readObject());
             oi.close();
             fi.close();*/
-            setManagers();
+            this.decksManager = new DecksManager(game.getPowerUpDeck(), game.getAmmoDeck());
         } catch (Exception e) {
             e.printStackTrace();
             CustomLogger.logException(getClass().getName(), e);
@@ -578,10 +561,6 @@ public class Controller implements Observer, Serializable {
      */
     public Game getGame() {
         return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
     }
 
     /**
