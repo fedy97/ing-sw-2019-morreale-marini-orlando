@@ -8,7 +8,6 @@ import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.utils.TimerTurn;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.client.RemoteView;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,6 +25,8 @@ import java.util.logging.Level;
 
 public class GUI extends RemoteView {
 
+    protected Font normale;
+    protected Font grande;
     private WaitingLobbyController waitingLobbyController;
     private ChooseMapController chooseMapController;
     private ChooseCharacterController chooseCharacterController;
@@ -38,7 +39,6 @@ public class GUI extends RemoteView {
     private BuyWithPowerupController buyWithPowerupController;
     private ChooseTargetsController chooseTargetsController;
     private ReloadWeaponsController reloadWeaponsController;
-
     private Scene sceneLogin;
     private Scene sceneWaitingLobby;
     private Scene sceneChooseMap;
@@ -52,7 +52,6 @@ public class GUI extends RemoteView {
     private Scene sceneBuyWithPowerups;
     private Scene sceneChooseTargets;
     private Scene sceneReloadWeapons;
-
     private Stage stage;
     private Stage secondStage;
     private Stage playerBoardStage;
@@ -62,15 +61,11 @@ public class GUI extends RemoteView {
     private Stage buyWithPowerupsStage;
     private Stage chooseTargetsStage;
     private Stage reloadWeaponsStage;
-
     private String charInString;
     private List<String> charsInGame;
     private String config;
     private LightGameVersion lightGameVersion;
     private TimerTurn timerTurn;
-
-    protected Font normale;
-    protected Font grande;
 
     public GUI(String user, Stage stage, Scene login, Font normale, Font grande) {
         this.normale = normale;
@@ -456,7 +451,8 @@ public class GUI extends RemoteView {
 
     protected void usePowerup(String hashPowerup) {
         usePowerupStage.close();
-        //TODO
+        ActivateCardMessage message = new ActivateCardMessage(hashPowerup);
+        notifyController(message);
     }
 
     protected void useWeapon(String hashWeapon) {
@@ -643,6 +639,17 @@ public class GUI extends RemoteView {
     }
 
     @Override
+    public void showUsablePowerups(List<String> powerups) {
+        Platform.runLater(
+                () -> {
+                    getUsePowerupStage().setScene(getSceneUsePowerup());
+                    getUsePowerupStage().setResizable(false);
+                    getUsePowerupController().updateMyPowerups(lightGameVersion, powerups);
+                    getUsePowerupStage().show();
+                });
+    }
+
+    @Override
     public void showTargets(List<String> targets) {
         Platform.runLater(
                 () -> {
@@ -662,12 +669,13 @@ public class GUI extends RemoteView {
     public void startTimerTurn(int count, String currToDisconnect) {
         try {
             timerTurn.interrupt();
-        } catch (Exception ex) {}
-        timerTurn = new TimerTurn(count,this, currToDisconnect);
+        } catch (Exception ex) {
+        }
+        timerTurn = new TimerTurn(count, this, currToDisconnect);
         timerTurn.start();
     }
 
-    public void updateTimerTurnLabel(int seconds, String curr){
+    public void updateTimerTurnLabel(int seconds, String curr) {
         if (seconds == 0 && curr.equals(getUserName())) {
             timerTurn.interrupt();
             System.exit(0);

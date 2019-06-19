@@ -74,17 +74,20 @@ public class PerformActionMessage extends ToServerMessage {
                         destinations = v.getValidMoves(Action.SHOOT);
                         c.askFor(destinations, "position");
                         c.getPlayerManager().move(c.getChosenDestination().take());
-                    }catch (InvalidActionException e){
+                    } catch (InvalidActionException e) {
                         CustomLogger.logInfo(this.getClass().getName(), "You cannot move before shooting!");
                     }
 
                     c.askFor(c.getValidator().getUsableWeapons(), "weaponsToUse");
 
-                    while(c.getState() == ControllerState.PROCESSING_ACTION_3)
+                    while (c.getState() == ControllerState.PROCESSING_ACTION_3)
                         Thread.sleep(200);
                 } else if (choice.equals("action4")) {
-                    HandyFunctions.printList(c.getValidator().getReloadableWeapons());
                     c.askFor(c.getValidator().getReloadableWeapons(), "recharge");
+                } else if (choice.equals("action5")) {
+                    c.askFor(c.getValidator().getUsablePowerUps(), "powerups");
+                    while (c.getState() == ControllerState.PROCESSING_POWERUP)
+                        Thread.sleep(200);
                 }
             } catch (Exception e) {
                 CustomLogger.logException(this.getClass().getName(), e);

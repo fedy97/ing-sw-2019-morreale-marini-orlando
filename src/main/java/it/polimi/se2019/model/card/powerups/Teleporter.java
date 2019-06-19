@@ -30,10 +30,7 @@ public final class Teleporter extends PowerUpCard {
      */
     @Override
     public List<Character> getPossibleTargets() {
-        List<Character> targets = new ArrayList<>();
-        for (Player player : c.getGame().getPlayers())
-            targets.add(player.getCharacter());
-        return targets;
+        return null;
     }
 
     @Override

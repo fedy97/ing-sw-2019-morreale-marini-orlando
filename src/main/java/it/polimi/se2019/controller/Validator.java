@@ -115,9 +115,8 @@ public abstract class Validator implements Serializable {
         Player currPlayer = father.getPlayerManager().getCurrentPlayer();
 
         for (PowerUpCard powerUp : currPlayer.getPowerUpCards())
-            if (powerUp.isUsable(currPlayer))
+            if (powerUp.isUsable(currPlayer) && (powerUp.getPossibleTargets() == null || !powerUp.getPossibleTargets().isEmpty()))
                 res.add(powerUp);
-
         return res;
     }
 
@@ -171,8 +170,8 @@ public abstract class Validator implements Serializable {
                     toRemove.add(weapon);
             }
         }
-
         res.removeAll(toRemove);
+        HandyFunctions.printList(res);
         return res;
     }
 

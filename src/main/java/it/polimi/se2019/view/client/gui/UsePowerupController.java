@@ -47,13 +47,16 @@ public class UsePowerupController {
         this.gui = gui;
     }
 
-    protected void updateMyPowerups(LightGameVersion lightGameVersion) {
+    protected void updateMyPowerups(LightGameVersion lightGameVersion, List<String> hashes) {
         this.lightGameVersion = lightGameVersion;
         Map<String, List<CardRep>> charPowerupsReps = lightGameVersion.getPlayerPowerups();
         List<CardRep> myPowerupsReps = charPowerupsReps.get(gui.getCharInString());
         for (CardRep myPowerup : myPowerupsReps) {
+            if (hashes.contains(Integer.toString(myPowerup.getId())))
+                HandyFunctions.enlightenButton(powerupsButtons.get(myPowerupsReps.indexOf(myPowerup)));
+            else
+                HandyFunctions.darkenButton(powerupsButtons.get(myPowerupsReps.indexOf(myPowerup)));
             powerupsImages.get(myPowerupsReps.indexOf(myPowerup)).setImage(new Image(myPowerup.getPath()));
-            HandyFunctions.enlightenButton(powerupsButtons.get(myPowerupsReps.indexOf(myPowerup)));
         }
         for (int j = myPowerupsReps.size(); j < 3; j++) {
             powerupsImages.get(j).setImage(new Image("/assets/powerups/AD_powerups_IT_02.jpg"));

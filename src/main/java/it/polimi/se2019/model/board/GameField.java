@@ -349,19 +349,20 @@ public class GameField implements Serializable {
      * @return the platforms in the directions selected of max distance from curr = 2, used by Newton
      */
     public List<Platform> getPlatformDir(Platform curr) {
-        //TODO verificare di non passare attraverso muri
-        List<Platform> platformArrayList = new ArrayList<>();
-        int row = curr.getPlatformPosition()[0];
-        int column = curr.getPlatformPosition()[1];
-        if (row + 1 < 3 && field[row + 1][column] != null) platformArrayList.add(field[row + 1][column]);
-        if (row + 2 < 3 && field[row + 2][column] != null) platformArrayList.add(field[row + 2][column]);
-        if (column + 1 < 4 && field[row][column + 1] != null) platformArrayList.add(field[row][column + 1]);
-        if (column + 2 < 4 && field[row][column + 2] != null) platformArrayList.add(field[row][column + 2]);
-        if (row - 1 >= 0 && field[row - 1][column] != null) platformArrayList.add(field[row - 1][column]);
-        if (row - 2 >= 0 && field[row - 2][column] != null) platformArrayList.add(field[row - 2][column]);
-        if (column - 1 >= 0 && field[row][column - 1] != null) platformArrayList.add(field[row][column - 1]);
-        if (column - 2 >= 0 && field[row][column - 2] != null) platformArrayList.add(field[row][column - 2]);
-        return platformArrayList;
+        List<Platform> destinations = new ArrayList<>();
+        int[] pos = curr.getPlatformPosition();
+        int myX = pos[0];
+        int myY = pos[1];
+        destinations.addAll(getAvailablePlatforms(curr, 2));
+        List<Platform> toDelete = new ArrayList<>();
+        for (Platform platform : destinations) {
+            int currX = platform.getPlatformPosition()[0];
+            int currY = platform.getPlatformPosition()[1];
+            if (myX != currX && myY != currY)
+                toDelete.add(platform);
+        }
+        destinations.removeAll(toDelete);
+        return destinations;
     }
 
 }

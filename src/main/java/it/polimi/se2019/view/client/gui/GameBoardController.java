@@ -788,8 +788,7 @@ public class GameBoardController {
             if (message.equals("Do you want to use another effect?"))
                 gui.getUseWeaponStage().show();
             gui.sendBinaryAnswer(true);
-        }
-        else {
+        } else {
             gui.getUseWeaponStage().close();
             gui.sendBinaryAnswer(false);
         }
@@ -816,13 +815,7 @@ public class GameBoardController {
     }
 
     public void powerupsClick() {
-        Platform.runLater(
-                () -> {
-                    gui.getUsePowerupStage().setScene(gui.getSceneUsePowerup());
-                    gui.getUsePowerupStage().setResizable(false);
-                    gui.getUsePowerupController().updateMyPowerups(lightGameVersion);
-                    gui.getUsePowerupStage().show();
-                });
+        gui.iWantToDoSomething("action5");
     }
 
     public void endturnClick() {

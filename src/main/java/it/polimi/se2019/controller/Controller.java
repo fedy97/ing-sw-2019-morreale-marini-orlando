@@ -128,8 +128,6 @@ public class Controller implements Observer, Serializable {
      * @param powerUp composed of different stages in order to perform the final effect
      */
     public void processPowerUp(PowerUpCard powerUp) {
-        state = ControllerState.PROCESSING_POWERUP;
-
         try {
             if (powerUp.getPossibleTargets() != null) {
                 askFor(powerUp.getPossibleTargets(), "targets");
@@ -144,6 +142,7 @@ public class Controller implements Observer, Serializable {
             CustomLogger.logException(this.getClass().getName(), e);
         }
         game.notifyChanges();
+        setState(ControllerState.IDLE);
     }
 
     /**
@@ -269,6 +268,8 @@ public class Controller implements Observer, Serializable {
             msg = new AskForCubeMessage(lightVersion);
         else if (choice.equals("recharge"))
             msg = new ShowReloadableWeaponsMessage(lightVersion);
+        else if (choice.equals("powerups"))
+            msg = new ShowUsablePowerupsMessage(lightVersion);
         else
             msg = null; // OTHER options
 

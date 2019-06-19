@@ -1,9 +1,7 @@
 package it.polimi.se2019.model.card;
 
-import it.polimi.se2019.exceptions.InvalidImageException;
 import it.polimi.se2019.exceptions.InvalidNameException;
 
-import java.awt.*;
 import java.io.Serializable;
 
 /**
@@ -53,6 +51,10 @@ public abstract class Card implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     /**
      * @return the description of the card
      */
@@ -60,19 +62,20 @@ public abstract class Card implements Serializable {
         return description;
     }
 
-    public String getImgPath() {
-        return imgPath;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public String getImgPath() {
+        return imgPath;
+    }
+
     public void setImgPath(String imgPath) {
         this.imgPath = imgPath;
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(hashCode());
     }
 }
