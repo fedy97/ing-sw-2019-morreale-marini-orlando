@@ -23,9 +23,8 @@ public class ReconnectedClientMessage extends ToServerMessage {
         actor.getPingsList().add(mychar);
         actor.getAlreadyNotified().remove(mychar);
         if (actor.getPingsList().size() == 1) {
-            actor.getTurnController().endTurn();
-            /*actor.callView(new EnablePlayerActionsMessage(UserValidActions.ALL.getActions()), actor.getPlayerManager().getCurrentPlayer().getName());
-            actor.sendMessage("It's your turn!", user);*/
+            while (!actor.getTurnController().getTurnUser().equals(user))
+                actor.getTurnController().endTurn();
         }
 
     }
