@@ -32,7 +32,6 @@ public class Controller implements Observer, Serializable {
     private static Controller instance = null;
     private Game game;
     private DecksManager decksManager;
-    private GameManager gameManager;
     private PlayerManager playerManager;
     private Validator validator;
     private TurnController turnController;
@@ -95,7 +94,6 @@ public class Controller implements Observer, Serializable {
     public void setManagers() {
         this.game = Game.getInstance();
         this.decksManager = new DecksManager(game.getPowerUpDeck(), game.getAmmoDeck());
-        this.gameManager = new GameManager();
     }
 
 
@@ -582,6 +580,10 @@ public class Controller implements Observer, Serializable {
         return game;
     }
 
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     /**
      * @return The manager of all decks used in the game
      */
@@ -594,20 +596,6 @@ public class Controller implements Observer, Serializable {
      */
     public void setDecksManager(DecksManager deckManager) {
         this.decksManager = deckManager;
-    }
-
-    /**
-     * @return the game manager
-     */
-    public GameManager getGameManager() {
-        return gameManager;
-    }
-
-    /**
-     * @param gameManager The game manager
-     */
-    public void setGameManager(GameManager gameManager) {
-        this.gameManager = gameManager;
     }
 
     /**
@@ -632,20 +620,40 @@ public class Controller implements Observer, Serializable {
         return currentTargets;
     }
 
+    public void setCurrentTargets(BlockingDeque<Character> currentTargets) {
+        this.currentTargets = currentTargets;
+    }
+
     public BlockingDeque<WeaponCard> getChosenWeapons() {
         return chosenWeapons;
+    }
+
+    public void setChosenWeapons(BlockingDeque<WeaponCard> chosenWeapons) {
+        this.chosenWeapons = chosenWeapons;
     }
 
     public BlockingDeque<Platform> getChosenDestination() {
         return chosenDestination;
     }
 
+    public void setChosenDestination(BlockingDeque<Platform> chosenDestination) {
+        this.chosenDestination = chosenDestination;
+    }
+
     public BlockingDeque<Boolean> getChosenBinaryOption() {
         return chosenBinaryOption;
     }
 
+    public void setChosenBinaryOption(BlockingDeque<Boolean> chosenBinaryOption) {
+        this.chosenBinaryOption = chosenBinaryOption;
+    }
+
     public BlockingDeque<Integer> getChosenEffect() {
         return chosenEffect;
+    }
+
+    public void setChosenEffect(BlockingDeque<Integer> chosenEffect) {
+        this.chosenEffect = chosenEffect;
     }
 
     public ControllerState getState() {
@@ -688,8 +696,16 @@ public class Controller implements Observer, Serializable {
         return configMap;
     }
 
+    public void setConfigMap(int configMap) {
+        this.configMap = configMap;
+    }
+
     public Map<String, VirtualView> getUserView() {
         return userView;
+    }
+
+    public void setUserView(Map<String, VirtualView> userView) {
+        this.userView = userView;
     }
 
     public List<String> getPingsList() {
@@ -698,5 +714,9 @@ public class Controller implements Observer, Serializable {
 
     public List<String> getAlreadyNotified() {
         return alreadyNotified;
+    }
+
+    public void setValidActions(List<String> validActions) {
+        this.validActions = validActions;
     }
 }

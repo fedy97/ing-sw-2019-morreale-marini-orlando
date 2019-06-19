@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.net.Socket;
 import java.util.logging.Level;
 
-public class SpecificSocketServer extends Thread implements Serializable {
+public class SpecificSocketServer extends Thread {
     private Socket socket;
     private ObjectOutputStream output;
     private ObjectInputStream input;

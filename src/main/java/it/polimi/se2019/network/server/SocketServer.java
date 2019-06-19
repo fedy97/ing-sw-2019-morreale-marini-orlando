@@ -25,7 +25,7 @@ import java.util.logging.Level;
  *
  * @author Gabriel Raul Marini
  */
-public class SocketServer implements Server, Serializable {
+public class SocketServer implements Server {
     private Map<String, SpecificSocketServer> connections;
     private ServerSocket serverSocket;
     private Map<String, VirtualView> actors;
