@@ -4,14 +4,20 @@ import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
+import it.polimi.se2019.model.card.weapons.Cyberblade;
+import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
+import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.utils.JsonParser;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -101,8 +107,211 @@ public class TestPlatform {
         } catch (InvalidCharacterException ex) {
         } catch (NullPointerException ex) {
         }
+    }
+
+    @Test
+    public void testGetWeapons() throws InvalidNameException{
+
+        try {
+            AmmoCube[] cubes = new AmmoCube[3];
+            cubes[0] = AmmoCube.BLUE;
+            cubes[1] = AmmoCube.RED;
+            cubes[2] = AmmoCube.YELLOW;
+            AmmoCard card = new AmmoCard(cubes, false,"test");
+            Platform p1 = new Platform(new int[2], false, card, null, new ArrayList<>());
+            try {
+                p1.getWeapons();
+                fail();            }
+            catch (InvalidGenerationSpotException e) {
+
+            }
+        }
+        catch (InvalidCardException|NullPointerException e) {
+            fail();
+        }
+        try {
+            Platform p1 = new Platform(new int[2], true, null, null, new ArrayList<>());
+            WeaponCard cardW = new WeaponCard();
+            p1.addWeaponCard(cardW);
+            assertEquals(cardW, p1.getWeapons().get(0));
+        }
+        catch (InvalidCardException|NullPointerException|InvalidGenerationSpotException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testSetAdjacentPlatforms() {
+        try {
+            Platform p1 = new Platform(new int[2], true, null, null, new ArrayList<>());
+            try {
+                p1.setAdjacentPlatforms(null);
+                fail();
+            }
+            catch (InvalidAdjacentPlatformsException e) {
+
+            }
+            Map<Orientation, Platform> adjacentPlatforms = new HashMap<>();
+            try {
+                p1.setAdjacentPlatforms(adjacentPlatforms);
+                assertEquals(adjacentPlatforms, p1.getAdjacentPlatforms());
+            }
+            catch (InvalidAdjacentPlatformsException e) {
+                fail();
+            }
+        }
+        catch (InvalidCardException|NullPointerException e) {
+            fail();
+        }
+    }
+
+
+    @Test
+    public void testSetWeapons() {
+        try {
+            AmmoCube[] cubes = new AmmoCube[3];
+            cubes[0] = AmmoCube.BLUE;
+            cubes[1] = AmmoCube.RED;
+            cubes[2] = AmmoCube.YELLOW;
+            AmmoCard card = new AmmoCard(cubes, false,"test");
+            Platform p1 = new Platform(new int[2], false, card, null, new ArrayList<>());
+            try {
+                p1.setWeapons(null);
+                fail();
+            }
+            catch (InvalidGenerationSpotException e) {
+
+            }
+        }
+        catch (InvalidCardException|NullPointerException e) {
+            fail();
+        }
+        try {
+            Platform p1 = new Platform(new int[2], true, null, null, new ArrayList<>());
+            try {
+                List<WeaponCard> weapons = new ArrayList<>();
+                p1.setWeapons(weapons);
+                assertEquals(weapons, p1.getWeapons());
+            }
+            catch (InvalidGenerationSpotException e) {
+                fail();
+            }
+        }
+        catch (InvalidCardException|NullPointerException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testAddWeaponCard() {
+        try {
+            AmmoCube[] cubes = new AmmoCube[3];
+            cubes[0] = AmmoCube.BLUE;
+            cubes[1] = AmmoCube.RED;
+            cubes[2] = AmmoCube.YELLOW;
+            AmmoCard card = new AmmoCard(cubes, false,"test");
+            Platform p1 = new Platform(new int[2], false, card, null, new ArrayList<>());
+            try {
+                p1.addWeaponCard(null);
+                fail();
+            }
+            catch (InvalidGenerationSpotException e) {
+
+            }
+        }
+        catch (InvalidCardException|NullPointerException e) {
+            fail();
+        }
+        try {
+            Platform p1 = new Platform(new int[2], true, null, null, new ArrayList<>());
+            try {
+                WeaponCard card = new WeaponCard();
+                p1.addWeaponCard(card);
+                assertEquals(card, p1.getWeapons().get(0));
+            }
+            catch (InvalidGenerationSpotException e) {
+                fail();
+            }
+        }
+        catch (InvalidCardException|NullPointerException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testRemoveWeaponCard() {
+        try {
+            AmmoCube[] cubes = new AmmoCube[3];
+            cubes[0] = AmmoCube.BLUE;
+            cubes[1] = AmmoCube.RED;
+            cubes[2] = AmmoCube.YELLOW;
+            AmmoCard card = new AmmoCard(cubes, false,"test");
+            Platform p1 = new Platform(new int[2], false, card, null, new ArrayList<>());
+            try {
+                p1.removeWeaponCard(new WeaponCard());
+                fail();
+            }
+            catch (InvalidGenerationSpotException e) {
+
+            }
+        }
+        catch (InvalidCardException|NullPointerException e) {
+            fail();
+        }
+        try {
+            Platform p1 = new Platform(new int[2], true, null, null, new ArrayList<>());
+            try {
+                WeaponCard card = new WeaponCard();
+                p1.addWeaponCard(card);
+                p1.removeWeaponCard(card);
+                assertEquals(0, p1.getWeapons().size());
+            }
+            catch (InvalidGenerationSpotException e) {
+                fail();
+            }
+        }
+        catch (InvalidCardException|NullPointerException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testGrabAmmoCard() {
+        try {
+            Platform p1 = new Platform(new int[2], true, null, null, new ArrayList<>());
+            try {
+                p1.grabAmmoCard();
+                fail();
+            }
+            catch (InvalidCardException e) {
+
+            }
+        }
+        catch (InvalidCardException|NullPointerException e) {
+            fail();
+        }
+
+        try {
+            AmmoCube[] cubes = new AmmoCube[3];
+            cubes[0] = AmmoCube.BLUE;
+            cubes[1] = AmmoCube.RED;
+            cubes[2] = AmmoCube.YELLOW;
+            AmmoCard card = new AmmoCard(cubes, false,"test");
+            Platform p1 = new Platform(new int[2], false, card, null, new ArrayList<>());
+            try {
+                assertEquals(card, p1.grabAmmoCard());
+            }
+            catch (InvalidCardException e) {
+                fail();
+            }
+        }
+        catch (InvalidCardException|NullPointerException e) {
+            fail();
+        }
 
     }
+
+
 
 
 }

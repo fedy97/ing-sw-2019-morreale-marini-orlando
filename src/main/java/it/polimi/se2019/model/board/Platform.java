@@ -51,6 +51,7 @@ public class Platform implements Serializable {
         //build the arraylist of doors of the platform, knowing the adjacent platforms
         this.hasAmmoCard = platformAmmoCard != null;
         this.hasDoor = !doors.isEmpty();
+        weapons = new ArrayList<>();
     }
 
     /**

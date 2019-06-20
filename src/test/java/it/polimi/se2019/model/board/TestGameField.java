@@ -1,13 +1,18 @@
 package it.polimi.se2019.model.board;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
+import it.polimi.se2019.model.enumeration.Character;
+import it.polimi.se2019.model.enumeration.Orientation;
+import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.utils.JsonParser;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,4 +73,50 @@ public class TestGameField {
         }*/
     }
 
+    @Test
+    public void testGetRoom() {
+        try {
+            int[] pos = {1,1,1};
+            gf.getRoom(pos);
+            fail();
+        }
+        catch (InvalidPositionException e) {
+
+        }
+        try {
+            int[] pos = {1,1};
+            Room r = gf.getRoom(pos);
+            assertEquals(null, r.getGenSpot());
+            assertEquals(-20561, r.getRoomColor().getRGB());
+        }
+        catch (InvalidPositionException e) {
+            fail();
+        }
+    }
+
+
+    @Test
+    public void testGetVisiblePlayers() throws InvalidCardException, NoSuchFieldException, IllegalAccessException, InvalidRoomException{
+
+    }
+
+    @Test
+    public void testGetVisiblePlatforms() {
+
+    }
+
+    @Test
+    public void testGetVisiblePlayers2() {
+
+    }
+
+    @Test
+    public void testGetPlatformPosLight() {
+
+    }
+
+    @Test
+    public void testgetPlatformDir() {
+
+    }
 }
