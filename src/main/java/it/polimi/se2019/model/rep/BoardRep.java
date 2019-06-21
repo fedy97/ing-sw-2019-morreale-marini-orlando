@@ -8,12 +8,13 @@ public final class BoardRep implements Serializable {
     private List<String> damages;
     private List<String> marks;
     private Map<String,Integer> colorQtyAmmos;
+    private int points;
 
-
-    public BoardRep(List<String> damages, List<String> marks, Map<String,Integer> colorQtyAmmos) {
+    public BoardRep(List<String> damages, List<String> marks, Map<String,Integer> colorQtyAmmos, int points) {
         this.damages = damages;
         this.marks = marks;
         this.colorQtyAmmos = colorQtyAmmos;
+        this.points = points;
     }
 
     public List<String> getDamages() {
