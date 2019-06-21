@@ -1,5 +1,6 @@
 package it.polimi.se2019.model;
 
+import it.polimi.se2019.model.board.SkullsBoard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.PlayerBoard;
@@ -13,7 +14,8 @@ import java.util.Map;
  */
 public final class PointsCounter {
 
-    private PointsCounter(){}
+    private PointsCounter() {
+    }
 
     /**
      * @param player killed during the turn
@@ -34,7 +36,6 @@ public final class PointsCounter {
         }
 
         int i = 0;
-
         while (!maxDamage.isEmpty()) {
             Character currCharacter = null;
             int max = 0;
@@ -52,6 +53,33 @@ public final class PointsCounter {
                 res.put(currCharacter, PointsBattery.getPointsValue(player.getNumOfDeaths())[i]);
 
             maxDamage.remove(currCharacter);
+            i++;
+        }
+
+        return res;
+    }
+
+    /**
+     * @param board containing all the kills
+     * @return a map containing the points assigned to each player
+     */
+    public static Map<Character, Integer> getFinalScore(SkullsBoard board) {
+        Map<Character, Integer> res = new EnumMap<>(Character.class);
+
+        int i = 0;
+        while (!board.getKillMarks().isEmpty()) {
+            Character currCharacter = null;
+
+            int max = 0;
+            for (Character key : board.getKillMarks().keySet()) {
+                if (board.getKillMarks().get(key) > max) {
+                    currCharacter = key;
+                    max = board.getKillMarks().get(key);
+                }
+            }
+
+            res.put(currCharacter, PointsBattery.getFinalPointValue()[i]);
+            board.getKillMarks().remove(currCharacter);
             i++;
         }
 
