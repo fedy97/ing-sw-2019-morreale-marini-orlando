@@ -6,6 +6,7 @@ import it.polimi.se2019.model.CardRep;
 import it.polimi.se2019.model.LightGameVersion;
 import it.polimi.se2019.utils.HandyFunctions;
 
+import java.net.InetAddress;
 import java.util.*;
 
 /**
@@ -570,6 +571,8 @@ public final class CliPrinter {
 
     public static void usePowerUpMessage(LightGameVersion lightGameVersion, String myChar, List<String> powerUps) {
         CliSetUp.savePosition();
+        CliSetUp.cursorUp(1);
+        CliSetUp.cursorRight(9);
         Map<String, List<CardRep>> playerPowerUps = lightGameVersion.getPlayerPowerups();
         List<CardRep> myPowerUps = playerPowerUps.get(myChar);
 
@@ -610,7 +613,7 @@ public final class CliPrinter {
         CliSetUp.cursorUp(6);
         int counter = 0;
         for (CardRep c: myPowerUps) {
-            if (powerUps.contains(c.getId())) {
+            if (powerUps.contains(Integer.toString(c.getId()))) {
                 CliPrinter.stamp(c.getTitle());
                 if (counter < 2) {
                     CliPrinter.stamp(", ");
@@ -1187,7 +1190,8 @@ public final class CliPrinter {
         CliSetUp.savePosition();
         Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
         List<CardRep> myWeapons = playerWeapons.get(myChar);
-
+        CliSetUp.cursorRight(9);
+        CliSetUp.cursorUp(1);
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
@@ -1225,7 +1229,7 @@ public final class CliPrinter {
         CliSetUp.cursorUp(6);
         int counter = 0;
         for (CardRep c: myWeapons) {
-            if (weapons.contains(c.getId())) {
+            if (weapons.contains(Integer.toString(c.getId()))) {
                 CliPrinter.stamp(c.getTitle());
                 if (counter < 2) {
                     CliPrinter.stamp(", ");
@@ -1240,7 +1244,8 @@ public final class CliPrinter {
         CliSetUp.savePosition();
         Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
         List<CardRep> myWeapons = playerWeapons.get(myChar);
-
+        CliSetUp.cursorUp(1);
+        CliSetUp.cursorRight(9);
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
@@ -1278,7 +1283,7 @@ public final class CliPrinter {
         CliSetUp.cursorUp(6);
         int counter = 0;
         for (CardRep c: myWeapons) {
-            if (weapons.contains(c.getId())) {
+            if (weapons.contains(Integer.toString(c.getId()))) {
                 CliPrinter.stamp(c.getTitle());
                 if (counter < 2) {
                     CliPrinter.stamp(", ");

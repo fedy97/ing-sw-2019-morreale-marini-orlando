@@ -479,6 +479,7 @@ public class CLI extends RemoteView {
     @Override
     public void switchWeapon() {
         CliPrinter.discartWeaponMessage(lightGameVersion, myCharEnumString);
+        currState = 0;
         new Thread(() -> {
             int choise;
             Scanner s = new Scanner(System.in);
@@ -497,6 +498,7 @@ public class CLI extends RemoteView {
             message.setSender(userName);
             viewSetChanged();
             notifyObservers(message);
+            currState = 1;
         }).start();
     }
 
@@ -556,6 +558,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void showReloadableWeapons(List<String> weapons) {
+        currState = 0;
         CliPrinter.reloadWeaponMessage(lightGameVersion,myCharEnumString,weapons);
         new Thread(() -> {
             int choise;
@@ -576,12 +579,14 @@ public class CLI extends RemoteView {
             message.setSender(userName);
             viewSetChanged();
             notifyObservers(message);
+            currState = 1;
         }).start();
     }
 
     @Override
     public void showUsableWeapons(List<String> weapons) {
         CliPrinter.chooseWeaponMessage(lightGameVersion,myCharEnumString,weapons);
+        currState = 0;
         new Thread(() -> {
             int choise;
             Scanner s = new Scanner(System.in);
@@ -601,11 +606,13 @@ public class CLI extends RemoteView {
             message.setSender(userName);
             viewSetChanged();
             notifyObservers(message);
+            currState = 1;
         }).start();
     }
 
     @Override
     public void showUsablePowerups(List<String> powerups) {
+        currState = 0;
         CliPrinter.usePowerUpMessage(lightGameVersion,myCharEnumString,powerups);
         new Thread(() -> {
             int choise;
@@ -626,6 +633,7 @@ public class CLI extends RemoteView {
             message.setSender(userName);
             viewSetChanged();
             notifyObservers(message);
+            currState = 1;
         }).start();
     }
 }
