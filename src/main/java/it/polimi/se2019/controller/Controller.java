@@ -474,7 +474,7 @@ public class Controller implements Observer, Serializable {
                                     }
                                 }
                             }
-                            if (!pingsList.isEmpty() && turnController.getTurnUser().equals(toDisconnect.getName()))
+                            if (turnController.getTurnUser().equals(toDisconnect.getName()))
                                 turnController.endTurn();
                         }
                     }

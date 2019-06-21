@@ -47,6 +47,7 @@ public class Lobby {
             controller = Controller.getInstance();
             oi.close();
             fi.close();
+            HandyFunctions.LOGGER.log(Level.INFO, "server loaded successfully!");
             Controller.getInstance().startPinging();
         } catch (FileNotFoundException ex3) {
             HandyFunctions.LOGGER.log(Level.INFO, "no loadable file found, starting new game...");
