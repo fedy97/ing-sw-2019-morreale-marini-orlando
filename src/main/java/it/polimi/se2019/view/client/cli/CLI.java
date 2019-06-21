@@ -40,6 +40,9 @@ public class CLI extends RemoteView {
     private LightGameVersion lightGameVersion;
     private boolean[] actives;
     private int begin;
+    private Timer timerTurn;
+    public static int counter;
+    private int currState;
 
     public CLI() {
         try {
@@ -86,6 +89,7 @@ public class CLI extends RemoteView {
         CliPrinter.drawPlayersInfoBox(lightGameVersion);
         CliSetUp.cursorDown(20);
         CliSetUp.cursorLeft(106);
+        currState = 1;
     }
 
     private void getActionInput() {
@@ -108,6 +112,7 @@ public class CLI extends RemoteView {
                     iWantToUsePowerUp();
                 else
                     endTurn();
+                currState = 0;
             }).start();
         }
     }
@@ -140,7 +145,10 @@ public class CLI extends RemoteView {
     }
 
     public void iWantToReload() {
-
+        PerformActionMessage message = new PerformActionMessage("action4");
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
     }
 
     public void iWantToUsePowerUp() {
@@ -156,6 +164,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void showChoosePowerup(CardRep p1, CardRep p2) {
+        currState = 1;
         CliPrinter.stamp("\n");
         CliPrinter.choosePowerUpMessage(p1, p2);
         CliSetUp.cursorRight(9);
@@ -180,6 +189,7 @@ public class CLI extends RemoteView {
             viewSetChanged();
             notifyObservers(message);
             begin = 0;
+            currState = 0;
         }).start();
     }
 
@@ -484,12 +494,12 @@ public class CLI extends RemoteView {
 
     @Override
     public void showTargets(List<String> targets) {
-
+        //Per decidere chi colpire
     }
 
     @Override
     public void enlightenEffects(List<Integer> effects) {
-
+        //lista effetti arma selezionata
     }
 
     @Override
@@ -504,17 +514,61 @@ public class CLI extends RemoteView {
 
     @Override
     public void receivePingFromServer() {
-
+        ResponseToPingMessage message = new ResponseToPingMessage(myCharEnumString);
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
     }
 
     @Override
     public void startTimerTurn(int count,String currPlayer) {
+        try {
+            timerTurn.cancel();
+            timerTurn.purge();
+        }
+        catch (Exception e) {
 
+        }
+        timerTurn = new Timer();
+        counter = count;
+        timerTurn.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (counter >= 0) {
+                    CliSetUp.savePosition();
+                    if (currState == 0)
+                        CliSetUp.cursorUp(5);
+                    HandyFunctions.printConsole("\rTimer: " + counter);
+                    CliSetUp.restorePosition();
+                    counter--;
+                }
+            }
+         }, 0,1*1000);
     }
 
     @Override
     public void showReloadableWeapons(List<String> weapons) {
+        CliPrinter.reloadWeaponMessage(lightGameVersion,myCharEnumString,weapons);
+        new Thread(() -> {
+            int choise;
+            Scanner s = new Scanner(System.in);
+            choise = s.nextInt();
+            CliSetUp.restorePosition();
+            Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
+            List<CardRep> myWeapons = playerWeapons.get(myCharEnumString);
+            int idCard;
+            if(choise == 0 || choise == 1 || choise == 2) {
+                idCard = myWeapons.get(choise).getId();
+            }
+            else {
+                idCard = myWeapons.get(2).getId();
+            }
 
+            ReloadWeaponsMessage message = new ReloadWeaponsMessage(idCard);
+            message.setSender(userName);
+            viewSetChanged();
+            notifyObservers(message);
+        }).start();
     }
 
     @Override

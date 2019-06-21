@@ -565,6 +565,7 @@ public final class CliPrinter {
         CliPrinter.stamp("┃                                      press the <key> followed by enter                                 ┃\n");
         CliSetUp.cursorRight(2);
         CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliSetUp.cursorUp(1);
     }
 
     public static void boxMessage(String msg) {
@@ -1123,6 +1124,59 @@ public final class CliPrinter {
             CliPrinter.stamp(c.getTitle());
             if (counter <2) {
                 CliPrinter.stamp(", ");
+            }
+            counter++;
+        }
+        stamp(" <0,1,2>: ");
+    }
+
+    public static void reloadWeaponMessage(LightGameVersion lightGameVersion, String myChar, List<String> weapons) {
+        CliSetUp.savePosition();
+        Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
+        List<CardRep> myWeapons = playerWeapons.get(myChar);
+
+        CliSetUp.cursorLeft(7);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                          Choose a weapon to reload:                                    ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliSetUp.cursorLeft(78);
+        CliSetUp.cursorUp(6);
+        int counter = 0;
+        for (CardRep c: myWeapons) {
+            if (weapons.contains(c.getId())) {
+                CliPrinter.stamp(c.getTitle());
+                if (counter < 2) {
+                    CliPrinter.stamp(", ");
+                }
             }
             counter++;
         }
