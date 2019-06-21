@@ -89,7 +89,10 @@ public class SkullsBoard implements Serializable {
             throw new InvalidCharacterException("Invalid character!");
         if (quantity > 2 || quantity < 1)
             throw new InvalidQuantityException("you cannot add more than 2 or less than 1 marks");
-        killMarks.replace(character, killMarks.get(character) + quantity);
+        if(killMarks.get(character) != null)
+            killMarks.replace(character, killMarks.get(character) + quantity);
+        else
+            killMarks.put(character, quantity);
         marksInPos.add(quantity);
         characterThatKilledInPos.add(character);
         currentSkulls--;

@@ -69,7 +69,7 @@ public class PlayerManager implements Serializable {
      *
      * @param platform platform destination
      */
-    public void move(Platform platform) throws InvalidCharacterException {
+    public void move(Platform platform){
         currentPlayer.setCurrentPlatform(platform);
         father.getGame().notifyChanges();
     }

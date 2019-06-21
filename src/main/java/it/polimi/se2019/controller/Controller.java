@@ -296,7 +296,7 @@ public class Controller implements Observer, Serializable {
      *
      */
     public void endGame() {
-        //TODO
+
     }
 
     public boolean isTimerStarted() {

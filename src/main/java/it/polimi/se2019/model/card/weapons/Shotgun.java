@@ -8,6 +8,7 @@ import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.SendBinaryOption;
 import it.polimi.se2019.utils.CustomLogger;
+import it.polimi.se2019.utils.HandyFunctions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +49,10 @@ public final class Shotgun extends WeaponAlternativeFire {
 
             @Override
             public void setupTargets() {
+                List<Character> targets = new ArrayList<>();
+                targets.addAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
+                HandyFunctions.printList(targets);
+                targets.remove(playerManager.getCurrentPlayer().getCharacter());
                 this.setPossibleTargets(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
             }
         };
