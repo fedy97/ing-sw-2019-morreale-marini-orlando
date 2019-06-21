@@ -141,7 +141,10 @@ public class CLI extends RemoteView {
     }
 
     public void iWantToShoot() {
-
+        PerformActionMessage message = new PerformActionMessage("action3");
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
     }
 
     public void iWantToReload() {
@@ -415,6 +418,7 @@ public class CLI extends RemoteView {
     @Override
     public void lightWeapons(List<String> weapons) {
         Map<Integer, Integer> hashes;
+        currState = 0;
         hashes = CliPrinter.printPossibleWeapon(lightGameVersion, weapons);
         new Thread( () -> {
             int choise;
@@ -425,6 +429,7 @@ public class CLI extends RemoteView {
             viewSetChanged();
             notifyObservers(message);
             isAsking = false;
+            currState = 1;
         }).start();
     }
 
@@ -573,7 +578,27 @@ public class CLI extends RemoteView {
 
     @Override
     public void showUsableWeapons(List<String> weapons) {
+        CliPrinter.chooseWeaponMessage(lightGameVersion,myCharEnumString,weapons);
+        new Thread(() -> {
+            int choise;
+            Scanner s = new Scanner(System.in);
+            choise = s.nextInt();
+            CliSetUp.restorePosition();
+            Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
+            List<CardRep> myWeapons = playerWeapons.get(myCharEnumString);
+            int idCard;
+            if(choise == 0 || choise == 1 || choise == 2) {
+                idCard = myWeapons.get(choise).getId();
+            }
+            else {
+                idCard = myWeapons.get(2).getId();
+            }
 
+            ActivateCardMessage message = new ActivateCardMessage(idCard);
+            message.setSender(userName);
+            viewSetChanged();
+            notifyObservers(message);
+        }).start();
     }
 
     @Override

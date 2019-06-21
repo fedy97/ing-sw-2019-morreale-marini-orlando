@@ -1183,6 +1183,60 @@ public final class CliPrinter {
         stamp(" <0,1,2>: ");
     }
 
+    public static void chooseWeaponMessage(LightGameVersion lightGameVersion, String myChar, List<String> weapons) {
+        CliSetUp.savePosition();
+        Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
+        List<CardRep> myWeapons = playerWeapons.get(myChar);
+
+        CliSetUp.cursorLeft(7);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                               Choose a weapon:                                         ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliSetUp.cursorLeft(78);
+        CliSetUp.cursorUp(6);
+        int counter = 0;
+        for (CardRep c: myWeapons) {
+            if (weapons.contains(c.getId())) {
+                CliPrinter.stamp(c.getTitle());
+                if (counter < 2) {
+                    CliPrinter.stamp(", ");
+                }
+            }
+            counter++;
+        }
+        stamp(" <0,1,2>: ");
+
+    }
+
     public static void printPlatformWeapons(LightGameVersion lightGameVersion) {
         CliPrinter.weaponBox(CliColor.TEXTRED, lightGameVersion.getPlatformWeapons().get("1,0"));
         CliPrinter.weaponBox(CliColor.TEXTBLUE,lightGameVersion.getPlatformWeapons().get("0,2"));
