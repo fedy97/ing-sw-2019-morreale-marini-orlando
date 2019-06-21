@@ -68,6 +68,7 @@ public class TurnController implements Serializable {
         Player previousPlayer = c.getPlayerManager().getCurrentPlayer();
         previousPlayer.getPlayerBoard().getAmmoBox().getOptionals().clear();
 
+        checkDeadPlayers();
         //Refill operations
         if ((currIndex + 1) == turningOrder.size()) {
             for (int i = 0; i < c.getDecksManager().getToFill().size(); i++) {
@@ -156,6 +157,7 @@ public class TurnController implements Serializable {
                 for (Map.Entry<Character, Integer> entry : PointsCounter.getPoints(player).entrySet())
                     c.getGame().getPlayer(entry.getKey()).addPoint(entry.getValue());
                 askToSpawn(player);
+                player.getPlayerBoard().resetDamageLine();
             }
     }
 
