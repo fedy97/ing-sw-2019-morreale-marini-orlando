@@ -69,8 +69,6 @@ public class TestPlayer {
 
         player.addPoint(5);
         assertEquals(5, player.getCurrentScore());
-        player.addPoint(-3);
-        fail();
 
     }
 
