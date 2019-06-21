@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Class that manages the damages and the marks suffered by the player and
  * the points obtainable at the player's next death
+ *
  * @author Simone Orlando
  */
 public class PlayerBoard implements Serializable {
@@ -29,6 +30,7 @@ public class PlayerBoard implements Serializable {
 
     /**
      * Get the player's ammo container
+     *
      * @return Player's ammo container
      */
     public AmmoBox getAmmoBox() {
@@ -37,18 +39,20 @@ public class PlayerBoard implements Serializable {
 
     /**
      * Gets the marks that the player has received from other players
+     *
      * @return A list with the marks suffered
      */
     public List<Character> getRevengeMarks() {
-        return new ArrayList<>(revengeMarks);
+        return revengeMarks;
     }
 
-    public void clearMarks(){
+    public void clearMarks() {
         revengeMarks.clear();
     }
 
     /**
      * Get the damage suffered by the player
+     *
      * @return A list with the damages suffered
      */
     public List<Character> getDamageLine() {
@@ -58,8 +62,9 @@ public class PlayerBoard implements Serializable {
 
     /**
      * Add damage to the player
+     *
      * @param character The character of player who deals the damage
-     * @param value The number of damages to be inflicted
+     * @param value     The number of damages to be inflicted
      * @throws InvalidCharacterException if character reference is null
      */
     public void addDamage(Character character, int value) throws InvalidCharacterException {
@@ -70,8 +75,7 @@ public class PlayerBoard implements Serializable {
             for (int i = 0; i < 12 - oldSize; i++) {
                 damageLine.add(character);
             }
-        }
-        else {
+        } else {
             for (int i = 0; i < value; i++) {
                 damageLine.add(character);
             }
@@ -88,23 +92,23 @@ public class PlayerBoard implements Serializable {
 
     /**
      * Add marks to the player
+     *
      * @param character The character of player who marks
-     * @param value The number of marks to be added
+     * @param value     The number of marks to be added
      */
-    public void addRevengeMark(Character character, int value){
+    public void addRevengeMark(Character character, int value) {
         int counter = 0;
-        for (Character c: revengeMarks) {
+        for (Character c : revengeMarks) {
             if (c == character)
                 counter++;
         }
 
         if (counter + value < 3) {
-            for (int i = 0; i < value ; i++) {
+            for (int i = 0; i < value; i++) {
                 revengeMarks.add(character);
             }
-        }
-        else {
-            for (int i = 0; i < 3 - counter ; i++) {
+        } else {
+            for (int i = 0; i < 3 - counter; i++) {
                 revengeMarks.add(character);
             }
         }
@@ -112,15 +116,12 @@ public class PlayerBoard implements Serializable {
 
     /**
      * Remove all marks received from a player
+     *
      * @param character The character of the player whose marks are to be removed
-     * @throws InvalidCharacterException if character reference is null
      */
-    public void removeRevengeMarks(Character character) throws InvalidCharacterException{
-        if (character == null)
-            throw new InvalidCharacterException("Character cannot be null!");
+    public void removeRevengeMarks(Character character) {
         while (revengeMarks.contains(character)) {
             revengeMarks.remove(character);
         }
     }
-
 }

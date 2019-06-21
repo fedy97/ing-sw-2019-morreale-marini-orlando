@@ -7,12 +7,10 @@ import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.utils.CustomLogger;
-import it.polimi.se2019.utils.HandyFunctions;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * A class that manages the refill and the draw operations on the deck
@@ -88,14 +86,14 @@ public class DecksManager implements Serializable {
     /**
      * @param ammoCard tile collected
      */
-    public void discardAmmo(AmmoCard ammoCard){
+    public void discardAmmo(AmmoCard ammoCard) {
         ammoGarbageDeck.add(ammoCard);
     }
 
     /**
      * @param platform from which ammo tile was removed
      */
-    public void addToFill(Platform platform){
+    public void addToFill(Platform platform) {
         toFill.add(platform);
     }
 

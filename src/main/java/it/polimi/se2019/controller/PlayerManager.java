@@ -10,13 +10,11 @@ import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.CustomLogger;
-import it.polimi.se2019.utils.HandyFunctions;
 
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 /**
  * A manager class that controls the player behaviour
@@ -69,7 +67,7 @@ public class PlayerManager implements Serializable {
      *
      * @param platform platform destination
      */
-    public void move(Platform platform){
+    public void move(Platform platform) {
         currentPlayer.setCurrentPlatform(platform);
         father.getGame().notifyChanges();
     }
@@ -97,15 +95,14 @@ public class PlayerManager implements Serializable {
             father.getDecksManager().discardAmmo(ammo);
             father.getGame().notifyChanges();
         } catch (Exception e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            CustomLogger.logException(this.getClass().getName(), e);
         }
     }
 
     /**
      * @param weapons that can be grabbed by the player according to his ammos
-     * @throws MaxWeaponException is something went wrong
      */
-    public void grab(List<WeaponCard> weapons) throws MaxWeaponException {
+    public void grab(List<WeaponCard> weapons) {
         for (WeaponCard weaponCard : weapons) {
 
             try {
@@ -121,7 +118,7 @@ public class PlayerManager implements Serializable {
                  }*/
 
             } catch (InvalidGenerationSpotException e) {
-                HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+                CustomLogger.logException(this.getClass().getName(), e);
             }
         }
         father.getGame().notifyChanges();
@@ -144,13 +141,14 @@ public class PlayerManager implements Serializable {
             Map.Entry mapElement = (Map.Entry) hmIterator.next();
             int damage = ((int) mapElement.getValue());
             p = (Player) mapElement.getKey();
-            List<Character> marks = currentPlayer.getPlayerBoard().getRevengeMarks();
+            List<Character> marks = p.getPlayerBoard().getRevengeMarks();
 
             try {
-                if (marks.contains(p.getCharacter())) {
+                if (marks.contains(currentPlayer.getCharacter())) {
                     for (Character mark : marks)
-                        p.getPlayerBoard().addDamage(currentPlayer.getCharacter(), 1);
-                    currentPlayer.getPlayerBoard().clearMarks();
+                        if (mark == currentPlayer.getCharacter())
+                            p.getPlayerBoard().addDamage(currentPlayer.getCharacter(), 1);
+                    p.getPlayerBoard().removeRevengeMarks(currentPlayer.getCharacter());
                 }
 
                 p.getPlayerBoard().addDamage(currentPlayer.getCharacter(), damage);

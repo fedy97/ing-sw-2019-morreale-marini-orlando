@@ -185,7 +185,6 @@ public class Controller implements Observer, Serializable {
                     Thread.sleep(200);
             }
         } catch (Exception e) {
-            e.printStackTrace();
             CustomLogger.logException(this.getClass().getName(), e);
         }
 
@@ -274,7 +273,6 @@ public class Controller implements Observer, Serializable {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
                 CustomLogger.logException(getClass().getName(), e);
             }
 
@@ -296,7 +294,7 @@ public class Controller implements Observer, Serializable {
      *
      */
     public void endGame() {
-
+        //TODO
     }
 
     public boolean isTimerStarted() {
@@ -437,7 +435,6 @@ public class Controller implements Observer, Serializable {
                 startPinging();
 
             } catch (Exception e) {
-                e.printStackTrace();
                 CustomLogger.logException(getClass().getName(), e);
             }
         }
@@ -455,7 +452,6 @@ public class Controller implements Observer, Serializable {
                     pingsList.clear();
                     notifyAll(new PingClientsMessage(null));
                     Thread.sleep(1000);
-                    //HandyFunctions.printList(pingsList);
                     for (String charCurr : chars) {
                         if (!pingsList.contains(charCurr)) {
                             game.deleteObserver(userView.get(game.getPlayer(Character.valueOf(charCurr)).getName()));
@@ -548,7 +544,6 @@ public class Controller implements Observer, Serializable {
             fi.close();*/
             this.decksManager = new DecksManager(game.getPowerUpDeck(), game.getAmmoDeck());
         } catch (Exception e) {
-            e.printStackTrace();
             CustomLogger.logException(getClass().getName(), e);
         }
 
@@ -699,7 +694,6 @@ public class Controller implements Observer, Serializable {
                     || state == ControllerState.PROCESSING_ACTION_2
                     || state == ControllerState.PROCESSING_ACTION_3))
                 playerManager.useAction();
-            System.out.println(playerManager.getActionsLeft());
             if (playerManager.getActionsLeft() == 0) {
                 callView(new ShowMessage("You've finished your basic action! Now you can use your powerup, " +
                         "reload or pass the turn"), playerManager.getCurrentPlayer().getName());

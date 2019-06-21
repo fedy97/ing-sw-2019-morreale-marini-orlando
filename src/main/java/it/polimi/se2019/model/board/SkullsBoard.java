@@ -59,11 +59,11 @@ public class SkullsBoard implements Serializable {
         return killMarks;
     }
 
-    public ArrayList<Integer> getMarksInPos() {
+    public List<Integer> getMarksInPos() {
         return marksInPos;
     }
 
-    public ArrayList<Character> getCharacterThatKilledInPos() {
+    public List<Character> getCharacterThatKilledInPos() {
         return characterThatKilledInPos;
     }
 
