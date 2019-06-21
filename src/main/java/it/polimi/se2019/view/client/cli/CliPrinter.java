@@ -1,9 +1,9 @@
 package it.polimi.se2019.view.client.cli;
 
-import it.polimi.se2019.model.AmmoRep;
-import it.polimi.se2019.model.BoardRep;
-import it.polimi.se2019.model.CardRep;
-import it.polimi.se2019.model.LightGameVersion;
+import it.polimi.se2019.model.rep.AmmoRep;
+import it.polimi.se2019.model.rep.BoardRep;
+import it.polimi.se2019.model.rep.CardRep;
+import it.polimi.se2019.model.rep.LightGameVersion;
 import it.polimi.se2019.utils.HandyFunctions;
 
 import java.net.InetAddress;

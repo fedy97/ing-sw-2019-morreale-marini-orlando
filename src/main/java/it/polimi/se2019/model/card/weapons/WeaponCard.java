@@ -34,21 +34,6 @@ public class WeaponCard extends Card {
     }
 
     /**
-     * Creates a loaded weapon with the costs specified
-     *
-     * @param paidCost  consisting of an AmmoCube the player don't have to pay when he grabs the weapon
-     * @param extraCost consisting of one or two AmmoCubes the player pay when he grabs the weapon
-     */
-    public WeaponCard(AmmoCube paidCost, AmmoCube[] extraCost) {
-        this.paidCost = paidCost;
-        this.extraCost = extraCost;
-        c = Controller.getInstance();
-        game = c.getGame();
-        playerManager = c.getPlayerManager();
-        loaded = true;
-    }
-
-    /**
      * constructor for json parser
      *
      * @param name
@@ -65,6 +50,9 @@ public class WeaponCard extends Card {
         loaded = true;
         effects = new ArrayList<>();
         usableEffects = new boolean[]{true};
+        c = Controller.getInstance();
+        game = c.getGame();
+        playerManager = c.getPlayerManager();
     }
 
     /**

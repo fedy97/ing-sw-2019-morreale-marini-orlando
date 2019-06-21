@@ -134,7 +134,12 @@ public class PlayerManager implements Serializable {
     public void addDamage(Map<Player, Integer> targetsMap) {
         Iterator hmIterator = targetsMap.entrySet().iterator();
         Player p;
+/*
+        for(PowerUpCard powerUpCard: currentPlayer.getPowerUpCards()){
+            if(powerUpCard.getName().equals("mirino"))
 
+        }
+*/
         while (hmIterator.hasNext()) {
             Map.Entry mapElement = (Map.Entry) hmIterator.next();
             int damage = ((int) mapElement.getValue());

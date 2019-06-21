@@ -1,9 +1,11 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.Action;
+import it.polimi.se2019.exceptions.InvalidActionException;
 import it.polimi.se2019.exceptions.InvalidCharacterException;
 import it.polimi.se2019.exceptions.InvalidPositionException;
-import it.polimi.se2019.model.AmmoRep;
-import it.polimi.se2019.model.CardRep;
+import it.polimi.se2019.model.rep.AmmoRep;
+import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.board.*;
 import it.polimi.se2019.model.card.AmmoCard;
@@ -40,8 +42,10 @@ public class Controller implements Observer, Serializable {
     private Map<String, VirtualView> userView;
     private List<String> validActions;
     private ControllerState state; //the state is set to processing power up or weapon when a specific message from the client (ActivateCardMessage) is received
+
     private BlockingDeque<Character> currentTargets;
     private BlockingDeque<WeaponCard> chosenWeapons;
+    private BlockingDeque<PowerUpCard> chosenPowerUps;
     private BlockingDeque<Platform> chosenDestination;
     private BlockingDeque<Integer> chosenEffect;
     private BlockingDeque<Boolean> chosenBinaryOption;
@@ -56,11 +60,15 @@ public class Controller implements Observer, Serializable {
         game = Game.getInstance();
         validator = new HealthyValidator(this);
         validActions = new ArrayList<>();
+
         currentTargets = new LinkedBlockingDeque<>();
         chosenWeapons = new LinkedBlockingDeque<>();
+        chosenPowerUps = new LinkedBlockingDeque<>();
         chosenBinaryOption = new LinkedBlockingDeque<>();
         chosenDestination = new LinkedBlockingDeque<>();
         chosenEffect = new LinkedBlockingDeque<>();
+
+
         playerManager = new PlayerManager(this);
         turnController = new TurnController();
         userView = new HashMap<>();
@@ -114,6 +122,76 @@ public class Controller implements Observer, Serializable {
         }
     }
 
+    public void processAction(String action) {
+        List<Platform> destinations;
+
+        try {
+            if (action.equals("action1")) {
+                setState(ControllerState.PROCESSING_ACTION_1);
+                destinations = validator.getValidMoves(Action.MOVE);
+                askFor(destinations, "position");
+                playerManager.move(getChosenDestination().take());
+            } else if (action.equals("action2")) {
+                setState(ControllerState.PROCESSING_ACTION_2);
+                destinations = validator.getValidMoves(Action.GRAB);
+                askFor(destinations, "position");
+                Platform dest = getChosenDestination().take();
+                getPlayerManager().move(dest);
+
+                if (dest.isGenerationSpot()) {
+                    try {
+                        if (playerManager.getCurrentPlayer().getWeaponCards().size() == 3) {
+                            callView(new AskToDiscardMessage(null), playerManager.getCurrentPlayer().getName());
+                            WeaponCard card = getChosenWeapons().take();
+
+                            if (card.getName().equals("null")) {
+                                setState(ControllerState.IDLE);
+                                return;
+                            } else
+                                getPlayerManager().getCurrentPlayer().removeWeaponCard(card);
+                        }
+
+                        askFor(getValidator().getGrabableWeapons(), "weapons");
+                        WeaponCard chosen = getChosenWeapons().take();
+
+                        playerManager.buyWeapon(chosen);
+                    } catch (Exception e) {
+                        CustomLogger.logException(this.getClass().getName(), e);
+                    }
+                } else {
+                    getPlayerManager().grabAmmoCard();
+                }
+
+            } else if (action.equals("action3")) {
+                setState(ControllerState.PROCESSING_ACTION_3);
+
+                try {
+                    destinations = validator.getValidMoves(Action.SHOOT);
+                    askFor(destinations, "position");
+                    getPlayerManager().move(getChosenDestination().take());
+                } catch (InvalidActionException e) {
+                    CustomLogger.logInfo(this.getClass().getName(), "You cannot move before shooting!");
+                }
+
+                askFor(getValidator().getUsableWeapons(), "weaponsToUse");
+                while (getState() == ControllerState.PROCESSING_ACTION_3)
+                    Thread.sleep(200);
+
+            } else if (action.equals("action4")) {
+                askFor(getValidator().getReloadableWeapons(), "recharge");
+            } else if (action.equals("action5")) {
+                askFor(getValidator().getUsablePowerUps(), "powerups");
+                while (getState() == ControllerState.PROCESSING_POWERUP)
+                    Thread.sleep(200);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            CustomLogger.logException(this.getClass().getName(), e);
+        }
+
+        setState(ControllerState.IDLE);
+    }
+
     /**
      * @param powerUp composed of different stages in order to perform the final effect
      */
@@ -148,9 +226,13 @@ public class Controller implements Observer, Serializable {
             for (int i = 0; i < usableEffects.length; i++) {
                 if (usableEffects[i]) {
                     Effect effect = weapon.getEffects().get(i);
-                    if (effect.getCost().length == 0 ||
+                    effect.setupTargets();
+                    if ((effect.getCost().length == 0 ||
                             playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().hasAmmos(effect.getCost()))
+                            && (effect.getPossibleTargets() == null ||
+                            !effect.getPossibleTargets().isEmpty()))
                         usableEffectsIndex.add(i);
+
                 }
             }
 
@@ -174,7 +256,6 @@ public class Controller implements Observer, Serializable {
 
                 int effectIndex = chosenEffect.take();
                 Effect currEffect = weapon.getEffects().get(effectIndex);
-                currEffect.setupTargets();
 
                 if (currEffect.getPossibleTargets() != null) {
                     askFor(currEffect.getPossibleTargets(), "targets");
@@ -202,13 +283,6 @@ public class Controller implements Observer, Serializable {
 
         weapon.discard();
         game.notifyChanges();
-    }
-
-    /**
-     *
-     */
-    public void checkState() {
-        //TODO
     }
 
     /**
@@ -534,14 +608,6 @@ public class Controller implements Observer, Serializable {
     }
 
     /**
-     * @param action that can be validated by the controller once received a command message
-     *               from the client
-     */
-    public void addValidAction(String action) {
-        validActions.add(action);
-    }
-
-    /**
      * @param action to be removed
      */
     public void removeValidAction(String action) {
@@ -571,13 +637,6 @@ public class Controller implements Observer, Serializable {
     }
 
     /**
-     * @param deckManager The manager of all decks used in the game
-     */
-    public void setDecksManager(DecksManager deckManager) {
-        this.decksManager = deckManager;
-    }
-
-    /**
      * @return the manager of the players in the game
      */
     public PlayerManager getPlayerManager() {
@@ -599,24 +658,17 @@ public class Controller implements Observer, Serializable {
         return currentTargets;
     }
 
-    public void setCurrentTargets(BlockingDeque<Character> currentTargets) {
-        this.currentTargets = currentTargets;
-    }
 
     public BlockingDeque<WeaponCard> getChosenWeapons() {
         return chosenWeapons;
     }
 
-    public void setChosenWeapons(BlockingDeque<WeaponCard> chosenWeapons) {
-        this.chosenWeapons = chosenWeapons;
+    public BlockingDeque<PowerUpCard> getChosenPowerUps() {
+        return chosenPowerUps;
     }
 
     public BlockingDeque<Platform> getChosenDestination() {
         return chosenDestination;
-    }
-
-    public void setChosenDestination(BlockingDeque<Platform> chosenDestination) {
-        this.chosenDestination = chosenDestination;
     }
 
     public BlockingDeque<Boolean> getChosenBinaryOption() {
@@ -675,16 +727,8 @@ public class Controller implements Observer, Serializable {
         return configMap;
     }
 
-    public void setConfigMap(int configMap) {
-        this.configMap = configMap;
-    }
-
     public Map<String, VirtualView> getUserView() {
         return userView;
-    }
-
-    public void setUserView(Map<String, VirtualView> userView) {
-        this.userView = userView;
     }
 
     public List<String> getPingsList() {
@@ -695,7 +739,4 @@ public class Controller implements Observer, Serializable {
         return alreadyNotified;
     }
 
-    public void setValidActions(List<String> validActions) {
-        this.validActions = validActions;
-    }
 }

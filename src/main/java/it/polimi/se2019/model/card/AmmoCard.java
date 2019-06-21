@@ -1,11 +1,8 @@
 package it.polimi.se2019.model.card;
 
 import it.polimi.se2019.exceptions.InvalidCardException;
-import it.polimi.se2019.exceptions.InvalidImageException;
-import it.polimi.se2019.model.AmmoRep;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 
-import java.awt.*;
 import java.io.Serializable;
 
 

@@ -1,4 +1,6 @@
-package it.polimi.se2019.model;
+package it.polimi.se2019.model.rep;
+
+import it.polimi.se2019.model.card.Card;
 
 import java.io.Serializable;
 
@@ -8,6 +10,14 @@ public final class CardRep implements Serializable {
     private String description;
     private String path;
     private boolean loaded;
+
+    public CardRep(Card card) {
+        this.id = System.identityHashCode(card);
+        this.title = card.getName();
+        this.description = card.getDescription();
+        this.path = card.getImgPath();
+        loaded = false;
+    }
 
     public CardRep(int id, String title, String description, String path) {
         this.id = id;

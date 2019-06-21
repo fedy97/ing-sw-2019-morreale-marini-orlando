@@ -1,15 +1,13 @@
 package it.polimi.se2019.model.card.weapons;
 
 
-import it.polimi.se2019.controller.Controller;
-import it.polimi.se2019.controller.PlayerManager;
 import it.polimi.se2019.exceptions.InvalidNameException;
-import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.CustomLogger;
+import it.polimi.se2019.utils.HandyFunctions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,9 +18,6 @@ public final class Cyberblade extends WeaponTwoAddingEffect {
 
     public Cyberblade(String name, String descr, String img, AmmoCube paidCost, AmmoCube[] extraCost) throws InvalidNameException {
         super(name, descr, img, paidCost, extraCost);
-        Controller c = Controller.getInstance();
-        PlayerManager playerManager = c.getPlayerManager();
-        Game game = c.getGame();
 
         Effect eff1 = new Effect(new AmmoCube[]{}) {
             @Override
@@ -43,8 +38,12 @@ public final class Cyberblade extends WeaponTwoAddingEffect {
             @Override
             public void setupTargets() {
                 List<Character> targets = new ArrayList<>();
+                if(playerManager == null)
+                    HandyFunctions.printConsole("dsfsd");
+                playerManager.getCurrentPlayer().getCurrentPlatform();
                 targets.addAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
                 targets.remove(playerManager.getCurrentPlayer().getCharacter());
+                HandyFunctions.printList(targets);
                 this.setPossibleTargets(targets);
             }
         };
@@ -89,14 +88,10 @@ public final class Cyberblade extends WeaponTwoAddingEffect {
             @Override
             public void setupTargets() {
                 List<Character> targets;
-
-                if (usableEffects[1]) {
-                    targets = playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform();
-                    targets.removeAll(getLastEffectTargets());
-                } else {
-                    targets = playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform();
-                }
+                targets = playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform();
+                targets.removeAll(getLastEffectTargets());
                 targets.remove(playerManager.getCurrentPlayer().getCharacter());
+
                 this.setPossibleTargets(targets);
             }
         };

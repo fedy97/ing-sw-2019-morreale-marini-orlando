@@ -1,4 +1,4 @@
-package it.polimi.se2019.model;
+package it.polimi.se2019.model.rep;
 
 import java.io.Serializable;
 

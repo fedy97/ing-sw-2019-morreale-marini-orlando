@@ -6,6 +6,7 @@ import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
+import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 
 import java.io.Serializable;
@@ -73,7 +74,7 @@ public class DecksManager implements Serializable {
             powerUpGarbageDeck.clear();
             powerUps.mix();
         } catch (InvalidDeckException e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, "Something went wrong when refilling the deck");
+            CustomLogger.logException(this.getClass().getName(), e);
         }
     }
 

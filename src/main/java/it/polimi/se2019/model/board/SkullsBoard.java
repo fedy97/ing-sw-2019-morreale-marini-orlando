@@ -81,7 +81,6 @@ public class SkullsBoard implements Serializable {
     /**
      * @param character that killed someone
      * @param quantity  depending on the kind of death(either kill 1 or overkill 2)
-     * @return either old value of the character's kill marks or null if the player does not exist
      * @throws InvalidCharacterException if the character does not exist
      * @throws InvalidQuantityException  if trying to add more than 2 or less than 1 skulls
      */

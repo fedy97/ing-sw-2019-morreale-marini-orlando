@@ -1,8 +1,8 @@
 package it.polimi.se2019.view.client;
 
-import it.polimi.se2019.model.AmmoRep;
-import it.polimi.se2019.model.CardRep;
-import it.polimi.se2019.model.LightGameVersion;
+import it.polimi.se2019.model.rep.AmmoRep;
+import it.polimi.se2019.model.rep.CardRep;
+import it.polimi.se2019.model.rep.LightGameVersion;
 import it.polimi.se2019.view.View;
 
 import java.util.List;

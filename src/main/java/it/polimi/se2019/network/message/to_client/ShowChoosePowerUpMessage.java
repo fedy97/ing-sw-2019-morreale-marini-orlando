@@ -1,6 +1,6 @@
 package it.polimi.se2019.network.message.to_client;
 
-import it.polimi.se2019.model.CardRep;
+import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.view.client.RemoteView;
 
 import java.util.ArrayList;

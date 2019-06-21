@@ -51,12 +51,9 @@ public class Player implements Serializable {
         this.character = character;
         this.currentPlatform = startPlatform;
         this.name = name;
-        currentScore = 0;
         playerBoard = new PlayerBoard();
-        numOfDeaths = 0;
         powerUpCards = new ArrayList<>();
         weaponCards = new ArrayList<>();
-        frenzyModeType = 0;
         underAttack = false;
         attacking = false;
         isConnected = true;
@@ -176,11 +173,8 @@ public class Player implements Serializable {
      * Add points to those already scored by the player
      *
      * @param point Points to be added
-     * @throws NegativeNumberException if point is less than zero
      */
-    public void addPoint(int point) throws NegativeNumberException {
-        if (point < 0)
-            throw new NegativeNumberException("Point should be greater than zero!");
+    public void addPoint(int point){
         currentScore = currentScore + point;
     }
 
@@ -202,11 +196,8 @@ public class Player implements Serializable {
      * Add a power up card to those already owned by the player
      *
      * @param card The card drawn
-     * @throws InvalidCardException if card reference is null
      */
-    public void addPowerUpCard(PowerUpCard card) throws InvalidCardException {
-        if (card == null)
-            throw new InvalidCardException("Card cannot be null!");
+    public void addPowerUpCard(PowerUpCard card){
         if (powerUpCards.size() < 3) {
             powerUpCards.add(card);
             //playerBoard.getAmmoBox().addOptionalAmmo(card.getAmmoCube());
@@ -253,10 +244,7 @@ public class Player implements Serializable {
      * @return if the player has more than 3 damage tokens but less than 6
      */
     public boolean isDamaged() {
-        if (playerBoard.getDamageLine().size() >= 3 && playerBoard.getDamageLine().size() < 6)
-            return true;
-        else
-            return false;
+        return playerBoard.getDamageLine().size() >= 3 && playerBoard.getDamageLine().size() < 6;
     }
 
     //TODO test
@@ -264,10 +252,24 @@ public class Player implements Serializable {
      * @return if the player has more than 6 damage tokens
      */
     public boolean isSeriouslyDamaged() {
-        if (playerBoard.getDamageLine().size() >= 6)
-            return true;
-        else
-            return false;
+        return playerBoard.getDamageLine().size() >= 6;
+    }
+
+    //TODO test
+
+    /**
+     * @return if the player was killed
+     */
+    public boolean isDead(){
+        return playerBoard.getDamageLine().size() > 10;
+    }
+
+    //TODO test
+    /**
+     * @return if the player was overkilled
+     */
+    public boolean wasOverkilled(){
+        return playerBoard.getDamageLine().size() > 11;
     }
 
     public void setUnderAttack() {
