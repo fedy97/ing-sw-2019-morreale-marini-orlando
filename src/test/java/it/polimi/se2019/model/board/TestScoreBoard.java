@@ -9,8 +9,8 @@ import static org.junit.Assert.*;
 
 public class TestScoreBoard {
 
-    @Test
-    public void testSetScoreToPlayer() {
+   // @Test
+    /*public void testSetScoreToPlayer() {
         ScoreBoard board = new ScoreBoard();
         try {
             board.setScoreToPlayer(Character.BANSHEE, 2);
@@ -26,5 +26,5 @@ public class TestScoreBoard {
         catch (InvalidQuantityException| InvalidCharacterException e) {
 
         }
-    }
+    }*/
 }

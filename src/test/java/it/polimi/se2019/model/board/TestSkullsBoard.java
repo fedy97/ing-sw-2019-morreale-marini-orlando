@@ -9,8 +9,8 @@ import static org.junit.Assert.*;
 
 public class TestSkullsBoard {
 
-    @Test
-    public void testAddKillMarks() {
+    //@Test
+    /*public void testAddKillMarks() {
 
         try {
             SkullsBoard board = new SkullsBoard(8);
@@ -30,5 +30,5 @@ public class TestSkullsBoard {
 
         }
 
-    }
+    }*/
 }
