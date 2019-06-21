@@ -7,7 +7,10 @@ import it.polimi.se2019.network.server.SocketServer;
 import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.ObjectInputStream;
 import java.util.Scanner;
 import java.util.logging.Level;
 
@@ -37,25 +40,21 @@ public class Lobby {
     }
 
     private static void loadController() {
-        try {
-            FileInputStream fi = new FileInputStream(new File("server.txt"));
-            ObjectInputStream oi = new ObjectInputStream(fi);
+
+        try (FileInputStream fi = new FileInputStream(new File("server.txt"));
+             ObjectInputStream oi = new ObjectInputStream(fi)) {
+
             Controller instance = (Controller) oi.readObject();
             Game gameInstance = (Game) oi.readObject();
             Controller.setInstance(instance);
             Game.setInstance(gameInstance);
             controller = Controller.getInstance();
-            oi.close();
-            fi.close();
             HandyFunctions.LOGGER.log(Level.INFO, "server loaded successfully!");
             Controller.getInstance().startPinging();
         } catch (FileNotFoundException ex3) {
             HandyFunctions.LOGGER.log(Level.INFO, "no loadable file found, starting new game...");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            HandyFunctions.printConsole("failed IOEXXXXXX");
-        } catch (ClassNotFoundException ex2) {
-            HandyFunctions.printConsole("class not found");
+        } catch (Exception ex) {
+            CustomLogger.logException(Lobby.class.getName(), ex);
         }
 
     }
