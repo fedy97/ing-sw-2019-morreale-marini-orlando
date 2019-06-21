@@ -568,6 +568,59 @@ public final class CliPrinter {
         CliSetUp.cursorUp(1);
     }
 
+    public static void usePowerUpMessage(LightGameVersion lightGameVersion, String myChar, List<String> powerUps) {
+        CliSetUp.savePosition();
+        Map<String, List<CardRep>> playerPowerUps = lightGameVersion.getPlayerPowerups();
+        List<CardRep> myPowerUps = playerPowerUps.get(myChar);
+
+        CliSetUp.cursorLeft(7);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                           Choose a powerUp to use:                                     ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliSetUp.cursorLeft(78);
+        CliSetUp.cursorUp(6);
+        int counter = 0;
+        for (CardRep c: myPowerUps) {
+            if (powerUps.contains(c.getId())) {
+                CliPrinter.stamp(c.getTitle());
+                if (counter < 2) {
+                    CliPrinter.stamp(", ");
+                }
+            }
+            counter++;
+        }
+        stamp(" <0,1,2>: ");
+    }
+
     public static void boxMessage(String msg) {
         CliSetUp.savePosition();
         CliSetUp.cursorLeft(7);

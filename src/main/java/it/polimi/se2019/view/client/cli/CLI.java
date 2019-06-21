@@ -155,7 +155,10 @@ public class CLI extends RemoteView {
     }
 
     public void iWantToUsePowerUp() {
-
+        PerformActionMessage message = new PerformActionMessage("action5");
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
     }
 
     public void endTurn() {
@@ -603,6 +606,26 @@ public class CLI extends RemoteView {
 
     @Override
     public void showUsablePowerups(List<String> powerups) {
+        CliPrinter.usePowerUpMessage(lightGameVersion,myCharEnumString,powerups);
+        new Thread(() -> {
+            int choise;
+            Scanner s = new Scanner(System.in);
+            choise = s.nextInt();
+            CliSetUp.restorePosition();
+            Map<String, List<CardRep>> playePowerUps = lightGameVersion.getPlayerPowerups();
+            List<CardRep> myPowerUps = playePowerUps.get(myCharEnumString);
+            int idCard;
+            if(choise == 0 || choise == 1 || choise == 2) {
+                idCard = myPowerUps.get(choise).getId();
+            }
+            else {
+                idCard = myPowerUps.get(2).getId();
+            }
 
+            ActivateCardMessage message = new ActivateCardMessage(idCard);
+            message.setSender(userName);
+            viewSetChanged();
+            notifyObservers(message);
+        }).start();
     }
 }
