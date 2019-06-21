@@ -4,8 +4,6 @@ import it.polimi.se2019.Action;
 import it.polimi.se2019.exceptions.InvalidActionException;
 import it.polimi.se2019.exceptions.InvalidCharacterException;
 import it.polimi.se2019.exceptions.InvalidPositionException;
-import it.polimi.se2019.model.rep.AmmoRep;
-import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.board.*;
 import it.polimi.se2019.model.card.AmmoCard;
@@ -15,6 +13,8 @@ import it.polimi.se2019.model.card.weapons.Effect;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.model.rep.AmmoRep;
+import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.network.message.to_client.*;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.*;
@@ -480,8 +480,8 @@ public class Controller implements Observer, Serializable {
                     }
                     Thread.sleep(1000);
                 }
-            } catch (InterruptedException ex) {
             } catch (Exception ex) {
+                CustomLogger.logException(this.getClass().getName(), ex);
             }
 
         }).start();
