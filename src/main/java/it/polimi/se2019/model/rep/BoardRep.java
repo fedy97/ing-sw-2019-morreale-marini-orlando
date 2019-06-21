@@ -28,4 +28,8 @@ public final class BoardRep implements Serializable {
     public Map<String, Integer> getColorQtyAmmos() {
         return colorQtyAmmos;
     }
+
+    public int getPoints() {
+        return points;
+    }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -157,5 +158,10 @@
             <Image url="@assets/boards/skull.png" />
          </image>
       </ImageView>
+      <Label fx:id="scorelabel" layoutX="346.0" layoutY="275.0" prefHeight="37.0" prefWidth="244.0">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -7,6 +7,7 @@ import it.polimi.se2019.utils.HandyFunctions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
@@ -17,6 +18,8 @@ import java.util.Map;
 
 public class PlayerBoardController {
 
+    @FXML
+    private Label scorelabel;
     @FXML
     private ImageView boardImage;
     @FXML
@@ -199,6 +202,7 @@ public class PlayerBoardController {
         livesImages.add(life4);
         livesImages.add(life5);
         livesImages.add(life6);
+        //scorelabel.setFont(gui.grande);
 
     }
 
@@ -216,6 +220,16 @@ public class PlayerBoardController {
         updateDamages();
         //updates marks
         updateMarks();
+        //updates player's score
+        updateScore();
+    }
+
+    private void updateScore() {
+        if (currPlayerDisplay.equals(gui.getCharInString())) {
+            BoardRep boardRep = lightGameVersion.getPlayerBoardRep().get(currPlayerDisplay);
+            int score = boardRep.getPoints();
+            scorelabel.setText("Your score: " + score);
+        } else scorelabel.setText("");
     }
 
     private void updateMarks() {
