@@ -13,4 +13,8 @@ public final class PointsBattery {
 
         return res;
     }
+
+    public static int[] getFinalPointValue() {
+        return normalPointsValue;
+    }
 }
