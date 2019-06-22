@@ -526,7 +526,17 @@ public class CLI extends RemoteView {
 
     @Override
     public void enlightenEffects(List<Integer> effects) {
-        //lista effetti arma selezionata
+        CliPrinter.enlightenEffectsMessage(effects);
+        new Thread(() -> {
+            int choise;
+            Scanner s = new Scanner(System.in);
+            choise = s.nextInt();
+            ChosenEffectMessage message = new ChosenEffectMessage(choise);
+            message.setSender(userName);
+            viewSetChanged();
+            notifyObservers(message);
+            currState = 1;
+        }).start();
     }
 
     @Override
