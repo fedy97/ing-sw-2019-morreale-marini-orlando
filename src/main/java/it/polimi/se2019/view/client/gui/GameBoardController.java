@@ -203,6 +203,16 @@ public class GameBoardController {
     @FXML
     private ImageView dozertwothree;
     @FXML
+    private ImageView dozerboardimage;
+    @FXML
+    private ImageView sprogboardimage;
+    @FXML
+    private ImageView bansheeboardimage;
+    @FXML
+    private ImageView distructorboardimage;
+    @FXML
+    private ImageView violetboardimage;
+    @FXML
     private ImageView weapon10_1;
     @FXML
     private ImageView weapon10_2;
@@ -292,7 +302,9 @@ public class GameBoardController {
     private boolean reconnected = false;
     private Map<Button, String> buttonsHashes;
     private List<AmmoRep> ammoReps;
+    private List<Button> infoButtons;
     private Map<String, ImageView> posAmmo;
+    private Map<String, ImageView> charImageBoardChar;
     private Map<String, Button> posPlatform;
     private Map<String, List<CardRep>> posWeaponsReps;
     private Map<ImageView, AmmoRep> ammoRepImageViewMap;
@@ -348,6 +360,20 @@ public class GameBoardController {
         posWeaponsImages.put("1,0", weapons10);
         posWeaponsImages.put("2,3", weapons23);
         posWeaponsImages.put("0,2", weapons02);
+
+        infoButtons = new ArrayList<>();
+        infoButtons.add(info02_1);
+        infoButtons.add(info02_2);
+        infoButtons.add(info02_3);
+        infoButtons.add(info10_1);
+        infoButtons.add(info10_2);
+        infoButtons.add(info10_3);
+        infoButtons.add(info23_1);
+        infoButtons.add(info23_2);
+        infoButtons.add(info23_3);
+
+        for (Button button : infoButtons)
+            HandyFunctions.enlightenButton(button);
 
         skullsImages = new ArrayList<>();
         skullsImages.add(skull8);
@@ -572,14 +598,24 @@ public class GameBoardController {
         imageViews.add(ammotwotwo);
         imageViews.add(ammotwothree);
 
+        charImageBoardChar = new HashMap<>();
+        charImageBoardChar.put("DOZER", dozerboardimage);
+        charImageBoardChar.put("DISTRUCTOR", distructorboardimage);
+        charImageBoardChar.put("SPROG", sprogboardimage);
+        charImageBoardChar.put("VIOLET", violetboardimage);
+        charImageBoardChar.put("BANSHEE", bansheeboardimage);
+
         playersButtonBoards = new HashMap<>();
         playersButtonBoards.put("DOZER", dozerstats);
         playersButtonBoards.put("DISTRUCTOR", distructorstats);
         playersButtonBoards.put("VIOLET", violetstats);
         playersButtonBoards.put("SPROG", sprogstats);
         playersButtonBoards.put("BANSHEE", bansheestats);
-        for (String player : gui.getCharsInGame())
-            HandyFunctions.enlightenButton(playersButtonBoards.get(player));
+        for (String player : gui.getCharsInGame()) {
+            if (!player.equals(gui.getCharInString())) HandyFunctions.enlightenButton(playersButtonBoards.get(player));
+            else HandyFunctions.forceLightButton(playersButtonBoards.get(player));
+            charImageBoardChar.get(player).setVisible(true);
+        }
 
         if (!reconnected) {
             for (int i = 0; i < ammoReps.size(); i++) {
@@ -618,7 +654,8 @@ public class GameBoardController {
             updateAmmoCards();
             //update the number of current skulls
             updateSkulls();
-        } catch (NullPointerException ex) {}
+        } catch (NullPointerException ex) {
+        }
 
 
     }
@@ -754,14 +791,7 @@ public class GameBoardController {
     }
 
     protected void showMessage(String message) {
-        /*
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Info Message");
-        alert.setContentText(message);
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-        alert.showAndWait();*/
         messageLabel.setText(message);
-
     }
 
     private void showInstruction(CardRep cardRep) {
@@ -803,7 +833,7 @@ public class GameBoardController {
     }
 
     protected void updateTurnTimer(int count) {
-        timer.setText(Integer.toString(count));
+        timer.setText("Timer : " + count);
     }
 
     public void moveClick() {
