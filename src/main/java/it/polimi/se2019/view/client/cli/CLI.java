@@ -574,6 +574,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void startTimerTurn(int count,String currPlayer) {
+        /*
         try {
             timerTurn.cancel();
             timerTurn.purge();
@@ -596,6 +597,8 @@ public class CLI extends RemoteView {
                 }
             }
          }, 0,1*1000);
+         */
+
     }
 
     @Override
@@ -644,7 +647,7 @@ public class CLI extends RemoteView {
                 idCard = myWeapons.get(2).getId();
             }
 
-            ActivateCardMessage message = new ActivateCardMessage(idCard);
+            ActivateCardMessage message = new ActivateCardMessage(Integer.toString(idCard));
             message.setSender(userName);
             viewSetChanged();
             notifyObservers(message);

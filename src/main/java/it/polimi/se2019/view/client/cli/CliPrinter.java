@@ -1352,7 +1352,7 @@ public final class CliPrinter {
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                               Choose a target:                                         ┃");
+        CliPrinter.stamp("┃                                              Choose an effect:                                         ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
         CliPrinter.stamp("┃                                                                                                        ┃");
