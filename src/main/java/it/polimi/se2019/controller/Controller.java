@@ -312,29 +312,39 @@ public class Controller implements Observer, Serializable {
      * @param <T>             type of object to show to the client
      */
     public <T> void askFor(List<T> possibleChoices, String choice) {
-        ToClientMessage msg = null;
+        ToClientMessage msg;
         List<String> lightVersion = HandyFunctions.getLightCollection(possibleChoices);
         Player currPlayer = playerManager.getCurrentPlayer();
 
-        if (choice.equals("weapons"))
-            msg = new ShowWeaponsMessage(lightVersion);
-        else if (choice.equals("weaponsToUse"))
-            msg = new ShowUsableWeaponsMessage(lightVersion);
-        else if (choice.equals("position"))
-            msg = new ShowPlatformMessage(lightVersion);
-        else if (choice.equals("targets"))
-            msg = new ShowPossibleTargetsMessage(lightVersion);
-        else if (choice.equals("discard"))
-            msg = new AskForCubeMessage(lightVersion);
-        else if (choice.equals("cube"))
-            msg = new AskForCubeMessage(lightVersion);
-        else if (choice.equals("recharge"))
-            msg = new ShowReloadableWeaponsMessage(lightVersion);
-        else if (choice.equals("powerups"))
-            msg = new ShowUsablePowerupsMessage(lightVersion);
-        else
-            msg = null; // OTHER options
-
+        switch (choice) {
+            case "weapons":
+                msg = new ShowWeaponsMessage(lightVersion);
+                break;
+            case "weaponsToUse":
+                msg = new ShowUsableWeaponsMessage(lightVersion);
+                break;
+            case "position":
+                msg = new ShowPlatformMessage(lightVersion);
+                break;
+            case "targets":
+                msg = new ShowPossibleTargetsMessage(lightVersion);
+                break;
+            case "discard":
+                msg = new AskForCubeMessage(lightVersion);
+                break;
+            case "cube":
+                msg = new AskForCubeMessage(lightVersion);
+                break;
+            case "recharge":
+                msg = new ShowReloadableWeaponsMessage(lightVersion);
+                break;
+            case "powerups":
+                msg = new ShowUsablePowerupsMessage(lightVersion);
+                break;
+            default:
+                msg = null; // OTHER options
+                break;
+        }
         callView(msg, currPlayer.getName());
     }
 
@@ -353,7 +363,8 @@ public class Controller implements Observer, Serializable {
         notifyAll(new UpdateVotesMapChosenMessage(mapChosen));
     }
 
-    public void setCharacterChosen(String name, String characterChosen) throws InvalidCharacterException, InvalidPositionException {
+    public void setCharacterChosen(String name, String characterChosen) throws
+            InvalidCharacterException, InvalidPositionException {
         Player player = new Player(name, Character.valueOf(characterChosen), null);
         game.getPlayers().add(player);
         game.getCharacterPlayers().put(Character.valueOf(characterChosen), player);
