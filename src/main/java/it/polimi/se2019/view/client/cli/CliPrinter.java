@@ -1296,7 +1296,7 @@ public final class CliPrinter {
     }
 
     public static void showTargetMessage(LightGameVersion lightGameVersion, List<String> targets) {
-        CliSetUp.cursorUp(1);
+        CliSetUp.cursorUp(6);
         CliSetUp.cursorRight(9);
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
@@ -1524,6 +1524,8 @@ public final class CliPrinter {
     }
 
     public static void binaryOptionMessage(String msg) {
+        CliSetUp.cursorDown(1);
+        CliSetUp.cursorLeft(8);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);

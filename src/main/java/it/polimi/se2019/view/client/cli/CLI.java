@@ -555,6 +555,9 @@ public class CLI extends RemoteView {
             msg.setSender(userName);
             viewSetChanged();
             notifyObservers(msg);
+            if(message.equals("Do you want to move the target 1 square away?")) {
+                CliSetUp.cursorUp(5);
+            }
             currState = 1;
         }).start();
     }
