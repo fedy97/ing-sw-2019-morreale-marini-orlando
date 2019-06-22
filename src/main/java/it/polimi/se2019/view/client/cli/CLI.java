@@ -448,12 +448,20 @@ public class CLI extends RemoteView {
             String platform;
             Console c = System.console();
             platform = c.readLine();
-            MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(platform);
-            message.setSender(userName);
-            viewSetChanged();
-            notifyObservers(message);
-            if (!platform.equals("0,2") && !platform.equals("1,0") && !platform.equals("2,3")) {
-                isAsking = false;
+            if(platforms.contains(platform)) {
+                MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(platform);
+                message.setSender(userName);
+                viewSetChanged();
+                notifyObservers(message);
+                if (!platform.equals("0,2") && !platform.equals("1,0") && !platform.equals("2,3")) {
+                    isAsking = false;
+                }
+            }
+            else {
+                updateAll(lightGameVersion);
+                CliSetUp.cursorDown(1);
+                CliSetUp.cursorLeft(10);
+                lightPlatforms(platforms);
             }
         }).start();
     }
