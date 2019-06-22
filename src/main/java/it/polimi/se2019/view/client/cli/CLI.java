@@ -504,7 +504,24 @@ public class CLI extends RemoteView {
 
     @Override
     public void showTargets(List<String> targets) {
-        //Per decidere chi colpire
+        CliPrinter.showTargetMessage(lightGameVersion,targets);
+        List<String> toSend = new ArrayList<>();
+        new Thread(() -> {
+            String choise;
+            Scanner s = new Scanner(System.in);
+            choise = s.next();
+            for(int i = 0; i<choise.length();i++) {
+                if(choise.charAt(i) != ',') {
+                    toSend.add(targets.get(Character.getNumericValue(choise.charAt(i))));
+                }
+            }
+            SendTargetsMessage message = new SendTargetsMessage(toSend);
+            message.setSender(userName);
+            viewSetChanged();
+            notifyObservers(message);
+            currState = 1;
+        }).start();
+
     }
 
     @Override
@@ -514,7 +531,22 @@ public class CLI extends RemoteView {
 
     @Override
     public void showBinaryOption(String message) {
-
+        CliPrinter.binaryOptionMessage(message);
+        new Thread(() -> {
+            char choise;
+            Scanner s = new Scanner(System.in);
+            choise = s.next().charAt(0);
+            boolean toSend;
+            if(choise == 'y')
+                toSend = true;
+            else
+                toSend = false;
+            ResponseToBinaryOption msg = new ResponseToBinaryOption(toSend);
+            msg.setSender(userName);
+            viewSetChanged();
+            notifyObservers(msg);
+            currState = 1;
+        }).start();
     }
 
     @Override
