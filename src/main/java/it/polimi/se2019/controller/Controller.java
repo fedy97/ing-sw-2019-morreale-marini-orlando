@@ -537,11 +537,6 @@ public class Controller implements Observer, Serializable {
             for (int i = 0; i < 9; i++)
                 weaponCards[i] = game.getWeaponsDeck().drawCard();
             game.setGameField(new GameField(field, weaponCards, new SkullsBoard(HandyFunctions.parserSettings.numOfSkulls()), new ScoreBoard()));
-            /*FileInputStream fi = new FileInputStream(new File("myModel2.txt"));
-            ObjectInputStream oi = new ObjectInputStream(fi);
-            game.setGameField((GameField) oi.readObject());
-            oi.close();
-            fi.close();*/
             this.decksManager = new DecksManager(game.getPowerUpDeck(), game.getAmmoDeck());
         } catch (Exception e) {
             CustomLogger.logException(getClass().getName(), e);
