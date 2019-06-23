@@ -386,7 +386,7 @@ public class Controller implements Observer, Serializable {
      * @param msg to the destination client
      */
     public void callView(ToClientMessage msg, String user) {
-        if (game.getPlayers().isEmpty() || game.getPlayer(user).isConnected())
+        if (game.getPlayers().isEmpty() || (game.getPlayer(user) != null && game.getPlayer(user).isConnected()) || game.getPlayer(user) == null)
             userView.get(user).callView(msg);
     }
 
@@ -630,7 +630,7 @@ public class Controller implements Observer, Serializable {
 
     protected void notifyAll(ToClientMessage msg) {
         for (String user : userView.keySet()) {
-            if (game.getGameField() == null || game.getPlayers().isEmpty() || (game.getPlayer(user) != null && game.getPlayer(user).isConnected())) {
+            if (game.getGameField() == null || game.getPlayers().isEmpty() || (game.getPlayer(user) != null && game.getPlayer(user).isConnected()) || game.getPlayer(user) == null) {
                 callView(msg, user);
             }
         }
