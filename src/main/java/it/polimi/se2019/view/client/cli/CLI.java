@@ -43,6 +43,9 @@ public class CLI extends RemoteView {
     private Timer timerTurn;
     public static int counter;
     private int currState;
+    private String lastMsg;
+    private boolean powerUpChosen;
+    private CardRep p1, p2;
 
     public CLI() {
         try {
@@ -63,33 +66,49 @@ public class CLI extends RemoteView {
         for (int i=0; i<6; i++)
             actives[i] = false;
         begin = 1;
+        lastMsg = "";
+        powerUpChosen = false;
+        p1 = null;
+        p2 = null;
     }
 
     @Override
     public void updateAll(LightGameVersion lightGameVersion) {
         this.lightGameVersion = lightGameVersion;
-        CliSetUp.clear();
-        CliSetUp.cursorToHome();
-        CliPrinter.welcomeMessage();
-        CliSetUp.cursorLeft(109);
-        CliSetUp.cursorDown(2);
-        CliPrinter.printPlatformWeapons(lightGameVersion);
-        CliSetUp.cursorRight(38);
-        CliSetUp.cursorUp(23);
-        CliPrinter.printMap(lightGameVersion, chosenBoard);
-        CliSetUp.cursorDown(9);
-        CliSetUp.cursorLeft(106);
-        CliPrinter.standardActionsMessage();
-        CliSetUp.savePosition();
-        CliSetUp.cursorLeft(99);
-        CliPrinter.boxMessage(null);
-        CliSetUp.restorePosition();
-        CliSetUp.cursorUp(34);
-        CliSetUp.cursorRight(104);
-        CliPrinter.drawPlayersInfoBox(lightGameVersion);
-        CliSetUp.cursorDown(20);
-        CliSetUp.cursorLeft(106);
-        currState = 1;
+
+            CliSetUp.clear();
+            CliSetUp.cursorToHome();
+            CliPrinter.welcomeMessage();
+            CliSetUp.cursorLeft(109);
+            CliSetUp.cursorDown(2);
+            CliPrinter.printPlatformWeapons(lightGameVersion);
+            CliSetUp.cursorRight(38);
+            CliSetUp.cursorUp(23);
+            CliPrinter.printMap(lightGameVersion, chosenBoard);
+            CliSetUp.cursorDown(9);
+            CliSetUp.cursorLeft(106);
+            if (powerUpChosen || p1 == null || p2 == null) {
+                CliPrinter.standardActionsMessage();
+                CliSetUp.savePosition();
+                CliSetUp.cursorLeft(99);
+                CliPrinter.boxMessage(null);
+                CliSetUp.restorePosition();
+            }
+            else {
+                CliSetUp.cursorUp(1);
+                showChoosePowerup(p1, p2);
+                CliSetUp.cursorRight(9);
+                CliSetUp.cursorDown(10);
+            }
+
+            CliSetUp.cursorUp(34);
+            CliSetUp.cursorRight(104);
+            CliPrinter.drawPlayersInfoBox(lightGameVersion);
+            CliSetUp.cursorDown(20);
+            CliSetUp.cursorLeft(106);
+            showMessage(lastMsg);
+            currState = 1;
+
     }
 
     private void getActionInput() {
@@ -175,11 +194,13 @@ public class CLI extends RemoteView {
 
     @Override
     public void showChoosePowerup(CardRep p1, CardRep p2) {
+        this.p1 = p1;
+        this.p2 = p2;
         currState = 1;
         CliPrinter.stamp("\n");
         CliPrinter.choosePowerUpMessage(p1, p2);
         CliSetUp.cursorRight(9);
-        CliSetUp.cursorUp(1);
+        //CliSetUp.cursorUp(1);
         CliPrinter.boxMessage(null);
         CliSetUp.cursorUp(10);
         CliSetUp.cursorLeft(10);
@@ -199,6 +220,7 @@ public class CLI extends RemoteView {
             message.setSender(userName);
             viewSetChanged();
             notifyObservers(message);
+            powerUpChosen = true;
             begin = 0;
             currState = 0;
         }).start();
@@ -482,6 +504,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void showMessage(String msg) {
+        lastMsg = msg;
         CliSetUp.savePosition();
         CliSetUp.cursorDown(15);
         CliSetUp.cursorRight(5);
