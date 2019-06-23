@@ -153,6 +153,8 @@ public abstract class RemoteView extends View {
      */
     public abstract void startTimerTurn(int count, String curr);
 
+    public abstract void updateTimerTurn(int seconds, String curr);
+
     /**
      * @param weapons hashcodes
      */

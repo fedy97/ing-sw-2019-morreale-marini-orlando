@@ -4,6 +4,7 @@ import it.polimi.se2019.model.rep.AmmoRep;
 import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.model.rep.LightGameVersion;
 import it.polimi.se2019.network.message.to_server.*;
+import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.utils.TimerTurn;
 import it.polimi.se2019.view.State;
@@ -157,8 +158,6 @@ public class GUI extends RemoteView {
             Parent root = loader.load();
             useWeaponStage = new Stage();
             useWeaponStage.setTitle("Choose a weapon to use");
-            //useWeaponStage.initOwner(stage);
-            //useWeaponStage.initModality(Modality.APPLICATION_MODAL);
             sceneUseWeapon = new Scene(root);
             useWeaponController = loader.getController();
         } catch (IOException e) {
@@ -187,8 +186,6 @@ public class GUI extends RemoteView {
             Parent root = loader.load();
             chooseTargetsStage = new Stage();
             chooseTargetsStage.setTitle("Choose some targets");
-            //chooseTargetsStage.initOwner(stage);
-            //chooseTargetsStage.initModality(Modality.APPLICATION_MODAL);
             sceneChooseTargets = new Scene(root);
             chooseTargetsController = loader.getController();
         } catch (IOException e) {
@@ -330,7 +327,6 @@ public class GUI extends RemoteView {
             Parent root = loader.load();
             secondStage = new Stage();
             secondStage.setTitle("Choose Powerup");
-            //secondStage.initStyle(StageStyle.UNDECORATED);
             secondStage.initOwner(stage);
             secondStage.initModality(Modality.APPLICATION_MODAL);
             sceneChoosePowerup = new Scene(root);
@@ -676,14 +672,16 @@ public class GUI extends RemoteView {
     @Override
     public void startTimerTurn(int count, String currToDisconnect) {
         try {
-            timerTurn.interrupt();
+            if (timerTurn != null) timerTurn.interrupt();
         } catch (Exception ex) {
+            CustomLogger.logException(this.getClass().getName(), ex);
         }
         timerTurn = new TimerTurn(count, this, currToDisconnect);
         timerTurn.start();
     }
 
-    public void updateTimerTurnLabel(int seconds, String curr) {
+    @Override
+    public void updateTimerTurn(int seconds, String curr) {
         if (seconds == 0 && curr.equals(getUserName())) {
             timerTurn.interrupt();
             System.exit(0);

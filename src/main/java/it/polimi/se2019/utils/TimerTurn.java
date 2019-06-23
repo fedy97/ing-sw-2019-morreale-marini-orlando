@@ -1,12 +1,13 @@
 package it.polimi.se2019.utils;
 
+import it.polimi.se2019.view.client.RemoteView;
 import it.polimi.se2019.view.client.gui.GUI;
 
 public class TimerTurn extends Thread {
     private int seconds;
-    private GUI gui;
+    private RemoteView gui;
     private String curr;
-    public TimerTurn(int seconds, GUI gui, String curr) {
+    public TimerTurn(int seconds, RemoteView gui, String curr) {
         this.seconds = seconds;
         this.gui = gui;
         this.curr = curr;
@@ -21,7 +22,7 @@ public class TimerTurn extends Thread {
                 sleep(1000);
                 slept = slept + 1000;
 
-                gui.updateTimerTurnLabel(seconds - slept / 1000, curr);
+                gui.updateTimerTurn(seconds - slept / 1000, curr);
 
             }
         } catch (InterruptedException ex) {

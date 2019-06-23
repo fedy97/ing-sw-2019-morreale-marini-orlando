@@ -642,6 +642,9 @@ public class CLI extends RemoteView {
     @Override
     public void startTimerTurn(int count,String currPlayer) {
         /*
+        CE LA CLASSE TURNTIMER CHE IMPLEMENTA IL TIMER,
+        QUI SI INIZIALIZZA IL TURNTIMER POI
+        OGNI SECONDO VIENE CHIAMATO L UPDATE TURN TIMER DA QUELLA CLASSE
         try {
             timerTurn.cancel();
             timerTurn.purge();
@@ -666,6 +669,11 @@ public class CLI extends RemoteView {
          }, 0,1*1000);
 
         */
+    }
+
+    @Override
+    public void updateTimerTurn(int seconds, String curr) {
+
     }
 
     @Override
