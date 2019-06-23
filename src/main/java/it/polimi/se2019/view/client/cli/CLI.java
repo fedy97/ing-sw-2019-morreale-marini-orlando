@@ -749,4 +749,14 @@ public class CLI extends RemoteView {
             isAsking = false;
         }).start();
     }
+
+    @Override
+    public void receiveWaitingPingFromServer() {
+
+    }
+
+    @Override
+    public void resetTimer() {
+
+    }
 }

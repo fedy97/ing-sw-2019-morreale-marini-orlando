@@ -53,8 +53,10 @@ public class Controller implements Observer, Serializable {
     private boolean timerStarted = false;
     private Map<Integer, Integer> mapChosen;
     private List<String> pingsList;
+    private List<String> pingsWaitingList;
     private List<String> alreadyNotified = new ArrayList<>();
     private int configMap;
+    private boolean waitingToPing = true;
 
     private Controller() {
         game = Game.getInstance();
@@ -75,6 +77,8 @@ public class Controller implements Observer, Serializable {
         state = ControllerState.SETUP;
         timerSetup = HandyFunctions.parserSettings.getTimerSetup();
         pingsList = new ArrayList<>();
+        pingsWaitingList = new ArrayList<>();
+        startWaitingLobbyPing();
     }
 
     /**
@@ -98,19 +102,47 @@ public class Controller implements Observer, Serializable {
         Controller.instance = instance;
     }
 
+    private void startWaitingLobbyPing() {
+        Set<String> users = userView.keySet();
+
+        new Thread(() -> {
+            try {
+                while (waitingToPing) {
+                    pingsWaitingList.clear();
+                    notifyAll(new PingWaitingClientsMessage(null));
+                    Thread.sleep(1000);
+                    List<String> toRemove = new ArrayList<>();
+                    boolean toReset = false;
+                    for (String user : users) {
+                        if (!pingsWaitingList.contains(user)) {
+                            toRemove.add(user);
+                            turnController.removeUser(user);
+                            if (turnController.getUsers().size() < HandyFunctions.parserSettings.getMinimumPlayers() && timerStarted) {
+                                timerStarted = false;
+                                toReset = true;
+                            }
+                        }
+                    }
+
+                    for (String string : toRemove)
+                        userView.remove(string);
+                    if (toReset && !timerStarted) notifyAll(new ResetTimerMessage(null));
+                    notifyAll(new NewConnectionMessage(pingsWaitingList));
+                    Thread.sleep(1000);
+                }
+            } catch (Exception ex) {
+                CustomLogger.logException(this.getClass().getName(), ex);
+            }
+        }).start();
+    }
+
     @Override
     /**
      * Called when the VirtualView notify changes
      */
     public void update(Observable virtualView, Object message) {
         if (state == ControllerState.SETUP) {
-            if (message.equals("new client connected")) {
-                //notify all clients connected
-                for (String user : turnController.getUsers()) {
-                    callView(new NewConnectionMessage(turnController.getUsers()), user);
-                }
-            } else if (message.equals("we are at least 2")) {
-                //this timer will modify the model(Game) where the seconds integer is hold
+            if (message.equals("we are at least 2")) {
                 TimerLobby t = new TimerLobby(timerSetup);
                 t.start();
             } else {
@@ -377,14 +409,17 @@ public class Controller implements Observer, Serializable {
      * @param secondsLeft to the chooseMap page
      */
     public synchronized void setSecondsLeftLobby(int secondsLeft) {
-        notifyAll(new UpdateTimerLobbyMessage(secondsLeft));
-        if (secondsLeft == 0) {
-            notifyAll(new ShowChooseMapMessage(null));
-            //starts the other timer, this timer even if is in Model , is a controller feature
-            //in fact TimerMap will modify the model by calling setSecondsLeftMap
-            TimerMap t = new TimerMap(timerSetup);
-            t.start();
+        if (timerStarted) {
+            notifyAll(new UpdateTimerLobbyMessage(secondsLeft));
+            if (secondsLeft == 0) {
+                waitingToPing = false;
+                notifyAll(new ShowChooseMapMessage(null));
+                //starts the other timer, this timer even if is in Model , is a controller feature
+                //in fact TimerMap will modify the model by calling setSecondsLeftMap
+                TimerMap t = new TimerMap(timerSetup);
+                t.start();
 
+            }
         }
     }
 
@@ -457,7 +492,7 @@ public class Controller implements Observer, Serializable {
         for (Player p : game.getPlayers())
             chars.add(p.getCharacter().name());
 
-        new Thread(() -> {
+        Thread t = new Thread(() -> {
             try {
                 while (true) {
                     pingsList.clear();
@@ -491,7 +526,8 @@ public class Controller implements Observer, Serializable {
                 CustomLogger.logException(this.getClass().getName(), ex);
             }
 
-        }).start();
+        });
+        t.start();
     }
 
     public List<String> findCharactersInGame() {
@@ -738,5 +774,10 @@ public class Controller implements Observer, Serializable {
     public List<String> getAlreadyNotified() {
         return alreadyNotified;
     }
+
+    public List<String> getPingsWaitingList() {
+        return pingsWaitingList;
+    }
+
 
 }

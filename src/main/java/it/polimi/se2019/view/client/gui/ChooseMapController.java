@@ -10,6 +10,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -36,15 +37,27 @@ public class ChooseMapController {
     @FXML
     private Label timer;
     @FXML
+    private Label labelmap;
+    @FXML
     private ImageView bgImg;
 
     private ArrayList<Label> voteLabels;
 
     private ToggleGroup connectionType = new ToggleGroup();
     private DropShadow shadow = new DropShadow();
+    private Font normale;
+    private Font grande;
 
     public void initialize() {
         Platform.runLater(() -> {
+            normale = javafx.scene.text.Font.loadFont(
+                    getClass().getResource("/font.ttf").toExternalForm(),
+                    10
+            );
+            grande = javafx.scene.text.Font.loadFont(
+                    getClass().getResource("/font.ttf").toExternalForm(),
+                    20
+            );
             voteLabels = new ArrayList<>();
             voteLabels.add(map1vote);
             voteLabels.add(map2vote);
@@ -56,6 +69,10 @@ public class ChooseMapController {
             HandyFunctions.enlightenToggleButton(map2button);
             HandyFunctions.enlightenToggleButton(map3button);
             HandyFunctions.enlightenToggleButton(map4button);
+            for (Label label : voteLabels)
+                label.setFont(normale);
+            timer.setFont(normale);
+            labelmap.setFont(grande);
 
         });
 
@@ -104,17 +121,17 @@ public class ChooseMapController {
     public void updateVotes(Map<Integer, Integer> map) {
         int n = 1;
         for (Label l : voteLabels) {
-            l.setText(map.get(n).toString());
+            l.setText("Votes: " + map.get(n).toString());
             n++;
         }
     }
 
     public void updateTimer(int count) {
-        timer.setText(Integer.toString(count));
+        timer.setText("Timer: " + count);
     }
 
-    private void setEffectToButton(ToggleButton toggleButton){
-        shadow.setColor(new Color(1, 1,0,1));
+    private void setEffectToButton(ToggleButton toggleButton) {
+        shadow.setColor(new Color(1, 1, 0, 1));
         toggleButton.setEffect(shadow);
     }
 }

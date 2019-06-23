@@ -357,6 +357,8 @@ public class GUI extends RemoteView {
                         waitingLobbyController.updateLoggedPlayers(users));
     }
 
+
+
     @Override
     public void updateTimerLobby(int count) {
         Platform.runLater(
@@ -514,6 +516,12 @@ public class GUI extends RemoteView {
     @Override
     public void receivePingFromServer() {
         ResponseToPingMessage message = new ResponseToPingMessage(getCharInString());
+        notifyController(message);
+    }
+
+    @Override
+    public void receiveWaitingPingFromServer() {
+        ResponseToWaitingPingMessage message = new ResponseToWaitingPingMessage(userName);
         notifyController(message);
     }
 
@@ -682,6 +690,12 @@ public class GUI extends RemoteView {
         }
         Platform.runLater(() ->
                 gameBoardController.updateTurnTimer(seconds));
+    }
+
+    @Override
+    public void resetTimer() {
+        Platform.runLater(() ->
+                waitingLobbyController.resetTimer());
     }
 
     public String getCharInString() {

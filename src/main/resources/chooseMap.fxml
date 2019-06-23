@@ -47,20 +47,15 @@
                </image>
             </ImageView>
          </graphic></ToggleButton>
-      <Label layoutX="224.0" layoutY="29.0" prefHeight="29.0" prefWidth="139.0" text="Choose Map" textFill="WHITE">
+      <Label fx:id="labelmap" layoutX="195.0" layoutY="29.0" prefHeight="29.0" prefWidth="296.0" text="Choose Map" textFill="WHITE">
          <font>
             <Font name="Ubuntu" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="384.0" layoutY="250.0" text="Votes:" textFill="WHITE" />
-      <Label layoutX="104.0" layoutY="250.0" text="Votes:" textFill="WHITE" />
-      <Label layoutX="104.0" layoutY="464.0" text="Votes:" textFill="WHITE" />
-      <Label layoutX="384.0" layoutY="464.0" text="Votes:" textFill="WHITE" />
-      <Label fx:id="map1vote" layoutX="159.0" layoutY="250.0" text="0" textFill="WHITE" />
-      <Label fx:id="map2vote" layoutX="443.0" layoutY="250.0" text="0" textFill="WHITE" />
-      <Label fx:id="map3vote" layoutX="159.0" layoutY="464.0" text="0" textFill="WHITE" />
-      <Label fx:id="map4vote" layoutX="443.0" layoutY="464.0" text="0" textFill="WHITE" />
-      <Label layoutX="260.0" layoutY="258.0" text="Timer:" textFill="WHITE" />
-      <Label fx:id="timer" layoutX="310.0" layoutY="258.0" text="5" textFill="WHITE" />
+      <Label fx:id="map1vote" layoutX="102.0" layoutY="250.0" prefHeight="15.0" prefWidth="163.0" text="Votes: 0" textFill="WHITE" />
+      <Label fx:id="map2vote" layoutX="385.0" layoutY="250.0" prefHeight="15.0" prefWidth="163.0" text="Votes: 0" textFill="WHITE" />
+      <Label fx:id="map3vote" layoutX="95.0" layoutY="464.0" prefHeight="15.0" prefWidth="163.0" text="Votes: 0" textFill="WHITE" />
+      <Label fx:id="map4vote" layoutX="386.0" layoutY="464.0" prefHeight="15.0" prefWidth="163.0" text="Votes: 0" textFill="WHITE" />
+      <Label fx:id="timer" layoutX="252.0" layoutY="258.0" prefHeight="15.0" prefWidth="83.0" text="Timer:" textFill="WHITE" />
    </children>
 </AnchorPane>

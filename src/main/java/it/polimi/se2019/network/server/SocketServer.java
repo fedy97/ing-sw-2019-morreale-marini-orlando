@@ -4,6 +4,7 @@ import it.polimi.se2019.Lobby;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.network.message.to_server.NewClientConnectedMessage;
 import it.polimi.se2019.network.message.to_server.ReconnectedClientMessage;
 import it.polimi.se2019.network.message.to_server.ResponseToPingMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
@@ -90,7 +91,7 @@ public class SocketServer implements Server {
                         HandyFunctions.LOGGER.log(Level.INFO, user + " connected to the socket server!");
                         virtualView.viewSetChanged();
                         if (newConnection) {
-                            virtualView.notifyObservers("new client connected");
+                            virtualView.notifyObservers(new NewClientConnectedMessage(user));
                             HandyFunctions.checkForAtLeast2Players(virtualView);
                         } else {
                             virtualView.notifyObservers(new ReconnectedClientMessage(user));

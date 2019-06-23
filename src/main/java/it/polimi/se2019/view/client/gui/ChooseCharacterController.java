@@ -1,12 +1,14 @@
 package it.polimi.se2019.view.client.gui;
 
 import it.polimi.se2019.utils.HandyFunctions;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,12 +27,15 @@ public class ChooseCharacterController {
     private ToggleButton greybutton;
     @FXML
     private Label timer;
+    @FXML
+    private Label labelcharacter;
 
     private ToggleGroup connectionType = new ToggleGroup();
 
     private GUI gui;
     private Map<String, ToggleButton> buttons;
     private DropShadow shadow = new DropShadow();
+    private Font normale;
 
     /**
      * here I need the reference to GUI in order to notify it for the click of a button
@@ -42,18 +47,26 @@ public class ChooseCharacterController {
     }
 
     public void initialize() {
-        connectionType.getToggles().addAll(violetbutton, bluebutton, yellowbutton, greenbutton, greybutton);
-        buttons = new HashMap<>();
-        buttons.put("DOZER", greybutton);
-        buttons.put("DISTRUCTOR", yellowbutton);
-        buttons.put("SPROG", greenbutton);
-        buttons.put("BANSHEE", bluebutton);
-        buttons.put("VIOLET", violetbutton);
-        HandyFunctions.enlightenToggleButton(greybutton);
-        HandyFunctions.enlightenToggleButton(greenbutton);
-        HandyFunctions.enlightenToggleButton(yellowbutton);
-        HandyFunctions.enlightenToggleButton(violetbutton);
-        HandyFunctions.enlightenToggleButton(bluebutton);
+        Platform.runLater(() -> {
+            normale = javafx.scene.text.Font.loadFont(
+                    getClass().getResource("/font.ttf").toExternalForm(),
+                    20
+            );
+            connectionType.getToggles().addAll(violetbutton, bluebutton, yellowbutton, greenbutton, greybutton);
+            buttons = new HashMap<>();
+            buttons.put("DOZER", greybutton);
+            buttons.put("DISTRUCTOR", yellowbutton);
+            buttons.put("SPROG", greenbutton);
+            buttons.put("BANSHEE", bluebutton);
+            buttons.put("VIOLET", violetbutton);
+            HandyFunctions.enlightenToggleButton(greybutton);
+            HandyFunctions.enlightenToggleButton(greenbutton);
+            HandyFunctions.enlightenToggleButton(yellowbutton);
+            HandyFunctions.enlightenToggleButton(violetbutton);
+            HandyFunctions.enlightenToggleButton(bluebutton);
+            labelcharacter.setFont(normale);
+            timer.setFont(normale);
+        });
     }
 
     public void chooseBlue() {
@@ -95,7 +108,7 @@ public class ChooseCharacterController {
     }
 
     public void updateTimer(int count) {
-        timer.setText(Integer.toString(count));
+        timer.setText("Game will start in: " + count);
     }
 
     public void updateCharacters(String c) {

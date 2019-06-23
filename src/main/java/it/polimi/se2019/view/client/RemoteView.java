@@ -140,6 +140,13 @@ public abstract class RemoteView extends View {
     public abstract void receivePingFromServer();
 
     /**
+     * pinging the waiting list
+     */
+    public abstract void receiveWaitingPingFromServer();
+
+    public abstract void resetTimer();
+
+    /**
      * this method is called only once, not every second, by the server
      * @param count is the starting time of the timer
      * @param curr player to disconnect in case the timer's up
