@@ -158,7 +158,7 @@
             <Image url="@assets/boards/skull.png" />
          </image>
       </ImageView>
-      <Label fx:id="scorelabel" layoutX="346.0" layoutY="275.0" prefHeight="37.0" prefWidth="244.0">
+      <Label fx:id="scorelabel" layoutX="346.0" layoutY="275.0" prefHeight="37.0" prefWidth="298.0" textFill="#b0d00e">
          <font>
             <Font size="19.0" />
          </font>
