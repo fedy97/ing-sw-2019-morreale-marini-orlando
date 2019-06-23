@@ -617,7 +617,9 @@ public class CLI extends RemoteView {
 
     @Override
     public void showReconnectedGameBoard(int configMap, LightGameVersion lightGameVersion, List<String> charsInGame, String myChar) {
-
+        chosenBoard = Integer.toString(configMap);
+        myCharEnumString = myChar;
+        updateAll(lightGameVersion);
     }
 
     @Override
