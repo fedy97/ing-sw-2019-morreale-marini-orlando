@@ -114,7 +114,6 @@ public class CLI extends RemoteView {
     }
 
     private void getActionInput() {
-        System.out.print("cisono");
         if (!isAsking && isMyTurn() && powerUpChosen) {
             new Thread(() -> {
                 isAsking = true;
