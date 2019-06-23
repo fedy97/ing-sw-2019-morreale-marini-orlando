@@ -166,6 +166,7 @@ public class CLI extends RemoteView {
     }
 
     public void iWantToShoot() {
+        isAsking = true;
         PerformActionMessage message = new PerformActionMessage("action3");
         message.setSender(userName);
         viewSetChanged();
@@ -509,12 +510,14 @@ public class CLI extends RemoteView {
 
     @Override
     public void showMessage(String msg) {
+
         lastMsg = msg;
         CliSetUp.savePosition();
         CliSetUp.cursorDown(15);
         CliSetUp.cursorRight(5);
         HandyFunctions.printConsole(msg);
         CliSetUp.restorePosition();
+
     }
 
     @Override
@@ -572,6 +575,7 @@ public class CLI extends RemoteView {
                 viewSetChanged();
                 notifyObservers(message);
                 currState = 1;
+                isAsking = false;
             }
             else {
                 showTargets(targets);
