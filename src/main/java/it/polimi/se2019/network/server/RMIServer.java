@@ -5,6 +5,7 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.network.message.to_server.NewClientConnectedMessage;
 import it.polimi.se2019.network.message.to_server.ReconnectedClientMessage;
 import it.polimi.se2019.network.message.to_server.ResponseToPingMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
@@ -117,7 +118,7 @@ public class RMIServer implements Server {
             skeletons.put(username, (Client) registry.lookup("RemoteView"));
             virtualView.viewSetChanged();
             if (newConnection) {
-                virtualView.notifyObservers("new client connected");
+                virtualView.notifyObservers(new NewClientConnectedMessage(username));
                 HandyFunctions.checkForAtLeast2Players(virtualView);
             } else {
                 virtualView.notifyObservers(new ReconnectedClientMessage(username));
