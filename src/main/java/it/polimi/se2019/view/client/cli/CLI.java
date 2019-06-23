@@ -46,6 +46,7 @@ public class CLI extends RemoteView {
     private String lastMsg;
     private boolean powerUpChosen;
     private CardRep p1, p2;
+    private boolean firstCallChoosePU;
 
     public CLI() {
         try {
@@ -70,6 +71,7 @@ public class CLI extends RemoteView {
         powerUpChosen = false;
         p1 = null;
         p2 = null;
+        firstCallChoosePU = true;
     }
 
     @Override
@@ -112,7 +114,8 @@ public class CLI extends RemoteView {
     }
 
     private void getActionInput() {
-        if (!isAsking && isMyTurn()) {
+        System.out.print("cisono");
+        if (!isAsking && isMyTurn() && powerUpChosen) {
             new Thread(() -> {
                 isAsking = true;
                 Console c = System.console();
@@ -204,26 +207,29 @@ public class CLI extends RemoteView {
         CliPrinter.boxMessage(null);
         CliSetUp.cursorUp(10);
         CliSetUp.cursorLeft(10);
-        new Thread(() -> {
-            int choosenPowerUp;
-            Console c = System.console();
-            choosenPowerUp = Character.getNumericValue((c.readPassword())[0]);
-            ArrayList<Integer> arrayList = new ArrayList<>();
-            if (choosenPowerUp == 1) {
-                arrayList.add(p1.getId());
-                arrayList.add(p2.getId());
-            } else {
-                arrayList.add(p2.getId());
-                arrayList.add(p1.getId());
-            }
-            SendInitPowerUpMessage message = new SendInitPowerUpMessage(arrayList);
-            message.setSender(userName);
-            viewSetChanged();
-            notifyObservers(message);
-            powerUpChosen = true;
-            begin = 0;
-            currState = 0;
-        }).start();
+        if (firstCallChoosePU) {
+            firstCallChoosePU = false;
+            new Thread(() -> {
+                int choosenPowerUp;
+                Console c = System.console();
+                choosenPowerUp = Character.getNumericValue((c.readPassword())[0]);
+                ArrayList<Integer> arrayList = new ArrayList<>();
+                if (choosenPowerUp == 1) {
+                    arrayList.add(p1.getId());
+                    arrayList.add(p2.getId());
+                } else {
+                    arrayList.add(p2.getId());
+                    arrayList.add(p1.getId());
+                }
+                SendInitPowerUpMessage message = new SendInitPowerUpMessage(arrayList);
+                message.setSender(userName);
+                viewSetChanged();
+                notifyObservers(message);
+                powerUpChosen = true;
+                begin = 0;
+                currState = 0;
+            }).start();
+        }
     }
 
     //TODO show the right player board given the arrChars, an arraylist of objects like "SPROG"
