@@ -7,7 +7,9 @@ import it.polimi.se2019.model.rep.LightGameVersion;
 import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.client.SocketClient;
 import it.polimi.se2019.network.message.to_server.*;
+import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
+import it.polimi.se2019.utils.TimerTurn;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.client.RemoteView;
 
@@ -40,13 +42,14 @@ public class CLI extends RemoteView {
     private LightGameVersion lightGameVersion;
     private boolean[] actives;
     private int begin;
-    private Timer timerTurn;
+    //private Timer timerTurn;
     public static int counter;
     private int currState;
     private String lastMsg;
     private boolean powerUpChosen;
     private CardRep p1, p2;
     private boolean firstCallChoosePU;
+    private TimerTurn timerTurn;
 
     public CLI() {
         try {
@@ -641,6 +644,13 @@ public class CLI extends RemoteView {
 
     @Override
     public void startTimerTurn(int count,String currPlayer) {
+        try {
+            if (timerTurn != null) timerTurn.interrupt();
+        } catch (Exception ex) {
+            CustomLogger.logException(this.getClass().getName(), ex);
+        }
+        timerTurn = new TimerTurn(count, this, currPlayer);
+        timerTurn.start();
         /*
         CE LA CLASSE TURNTIMER CHE IMPLEMENTA IL TIMER,
         QUI SI INIZIALIZZA IL TURNTIMER POI
@@ -673,7 +683,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void updateTimerTurn(int seconds, String curr) {
-
+        //TODO
     }
 
     @Override
