@@ -40,10 +40,10 @@ public final class PointsCounter {
             Character currCharacter = null;
             int max = 0;
 
-            for (Character key : maxDamage.keySet()) {
-                if (maxDamage.get(key) > max) {
-                    currCharacter = key;
-                    max = maxDamage.get(key);
+            for (Map.Entry<Character, Integer> entry : maxDamage.entrySet()) {
+                if (entry.getValue() > max) {
+                    currCharacter = entry.getKey();
+                    max = entry.getValue();
                 }
             }
 

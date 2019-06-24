@@ -1,6 +1,9 @@
 package it.polimi.se2019.model.player;
 
-import it.polimi.se2019.exceptions.*;
+import it.polimi.se2019.exceptions.InvalidCardException;
+import it.polimi.se2019.exceptions.InvalidCharacterException;
+import it.polimi.se2019.exceptions.InvalidPositionException;
+import it.polimi.se2019.exceptions.MaxWeaponException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
@@ -43,11 +46,9 @@ public class Player implements Serializable {
      * @throws InvalidCharacterException if character is null
      * @throws InvalidPositionException  if startPlatform is null
      */
-    public Player(String name, Character character, Platform startPlatform) throws InvalidCharacterException, InvalidPositionException {
+    public Player(String name, Character character, Platform startPlatform) throws InvalidCharacterException {
         if (character == null)
             throw new InvalidCharacterException("Character can not be null!");
-        /*if (startPlatform == null)
-            throw new InvalidPositionException("StartPlatform can not be null!");*/
         this.character = character;
         this.currentPlatform = startPlatform;
         this.name = name;
@@ -174,7 +175,7 @@ public class Player implements Serializable {
      *
      * @param point Points to be added
      */
-    public void addPoint(int point){
+    public void addPoint(int point) {
         currentScore = currentScore + point;
     }
 
@@ -197,10 +198,9 @@ public class Player implements Serializable {
      *
      * @param card The card drawn
      */
-    public void addPowerUpCard(PowerUpCard card){
+    public void addPowerUpCard(PowerUpCard card) {
         if (powerUpCards.size() < 3) {
             powerUpCards.add(card);
-            //playerBoard.getAmmoBox().addOptionalAmmo(card.getAmmoCube());
         }
     }
 
@@ -214,7 +214,6 @@ public class Player implements Serializable {
         if (card == null)
             throw new InvalidCardException("Card cannot be null!");
         powerUpCards.remove(card);
-        //playerBoard.getAmmoBox().removeOptionalAmmo(card.getAmmoCube());
     }
 
     /**
@@ -239,7 +238,6 @@ public class Player implements Serializable {
         weaponCards.remove(card);
     }
 
-    //TODO test
     /**
      * @return if the player has more than 3 damage tokens but less than 6
      */
@@ -247,7 +245,6 @@ public class Player implements Serializable {
         return playerBoard.getDamageLine().size() >= 3 && playerBoard.getDamageLine().size() < 6;
     }
 
-    //TODO test
     /**
      * @return if the player has more than 6 damage tokens
      */
@@ -255,20 +252,17 @@ public class Player implements Serializable {
         return playerBoard.getDamageLine().size() >= 6;
     }
 
-    //TODO test
-
     /**
      * @return if the player was killed
      */
-    public boolean isDead(){
+    public boolean isDead() {
         return playerBoard.getDamageLine().size() > 10;
     }
 
-    //TODO test
     /**
      * @return if the player was overkilled
      */
-    public boolean wasOverkilled(){
+    public boolean wasOverkilled() {
         return playerBoard.getDamageLine().size() > 11;
     }
 

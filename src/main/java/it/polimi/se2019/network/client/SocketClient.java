@@ -2,6 +2,7 @@ package it.polimi.se2019.network.client;
 
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
+import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.client.RemoteView;
 
@@ -55,13 +56,12 @@ public class SocketClient implements Client, Observer {
                             interpretMessage(msg);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+                    CustomLogger.logException(this.getClass().getName(), e);
                 }
             }).start();
 
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "Error connecting to the server socket");
+            CustomLogger.logException(this.getClass().getName(), e);
         }
 
         connected = true;
@@ -108,7 +108,7 @@ public class SocketClient implements Client, Observer {
                 objectOutputStream.flush();
                 objectOutputStream.reset();
             } catch (Exception ex) {
-
+                CustomLogger.logException(this.getClass().getName(), e);
             }
         }
     }

@@ -1,8 +1,5 @@
 package it.polimi.se2019.model.rep;
 
-import it.polimi.se2019.model.rep.AmmoRep;
-import it.polimi.se2019.model.rep.BoardRep;
-import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.view.client.RemoteView;
 
@@ -11,10 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class LightGameVersion extends ToClientMessage implements Serializable {
-    public LightGameVersion(Object payload) {
-        super(payload);
-    }
-
     private int skullsNum;
     private int totalSkulls;
     private List<String> charactersThatKilled;
@@ -25,6 +18,9 @@ public class LightGameVersion extends ToClientMessage implements Serializable {
     private Map<String, AmmoRep> platformAmmoTile; //platform - AmmoRep
     private Map<String, BoardRep> playerBoardRep; //character - BoardRep
     private Map<String, List<CardRep>> platformWeapons; // platform - CardRep
+    public LightGameVersion(Object payload) {
+        super(payload);
+    }
 
     public int getTotalSkulls() {
         return totalSkulls;

@@ -15,7 +15,7 @@ public final class AmmoCard extends Card implements Serializable {
     private boolean hasPowerUp;
 
     /**
-     * Instantiate an Ammocard with two cubes and one power up or three cubes
+     * Instantiate an AmmoCard with two cubes and one power up or three cubes
      *
      * @param cubes      the number of cubes the player can grab
      * @param hasPowerUp true if the player can draw a PowerUp card, false otherwise
@@ -43,7 +43,7 @@ public final class AmmoCard extends Card implements Serializable {
         return hasPowerUp;
     }
 
-    //TODO test
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();

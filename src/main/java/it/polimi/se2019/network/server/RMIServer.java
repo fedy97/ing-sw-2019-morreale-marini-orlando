@@ -7,8 +7,8 @@ import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.network.message.to_server.NewClientConnectedMessage;
 import it.polimi.se2019.network.message.to_server.ReconnectedClientMessage;
-import it.polimi.se2019.network.message.to_server.ResponseToPingMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
+import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
@@ -48,7 +48,7 @@ public class RMIServer implements Server {
             HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
         }
         available = true;
-        HandyFunctions.LOGGER.log(Level.INFO, "RMI Server is ready");
+        CustomLogger.logInfo(this.getClass().getName(), "RMI server is ready");
     }
 
     /**
@@ -62,7 +62,7 @@ public class RMIServer implements Server {
             Registry registry = LocateRegistry.createRegistry(port);
             registry.bind("FakeView", stub);
         } catch (Exception e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            CustomLogger.logException(this.getClass().getName(), e);
         }
     }
 
@@ -75,7 +75,7 @@ public class RMIServer implements Server {
             Registry registry = LocateRegistry.getRegistry(port);
             registry.unbind("FakeView");
         } catch (Exception e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            CustomLogger.logException(this.getClass().getName(), e);
         }
 
         available = false;
@@ -99,13 +99,12 @@ public class RMIServer implements Server {
                 virtualView = new VirtualView(username);
                 clientActor.put(username, virtualView);
                 Lobby.addUser(username);
-            } else if (clientActor.containsKey(username)){
+            } else if (clientActor.containsKey(username)) {
                 virtualView = clientActor.get(username);
                 Game.getInstance().addObserver(virtualView);
                 Game.getInstance().getPlayer(username).setConnected(true);
                 newConnection = false;
-            }
-            else {
+            } else {
                 virtualView = Controller.getInstance().getUserView().get(username);
                 virtualView.addObserver(Controller.getInstance());
                 Game.getInstance().addObserver(virtualView);
@@ -123,9 +122,9 @@ public class RMIServer implements Server {
             } else {
                 virtualView.notifyObservers(new ReconnectedClientMessage(username));
             }
-            HandyFunctions.LOGGER.log(Level.INFO, username + " connected to the RMI server!");
+            CustomLogger.logInfo(this.getClass().getName(), username + " connected to the RMI server!");
         } catch (Exception e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            CustomLogger.logException(this.getClass().getName(), e);
         }
     }
 
@@ -150,7 +149,7 @@ public class RMIServer implements Server {
         try {
             skeletons.get(username).interpretMessage(msg);
         } catch (Exception e) {
-            //HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            CustomLogger.logException(this.getClass().getName(), e);
         }
     }
 

@@ -1,20 +1,14 @@
 package it.polimi.se2019.model.board;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
-import it.polimi.se2019.model.enumeration.Character;
-import it.polimi.se2019.model.enumeration.Orientation;
-import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.utils.JsonParser;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -26,7 +20,7 @@ public class TestGameField {
     @Before
     public void initTest() throws InvalidCardException, InvalidDeckException, NoCardException,
             InvalidFieldException, InvalidAdjacentPlatformsException, InvalidRoomException, InvalidPositionException,
-            NoSuchFieldException, IllegalAccessException, InvalidQuantityException, InvalidGenerationSpotException,InvalidImageException, IOException {
+            NoSuchFieldException, IllegalAccessException, InvalidQuantityException, InvalidGenerationSpotException, InvalidImageException, IOException {
 
         JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
         Deck<AmmoCard> deck = parserAmmos.buildAmmoCards();
@@ -62,7 +56,7 @@ public class TestGameField {
         /*for (int i = 0; i < list.size(); i++) {
             System.out.println("[" + list.get(i).getPlatformPosition()[0] + " " + list.get(i).getPlatformPosition()[1] + "]");
         }*/
-        if (config == 1) assertEquals(11,list.size());
+        if (config == 1) assertEquals(11, list.size());
     }
 
     @Test
@@ -76,27 +70,25 @@ public class TestGameField {
     @Test
     public void testGetRoom() {
         try {
-            int[] pos = {1,1,1};
+            int[] pos = {1, 1, 1};
             gf.getRoom(pos);
             fail();
-        }
-        catch (InvalidPositionException e) {
+        } catch (InvalidPositionException e) {
 
         }
         try {
-            int[] pos = {1,1};
+            int[] pos = {1, 1};
             Room r = gf.getRoom(pos);
             assertEquals(null, r.getGenSpot());
             assertEquals(-20561, r.getRoomColor().getRGB());
-        }
-        catch (InvalidPositionException e) {
+        } catch (InvalidPositionException e) {
             fail();
         }
     }
 
 
     @Test
-    public void testGetVisiblePlayers() throws InvalidCardException, NoSuchFieldException, IllegalAccessException, InvalidRoomException{
+    public void testGetVisiblePlayers() throws InvalidCardException, NoSuchFieldException, IllegalAccessException, InvalidRoomException {
 
     }
 

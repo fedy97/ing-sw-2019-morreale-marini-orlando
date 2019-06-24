@@ -9,14 +9,18 @@ import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.player.Player;
 
 import java.util.List;
-import java.util.StringTokenizer;
 import java.util.logging.Level;
 
 /**
  * Class providing service methods to match the server objects' with the corresponding
  * remote version
+ *
+ * @author Gabriel Raul Marini
  */
 public final class Deserializer {
+
+    private Deserializer() {
+    }
 
     /**
      * @param light remote id of the platform
@@ -24,7 +28,7 @@ public final class Deserializer {
      */
     public static Platform getPlatform(String light) {
         try {
-            int pos[] = new int[2];
+            int[] pos = new int[2];
             pos[0] = Integer.parseInt(light.substring(0, 1));
             pos[1] = Integer.parseInt(light.substring(2, 3));
             return Controller.getInstance().getGame().getGameField().getPlatform(pos);
@@ -58,6 +62,7 @@ public final class Deserializer {
                         return weaponCard;
                 }
             } catch (InvalidGenerationSpotException ex) {
+                CustomLogger.logException(Deserializer.class.getName(), ex);
             }
 
         }

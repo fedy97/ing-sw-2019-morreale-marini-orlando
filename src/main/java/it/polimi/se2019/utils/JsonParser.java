@@ -47,7 +47,7 @@ public class JsonParser {
      * @return a deck of 36 ammos
      * @throws InvalidCardException
      */
-    public Deck<AmmoCard> buildAmmoCards() throws InvalidCardException, InvalidDeckException, IOException {
+    public Deck<AmmoCard> buildAmmoCards() throws InvalidCardException, InvalidDeckException {
         if (path.equals("/json/ammocards.json")) {
             ArrayList<AmmoCard> ammoCards = new ArrayList<>();
             AmmoCube[] arrAmmos;
@@ -77,7 +77,6 @@ public class JsonParser {
             }
             Deck<AmmoCard> d = new Deck<>(36);
             d.addCards(ammoCards);
-            d.mix();
             return d;
         }
         return null;

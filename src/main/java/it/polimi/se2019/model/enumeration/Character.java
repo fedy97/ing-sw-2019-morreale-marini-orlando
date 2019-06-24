@@ -1,7 +1,5 @@
 package it.polimi.se2019.model.enumeration;
 
-import it.polimi.se2019.exceptions.InvalidNameException;
-
 import java.awt.*;
 
 /**

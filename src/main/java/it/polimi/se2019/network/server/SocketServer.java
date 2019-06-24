@@ -6,15 +6,14 @@ import it.polimi.se2019.model.Game;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.network.message.to_server.NewClientConnectedMessage;
 import it.polimi.se2019.network.message.to_server.ReconnectedClientMessage;
-import it.polimi.se2019.network.message.to_server.ResponseToPingMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
+import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -69,20 +68,19 @@ public class SocketServer implements Server {
                             virtualView = new VirtualView(user);
                             actors.put(user, virtualView);
                             Lobby.addUser(user);
-                        } else if (actors.containsKey(user)){
+                        } else if (actors.containsKey(user)) {
                             virtualView = actors.get(user);
                             Game.getInstance().addObserver(virtualView);
                             Game.getInstance().getPlayer(user).setConnected(true);
                             newConnection = false;
-                        }
-                        else {
+                        } else {
                             virtualView = Controller.getInstance().getUserView().get(user);
                             virtualView.addObserver(Controller.getInstance());
                             Game.getInstance().addObserver(virtualView);
                             Game.getInstance().getPlayer(user).setConnected(true);
                             Lobby.getRmiServer().getClientActor().remove(user);
                             Lobby.getRmiServer().getSkeletons().remove(user);
-                            actors.put(user,virtualView);
+                            actors.put(user, virtualView);
                             newConnection = false;
                         }
                         SpecificSocketServer specificSocketServer = new SpecificSocketServer(this, socket, input, output, virtualView);
@@ -98,8 +96,7 @@ public class SocketServer implements Server {
                         }
 
                     } catch (Exception e) {
-                        HandyFunctions.LOGGER.log(Level.SEVERE, e.toString());
-                        e.printStackTrace();
+                        CustomLogger.logException(this.getClass().getName(), e);
                     }
                 }
             }).start();
@@ -124,7 +121,7 @@ public class SocketServer implements Server {
             outStream.writeObject(msg);
             outStream.reset();
         } catch (IOException e) {
-            //HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            CustomLogger.logException(this.getClass().getName(), e);
         }
     }
 

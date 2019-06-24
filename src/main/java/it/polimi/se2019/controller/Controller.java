@@ -1,6 +1,9 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.Action;
+import it.polimi.se2019.controller.validator.HealthyValidator;
+import it.polimi.se2019.controller.validator.UserValidActions;
+import it.polimi.se2019.controller.validator.Validator;
 import it.polimi.se2019.exceptions.InvalidActionException;
 import it.polimi.se2019.exceptions.InvalidCharacterException;
 import it.polimi.se2019.exceptions.InvalidPositionException;
@@ -108,10 +111,12 @@ public class Controller implements Observer, Serializable {
         new Thread(() -> {
             try {
                 while (waitingToPing) {
+
                     pingsWaitingList.clear();
                     notifyAll(new PingWaitingClientsMessage(null));
                     Thread.sleep(1000);
                     List<String> toRemove = new ArrayList<>();
+
                     boolean toReset = false;
                     for (String user : users) {
                         if (!pingsWaitingList.contains(user)) {
@@ -126,6 +131,7 @@ public class Controller implements Observer, Serializable {
 
                     for (String string : toRemove)
                         userView.remove(string);
+
                     if (toReset && !timerStarted) notifyAll(new ResetTimerMessage(null));
                     notifyAll(new NewConnectionMessage(pingsWaitingList));
                     Thread.sleep(1000);
@@ -154,18 +160,29 @@ public class Controller implements Observer, Serializable {
         }
     }
 
+    /**
+     * Manage new action request
+     * @param action to be performed
+     */
     public void processAction(String action) {
         List<Platform> destinations;
 
         try {
+
             if (action.equals("action1")) {
                 setState(ControllerState.PROCESSING_ACTION_1);
                 destinations = validator.getValidMoves(Action.MOVE);
+
+                //send the possible destinations
                 askFor(destinations, "position");
                 playerManager.move(getChosenDestination().take());
+
             } else if (action.equals("action2")) {
+
                 setState(ControllerState.PROCESSING_ACTION_2);
                 destinations = validator.getValidMoves(Action.GRAB);
+
+                //ask where to move before grabbing
                 askFor(destinations, "position");
                 Platform dest = getChosenDestination().take();
                 getPlayerManager().move(dest);
@@ -224,7 +241,8 @@ public class Controller implements Observer, Serializable {
     }
 
     /**
-     * @param powerUp composed of different stages in order to perform the final effect
+     * Launch a power up execution
+     * @param powerUp chosen by the player
      */
     public void processPowerUp(PowerUpCard powerUp) {
         try {
@@ -245,7 +263,8 @@ public class Controller implements Observer, Serializable {
     }
 
     /**
-     * @param weapon composed of different stages in order to perform the final effect
+     * Launch the weapon execution
+     * @param weapon chosen by the player to perform shooting action
      */
     public void processWeaponCard(WeaponCard weapon) {
         List<Integer> usableEffectsIndex = new ArrayList<>();
@@ -255,9 +274,11 @@ public class Controller implements Observer, Serializable {
             boolean[] usableEffects = weapon.getUsableEffects();
 
             for (int i = 0; i < usableEffects.length; i++) {
+
                 if (usableEffects[i]) {
                     Effect effect = weapon.getEffects().get(i);
                     effect.setupTargets();
+
                     if ((effect.getCost().length == 0 ||
                             playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().hasAmmos(effect.getCost()))
                             && (effect.getPossibleTargets() == null ||
@@ -486,29 +507,40 @@ public class Controller implements Observer, Serializable {
         }
     }
 
+    /**
+     * Start to check periodically if a client disconnect itself from the game
+     */
     public void startPinging() {
         List<String> chars = new ArrayList<>();
 
+        //Collect all the characters in game
         for (Player p : game.getPlayers())
             chars.add(p.getCharacter().name());
 
         Thread t = new Thread(() -> {
+
             try {
+
                 while (true) {
                     pingsList.clear();
                     notifyAll(new PingClientsMessage(null));
                     Thread.sleep(1000);
+
                     for (String charCurr : chars) {
+
                         if (!pingsList.contains(charCurr)) {
                             game.deleteObserver(userView.get(game.getPlayer(Character.valueOf(charCurr)).getName()));
                             Player toDisconnect = game.getPlayer(Character.valueOf(charCurr));
                             toDisconnect.setConnected(false);
+
                             if (!alreadyNotified.contains(charCurr)) {
                                 alreadyNotified.add(charCurr);
                                 broadcastMessage(toDisconnect.getName() + " disconnected!");
+
                                 if (toDisconnect.getCurrentPlatform() == null) {
                                     PowerUpCard p = decksManager.drawPowerUp();
                                     toDisconnect.addPowerUpCard(p);
+
                                     Color powerupColor = HandyFunctions.stringToColor(p.getAmmoCube().name());
                                     for (Room r : Game.getInstance().getGameField().getRooms()) {
                                         if (r.hasGenerationSpot() && r.getGenSpot().getPlatformColor().equals(powerupColor))
@@ -618,10 +650,10 @@ public class Controller implements Observer, Serializable {
     private int findWhichMapWon() {
         int max = -1;
         int config = -1;
-        for (int i : mapChosen.keySet()) {
-            if (mapChosen.get(i) > max) {
-                max = mapChosen.get(i);
-                config = i;
+        for (Map.Entry<Integer, Integer> entry: mapChosen.entrySet()) {
+            if (entry.getValue() > max) {
+                max = entry.getValue();
+                config = entry.getKey();
             }
         }
         configMap = config;

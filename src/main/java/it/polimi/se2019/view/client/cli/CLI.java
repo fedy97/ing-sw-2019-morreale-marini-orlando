@@ -25,6 +25,8 @@ import java.util.logging.Level;
  */
 public class CLI extends RemoteView {
 
+    //private Timer timerTurn;
+    public static int counter;
     private CliReader reader;
     private int connectionChosen;
     private String ip;
@@ -42,8 +44,6 @@ public class CLI extends RemoteView {
     private LightGameVersion lightGameVersion;
     private boolean[] actives;
     private int begin;
-    //private Timer timerTurn;
-    public static int counter;
     private int currState;
     private String lastMsg;
     private boolean powerUpChosen;
@@ -67,7 +67,7 @@ public class CLI extends RemoteView {
         map = new int[3][4];
         isAsking = false;
         actives = new boolean[6];
-        for (int i=0; i<6; i++)
+        for (int i = 0; i < 6; i++)
             actives[i] = false;
         begin = 1;
         lastMsg = "";
@@ -81,38 +81,37 @@ public class CLI extends RemoteView {
     public void updateAll(LightGameVersion lightGameVersion) {
         this.lightGameVersion = lightGameVersion;
 
-            CliSetUp.clear();
-            CliSetUp.cursorToHome();
-            CliPrinter.welcomeMessage();
-            CliSetUp.cursorLeft(109);
-            CliSetUp.cursorDown(2);
-            CliPrinter.printPlatformWeapons(lightGameVersion);
-            CliSetUp.cursorRight(38);
-            CliSetUp.cursorUp(23);
-            CliPrinter.printMap(lightGameVersion, chosenBoard);
-            CliSetUp.cursorDown(9);
-            CliSetUp.cursorLeft(106);
-            if (powerUpChosen || p1 == null || p2 == null) {
-                CliPrinter.standardActionsMessage();
-                CliSetUp.savePosition();
-                CliSetUp.cursorLeft(99);
-                CliPrinter.boxMessage(null);
-                CliSetUp.restorePosition();
-            }
-            else {
-                CliSetUp.cursorUp(1);
-                showChoosePowerup(p1, p2);
-                CliSetUp.cursorRight(9);
-                CliSetUp.cursorDown(10);
-            }
+        CliSetUp.clear();
+        CliSetUp.cursorToHome();
+        CliPrinter.welcomeMessage();
+        CliSetUp.cursorLeft(109);
+        CliSetUp.cursorDown(2);
+        CliPrinter.printPlatformWeapons(lightGameVersion);
+        CliSetUp.cursorRight(38);
+        CliSetUp.cursorUp(23);
+        CliPrinter.printMap(lightGameVersion, chosenBoard);
+        CliSetUp.cursorDown(9);
+        CliSetUp.cursorLeft(106);
+        if (powerUpChosen || p1 == null || p2 == null) {
+            CliPrinter.standardActionsMessage();
+            CliSetUp.savePosition();
+            CliSetUp.cursorLeft(99);
+            CliPrinter.boxMessage(null);
+            CliSetUp.restorePosition();
+        } else {
+            CliSetUp.cursorUp(1);
+            showChoosePowerup(p1, p2);
+            CliSetUp.cursorRight(9);
+            CliSetUp.cursorDown(10);
+        }
 
-            CliSetUp.cursorUp(34);
-            CliSetUp.cursorRight(104);
-            CliPrinter.drawPlayersInfoBox(lightGameVersion);
-            CliSetUp.cursorDown(20);
-            CliSetUp.cursorLeft(106);
-            showMessage(lastMsg);
-            currState = 1;
+        CliSetUp.cursorUp(34);
+        CliSetUp.cursorRight(104);
+        CliPrinter.drawPlayersInfoBox(lightGameVersion);
+        CliSetUp.cursorDown(20);
+        CliSetUp.cursorLeft(106);
+        showMessage(lastMsg);
+        currState = 1;
 
     }
 
@@ -145,8 +144,8 @@ public class CLI extends RemoteView {
         }
     }
 
-    public boolean isMyTurn () {
-        for (int i=0; i<6; i++) {
+    public boolean isMyTurn() {
+        for (int i = 0; i < 6; i++) {
             if (actives[i] == true)
                 return true;
         }
@@ -276,33 +275,32 @@ public class CLI extends RemoteView {
                 //Console c = System.console();
                 CliReader reader2 = new CliReader(1);
                 //while (!okChar) {
-                    int temp;
-                    //temp = Character.getNumericValue((c.readPassword())[0]);
-                    try {
-                        temp = reader2.getTimedInt();
-                        if (temp == 1) {
-                            myCharEnumString = "BANSHEE";
-                        } else if (temp == 2) {
-                            myCharEnumString = "SPROG";
-                        } else if (temp == 3) {
-                            myCharEnumString = "DOZER";
-                        } else if (temp == 4) {
-                            myCharEnumString = "VIOLET";
-                        } else {
-                            myCharEnumString = "DISTRUCTOR";
-                        }
-                        if (!charChosen.contains(myCharEnumString)) {
-                            okChar = true;
-                            myChar = temp;
-                        }
-                        SendCharacterChosenMessage message = new SendCharacterChosenMessage(myCharEnumString);
-                        message.setSender(userName);
-                        viewSetChanged();
-                        notifyObservers(message);
+                int temp;
+                //temp = Character.getNumericValue((c.readPassword())[0]);
+                try {
+                    temp = reader2.getTimedInt();
+                    if (temp == 1) {
+                        myCharEnumString = "BANSHEE";
+                    } else if (temp == 2) {
+                        myCharEnumString = "SPROG";
+                    } else if (temp == 3) {
+                        myCharEnumString = "DOZER";
+                    } else if (temp == 4) {
+                        myCharEnumString = "VIOLET";
+                    } else {
+                        myCharEnumString = "DISTRUCTOR";
                     }
-                    catch (NoInputException|IOException e) {
+                    if (!charChosen.contains(myCharEnumString)) {
+                        okChar = true;
+                        myChar = temp;
+                    }
+                    SendCharacterChosenMessage message = new SendCharacterChosenMessage(myCharEnumString);
+                    message.setSender(userName);
+                    viewSetChanged();
+                    notifyObservers(message);
+                } catch (NoInputException | IOException e) {
 
-                    }
+                }
                 //}
 
             }).start();
@@ -350,16 +348,14 @@ public class CLI extends RemoteView {
                         message.setSender(userName);
                         viewSetChanged();
                         notifyObservers(message);
-                    }
-                    else {
+                    } else {
                         mapChosen = 1;
                         SendMapChosenMessage message = new SendMapChosenMessage(mapChosen);
                         message.setSender(userName);
                         viewSetChanged();
                         notifyObservers(message);
                     }
-                }
-                catch (NoInputException| IOException e) {
+                } catch (NoInputException | IOException e) {
 
                 }
             }).start();
@@ -459,7 +455,7 @@ public class CLI extends RemoteView {
         Map<Integer, Integer> hashes;
         currState = 0;
         hashes = CliPrinter.printPossibleWeapon(lightGameVersion, weapons);
-        new Thread( () -> {
+        new Thread(() -> {
             int choise;
             Scanner s = new Scanner(System.in);
             choise = s.nextInt();
@@ -479,7 +475,7 @@ public class CLI extends RemoteView {
             String platform;
             Console c = System.console();
             platform = c.readLine();
-            if(platforms.contains(platform)) {
+            if (platforms.contains(platform)) {
                 MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(platform);
                 message.setSender(userName);
                 viewSetChanged();
@@ -487,8 +483,7 @@ public class CLI extends RemoteView {
                 if (!platform.equals("0,2") && !platform.equals("1,0") && !platform.equals("2,3")) {
                     isAsking = false;
                 }
-            }
-            else {
+            } else {
                 updateAll(lightGameVersion);
                 CliSetUp.cursorDown(1);
                 CliSetUp.cursorLeft(10);
@@ -535,10 +530,9 @@ public class CLI extends RemoteView {
             Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
             List<CardRep> myWeapons = playerWeapons.get(myCharEnumString);
             int idCard;
-            if(choise == 0 || choise == 1 || choise == 2) {
+            if (choise == 0 || choise == 1 || choise == 2) {
                 idCard = myWeapons.get(choise).getId();
-            }
-            else {
+            } else {
                 idCard = myWeapons.get(2).getId();
             }
             DiscardWeaponMessage message = new DiscardWeaponMessage(Integer.toString(idCard));
@@ -551,16 +545,16 @@ public class CLI extends RemoteView {
 
     @Override
     public void showTargets(List<String> targets) {
-        CliPrinter.showTargetMessage(lightGameVersion,targets);
+        CliPrinter.showTargetMessage(lightGameVersion, targets);
         List<String> toSend = new ArrayList<>();
         new Thread(() -> {
             boolean isOk = true;
             String choise;
             Scanner s = new Scanner(System.in);
             choise = s.next();
-            for(int i = 0; i<choise.length();i++) {
-                if(choise.charAt(i) != ',' && Character.getNumericValue(choise.charAt(i)) < targets.size()) {
-                        toSend.add(targets.get(Character.getNumericValue(choise.charAt(i))));
+            for (int i = 0; i < choise.length(); i++) {
+                if (choise.charAt(i) != ',' && Character.getNumericValue(choise.charAt(i)) < targets.size()) {
+                    toSend.add(targets.get(Character.getNumericValue(choise.charAt(i))));
                 }
             }
             if (toSend.size() == 0)
@@ -572,15 +566,14 @@ public class CLI extends RemoteView {
 
                 }
             }
-            if(isOk) {
+            if (isOk) {
                 SendTargetsMessage message = new SendTargetsMessage(toSend);
                 message.setSender(userName);
                 viewSetChanged();
                 notifyObservers(message);
                 currState = 1;
                 isAsking = false;
-            }
-            else {
+            } else {
                 showTargets(targets);
             }
         }).start();
@@ -594,7 +587,7 @@ public class CLI extends RemoteView {
             int choise;
             Scanner s = new Scanner(System.in);
             choise = s.nextInt();
-            if(!effects.contains(choise))
+            if (!effects.contains(choise))
                 choise = effects.get(0).intValue();
             ChosenEffectMessage message = new ChosenEffectMessage(choise);
             message.setSender(userName);
@@ -612,7 +605,7 @@ public class CLI extends RemoteView {
             Scanner s = new Scanner(System.in);
             choise = s.next().charAt(0);
             boolean toSend;
-            if(choise == 'y')
+            if (choise == 'y')
                 toSend = true;
             else
                 toSend = false;
@@ -620,7 +613,7 @@ public class CLI extends RemoteView {
             msg.setSender(userName);
             viewSetChanged();
             notifyObservers(msg);
-            if(message.equals("Do you want to move the target 1 square away?")) {
+            if (message.equals("Do you want to move the target 1 square away?")) {
                 CliSetUp.cursorUp(5);
             }
             currState = 1;
@@ -643,7 +636,7 @@ public class CLI extends RemoteView {
     }
 
     @Override
-    public void startTimerTurn(int count,String currPlayer) {
+    public void startTimerTurn(int count, String currPlayer) {
         try {
             if (timerTurn != null) timerTurn.interrupt();
         } catch (Exception ex) {
@@ -689,7 +682,7 @@ public class CLI extends RemoteView {
     @Override
     public void showReloadableWeapons(List<String> weapons) {
         currState = 0;
-        CliPrinter.reloadWeaponMessage(lightGameVersion,myCharEnumString,weapons);
+        CliPrinter.reloadWeaponMessage(lightGameVersion, myCharEnumString, weapons);
         new Thread(() -> {
             int choise;
             Scanner s = new Scanner(System.in);
@@ -698,10 +691,9 @@ public class CLI extends RemoteView {
             Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
             List<CardRep> myWeapons = playerWeapons.get(myCharEnumString);
             int idCard;
-            if(choise < weapons.size()) {
+            if (choise < weapons.size()) {
                 idCard = myWeapons.get(choise).getId();
-            }
-            else {
+            } else {
                 idCard = myWeapons.get(0).getId();
             }
 
@@ -715,7 +707,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void showUsableWeapons(List<String> weapons) {
-        CliPrinter.chooseWeaponMessage(lightGameVersion,myCharEnumString,weapons);
+        CliPrinter.chooseWeaponMessage(lightGameVersion, myCharEnumString, weapons);
         currState = 0;
         new Thread(() -> {
             int choise;
@@ -725,10 +717,9 @@ public class CLI extends RemoteView {
             Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
             List<CardRep> myWeapons = playerWeapons.get(myCharEnumString);
             int idCard;
-            if(choise < weapons.size()) {
+            if (choise < weapons.size()) {
                 idCard = myWeapons.get(choise).getId();
-            }
-            else {
+            } else {
                 idCard = myWeapons.get(0).getId();
             }
 
@@ -743,7 +734,7 @@ public class CLI extends RemoteView {
     @Override
     public void showUsablePowerups(List<String> powerups) {
         currState = 0;
-        CliPrinter.usePowerUpMessage(lightGameVersion,myCharEnumString,powerups);
+        CliPrinter.usePowerUpMessage(lightGameVersion, myCharEnumString, powerups);
         new Thread(() -> {
             int choise;
             Scanner s = new Scanner(System.in);
@@ -752,10 +743,9 @@ public class CLI extends RemoteView {
             Map<String, List<CardRep>> playePowerUps = lightGameVersion.getPlayerPowerups();
             List<CardRep> myPowerUps = playePowerUps.get(myCharEnumString);
             int idCard;
-            if(choise < powerups.size()) {
+            if (choise < powerups.size()) {
                 idCard = myPowerUps.get(choise).getId();
-            }
-            else {
+            } else {
                 idCard = myPowerUps.get(0).getId();
             }
 

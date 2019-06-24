@@ -3,6 +3,7 @@ package it.polimi.se2019.network.client;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.network.server.Server;
+import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.client.RemoteView;
 
@@ -62,11 +63,11 @@ public class RMIClient implements Client, Observer {
         try {
             stub.registerClient(InetAddress.getLocalHost().getHostAddress(), this.port, user);
         } catch (Exception e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            CustomLogger.logException(this.getClass().getName(), e);
         }
 
         connected = true;
-        HandyFunctions.LOGGER.log(Level.FINE, "Client is connected!");
+        CustomLogger.logInfo(this.getClass().getName(), "Client is connected!");
     }
 
     /**
@@ -77,7 +78,7 @@ public class RMIClient implements Client, Observer {
             Client skeleton = (Client) UnicastRemoteObject.exportObject(this, port);
             registry.bind("RemoteView", skeleton);
         } catch (Exception e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            CustomLogger.logException(this.getClass().getName(), e);
         }
     }
 
@@ -86,7 +87,7 @@ public class RMIClient implements Client, Observer {
         try {
             registry.unbind("RemoteView");
         } catch (Exception e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            CustomLogger.logException(this.getClass().getName(), e);
         }
         connected = false;
     }
@@ -103,8 +104,7 @@ public class RMIClient implements Client, Observer {
         try {
             msg.performAction(actor);
         } catch (Exception e) {
-            e.printStackTrace();
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            CustomLogger.logException(this.getClass().getName(), e);
         }
     }
 
@@ -116,14 +116,14 @@ public class RMIClient implements Client, Observer {
         try {
             stub.interpretMessage(msg);
         } catch (Exception e) {
-            e.printStackTrace();
-            HandyFunctions.LOGGER.log(Level.INFO, e.toString());
+            CustomLogger.logException(this.getClass().getName(), e);
         }
     }
 
     /**
      * it recives the updates from GUI or CLI
-     * @param o GUI/CLI
+     *
+     * @param o   GUI/CLI
      * @param arg the message sent from gui or cli
      */
     @Override

@@ -8,7 +8,6 @@ import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.CustomLogger;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public final class Teleporter extends PowerUpCard {

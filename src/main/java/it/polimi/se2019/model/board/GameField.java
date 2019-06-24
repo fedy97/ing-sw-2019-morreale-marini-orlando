@@ -159,6 +159,7 @@ public class GameField implements Serializable {
      *                                           build the adjacency list of each platform
      */
     private void buildPlatformAdjMap(Platform platform, int row, int column) throws InvalidAdjacentPlatformsException {
+
         EnumMap<Orientation, Platform> adjMap = new EnumMap<>(Orientation.class);
         if (row - 1 >= 0 && field[row - 1][column] != null && (platform.getPlatformColor().equals(field[row - 1][column].getPlatformColor()) || platform.getDoorLocation().contains(Orientation.UP)))
             adjMap.put(Orientation.UP, field[row - 1][column]);

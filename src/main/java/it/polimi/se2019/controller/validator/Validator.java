@@ -1,6 +1,7 @@
-package it.polimi.se2019.controller;
+package it.polimi.se2019.controller.validator;
 
 import it.polimi.se2019.Action;
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.exceptions.InvalidActionException;
 import it.polimi.se2019.exceptions.InvalidGenerationSpotException;
 import it.polimi.se2019.model.board.Platform;
@@ -16,7 +17,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 /**
  * @author Gabriel Raul Marini
@@ -53,20 +53,8 @@ public abstract class Validator implements Serializable {
      * according to the ammo qty in his AmmoBox
      */
     public List<WeaponCard> getGrabableWeapons() throws InvalidGenerationSpotException {
-        List<WeaponCard> res = new ArrayList<>();
-        Player currPlayer = father.getPlayerManager().getCurrentPlayer();
-        AmmoBox ammoBox = currPlayer.getPlayerBoard().getAmmoBox();
-        Platform p = currPlayer.getCurrentPlatform();
-
-        if (!p.isGenerationSpot())
-            throw new InvalidGenerationSpotException();
-
-        for (WeaponCard weapon : p.getWeapons()) {
-            if (ammoBox.hasAmmos(weapon.getExtraCost()))
-                res.add(weapon);
-        }
-
-        return res;
+        Platform p = father.getPlayerManager().getCurrentPlayer().getCurrentPlatform();
+        return getGrabableWeapons(p);
     }
 
     /**
@@ -172,21 +160,6 @@ public abstract class Validator implements Serializable {
         }
         res.removeAll(toRemove);
         HandyFunctions.printList(res);
-        return res;
-    }
-
-    /**
-     * @return a list of the platform where the player can grab an ammo
-     */
-    public List<Platform> getGrabableAmmos() {
-        List<Platform> res = null;
-
-        try {
-            res = getValidMoves(Action.GRAB);
-        } catch (InvalidActionException e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
-        }
-
         return res;
     }
 }

@@ -1,5 +1,9 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.controller.validator.CriticalDamagedValidator;
+import it.polimi.se2019.controller.validator.DamagedValidator;
+import it.polimi.se2019.controller.validator.HealthyValidator;
+import it.polimi.se2019.controller.validator.UserValidActions;
 import it.polimi.se2019.exceptions.NoCardException;
 import it.polimi.se2019.model.PointsCounter;
 import it.polimi.se2019.model.board.Platform;
@@ -46,7 +50,6 @@ public class TurnController implements Serializable {
     }
 
     public void notifyFirst() {
-        Controller c = Controller.getInstance();
         c.callView(new EnablePlayerActionsMessage(UserValidActions.ALL.getActions()), c.getPlayerManager().getCurrentPlayer().getName());
         c.callView(new ShowMessage("It's your turn!"), c.getPlayerManager().getCurrentPlayer().getName());
     }

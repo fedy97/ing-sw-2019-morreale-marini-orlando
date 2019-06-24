@@ -127,7 +127,6 @@ public class AmmoBox implements Serializable {
      * @param cubes ammos to be discarded
      */
     public void removeAmmos(AmmoCube[] cubes) {
-        List<AmmoCube> toRemove = new ArrayList<>();
 
         int i = 0;
         while (optionals.contains(cubes[i])) {

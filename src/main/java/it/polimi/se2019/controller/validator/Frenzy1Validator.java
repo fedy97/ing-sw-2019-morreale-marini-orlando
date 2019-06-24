@@ -1,6 +1,7 @@
-package it.polimi.se2019.controller;
+package it.polimi.se2019.controller.validator;
 
 import it.polimi.se2019.Action;
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.board.Platform;
 
 import java.util.*;
