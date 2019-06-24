@@ -24,6 +24,7 @@ import static org.junit.Assert.*;
  * A test class verifying that player behaviour is correct with the game guidelines
  *
  * @author Simone Orlando
+ * @author Gabriel Raul Marini
  */
 public class TestPlayer {
     private Deck<PowerUpCard> deck;
@@ -250,6 +251,28 @@ public class TestPlayer {
         player.addTarget(target);
 
         assertTrue(player.getCurrentTargets().contains(target));
+    }
+
+    @Test
+    public void testIsDeath() {
+        try {
+            Player player = new Player("name", Character.DOZER, null);
+            player.getPlayerBoard().addDamage(Character.BANSHEE, 11);
+            assertTrue(player.isDead());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testWasOverKilled() {
+        try {
+            Player player = new Player("name", Character.DOZER, null);
+            player.getPlayerBoard().addDamage(Character.BANSHEE, 12);
+            assertTrue(player.wasOverkilled());
+        } catch (Exception e) {
+            fail();
+        }
     }
 
 }

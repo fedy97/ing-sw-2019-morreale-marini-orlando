@@ -108,19 +108,14 @@ public class TestPlayerBoard {
     @Test
     public void testRemoveRevengeMarks() {
 
-        //PlayerBoard myBoard = new PlayerBoard();
+        PlayerBoard myBoard = new PlayerBoard();
 
         /*
             Testing the mark removal
          */
-        /*
         myBoard.addRevengeMark(Character.DOZER,2);
-        try {
-            myBoard.removeRevengeMarks(Character.DOZER);
-        }
-        catch (InvalidCharacterException e) {
-            fail();
-        }
+        myBoard.removeRevengeMarks(Character.DOZER);
+
         int counter = 0;
         List<Character> line = myBoard.getRevengeMarks();
         for (Character c: line) {
@@ -128,18 +123,5 @@ public class TestPlayerBoard {
                 counter++;
         }
         assertEquals(0, counter);
-
-        /*
-            Test of the impossibility of having a null character
-         */
-        /*
-        try {
-            myBoard.removeRevengeMarks(null);
-            fail();
-        }
-        catch (InvalidCharacterException e) {
-
-        }
-        */
     }
 }
