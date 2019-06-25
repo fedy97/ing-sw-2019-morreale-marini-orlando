@@ -50,6 +50,7 @@ public class CLI extends RemoteView {
     private CardRep p1, p2;
     private boolean firstCallChoosePU;
     private TimerTurn timerTurn;
+    private boolean isChoosingPowerUp;
 
     public CLI() {
         try {
@@ -75,6 +76,7 @@ public class CLI extends RemoteView {
         p1 = null;
         p2 = null;
         firstCallChoosePU = true;
+        isChoosingPowerUp = false;
     }
 
     @Override
@@ -116,7 +118,7 @@ public class CLI extends RemoteView {
     }
 
     private void getActionInput() {
-        if (!isAsking && isMyTurn() && powerUpChosen) {
+        if (!isAsking && isMyTurn() && powerUpChosen && !isChoosingPowerUp) {
             new Thread(() -> {
                 isAsking = true;
                 Console c = System.console();
@@ -184,6 +186,7 @@ public class CLI extends RemoteView {
 
     public void iWantToUsePowerUp() {
         isAsking = true;
+        isChoosingPowerUp = true;
         PerformActionMessage message = new PerformActionMessage("action5");
         message.setSender(userName);
         viewSetChanged();
@@ -723,6 +726,7 @@ public class CLI extends RemoteView {
                 idCard = myWeapons.get(0).getId();
             }
 
+
             ActivateCardMessage message = new ActivateCardMessage(Integer.toString(idCard));
             message.setSender(userName);
             viewSetChanged();
@@ -755,12 +759,16 @@ public class CLI extends RemoteView {
             notifyObservers(message);
             currState = 1;
             isAsking = false;
+            isChoosingPowerUp = false;
         }).start();
     }
 
     @Override
     public void receiveWaitingPingFromServer() {
-
+        ResponseToWaitingPingMessage message = new ResponseToWaitingPingMessage(userName);
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
     }
 
     @Override
