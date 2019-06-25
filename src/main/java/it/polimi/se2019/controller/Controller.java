@@ -527,16 +527,13 @@ public class Controller implements Observer, Serializable {
 
                 while (true) {
                     pingsList.clear();
-                    try {
-                        notifyAll(new PingClientsMessage(null));
-                    } catch (Exception ex) {
-                    }
-                    Thread.sleep(2000);
+                    notifyAll(new PingClientsMessage(null));
+                    Thread.sleep(3000);
 
                     for (String charCurr : chars) {
 
                         if (!pingsList.contains(charCurr)) {
-                            game.deleteObserver(userView.get(game.getPlayer(Character.valueOf(charCurr)).getName()));
+                            //game.deleteObserver(userView.get(game.getPlayer(Character.valueOf(charCurr)).getName()));
                             Player toDisconnect = game.getPlayer(Character.valueOf(charCurr));
                             toDisconnect.setConnected(false);
 
@@ -559,7 +556,7 @@ public class Controller implements Observer, Serializable {
                                 turnController.endTurn();
                         }
                     }
-                    Thread.sleep(1000);
+                    //Thread.sleep(1000);
                 }
             } catch (Exception ex) {
                 CustomLogger.logException(this.getClass().getName(), ex);
