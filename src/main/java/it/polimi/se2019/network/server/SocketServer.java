@@ -119,6 +119,7 @@ public class SocketServer implements Server {
         try {
             ObjectOutputStream outStream = connections.get(user).getOutput();
             outStream.writeObject(msg);
+            outStream.flush();
             outStream.reset();
         } catch (IOException e) {
             CustomLogger.logException(this.getClass().getName(), e);

@@ -33,12 +33,13 @@ public class WaitingLobbyController {
     private Font normale;
 
     public void initialize() {
+        playerLabels.add(player1);
+        playerLabels.add(player2);
+        playerLabels.add(player3);
+        playerLabels.add(player4);
+        playerLabels.add(player5);
         Platform.runLater(() -> {
-            playerLabels.add(player1);
-            playerLabels.add(player2);
-            playerLabels.add(player3);
-            playerLabels.add(player4);
-            playerLabels.add(player5);
+
             normale = javafx.scene.text.Font.loadFont(
                     getClass().getResource("/font.ttf").toExternalForm(),
                     21

@@ -9,9 +9,11 @@ import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.message.to_client.SendBinaryOption;
 import it.polimi.se2019.utils.CustomLogger;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -131,12 +133,36 @@ public class PlayerManager implements Serializable {
     public void addDamage(Map<Player, Integer> targetsMap) {
         Iterator hmIterator = targetsMap.entrySet().iterator();
         Player p;
-/*
-        for(PowerUpCard powerUpCard: currentPlayer.getPowerUpCards()){
-            if(powerUpCard.getName().equals("mirino"))
+
+        int i = 0;
+        while (!currentPlayer.getPowerUpCards().isEmpty()) {
+            PowerUpCard powerUpCard = currentPlayer.getPowerUpCards().get(i);
+            if (powerUpCard.getName().equals("mirino"))
+                father.callView(new SendBinaryOption("Do you want to use Mirino?"), currentPlayer.getName());
+
+            try {
+                if (father.getChosenBinaryOption().take()) {
+
+                    List<PowerUpCard> toShow = new ArrayList<>();
+                    tempPlayers = new ArrayList<>(targetsMap.keySet());
+
+                    for (PowerUpCard mir : currentPlayer.getPowerUpCards()) {
+                        if (mir.getName().equals("mirino")) {
+                            toShow.add(mir);
+                        }
+                    }
+
+                    father.askFor(toShow, "powerups");
+                    father.setState(ControllerState.PROCESSING_POWERUP);
+                    while(father.getState() == ControllerState.PROCESSING_POWERUP)
+                        Thread.sleep(200);
+                }
+            } catch (Exception e) {
+                CustomLogger.logException(this.getClass().getName(), e);
+            }
 
         }
-*/
+
         while (hmIterator.hasNext()) {
             Map.Entry mapElement = (Map.Entry) hmIterator.next();
             int damage = ((int) mapElement.getValue());

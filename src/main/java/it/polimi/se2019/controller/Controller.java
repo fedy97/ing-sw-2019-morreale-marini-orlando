@@ -52,6 +52,8 @@ public class Controller implements Observer, Serializable {
     private BlockingDeque<Platform> chosenDestination;
     private BlockingDeque<Integer> chosenEffect;
     private BlockingDeque<Boolean> chosenBinaryOption;
+    private BlockingDeque<String> chosenAmmo;
+
     private int timerSetup;
     private boolean timerStarted = false;
     private Map<Integer, Integer> mapChosen;
@@ -72,6 +74,7 @@ public class Controller implements Observer, Serializable {
         chosenBinaryOption = new LinkedBlockingDeque<>();
         chosenDestination = new LinkedBlockingDeque<>();
         chosenEffect = new LinkedBlockingDeque<>();
+        chosenAmmo = new LinkedBlockingDeque<>();
 
 
         playerManager = new PlayerManager(this);
@@ -259,7 +262,6 @@ public class Controller implements Observer, Serializable {
             CustomLogger.logException(this.getClass().getName(), e);
         }
         game.notifyChanges();
-        setState(ControllerState.IDLE);
     }
 
     /**
@@ -742,6 +744,10 @@ public class Controller implements Observer, Serializable {
 
     public BlockingDeque<Boolean> getChosenBinaryOption() {
         return chosenBinaryOption;
+    }
+
+    public BlockingDeque<String> getChosenAmmo() {
+        return chosenAmmo;
     }
 
     public void setChosenBinaryOption(BlockingDeque<Boolean> chosenBinaryOption) {
