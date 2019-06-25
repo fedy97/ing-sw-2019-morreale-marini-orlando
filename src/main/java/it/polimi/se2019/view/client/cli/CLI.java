@@ -207,17 +207,20 @@ public class CLI extends RemoteView {
     }
 
     public void iWantToConvertPowerUp() {
+        isAsking = true;
         CliPrinter.convertPowerUpMessage(lightGameVersion,myCharEnumString);
-        Map<String, List<CardRep>> playerPowerUps = lightGameVersion.getPlayerPowerups();
-        List<CardRep> myPowerUps = playerPowerUps.get(myChar);
         new Thread(() -> {
             int choise;
             Scanner s = new Scanner(System.in);
             choise = s.nextInt();
+            Map<String, List<CardRep>> playerPowerUps = lightGameVersion.getPlayerPowerups();
+            List<CardRep> myPowerUps = playerPowerUps.get(myCharEnumString);
             if (choise < myPowerUps.size()) {
-                int hash = myPowerUps.get(choise).getId();
+                int hash = myPowerUps.get(0).getId();
                 BuyWithPowerupsMessage message = new BuyWithPowerupsMessage(Integer.toString(hash));
                 notifyController(message);
+                isAsking = false;
+                getActionInput();
             }
             else {
                 iWantToConvertPowerUp();
