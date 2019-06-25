@@ -12,10 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -28,17 +25,23 @@ public class JsonParser {
     private JSONObject jsonObj;
 
     public JsonParser(String path) {
-        this.path = path;
-        InputStream is = getClass().getResourceAsStream(path);
-        InputStreamReader isr = new InputStreamReader(is);
-        BufferedReader bufferedReader = new BufferedReader(isr);
-        StringBuilder ris = new StringBuilder();
         try {
+            this.path = path;
+            InputStream is;
+            if (path.equals("settings.json"))
+                is = new FileInputStream(path);
+            else
+                is = getClass().getResourceAsStream(path);
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            StringBuilder ris = new StringBuilder();
+
             for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
                 ris.append(line).append("\n");
             }
             jsonObj = new JSONObject(ris.toString());
-        } catch (IOException ex) {
+        } catch (Exception ex) {
+            CustomLogger.logException(this.getClass().getName(), ex);
         }
 
     }

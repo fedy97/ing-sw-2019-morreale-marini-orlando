@@ -175,12 +175,6 @@ public class Game extends Observable implements Serializable {
      * @return the light model representation used to update the client vew
      */
     public LightGameVersion getLightVersion() {
-        for (Platform p : gameField.getPlatforms()) {
-            System.out.flush();
-            System.out.println(p);
-            HandyFunctions.printList(p.getPlayersOnThePlatform());
-        }
-
         //set the skulls
         LightGameVersion lightVersion = new LightGameVersion(null);
         lightVersion.setSkullsNum(getGameField().getSkullsBoard().getCurrentSkulls());
