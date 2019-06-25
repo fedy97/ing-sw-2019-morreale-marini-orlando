@@ -3,6 +3,8 @@ package it.polimi.se2019.view.client;
 import it.polimi.se2019.model.rep.AmmoRep;
 import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.model.rep.LightGameVersion;
+import it.polimi.se2019.network.message.to_server.ResponseToPingMessage;
+import it.polimi.se2019.network.message.to_server.ResponseToWaitingPingMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.view.View;
 
@@ -109,18 +111,21 @@ public abstract class RemoteView extends View {
 
     /**
      * in order to decide who will be shot
+     *
      * @param targets hashcodes, in remoteview we have lightgameversion to decode it
      */
     public abstract void showTargets(List<String> targets);
 
     /**
      * list of all usable effects of the weapon selected
+     *
      * @param effects the list which can contain 0,1,2
      */
     public abstract void enlightenEffects(List<Integer> effects);
 
     /**
      * the answer can only be yes or no
+     *
      * @param message to display before the binary request
      */
     public abstract void showBinaryOption(String message);
@@ -128,29 +133,21 @@ public abstract class RemoteView extends View {
     /**
      * used when someone wants to reconnect, the following params are requested
      * in order to set up everything again in the right way
-     * @param config map
+     *
+     * @param config           map
      * @param lightGameVersion
-     * @param arr of the characters in game
+     * @param arr              of the characters in game
      * @param myChar
      */
     public abstract void showReconnectedGameBoard(int config, LightGameVersion lightGameVersion, List<String> arr, String myChar);
-
-    /**
-     * if the ping is received, a response will be immediately sent to the server
-     */
-    public abstract void receivePingFromServer();
-
-    /**
-     * pinging the waiting list
-     */
-    public abstract void receiveWaitingPingFromServer();
 
     public abstract void resetTimer();
 
     /**
      * this method is called only once, not every second, by the server
+     *
      * @param count is the starting time of the timer
-     * @param curr player to disconnect in case the timer's up
+     * @param curr  player to disconnect in case the timer's up
      */
     public abstract void startTimerTurn(int count, String curr);
 
@@ -170,6 +167,26 @@ public abstract class RemoteView extends View {
      * @param powerups hashcodes
      */
     public abstract void showUsablePowerups(List<String> powerups);
+
+    /**
+     * if the ping is received, a response will be immediately sent to the server
+     */
+    public void receivePingFromServer() {
+        ResponseToPingMessage message = new ResponseToPingMessage(userName);
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
+    }
+
+    /**
+     * pinging the waiting list
+     */
+    public void receiveWaitingPingFromServer() {
+        ResponseToWaitingPingMessage message = new ResponseToWaitingPingMessage(userName);
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
+    }
 
     public void notifyController(ToServerMessage message) {
         message.setSender(userName);
