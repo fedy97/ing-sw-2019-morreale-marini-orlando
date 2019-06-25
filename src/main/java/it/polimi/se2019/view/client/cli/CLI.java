@@ -51,6 +51,7 @@ public class CLI extends RemoteView {
     private boolean firstCallChoosePU;
     private TimerTurn timerTurn;
     private boolean isChoosingPowerUp;
+    private boolean isReloadedWeapons;
 
     public CLI() {
         try {
@@ -77,6 +78,7 @@ public class CLI extends RemoteView {
         p2 = null;
         firstCallChoosePU = true;
         isChoosingPowerUp = false;
+        isReloadedWeapons = false;
     }
 
     @Override
@@ -118,7 +120,7 @@ public class CLI extends RemoteView {
     }
 
     private void getActionInput() {
-        if (!isAsking && isMyTurn() && powerUpChosen && !isChoosingPowerUp) {
+        if (!isAsking && isMyTurn() && powerUpChosen && !isChoosingPowerUp && !isReloadedWeapons) {
             new Thread(() -> {
                 isAsking = true;
                 Console c = System.console();
@@ -178,6 +180,8 @@ public class CLI extends RemoteView {
     }
 
     public void iWantToReload() {
+        isAsking = true;
+        isReloadedWeapons = true;
         PerformActionMessage message = new PerformActionMessage("action4");
         message.setSender(userName);
         viewSetChanged();
@@ -511,14 +515,14 @@ public class CLI extends RemoteView {
 
     @Override
     public void showMessage(String msg) {
-
-        lastMsg = msg;
-        CliSetUp.savePosition();
-        CliSetUp.cursorDown(15);
-        CliSetUp.cursorRight(5);
-        HandyFunctions.printConsole(msg);
-        CliSetUp.restorePosition();
-
+        if(!(msg.equals(lastMsg) && msg.equals("You've finished your basic action! Now you can use your powerup, reload or pass the turn"))) {
+            CliSetUp.savePosition();
+            CliSetUp.cursorDown(15);
+            CliSetUp.cursorRight(5);
+            HandyFunctions.printConsole(msg);
+            CliSetUp.restorePosition();
+            lastMsg = msg;
+        }
     }
 
     @Override
@@ -705,6 +709,8 @@ public class CLI extends RemoteView {
             viewSetChanged();
             notifyObservers(message);
             currState = 1;
+            isAsking = false;
+            isReloadedWeapons = false;
         }).start();
     }
 
