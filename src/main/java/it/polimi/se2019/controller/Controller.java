@@ -531,7 +531,7 @@ public class Controller implements Observer, Serializable {
                         notifyAll(new PingClientsMessage(null));
                     } catch (Exception ex) {
                     }
-                    Thread.sleep(5000);
+                    Thread.sleep(2000);
 
                     for (String charCurr : chars) {
 
@@ -559,7 +559,7 @@ public class Controller implements Observer, Serializable {
                                 turnController.endTurn();
                         }
                     }
-                    //Thread.sleep(1000);
+                    Thread.sleep(1000);
                 }
             } catch (Exception ex) {
                 CustomLogger.logException(this.getClass().getName(), ex);
