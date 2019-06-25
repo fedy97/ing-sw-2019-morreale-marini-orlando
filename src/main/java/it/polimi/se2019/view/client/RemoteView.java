@@ -3,6 +3,7 @@ package it.polimi.se2019.view.client;
 import it.polimi.se2019.model.rep.AmmoRep;
 import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.model.rep.LightGameVersion;
+import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.view.View;
 
 import java.util.List;
@@ -169,5 +170,11 @@ public abstract class RemoteView extends View {
      * @param powerups hashcodes
      */
     public abstract void showUsablePowerups(List<String> powerups);
+
+    public void notifyController(ToServerMessage message) {
+        message.setSender(userName);
+        viewSetChanged();
+        notifyObservers(message);
+    }
 
 }
