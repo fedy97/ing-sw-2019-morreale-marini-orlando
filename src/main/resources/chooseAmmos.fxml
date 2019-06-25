@@ -18,9 +18,6 @@
             <Image url="@assets/backgrounds/bgchoose.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="bluebutton" disable="true" layoutX="36.0" layoutY="120.0" mnemonicParsing="false" onAction="#blueclick" prefHeight="75.0" prefWidth="78.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="redbutton" disable="true" layoutX="195.0" layoutY="120.0" mnemonicParsing="false" onAction="#redclick" prefHeight="75.0" prefWidth="78.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="yellowbutton" disable="true" layoutX="349.0" layoutY="120.0" mnemonicParsing="false" onAction="#yellowclick" prefHeight="75.0" prefWidth="78.0" style="-fx-background-color: transparent;" />
       <ImageView fx:id="yellowimage" fitHeight="75.0" fitWidth="78.0" layoutX="349.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@assets/ammos/yellowAmmo.png" />
@@ -36,5 +33,8 @@
             <Image url="@assets/ammos/blueAmmo.png" />
          </image>
       </ImageView>
+      <Button fx:id="bluebutton" disable="true" layoutX="36.0" layoutY="120.0" mnemonicParsing="false" onAction="#blueclick" prefHeight="75.0" prefWidth="78.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="redbutton" disable="true" layoutX="192.0" layoutY="120.0" mnemonicParsing="false" onAction="#redclick" prefHeight="75.0" prefWidth="78.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="yellowbutton" disable="true" layoutX="349.0" layoutY="120.0" mnemonicParsing="false" onAction="#yellowclick" prefHeight="75.0" prefWidth="78.0" style="-fx-background-color: transparent;" />
     </children>
 </AnchorPane>
