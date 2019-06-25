@@ -2,7 +2,7 @@
   "settings": [
     {
       "skulls": 1,
-      "timerSetup": 10,
+      "timerSetup": 1,
       "timerTurn": 60,
       "minPlayers": 2,
       "socketServerPort": 1100,

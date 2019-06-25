@@ -81,7 +81,7 @@ public class Controller implements Observer, Serializable {
         timerSetup = HandyFunctions.parserSettings.getTimerSetup();
         pingsList = new ArrayList<>();
         pingsWaitingList = new ArrayList<>();
-        startWaitingLobbyPing();
+        //startWaitingLobbyPing();
     }
 
     /**
