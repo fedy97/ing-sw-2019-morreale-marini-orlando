@@ -122,6 +122,10 @@ public class SocketServer implements Server {
             outStream.flush();
             outStream.reset();
         } catch (IOException e) {
+            try {
+                connections.get(user).getSocket().close();
+            } catch (IOException ex) {
+            }
             CustomLogger.logException(this.getClass().getName(), e);
         }
     }

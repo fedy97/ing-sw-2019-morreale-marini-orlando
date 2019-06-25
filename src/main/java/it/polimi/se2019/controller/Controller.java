@@ -84,7 +84,7 @@ public class Controller implements Observer, Serializable {
         timerSetup = HandyFunctions.parserSettings.getTimerSetup();
         pingsList = new ArrayList<>();
         pingsWaitingList = new ArrayList<>();
-        //startWaitingLobbyPing();
+        startWaitingLobbyPing();
     }
 
     /**
@@ -137,7 +137,6 @@ public class Controller implements Observer, Serializable {
 
                     if (toReset && !timerStarted) notifyAll(new ResetTimerMessage(null));
                     notifyAll(new NewConnectionMessage(pingsWaitingList));
-                    Thread.sleep(1000);
                 }
             } catch (Exception ex) {
                 CustomLogger.logException(this.getClass().getName(), ex);
@@ -165,6 +164,7 @@ public class Controller implements Observer, Serializable {
 
     /**
      * Manage new action request
+     *
      * @param action to be performed
      */
     public void processAction(String action) {
@@ -245,6 +245,7 @@ public class Controller implements Observer, Serializable {
 
     /**
      * Launch a power up execution
+     *
      * @param powerUp chosen by the player
      */
     public void processPowerUp(PowerUpCard powerUp) {
@@ -266,6 +267,7 @@ public class Controller implements Observer, Serializable {
 
     /**
      * Launch the weapon execution
+     *
      * @param weapon chosen by the player to perform shooting action
      */
     public void processWeaponCard(WeaponCard weapon) {
@@ -525,8 +527,11 @@ public class Controller implements Observer, Serializable {
 
                 while (true) {
                     pingsList.clear();
-                    notifyAll(new PingClientsMessage(null));
-                    Thread.sleep(1000);
+                    try {
+                        notifyAll(new PingClientsMessage(null));
+                    } catch (Exception ex) {
+                    }
+                    Thread.sleep(5000);
 
                     for (String charCurr : chars) {
 
@@ -554,7 +559,7 @@ public class Controller implements Observer, Serializable {
                                 turnController.endTurn();
                         }
                     }
-                    Thread.sleep(1000);
+                    //Thread.sleep(1000);
                 }
             } catch (Exception ex) {
                 CustomLogger.logException(this.getClass().getName(), ex);
@@ -652,7 +657,7 @@ public class Controller implements Observer, Serializable {
     private int findWhichMapWon() {
         int max = -1;
         int config = -1;
-        for (Map.Entry<Integer, Integer> entry: mapChosen.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : mapChosen.entrySet()) {
             if (entry.getValue() > max) {
                 max = entry.getValue();
                 config = entry.getKey();
@@ -746,12 +751,12 @@ public class Controller implements Observer, Serializable {
         return chosenBinaryOption;
     }
 
-    public BlockingDeque<String> getChosenAmmo() {
-        return chosenAmmo;
-    }
-
     public void setChosenBinaryOption(BlockingDeque<Boolean> chosenBinaryOption) {
         this.chosenBinaryOption = chosenBinaryOption;
+    }
+
+    public BlockingDeque<String> getChosenAmmo() {
+        return chosenAmmo;
     }
 
     public BlockingDeque<Integer> getChosenEffect() {
