@@ -117,15 +117,12 @@ public class SocketServer implements Server {
     @Override
     public void sendToClient(ToClientMessage msg, String user) {
         try {
-            ObjectOutputStream outStream = connections.get(user).getOutput();
-            outStream.writeObject(msg);
-            //outStream.flush();
-            outStream.reset();
-        } catch (IOException e) {
-            try {
-                connections.get(user).getSocket().close();
-            } catch (IOException ex) {
+            if (!connections.get(user).getSocket().isClosed()) {
+                ObjectOutputStream outStream = connections.get(user).getOutput();
+                outStream.writeObject(msg);
+                outStream.reset();
             }
+        } catch (Exception e) {
             CustomLogger.logException(this.getClass().getName(), e);
         }
     }
