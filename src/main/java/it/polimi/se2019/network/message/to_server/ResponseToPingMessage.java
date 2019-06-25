@@ -9,8 +9,9 @@ public class ResponseToPingMessage extends ToServerMessage {
 
     @Override
     public void performAction() {
-        String pingChar = (String) payload;
+        String user = (String) payload;
         Controller c = Controller.getInstance();
+        String pingChar = c.getGame().getPlayer(user).getCharacter().toString();
         c.getPingsList().add(pingChar);
     }
 }

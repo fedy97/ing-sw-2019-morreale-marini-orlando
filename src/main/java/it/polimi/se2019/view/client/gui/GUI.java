@@ -28,18 +28,18 @@ public class GUI extends RemoteView {
 
     protected Font normale;
     protected Font grande;
-    private WaitingLobbyController waitingLobbyController;
-    private ChooseMapController chooseMapController;
-    private ChooseCharacterController chooseCharacterController;
-    private GameBoardController gameBoardController;
-    private ChoosePowerupController choosePowerupController;
-    private PlayerBoardController playerBoardController;
-    private SwitchWeaponController switchWeaponController;
-    private UsePowerupController usePowerupController;
-    private UseWeaponController useWeaponController;
-    private BuyWithPowerupController buyWithPowerupController;
-    private ChooseTargetsController chooseTargetsController;
-    private ReloadWeaponsController reloadWeaponsController;
+    private transient WaitingLobbyController waitingLobbyController;
+    private transient ChooseMapController chooseMapController;
+    private transient ChooseCharacterController chooseCharacterController;
+    private transient GameBoardController gameBoardController;
+    private transient ChoosePowerupController choosePowerupController;
+    private transient PlayerBoardController playerBoardController;
+    private transient SwitchWeaponController switchWeaponController;
+    private transient UsePowerupController usePowerupController;
+    private transient UseWeaponController useWeaponController;
+    private transient BuyWithPowerupController buyWithPowerupController;
+    private transient ChooseTargetsController chooseTargetsController;
+    private transient ReloadWeaponsController reloadWeaponsController;
     private Scene sceneLogin;
     private Scene sceneWaitingLobby;
     private Scene sceneChooseMap;
@@ -66,7 +66,7 @@ public class GUI extends RemoteView {
     private List<String> charsInGame;
     private String config;
     private LightGameVersion lightGameVersion;
-    private TimerTurn timerTurn;
+    private transient TimerTurn timerTurn;
 
     public GUI(String user, Stage stage, Scene login, Font normale, Font grande) {
         this.normale = normale;
@@ -507,24 +507,6 @@ public class GUI extends RemoteView {
                     stage.show();
                 });
 
-    }
-
-    @Override
-    public void receivePingFromServer() {
-        ResponseToPingMessage message = new ResponseToPingMessage(getCharInString());
-        notifyController(message);
-    }
-
-    @Override
-    public void receiveWaitingPingFromServer() {
-        ResponseToWaitingPingMessage message = new ResponseToWaitingPingMessage(userName);
-        notifyController(message);
-    }
-
-    private void notifyController(ToServerMessage message) {
-        message.setSender(userName);
-        viewSetChanged();
-        notifyObservers(message);
     }
 
     @Override

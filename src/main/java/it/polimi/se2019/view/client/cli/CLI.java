@@ -634,13 +634,6 @@ public class CLI extends RemoteView {
         updateAll(lightGameVersion);
     }
 
-    @Override
-    public void receivePingFromServer() {
-        ResponseToPingMessage message = new ResponseToPingMessage(myCharEnumString);
-        message.setSender(userName);
-        viewSetChanged();
-        notifyObservers(message);
-    }
 
     @Override
     public void startTimerTurn(int count, String currPlayer) {
@@ -691,20 +684,7 @@ public class CLI extends RemoteView {
         currState = 0;
         CliPrinter.reloadWeaponMessage(lightGameVersion, myCharEnumString, weapons);
         new Thread(() -> {
-            int choise;
-            Scanner s = new Scanner(System.in);
-            choise = s.nextInt();
-            CliSetUp.restorePosition();
-            Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
-            List<CardRep> myWeapons = playerWeapons.get(myCharEnumString);
-            int idCard;
-            if (choise < weapons.size()) {
-                idCard = myWeapons.get(choise).getId();
-            } else {
-                idCard = myWeapons.get(0).getId();
-            }
-
-            ReloadWeaponsMessage message = new ReloadWeaponsMessage(Integer.toString(idCard));
+            ReloadWeaponsMessage message = new ReloadWeaponsMessage(Integer.toString(showWeapons(weapons)));
             message.setSender(userName);
             viewSetChanged();
             notifyObservers(message);
@@ -769,16 +749,27 @@ public class CLI extends RemoteView {
         }).start();
     }
 
-    @Override
-    public void receiveWaitingPingFromServer() {
-        ResponseToWaitingPingMessage message = new ResponseToWaitingPingMessage(userName);
-        message.setSender(userName);
-        viewSetChanged();
-        notifyObservers(message);
-    }
 
     @Override
     public void resetTimer() {
 
+    }
+
+    private int showWeapons(List<String> weapons) {
+        int choise;
+        Scanner s = new Scanner(System.in);
+        choise = s.nextInt();
+        CliSetUp.restorePosition();
+        Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
+        List<CardRep> myWeapons = playerWeapons.get(myCharEnumString);
+
+        int idCard;
+        if (choise < weapons.size()) {
+            idCard = myWeapons.get(choise).getId();
+        } else {
+            idCard = myWeapons.get(0).getId();
+        }
+
+        return idCard;
     }
 }
