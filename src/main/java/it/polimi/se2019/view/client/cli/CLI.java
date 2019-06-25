@@ -243,6 +243,7 @@ public class CLI extends RemoteView {
     //TODO show the right player board given the arrChars, an arraylist of objects like "SPROG"
     @Override
     public void showGameBoard(List<AmmoRep> ammoReps, Map<String, List<CardRep>> posWeapons, List<String> arrChars) {
+        currState = 3;
         CliPrinter.reset();
         CliSetUp.clear();
         CliSetUp.cursorToHome();
@@ -641,6 +642,8 @@ public class CLI extends RemoteView {
             CliSetUp.cursorUp(5);
         else if (currState == 1)
             CliSetUp.cursorUp(1);
+        else if (currState == 3)
+            CliSetUp.cursorDown(1);
         HandyFunctions.printConsole("\rTimer: " + seconds);
         CliSetUp.restorePosition();
     }
