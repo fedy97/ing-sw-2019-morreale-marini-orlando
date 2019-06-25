@@ -12,5 +12,4 @@ public class ShowAmmoMessage extends ToClientMessage {
     public void performAction(RemoteView remoteView) {
         remoteView.showAmmoToDiscard();
     }
-
 }
