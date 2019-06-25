@@ -468,9 +468,6 @@
             <Image url="@assets/powerups/AD_powerups_IT_02.jpg" />
          </image></ImageView>
       <ImageView fitHeight="162.0" fitWidth="116.0" layoutX="933.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="movebutton" disable="true" layoutX="30.0" layoutY="603.0" mnemonicParsing="false" onAction="#moveClick" style="-fx-background-color: transparent;" text="move" />
-      <Button fx:id="grabbutton" disable="true" layoutX="31.0" layoutY="637.0" mnemonicParsing="false" onAction="#grabClick" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: transparent;" text="grab" />
-      <Button fx:id="shootbutton" disable="true" layoutX="30.0" layoutY="671.0" mnemonicParsing="false" onAction="#shootClick" style="-fx-background-color: transparent;" text="shoot" />
       <ImageView fitHeight="162.0" fitWidth="122.0" layoutX="931.0" layoutY="185.0" pickOnBounds="true">
          <image>
             <Image url="@assets/weapons/back.png" />
@@ -620,5 +617,20 @@
             <Font size="29.0" />
          </font>
       </Label>
+      <ImageView fx:id="moveimage" fitHeight="25.0" fitWidth="66.0" layoutX="31.0" layoutY="603.0" pickOnBounds="true">
+         <image>
+            <Image url="@assets/boards/move1.png" />
+         </image></ImageView>
+      <ImageView fx:id="grabimage" fitHeight="25.0" fitWidth="66.0" layoutX="31.0" layoutY="636.0" pickOnBounds="true">
+         <image>
+            <Image url="@assets/boards/grab1.png" />
+         </image></ImageView>
+      <ImageView fx:id="shootimage" fitHeight="25.0" fitWidth="66.0" layoutX="31.0" layoutY="671.0" pickOnBounds="true">
+         <image>
+            <Image url="@assets/boards/shoot1.png" />
+         </image></ImageView>
+      <Button fx:id="movebutton" disable="true" layoutX="31.0" layoutY="603.0" mnemonicParsing="false" onAction="#moveClick" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="grabbutton" disable="true" layoutX="31.0" layoutY="637.0" mnemonicParsing="false" onAction="#grabClick" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="shootbutton" disable="true" layoutX="30.0" layoutY="671.0" mnemonicParsing="false" onAction="#shootClick" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: transparent;" />
    </children>
 </AnchorPane>

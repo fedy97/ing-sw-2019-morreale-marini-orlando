@@ -722,4 +722,9 @@ public class CLI extends RemoteView {
 
         return idCard;
     }
+
+    @Override
+    public void showAmmoToDiscard() {
+
+    }
 }
