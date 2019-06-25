@@ -115,7 +115,7 @@ public class CLI extends RemoteView {
         CliSetUp.cursorDown(20);
         CliSetUp.cursorLeft(106);
         showMessage(lastMsg);
-        currState = 1;
+        currState = 2;
 
     }
 
@@ -212,7 +212,6 @@ public class CLI extends RemoteView {
         CliPrinter.stamp("\n");
         CliPrinter.choosePowerUpMessage(p1, p2);
         CliSetUp.cursorRight(9);
-        //CliSetUp.cursorUp(1);
         CliPrinter.boxMessage(null);
         CliSetUp.cursorUp(10);
         CliSetUp.cursorLeft(10);
@@ -644,39 +643,17 @@ public class CLI extends RemoteView {
         }
         timerTurn = new TimerTurn(count, this, currPlayer);
         timerTurn.start();
-        /*
-        CE LA CLASSE TURNTIMER CHE IMPLEMENTA IL TIMER,
-        QUI SI INIZIALIZZA IL TURNTIMER POI
-        OGNI SECONDO VIENE CHIAMATO L UPDATE TURN TIMER DA QUELLA CLASSE
-        try {
-            timerTurn.cancel();
-            timerTurn.purge();
-        }
-        catch (Exception e) {
-
-        }
-        timerTurn = new Timer();
-        counter = count;
-        timerTurn.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (counter >= 0) {
-                    CliSetUp.savePosition();
-                    if (currState == 0)
-                        CliSetUp.cursorUp(5);
-                    HandyFunctions.printConsole("\rTimer: " + counter);
-                    CliSetUp.restorePosition();
-                    counter--;
-                }
-            }
-         }, 0,1*1000);
-
-        */
     }
 
     @Override
     public void updateTimerTurn(int seconds, String curr) {
-        //TODO
+        CliSetUp.savePosition();
+        if (currState == 0)
+            CliSetUp.cursorUp(5);
+        else if (currState == 1)
+            CliSetUp.cursorUp(1);
+        HandyFunctions.printConsole("\rTimer: " + seconds);
+        CliSetUp.restorePosition();
     }
 
     @Override
