@@ -87,6 +87,7 @@ public class GUI extends RemoteView {
         initWaitingLobby();
         initChooseMap();
         initChooseCharacter();
+        initChoosePowerup();
         showWaitingLobby();
     }
 
@@ -97,11 +98,11 @@ public class GUI extends RemoteView {
     }
 
     @Override
-    public void showChoosePowerup(CardRep p1, CardRep p2) {
+    public void showChoosePowerup(List<CardRep> cards) {
+        choosePowerupController.passGUI(this);
         Platform.runLater(
                 () -> {
-                    initChoosePowerup(p1, p2);
-                    choosePowerupController.passGUI(this);
+                    choosePowerupController.updateRightPowerups(cards);
                     secondStage.setScene(sceneChoosePowerup);
                     secondStage.setResizable(false);
                     secondStage.show();
@@ -342,7 +343,7 @@ public class GUI extends RemoteView {
         }
     }
 
-    private void initChoosePowerup(CardRep p1, CardRep p2) {
+    private void initChoosePowerup() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/choosePowerup.fxml"));
         try {
             Parent root = loader.load();
@@ -352,14 +353,13 @@ public class GUI extends RemoteView {
             secondStage.initModality(Modality.APPLICATION_MODAL);
             sceneChoosePowerup = new Scene(root);
             choosePowerupController = loader.getController();
-            choosePowerupController.im1rep = p1;
-            choosePowerupController.im2rep = p2;
             secondStage.setOnCloseRequest(event -> Platform.runLater(
                     () -> secondStage.show()
             ));
 
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose power up");
+            CustomLogger.logException(this.getClass().getName(), e);
         }
 
     }
@@ -373,7 +373,6 @@ public class GUI extends RemoteView {
                 () ->
                         waitingLobbyController.updateLoggedPlayers(users));
     }
-
 
 
     @Override
@@ -458,7 +457,7 @@ public class GUI extends RemoteView {
         notifyController(message);
     }
 
-    protected void sendAmmo(String ammo){
+    protected void sendAmmo(String ammo) {
         ChosenAmmoMessage message = new ChosenAmmoMessage(ammo);
         notifyController(message);
         chooseAmmosStage.close();
@@ -466,6 +465,14 @@ public class GUI extends RemoteView {
 
     protected void sendBinaryAnswer(boolean answer) {
         ResponseToBinaryOption message = new ResponseToBinaryOption(answer);
+        notifyController(message);
+    }
+
+    protected void sendPowerupToDiscardThenSpawn(int hash) {
+        List<Integer> hashes = new ArrayList<>();
+        hashes.add(hash);
+        hashes.add(hash);
+        SendInitPowerUpMessage message = new SendInitPowerUpMessage(hashes);
         notifyController(message);
     }
 
@@ -511,6 +518,7 @@ public class GUI extends RemoteView {
                     this.charsInGame = charsInGame;
                     this.charInString = myChar;
                     initGameBoardReconnected(Integer.toString(config));
+                    initChoosePowerup();
                     initPlayerBoard();
                     initSwitchWeapon();
                     initUsePowerup();
@@ -519,6 +527,7 @@ public class GUI extends RemoteView {
                     initChooseTargets();
                     initReloadWeapons();
                     initChooseAmmos();
+                    choosePowerupController.passGUI(this);
                     chooseAmmosController.passGUI(this);
                     reloadWeaponsController.passGUI(this);
                     chooseTargetsController.passGUI(this);

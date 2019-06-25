@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="463.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.view.client.gui.ChoosePowerupController">
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="315.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/8"
+            fx:controller="it.polimi.se2019.view.client.gui.ChoosePowerupController">
     <children>
-      <ImageView fitHeight="315.0" fitWidth="463.0" pickOnBounds="true">
-         <image>
-            <Image url="@assets/backgrounds/bgchoose.jpg" />
-         </image>
-      </ImageView>
-        <ImageView fx:id="im1" fitHeight="186.0" fitWidth="146.0" layoutX="56.0" layoutY="65.0" pickOnBounds="true" />
-        <ImageView fx:id="im2" fitHeight="186.0" fitWidth="146.0" layoutX="261.0" layoutY="65.0" pickOnBounds="true" />
-        <Button fx:id="powerup1" layoutX="56.0" layoutY="65.0" mnemonicParsing="false" onAction="#chooseFirstPowerup" prefHeight="186.0" prefWidth="146.0" style="-fx-background-color: transparent;" />
-        <Button fx:id="powerup2" layoutX="261.0" layoutY="65.0" mnemonicParsing="false" onAction="#chooseSecondPowerup" prefHeight="186.0" prefWidth="146.0" style="-fx-background-color: transparent;" />
-      <Label layoutX="126.0" layoutY="14.0" text="Choose a Power Up" textFill="WHITE">
-         <font>
-            <Font name="Ubuntu" size="24.0" />
-         </font>
-      </Label>
-      <Button fx:id="info1button" layoutX="104.0" layoutY="276.0" mnemonicParsing="false" onAction="#info1click" text="INFO" />
-      <Button fx:id="info2button" layoutX="312.0" layoutY="276.0" mnemonicParsing="false" onAction="#info2click" text="INFO" />
+        <ImageView fitHeight="315.0" fitWidth="648.0" pickOnBounds="true">
+            <image>
+                <Image url="@assets/backgrounds/bgchoose.jpg"/>
+            </image>
+        </ImageView>
+        <ImageView fx:id="im1" fitHeight="186.0" fitWidth="146.0" layoutX="56.0" layoutY="65.0" pickOnBounds="true"/>
+        <ImageView fx:id="im2" fitHeight="186.0" fitWidth="146.0" layoutX="261.0" layoutY="65.0" pickOnBounds="true"/>
+        <Button fx:id="powerup1" layoutX="56.0" layoutY="65.0" mnemonicParsing="false" onAction="#chooseFirstPowerup"
+                prefHeight="186.0" prefWidth="146.0" style="-fx-background-color: transparent;"/>
+        <Button fx:id="powerup2" layoutX="261.0" layoutY="65.0" mnemonicParsing="false" onAction="#chooseSecondPowerup"
+                prefHeight="186.0" prefWidth="146.0" style="-fx-background-color: transparent;"/>
+        <Label layoutX="232.0" layoutY="14.0" text="Choose a Power Up" textFill="WHITE">
+            <font>
+                <Font name="Ubuntu" size="24.0"/>
+            </font>
+        </Label>
+        <Button fx:id="info1button" layoutX="104.0" layoutY="276.0" mnemonicParsing="false" onAction="#info1click"
+                text="INFO"/>
+        <Button fx:id="info2button" layoutX="312.0" layoutY="276.0" mnemonicParsing="false" onAction="#info2click"
+                text="INFO"/>
+        <ImageView fx:id="im3" fitHeight="186.0" fitWidth="146.0" layoutX="469.0" layoutY="65.0" pickOnBounds="true"/>
+        <Button fx:id="powerup3" layoutX="469.0" layoutY="65.0" mnemonicParsing="false" onAction="#chooseThirdPowerup"
+                prefHeight="186.0" prefWidth="146.0" style="-fx-background-color: transparent;"/>
+        <Button fx:id="info3button" layoutX="517.0" layoutY="276.0" mnemonicParsing="false" onAction="#info3click"
+                text="INFO"/>
     </children>
 </AnchorPane>
