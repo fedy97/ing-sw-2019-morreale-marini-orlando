@@ -139,6 +139,8 @@ public class CLI extends RemoteView {
                     iWantToUsePowerUp();
                 else if (choise == 6 && actives[5])
                     endTurn();
+                else if (choise == 7)
+                    iWantToConvertPowerUp();
                 else {
                     updateAll(lightGameVersion);
                     getActionInput();
@@ -202,6 +204,25 @@ public class CLI extends RemoteView {
         message.setSender(userName);
         viewSetChanged();
         notifyObservers(message);
+    }
+
+    public void iWantToConvertPowerUp() {
+        CliPrinter.convertPowerUpMessage(lightGameVersion,myCharEnumString);
+        Map<String, List<CardRep>> playerPowerUps = lightGameVersion.getPlayerPowerups();
+        List<CardRep> myPowerUps = playerPowerUps.get(myChar);
+        new Thread(() -> {
+            int choise;
+            Scanner s = new Scanner(System.in);
+            choise = s.nextInt();
+            if (choise < myPowerUps.size()) {
+                int hash = myPowerUps.get(choise).getId();
+                BuyWithPowerupsMessage message = new BuyWithPowerupsMessage(Integer.toString(hash));
+                notifyController(message);
+            }
+            else {
+                iWantToConvertPowerUp();
+            }
+        }).start();
     }
 
     @Override

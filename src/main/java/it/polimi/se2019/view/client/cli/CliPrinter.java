@@ -292,9 +292,6 @@ public final class CliPrinter {
         CliPrinter.stamp("┃                                            Choose an action:                                           ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
-        CliSetUp.cursorLeft(106);
-        CliSetUp.cursorDown(1);
         CliPrinter.stamp("┃                                        <1> move                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
@@ -311,6 +308,9 @@ public final class CliPrinter {
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
         CliPrinter.stamp("┃                                        <6> end turn                                                    ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <7> convert power up                                            ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
         CliPrinter.stamp("┃                                     press the <key> followed by enter                                  ┃");
@@ -618,6 +618,59 @@ public final class CliPrinter {
                 if (counter < 2) {
                     CliPrinter.stamp(", ");
                 }
+            }
+            counter++;
+        }
+        stamp(" <0,1,2>: ");
+    }
+
+    public static void convertPowerUpMessage(LightGameVersion lightGameVersion, String myChar) {
+        CliSetUp.savePosition();
+        CliSetUp.cursorUp(1);
+        CliSetUp.cursorRight(9);
+        Map<String, List<CardRep>> playerPowerUps = lightGameVersion.getPlayerPowerups();
+        List<CardRep> myPowerUps = playerPowerUps.get(myChar);
+
+        CliSetUp.cursorLeft(7);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                             Choose a powerUp:                                          ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliSetUp.cursorLeft(78);
+        CliSetUp.cursorUp(6);
+        int counter = 0;
+        for (CardRep c: myPowerUps) {
+            CliPrinter.stamp(c.getTitle());
+            if (counter < 2) {
+                CliPrinter.stamp(", ");
             }
             counter++;
         }
