@@ -25,7 +25,7 @@ public class ShowGameBoardMessage extends ToClientMessage {
         remoteView.showGameBoard(ammoReps, posWeaponsReps, arrChars);
         String rec = (String) payload;
         if (rec.equals(remoteView.getUserName())) {
-            remoteView.showChoosePowerup(cardReps.get(0), cardReps.get(1));
+            remoteView.showChoosePowerup(cardReps);
         }
 
     }

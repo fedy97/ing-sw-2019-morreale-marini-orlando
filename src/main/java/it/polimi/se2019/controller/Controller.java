@@ -485,8 +485,8 @@ public class Controller implements Observer, Serializable {
                 PowerUpCard p2 = decksManager.drawPowerUp();
                 playerManager.getCurrentPlayer().addPowerUpCard(p1);
                 playerManager.getCurrentPlayer().addPowerUpCard(p2);
-                cardReps.add(new CardRep(HandyFunctions.getSystemAddress(p1), p1.getName(), p1.getDescription(), p1.getImgPath()));
-                cardReps.add(new CardRep(HandyFunctions.getSystemAddress(p2), p2.getName(), p2.getDescription(), p2.getImgPath()));
+                cardReps.add(new CardRep(p1));
+                cardReps.add(new CardRep(p2));
 
                 List<AmmoRep> ammoReps = new ArrayList<>();
                 //set for each platform an ammocard, than add it to the array of ammoreps

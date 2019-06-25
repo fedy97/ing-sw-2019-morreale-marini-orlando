@@ -18,7 +18,7 @@ public class ShowChoosePowerUpMessage extends ToClientMessage {
     @Override
     public void performAction(RemoteView remoteView) {
         List<CardRep> cardReps = (ArrayList) payload;
-        remoteView.showChoosePowerup(cardReps.get(0), cardReps.get(1));
+        remoteView.showChoosePowerup(cardReps);
     }
 
 }

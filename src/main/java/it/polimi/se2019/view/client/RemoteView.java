@@ -63,7 +63,7 @@ public abstract class RemoteView extends View {
      * @param p1
      * @param p2
      */
-    public abstract void showChoosePowerup(CardRep p1, CardRep p2);
+    public abstract void showChoosePowerup(List<CardRep> cards);
 
     /**
      * @param randomChar if the player does not choose a character
