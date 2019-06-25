@@ -1,9 +1,9 @@
 {
   "weapons": [
     {
-      "name": "fucile a pompa",
-      "description": "modalità base: Dai 3 danni a 1 bersaglio nel\nquadrato in cui ti trovi. Se vuoi puoi muovere\nquel bersaglio di 1 quadrato.\nmodalità canna lunga: Dai 2 danni\na 1 bersaglio in un quadrato distante\nesattamente 1 movimento.",
-      "paidCost":  "YELLOW",
+      "name": "fucile al plasma",
+      "description": "effetto base: Dai 2 danni a 1 bersaglio che puoi vedere.\nslittamento di fase: Muovi di 1 o 2 quadrati. Questo effetto\npuò essere usato prima o dopo l'effetto base.\ncolpo sovraccarico: Dai 1 danno aggiuntivo al tuo\nbersaglio.\nNota: I due movimenti non hanno costo in munizioni.\nNon hai bisogno di vedere il tuo bersaglio quando giochi la\ncarta. Per esempio puoi muovere di 2 quadrati e sparare al\nbersaglio che ora puoi vedere. Non puoi usare 1 movimento\nprima di sparare e 1 dopo aver sparato.",
+      "paidCost": "BLUE",
       "extraCost": ["YELLOW"]
     }
   ]

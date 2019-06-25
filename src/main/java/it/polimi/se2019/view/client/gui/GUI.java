@@ -40,6 +40,8 @@ public class GUI extends RemoteView {
     private transient BuyWithPowerupController buyWithPowerupController;
     private transient ChooseTargetsController chooseTargetsController;
     private transient ReloadWeaponsController reloadWeaponsController;
+    private transient ChooseAmmosController chooseAmmosController;
+
     private Scene sceneLogin;
     private Scene sceneWaitingLobby;
     private Scene sceneChooseMap;
@@ -53,6 +55,8 @@ public class GUI extends RemoteView {
     private Scene sceneBuyWithPowerups;
     private Scene sceneChooseTargets;
     private Scene sceneReloadWeapons;
+    private Scene sceneChooseAmmos;
+
     private Stage stage;
     private Stage secondStage;
     private Stage playerBoardStage;
@@ -62,6 +66,8 @@ public class GUI extends RemoteView {
     private Stage buyWithPowerupsStage;
     private Stage chooseTargetsStage;
     private Stage reloadWeaponsStage;
+    private Stage chooseAmmosStage;
+
     private String charInString;
     private List<String> charsInGame;
     private String config;
@@ -138,6 +144,8 @@ public class GUI extends RemoteView {
                     initBuyWithPowerup();
                     initChooseTargets();
                     initReloadWeapons();
+                    initChooseAmmos();
+                    chooseAmmosController.passGUI(this);
                     reloadWeaponsController.passGUI(this);
                     chooseTargetsController.passGUI(this);
                     buyWithPowerupController.passGUI(this);
@@ -190,6 +198,19 @@ public class GUI extends RemoteView {
             chooseTargetsController = loader.getController();
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose targets");
+        }
+    }
+
+    private void initChooseAmmos() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chooseAmmos.fxml"));
+        try {
+            Parent root = loader.load();
+            chooseAmmosStage = new Stage();
+            chooseAmmosStage.setTitle("Choose one ammo to pay with");
+            sceneChooseAmmos = new Scene(root);
+            chooseAmmosController = loader.getController();
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose ammos");
         }
     }
 
@@ -437,6 +458,12 @@ public class GUI extends RemoteView {
         notifyController(message);
     }
 
+    protected void sendAmmo(String ammo){
+        ChosenAmmoMessage message = new ChosenAmmoMessage(ammo);
+        notifyController(message);
+        chooseAmmosStage.close();
+    }
+
     protected void sendBinaryAnswer(boolean answer) {
         ResponseToBinaryOption message = new ResponseToBinaryOption(answer);
         notifyController(message);
@@ -491,6 +518,8 @@ public class GUI extends RemoteView {
                     initBuyWithPowerup();
                     initChooseTargets();
                     initReloadWeapons();
+                    initChooseAmmos();
+                    chooseAmmosController.passGUI(this);
                     reloadWeaponsController.passGUI(this);
                     chooseTargetsController.passGUI(this);
                     buyWithPowerupController.passGUI(this);
@@ -676,6 +705,17 @@ public class GUI extends RemoteView {
     public void resetTimer() {
         Platform.runLater(() ->
                 waitingLobbyController.resetTimer());
+    }
+
+    @Override
+    public void showAmmoToDiscard() {
+        Platform.runLater(
+                () -> {
+                    chooseAmmosStage.setScene(sceneChooseAmmos);
+                    chooseAmmosStage.setResizable(false);
+                    chooseAmmosController.updateRightAmmos(lightGameVersion);
+                    chooseAmmosStage.show();
+                });
     }
 
     public String getCharInString() {

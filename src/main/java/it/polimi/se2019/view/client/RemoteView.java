@@ -117,6 +117,11 @@ public abstract class RemoteView extends View {
     public abstract void showTargets(List<String> targets);
 
     /**
+     * Show the ammo to discard in order to perform actions
+     */
+    public abstract void showAmmoToDiscard();
+
+    /**
      * list of all usable effects of the weapon selected
      *
      * @param effects the list which can contain 0,1,2

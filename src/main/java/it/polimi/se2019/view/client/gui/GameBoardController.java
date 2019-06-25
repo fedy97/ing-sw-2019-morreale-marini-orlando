@@ -297,6 +297,12 @@ public class GameBoardController {
     @FXML
     private Button convertbutton;
     @FXML
+    private ImageView moveimage;
+    @FXML
+    private ImageView shootimage;
+    @FXML
+    private ImageView grabimage;
+    @FXML
     private Label timer;
 
     private boolean reconnected = false;
@@ -645,8 +651,8 @@ public class GameBoardController {
 
     protected void updateAll(LightGameVersion lightGameVersion) {
         this.lightGameVersion = lightGameVersion;
-        //update position of players
         try {
+            //update position of players
             updatePositionsPlayers();
             //update the 9 weapons in the field
             updateWeapons();

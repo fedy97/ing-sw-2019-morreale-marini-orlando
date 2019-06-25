@@ -56,13 +56,16 @@ public final class Deserializer {
                 return weaponCard;
         }
         for (Platform platform : Game.getInstance().getGameField().getPlatforms()) {
-            try {
-                for (WeaponCard weaponCard : platform.getWeapons()) {
-                    if (weaponCard.toString().equals(light))
-                        return weaponCard;
+            if (platform.isGenerationSpot()) {
+                try {
+                    for (WeaponCard weaponCard : platform.getWeapons()) {
+                        if (weaponCard.toString().equals(light))
+                            return weaponCard;
+                    }
+
+                } catch (InvalidGenerationSpotException ex) {
+                    CustomLogger.logException(Deserializer.class.getName(), ex);
                 }
-            } catch (InvalidGenerationSpotException ex) {
-                CustomLogger.logException(Deserializer.class.getName(), ex);
             }
 
         }

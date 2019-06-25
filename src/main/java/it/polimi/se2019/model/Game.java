@@ -78,6 +78,17 @@ public class Game extends Observable implements Serializable {
     }
 
     /**
+     * @param players of the game
+     * @return the list of character corresponding to the player
+     */
+    public List<Character> getCharacters(List<Player> players) {
+        List<Character> res = new ArrayList<>();
+        for (Player player : players)
+            res.add(player.getCharacter());
+        return res;
+    }
+
+    /**
      * @return The deck containing the weapon cards
      */
     public Deck<WeaponCard> getWeaponsDeck() {
@@ -164,7 +175,7 @@ public class Game extends Observable implements Serializable {
      * @return the light model representation used to update the client vew
      */
     public LightGameVersion getLightVersion() {
-        for(Platform p : gameField.getPlatforms()) {
+        for (Platform p : gameField.getPlatforms()) {
             System.out.flush();
             System.out.println(p);
             HandyFunctions.printList(p.getPlayersOnThePlatform());
