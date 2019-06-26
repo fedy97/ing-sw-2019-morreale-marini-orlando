@@ -741,8 +741,50 @@ public final class CliPrinter {
         CliSetUp.cursorLeft(23);
         CliPrinter.stamp("GAME'S INFO");
         CliSetUp.cursorDown(2);
-        CliSetUp.cursorLeft(34);
+        CliSetUp.cursorLeft(20);
         CliSetUp.savePosition();
+        CliPrinter.stamp("Total skulls: " + lightGameVersion.getTotalSkulls());
+        CliSetUp.restorePosition();
+        CliSetUp.cursorDown(1);
+        CliSetUp.savePosition();
+        CliPrinter.stamp("Number of skulls: " + lightGameVersion.getSkullsNum());
+        CliSetUp.restorePosition();
+        CliSetUp.cursorDown(1);
+        CliSetUp.savePosition();
+        List<String> charactersThatKilled = lightGameVersion.getCharactersThatKilled();
+        List<Integer> quantityOfMarks = lightGameVersion.getQuantityOfMarks();
+
+        for (int i=0; i < charactersThatKilled.size(); i++) {
+            if (charactersThatKilled.get(i).equals("BANSHEE")) {
+                CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+                if (quantityOfMarks.get(i) == 2)
+                    CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+            }
+            if (charactersThatKilled.get(i).equals("SPROG")) {
+                CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+                if (quantityOfMarks.get(i) == 2)
+                    CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+            }
+            if(charactersThatKilled.get(i).equals("DOZER")) {
+                CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+                if (quantityOfMarks.get(i) == 2)
+                    CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+            }
+            if(charactersThatKilled.get(i).equals("VIOLET")) {
+                CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+                if (quantityOfMarks.get(i) == 2)
+                    CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+            }
+            if(charactersThatKilled.get(i).equals("DISTRUCTOR")) {
+                CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+                if (quantityOfMarks.get(i) == 2)
+                    CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+            }
+            CliSetUp.restorePosition();
+            CliSetUp.cursorDown(1);
+            CliSetUp.savePosition();
+        }
+        CliSetUp.restorePosition();
     }
 
 
