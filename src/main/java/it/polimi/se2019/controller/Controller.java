@@ -1,6 +1,7 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.Action;
+import it.polimi.se2019.controller.validator.Frenzy2Validator;
 import it.polimi.se2019.controller.validator.HealthyValidator;
 import it.polimi.se2019.controller.validator.UserValidActions;
 import it.polimi.se2019.controller.validator.Validator;
@@ -12,6 +13,7 @@ import it.polimi.se2019.model.board.*;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
+import it.polimi.se2019.model.card.powerups.TagbackGrenade;
 import it.polimi.se2019.model.card.weapons.Effect;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
@@ -62,6 +64,7 @@ public class Controller implements Observer, Serializable {
     private List<String> alreadyNotified = new ArrayList<>();
     private int configMap;
     private boolean waitingToPing = true;
+    private boolean frenzyModeOn = false;
 
     private Controller() {
         game = Game.getInstance();
@@ -75,7 +78,6 @@ public class Controller implements Observer, Serializable {
         chosenDestination = new LinkedBlockingDeque<>();
         chosenEffect = new LinkedBlockingDeque<>();
         chosenAmmo = new LinkedBlockingDeque<>();
-
 
         playerManager = new PlayerManager(this);
         turnController = new TurnController();
@@ -144,10 +146,11 @@ public class Controller implements Observer, Serializable {
         }).start();
     }
 
-    @Override
+
     /**
      * Called when the VirtualView notify changes
      */
+    @Override
     public void update(Observable virtualView, Object message) {
         if (state == ControllerState.SETUP) {
             if (message.equals("we are at least 2")) {
@@ -167,9 +170,82 @@ public class Controller implements Observer, Serializable {
      *
      * @param action to be performed
      */
-    public void processAction(String action) {
+    public void processAction(String action) throws InterruptedException {
+        if (isFrenzyModeOn())
+            processFrenzyAction(action);
+        else
+            processNormalAction(action);
+
+        if (action.equals("action4")) {
+            askFor(getValidator().getReloadableWeapons(), "recharge");
+        }
+        if (action.equals("action5")) {
+            askFor(getValidator().getUsablePowerUps(), "powerups");
+            while (getState() == ControllerState.PROCESSING_POWERUP)
+                Thread.sleep(200);
+        }
+
+        setState(ControllerState.IDLE);
+    }
+
+    private void processFrenzyAction(String action) {
         List<Platform> destinations;
 
+        try {
+
+            if (action.equals("action1")) {
+
+                setState(ControllerState.PROCESSING_ACTION_1);
+                destinations = validator.getValidMoves(Action.SHOOT);
+
+                //send the possible destinations
+                askFor(destinations, "position");
+                playerManager.move(getChosenDestination().take());
+
+                if (!validator.getReloadableWeapons().isEmpty()) {
+                    callView(new SendBinaryOption("Do you want to recharge?"), playerManager.getCurrentPlayer().getName());
+                    if (chosenBinaryOption.take()){
+                        askFor(validator.getReloadableWeapons(), "recharge");
+                        while(!wasRecharged)
+                            Thread.sleep(500);
+                        wasRecharged = false;
+                    }
+                }
+
+                if (validator.getUsableWeapons().isEmpty()) {
+                    sendMessage("***** You have no usable weapons actually! ***", playerManager.getCurrentPlayer().getName());
+                    setState(ControllerState.IDLE);
+                    return;
+                }
+                askFor(getValidator().getUsableWeapons(), "weaponsToUse");
+
+                while (getState() == ControllerState.PROCESSING_ACTION_1)
+                    Thread.sleep(200);
+            }
+
+            if ((action.equals("action2") && playerManager.getCurrentPlayer().getFrenzyModeType() == 2) ||
+                    (action.equals("action3") && playerManager.getCurrentPlayer().getFrenzyModeType() == 1)) {
+                grabRoutine();
+            }
+
+            if (action.equals("action2") && playerManager.getCurrentPlayer().getFrenzyModeType() == 1) {
+                setState(ControllerState.PROCESSING_ACTION_3);
+
+                destinations = validator.getValidMoves(Action.MOVE);
+                //send the possible destinations
+                askFor(destinations, "position");
+                playerManager.move(getChosenDestination().take());
+            }
+
+            if (action.equals("action3") && playerManager.getCurrentPlayer().getFrenzyModeType() == 2)
+                sendMessage("*** You cannot perform this action!!!! ***", playerManager.getCurrentPlayer().getName());
+        } catch (Exception e) {
+            CustomLogger.logException(this.getClass().getName(), e);
+        }
+    }
+
+    private void processNormalAction(String action) {
+        List<Platform> destinations;
         try {
 
             if (action.equals("action1")) {
@@ -181,40 +257,14 @@ public class Controller implements Observer, Serializable {
                 playerManager.move(getChosenDestination().take());
 
             } else if (action.equals("action2")) {
+                grabRoutine();
+            } else if (action.equals("action3")) {
 
-                setState(ControllerState.PROCESSING_ACTION_2);
-                destinations = validator.getValidMoves(Action.GRAB);
-
-                //ask where to move before grabbing
-                askFor(destinations, "position");
-                Platform dest = getChosenDestination().take();
-                getPlayerManager().move(dest);
-
-                if (dest.isGenerationSpot()) {
-                    try {
-                        if (playerManager.getCurrentPlayer().getWeaponCards().size() == 3) {
-                            callView(new AskToDiscardMessage(null), playerManager.getCurrentPlayer().getName());
-                            WeaponCard card = getChosenWeapons().take();
-
-                            if (card.getName().equals("null")) {
-                                setState(ControllerState.IDLE);
-                                return;
-                            } else
-                                getPlayerManager().getCurrentPlayer().removeWeaponCard(card);
-                        }
-
-                        askFor(getValidator().getGrabableWeapons(), "weapons");
-                        WeaponCard chosen = getChosenWeapons().take();
-
-                        playerManager.buyWeapon(chosen);
-                    } catch (Exception e) {
-                        CustomLogger.logException(this.getClass().getName(), e);
-                    }
-                } else {
-                    getPlayerManager().grabAmmoCard();
+                if (validator.getUsableWeapons().isEmpty()) {
+                    sendMessage("***** You have no usable weapons actually! ***", playerManager.getCurrentPlayer().getName());
+                    return;
                 }
 
-            } else if (action.equals("action3")) {
                 setState(ControllerState.PROCESSING_ACTION_3);
 
                 try {
@@ -229,19 +279,46 @@ public class Controller implements Observer, Serializable {
                 while (getState() == ControllerState.PROCESSING_ACTION_3)
                     Thread.sleep(200);
 
-            } else if (action.equals("action4")) {
-                askFor(getValidator().getReloadableWeapons(), "recharge");
-            } else if (action.equals("action5")) {
-                askFor(getValidator().getUsablePowerUps(), "powerups");
-                while (getState() == ControllerState.PROCESSING_POWERUP)
-                    Thread.sleep(200);
             }
         } catch (Exception e) {
             CustomLogger.logException(this.getClass().getName(), e);
         }
-
-        setState(ControllerState.IDLE);
     }
+
+    private void grabRoutine() throws InvalidActionException, InterruptedException {
+        setState(ControllerState.PROCESSING_ACTION_2);
+        List<Platform> destinations = validator.getValidMoves(Action.GRAB);
+
+        //ask where to move before grabbing
+        askFor(destinations, "position");
+        Platform dest = getChosenDestination().take();
+        getPlayerManager().move(dest);
+
+        if (dest.isGenerationSpot()) {
+            try {
+                if (playerManager.getCurrentPlayer().getWeaponCards().size() == 3) {
+                    callView(new AskToDiscardMessage(null), playerManager.getCurrentPlayer().getName());
+                    WeaponCard card = getChosenWeapons().take();
+
+                    if (card.getName().equals("null")) {
+                        setState(ControllerState.IDLE);
+                        return;
+                    } else
+                        getPlayerManager().getCurrentPlayer().removeWeaponCard(card);
+                }
+
+                askFor(getValidator().getGrabableWeapons(), "weapons");
+                WeaponCard chosen = getChosenWeapons().take();
+
+                playerManager.buyWeapon(chosen);
+            } catch (Exception e) {
+                CustomLogger.logException(this.getClass().getName(), e);
+            }
+        } else {
+            getPlayerManager().grabAmmoCard();
+        }
+    }
+
 
     /**
      * Launch a power up execution
@@ -257,7 +334,11 @@ public class Controller implements Observer, Serializable {
                 powerUp.activate(null);
             }
 
-            playerManager.getCurrentPlayer().removePowerUpCard(powerUp);
+            if (powerUp.getName().equals("granata venom")) {
+                TagbackGrenade tagbackGrenade = (TagbackGrenade) powerUp;
+                game.getPlayer(tagbackGrenade.getUserTarget()).removePowerUpCard(powerUp);
+            } else
+                playerManager.getCurrentPlayer().removePowerUpCard(powerUp);
             decksManager.addToGarbage(powerUp);
         } catch (Exception e) {
             CustomLogger.logException(this.getClass().getName(), e);
@@ -274,7 +355,7 @@ public class Controller implements Observer, Serializable {
         List<Integer> usableEffectsIndex = new ArrayList<>();
         int usedEffects = 0;
 
-        while (state == ControllerState.PROCESSING_ACTION_3) {
+        while (usedEffects < 3) {
             boolean[] usableEffects = weapon.getUsableEffects();
 
             for (int i = 0; i < usableEffects.length; i++) {
@@ -336,6 +417,7 @@ public class Controller implements Observer, Serializable {
             usedEffects++;
         }
 
+        setState(ControllerState.IDLE);
         weapon.discard();
         game.notifyChanges();
     }
@@ -352,6 +434,8 @@ public class Controller implements Observer, Serializable {
      */
     public void endGame() {
         //TODO
+        System.out.println("Scores");
+        System.exit(0);
     }
 
     public boolean isTimerStarted() {
@@ -630,7 +714,7 @@ public class Controller implements Observer, Serializable {
     /**
      * Send general info to the selected player
      *
-     * @param msg       content of the communication
+     * @param msg       content of the message (String)
      * @param recipient destination of the message
      */
     public void sendMessage(String msg, String recipient) {
@@ -664,6 +748,11 @@ public class Controller implements Observer, Serializable {
         return config;
     }
 
+    /**
+     * Send a broadcast message
+     *
+     * @param msg to be sent to all the players
+     */
     protected void notifyAll(ToClientMessage msg) {
         for (String user : userView.keySet()) {
             if (game.getGameField() == null || game.getPlayers().isEmpty() || (game.getPlayer(user) != null && game.getPlayer(user).isConnected()) || game.getPlayer(user) == null) {
@@ -731,7 +820,6 @@ public class Controller implements Observer, Serializable {
         return currentTargets;
     }
 
-
     public BlockingDeque<WeaponCard> getChosenWeapons() {
         return chosenWeapons;
     }
@@ -768,9 +856,12 @@ public class Controller implements Observer, Serializable {
         return state;
     }
 
+    /**
+     * Set the new state of the controller
+     *
+     * @param newState
+     */
     public void setState(ControllerState newState) {
-        CustomLogger.logInfo("Old state", state.toString());
-        CustomLogger.logInfo("New State", newState.toString());
         if (newState == ControllerState.IDLE) {
             if ((state == ControllerState.PROCESSING_ACTION_1
                     || state == ControllerState.PROCESSING_ACTION_2
@@ -819,5 +910,27 @@ public class Controller implements Observer, Serializable {
         return pingsWaitingList;
     }
 
+    /**
+     * Activate the final frenzy mode
+     */
+    public void activateFrenzyMode() {
+        frenzyModeOn = true;
+    }
 
+    /**
+     * @return if frenzy mode is on
+     */
+    public boolean isFrenzyModeOn() {
+        return frenzyModeOn;
+    }
+
+    private boolean wasRecharged;
+
+    public boolean wasRecharged() {
+        return wasRecharged;
+    }
+
+    public void setWasRecharged(boolean wasRecharged) {
+        this.wasRecharged = wasRecharged;
+    }
 }

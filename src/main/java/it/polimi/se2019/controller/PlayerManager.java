@@ -10,13 +10,12 @@ import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.SendBinaryOption;
+import it.polimi.se2019.network.message.to_client.ShowUsablePowerupsMessage;
 import it.polimi.se2019.utils.CustomLogger;
+import it.polimi.se2019.utils.HandyFunctions;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A manager class that controls the player behaviour
@@ -132,37 +131,11 @@ public class PlayerManager implements Serializable {
      */
     public void addDamage(Map<Player, Integer> targetsMap) {
         Iterator hmIterator = targetsMap.entrySet().iterator();
+
+        checkTargettingScope(targetsMap.keySet());
+        checkTagbackGrenade(targetsMap.keySet());
+
         Player p;
-
-        int i = 0;
-        while (!currentPlayer.getPowerUpCards().isEmpty()) {
-            PowerUpCard powerUpCard = currentPlayer.getPowerUpCards().get(i);
-            if (powerUpCard.getName().equals("mirino"))
-                father.callView(new SendBinaryOption("Do you want to use Mirino?"), currentPlayer.getName());
-
-            try {
-                if (father.getChosenBinaryOption().take()) {
-
-                    List<PowerUpCard> toShow = new ArrayList<>();
-                    tempPlayers = new ArrayList<>(targetsMap.keySet());
-
-                    for (PowerUpCard mir : currentPlayer.getPowerUpCards()) {
-                        if (mir.getName().equals("mirino")) {
-                            toShow.add(mir);
-                        }
-                    }
-
-                    father.askFor(toShow, "powerups");
-                    father.setState(ControllerState.PROCESSING_POWERUP);
-                    while(father.getState() == ControllerState.PROCESSING_POWERUP)
-                        Thread.sleep(200);
-                }
-            } catch (Exception e) {
-                CustomLogger.logException(this.getClass().getName(), e);
-            }
-
-        }
-
         while (hmIterator.hasNext()) {
             Map.Entry mapElement = (Map.Entry) hmIterator.next();
             int damage = ((int) mapElement.getValue());
@@ -187,12 +160,66 @@ public class PlayerManager implements Serializable {
     }
 
     /**
-     * @param weapon to be bought
-     * @throws InsufficientAmmoException when the player hasn't enough ammos to buy the weapon
-     * @throws MaxWeaponException        when the player has already three weapons, he can choose to discard one
-     *                                   or not buying the current one
+     * Check if the player can use TargettingScope
+     *
+     * @param targets that are receiving damage
      */
-    public void buyWeapon(WeaponCard weapon) throws InsufficientAmmoException, MaxWeaponException, InvalidGenerationSpotException {
+    private void checkTargettingScope(Set<Player> targets) {
+        List<PowerUpCard> targettingScope = new ArrayList<>();
+
+        for (PowerUpCard powerUp : currentPlayer.getPowerUpCards())
+            if (powerUp.getName().equals("mirino"))
+                targettingScope.add(powerUp);
+
+        int i = 0;
+        while (i < targettingScope.size()) {
+            father.callView(new SendBinaryOption("Do you want to use Mirino?"), currentPlayer.getName());
+
+            try {
+                if (father.getChosenBinaryOption().take()) {
+                    tempPlayers = new ArrayList<>(targets);
+
+                    father.askFor(targettingScope, "powerups");
+                    father.setState(ControllerState.PROCESSING_POWERUP);
+                    while (father.getState() != ControllerState.PROCESSING_ACTION_3)
+                        Thread.sleep(200);
+                } else
+                    break;
+            } catch (Exception e) {
+                CustomLogger.logException(this.getClass().getName(), e);
+            }
+            i++;
+        }
+    }
+
+    /**
+     * Check if the targets can use TagBackGrenade
+     *
+     * @param targets that are receiving damage
+     */
+    private void checkTagbackGrenade(Set<Player> targets) {
+
+        for (Player player : targets) {
+            List<PowerUpCard> tagbackGrenade = new ArrayList<>();
+            for (PowerUpCard powerUp : player.getPowerUpCards()) {
+                if (powerUp.getName().equals("granata venom"))
+                    tagbackGrenade.add(powerUp);
+            }
+
+            if (!tagbackGrenade.isEmpty()) {
+                List<String> lightVersion = HandyFunctions.getLightCollection(tagbackGrenade);
+                father.callView(new ShowUsablePowerupsMessage(lightVersion), player.getName());
+            }
+        }
+    }
+
+
+    /**
+     * @param weapon to be bought
+     * @throws MaxWeaponException when the player has already three weapons, he can choose to discard one
+     *                            or not buying the current one
+     */
+    public void buyWeapon(WeaponCard weapon) throws MaxWeaponException, InvalidGenerationSpotException {
         AmmoBox box = currentPlayer.getPlayerBoard().getAmmoBox();
         currentPlayer.addWeaponCard(weapon);
         currentPlayer.getCurrentPlatform().removeWeaponCard(weapon);
@@ -260,9 +287,5 @@ public class PlayerManager implements Serializable {
 
     public List<Player> getTempPlayers() {
         return tempPlayers;
-    }
-
-    public void setTempPlayers(List<Player> tempPlayers) {
-        this.tempPlayers = tempPlayers;
     }
 }

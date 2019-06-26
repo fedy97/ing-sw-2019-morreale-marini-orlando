@@ -25,6 +25,7 @@ public class ReloadWeaponsMessage extends ToServerMessage {
             PlayerManager manager = Controller.getInstance().getPlayerManager();
             EnablePlayerActionsMessage message = new EnablePlayerActionsMessage(UserValidActions.NO_BASIC.getActions());
             Controller.getInstance().callView(message, manager.getCurrentPlayer().getName());
+            Controller.getInstance().setWasRecharged(true);
             try {
                 manager.reload(weapon);
             } catch (Exception e) {

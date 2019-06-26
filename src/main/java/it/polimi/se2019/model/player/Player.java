@@ -183,7 +183,7 @@ public class Player implements Serializable {
      * Increases by one the number of times the player died during the game
      */
     public void addDeath() {
-        numOfDeaths = numOfDeaths + 1;
+        numOfDeaths++;
     }
 
     /**

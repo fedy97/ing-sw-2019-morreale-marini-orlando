@@ -103,7 +103,7 @@ public abstract class Validator implements Serializable {
         Player currPlayer = father.getPlayerManager().getCurrentPlayer();
 
         for (PowerUpCard powerUp : currPlayer.getPowerUpCards())
-            if (powerUp.isUsable(currPlayer) && (powerUp.getPossibleTargets() == null || !powerUp.getPossibleTargets().isEmpty()))
+            if(powerUp.getName().equals("teletrasporto") || powerUp.getName().equals("raggio cinetico"))
                 res.add(powerUp);
         return res;
     }

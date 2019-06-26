@@ -12,6 +12,7 @@ import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
+import java.net.InetAddress;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -43,9 +44,10 @@ public class RMIServer implements Server {
      */
     public void start() {
         try {
+            System.setProperty("java.rmi.server.hostname", InetAddress.getLocalHost().getHostAddress());
             exportRemoteObject();
         } catch (Exception e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            CustomLogger.logException(this.getClass().getName(), e);
         }
         available = true;
         CustomLogger.logInfo(this.getClass().getName(), "RMI server is ready");

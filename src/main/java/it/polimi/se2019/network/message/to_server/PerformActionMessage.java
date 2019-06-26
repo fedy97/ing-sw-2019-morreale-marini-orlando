@@ -1,6 +1,7 @@
 package it.polimi.se2019.network.message.to_server;
 
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.utils.CustomLogger;
 
 
 public class PerformActionMessage extends ToServerMessage {
@@ -12,6 +13,10 @@ public class PerformActionMessage extends ToServerMessage {
     @Override
     public void performAction() {
         Controller c = Controller.getInstance();
-        c.processAction((String) payload);
+        try {
+            c.processAction((String) payload);
+        } catch (Exception e) {
+            CustomLogger.logException(this.getClass().getName(), e);
+        }
     }
 }

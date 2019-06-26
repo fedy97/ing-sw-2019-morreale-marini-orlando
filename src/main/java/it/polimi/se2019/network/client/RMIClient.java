@@ -4,17 +4,14 @@ import it.polimi.se2019.network.message.to_client.ToClientMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.network.server.Server;
 import it.polimi.se2019.utils.CustomLogger;
-import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.client.RemoteView;
 
 import java.net.InetAddress;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
 
 /**
  * RMI implementation of remote client
@@ -35,9 +32,10 @@ public class RMIClient implements Client, Observer {
         this.user = user;
 
         try {
+            System.setProperty("java.rmi.server.hostname", InetAddress.getLocalHost().getHostAddress());
             registry = LocateRegistry.createRegistry(port);
-        } catch (RemoteException e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+        } catch (Exception e) {
+            CustomLogger.logException(this.getClass().getName(), e);
         }
 
         connected = false;
@@ -55,7 +53,7 @@ public class RMIClient implements Client, Observer {
             Registry remoteRegistry = LocateRegistry.getRegistry(host, port);
             stub = (Server) remoteRegistry.lookup("FakeView");
         } catch (Exception e) {
-            HandyFunctions.LOGGER.log(Level.WARNING, e.toString());
+            CustomLogger.logException(this.getClass().getName(), e);
         }
 
         exportRemoteObject();

@@ -390,8 +390,7 @@ public class GUI extends RemoteView {
     @Override
     public void updatePlayersOnWaitingList(List<String> users) {
         Platform.runLater(
-                () ->
-                        waitingLobbyController.updateLoggedPlayers(users));
+                () -> waitingLobbyController.updateLoggedPlayers(users));
     }
 
 
