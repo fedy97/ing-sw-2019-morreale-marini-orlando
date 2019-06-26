@@ -7,10 +7,10 @@ import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public final class TagbackGrenade extends PowerUpCard {
+    private String userTarget;
 
 
     public TagbackGrenade(AmmoCube ammoCube, String name, String description, String img) throws InvalidNameException, InvalidCubeException {
@@ -29,14 +29,19 @@ public final class TagbackGrenade extends PowerUpCard {
      */
     @Override
     public List<Character> getPossibleTargets() {
-        List<Character> targets = new ArrayList<>();
-        for (Player player : c.getGame().getPlayers())
-            targets.add(player.getCharacter());
-        return targets;
+        return null;
     }
 
     @Override
     public void activate(Character target) {
-        //TODO
+        c.getPlayerManager().getCurrentPlayer().getPlayerBoard().addRevengeMark(game.getPlayer(userTarget).getCharacter(), 1);
+    }
+
+    public String getUserTarget() {
+        return userTarget;
+    }
+
+    public void setUserTarget(String target) {
+        userTarget = target;
     }
 }
