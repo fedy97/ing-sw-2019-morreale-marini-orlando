@@ -112,6 +112,9 @@ public class CLI extends RemoteView {
         CliSetUp.cursorUp(34);
         CliSetUp.cursorRight(104);
         CliPrinter.drawPlayersInfoBox(lightGameVersion);
+        CliSetUp.cursorRight(59);
+        CliSetUp.cursorUp(3);
+        CliPrinter.drawGameInfoBox(lightGameVersion);
         CliSetUp.cursorDown(20);
         CliSetUp.cursorLeft(106);
         showMessage(lastMsg);
@@ -230,8 +233,8 @@ public class CLI extends RemoteView {
 
     @Override
     public void showChoosePowerup(List<CardRep> cards) {
-        /*this.p1 = p1;
-        this.p2 = p2;
+        this.p1 = cards.get(0);
+        this.p2 = cards.get(1);
         currState = 1;
         CliPrinter.stamp("\n");
         CliPrinter.choosePowerUpMessage(p1, p2);
@@ -261,7 +264,7 @@ public class CLI extends RemoteView {
                 begin = 0;
                 currState = 0;
             }).start();
-        }*/
+        }
     }
 
     //TODO show the right player board given the arrChars, an arraylist of objects like "SPROG"

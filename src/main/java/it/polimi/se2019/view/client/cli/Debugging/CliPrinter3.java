@@ -1,4 +1,4 @@
-package it.polimi.se2019.view.client.cli.Debug;
+package it.polimi.se2019.view.client.cli.Debugging;
 
 import it.polimi.se2019.model.rep.AmmoRep;
 import it.polimi.se2019.model.rep.BoardRep;

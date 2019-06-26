@@ -720,6 +720,32 @@ public final class CliPrinter {
         CliSetUp.restorePosition();
     }
 
+    public static void drawGameInfoBox(LightGameVersion lightGameVersion) {
+        stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(61 - 25);
+        CliSetUp.cursorDown(1);
+        for (int i=0;i<45;i++) {
+            stamp("┃");
+            CliSetUp.cursorLeft(1);
+            CliSetUp.cursorDown(1);
+        }
+        stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliSetUp.cursorUp(45);
+        CliSetUp.cursorLeft(1);
+        for (int i=0;i<45;i++) {
+            stamp("┃");
+            CliSetUp.cursorLeft(1);
+            CliSetUp.cursorDown(1);
+        }
+        CliSetUp.cursorUp(45);
+        CliSetUp.cursorLeft(23);
+        CliPrinter.stamp("GAME'S INFO");
+        CliSetUp.cursorDown(2);
+        CliSetUp.cursorLeft(34);
+        CliSetUp.savePosition();
+    }
+
+
     public static void drawPlayersInfoBox(LightGameVersion lightGameVersion) {
 
         int playerCounter = 0;
