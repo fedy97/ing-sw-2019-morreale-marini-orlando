@@ -41,6 +41,7 @@ public class GUI extends RemoteView {
     private transient ChooseTargetsController chooseTargetsController;
     private transient ReloadWeaponsController reloadWeaponsController;
     private transient ChooseAmmosController chooseAmmosController;
+    private transient ScoreBoardController scoreBoardController;
 
     private Scene sceneLogin;
     private Scene sceneWaitingLobby;
@@ -56,6 +57,7 @@ public class GUI extends RemoteView {
     private Scene sceneChooseTargets;
     private Scene sceneReloadWeapons;
     private Scene sceneChooseAmmos;
+    private Scene sceneScoreboard;
 
     private Stage stage;
     private Stage secondStage;
@@ -67,6 +69,7 @@ public class GUI extends RemoteView {
     private Stage chooseTargetsStage;
     private Stage reloadWeaponsStage;
     private Stage chooseAmmosStage;
+    private Stage scoreBoardStage;
 
     private String charInString;
     private List<String> charsInGame;
@@ -92,6 +95,7 @@ public class GUI extends RemoteView {
     }
 
     private void showWaitingLobby() {
+        stage.setTitle("Waiting Lobby");
         stage.setScene(sceneWaitingLobby);
         stage.setResizable(false);
         stage.show();
@@ -113,6 +117,7 @@ public class GUI extends RemoteView {
     public void showChooseMap() {
         Platform.runLater(
                 () -> {
+                    stage.setTitle("Choose Map");
                     chooseMapController.passGUI(this);
                     stage.setScene(sceneChooseMap);
                     stage.setResizable(false);
@@ -124,6 +129,7 @@ public class GUI extends RemoteView {
     public void showChooseCharacter(String config) {
         Platform.runLater(
                 () -> {
+                    stage.setTitle("Choose Character");
                     this.config = config;
                     chooseCharacterController.passGUI(this);
                     stage.setScene(sceneChooseCharacter);
@@ -146,6 +152,7 @@ public class GUI extends RemoteView {
                     initChooseTargets();
                     initReloadWeapons();
                     initChooseAmmos();
+                    initScoreboard();
                     chooseAmmosController.passGUI(this);
                     reloadWeaponsController.passGUI(this);
                     chooseTargetsController.passGUI(this);
@@ -199,6 +206,19 @@ public class GUI extends RemoteView {
             chooseTargetsController = loader.getController();
         } catch (IOException e) {
             HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose targets");
+        }
+    }
+
+    private void initScoreboard() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scoreBoard.fxml"));
+        try {
+            Parent root = loader.load();
+            scoreBoardStage = new Stage();
+            scoreBoardStage.setTitle("Final Scores");
+            sceneScoreboard = new Scene(root);
+            scoreBoardController = loader.getController();
+        } catch (IOException e) {
+            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing score board");
         }
     }
 
@@ -527,6 +547,7 @@ public class GUI extends RemoteView {
                     initChooseTargets();
                     initReloadWeapons();
                     initChooseAmmos();
+                    initScoreboard();
                     choosePowerupController.passGUI(this);
                     chooseAmmosController.passGUI(this);
                     reloadWeaponsController.passGUI(this);

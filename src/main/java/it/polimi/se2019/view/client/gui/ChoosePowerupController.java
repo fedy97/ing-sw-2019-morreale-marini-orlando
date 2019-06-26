@@ -69,9 +69,11 @@ public class ChoosePowerupController {
     protected void updateRightPowerups(List<CardRep> cards) {
         this.cardReps = cards;
         for (CardRep cardRep : cards) {
-            imageViews.get(cards.indexOf(cardRep)).setImage(new Image(cardRep.getPath()));
-            HandyFunctions.enlightenButton(buttons.get(cards.indexOf(cardRep)));
-            HandyFunctions.enlightenButton(infoButtons.get(cards.indexOf(cardRep)));
+            if (cards.indexOf(cardRep) <= 2) {
+                imageViews.get(cards.indexOf(cardRep)).setImage(new Image(cardRep.getPath()));
+                HandyFunctions.enlightenButton(buttons.get(cards.indexOf(cardRep)));
+                HandyFunctions.enlightenButton(infoButtons.get(cards.indexOf(cardRep)));
+            }
         }
         for (int i = cardReps.size(); i < 3; i++) {
             imageViews.get(i).setImage(new Image("/assets/powerups/AD_powerups_IT_02.jpg"));

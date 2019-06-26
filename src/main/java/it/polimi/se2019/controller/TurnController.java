@@ -115,7 +115,7 @@ public class TurnController implements Serializable {
             c.setValidator(new HealthyValidator(c));
 
         for (Player player : c.getGame().getPlayers()) {
-            if (player.equals(currPlayer)) {
+            if (player.equals(currPlayer) && player.isConnected() && c.getPingsList().size() >= 2) {
                 c.callView(new EnablePlayerActionsMessage(UserValidActions.ALL.getActions()), player.getName());
                 c.sendMessage("It's your turn!", player.getName());
 
@@ -131,7 +131,7 @@ public class TurnController implements Serializable {
                     c.callView(message, currPlayer.getName());
                 }
 
-            } else {
+            } else if (player.isConnected()) {
                 c.callView(new EnablePlayerActionsMessage(UserValidActions.NONE.getActions()), player.getName());
                 c.sendMessage("It's ".concat(c.getPlayerManager().getCurrentPlayer().getName()).concat(" turn!"), player.getName());
             }

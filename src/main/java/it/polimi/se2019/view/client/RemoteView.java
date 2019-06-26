@@ -178,9 +178,7 @@ public abstract class RemoteView extends View {
      */
     public void receivePingFromServer() {
         ResponseToPingMessage message = new ResponseToPingMessage(userName);
-        message.setSender(userName);
-        viewSetChanged();
-        notifyObservers(message);
+        notifyController(message);
     }
 
     /**
@@ -188,9 +186,7 @@ public abstract class RemoteView extends View {
      */
     public void receiveWaitingPingFromServer() {
         ResponseToWaitingPingMessage message = new ResponseToWaitingPingMessage(userName);
-        message.setSender(userName);
-        viewSetChanged();
-        notifyObservers(message);
+        notifyController(message);
     }
 
     public void notifyController(ToServerMessage message) {

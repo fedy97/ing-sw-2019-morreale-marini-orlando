@@ -2,6 +2,7 @@ package it.polimi.se2019.network.message.to_server;
 
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.network.message.to_client.ShowReconnectedGameBoard;
+import it.polimi.se2019.utils.HandyFunctions;
 
 
 public class ReconnectedClientMessage extends ToServerMessage {
@@ -19,7 +20,8 @@ public class ReconnectedClientMessage extends ToServerMessage {
         actor.getGame().getPlayer(user).setConnected(true);
         actor.getPingsList().add(mychar);
         actor.getAlreadyNotified().remove(mychar);
-        if (actor.getPingsList().size() == 1) {
+        HandyFunctions.printConsole(actor.getPingsList().size());
+        if (actor.getPingsList().size() == 2) {
             while (!actor.getTurnController().getTurnUser().equals(user))
                 actor.getTurnController().endTurn();
         }
