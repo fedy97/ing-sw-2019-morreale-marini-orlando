@@ -1,10 +1,6 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.controller.validator.CriticalDamagedValidator;
-import it.polimi.se2019.controller.validator.DamagedValidator;
-import it.polimi.se2019.controller.validator.HealthyValidator;
-import it.polimi.se2019.controller.validator.UserValidActions;
-import it.polimi.se2019.exceptions.NoCardException;
+import it.polimi.se2019.controller.validator.*;
 import it.polimi.se2019.model.PointsCounter;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.AmmoCard;
@@ -32,9 +28,13 @@ public class TurnController implements Serializable {
     private String first;
     private List<String> turningOrder;
     private int seconds;
+    private int frenzyStart;
+    private int currIndex;
     private Controller c;
+    private boolean firstTurn;
 
     public TurnController() {
+        firstTurn = true;
         turningOrder = new ArrayList<>();
         seconds = HandyFunctions.parserSettings.getTurnTimer();
     }
@@ -50,7 +50,7 @@ public class TurnController implements Serializable {
     }
 
     public void notifyFirst() {
-        c.callView(new EnablePlayerActionsMessage(UserValidActions.ALL.getActions()), c.getPlayerManager().getCurrentPlayer().getName());
+        c.callView(new EnablePlayerActionsMessage(UserValidActions.NO_SHOOT.getActions()), c.getPlayerManager().getCurrentPlayer().getName());
         c.callView(new ShowMessage("It's your turn!"), c.getPlayerManager().getCurrentPlayer().getName());
     }
 
@@ -67,56 +67,85 @@ public class TurnController implements Serializable {
      * End the turn of the current user and switch to the next
      */
     public void endTurn() {
-        int currIndex = turningOrder.indexOf(curr);
         Player previousPlayer = c.getPlayerManager().getCurrentPlayer();
         previousPlayer.getPlayerBoard().getAmmoBox().getOptionals().clear();
-
         checkDeadPlayers();
-        //Refill operations
-        if ((currIndex + 1) == turningOrder.size()) {
-            for (int i = 0; i < c.getDecksManager().getToFill().size(); i++) {
-                try {
-                    AmmoCard newAmmo = c.getDecksManager().getNewAmmoCard(c.getDecksManager().getAmmoGarbageDeck().get(i));
-                    c.getDecksManager().getToFill().get(i).setPlatformAmmoCard(newAmmo);
-                    c.getGame().notifyChanges();
-                } catch (Exception e) {
-                    CustomLogger.logException(this.getClass().getName(), e);
-                }
-            }
-
-            for (Platform platform : c.getGame().getGameField().getPlatforms()) {
-                if (platform.isGenerationSpot()) {
-                    try {
-                        while (platform.getWeapons().size() < 3)
-                            try {
-                                platform.getWeapons().add(c.getGame().getWeaponsDeck().drawCard());
-                            } catch (NoCardException e) {
-                                CustomLogger.logInfo(this.getClass().getName(), "No more weapons to refill the field!");
-                            }
-                    } catch (Exception e) {
-                        CustomLogger.logException(this.getClass().getName(), e);
-                    }
-                }
-            }
-
-            c.getDecksManager().getToFill().clear();
-            c.getDecksManager().getAmmoGarbageDeck().clear();
-        }
         curr = nextUser();
+        currIndex = turningOrder.indexOf(curr);
+        System.out.println(" FIRST " + currIndex);
+
+        //Refill operations
+        if (currIndex == 0) {
+            refillGameField();
+            firstTurn = false;
+        }
+
+        if (c.isFrenzyModeOn() && currIndex == frenzyStart)
+            c.endGame();
 
         Player currPlayer = c.getGame().getPlayer(curr);
         c.getPlayerManager().setCurrentPlayer(currPlayer);
 
-        if (currPlayer.isDamaged())
-            c.setValidator(new DamagedValidator(c));
-        else if (currPlayer.isSeriouslyDamaged())
-            c.setValidator(new CriticalDamagedValidator(c));
-        else
-            c.setValidator(new HealthyValidator(c));
+        //Validator setting
+        setRightValidator(currPlayer);
 
+        //Check if we have to activate the final frenzy
+        checkFinalFrenzy();
+
+        //Enable actions to the right player
+        enablePlayers(currPlayer);
+
+        //notify the model changes
+        c.getGame().notifyChanges();
+    }
+
+
+    private String nextUser() {
+        int currIndex = turningOrder.indexOf(curr);
+        if (currIndex + 1 == turningOrder.size())
+            currIndex = 0;
+        else
+            currIndex++;
+        return turningOrder.get(currIndex);
+    }
+
+    /**
+     * Set the right validator according to the player health state
+     *
+     * @param currPlayer
+     */
+    private void setRightValidator(Player currPlayer) {
+        if (c.isFrenzyModeOn()) {
+            if (currIndex >= frenzyStart && frenzyStart > 0) {
+                c.setValidator(new Frenzy1Validator(c));
+                currPlayer.setFrenzyModeType(1);
+            } else {
+                c.setValidator(new Frenzy2Validator(c));
+                currPlayer.setFrenzyModeType(2);
+            }
+        } else {
+            if (currPlayer.isDamaged())
+                c.setValidator(new DamagedValidator(c));
+            else if (currPlayer.isSeriouslyDamaged())
+                c.setValidator(new CriticalDamagedValidator(c));
+            else
+                c.setValidator(new HealthyValidator(c));
+        }
+    }
+
+    /**
+     * Set the allowed action to every player
+     *
+     * @param currPlayer
+     */
+    private void enablePlayers(Player currPlayer) {
         for (Player player : c.getGame().getPlayers()) {
             if (player.equals(currPlayer) && player.isConnected() && c.getPingsList().size() >= 2) {
-                c.callView(new EnablePlayerActionsMessage(UserValidActions.ALL.getActions()), player.getName());
+
+                if (firstTurn || player.getFrenzyModeType() == 2)
+                    c.callView(new EnablePlayerActionsMessage(UserValidActions.NO_SHOOT.getActions()), player.getName());
+                else
+                    c.callView(new EnablePlayerActionsMessage(UserValidActions.ALL.getActions()), player.getName());
                 c.sendMessage("It's your turn!", player.getName());
 
                 if (currPlayer.getCurrentPlatform() == null) {
@@ -137,31 +166,77 @@ public class TurnController implements Serializable {
             }
             c.callView(new StartTimerTurnMessage(seconds, getTurnUser()), player.getName());
         }
-
-        c.getGame().notifyChanges();
     }
 
+    /**
+     * Perform the refill operations at the end of the main turn
+     */
+    private void refillGameField() {
 
-    private String nextUser() {
-        int currIndex = turningOrder.indexOf(curr);
-        if (currIndex + 1 == turningOrder.size())
-            currIndex = 0;
-        else
-            currIndex++;
-        return turningOrder.get(currIndex);
+        for (int i = 0; i < c.getDecksManager().getToFill().size(); i++) {
+            try {
+                AmmoCard newAmmo = c.getDecksManager().getNewAmmoCard(c.getDecksManager().getAmmoGarbageDeck().get(i));
+                c.getDecksManager().getToFill().get(i).setPlatformAmmoCard(newAmmo);
+                c.getGame().notifyChanges();
+            } catch (Exception e) {
+                CustomLogger.logException(this.getClass().getName(), e);
+            }
+        }
+
+        for (Platform platform : c.getGame().getGameField().getPlatforms()) {
+            if (platform.isGenerationSpot()) {
+                try {
+                    while (platform.getWeapons().size() < 3)
+                        platform.getWeapons().add(c.getGame().getWeaponsDeck().drawCard());
+
+                } catch (Exception e) {
+                    CustomLogger.logException(this.getClass().getName(), e);
+                }
+            }
+        }
+
+        c.getDecksManager().getToFill().clear();
+        c.getDecksManager().getAmmoGarbageDeck().clear();
     }
 
     /**
      * Check if players where killed during the turn
      */
     private void checkDeadPlayers() {
-        for (Player player : c.getGame().getPlayers())
+        int kills = 0;
+        for (Player player : c.getGame().getPlayers()) {
+
             if (player.isDead()) {
                 for (Map.Entry<Character, Integer> entry : PointsCounter.getPoints(player).entrySet())
                     c.getGame().getPlayer(entry.getKey()).addPoint(entry.getValue());
-                askToSpawn(player);
+
+                player.addDeath();
+                try {
+                    if (player.wasOverkilled())
+                        c.getGame().getGameField().getSkullsBoard().addKillMarks(player.getPlayerBoard().getDamageLine().get(11), 2);
+                    else
+                        c.getGame().getGameField().getSkullsBoard().addKillMarks(player.getPlayerBoard().getDamageLine().get(10), 1);
+                } catch (Exception e) {
+                    CustomLogger.logException(this.getClass().getName(), e);
+                }
                 player.getPlayerBoard().resetDamageLine();
+                askToSpawn(player);
+                kills++;
             }
+        }
+
+        if (kills > 1)
+            c.getPlayerManager().getCurrentPlayer().addPoint(1);
+    }
+
+    /**
+     * Check if is the case to activate the final frenzy
+     */
+    private void checkFinalFrenzy() {
+        if (c.getGame().getGameField().getSkullsBoard().getTotalSkulls() == 0) {
+            c.activateFrenzyMode();
+            frenzyStart = currIndex;
+        }
     }
 
     private void askToSpawn(Player p) {
@@ -184,6 +259,5 @@ public class TurnController implements Serializable {
     public void removeUser(String user) {
         turningOrder.remove(user);
     }
-
 
 }
