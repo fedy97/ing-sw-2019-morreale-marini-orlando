@@ -231,7 +231,17 @@ public class Game extends Observable implements Serializable {
 
             playerPowerups.put(player.getCharacter().name(), powerUps);
             playerWeapons.put(player.getCharacter().name(), weapons);
-            playerBoardRep.put(player.getCharacter().name(), new BoardRep(damages, marks, ammos, player.getCurrentScore()));
+
+            int actionType;
+            if(player.getFrenzyModeType() > 0)
+                actionType = player.getFrenzyModeType() + 2;
+            else if(player.isDamaged())
+                actionType = 1;
+            else if(player.isSeriouslyDamaged())
+                actionType = 2;
+            else
+                actionType = 0;
+            playerBoardRep.put(player.getCharacter().name(), new BoardRep(damages, marks, ammos, player.getCurrentScore(), actionType));
         }
 
         lightVersion.setPlayerWeapons(playerWeapons);
@@ -293,5 +303,25 @@ public class Game extends Observable implements Serializable {
      */
     public Player getPlayer(Character c) {
         return characterPlayers.get(c);
+    }
+
+    /**
+     * Assign to each player the corresponding points
+     *
+     * @param scores map containing for each character the corresponding score
+     */
+    public void setScore(Map<Character, Integer> scores) {
+        for (Map.Entry<Character, Integer> entry : scores.entrySet())
+            getPlayer(entry.getKey()).addPoint(entry.getValue());
+    }
+
+    /**
+     * @return the final score for each player
+     */
+    public Map<String, Integer> getFinalScore() {
+        Map<String, Integer> res = new HashMap<>();
+        for (Player player : players)
+            res.put(player.getName(), player.getCurrentScore());
+        return res;
     }
 }
