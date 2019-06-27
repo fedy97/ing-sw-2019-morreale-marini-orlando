@@ -25,8 +25,11 @@ public final class PointsCounter {
         PlayerBoard board = player.getPlayerBoard();
         Map<Character, Integer> res = new EnumMap<>(Character.class);
         Map<Character, Integer> maxDamage = new EnumMap<>(Character.class);
-        Character firstDamage = board.getDamageLine().get(0);
-        res.put(firstDamage, 1);
+
+        if (!player.getPlayerBoard().isReverted()) {
+            Character firstDamage = board.getDamageLine().get(0);
+            res.put(firstDamage, 1);
+        }
 
         for (Character character : board.getDamageLine()) {
             if (maxDamage.containsKey(character))
@@ -47,10 +50,17 @@ public final class PointsCounter {
                 }
             }
 
-            if (res.containsKey(currCharacter))
-                res.replace(currCharacter, res.get(currCharacter) + PointsBattery.getPointsValue(player.getNumOfDeaths())[i]);
+            int pointsValue;
+
+            if (player.getPlayerBoard().isReverted())
+                pointsValue = PointsBattery.getPointsValue(3)[i];
             else
-                res.put(currCharacter, PointsBattery.getPointsValue(player.getNumOfDeaths())[i]);
+                pointsValue = PointsBattery.getPointsValue(player.getNumOfDeaths())[i];
+
+            if (res.containsKey(currCharacter))
+                res.replace(currCharacter, res.get(currCharacter) + pointsValue);
+            else
+                res.put(currCharacter, pointsValue);
 
             maxDamage.remove(currCharacter);
             i++;
