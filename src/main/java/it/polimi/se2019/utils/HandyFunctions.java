@@ -15,11 +15,12 @@ import java.util.logging.Logger;
 //add here some recurrent functions that can be helpful
 public class HandyFunctions {
     public static final Logger LOGGER = Logger.getLogger(Class.class.getName());
+    public static final JsonParser parserSettings = new JsonParser("settings.json");
     private static final String HOVERED_BUTTON_STYLE = "-fx-border-color: #f7ff00; -fx-border-width: 4px; -fx-background-color: transparent; -fx-border-radius: 15;";
     private static final String ENLIGHTED_BUTTON_STYLE = "-fx-border-color: #ff0000; -fx-border-width: 2px; -fx-background-color: transparent;-fx-border-radius: 15;";
     private static final String DARKED_BUTTON_STYLE = "-fx-border-width: 0px; -fx-background-color: transparent;";
     private static Random random = new Random();
-    public static final JsonParser parserSettings = new JsonParser("settings.json");
+
     private HandyFunctions() {
     }
 
@@ -76,6 +77,10 @@ public class HandyFunctions {
             Controller.getInstance().setTimerStarted(true);
             virtualView.viewSetChanged();
             virtualView.notifyObservers("we are at least 2");
+        }
+        if (Controller.getInstance().getTurnController().getUsers().size() == 5) {
+            virtualView.viewSetChanged();
+            virtualView.notifyObservers("we are 5");
         }
     }
 
@@ -139,6 +144,7 @@ public class HandyFunctions {
         button.setOnMouseExited(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
         button.setDisable(false);
     }
+
     public static void forceLightButton(Button button) {
         button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
         button.setStyle(HOVERED_BUTTON_STYLE);
@@ -146,6 +152,7 @@ public class HandyFunctions {
         button.setOnMouseExited(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
         button.setDisable(false);
     }
+
     public static void darkenButton(Button button) {
         button.setStyle(DARKED_BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.DARKED_BUTTON_STYLE));

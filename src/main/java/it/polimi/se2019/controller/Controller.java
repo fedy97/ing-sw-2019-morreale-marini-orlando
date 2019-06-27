@@ -1,7 +1,6 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.Action;
-import it.polimi.se2019.controller.validator.Frenzy2Validator;
 import it.polimi.se2019.controller.validator.HealthyValidator;
 import it.polimi.se2019.controller.validator.UserValidActions;
 import it.polimi.se2019.controller.validator.Validator;
@@ -66,6 +65,7 @@ public class Controller implements Observer, Serializable {
     private boolean waitingToPing = true;
     private boolean gameIsActive = true;
     private boolean frenzyModeOn = false;
+    private boolean wasRecharged;
 
     private Controller() {
         game = Game.getInstance();
@@ -147,7 +147,6 @@ public class Controller implements Observer, Serializable {
         }).start();
     }
 
-
     /**
      * Called when the VirtualView notify changes
      */
@@ -156,6 +155,11 @@ public class Controller implements Observer, Serializable {
         if (state == ControllerState.SETUP) {
             if (message.equals("we are at least 2")) {
                 TimerLobby t = new TimerLobby(timerSetup);
+                t.start();
+            } else if (message.equals("we are 5")) {
+                waitingToPing = false;
+                notifyAll(new ShowChooseMapMessage(null));
+                TimerMap t = new TimerMap(timerSetup);
                 t.start();
             } else {
                 ((ToServerMessage) message).performAction();
@@ -205,9 +209,9 @@ public class Controller implements Observer, Serializable {
 
                 if (!validator.getReloadableWeapons().isEmpty()) {
                     callView(new SendBinaryOption("Do you want to recharge?"), playerManager.getCurrentPlayer().getName());
-                    if (chosenBinaryOption.take()){
+                    if (chosenBinaryOption.take()) {
                         askFor(validator.getReloadableWeapons(), "recharge");
-                        while(!wasRecharged)
+                        while (!wasRecharged)
                             Thread.sleep(500);
                         wasRecharged = false;
                     }
@@ -319,7 +323,6 @@ public class Controller implements Observer, Serializable {
             getPlayerManager().grabAmmoCard();
         }
     }
-
 
     /**
      * Launch a power up execution
@@ -924,8 +927,6 @@ public class Controller implements Observer, Serializable {
     public boolean isFrenzyModeOn() {
         return frenzyModeOn;
     }
-
-    private boolean wasRecharged;
 
     public boolean wasRecharged() {
         return wasRecharged;

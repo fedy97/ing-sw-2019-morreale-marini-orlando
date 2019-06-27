@@ -825,9 +825,5 @@ public class GUI extends RemoteView {
     public BuyWithPowerupController getBuyWithPowerupController() {
         return buyWithPowerupController;
     }
-
-    public LoginController getLoginController() {
-        return loginController;
-    }
 }
 
