@@ -18,6 +18,7 @@ public class PlayerBoard implements Serializable {
     private ArrayList<Character> damageLine;
     private ArrayList<Character> revengeMarks;
     private AmmoBox ammoBox;
+    private boolean reverted;
 
     /**
      * Class constructor that initializes the data structures it uses
@@ -26,6 +27,7 @@ public class PlayerBoard implements Serializable {
         damageLine = new ArrayList<>();
         revengeMarks = new ArrayList<>();
         ammoBox = new AmmoBox();
+        reverted = false;
     }
 
     /**
@@ -123,5 +125,13 @@ public class PlayerBoard implements Serializable {
         while (revengeMarks.contains(character)) {
             revengeMarks.remove(character);
         }
+    }
+
+    public boolean isReverted() {
+        return reverted;
+    }
+
+    public void setReverted(boolean reverted) {
+        this.reverted = reverted;
     }
 }

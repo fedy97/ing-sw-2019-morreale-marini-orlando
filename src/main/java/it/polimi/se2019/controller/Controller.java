@@ -8,6 +8,7 @@ import it.polimi.se2019.exceptions.InvalidActionException;
 import it.polimi.se2019.exceptions.InvalidCharacterException;
 import it.polimi.se2019.exceptions.InvalidPositionException;
 import it.polimi.se2019.model.Game;
+import it.polimi.se2019.model.PointsCounter;
 import it.polimi.se2019.model.board.*;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
@@ -427,25 +428,32 @@ public class Controller implements Observer, Serializable {
     }
 
     /**
-     *
+     * Start the game
      */
     public void startGame() {
         state = ControllerState.IDLE;
     }
 
     /**
-     *
+     * Called when the game is finished or there are no more players to continue
      */
     public void endGame() {
         //in order to interrupt the pinging
         gameIsActive = false;
-        //notifyAll(new ShowScoreboardMessage(mappa));
+        game.setScore(PointsCounter.getFinalScore(game.getGameField().getSkullsBoard()));
+        notifyAll(new ShowScoreboardMessage(game.getFinalScore()));
     }
 
+    /**
+     * @return if the timer is started
+     */
     public boolean isTimerStarted() {
         return timerStarted;
     }
 
+    /**
+     * @param timerStarted true id started, false otherwise
+     */
     public void setTimerStarted(boolean timerStarted) {
         this.timerStarted = timerStarted;
     }
@@ -918,6 +926,9 @@ public class Controller implements Observer, Serializable {
      * Activate the final frenzy mode
      */
     public void activateFrenzyMode() {
+        for(Player player: game.getPlayers())
+            if(player.hasNoDamage())
+                player.getPlayerBoard().setReverted(true);
         frenzyModeOn = true;
     }
 

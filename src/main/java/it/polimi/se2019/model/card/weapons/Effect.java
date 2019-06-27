@@ -1,8 +1,8 @@
 package it.polimi.se2019.model.card.weapons;
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
-import it.polimi.se2019.model.player.Player;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,6 +30,11 @@ public abstract class Effect implements Serializable {
     public abstract void activateEffect(List<Character> targets, WeaponCard card);
 
     public List<Character> getPossibleTargets() {
+        if (possibleTargets != null) {
+            Character character = Controller.getInstance().getPlayerManager().getCurrentPlayer().getCharacter();
+            while (possibleTargets.contains(character))
+                possibleTargets.remove(character);
+        }
         return possibleTargets;
     }
 
@@ -57,9 +62,5 @@ public abstract class Effect implements Serializable {
 
     public List<Character> getLastEffectTargets() {
         return lastEffectTargets;
-    }
-
-    public void setLastEffectTargets(List<Character> lastEffectTargets) {
-        this.lastEffectTargets = lastEffectTargets;
     }
 }

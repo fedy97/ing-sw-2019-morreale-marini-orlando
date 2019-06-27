@@ -7,7 +7,6 @@ import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.CustomLogger;
-import it.polimi.se2019.utils.HandyFunctions;
 
 import java.util.ArrayList;
 import java.util.HashMap;

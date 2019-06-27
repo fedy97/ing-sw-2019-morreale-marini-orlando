@@ -24,7 +24,7 @@ public final class PlasmaGun extends WeaponTwoAddingEffect {
 
                 //Deal 2 damage to 1 target you can see
 
-                damages.put(game.getPlayer(chosenTargets.get(0)), 2);
+                damages.put(game.getPlayer(chosenTargets.get(0)), 10);
                 playerManager.addDamage(damages);
                 usableEffects[0] = false;
                 usableEffects[2] = true;

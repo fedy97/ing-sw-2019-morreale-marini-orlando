@@ -1,7 +1,7 @@
 {
   "settings": [
     {
-      "skulls": 1,
+      "skulls": 2,
       "timerSetup": 1,
       "timerTurn": 600,
       "minPlayers": 2,

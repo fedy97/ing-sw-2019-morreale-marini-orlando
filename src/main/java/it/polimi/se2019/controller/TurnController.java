@@ -5,7 +5,6 @@ import it.polimi.se2019.model.PointsCounter;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
-import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.network.message.to_client.EnablePlayerActionsMessage;
@@ -18,7 +17,6 @@ import it.polimi.se2019.utils.HandyFunctions;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Gabriel Raul Marini
@@ -69,9 +67,10 @@ public class TurnController implements Serializable {
     public void endTurn() {
         Player previousPlayer = c.getPlayerManager().getCurrentPlayer();
         previousPlayer.getPlayerBoard().getAmmoBox().getOptionals().clear();
+
         checkDeadPlayers();
+
         curr = nextUser();
-        currIndex = turningOrder.indexOf(curr);
 
         //Refill operations
         if (currIndex == 0) {
@@ -85,11 +84,11 @@ public class TurnController implements Serializable {
         Player currPlayer = c.getGame().getPlayer(curr);
         c.getPlayerManager().setCurrentPlayer(currPlayer);
 
-        //Validator setting
-        setRightValidator(currPlayer);
-
         //Check if we have to activate the final frenzy
         checkFinalFrenzy();
+
+        //Validator setting
+        setRightValidator(currPlayer);
 
         //Enable actions to the right player
         enablePlayers(currPlayer);
@@ -204,18 +203,21 @@ public class TurnController implements Serializable {
      */
     private void checkDeadPlayers() {
         int kills = 0;
+
         for (Player player : c.getGame().getPlayers()) {
-
+            System.out.println(player.getName());
+            HandyFunctions.printList(player.getPlayerBoard().getDamageLine());
             if (player.isDead()) {
-                for (Map.Entry<Character, Integer> entry : PointsCounter.getPoints(player).entrySet())
-                    c.getGame().getPlayer(entry.getKey()).addPoint(entry.getValue());
-
+                c.getGame().setScore(PointsCounter.getPoints(player));
                 player.addDeath();
+
                 try {
-                    if (player.wasOverkilled())
-                        c.getGame().getGameField().getSkullsBoard().addKillMarks(player.getPlayerBoard().getDamageLine().get(11), 2);
-                    else
-                        c.getGame().getGameField().getSkullsBoard().addKillMarks(player.getPlayerBoard().getDamageLine().get(10), 1);
+                    if (!c.isFrenzyModeOn()) {
+                        if (player.wasOverkilled())
+                            c.getGame().getGameField().getSkullsBoard().addKillMarks(player.getPlayerBoard().getDamageLine().get(10), 2);
+                        else
+                            c.getGame().getGameField().getSkullsBoard().addKillMarks(player.getPlayerBoard().getDamageLine().get(10), 1);
+                    }
                 } catch (Exception e) {
                     CustomLogger.logException(this.getClass().getName(), e);
                 }
@@ -233,7 +235,7 @@ public class TurnController implements Serializable {
      * Check if is the case to activate the final frenzy
      */
     private void checkFinalFrenzy() {
-        if (c.getGame().getGameField().getSkullsBoard().getCurrentSkulls() == 0) {
+        if (!c.isFrenzyModeOn() && c.getGame().getGameField().getSkullsBoard().getCurrentSkulls() == 0) {
             c.activateFrenzyMode();
             frenzyStart = currIndex;
         }

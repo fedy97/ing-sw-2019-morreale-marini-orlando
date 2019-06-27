@@ -239,6 +239,13 @@ public class Player implements Serializable {
     }
 
     /**
+     * @return if the player has no damage marks on his board
+     */
+    public boolean hasNoDamage(){
+        return playerBoard.getDamageLine().isEmpty();
+    }
+
+    /**
      * @return if the player has more than 3 damage tokens but less than 6
      */
     public boolean isDamaged() {
