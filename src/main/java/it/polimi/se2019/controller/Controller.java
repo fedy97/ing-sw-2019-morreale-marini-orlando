@@ -434,6 +434,8 @@ public class Controller implements Observer, Serializable {
      *
      */
     public void endGame() {
+        //in order to interrupt the pinging
+        gameIsActive = false;
         //notifyAll(new ShowScoreboardMessage(mappa));
     }
 

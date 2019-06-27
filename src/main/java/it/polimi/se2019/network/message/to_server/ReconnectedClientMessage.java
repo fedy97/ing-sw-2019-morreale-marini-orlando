@@ -20,11 +20,10 @@ public class ReconnectedClientMessage extends ToServerMessage {
         actor.getGame().getPlayer(user).setConnected(true);
         actor.getPingsList().add(mychar);
         actor.getAlreadyNotified().remove(mychar);
-        HandyFunctions.printConsole(actor.getPingsList().size());
-        if (actor.getPingsList().size() == 2) {
+        /*if (actor.getPingsList().size() == 2) {
             while (!actor.getTurnController().getTurnUser().equals(user))
                 actor.getTurnController().endTurn();
-        }
+        }*/
 
     }
 }
