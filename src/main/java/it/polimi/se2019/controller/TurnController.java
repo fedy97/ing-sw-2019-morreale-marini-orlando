@@ -72,7 +72,6 @@ public class TurnController implements Serializable {
         checkDeadPlayers();
         curr = nextUser();
         currIndex = turningOrder.indexOf(curr);
-        System.out.println(" FIRST " + currIndex);
 
         //Refill operations
         if (currIndex == 0) {
@@ -101,7 +100,7 @@ public class TurnController implements Serializable {
 
 
     private String nextUser() {
-        int currIndex = turningOrder.indexOf(curr);
+        currIndex = turningOrder.indexOf(curr);
         if (currIndex + 1 == turningOrder.size())
             currIndex = 0;
         else
@@ -140,7 +139,8 @@ public class TurnController implements Serializable {
      */
     private void enablePlayers(Player currPlayer) {
         for (Player player : c.getGame().getPlayers()) {
-            if (player.equals(currPlayer) && player.isConnected() && c.getPingsList().size() >= 2) {
+            // && c.getPingsList().size() >= 2
+            if (player.equals(currPlayer) && player.isConnected()) {
 
                 if (firstTurn || player.getFrenzyModeType() == 2)
                     c.callView(new EnablePlayerActionsMessage(UserValidActions.NO_SHOOT.getActions()), player.getName());

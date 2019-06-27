@@ -15,7 +15,6 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public abstract class RemoteView extends View {
 
-    private BlockingDeque<Boolean> answer = new LinkedBlockingDeque<>();
     /**
      * @param users to display on the lobby
      */
@@ -179,6 +178,8 @@ public abstract class RemoteView extends View {
 
     public abstract void showUsernameAlreadyInUse(String user);
 
+    public abstract void showScoreboard(Map<String, Integer> scoreboard);
+
     /**
      * if the ping is received, a response will be immediately sent to the server
      */
@@ -199,9 +200,5 @@ public abstract class RemoteView extends View {
         message.setSender(userName);
         viewSetChanged();
         notifyObservers(message);
-    }
-
-    public BlockingDeque<Boolean> getAnswer() {
-        return answer;
     }
 }

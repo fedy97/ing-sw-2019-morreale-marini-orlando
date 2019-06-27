@@ -758,6 +758,18 @@ public class GUI extends RemoteView {
         });
     }
 
+    @Override
+    public void showScoreboard(Map<String, Integer> scoreboard) {
+        Platform.runLater(
+                () -> {
+                    scoreBoardStage.setScene(sceneScoreboard);
+                    scoreBoardStage.setResizable(false);
+                    scoreBoardController.showScores(scoreboard);
+                    scoreBoardStage.show();
+                    stage.close();
+                });
+    }
+
     public String getCharInString() {
         return charInString;
     }

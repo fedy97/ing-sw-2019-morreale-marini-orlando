@@ -64,6 +64,7 @@ public class Controller implements Observer, Serializable {
     private List<String> alreadyNotified = new ArrayList<>();
     private int configMap;
     private boolean waitingToPing = true;
+    private boolean gameIsActive = true;
     private boolean frenzyModeOn = false;
 
     private Controller() {
@@ -433,9 +434,7 @@ public class Controller implements Observer, Serializable {
      *
      */
     public void endGame() {
-        //TODO
-        System.out.println("Scores");
-        System.exit(0);
+        //notifyAll(new ShowScoreboardMessage(mappa));
     }
 
     public boolean isTimerStarted() {
@@ -609,7 +608,7 @@ public class Controller implements Observer, Serializable {
 
             try {
 
-                while (true) {
+                while (gameIsActive) {
                     pingsList.clear();
                     notifyAll(new PingClientsMessage(null));
                     Thread.sleep(3000);
@@ -932,5 +931,9 @@ public class Controller implements Observer, Serializable {
 
     public void setWasRecharged(boolean wasRecharged) {
         this.wasRecharged = wasRecharged;
+    }
+
+    public void setGameIsActive(boolean gameIsActive) {
+        this.gameIsActive = gameIsActive;
     }
 }

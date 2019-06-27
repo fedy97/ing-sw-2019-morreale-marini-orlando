@@ -1,12 +1,11 @@
 package it.polimi.se2019.view.client.gui;
 
-import it.polimi.se2019.model.rep.LightGameVersion;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ScoreBoardController {
 
@@ -21,8 +20,6 @@ public class ScoreBoardController {
     @FXML
     Label player5;
 
-
-    private LightGameVersion lightGameVersion;
     private GUI gui;
     private List<Label> labels;
 
@@ -42,12 +39,16 @@ public class ScoreBoardController {
         labels.add(player3);
         labels.add(player4);
         labels.add(player5);
-        /*Platform.runLater(() -> {
-            for (Label label : labels)
-                label.setFont(gui.normale);
+    }
 
-        });*/
-
+    protected void showScores(Map<String, Integer> scores) {
+        int n = 0;
+        for (Map.Entry<String, Integer> entry : scores.entrySet()) {
+            labels.get(n).setVisible(true);
+            labels.get(n).setText(entry.getKey() + ": " + entry.getValue());
+            //labels.get(n).setFont(gui.normale);
+            n++;
+        }
     }
 
 

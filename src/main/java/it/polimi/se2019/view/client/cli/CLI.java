@@ -759,4 +759,9 @@ public class CLI extends RemoteView {
     public void showUsernameAlreadyInUse(String user) {
 
     }
+
+    @Override
+    public void showScoreboard(Map<String, Integer> scoreboard) {
+
+    }
 }
