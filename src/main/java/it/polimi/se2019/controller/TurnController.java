@@ -233,7 +233,7 @@ public class TurnController implements Serializable {
      * Check if is the case to activate the final frenzy
      */
     private void checkFinalFrenzy() {
-        if (c.getGame().getGameField().getSkullsBoard().getTotalSkulls() == 0) {
+        if (c.getGame().getGameField().getSkullsBoard().getCurrentSkulls() == 0) {
             c.activateFrenzyMode();
             frenzyStart = currIndex;
         }
