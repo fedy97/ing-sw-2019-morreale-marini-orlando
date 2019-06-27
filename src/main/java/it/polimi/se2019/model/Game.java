@@ -233,15 +233,15 @@ public class Game extends Observable implements Serializable {
             playerWeapons.put(player.getCharacter().name(), weapons);
 
             int actionType;
-            if(player.getFrenzyModeType() > 0)
+            if (player.getFrenzyModeType() > 0)
                 actionType = player.getFrenzyModeType() + 2;
-            else if(player.isDamaged())
+            else if (player.isDamaged())
                 actionType = 1;
-            else if(player.isSeriouslyDamaged())
+            else if (player.isSeriouslyDamaged())
                 actionType = 2;
             else
                 actionType = 0;
-            playerBoardRep.put(player.getCharacter().name(), new BoardRep(damages, marks, ammos, player.getCurrentScore(), actionType));
+            playerBoardRep.put(player.getCharacter().name(), new BoardRep(damages, marks, ammos, player.getCurrentScore(), actionType, player.getPlayerBoard().isReverted()));
         }
 
         lightVersion.setPlayerWeapons(playerWeapons);

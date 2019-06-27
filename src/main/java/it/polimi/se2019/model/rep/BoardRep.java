@@ -10,13 +10,15 @@ public final class BoardRep implements Serializable {
     private Map<String, Integer> colorQtyAmmos;
     private int points;
     private int actionType;
+    private boolean reverted;
 
-    public BoardRep(List<String> damages, List<String> marks, Map<String, Integer> colorQtyAmmos, int points, int actionType) {
+    public BoardRep(List<String> damages, List<String> marks, Map<String, Integer> colorQtyAmmos, int points, int actionType, boolean reverted) {
         this.damages = damages;
         this.marks = marks;
         this.colorQtyAmmos = colorQtyAmmos;
         this.points = points;
         this.actionType = actionType;
+        this.reverted = reverted;
     }
 
     public List<String> getDamages() {
@@ -37,5 +39,9 @@ public final class BoardRep implements Serializable {
 
     public int getActionType() {
         return actionType;
+    }
+
+    public boolean isReverted() {
+        return reverted;
     }
 }
