@@ -7,14 +7,16 @@ import java.util.Map;
 public final class BoardRep implements Serializable {
     private List<String> damages;
     private List<String> marks;
-    private Map<String,Integer> colorQtyAmmos;
+    private Map<String, Integer> colorQtyAmmos;
     private int points;
+    private int actionType;
 
-    public BoardRep(List<String> damages, List<String> marks, Map<String,Integer> colorQtyAmmos, int points) {
+    public BoardRep(List<String> damages, List<String> marks, Map<String, Integer> colorQtyAmmos, int points, int actionType) {
         this.damages = damages;
         this.marks = marks;
         this.colorQtyAmmos = colorQtyAmmos;
         this.points = points;
+        this.actionType = actionType;
     }
 
     public List<String> getDamages() {
@@ -31,5 +33,9 @@ public final class BoardRep implements Serializable {
 
     public int getPoints() {
         return points;
+    }
+
+    public int getActionType() {
+        return actionType;
     }
 }
