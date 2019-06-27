@@ -42,6 +42,7 @@ public class GUI extends RemoteView {
     private transient ReloadWeaponsController reloadWeaponsController;
     private transient ChooseAmmosController chooseAmmosController;
     private transient ScoreBoardController scoreBoardController;
+    private transient LoginController loginController;
 
     private Scene sceneLogin;
     private Scene sceneWaitingLobby;
@@ -77,7 +78,8 @@ public class GUI extends RemoteView {
     private LightGameVersion lightGameVersion;
     private transient TimerTurn timerTurn;
 
-    public GUI(String user, Stage stage, Scene login, Font normale, Font grande) {
+    public GUI(LoginController loginController, String user, Stage stage, Scene login, Font normale, Font grande) {
+        this.loginController = loginController;
         this.normale = normale;
         this.grande = grande;
         this.stage = stage;
@@ -747,6 +749,15 @@ public class GUI extends RemoteView {
                 });
     }
 
+    @Override
+    public void showUsernameAlreadyInUse(String user) {
+        Platform.runLater(() -> {
+            loginController.notifyAlreadyInUse(user);
+            stage.setScene(sceneLogin);
+            stage.show();
+        });
+    }
+
     public String getCharInString() {
         return charInString;
     }
@@ -801,6 +812,10 @@ public class GUI extends RemoteView {
 
     public BuyWithPowerupController getBuyWithPowerupController() {
         return buyWithPowerupController;
+    }
+
+    public LoginController getLoginController() {
+        return loginController;
     }
 }
 

@@ -754,4 +754,9 @@ public class CLI extends RemoteView {
     public void showAmmoToDiscard() {
 
     }
+
+    @Override
+    public void showUsernameAlreadyInUse(String user) {
+
+    }
 }

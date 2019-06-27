@@ -42,11 +42,11 @@ public class ScoreBoardController {
         labels.add(player3);
         labels.add(player4);
         labels.add(player5);
-        Platform.runLater(() -> {
+        /*Platform.runLater(() -> {
             for (Label label : labels)
                 label.setFont(gui.normale);
 
-        });
+        });*/
 
     }
 

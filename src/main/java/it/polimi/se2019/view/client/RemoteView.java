@@ -10,8 +10,12 @@ import it.polimi.se2019.view.View;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public abstract class RemoteView extends View {
+
+    private BlockingDeque<Boolean> answer = new LinkedBlockingDeque<>();
     /**
      * @param users to display on the lobby
      */
@@ -173,6 +177,8 @@ public abstract class RemoteView extends View {
      */
     public abstract void showUsablePowerups(List<String> powerups);
 
+    public abstract void showUsernameAlreadyInUse(String user);
+
     /**
      * if the ping is received, a response will be immediately sent to the server
      */
@@ -195,4 +201,7 @@ public abstract class RemoteView extends View {
         notifyObservers(message);
     }
 
+    public BlockingDeque<Boolean> getAnswer() {
+        return answer;
+    }
 }

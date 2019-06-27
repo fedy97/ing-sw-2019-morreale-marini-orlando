@@ -1,6 +1,7 @@
 package it.polimi.se2019.network.client;
 
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.network.message.to_client.UsernameAlreadyInUseMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.network.server.Server;
 import it.polimi.se2019.utils.CustomLogger;
@@ -60,12 +61,16 @@ public class RMIClient implements Client, Observer {
 
         try {
             stub.registerClient(InetAddress.getLocalHost().getHostAddress(), this.port, user);
+            if (!stub.isUsed()) {
+                connected = true;
+                CustomLogger.logInfo(this.getClass().getName(), "Client is connected!");
+            } else {
+                stub.setUsed(false);
+                interpretMessage(new UsernameAlreadyInUseMessage(user));
+            }
         } catch (Exception e) {
             CustomLogger.logException(this.getClass().getName(), e);
         }
-
-        connected = true;
-        CustomLogger.logInfo(this.getClass().getName(), "Client is connected!");
     }
 
     /**

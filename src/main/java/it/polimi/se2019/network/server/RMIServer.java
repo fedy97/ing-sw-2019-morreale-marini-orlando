@@ -2,6 +2,7 @@ package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.Lobby;
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.controller.ControllerState;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
@@ -18,7 +19,6 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 
 
 /**
@@ -31,6 +31,7 @@ public class RMIServer implements Server {
     private Map<String, VirtualView> clientActor;
     private boolean available;
     private int port;
+    private boolean isUsed = false;
 
     public RMIServer(int port) {
         this.port = port;
@@ -95,34 +96,38 @@ public class RMIServer implements Server {
     public void registerClient(String host, int port, String username) {
         try {
             Registry registry = LocateRegistry.getRegistry(host, port);
-            boolean newConnection = true;
-            VirtualView virtualView;
-            if (!Controller.getInstance().getUserView().containsKey(username)) {
-                virtualView = new VirtualView(username);
-                clientActor.put(username, virtualView);
-                Lobby.addUser(username);
-            } else if (clientActor.containsKey(username)) {
-                virtualView = clientActor.get(username);
-                Game.getInstance().addObserver(virtualView);
-                Game.getInstance().getPlayer(username).setConnected(true);
-                newConnection = false;
+            if (Controller.getInstance().getState().equals(ControllerState.SETUP) && Controller.getInstance().getUserView().containsKey(username)) {
+                setUsed(true);
             } else {
-                virtualView = Controller.getInstance().getUserView().get(username);
-                virtualView.addObserver(Controller.getInstance());
-                Game.getInstance().addObserver(virtualView);
-                Game.getInstance().getPlayer(username).setConnected(true);
-                Lobby.getSocketServer().getActors().remove(username);
-                Lobby.getSocketServer().getConnections().remove(username);
-                clientActor.put(username, virtualView);
-                newConnection = false;
-            }
-            skeletons.put(username, (Client) registry.lookup("RemoteView"));
-            virtualView.viewSetChanged();
-            if (newConnection) {
-                virtualView.notifyObservers(new NewClientConnectedMessage(username));
-                HandyFunctions.checkForAtLeast2Players(virtualView);
-            } else {
-                virtualView.notifyObservers(new ReconnectedClientMessage(username));
+                boolean newConnection = true;
+                VirtualView virtualView;
+                if (!Controller.getInstance().getUserView().containsKey(username)) {
+                    virtualView = new VirtualView(username);
+                    clientActor.put(username, virtualView);
+                    Lobby.addUser(username);
+                } else if (clientActor.containsKey(username)) {
+                    virtualView = clientActor.get(username);
+                    Game.getInstance().addObserver(virtualView);
+                    Game.getInstance().getPlayer(username).setConnected(true);
+                    newConnection = false;
+                } else {
+                    virtualView = Controller.getInstance().getUserView().get(username);
+                    virtualView.addObserver(Controller.getInstance());
+                    Game.getInstance().addObserver(virtualView);
+                    Game.getInstance().getPlayer(username).setConnected(true);
+                    Lobby.getSocketServer().getActors().remove(username);
+                    Lobby.getSocketServer().getConnections().remove(username);
+                    clientActor.put(username, virtualView);
+                    newConnection = false;
+                }
+                skeletons.put(username, (Client) registry.lookup("RemoteView"));
+                virtualView.viewSetChanged();
+                if (newConnection) {
+                    virtualView.notifyObservers(new NewClientConnectedMessage(username));
+                    HandyFunctions.checkForAtLeast2Players(virtualView);
+                } else {
+                    virtualView.notifyObservers(new ReconnectedClientMessage(username));
+                }
             }
             CustomLogger.logInfo(this.getClass().getName(), username + " connected to the RMI server!");
         } catch (Exception e) {
@@ -178,5 +183,15 @@ public class RMIServer implements Server {
 
     public Map<String, Client> getSkeletons() {
         return skeletons;
+    }
+
+    @Override
+    public boolean isUsed() {
+        return isUsed;
+    }
+
+    @Override
+    public void setUsed(boolean isused) {
+        isUsed = isused;
     }
 }

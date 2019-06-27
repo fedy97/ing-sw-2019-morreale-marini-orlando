@@ -2,8 +2,10 @@ package it.polimi.se2019.network.server;
 
 import it.polimi.se2019.Lobby;
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.controller.ControllerState;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.network.message.to_client.UsernameAlreadyInUseMessage;
 import it.polimi.se2019.network.message.to_server.NewClientConnectedMessage;
 import it.polimi.se2019.network.message.to_server.ReconnectedClientMessage;
 import it.polimi.se2019.network.message.to_server.ToServerMessage;
@@ -62,39 +64,44 @@ public class SocketServer implements Server {
                         output.flush();
                         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
                         String user = (String) input.readObject();
-                        boolean newConnection = true;
-                        VirtualView virtualView;
-                        if (!Controller.getInstance().getUserView().containsKey(user)) {
-                            virtualView = new VirtualView(user);
-                            actors.put(user, virtualView);
-                            Lobby.addUser(user);
-                        } else if (actors.containsKey(user)) {
-                            virtualView = actors.get(user);
-                            Game.getInstance().addObserver(virtualView);
-                            Game.getInstance().getPlayer(user).setConnected(true);
-                            newConnection = false;
-                        } else {
-                            virtualView = Controller.getInstance().getUserView().get(user);
-                            virtualView.addObserver(Controller.getInstance());
-                            Game.getInstance().addObserver(virtualView);
-                            Game.getInstance().getPlayer(user).setConnected(true);
-                            Lobby.getRmiServer().getClientActor().remove(user);
-                            Lobby.getRmiServer().getSkeletons().remove(user);
-                            actors.put(user, virtualView);
-                            newConnection = false;
+                        if (Controller.getInstance().getState().equals(ControllerState.SETUP) && Controller.getInstance().getUserView().containsKey(user)) {
+                            output.writeObject(new UsernameAlreadyInUseMessage(user));
+                            output.reset();
                         }
-                        SpecificSocketServer specificSocketServer = new SpecificSocketServer(this, socket, input, output, virtualView);
-                        specificSocketServer.start();
-                        connections.put(user, specificSocketServer);
-                        HandyFunctions.LOGGER.log(Level.INFO, user + " connected to the socket server!");
-                        virtualView.viewSetChanged();
-                        if (newConnection) {
-                            virtualView.notifyObservers(new NewClientConnectedMessage(user));
-                            HandyFunctions.checkForAtLeast2Players(virtualView);
-                        } else {
-                            virtualView.notifyObservers(new ReconnectedClientMessage(user));
+                        else {
+                            boolean newConnection = true;
+                            VirtualView virtualView;
+                            if (!Controller.getInstance().getUserView().containsKey(user)) {
+                                virtualView = new VirtualView(user);
+                                actors.put(user, virtualView);
+                                Lobby.addUser(user);
+                            } else if (actors.containsKey(user)) {
+                                virtualView = actors.get(user);
+                                Game.getInstance().addObserver(virtualView);
+                                Game.getInstance().getPlayer(user).setConnected(true);
+                                newConnection = false;
+                            } else {
+                                virtualView = Controller.getInstance().getUserView().get(user);
+                                virtualView.addObserver(Controller.getInstance());
+                                Game.getInstance().addObserver(virtualView);
+                                Game.getInstance().getPlayer(user).setConnected(true);
+                                Lobby.getRmiServer().getClientActor().remove(user);
+                                Lobby.getRmiServer().getSkeletons().remove(user);
+                                actors.put(user, virtualView);
+                                newConnection = false;
+                            }
+                            SpecificSocketServer specificSocketServer = new SpecificSocketServer(this, socket, input, output, virtualView);
+                            specificSocketServer.start();
+                            connections.put(user, specificSocketServer);
+                            HandyFunctions.LOGGER.log(Level.INFO, user + " connected to the socket server!");
+                            virtualView.viewSetChanged();
+                            if (newConnection) {
+                                virtualView.notifyObservers(new NewClientConnectedMessage(user));
+                                HandyFunctions.checkForAtLeast2Players(virtualView);
+                            } else {
+                                virtualView.notifyObservers(new ReconnectedClientMessage(user));
+                            }
                         }
-
                     } catch (Exception e) {
                         CustomLogger.logException(this.getClass().getName(), e);
                     }
@@ -155,5 +162,13 @@ public class SocketServer implements Server {
         return actors.get(user);
     }
 
+    @Override
+    public boolean isUsed() {
+        return false;
+    }
 
+    @Override
+    public void setUsed(boolean isused) {
+        //nothing
+    }
 }

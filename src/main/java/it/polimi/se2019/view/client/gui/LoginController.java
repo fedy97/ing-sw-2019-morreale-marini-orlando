@@ -2,8 +2,8 @@ package it.polimi.se2019.view.client.gui;
 
 import it.polimi.se2019.network.client.RMIClient;
 import it.polimi.se2019.network.client.SocketClient;
+import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -13,6 +13,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.rmi.RemoteException;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class LoginController {
 
@@ -51,25 +53,31 @@ public class LoginController {
 
     @FXML
     public void login() throws RemoteException {
-
-        if (getUsername().equals("")) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Error");
-            alert.setHeaderText("Invalid username");
-            alert.showAndWait();
-        } else {
-            GUI gui = new GUI(getUsername(), (Stage) loginButton.getScene().getWindow(), loginButton.getScene(),normale,grande);
-            gui.setUserName();
-            if (selection.equals("RMI")) {
-                RMIClient client = new RMIClient(gui, HandyFunctions.randomIntegerBetWeen(1500, 3000), getUsername());
-                client.connect(getIp(), HandyFunctions.parserSettings.getRmiServerPort());
-                gui.addObserver(client);
+        try {
+            if (getUsername().equals("")) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid username");
+                alert.showAndWait();
             } else {
-                SocketClient client = new SocketClient(gui, getUsername());
-                client.connect(getIp(), HandyFunctions.parserSettings.getSocketServerPort());
-                gui.addObserver(client);
+                GUI gui = new GUI(this, getUsername(), (Stage) loginButton.getScene().getWindow(), loginButton.getScene(), normale, grande);
+                gui.setUserName();
+                if (selection.equals("RMI")) {
+                    RMIClient client = new RMIClient(gui, HandyFunctions.randomIntegerBetWeen(1500, 3000), getUsername());
+                    client.connect(getIp(), HandyFunctions.parserSettings.getRmiServerPort());
+                    gui.addObserver(client);
+                } else {
+                    SocketClient client = new SocketClient(gui, getUsername());
+                    client.connect(getIp(), HandyFunctions.parserSettings.getSocketServerPort());
+                    gui.addObserver(client);
+                }
+                try {
+                    showWaitingLobby(gui);
+                } catch (Exception e){}
+
             }
-            showWaitingLobby(gui);
+        } catch (Exception ex) {
+            CustomLogger.logException(this.getClass().getName(), ex);
         }
     }
 
@@ -96,5 +104,12 @@ public class LoginController {
         HandyFunctions.enlightenToggleButton(socketButton);
         HandyFunctions.forceLightToggleButton(rmiButton);
         selection = rmiButton.getText();
+    }
+
+    protected void notifyAlreadyInUse(String user) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Error");
+        alert.setHeaderText(user + " is already in use");
+        alert.showAndWait();
     }
 }

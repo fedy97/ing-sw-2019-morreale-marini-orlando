@@ -13,7 +13,6 @@ import java.rmi.RemoteException;
  * @author Simone Orlando
  */
 public interface Server extends Remote {
-
     /**
      * Initialize the server parameters in order to connect to the client
      */
@@ -37,4 +36,9 @@ public interface Server extends Remote {
     void registerClient(String host, int port, String user) throws RemoteException;
 
     boolean isConnected(String user) throws RemoteException;
+
+    boolean isUsed() throws RemoteException;
+
+    void setUsed(boolean isused) throws RemoteException;
+
 }
