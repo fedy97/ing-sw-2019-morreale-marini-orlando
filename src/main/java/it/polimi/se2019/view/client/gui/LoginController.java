@@ -64,11 +64,11 @@ public class LoginController {
                 gui.setUserName();
                 if (selection.equals("RMI")) {
                     RMIClient client = new RMIClient(gui, HandyFunctions.randomIntegerBetWeen(1500, 3000), getUsername());
-                    client.connect(getIp(), HandyFunctions.parserSettings.getRmiServerPort());
+                    client.connect(getIp(), HandyFunctions.parserClientSettings.getRmiServerPort());
                     gui.addObserver(client);
                 } else {
                     SocketClient client = new SocketClient(gui, getUsername());
-                    client.connect(getIp(), HandyFunctions.parserSettings.getSocketServerPort());
+                    client.connect(getIp(), HandyFunctions.parserClientSettings.getSocketServerPort());
                     gui.addObserver(client);
                 }
                 try {
