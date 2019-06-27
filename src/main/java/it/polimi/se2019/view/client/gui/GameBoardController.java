@@ -680,7 +680,7 @@ public class GameBoardController {
         }
         for (int i = skullsToSet; i < totalSkulls; i++) {
             skullsImages.get(i).setVisible(true);
-            skullsImages.get(i).setImage(new Image(quantityMarks.get(totalSkulls - i - 1) + "mark" + charactersKillers.get(totalSkulls - i - 1) + ".png"));
+            skullsImages.get(i).setImage(new Image("/assets/boards/" + quantityMarks.get(totalSkulls - i - 1) + "mark" + charactersKillers.get(totalSkulls - i - 1) + ".png"));
         }
     }
 
