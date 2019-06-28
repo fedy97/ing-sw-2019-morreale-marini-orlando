@@ -74,9 +74,10 @@ public class TurnController implements Serializable {
 
         //Refill operations
         if (currIndex == 0) {
-            refillGameField();
             firstTurn = false;
         }
+
+        refillGameField();
 
         if (c.isFrenzyModeOn() && currIndex == frenzyStart)
             c.endGame();
