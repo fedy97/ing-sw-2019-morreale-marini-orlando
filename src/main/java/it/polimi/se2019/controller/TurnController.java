@@ -136,7 +136,7 @@ public class TurnController implements Serializable {
      *
      * @param currPlayer
      */
-    private void enablePlayers(Player currPlayer) {
+    public void enablePlayers(Player currPlayer) {
         for (Player player : c.getGame().getPlayers()) {
             // && c.getPingsList().size() >= 2
             if (player.equals(currPlayer) && player.isConnected()) {
