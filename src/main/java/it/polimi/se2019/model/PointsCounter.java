@@ -10,6 +10,7 @@ import java.util.Map;
 
 
 /**
+ * Class used to calculate the amount of points of each player
  * @author Gabriel Raul Marini
  */
 public final class PointsCounter {

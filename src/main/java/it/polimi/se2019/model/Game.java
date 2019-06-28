@@ -38,6 +38,17 @@ public class Game extends Observable implements Serializable {
     private Deck<AmmoCard> ammoDeck;
     private Map<Character, Player> characterPlayers;
 
+    private Game() {
+        players = new ArrayList<>();
+
+        characterPlayers = new EnumMap<>(Character.class);
+        characterPlayers.put(Character.BANSHEE, null);
+        characterPlayers.put(Character.VIOLET, null);
+        characterPlayers.put(Character.SPROG, null);
+        characterPlayers.put(Character.DISTRUCTOR, null);
+        characterPlayers.put(Character.DOZER, null);
+    }
+
     /**
      * Game singleton constructor
      *
@@ -46,14 +57,6 @@ public class Game extends Observable implements Serializable {
     public static Game getInstance() {
         if (instance == null) {
             instance = new Game();
-            instance.players = new ArrayList<>();
-
-            instance.characterPlayers = new EnumMap<>(Character.class);
-            instance.characterPlayers.put(Character.BANSHEE, null);
-            instance.characterPlayers.put(Character.VIOLET, null);
-            instance.characterPlayers.put(Character.SPROG, null);
-            instance.characterPlayers.put(Character.DISTRUCTOR, null);
-            instance.characterPlayers.put(Character.DOZER, null);
         }
         return instance;
     }

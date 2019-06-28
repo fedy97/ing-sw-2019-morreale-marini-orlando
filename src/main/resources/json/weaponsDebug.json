@@ -1,10 +1,10 @@
 {
   "weapons": [
     {
-      "name": "fucile al plasma",
-      "description": "effetto base: Dai 2 danni a 1 bersaglio che puoi vedere.\nslittamento di fase: Muovi di 1 o 2 quadrati. Questo effetto\npuò essere usato prima o dopo l'effetto base.\ncolpo sovraccarico: Dai 1 danno aggiuntivo al tuo\nbersaglio.\nNota: I due movimenti non hanno costo in munizioni.\nNon hai bisogno di vedere il tuo bersaglio quando giochi la\ncarta. Per esempio puoi muovere di 2 quadrati e sparare al\nbersaglio che ora puoi vedere. Non puoi usare 1 movimento\nprima di sparare e 1 dopo aver sparato.",
-      "paidCost": "BLUE",
-      "extraCost": ["YELLOW"]
+      "name": "onda d'urto",
+      "description": "modalità base: Scegli fino a 3 bersagli\nsu quadrati differenti, ognuno distante\nesattamente 1 movimento. Dai 1 danno a ogni\nbersaglio.\nmodalità tsunami: Dai 1 danno a tutti\ni bersagli che sono distanti esattamente\n1 movimento.",
+      "paidCost":  "YELLOW",
+      "extraCost": [""]
     }
   ]
 }
