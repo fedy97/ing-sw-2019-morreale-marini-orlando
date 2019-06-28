@@ -85,10 +85,6 @@ public class HandyFunctions {
         }
     }
 
-    public static int randomInteger() {
-        return random.nextInt();
-    }
-
     /**
      * return a random number between first and second inclusive
      *
@@ -117,7 +113,7 @@ public class HandyFunctions {
 
     public static <T> void printList(List<T> list) {
         for (T el : list) {
-            System.out.println(el.toString());
+            printConsole(el.toString());
         }
     }
 

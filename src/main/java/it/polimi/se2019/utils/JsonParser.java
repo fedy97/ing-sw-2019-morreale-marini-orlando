@@ -177,7 +177,7 @@ public class JsonParser {
     }
 
     public Deck<WeaponCard> buildWeaponCards() throws InvalidDeckException, InvalidNameException {
-        if (path.equals("/json/weaponsDebug.json")) {
+        if (path.equals("/json/weapons.json")) {
             ArrayList<WeaponCard> weaponCards = new ArrayList<>();
             AmmoCube paidCost;
             String name;
@@ -197,8 +197,7 @@ public class JsonParser {
                     for (int j = 0; j < jArrExtraCost.length(); j++)
                         extraCost[j] = AmmoCube.valueOf((String) jArrExtraCost.get(j));
                 } else extraCost = null;
-                for (int j = 0; j < 21; j++)
-                    createWeapon(name, description, pathImg, paidCost, extraCost, weaponCards);
+                createWeapon(name, description, pathImg, paidCost, extraCost, weaponCards);
             }
 
             Deck<WeaponCard> d = new Deck<>(21);
