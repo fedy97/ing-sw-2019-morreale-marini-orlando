@@ -47,6 +47,7 @@ public class Lobby {
             Controller instance = (Controller) oi.readObject();
             Game gameInstance = (Game) oi.readObject();
             Controller.setInstance(instance);
+            Controller.getInstance().setServerReloaded(true);
             Game.setInstance(gameInstance);
             controller = Controller.getInstance();
             HandyFunctions.LOGGER.log(Level.INFO, "server loaded successfully!");

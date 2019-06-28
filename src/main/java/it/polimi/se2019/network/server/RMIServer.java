@@ -14,6 +14,7 @@ import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.net.InetAddress;
+import java.rmi.ConnectException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -155,6 +156,8 @@ public class RMIServer implements Server {
     public void sendToClient(ToClientMessage msg, String username) {
         try {
             skeletons.get(username).interpretMessage(msg);
+        } catch (ConnectException ex) {
+            CustomLogger.logInfo(this.getClass().getName(),"rmi client disconnected");
         } catch (Exception e) {
             CustomLogger.logException(this.getClass().getName(), e);
         }

@@ -322,6 +322,7 @@ public class GameBoardController {
     private boolean firstSetup = true;
     private boolean firstSetupReconnected = false;
     private LightGameVersion lightGameVersion;
+    private int oldActionType = 0;
 
 
     protected void passGUI(GUI gui) {
@@ -660,10 +661,48 @@ public class GameBoardController {
             updateAmmoCards();
             //update the number of current skulls
             updateSkulls();
+            //update right action buttons
+            updateActionButtons();
         } catch (NullPointerException ex) {
         }
 
 
+    }
+
+    private void updateActionButtons() {
+        int actionType = lightGameVersion.getPlayerBoardRep().get(gui.getCharInString()).getActionType();
+        if (actionType != oldActionType) {
+            oldActionType=actionType;
+            switch (actionType) {
+                case 0:
+                    moveimage.setImage(new Image("/assets/boards/move1.png"));
+                    grabimage.setImage(new Image("/assets/boards/grab1.png"));
+                    shootimage.setImage(new Image("/assets/boards/shoot1.png"));
+                    break;
+                case 1:
+                    moveimage.setImage(new Image("/assets/boards/move1.png"));
+                    grabimage.setImage(new Image("/assets/boards/grab2adren_3frenzy.png"));
+                    shootimage.setImage(new Image("/assets/boards/shoot1.png"));
+                    break;
+                case 2:
+                    moveimage.setImage(new Image("/assets/boards/move1.png"));
+                    grabimage.setImage(new Image("/assets/boards/grab2adren_3frenzy.png"));
+                    shootimage.setImage(new Image("/assets/boards/shoot2adren.png"));
+                    break;
+                case 3:
+                    moveimage.setImage(new Image("/assets/boards/movefrenzy3.png"));
+                    grabimage.setImage(new Image("/assets/boards/grab2adren_3frenzy.png"));
+                    shootimage.setImage(new Image("/assets/boards/shootfrenzy3.png"));
+                    break;
+                case 4:
+                    moveimage.setImage(new Image("/assets/boards/grabfrenzy4.png"));
+                    grabimage.setImage(new Image("/assets/boards/shootfrenzy4.png"));
+                    shootimage.setImage(null);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private void updateSkulls() {

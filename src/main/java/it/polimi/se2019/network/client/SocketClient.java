@@ -5,6 +5,7 @@ import it.polimi.se2019.network.message.to_server.ToServerMessage;
 import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.view.client.RemoteView;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -50,6 +51,8 @@ public class SocketClient implements Client, Observer {
                         if (msg != null)
                             interpretMessage(msg);
                     }
+                } catch (EOFException ex) {
+                    CustomLogger.logInfo(this.getClass().getName(), "socket client disconnected");
                 } catch (Exception e) {
                     CustomLogger.logException(this.getClass().getName(), e);
                 }

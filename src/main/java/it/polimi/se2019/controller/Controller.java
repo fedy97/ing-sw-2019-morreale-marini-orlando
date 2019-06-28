@@ -67,6 +67,7 @@ public class Controller implements Observer, Serializable {
     private boolean gameIsActive = true;
     private boolean frenzyModeOn = false;
     private boolean wasRecharged;
+    private boolean serverReloaded;
 
     private Controller() {
         game = Game.getInstance();
@@ -88,6 +89,7 @@ public class Controller implements Observer, Serializable {
         timerSetup = HandyFunctions.parserSettings.getTimerSetup();
         pingsList = new ArrayList<>();
         pingsWaitingList = new ArrayList<>();
+        serverReloaded = false;
         startWaitingLobbyPing();
     }
 
@@ -625,31 +627,36 @@ public class Controller implements Observer, Serializable {
                     pingsList.clear();
                     notifyAll(new PingClientsMessage(null));
                     Thread.sleep(3000);
+                    if (pingsList.size() == 2 && serverReloaded)
+                        setServerReloaded(false);
+                    if (pingsList.size() < 2 && !serverReloaded)
+                        endGame();
+                    else {
+                        for (String charCurr : chars) {
 
-                    for (String charCurr : chars) {
+                            if (!pingsList.contains(charCurr)) {
+                                game.deleteObserver(userView.get(game.getPlayer(Character.valueOf(charCurr)).getName()));
+                                Player toDisconnect = game.getPlayer(Character.valueOf(charCurr));
+                                toDisconnect.setConnected(false);
 
-                        if (!pingsList.contains(charCurr)) {
-                            game.deleteObserver(userView.get(game.getPlayer(Character.valueOf(charCurr)).getName()));
-                            Player toDisconnect = game.getPlayer(Character.valueOf(charCurr));
-                            toDisconnect.setConnected(false);
+                                if (!alreadyNotified.contains(charCurr)) {
+                                    alreadyNotified.add(charCurr);
+                                    broadcastMessage(toDisconnect.getName() + " disconnected!");
 
-                            if (!alreadyNotified.contains(charCurr)) {
-                                alreadyNotified.add(charCurr);
-                                broadcastMessage(toDisconnect.getName() + " disconnected!");
+                                    if (toDisconnect.getCurrentPlatform() == null) {
+                                        PowerUpCard p = decksManager.drawPowerUp();
+                                        toDisconnect.addPowerUpCard(p);
 
-                                if (toDisconnect.getCurrentPlatform() == null) {
-                                    PowerUpCard p = decksManager.drawPowerUp();
-                                    toDisconnect.addPowerUpCard(p);
-
-                                    Color powerupColor = HandyFunctions.stringToColor(p.getAmmoCube().name());
-                                    for (Room r : Game.getInstance().getGameField().getRooms()) {
-                                        if (r.hasGenerationSpot() && r.getGenSpot().getPlatformColor().equals(powerupColor))
-                                            toDisconnect.setCurrentPlatform(r.getGenSpot());
+                                        Color powerupColor = HandyFunctions.stringToColor(p.getAmmoCube().name());
+                                        for (Room r : Game.getInstance().getGameField().getRooms()) {
+                                            if (r.hasGenerationSpot() && r.getGenSpot().getPlatformColor().equals(powerupColor))
+                                                toDisconnect.setCurrentPlatform(r.getGenSpot());
+                                        }
                                     }
                                 }
+                                if (turnController.getTurnUser().equals(toDisconnect.getName()))
+                                    turnController.endTurn();
                             }
-                            if (turnController.getTurnUser().equals(toDisconnect.getName()))
-                                turnController.endTurn();
                         }
                     }
                     //Thread.sleep(1000);
@@ -926,8 +933,8 @@ public class Controller implements Observer, Serializable {
      * Activate the final frenzy mode
      */
     public void activateFrenzyMode() {
-        for(Player player: game.getPlayers())
-            if(player.hasNoDamage())
+        for (Player player : game.getPlayers())
+            if (player.hasNoDamage())
                 player.getPlayerBoard().setReverted(true);
         frenzyModeOn = true;
     }
@@ -949,5 +956,9 @@ public class Controller implements Observer, Serializable {
 
     public void setGameIsActive(boolean gameIsActive) {
         this.gameIsActive = gameIsActive;
+    }
+
+    public void setServerReloaded(boolean serverReloaded) {
+        this.serverReloaded = serverReloaded;
     }
 }

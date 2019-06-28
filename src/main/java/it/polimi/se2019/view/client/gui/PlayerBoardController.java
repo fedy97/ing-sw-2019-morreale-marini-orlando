@@ -339,7 +339,11 @@ public class PlayerBoardController {
             powerUp.setImage(new Image("/assets/powerups/AD_powerups_IT_02.jpg"));
         for (ImageView weapon : weaponsImages)
             weapon.setImage(new Image("/assets/weapons/back.png"));
-        boardImage.setImage(new Image("/assets/boards/" + currPlayerDisplay.toLowerCase() + ".png"));
+        BoardRep myBoard = lightGameVersion.getPlayerBoardRep().get(currPlayerDisplay);
+        if (!myBoard.isReverted())
+            boardImage.setImage(new Image("/assets/boards/" + currPlayerDisplay.toLowerCase() + ".png"));
+        else
+            boardImage.setImage(new Image("/assets/boards/" + currPlayerDisplay.toLowerCase() + "frenzy" + ".png"));
     }
 
     void passGUI(GUI gui) {
