@@ -56,7 +56,6 @@
 
     <build>
         <plugins>
-
             <!-- Export the project as runnable JARs, with the provided mainClass -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -74,8 +73,12 @@
                             <finalName>Server</finalName>
                             <archive>
                                 <manifest>
+                                    <addClasspath>true</addClasspath>
                                     <mainClass>it.polimi.se2019.Lobby</mainClass>
                                 </manifest>
+                                <manifestEntries>
+                                    <Class-Path>.</Class-Path>
+                                </manifestEntries>
                             </archive>
                             <descriptorRefs>
                                 <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -94,8 +97,12 @@
                             <finalName>Client</finalName>
                             <archive>
                                 <manifest>
+                                    <addClasspath>true</addClasspath>
                                     <mainClass>it.polimi.se2019.MainClient</mainClass>
                                 </manifest>
+                                <manifestEntries>
+                                    <Class-Path>.</Class-Path>
+                                </manifestEntries>
                             </archive>
                             <descriptorRefs>
                                 <descriptorRef>jar-with-dependencies</descriptorRef>

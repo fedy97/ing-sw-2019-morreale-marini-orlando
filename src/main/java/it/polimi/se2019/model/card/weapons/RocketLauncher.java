@@ -27,9 +27,7 @@ public final class RocketLauncher extends WeaponTwoAddingEffect {
                 damages.put(game.getPlayer(chosenTargets.get(0)), 2);
                 playerManager.addDamage(damages);
 
-                //"Then you may move the target 1 square"
-                c.sendMessage("You can move the target one move away", playerManager.getCurrentPlayer().getName());
-                c.callView(new SendBinaryOption("You can move the target one move away"), playerManager.getCurrentPlayer().getName());
+                c.callView(new SendBinaryOption("Do you want you to move your target away?"), playerManager.getCurrentPlayer().getName());
 
                 try {
                     if (c.getChosenBinaryOption().take()) {
