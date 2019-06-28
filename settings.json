@@ -1,9 +1,9 @@
 {
   "settings": [
     {
-      "skulls": 2,
+      "skulls": 1,
       "timerSetup": 1,
-      "timerTurn": 600,
+      "timerTurn": 200,
       "minPlayers": 2,
       "socketServerPort": 1100,
       "rmiServerPort": 1099

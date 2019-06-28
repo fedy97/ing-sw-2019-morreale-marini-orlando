@@ -125,6 +125,24 @@ public class PlayerBoardController {
     private ImageView mark2;
     @FXML
     private ImageView mark3;
+    @FXML
+    private ImageView mark4;
+    @FXML
+    private ImageView mark5;
+    @FXML
+    private ImageView mark6;
+    @FXML
+    private ImageView mark7;
+    @FXML
+    private ImageView mark8;
+    @FXML
+    private ImageView mark9;
+    @FXML
+    private ImageView mark10;
+    @FXML
+    private ImageView mark11;
+    @FXML
+    private ImageView mark12;
 
     private GUI gui;
     private String myChar;
@@ -156,6 +174,15 @@ public class PlayerBoardController {
             marksImages.add(mark1);
             marksImages.add(mark2);
             marksImages.add(mark3);
+            marksImages.add(mark4);
+            marksImages.add(mark5);
+            marksImages.add(mark6);
+            marksImages.add(mark7);
+            marksImages.add(mark8);
+            marksImages.add(mark9);
+            marksImages.add(mark10);
+            marksImages.add(mark11);
+            marksImages.add(mark12);
             yellowAmmosImages.add(yellowAmmo1);
             yellowAmmosImages.add(yellowAmmo2);
             yellowAmmosImages.add(yellowAmmo3);
@@ -204,7 +231,7 @@ public class PlayerBoardController {
             livesImages.add(life4);
             livesImages.add(life5);
             livesImages.add(life6);
-            scorelabel.setFont(gui.grande);
+            scorelabel.setFont(gui.getGrande());
         });
 
 
@@ -243,7 +270,7 @@ public class PlayerBoardController {
             marksImages.get(i).setVisible(true);
             marksImages.get(i).setImage(new Image("/assets/boards/1mark" + characterMarks.get(i) + ".png"));
         }
-        for (int i = characterMarks.size(); i < 3; i++)
+        for (int i = characterMarks.size(); i < 12; i++)
             marksImages.get(i).setVisible(false);
     }
 

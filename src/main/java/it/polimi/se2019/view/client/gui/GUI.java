@@ -26,8 +26,8 @@ import java.util.logging.Level;
 
 public class GUI extends RemoteView {
 
-    protected Font normale;
-    protected Font grande;
+    private Font normale;
+    private Font grande;
     private transient WaitingLobbyController waitingLobbyController;
     private transient ChooseMapController chooseMapController;
     private transient ChooseCharacterController chooseCharacterController;
@@ -155,6 +155,7 @@ public class GUI extends RemoteView {
                     initReloadWeapons();
                     initChooseAmmos();
                     initScoreboard();
+                    scoreBoardController.passGUI(this);
                     chooseAmmosController.passGUI(this);
                     reloadWeaponsController.passGUI(this);
                     chooseTargetsController.passGUI(this);
@@ -549,6 +550,7 @@ public class GUI extends RemoteView {
                     initReloadWeapons();
                     initChooseAmmos();
                     initScoreboard();
+                    scoreBoardController.passGUI(this);
                     choosePowerupController.passGUI(this);
                     chooseAmmosController.passGUI(this);
                     reloadWeaponsController.passGUI(this);
@@ -824,6 +826,14 @@ public class GUI extends RemoteView {
 
     public BuyWithPowerupController getBuyWithPowerupController() {
         return buyWithPowerupController;
+    }
+
+    public Font getNormale() {
+        return normale;
+    }
+
+    public Font getGrande() {
+        return grande;
     }
 }
 

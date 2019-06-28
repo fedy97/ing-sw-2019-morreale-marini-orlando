@@ -1,5 +1,6 @@
 package it.polimi.se2019.view.client.gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -33,12 +34,17 @@ public class ScoreBoardController {
     }
 
     public void initialize() {
-        labels = new ArrayList<>();
-        labels.add(player1);
-        labels.add(player2);
-        labels.add(player3);
-        labels.add(player4);
-        labels.add(player5);
+        Platform.runLater(() -> {
+            labels = new ArrayList<>();
+            labels.add(player1);
+            labels.add(player2);
+            labels.add(player3);
+            labels.add(player4);
+            labels.add(player5);
+            for (Label l : labels)
+                l.setFont(gui.getGrande());
+        });
+
     }
 
     protected void showScores(Map<String, Integer> scores) {
@@ -46,7 +52,6 @@ public class ScoreBoardController {
         for (Map.Entry<String, Integer> entry : scores.entrySet()) {
             labels.get(n).setVisible(true);
             labels.get(n).setText(entry.getKey() + ": " + entry.getValue());
-            //labels.get(n).setFont(gui.normale);
             n++;
         }
     }

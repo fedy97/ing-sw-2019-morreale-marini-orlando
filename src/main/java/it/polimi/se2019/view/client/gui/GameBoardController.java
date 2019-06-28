@@ -630,15 +630,15 @@ public class GameBoardController {
                 ammoRepImageViewMap.put(imageView, ammoRep);
             }
         }
-        movebutton.setFont(gui.normale);
-        reloadbutton.setFont(gui.normale);
-        shootbutton.setFont(gui.normale);
-        grabbutton.setFont(gui.normale);
-        convertbutton.setFont(gui.normale);
-        messageLabel.setFont(gui.normale);
-        endturnbutton.setFont(gui.normale);
-        powerupsbutton.setFont(gui.normale);
-        timer.setFont(gui.grande);
+        movebutton.setFont(gui.getNormale());
+        reloadbutton.setFont(gui.getNormale());
+        shootbutton.setFont(gui.getNormale());
+        grabbutton.setFont(gui.getNormale());
+        convertbutton.setFont(gui.getNormale());
+        messageLabel.setFont(gui.getNormale());
+        endturnbutton.setFont(gui.getNormale());
+        powerupsbutton.setFont(gui.getNormale());
+        timer.setFont(gui.getGrande());
     }
 
     protected void setConfig(String config) {
@@ -705,7 +705,6 @@ public class GameBoardController {
                 try {
                     ArrayList<ImageView> imagesPlayers = playerImages.get(player);
                     ArrayList<ImageView> imagesPos = posImages.get(pos);
-                    //HandyFunctions.printLineConsole(player + " " + pos);
                     for (ImageView im : imagesPlayers) {
                         for (ImageView im2 : imagesPos) {
                             if (im.equals(im2)) {
