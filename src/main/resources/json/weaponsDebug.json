@@ -1,10 +1,10 @@
 {
   "weapons": [
     {
-      "name": "onda d'urto",
-      "description": "modalità base: Scegli fino a 3 bersagli\nsu quadrati differenti, ognuno distante\nesattamente 1 movimento. Dai 1 danno a ogni\nbersaglio.\nmodalità tsunami: Dai 1 danno a tutti\ni bersagli che sono distanti esattamente\n1 movimento.",
-      "paidCost":  "YELLOW",
-      "extraCost": [""]
+      "name": "cannone vortex",
+      "description": "effetto base: Scegli un quadrato che puoi vedere ad almeno\n1 movimento di distanza. Un vortice si apre in quel punto.\nScegli un bersaglio nel quadrato in cui si trova il vortice\no distante 1 movimento. Muovi il bersaglio nel quadrato in\ncui si trova il vortice e dagli 2 danni.\nbuco nero: Scegli fino ad altri 2 bersagli nel quadrato in\ncui si trova il vortice o distanti 1 movimento. Muovili nel\nquadrato in cui si trova il vortice e dai loro 1 danno ciascuno.\nNota: I 3 bersagli devono essere diversi, ma alcuni di\nloro potrebbero partire dallo stesso quadrato (anche nel\nquadrato in cui ti trovi tu). Finiscono tutti sullo stesso\nquadrato con il vortice. Non hai bisogno di vedere i bersagli.\nSpari al quadrato che puoi vedere, crei un vortice lì e i tuoi\nbersagli vi vengono risucchiati.",
+      "paidCost":"RED",
+      "extraCost": ["BLUE"]
     }
   ]
 }

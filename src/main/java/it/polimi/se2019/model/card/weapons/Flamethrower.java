@@ -50,23 +50,24 @@ public final class Flamethrower extends WeaponAlternativeFire {
         Effect eff2 = new Effect(new AmmoCube[]{AmmoCube.YELLOW, AmmoCube.YELLOW}) {
             @Override
             public void activateEffect(List<Character> targets, WeaponCard card) {
-                /**Map<Player, Integer> damages = new HashMap<>();
+                /*List<Platform> destinations = game.getGameField().getPlatformDir(playerManager.getCurrentPlayer().getCurrentPlatform());
+                List<Platform> toRemove = new ArrayList<>();
 
-                 damages.put(game.getPlayer(targets.get(0)), 2);
-                 playerManager.addDamage(damages);
+                for (Platform p : destinations)
+                    if (!game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 2).contains(p))
+                        toRemove.add(p);
+                destinations.removeAll(toRemove);
 
-                 usableEffects[0] = false;
-                 usableEffects[1] = false;*/ //TODO
+                //TODO
+                c.sendMessage("Where do you want to move your target?", playerManager.getCurrentPlayer().getName());
+                c.askFor(destinations, "position");
+                target.setCurrentPlatform(c.getChosenDestination().take());
+                game.notifyChanges();*/
             }
 
             @Override
             public void setupTargets() {
-                List<Character> possibleTargets = new ArrayList<>();
-
-                for (Platform p : game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 1))
-                    possibleTargets.addAll(p.getPlayersOnThePlatform());
-                possibleTargets.removeAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
-                this.setPossibleTargets(possibleTargets);
+                this.setPossibleTargets(null);
             }
         };
 

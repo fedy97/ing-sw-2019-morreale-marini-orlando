@@ -230,9 +230,9 @@ public class JsonParser {
             case "fucile al plasma":
                 weaponCard = new PlasmaGun(name, description, pathImg, paidCost, extraCost);
                 break;
-            /*case "cannone vortex":
+            case "cannone vortex":
                 weaponCard = new VortexCannon(name, description, pathImg, paidCost, extraCost);
-                break;*/
+                break;
             case "zx-2":
                 weaponCard = new ZX2(name, description, pathImg, paidCost, extraCost);
                 break;
