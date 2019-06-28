@@ -690,13 +690,13 @@ public class GameBoardController {
                     shootimage.setImage(new Image("/assets/boards/shoot2adren.png"));
                     break;
                 case 3:
-                    moveimage.setImage(new Image("/assets/boards/movefrenzy3.png"));
-                    grabimage.setImage(new Image("/assets/boards/grab2adren_3frenzy.png"));
-                    shootimage.setImage(new Image("/assets/boards/shootfrenzy3.png"));
+                    moveimage.setImage(new Image("/assets/boards/shootfrenzy3.png"));
+                    grabimage.setImage(new Image("/assets/boards/movefrenzy3.png"));
+                    shootimage.setImage(new Image("/assets/boards/grab2adren_3frenzy.png"));
                     break;
                 case 4:
-                    moveimage.setImage(new Image("/assets/boards/grabfrenzy4.png"));
-                    grabimage.setImage(new Image("/assets/boards/shootfrenzy4.png"));
+                    grabimage.setImage(new Image("/assets/boards/grabfrenzy4.png"));
+                    moveimage.setImage(new Image("/assets/boards/shootfrenzy4.png"));
                     shootimage.setImage(null);
                     break;
                 default:

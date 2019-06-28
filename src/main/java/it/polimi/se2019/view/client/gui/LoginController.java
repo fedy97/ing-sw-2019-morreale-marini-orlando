@@ -13,8 +13,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.rmi.RemoteException;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.LinkedBlockingDeque;
 
 public class LoginController {
 
@@ -73,7 +71,8 @@ public class LoginController {
                 }
                 try {
                     showWaitingLobby(gui);
-                } catch (Exception e){}
+                } catch (Exception e) {
+                }
 
             }
         } catch (Exception ex) {
