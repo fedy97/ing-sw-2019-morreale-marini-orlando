@@ -28,7 +28,7 @@ public class JsonParser {
         try {
             this.path = path;
             InputStream is;
-            if (path.equals("settings.json") || path.equals("settingsClient.json"))
+            if (path.equals("settingsServer.json") || path.equals("settingsClient.json"))
                 is = new FileInputStream(path);
             else
                 is = getClass().getResourceAsStream(path);

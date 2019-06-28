@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 //add here some recurrent functions that can be helpful
 public class HandyFunctions {
     public static final Logger LOGGER = Logger.getLogger(Class.class.getName());
-    public static final JsonParser parserSettings = new JsonParser("settings.json");
+    public static final JsonParser parserSettings = new JsonParser("settingsServer.json");
     public static final JsonParser parserClientSettings = new JsonParser("settingsClient.json");
     private static final String HOVERED_BUTTON_STYLE = "-fx-border-color: #f7ff00; -fx-border-width: 4px; -fx-background-color: transparent; -fx-border-radius: 15;";
     private static final String ENLIGHTED_BUTTON_STYLE = "-fx-border-color: #ff0000; -fx-border-width: 2px; -fx-background-color: transparent;-fx-border-radius: 15;";
