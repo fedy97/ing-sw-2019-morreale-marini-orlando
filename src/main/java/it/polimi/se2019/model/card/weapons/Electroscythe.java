@@ -6,6 +6,7 @@ import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,10 @@ public final class Electroscythe extends WeaponAlternativeFire {
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(null);
+                List<Character> targets = new ArrayList<>();
+                targets.addAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
+                targets.remove(playerManager.getCurrentPlayer().getCharacter());
+                setPossibleTargets(targets);
             }
         };
 
@@ -49,7 +53,10 @@ public final class Electroscythe extends WeaponAlternativeFire {
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(null);
+                List<Character> targets = new ArrayList<>();
+                targets.addAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
+                targets.remove(playerManager.getCurrentPlayer().getCharacter());
+                setPossibleTargets(targets);
             }
         };
 
