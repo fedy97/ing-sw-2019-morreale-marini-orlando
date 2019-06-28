@@ -53,6 +53,13 @@ public class PlayerManager implements Serializable {
     }
 
     /**
+     * Clear the number of action left
+     */
+    public void clearActionLeft() {
+        actionsLeft = 0;
+    }
+
+    /**
      * Mark the target player with the mark of the current player
      *
      * @param target the player to be marked

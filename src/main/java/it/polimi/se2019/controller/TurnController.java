@@ -76,6 +76,7 @@ public class TurnController implements Serializable {
         if (currIndex == 0) {
             firstTurn = false;
         }
+        c.resetValidActions();
 
         refillGameField();
 
@@ -141,11 +142,11 @@ public class TurnController implements Serializable {
         for (Player player : c.getGame().getPlayers()) {
             // && c.getPingsList().size() >= 2
             if (player.equals(currPlayer) && player.isConnected()) {
-
-                if (firstTurn || player.getFrenzyModeType() == 2)
+                if (isFirstTurn() || currPlayer.getFrenzyModeType() == 2)
                     c.callView(new EnablePlayerActionsMessage(UserValidActions.NO_SHOOT.getActions()), player.getName());
                 else
                     c.callView(new EnablePlayerActionsMessage(UserValidActions.ALL.getActions()), player.getName());
+
                 c.sendMessage("It's your turn!", player.getName());
 
                 if (currPlayer.getCurrentPlatform() == null) {
@@ -261,6 +262,10 @@ public class TurnController implements Serializable {
 
     public void removeUser(String user) {
         turningOrder.remove(user);
+    }
+
+    public boolean isFirstTurn() {
+        return firstTurn;
     }
 
 }

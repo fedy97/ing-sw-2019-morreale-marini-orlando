@@ -49,7 +49,7 @@ public final class VortexCannon extends WeaponOneAddingEffect {
                     if (game.getPlayer(target).getCurrentPlatform() != vortex)
                         game.getPlayer(target).setCurrentPlatform(vortex);
                     Map<Player, Integer> damage = new HashMap<>();
-                    damage.put(game.getPlayer(target), 2);
+                    damage.put(game.getPlayer(target), 10);
                     playerManager.addDamage(damage);
                 } catch (Exception e) {
                     CustomLogger.logException(this.getClass().getName(), e);

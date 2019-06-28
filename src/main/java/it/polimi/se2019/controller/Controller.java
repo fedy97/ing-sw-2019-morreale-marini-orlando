@@ -45,7 +45,6 @@ public class Controller implements Observer, Serializable {
     private Validator validator;
     private TurnController turnController;
     private Map<String, VirtualView> userView;
-    private List<String> validActions;
     private ControllerState state; //the state is set to processing power up or weapon when a specific message from the client (ActivateCardMessage) is received
 
     private BlockingDeque<Character> currentTargets;
@@ -69,10 +68,11 @@ public class Controller implements Observer, Serializable {
     private boolean wasRecharged;
     private boolean serverReloaded;
 
+    private boolean[] validActions;
+
     private Controller() {
         game = Game.getInstance();
         validator = new HealthyValidator(this);
-        validActions = new ArrayList<>();
 
         currentTargets = new LinkedBlockingDeque<>();
         chosenWeapons = new LinkedBlockingDeque<>();
@@ -90,6 +90,9 @@ public class Controller implements Observer, Serializable {
         pingsList = new ArrayList<>();
         pingsWaitingList = new ArrayList<>();
         serverReloaded = false;
+
+        validActions = UserValidActions.NO_SHOOT.getActions().clone();
+
         startWaitingLobbyPing();
     }
 
@@ -173,26 +176,48 @@ public class Controller implements Observer, Serializable {
         }
     }
 
+    public void updateValidActions(boolean[] newValidActions) {
+        for (int i = 0; i < validActions.length; i++) {
+            validActions[i] = validActions[i] && newValidActions[i];
+        }
+    }
+
     /**
      * Manage new action request
      *
      * @param action to be performed
      */
     public void processAction(String action) throws InterruptedException {
-        if (isFrenzyModeOn())
-            processFrenzyAction(action);
-        else
-            processNormalAction(action);
+        callView(new EnablePlayerActionsMessage(UserValidActions.NONE.getActions()), playerManager.getCurrentPlayer().getName());
+
+        if (!action.equals("action4") && !action.equals("action5")) {
+            if (isFrenzyModeOn())
+                processFrenzyAction(action);
+            else
+                processNormalAction(action);
+            playerManager.useAction();
+        }
 
         if (action.equals("action4")) {
             askFor(getValidator().getReloadableWeapons(), "recharge");
+            updateValidActions(UserValidActions.ONLY_END.getActions());
+            playerManager.clearActionLeft();
+
         }
+
         if (action.equals("action5")) {
             askFor(getValidator().getUsablePowerUps(), "powerups");
             while (getState() == ControllerState.PROCESSING_POWERUP)
                 Thread.sleep(200);
         }
 
+        if (playerManager.getActionsLeft() == 0) {
+            updateValidActions(UserValidActions.NO_BASIC.getActions());
+            sendMessage("You've finished your basic action! Now you can use your powerups, reload or pass the turn",
+                    playerManager.getCurrentPlayer().getName());
+        }
+
+        callView(new EnablePlayerActionsMessage(validActions), playerManager.getCurrentPlayer().getName());
         setState(ControllerState.IDLE);
     }
 
@@ -519,11 +544,18 @@ public class Controller implements Observer, Serializable {
     }
 
     public void setCharacterChosen(String name, String characterChosen) throws
-            InvalidCharacterException, InvalidPositionException {
+            InvalidCharacterException {
         Player player = new Player(name, Character.valueOf(characterChosen), null);
         game.getPlayers().add(player);
         game.getCharacterPlayers().put(Character.valueOf(characterChosen), player);
         notifyAll(new UpdateVotesCharacterChosenMessage(characterChosen));
+    }
+
+    public void resetValidActions() {
+        if (turnController.isFirstTurn() || playerManager.getCurrentPlayer().getFrenzyModeType() == 2)
+            validActions = UserValidActions.NO_SHOOT.getActions().clone();
+        else
+            validActions = UserValidActions.ALL.getActions().clone();
     }
 
     /**
@@ -789,21 +821,6 @@ public class Controller implements Observer, Serializable {
     }
 
     /**
-     * @param action to be removed
-     */
-    public void removeValidAction(String action) {
-        validActions.remove(action);
-    }
-
-    /**
-     * @param action to be validated
-     * @return if the action is valid in the current state of the game
-     */
-    public boolean isValidAction(String action) {
-        return validActions.contains(action);
-    }
-
-    /**
      * @return The current game
      */
     public Game getGame() {
@@ -843,10 +860,6 @@ public class Controller implements Observer, Serializable {
         return chosenWeapons;
     }
 
-    public BlockingDeque<PowerUpCard> getChosenPowerUps() {
-        return chosenPowerUps;
-    }
-
     public BlockingDeque<Platform> getChosenDestination() {
         return chosenDestination;
     }
@@ -855,20 +868,12 @@ public class Controller implements Observer, Serializable {
         return chosenBinaryOption;
     }
 
-    public void setChosenBinaryOption(BlockingDeque<Boolean> chosenBinaryOption) {
-        this.chosenBinaryOption = chosenBinaryOption;
-    }
-
     public BlockingDeque<String> getChosenAmmo() {
         return chosenAmmo;
     }
 
     public BlockingDeque<Integer> getChosenEffect() {
         return chosenEffect;
-    }
-
-    public void setChosenEffect(BlockingDeque<Integer> chosenEffect) {
-        this.chosenEffect = chosenEffect;
     }
 
     public ControllerState getState() {
@@ -881,23 +886,6 @@ public class Controller implements Observer, Serializable {
      * @param newState
      */
     public void setState(ControllerState newState) {
-        if (newState == ControllerState.IDLE) {
-            if ((state == ControllerState.PROCESSING_ACTION_1
-                    || state == ControllerState.PROCESSING_ACTION_2
-                    || state == ControllerState.PROCESSING_ACTION_3))
-                playerManager.useAction();
-            if (playerManager.getActionsLeft() == 0) {
-                callView(new ShowMessage("You've finished your basic action! Now you can use your powerup, " +
-                        "reload or pass the turn"), playerManager.getCurrentPlayer().getName());
-                callView(new EnablePlayerActionsMessage(UserValidActions.NO_BASIC.getActions()), playerManager.getCurrentPlayer().getName());
-            } else {
-                callView(new EnablePlayerActionsMessage(UserValidActions.ALL.getActions()), playerManager.getCurrentPlayer().getName());
-            }
-        } else if ((newState == ControllerState.PROCESSING_ACTION_1
-                || state == ControllerState.PROCESSING_ACTION_2
-                || state == ControllerState.PROCESSING_ACTION_3)) {
-            callView(new EnablePlayerActionsMessage(UserValidActions.NONE.getActions()), playerManager.getCurrentPlayer().getName());
-        }
         state = newState;
     }
 
