@@ -1573,7 +1573,7 @@ public final class CliPrinter {
         Map<Integer, Integer> hashes = new HashMap<>();
 
 
-        CliSetUp.cursorLeft(20);
+        CliSetUp.cursorLeft(17);
         CliSetUp.cursorDown(1);
 
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
@@ -1649,7 +1649,7 @@ public final class CliPrinter {
 
     public static void binaryOptionMessage(String msg) {
         CliSetUp.cursorDown(1);
-        CliSetUp.cursorLeft(20);
+        CliSetUp.cursorLeft(17);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
