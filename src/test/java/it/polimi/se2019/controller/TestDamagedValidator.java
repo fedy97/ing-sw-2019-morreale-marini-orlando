@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -25,7 +24,7 @@ public class TestDamagedValidator extends TestControllerChild {
     private Player currPlayer;
 
     @Before
-    public void initTest() throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, InvalidImageException, InvalidNameException, InvalidCubeException, IOException, InvalidDeckException, InvalidCardException {
+    public void initTest() throws InvalidImageException, InvalidNameException, InvalidCubeException, IOException, InvalidDeckException, InvalidCardException {
         super.initTest();
         validator = new DamagedValidator(c);
         currPlayer = c.getPlayerManager().getCurrentPlayer();

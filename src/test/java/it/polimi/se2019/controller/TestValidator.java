@@ -30,7 +30,7 @@ public class TestValidator extends TestControllerChild {
     private Player currPlayer;
 
     @Before
-    public void initTest() throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, InvalidImageException, InvalidNameException, InvalidCubeException, IOException, InvalidDeckException, InvalidCardException {
+    public void initTest() throws InvalidImageException, InvalidNameException, InvalidCubeException, IOException, InvalidDeckException, InvalidCardException {
         super.initTest();
         validator = c.getValidator();
         currPlayer = c.getPlayerManager().getCurrentPlayer();
