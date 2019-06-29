@@ -35,25 +35,11 @@ public class TestControllerChild {
         c.setSecondsLeftMap(0);
         c.setSecondsLeftCharacter(0);
 
-
-        Method method = Controller.class.getDeclaredMethod("findWhichMapWon");
-        method.setAccessible(true);
-        int configMap = (int) method.invoke(c);
-        Method method2 = Controller.class.getDeclaredMethod("createAssets", int.class);
-        method2.setAccessible(true);
-        method2.invoke(c, configMap);
-        Method method3 = Controller.class.getDeclaredMethod("findCharactersAvailableAndReplace");
-        method3.setAccessible(true);
-        method3.invoke(c);
-        c.startGame();
-        c.getTurnController().start();
-
     }
 
     @Test
     public void test1(){
-        //this will print user1
-//        HandyFunctions.printConsole(c.getTurnController().getTurnUser());
+
     }
 }
 
