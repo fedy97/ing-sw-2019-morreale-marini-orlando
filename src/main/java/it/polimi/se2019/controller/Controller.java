@@ -940,10 +940,6 @@ public class Controller implements Observer, Serializable {
         return frenzyModeOn;
     }
 
-    public boolean wasRecharged() {
-        return wasRecharged;
-    }
-
     public void setWasRecharged(boolean wasRecharged) {
         this.wasRecharged = wasRecharged;
     }
@@ -956,15 +952,19 @@ public class Controller implements Observer, Serializable {
         return gameIsActive;
     }
 
-    public void setGameIsActive(boolean gameIsActive) {
-        this.gameIsActive = gameIsActive;
-    }
-
     public void setDebug(boolean debug) {
         this.debug = debug;
     }
 
     public boolean isDebug() {
         return debug;
+    }
+
+    public void setFrenzyMode(boolean frenzy){
+        frenzyModeOn = frenzy;
+    }
+
+    public boolean[] getValidActions() {
+        return validActions;
     }
 }

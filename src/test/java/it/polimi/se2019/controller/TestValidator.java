@@ -94,7 +94,15 @@ public class TestValidator extends TestControllerChild {
 
             List<PowerUpCard> res = validator.getUsablePowerUps();
             assertEquals(2, res.size());
-            ;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void getUsableWeapons() {
+        try {
+            assertTrue(validator.getUsableWeapons().isEmpty());
         } catch (Exception e) {
             fail();
         }
