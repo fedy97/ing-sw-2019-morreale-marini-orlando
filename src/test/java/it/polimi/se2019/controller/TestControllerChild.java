@@ -1,20 +1,11 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.exceptions.*;
-import it.polimi.se2019.model.card.AmmoCard;
-import it.polimi.se2019.model.card.Deck;
-import it.polimi.se2019.model.card.powerups.PowerUpCard;
-import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.utils.HandyFunctions;
-import it.polimi.se2019.utils.JsonParser;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import static org.junit.Assert.fail;
 
 /**
  * Super test class used to verify controller children's behaviour
@@ -31,15 +22,22 @@ public class TestControllerChild {
         c.getTurnController().addUser("user1");
         c.getTurnController().addUser("user2");
         c.getTurnController().addUser("user3");
+        c.setVoteMapChosen(1);
+        try {
+            c.setCharacterChosen("user1", "DISTRUCTOR");
+        } catch (InvalidCharacterException ex) {
+        }
 
+
+        c.setSecondsLeftLobby(0);
         c.setSecondsLeftMap(0);
         c.setSecondsLeftCharacter(0);
 
     }
 
     @Test
-    public void test1(){
-
+    public void test1() {
+        c.resetValidActions();
     }
 }
 
