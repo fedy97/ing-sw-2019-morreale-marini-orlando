@@ -3,19 +3,14 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
-import it.polimi.se2019.model.card.powerups.Newton;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
-import it.polimi.se2019.model.card.powerups.TagbackGrenade;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.utils.JsonParser;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 /**
@@ -27,7 +22,7 @@ public class TestDecksManager {
     DecksManager decksManager;
 
     @Before
-    public void initTest() throws InvalidImageException, InvalidNameException, InvalidCubeException,IOException,InvalidDeckException,InvalidCardException {
+    public void initTest() throws InvalidImageException, InvalidNameException, InvalidCubeException, IOException, InvalidDeckException, InvalidCardException {
         JsonParser parser = new JsonParser("/json/powerups.json");
         Deck<PowerUpCard> powerUpCardDeck = parser.buildPowerupCards();
         JsonParser parserAmmos = new JsonParser("/json/ammocards.json");
@@ -40,22 +35,22 @@ public class TestDecksManager {
      */
     @Test
     public void testDrawPowerUp() {
-        PowerUpCard powerUp = decksManager.drawPowerUp();
-        decksManager.addToGarbage(powerUp);
-        decksManager.drawPowerUp();
-        decksManager.drawPowerUp();
+        //the deck is composed only of 24 cards!
+        for (int i = 0; i < 32; i++) {
+            decksManager.addToGarbage(decksManager.drawPowerUp());
+        }
+        //no errors, ok!
     }
 
-    /*@Test
+    @Test
     public void testGetNewAmmoCard() {
         try {
-            decksManager.getNewAmmoCard(decksManager., true));
+            decksManager.getNewAmmoCard(new AmmoCard(new AmmoCube[]{AmmoCube.YELLOW, AmmoCube.BLUE}, true, ""));
         } catch (InvalidCardException e) {
             fail();
         } catch (
                 NoCardException e) {
             fail();
         }
-    }*/
-
+    }
 }

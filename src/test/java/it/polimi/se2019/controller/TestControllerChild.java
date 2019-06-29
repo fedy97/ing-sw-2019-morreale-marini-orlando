@@ -35,7 +35,7 @@ public class TestControllerChild {
         c.setSecondsLeftMap(0);
         c.setSecondsLeftCharacter(0);
 
-        /*
+
         Method method = Controller.class.getDeclaredMethod("findWhichMapWon");
         method.setAccessible(true);
         int configMap = (int) method.invoke(c);
@@ -46,14 +46,14 @@ public class TestControllerChild {
         method3.setAccessible(true);
         method3.invoke(c);
         c.startGame();
-        c.getTurnController().start();*/
+        c.getTurnController().start();
 
     }
 
     @Test
     public void test1(){
         //this will print user1
-        HandyFunctions.printConsole(c.getTurnController().getTurnUser());
+//        HandyFunctions.printConsole(c.getTurnController().getTurnUser());
     }
 }
 

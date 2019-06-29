@@ -139,8 +139,10 @@ public class PlayerManager implements Serializable {
     public void addDamage(Map<Player, Integer> targetsMap) {
         Iterator hmIterator = targetsMap.entrySet().iterator();
 
-        checkTargettingScope(targetsMap.keySet());
-        checkTagbackGrenade(targetsMap.keySet());
+        if (!father.isDebug()) {
+            checkTargettingScope(targetsMap.keySet());
+            checkTagbackGrenade(targetsMap.keySet());
+        }
 
         Player p;
         while (hmIterator.hasNext()) {

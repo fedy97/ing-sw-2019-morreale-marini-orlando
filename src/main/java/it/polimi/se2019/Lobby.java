@@ -55,10 +55,10 @@ public class Lobby {
             Controller.getInstance().setServerReloaded(true);
             Game.setInstance(gameInstance);
             controller = Controller.getInstance();
-            HandyFunctions.LOGGER.log(Level.INFO, "server loaded successfully!");
+            CustomLogger.logInfo(Lobby.class.getName(), "Server was reloaded succesfully");
             Controller.getInstance().startPinging();
         } catch (FileNotFoundException ex3) {
-            HandyFunctions.LOGGER.log(Level.INFO, "no loadable file found, starting new game...");
+            CustomLogger.logInfo(Lobby.class.getName(), "no loadable file found, starting new game...");
         } catch (Exception ex) {
             CustomLogger.logException(Lobby.class.getName(), ex);
         }

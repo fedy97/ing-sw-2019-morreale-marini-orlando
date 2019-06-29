@@ -8,15 +8,12 @@ import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.weapons.Effect;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
-import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.utils.HandyFunctions;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Gabriel Raul Marini
@@ -38,15 +35,6 @@ public abstract class Validator implements Serializable {
      *                                selected action
      */
     public abstract List<Platform> getValidMoves(Action c) throws InvalidActionException;
-
-    /**
-     * @param weapon chosen by the player to perform a damage action
-     * @return the list of player that can be the targets of the weapon according to its effect
-     */
-    public List<Player> getValidTargets(WeaponCard weapon) {
-        //TODO
-        return new ArrayList<>();
-    }
 
     /**
      * @return the list of weapons that can be grabbed by the player in his current position
@@ -103,31 +91,9 @@ public abstract class Validator implements Serializable {
         Player currPlayer = father.getPlayerManager().getCurrentPlayer();
 
         for (PowerUpCard powerUp : currPlayer.getPowerUpCards())
-            if(powerUp.getName().equals("teletrasporto") || powerUp.getName().equals("raggio cinetico"))
+            if (powerUp.getName().equals("teletrasporto") || powerUp.getName().equals("raggio cinetico"))
                 res.add(powerUp);
         return res;
-    }
-
-    /**
-     * @return the list of PowerUp cards the player can use to buy or reload weapons
-     */
-    public Map<PowerUpCard, Boolean> getUsablePowerUps(WeaponCard weaponCard, boolean reload) {
-        Player currPlayer = father.getPlayerManager().getCurrentPlayer();
-        List<PowerUpCard> res = new ArrayList<>();
-        AmmoCube[] cost;
-
-        if (reload)
-            cost = weaponCard.getTotalCost();
-        else
-            cost = weaponCard.getExtraCost();
-
-        for (PowerUpCard powerUp : currPlayer.getPowerUpCards())
-            if (reload)
-
-                if (powerUp.isUsable(currPlayer))
-                    res.add(powerUp);
-        return null; //TODO
-
     }
 
     /**
@@ -159,7 +125,6 @@ public abstract class Validator implements Serializable {
             }
         }
         res.removeAll(toRemove);
-        HandyFunctions.printList(res);
         return res;
     }
 }

@@ -232,11 +232,17 @@ public class AmmoBox implements Serializable {
         optionals.add(ammoCube);
     }
 
-    public void removeOptionalAmmo(AmmoCube ammoCube) {
-        optionals.remove(ammoCube);
-    }
-
     public List<AmmoCube> getOptionals() {
         return optionals;
+    }
+
+    /**
+     * Clear the AmmoBox
+     */
+    public void clear(){
+        optionals.clear();
+        redAmmos = 0;
+        blueAmmos = 0;
+        yellowAmmos = 0;
     }
 }

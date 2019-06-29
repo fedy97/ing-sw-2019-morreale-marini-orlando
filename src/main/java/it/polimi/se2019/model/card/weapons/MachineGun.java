@@ -23,14 +23,14 @@ public final class MachineGun extends WeaponTwoAddingEffect {
 
                 //Chose one or two targets you can see and deal 1 damage to each
                 for (Character character : chosenTargets)
-                    damages.put(game.getPlayer(character), 1);
+                    damages.put(game.getPlayer(character), 10);
                 playerManager.addDamage(damages);
 
                 usableEffects[0] = false;
                 usableEffects[1] = true;
                 usableEffects[2] = true;
                 //setting targets for the next additional effect
-                getEffects().get(1).setPossibleTargets(chosenTargets);
+                getEffects().get(1).getLastEffectTargets().addAll(chosenTargets);
             }
 
 
@@ -56,12 +56,12 @@ public final class MachineGun extends WeaponTwoAddingEffect {
                 List<Character> targetsForEff3 = new ArrayList<>(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform()));
                 targetsForEff3.remove(targets.get(0));
 
-                getEffects().get(2).setPossibleTargets(targetsForEff3);
+                getEffects().get(2).getLastEffectTargets().addAll(targetsForEff3);
             }
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform()));
+                this.setPossibleTargets(this.getLastEffectTargets());
             }
         };
 
@@ -78,7 +78,7 @@ public final class MachineGun extends WeaponTwoAddingEffect {
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform()));
+                this.setPossibleTargets(this.getLastEffectTargets());
             }
         };
 

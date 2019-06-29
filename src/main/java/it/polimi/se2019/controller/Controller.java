@@ -92,6 +92,14 @@ public class Controller implements Observer, Serializable {
         debug = false;
 
         validActions = UserValidActions.NO_SHOOT.getActions().clone();
+
+        startWaitingLobbyPing();
+
+        mapChosen = new HashMap<>();
+        mapChosen.put(1, 0);
+        mapChosen.put(2, 0);
+        mapChosen.put(3, 0);
+        mapChosen.put(4, 0);
     }
 
     /**
@@ -102,11 +110,6 @@ public class Controller implements Observer, Serializable {
     public static Controller getInstance() {
         if (instance == null) {
             instance = new Controller();
-            instance.mapChosen = new HashMap<>();
-            instance.mapChosen.put(1, 0);
-            instance.mapChosen.put(2, 0);
-            instance.mapChosen.put(3, 0);
-            instance.mapChosen.put(4, 0);
         }
         return instance;
     }
@@ -533,8 +536,10 @@ public class Controller implements Observer, Serializable {
      * @param msg to the destination client
      */
     public void callView(ToClientMessage msg, String user) {
-        if (game.getPlayers().isEmpty() || (game.getPlayer(user) != null && game.getPlayer(user).isConnected()) || game.getPlayer(user) == null)
-            userView.get(user).callView(msg);
+        if(!debug) {
+            if (game.getPlayers().isEmpty() || (game.getPlayer(user) != null && game.getPlayer(user).isConnected()) || game.getPlayer(user) == null)
+                userView.get(user).callView(msg);
+        }
     }
 
     public void setVoteMapChosen(int voteMapChosen) {
@@ -957,5 +962,9 @@ public class Controller implements Observer, Serializable {
 
     public void setDebug(boolean debug) {
         this.debug = debug;
+    }
+
+    public boolean isDebug() {
+        return debug;
     }
 }
