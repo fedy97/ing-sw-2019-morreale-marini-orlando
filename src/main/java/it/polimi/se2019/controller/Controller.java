@@ -760,7 +760,7 @@ public class Controller implements Observer, Serializable {
             WeaponCard[] weaponCards = new WeaponCard[9];
             for (int i = 0; i < 9; i++)
                 weaponCards[i] = game.getWeaponsDeck().drawCard();
-            game.setGameField(new GameField(field, weaponCards, new SkullsBoard(HandyFunctions.parserSettings.numOfSkulls()), new ScoreBoard()));
+            game.setGameField(new GameField(field, weaponCards, new SkullsBoard(HandyFunctions.parserSettings.numOfSkulls())));
             this.decksManager = new DecksManager(game.getPowerUpDeck(), game.getAmmoDeck());
         } catch (Exception e) {
             CustomLogger.logException(getClass().getName(), e);

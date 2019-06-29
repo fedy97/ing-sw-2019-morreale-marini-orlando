@@ -23,7 +23,6 @@ public class GameField implements Serializable {
     private ArrayList<Room> rooms;
     private Platform[][] field;
     private SkullsBoard skullsBoard;
-    private ScoreBoard scoreBoard;
 
     /**
      * @param initWeapons an array of weapons ready to be grabbed, each weapon will be linked to its platform
@@ -35,7 +34,7 @@ public class GameField implements Serializable {
      * @throws InvalidAdjacentPlatformsException if the adjacency list has more than 2 nulls
      */
     public GameField(Platform[][] field, WeaponCard[] initWeapons,
-                     SkullsBoard skullsBoard, ScoreBoard scoreBoard) throws InvalidFieldException, InvalidRoomException,
+                     SkullsBoard skullsBoard) throws InvalidFieldException, InvalidRoomException,
             InvalidAdjacentPlatformsException, InvalidDeckException, InvalidGenerationSpotException {
         if (hasMoreThan2Nulls(field)) {
             throw new InvalidFieldException();
@@ -53,7 +52,6 @@ public class GameField implements Serializable {
         // we may now build the rooms
         this.rooms = new ArrayList<>();
         buildRooms();
-        this.scoreBoard = scoreBoard;
         this.skullsBoard = skullsBoard;
 
         if (!areValidWeapons(initWeapons))
@@ -92,10 +90,6 @@ public class GameField implements Serializable {
 
     public SkullsBoard getSkullsBoard() {
         return skullsBoard;
-    }
-
-    public ScoreBoard getScoreBoard() {
-        return scoreBoard;
     }
 
     /**

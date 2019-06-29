@@ -32,7 +32,7 @@ public class TestGameField {
         WeaponCard[] weaponCards = new WeaponCard[9];
         for (int i = 0; i < 9; i++)
             weaponCards[i] = new WeaponCard();
-        gf = new GameField(field, weaponCards, new SkullsBoard(8), new ScoreBoard());
+        gf = new GameField(field, weaponCards, new SkullsBoard(8));
     }
 
     @Test
