@@ -6,6 +6,7 @@ import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.model.rep.LightGameVersion;
 import it.polimi.se2019.utils.HandyFunctions;
 
+import java.awt.event.ComponentListener;
 import java.net.InetAddress;
 import java.util.*;
 
@@ -714,6 +715,8 @@ public final class CliPrinter {
 
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
+        CliSetUp.cursorDown(2);
+        CliSetUp.cursorLeft(18);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
@@ -1680,6 +1683,9 @@ public final class CliPrinter {
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
         CliSetUp.cursorDown(5);
+        CliSetUp.cursorDown(5);
+        CliSetUp.cursorDown(1);
+        CliSetUp.cursorLeft(19);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
@@ -1729,6 +1735,8 @@ public final class CliPrinter {
         CliSetUp.cursorRight(9);
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
+        CliSetUp.cursorDown(1);
+        CliSetUp.cursorLeft(19);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
@@ -1781,7 +1789,7 @@ public final class CliPrinter {
     }
 
     public static void printPossiblePlatform(List<String> platforms) {
-        CliSetUp.savePosition();
+        //CliSetUp.savePosition();
         CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
