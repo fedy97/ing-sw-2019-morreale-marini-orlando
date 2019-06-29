@@ -6,6 +6,7 @@ import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.PlayerBoard;
+import it.polimi.se2019.utils.HandyFunctions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class TestPlayerManager extends TestControllerChild {
     PlayerManager playerManager;
 
     @Before
-    public void initTest() throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, InvalidImageException, InvalidNameException, InvalidCubeException, IOException, InvalidDeckException, InvalidCardException {
+    public void initTest() throws InvalidImageException, InvalidNameException, InvalidCubeException, IOException, InvalidDeckException, InvalidCardException {
         super.initTest();
         playerManager = c.getPlayerManager();
     }
@@ -65,7 +66,6 @@ public class TestPlayerManager extends TestControllerChild {
         for (Platform p : c.getGame().getGameField().getPlatforms())
             if (p.hasAmmoCard())
                 destination = p;
-
         playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().clear();
 
         try {

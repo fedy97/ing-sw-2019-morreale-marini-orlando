@@ -85,7 +85,7 @@ public class PlayerManager implements Serializable {
      */
     public void grabAmmoCard() {
         try {
-            AmmoCard ammo = currentPlayer.getCurrentPlatform().grabAmmoCard();
+                AmmoCard ammo = currentPlayer.getCurrentPlatform().grabAmmoCard();
             father.getDecksManager().addToFill(currentPlayer.getCurrentPlatform());
 
             if (ammo.hasPowerUp()) {
