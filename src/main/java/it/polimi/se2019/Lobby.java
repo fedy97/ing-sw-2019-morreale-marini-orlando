@@ -36,6 +36,7 @@ public class Lobby {
             rmiServer.start();
             socketServer.start();
         }
+        controller.startWaitingLobbyPing();
 
     }
 

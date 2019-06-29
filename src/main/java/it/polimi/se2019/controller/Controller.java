@@ -46,6 +46,7 @@ public class Controller implements Observer, Serializable {
     private TurnController turnController;
     private Map<String, VirtualView> userView;
     private ControllerState state; //the state is set to processing power up or weapon when a specific message from the client (ActivateCardMessage) is received
+    private boolean debug;
 
     private BlockingDeque<Character> currentTargets;
     private BlockingDeque<WeaponCard> chosenWeapons;
@@ -92,8 +93,6 @@ public class Controller implements Observer, Serializable {
         serverReloaded = false;
 
         validActions = UserValidActions.NO_SHOOT.getActions().clone();
-
-        startWaitingLobbyPing();
     }
 
     /**
@@ -117,7 +116,7 @@ public class Controller implements Observer, Serializable {
         Controller.instance = instance;
     }
 
-    private void startWaitingLobbyPing() {
+    public void startWaitingLobbyPing() {
         Set<String> users = userView.keySet();
 
         new Thread(() -> {

@@ -137,10 +137,9 @@ public class JsonParser {
      * @throws InvalidDeckException
      * @throws IOException
      * @throws InvalidCubeException
-     * @throws InvalidImageException
      * @throws InvalidNameException
      */
-    public Deck<PowerUpCard> buildPowerupCards() throws InvalidDeckException, IOException,
+    public Deck<PowerUpCard> buildPowerupCards() throws InvalidDeckException,
             InvalidCubeException, InvalidNameException {
         if (path.equals("/json/powerups.json")) {
             ArrayList<PowerUpCard> powerUpCards = new ArrayList<>();
