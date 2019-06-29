@@ -313,6 +313,7 @@ public class CLI extends RemoteView {
                 //getActionInput(); OOOOOOOOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKK
                 CliSetUp.restorePosition();
                 updateAll(lightGameVersion);
+                CliPrinter.stamp("\n");
             }
             else {
                 iWantToConvertPowerUp();
@@ -581,6 +582,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void lightWeapons(List<String> weapons) {
+        CliPrinter.stamp("\n");
         CliSetUp.savePosition();
         if(weapons.size() == 0)
             return;
@@ -598,6 +600,7 @@ public class CLI extends RemoteView {
                 currState = 1;
                 CliSetUp.restorePosition();
                 updateAll(lightGameVersion);
+                CliPrinter.stamp("\n");
             }
             else {
                 updateAll(lightGameVersion);
@@ -622,8 +625,11 @@ public class CLI extends RemoteView {
                 notifyController(message);
                 CliSetUp.restorePosition();
                 updateAll(lightGameVersion);
+                CliPrinter.stamp("\n");
                 if (!platform.equals("0,2") && !platform.equals("1,0") && !platform.equals("2,3")) {
                     isAsking = false;
+                    updateAll(lightGameVersion);
+                    CliPrinter.stamp("\n");
                 }
             } else {
                 updateAll(lightGameVersion);
@@ -687,6 +693,7 @@ public class CLI extends RemoteView {
             CliSetUp.restorePosition();
             currState = 1;
             updateAll(lightGameVersion);
+            CliPrinter.stamp("\n");
         }).start();
     }
 
@@ -723,6 +730,7 @@ public class CLI extends RemoteView {
                 isAsking = false;
                 CliSetUp.restorePosition();
                 updateAll(lightGameVersion);
+                CliPrinter.stamp("\n");
             } else {
                 showTargets(targets);
             }
@@ -746,8 +754,9 @@ public class CLI extends RemoteView {
             notifyController(message);
             CliSetUp.restorePosition();
             updateAll(lightGameVersion);
+            CliPrinter.stamp("\n");
             currState = 1;
-            CliSetUp.cursorUp(5);
+            //CliSetUp.cursorUp(5);
         }).start();
     }
 
@@ -772,6 +781,7 @@ public class CLI extends RemoteView {
             currState = 1;
             CliSetUp.restorePosition();
             updateAll(lightGameVersion);
+            CliPrinter.stamp("\n");
         }).start();
     }
 
@@ -825,6 +835,7 @@ public class CLI extends RemoteView {
             isReloadedWeapons = false;
             CliSetUp.restorePosition();
             updateAll(lightGameVersion);
+            CliPrinter.stamp("\n");
             //getActionInput(); OOOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKKk
         }).start();
     }
@@ -842,6 +853,7 @@ public class CLI extends RemoteView {
             currState = 1;
             CliSetUp.restorePosition();
             updateAll(lightGameVersion);
+            CliPrinter.stamp("\n");
         }).start();
     }
 
@@ -875,6 +887,7 @@ public class CLI extends RemoteView {
             isChoosingPowerUp = false;
             CliSetUp.restorePosition();
             updateAll(lightGameVersion);
+            CliPrinter.stamp("\n");
         }).start();
     }
 
@@ -922,6 +935,7 @@ public class CLI extends RemoteView {
             isChoosingPowerUp = false;
             CliSetUp.restorePosition();
             updateAll(lightGameVersion);
+            CliPrinter.stamp("\n");
         }).start();
     }
 

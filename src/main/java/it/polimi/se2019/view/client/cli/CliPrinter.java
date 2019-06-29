@@ -1838,9 +1838,9 @@ public final class CliPrinter {
         Map<Integer, Integer> hashes = new HashMap<>();
 
 
-        CliSetUp.cursorLeft(17);
-        CliSetUp.cursorDown(1);
-
+        //CliSetUp.cursorLeft(17);
+        //CliSetUp.cursorDown(1);
+        CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
