@@ -45,6 +45,10 @@ public class Lobby {
              ObjectInputStream oi = new ObjectInputStream(fi)) {
 
             Controller instance = (Controller) oi.readObject();
+            if (!instance.isGameIsActive()) {
+                HandyFunctions.LOGGER.log(Level.INFO, "the game has ended! restarting...");
+                return;
+            }
             Game gameInstance = (Game) oi.readObject();
             Controller.setInstance(instance);
             Controller.getInstance().setServerReloaded(true);

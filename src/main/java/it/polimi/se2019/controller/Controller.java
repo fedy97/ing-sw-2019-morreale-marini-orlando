@@ -26,7 +26,7 @@ import it.polimi.se2019.utils.*;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.awt.*;
-import java.io.Serializable;
+import java.io.*;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.BlockingDeque;
@@ -126,7 +126,7 @@ public class Controller implements Observer, Serializable {
 
                     pingsWaitingList.clear();
                     notifyAll(new PingWaitingClientsMessage(null));
-                    Thread.sleep(1000);
+                    Thread.sleep(1500);
                     List<String> toRemove = new ArrayList<>();
 
                     boolean toReset = false;
@@ -467,6 +467,7 @@ public class Controller implements Observer, Serializable {
     public void endGame() {
         //in order to interrupt the pinging
         gameIsActive = false;
+        game.saveServer();
         game.setScore(PointsCounter.getFinalScore(game.getGameField().getSkullsBoard()));
         notifyAll(new ShowScoreboardMessage(game.getFinalScore()));
     }
@@ -691,7 +692,7 @@ public class Controller implements Observer, Serializable {
                             }
                         }
                     }
-                    //Thread.sleep(1000);
+                    Thread.sleep(500);
                 }
             } catch (Exception ex) {
                 CustomLogger.logException(this.getClass().getName(), ex);
@@ -948,5 +949,9 @@ public class Controller implements Observer, Serializable {
 
     public void setServerReloaded(boolean serverReloaded) {
         this.serverReloaded = serverReloaded;
+    }
+
+    public boolean isGameIsActive() {
+        return gameIsActive;
     }
 }

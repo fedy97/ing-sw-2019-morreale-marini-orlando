@@ -265,9 +265,11 @@ public class PlayerBoardController {
             for (int i = boardRep.getSkullsNum(); i < 6; i++)
                 livesImages.get(i).setVisible(false);
         } else {
+            for (int i = 0; i < 6; i++)
+                livesImages.get(i).setVisible(false);
             for (int i = 0; i < boardRep.getSkullsNum(); i++)
                 livesImages.get(i+1).setVisible(true);
-            for (int i = boardRep.getSkullsNum(); i < 6; i++)
+            for (int i = boardRep.getSkullsNum(); i < 5; i++)
                 livesImages.get(i+1).setVisible(false);
         }
 

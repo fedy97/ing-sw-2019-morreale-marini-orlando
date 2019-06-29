@@ -165,6 +165,10 @@ public class Game extends Observable implements Serializable {
     public void notifyChanges() {
         setChanged();
         notifyObservers(getLightVersion());
+        saveServer();
+    }
+
+    public void saveServer() {
         try (FileOutputStream f = new FileOutputStream(new File("server.txt"));
              ObjectOutputStream o = new ObjectOutputStream(f)) {
             o.writeObject(Controller.getInstance());
