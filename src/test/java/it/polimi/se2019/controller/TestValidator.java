@@ -15,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -84,9 +83,9 @@ public class TestValidator extends TestControllerChild {
         currPlayer.getPowerUpCards().clear();
 
         try {
-            PowerUpCard p1 = new TagbackGrenade(AmmoCube.BLUE,"granata venom", "desc", "img");
-            PowerUpCard p2 = new Teleporter(AmmoCube.BLUE,"teletrasporto", "desc", "img");
-            PowerUpCard p3 = new TargettingScope(AmmoCube.BLUE,"raggio cinetico", "desc", "img");
+            PowerUpCard p1 = new TagbackGrenade(AmmoCube.BLUE, "granata venom", "desc", "img");
+            PowerUpCard p2 = new Teleporter(AmmoCube.BLUE, "teletrasporto", "desc", "img");
+            PowerUpCard p3 = new TargettingScope(AmmoCube.BLUE, "raggio cinetico", "desc", "img");
 
 
             currPlayer.addPowerUpCard(p1);
@@ -94,14 +93,15 @@ public class TestValidator extends TestControllerChild {
             currPlayer.addPowerUpCard(p3);
 
             List<PowerUpCard> res = validator.getUsablePowerUps();
-            assertEquals(2, res.size());;
+            assertEquals(2, res.size());
+            ;
         } catch (Exception e) {
             fail();
         }
     }
 
     @After
-    public void finisTest(){
+    public void finisTest() {
         currPlayer.getWeaponCards().clear();
         currPlayer.getPowerUpCards().clear();
     }

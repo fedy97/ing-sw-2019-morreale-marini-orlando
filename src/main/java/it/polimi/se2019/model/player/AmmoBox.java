@@ -62,6 +62,12 @@ public class AmmoBox implements Serializable {
         return redAmmos + blueAmmos + yellowAmmos;
     }
 
+
+    public void addAmmos(AmmoCube[] ammos) {
+        for (AmmoCube cube : ammos)
+            addAmmos(cube, 1);
+    }
+
     /**
      * Add ammunition to those already owned by the player
      *
@@ -165,6 +171,8 @@ public class AmmoBox implements Serializable {
      * @return if the AmmoBox has the AmmoCube specified by the parameters
      */
     public boolean hasAmmo(AmmoCube ammo) {
+        if (optionals.contains(ammo))
+            return true;
         if (ammo == AmmoCube.RED)
             return redAmmos > 0;
         if (ammo == AmmoCube.BLUE)
@@ -239,7 +247,7 @@ public class AmmoBox implements Serializable {
     /**
      * Clear the AmmoBox
      */
-    public void clear(){
+    public void clear() {
         optionals.clear();
         redAmmos = 0;
         blueAmmos = 0;

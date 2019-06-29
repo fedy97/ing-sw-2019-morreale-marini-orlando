@@ -241,19 +241,6 @@ public class PlayerManager implements Serializable {
     }
 
     /**
-     * @param powerUp chosen by the player from the list of those allowed by the validator
-     * @throws InvalidCardException if the card doesn't belong to the current player
-     */
-    public void usePowerUp(PowerUpCard powerUp) throws InvalidCardException {
-        if (!currentPlayer.getPowerUpCards().contains(powerUp))
-            throw new InvalidCardException("The PowerUp doesn't belong to the current player, something went wrong!");
-
-        currentPlayer.removePowerUpCard(powerUp);
-        father.getDecksManager().addToGarbage(powerUp);
-        father.getGame().notifyChanges();
-    }
-
-    /**
      * @param powerUpCard to be converted into the corresponding ammo cube
      * @throws InvalidCardException if the card doesn't belong to the current player
      */
