@@ -22,11 +22,10 @@ public class SendInitPowerUpMessage extends ToServerMessage {
     @Override
     public void performAction() {
         try {
-            int hashChosen = ((ArrayList<Integer>) payload).get(0);
             int hashGarbage = ((ArrayList<Integer>) payload).get(1);
             Controller c = Controller.getInstance();
-            Player curr = c.getPlayerManager().getCurrentPlayer();
-            PowerUpCard toDiscard = Deserializer.getPowerUp(hashGarbage, this.sender);
+            Player curr = c.getGame().getPlayer(sender);
+            PowerUpCard toDiscard = Deserializer.getPowerUp(hashGarbage, sender);
             //move the card not chosen from the user's power ups to the garbage deck
             Controller.getInstance().getDecksManager().addToGarbage(toDiscard);
             curr.removePowerUpCard(toDiscard);
@@ -36,7 +35,6 @@ public class SendInitPowerUpMessage extends ToServerMessage {
                 if (r.hasGenerationSpot() && r.getGenSpot().getPlatformColor().equals(powerupColor))
                     curr.setCurrentPlatform(r.getGenSpot());
             }
-            c.setState(ControllerState.IDLE);
             Game.getInstance().notifyChanges();
             //now the current player has to choose an action
         } catch (Exception e) {
