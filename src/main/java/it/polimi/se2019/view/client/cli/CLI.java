@@ -53,6 +53,7 @@ public class CLI extends RemoteView {
     private boolean isChoosingPowerUp;
     private boolean isReloadedWeapons;
     private List<CardRep> powerUps;
+    private int actionType;
 
     public CLI() {
         try {
@@ -80,11 +81,13 @@ public class CLI extends RemoteView {
         firstCallChoosePU = true;
         isChoosingPowerUp = false;
         isReloadedWeapons = false;
+        actionType = 0;
     }
 
     @Override
     public void updateAll(LightGameVersion lightGameVersion) {
         this.lightGameVersion = lightGameVersion;
+        actionType = lightGameVersion.getPlayerBoardRep().get(myCharEnumString).getActionType();
 
         CliSetUp.clear();
         CliSetUp.cursorToHome();
@@ -98,7 +101,16 @@ public class CLI extends RemoteView {
         CliSetUp.cursorDown(9);
         CliSetUp.cursorLeft(106);
         if (powerUpChosen || p1 == null || p2 == null) {
-            CliPrinter.standardActionsMessage();
+            if (actionType == 0)
+                CliPrinter.standardActionsMessage();
+            else if(actionType == 1)
+                CliPrinter.actionMessage1();
+            else if(actionType == 2)
+                CliPrinter.actionMessage2();
+            else if(actionType == 3)
+                CliPrinter.actionMessage3();
+            else
+                CliPrinter.actionMessage4();
             CliSetUp.savePosition();
             CliSetUp.cursorLeft(99);
             CliPrinter.boxMessage(null);
@@ -127,7 +139,7 @@ public class CLI extends RemoteView {
         CliSetUp.cursorUp(11);
         CliSetUp.cursorRight(10);
         currState = 2;
-
+        System.out.print(actionType);
     }
 
     private void getActionInput() {
@@ -825,6 +837,7 @@ public class CLI extends RemoteView {
     @Override
     public void showScoreboard(Map<String, Integer> scoreboard) {
         CliSetUp.clear();
+        CliSetUp.cursorToHome();
         CliPrinter.stamp("CLASSIFICA: ", CliColor.TEXTGREEN);
         CliPrinter.stamp("\n");
         for (String s: scoreboard.keySet()) {

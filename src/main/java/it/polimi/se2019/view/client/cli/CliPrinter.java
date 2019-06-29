@@ -319,6 +319,142 @@ public final class CliPrinter {
         CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
     }
 
+    public static void actionMessage1() {
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                            Choose an action:                                           ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <1> move                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <2> grab (>>)                                                   ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <3> shoot                                                       ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <4> reload                                                      ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <5> use power up                                                ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <6> end turn                                                    ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <7> convert power up                                            ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                     press the <key> followed by enter                                  ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+    }
+
+    public static void actionMessage2() {
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                            Choose an action:                                           ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <1> move                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <2> grab  (>>)                                                  ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <3> shoot (>)                                                   ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <4> reload                                                      ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <5> use power up                                                ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <6> end turn                                                    ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <7> convert power up                                            ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                     press the <key> followed by enter                                  ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+    }
+
+    public static void actionMessage3() {
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                            Choose an action:                                           ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <1> shoot (> + reload)                                          ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <2> move  (>>>>)                                                ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <3> grab (>>)                                                   ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <4> reload                                                      ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <5> use power up                                                ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <6> end turn                                                    ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <7> convert power up                                            ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                     press the <key> followed by enter                                  ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+    }
+
+    public static void actionMessage4() {
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                            Choose an action:                                           ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <1> shoot (>> + reload)                                         ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <2> grab  (>>>)                                                 ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <4> reload                                                      ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <5> use power up                                                ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <6> end turn                                                    ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                        <7> convert power up                                            ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                     press the <key> followed by enter                                  ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+    }
+
     public static void possibleCharMessage(int timer, ArrayList<String> chosen, int myChoice) {
 
         char cBan = ' ';
