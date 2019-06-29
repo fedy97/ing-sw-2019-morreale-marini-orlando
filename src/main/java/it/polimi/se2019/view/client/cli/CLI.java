@@ -496,6 +496,8 @@ public class CLI extends RemoteView {
 
     @Override
     public void lightWeapons(List<String> weapons) {
+        if(weapons.size() == 0)
+            return;
         Map<Integer, Integer> hashes;
         currState = 0;
         hashes = CliPrinter.printPossibleWeapon(lightGameVersion, weapons);
@@ -519,6 +521,8 @@ public class CLI extends RemoteView {
 
     @Override
     public void lightPlatforms(List<String> platforms) {
+        if(platforms.size() == 0)
+            return;
         CliPrinter.printPossiblePlatform(platforms);
         new Thread(() -> {
             String platform;
@@ -595,6 +599,8 @@ public class CLI extends RemoteView {
 
     @Override
     public void showTargets(List<String> targets) {
+        if(targets.size() == 0)
+            return;
         CliPrinter.showTargetMessage(lightGameVersion, targets);
         List<String> toSend = new ArrayList<>();
         new Thread(() -> {
@@ -630,6 +636,8 @@ public class CLI extends RemoteView {
 
     @Override
     public void enlightenEffects(List<Integer> effects) {
+        if(effects.size() == 0)
+            return;
         CliPrinter.enlightenEffectsMessage(effects);
         new Thread(() -> {
             int choise;
@@ -702,6 +710,8 @@ public class CLI extends RemoteView {
 
     @Override
     public void showReloadableWeapons(List<String> weapons) {
+        if(weapons.size() == 0)
+            return;
         currState = 0;
         CliPrinter.reloadWeaponMessage(lightGameVersion, myCharEnumString, weapons);
         new Thread(() -> {
@@ -715,6 +725,8 @@ public class CLI extends RemoteView {
 
     @Override
     public void showUsableWeapons(List<String> weapons) {
+        if(weapons.size() == 0)
+            return;
         CliPrinter.chooseWeaponMessage(lightGameVersion, myCharEnumString, weapons);
         currState = 0;
         new Thread(() -> {
@@ -726,6 +738,8 @@ public class CLI extends RemoteView {
 
     @Override
     public void showUsablePowerups(List<String> powerups) {
+        if(powerups.size() == 0)
+            return;
         currState = 0;
         CliPrinter.usePowerUpMessage(lightGameVersion, myCharEnumString, powerups);
         new Thread(() -> {
@@ -757,6 +771,8 @@ public class CLI extends RemoteView {
     }
 
     private int showWeapons(List<String> weapons) {
+        if(weapons.size() == 0)
+            return -1;
         int choise;
         Scanner s = new Scanner(System.in);
         choise = s.nextInt();
