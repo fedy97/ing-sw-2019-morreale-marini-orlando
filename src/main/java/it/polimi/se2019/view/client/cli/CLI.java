@@ -52,6 +52,7 @@ public class CLI extends RemoteView {
     private TimerTurn timerTurn;
     private boolean isChoosingPowerUp;
     private boolean isReloadedWeapons;
+    private List<CardRep> powerUps;
 
     public CLI() {
         try {
@@ -104,7 +105,7 @@ public class CLI extends RemoteView {
             CliSetUp.restorePosition();
         } else {
             CliSetUp.cursorUp(1);
-            //showChoosePowerup(p1, p2);
+            showChoosePowerup(powerUps);
             CliSetUp.cursorRight(9);
             CliSetUp.cursorDown(10);
         }
@@ -117,7 +118,14 @@ public class CLI extends RemoteView {
         CliPrinter.drawGameInfoBox(lightGameVersion);
         CliSetUp.cursorDown(20);
         CliSetUp.cursorLeft(106);
-        showMessage(lastMsg);
+        //showMessage(lastMsg);
+        CliSetUp.cursorLeft(63);
+        CliSetUp.cursorDown(9);
+        CliPrinter.boxMessage(lastMsg);
+        //CliSetUp.cursorUp(2);
+        //CliSetUp.cursorLeft(50);
+        CliSetUp.cursorUp(11);
+        CliSetUp.cursorRight(10);
         currState = 2;
 
     }
@@ -233,6 +241,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void showChoosePowerup(List<CardRep> cards) {
+        powerUps = cards;
         this.p1 = cards.get(0);
         this.p2 = cards.get(1);
         currState = 1;
@@ -263,6 +272,7 @@ public class CLI extends RemoteView {
                 powerUpChosen = true;
                 begin = 0;
                 currState = 0;
+                getActionInput();
             }).start();
         }
     }
@@ -493,10 +503,17 @@ public class CLI extends RemoteView {
             int choise;
             Scanner s = new Scanner(System.in);
             choise = s.nextInt();
-            ChosenWeaponMessage message = new ChosenWeaponMessage(Integer.toString(hashes.get(choise).intValue()));
-            notifyController(message);
-            isAsking = false;
-            currState = 1;
+            if (choise < weapons.size() && choise >= 0) {
+                ChosenWeaponMessage message = new ChosenWeaponMessage(Integer.toString(hashes.get(choise).intValue()));
+                notifyController(message);
+                isAsking = false;
+                currState = 1;
+            }
+            else {
+                updateAll(lightGameVersion);
+                //CliSetUp.cursorLeft(22);
+                lightWeapons(weapons);
+            }
         }).start();
     }
 
@@ -510,13 +527,14 @@ public class CLI extends RemoteView {
             if (platforms.contains(platform)) {
                 MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(platform);
                 notifyController(message);
+                CliSetUp.restorePosition();
                 if (!platform.equals("0,2") && !platform.equals("1,0") && !platform.equals("2,3")) {
                     isAsking = false;
                 }
             } else {
                 updateAll(lightGameVersion);
                 CliSetUp.cursorDown(1);
-                CliSetUp.cursorLeft(10);
+                CliSetUp.cursorLeft(22);
                 lightPlatforms(platforms);
             }
         }).start();
@@ -531,6 +549,7 @@ public class CLI extends RemoteView {
     public void setValidActions(boolean[] actives) {
         this.actives = actives;
         isAsking = false;
+        begin = 0;
         if (isMyTurn() && begin == 0) {
             getActionInput();
         }
@@ -538,6 +557,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void showMessage(String msg) {
+        /*
         if(!(msg.equals(lastMsg) && msg.equals("You've finished your basic action! Now you can use your powerup, reload or pass the turn"))) {
             CliSetUp.savePosition();
             CliSetUp.cursorDown(15);
@@ -545,7 +565,8 @@ public class CLI extends RemoteView {
             HandyFunctions.printConsole(msg);
             CliSetUp.restorePosition();
             lastMsg = msg;
-        }
+        }*/
+        lastMsg = msg;
     }
 
     @Override
@@ -619,6 +640,7 @@ public class CLI extends RemoteView {
             ChosenEffectMessage message = new ChosenEffectMessage(choise);
             notifyController(message);
             currState = 1;
+            CliSetUp.cursorUp(5);
         }).start();
     }
 
@@ -664,6 +686,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void updateTimerTurn(int seconds, String curr) {
+        /*
         CliSetUp.savePosition();
         if (currState == 0)
             CliSetUp.cursorUp(5);
@@ -673,6 +696,8 @@ public class CLI extends RemoteView {
             CliSetUp.cursorDown(1);
         HandyFunctions.printConsole("\rTimer: " + seconds);
         CliSetUp.restorePosition();
+
+         */
     }
 
     @Override
@@ -693,7 +718,6 @@ public class CLI extends RemoteView {
         CliPrinter.chooseWeaponMessage(lightGameVersion, myCharEnumString, weapons);
         currState = 0;
         new Thread(() -> {
-
             ActivateCardMessage message = new ActivateCardMessage(Integer.toString(showWeapons(weapons)));
             notifyController(message);
             currState = 1;

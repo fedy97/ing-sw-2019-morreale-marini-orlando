@@ -1,18 +1,21 @@
-package it.polimi.se2019.view.client.cli;
+package it.polimi.se2019.view.client.cli.forDebugging;
 
 import it.polimi.se2019.model.rep.AmmoRep;
 import it.polimi.se2019.model.rep.BoardRep;
 import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.model.rep.LightGameVersion;
 import it.polimi.se2019.utils.HandyFunctions;
+import it.polimi.se2019.view.client.cli.*;
 
-import java.net.InetAddress;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Simone Orlando
  */
-public final class CliPrinter {
+public final class CliPrinterTest4 {
 
     private static final String RESET = "\u001B[0m";
 
@@ -80,186 +83,186 @@ public final class CliPrinter {
     }
 
     public static void boxInterfaceMessage() {
-        CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃           Which interface do you want to use?            ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃               <1> CLI                                    ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃               <2> GUI                                    ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃           choice:");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃           Which interface do you want to use?            ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃               <1> CLI                                    ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃               <2> GUI                                    ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃           choice:");
         CliSetUp.savePosition();
-        CliPrinter.stamp("                                        ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliPrinterTest4.stamp("                                        ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         CliSetUp.restorePosition();
     }
 
     public static void boxConnectionMessage() {
-        CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃           Choose a connection type:                      ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃               <1> Socket                                 ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃               <2> Rmi                                    ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃           choice:");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃           Choose a connection type:                      ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃               <1> Socket                                 ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃               <2> Rmi                                    ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃           choice:");
         CliSetUp.savePosition();
-        CliPrinter.stamp("                                        ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliPrinterTest4.stamp("                                        ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         CliSetUp.restorePosition();
     }
 
     public static void boxUsernameMessage() {
-        CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃           Username: ");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃           Username: ");
         CliSetUp.savePosition();
-        CliPrinter.stamp("                                     ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃           Ip:                                            ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliPrinterTest4.stamp("                                     ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃           Ip:                                            ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         CliSetUp.restorePosition();
     }
 
     public static void boxIpMessage(String usename) {
-        CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃           Username: "+usename);
+        CliPrinterTest4.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃           Username: "+usename);
         for (int i=0; i < 37-usename.length(); i++) {
-            CliPrinter.stamp(" ");
+            CliPrinterTest4.stamp(" ");
         }
-        CliPrinter.stamp("┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃           Ip: ");
+        CliPrinterTest4.stamp("┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃           Ip: ");
         CliSetUp.savePosition();
-        CliPrinter.stamp("                                           ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliPrinterTest4.stamp("                                           ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         CliSetUp.restorePosition();
     }
 
     public static void boxWaitingMessage() {
-        CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃               Waiting for other players...               ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃               Waiting for other players...               ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
     }
 
     public static void boxLobbyMessage(List<String> users) {
         if (users.size() == 1) {
-            CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(0) + " joined the game");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(0) + " joined the game");
             for (int i = 0; i < 40 - (users.get(0)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         }
         else if (users.size() == 2) {
-            CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(0) + " joined the game");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(0) + " joined the game");
             for (int i = 0; i < 40 - (users.get(0)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(1) + " joined the game");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(1) + " joined the game");
             for (int i = 0; i < 40 - (users.get(1)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         }
         else if (users.size() == 3) {
-            CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(0) + " joined the game");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(0) + " joined the game");
             for (int i = 0; i < 40 - (users.get(0)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(1) + " joined the game");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(1) + " joined the game");
             for (int i = 0; i < 40 - (users.get(1)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(2) + " joined the game");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(2) + " joined the game");
             for (int i = 0; i < 40 - (users.get(2)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         }
         else if (users.size() == 4) {
-            CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(0) + " joined the game");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(0) + " joined the game");
             for (int i = 0; i < 40 - (users.get(0)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(1) + " joined the game");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(1) + " joined the game");
             for (int i = 0; i < 40 - (users.get(1)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(2) + " joined the game");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(2) + " joined the game");
             for (int i = 0; i < 40 - (users.get(2)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(3) + " joined the game");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(3) + " joined the game");
             for (int i = 0; i < 40 - (users.get(3)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         }
         else {
-            CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(0) + " joined the game");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(0) + " joined the game");
             for (int i = 0; i < 40 - (users.get(0)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(1) + " joined the game");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(1) + " joined the game");
             for (int i = 0; i < 40 - (users.get(1)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(2) + " joined the game");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(2) + " joined the game");
             for (int i = 0; i < 40 - (users.get(2)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(3) + " joined the game");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(3) + " joined the game");
             for (int i = 0; i < 40 - (users.get(3)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃  " + users.get(4) + " joined the game");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃  " + users.get(4) + " joined the game");
             for (int i = 0; i < 40 - (users.get(4)).length(); i++) {
-                CliPrinter.stamp(" ");
+                CliPrinterTest4.stamp(" ");
             }
-            CliPrinter.stamp("┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-            CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+            CliPrinterTest4.stamp("┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+            CliPrinterTest4.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         }
     }
 
@@ -268,55 +271,55 @@ public final class CliPrinter {
     }
 
     public static void possibleMapsMessage(int timer, int[] vote) {
-        CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                      Choose the map                      ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃    <1> 3-4-4(votes: "+vote[0]+")            <3> 3-4-3(votes: "+vote[2]+")    ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃    <2> 4-4-3(votes: "+vote[1]+")            <4> 4-4-4(votes: "+vote[3]+")    ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃            press the <key> followed by enter ");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                      Choose the map                      ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃    <1> 3-4-4(votes: "+vote[0]+")            <3> 3-4-3(votes: "+vote[2]+")    ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃    <2> 4-4-3(votes: "+vote[1]+")            <4> 4-4-4(votes: "+vote[3]+")    ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃            press the <key> followed by enter ");
         CliSetUp.savePosition();
-        CliPrinter.stamp("            ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
-        CliPrinter.stamp("\t\t\t\t\t  Time left: "+timer);
+        CliPrinterTest4.stamp("            ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t  Time left: "+timer);
         CliSetUp.restorePosition();
-        CliPrinter.noResetStamp("c",CliColor.TEXTWHITE, CliColor.BACKWHITE);
+        CliPrinterTest4.noResetStamp("c",CliColor.TEXTWHITE, CliColor.BACKWHITE);
         CliSetUp.cursorLeft(1);
     }
 
     public static void standardActionsMessage() {
-        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliPrinterTest4.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                            Choose an action:                                           ┃");
+        CliPrinterTest4.stamp("┃                                            Choose an action:                                           ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                        <1> move                                                        ┃");
+        CliPrinterTest4.stamp("┃                                        <1> move                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                        <2> grab                                                        ┃");
+        CliPrinterTest4.stamp("┃                                        <2> grab                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                        <3> shoot                                                       ┃");
+        CliPrinterTest4.stamp("┃                                        <3> shoot                                                       ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                        <4> reload                                                      ┃");
+        CliPrinterTest4.stamp("┃                                        <4> reload                                                      ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                        <5> use power up                                                ┃");
+        CliPrinterTest4.stamp("┃                                        <5> use power up                                                ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                        <6> end turn                                                    ┃");
+        CliPrinterTest4.stamp("┃                                        <6> end turn                                                    ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                        <7> convert power up                                            ┃");
+        CliPrinterTest4.stamp("┃                                        <7> convert power up                                            ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                     press the <key> followed by enter                                  ┃");
+        CliPrinterTest4.stamp("┃                                     press the <key> followed by enter                                  ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinterTest4.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
     }
 
     public static void possibleCharMessage(int timer, ArrayList<String> chosen, int myChoice) {
@@ -357,62 +360,62 @@ public final class CliPrinter {
         else if(myChoice ==5) {
             cDis = '✔';
         }
-        CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                   Choose the character                   ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃  <1> Banshee "+cBan+"          <2> Sprog "+cSpr+"         <3> Dozer "+cDoz+"  ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃            <4> Violet "+cVio+"          <5> Distructor "+cDis+"        ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┃            press the <key> followed by enter ");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                   Choose the character                   ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃  <1> Banshee "+cBan+"          <2> Sprog "+cSpr+"         <3> Dozer "+cDoz+"  ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃            <4> Violet "+cVio+"          <5> Distructor "+cDis+"        ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃                                                          ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┃            press the <key> followed by enter ");
         CliSetUp.savePosition();
-        CliPrinter.stamp("            ┃\n");
-        CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
-        CliPrinter.stamp("\t\t\t\t\t  Time left: "+timer);
+        CliPrinterTest4.stamp("            ┃\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliPrinterTest4.stamp("\t\t\t\t\t  Time left: "+timer);
         CliSetUp.restorePosition();
-        CliPrinter.noResetStamp("c",CliColor.TEXTWHITE, CliColor.BACKWHITE);
+        CliPrinterTest4.noResetStamp("c",CliColor.TEXTWHITE, CliColor.BACKWHITE);
         CliSetUp.cursorLeft(1);
     }
 
     public static void weaponBox(CliColor color, List<CardRep> powWeapons) {
         CliSetUp.savePosition();
-        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓", color);
+        CliPrinterTest4.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓", color);
         CliSetUp.restorePosition();
         CliSetUp.cursorDown(1);
         CliSetUp.savePosition();
-        CliPrinter.stamp("┃     "+powWeapons.get(0).getTitle(), color);
+        CliPrinterTest4.stamp("┃     "+powWeapons.get(0).getTitle(), color);
         for(int i=0; i < 24 - powWeapons.get(0).getTitle().length(); i++) {
-            CliPrinter.stamp(" ");
+            CliPrinterTest4.stamp(" ");
         }
-        CliPrinter.stamp("┃", color);
+        CliPrinterTest4.stamp("┃", color);
         CliSetUp.restorePosition();
         CliSetUp.cursorDown(1);
         CliSetUp.savePosition();
-        CliPrinter.stamp("┃                             ┃", color);
+        CliPrinterTest4.stamp("┃                             ┃", color);
         CliSetUp.restorePosition();
         CliSetUp.cursorDown(1);
         CliSetUp.savePosition();
-        CliPrinter.stamp("┃     "+powWeapons.get(1).getTitle(), color);
+        CliPrinterTest4.stamp("┃     "+powWeapons.get(1).getTitle(), color);
         for(int i=0; i < 24 - powWeapons.get(1).getTitle().length(); i++) {
-            CliPrinter.stamp(" ");
+            CliPrinterTest4.stamp(" ");
         }
-        CliPrinter.stamp("┃", color);
+        CliPrinterTest4.stamp("┃", color);
         CliSetUp.restorePosition();
         CliSetUp.cursorDown(1);
         CliSetUp.savePosition();
-        CliPrinter.stamp("┃                             ┃", color);
+        CliPrinterTest4.stamp("┃                             ┃", color);
         CliSetUp.restorePosition();
         CliSetUp.cursorDown(1);
         CliSetUp.savePosition();
-        CliPrinter.stamp("┃     "+powWeapons.get(2).getTitle(), color);
+        CliPrinterTest4.stamp("┃     "+powWeapons.get(2).getTitle(), color);
         for(int i=0; i < 24 - powWeapons.get(2).getTitle().length(); i++) {
-            CliPrinter.stamp(" ");
+            CliPrinterTest4.stamp(" ");
         }
-        CliPrinter.stamp("┃", color);
+        CliPrinterTest4.stamp("┃", color);
         CliSetUp.restorePosition();
         CliSetUp.cursorDown(1);
         CliSetUp.savePosition();
-        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛", color);
+        CliPrinterTest4.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛", color);
         CliSetUp.restorePosition();
         CliSetUp.cursorDown(2);
 
@@ -432,7 +435,7 @@ public final class CliPrinter {
         map1.plat10.setAmmo(ammoReps.get(10).getType());
 
         CliSetUp.savePosition();
-        CliPrinter.stamp("\n\t\t\t\t\t");
+        CliPrinterTest4.stamp("\n\t\t\t\t\t");
 
         map1.stamp();
 
@@ -461,7 +464,7 @@ public final class CliPrinter {
         map2.plat10.setAmmo(ammoReps.get(10).getType());
 
         CliSetUp.savePosition();
-        CliPrinter.stamp("\n\t\t\t\t\t");
+        CliPrinterTest4.stamp("\n\t\t\t\t\t");
 
         map2.stamp();
 
@@ -489,7 +492,7 @@ public final class CliPrinter {
         map3.plat9.setAmmo(ammoReps.get(10).getType());
 
         CliSetUp.savePosition();
-        CliPrinter.stamp("\n\t\t\t\t\t");
+        CliPrinterTest4.stamp("\n\t\t\t\t\t");
 
         map3.stamp();
 
@@ -519,7 +522,7 @@ public final class CliPrinter {
         map4.plat11.setAmmo(ammoReps.get(10).getType());
 
         CliSetUp.savePosition();
-        CliPrinter.stamp("\n\t\t\t\t\t");
+        CliPrinterTest4.stamp("\n\t\t\t\t\t");
 
         map4.stamp();
 
@@ -537,35 +540,35 @@ public final class CliPrinter {
 
     public static void choosePowerUpMessage(CardRep p1, CardRep p2) {
         CliSetUp.cursorRight(2);
-        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+        CliPrinterTest4.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
         CliSetUp.cursorRight(2);
-        CliPrinter.stamp("┃                                             Choose a powerup:                                          ┃\n");
+        CliPrinterTest4.stamp("┃                                             Choose a powerup:                                          ┃\n");
         CliSetUp.cursorRight(2);
-        CliPrinter.stamp("┃                                                                                                        ┃\n");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃\n");
         CliSetUp.cursorRight(2);
-        CliPrinter.stamp("┃                                                                                                        ┃\n");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃\n");
         CliSetUp.cursorRight(2);
-        CliPrinter.stamp("┃                                      <1> " + p1.getTitle());
+        CliPrinterTest4.stamp("┃                                      <1> " + p1.getTitle());
         for (int i=0; i < 62 - p1.getTitle().length(); i++) {
-            CliPrinter.stamp(" ");
+            CliPrinterTest4.stamp(" ");
         }
-        CliPrinter.stamp("┃\n");
+        CliPrinterTest4.stamp("┃\n");
         CliSetUp.cursorRight(2);
-        CliPrinter.stamp("┃                                                                                                        ┃\n");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃\n");
         CliSetUp.cursorRight(2);
-        CliPrinter.stamp("┃                                      <2> " + p2.getTitle());
+        CliPrinterTest4.stamp("┃                                      <2> " + p2.getTitle());
         for (int i=0; i < 62 - p2.getTitle().length(); i++) {
-            CliPrinter.stamp(" ");
+            CliPrinterTest4.stamp(" ");
         }
-        CliPrinter.stamp("┃\n");
+        CliPrinterTest4.stamp("┃\n");
         CliSetUp.cursorRight(2);
-        CliPrinter.stamp("┃                                                                                                        ┃\n");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃\n");
         CliSetUp.cursorRight(2);
-        CliPrinter.stamp("┃                                                                                                        ┃\n");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃\n");
         CliSetUp.cursorRight(2);
-        CliPrinter.stamp("┃                                      press the <key> followed by enter                                 ┃\n");
+        CliPrinterTest4.stamp("┃                                      press the <key> followed by enter                                 ┃\n");
         CliSetUp.cursorRight(2);
-        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        CliPrinterTest4.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         CliSetUp.cursorUp(1);
     }
 
@@ -578,45 +581,45 @@ public final class CliPrinter {
 
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliPrinterTest4.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                           Choose a powerUp to use:                                     ┃");
+        CliPrinterTest4.stamp("┃                                           Choose a powerUp to use:                                     ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinterTest4.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         CliSetUp.cursorLeft(78);
         CliSetUp.cursorUp(6);
         int counter = 0;
         for (CardRep c: myPowerUps) {
             if (powerUps.contains(Integer.toString(c.getId()))) {
-                CliPrinter.stamp(c.getTitle());
+                CliPrinterTest4.stamp(c.getTitle());
                 if (counter < 2) {
-                    CliPrinter.stamp(", ");
+                    CliPrinterTest4.stamp(", ");
                 }
             }
             counter++;
@@ -633,44 +636,44 @@ public final class CliPrinter {
 
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliPrinterTest4.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                             Choose a powerUp:                                          ┃");
+        CliPrinterTest4.stamp("┃                                             Choose a powerUp:                                          ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinterTest4.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         CliSetUp.cursorLeft(78);
         CliSetUp.cursorUp(6);
         int counter = 0;
         for (CardRep c: myPowerUps) {
-            CliPrinter.stamp(c.getTitle());
+            CliPrinterTest4.stamp(c.getTitle());
             if (counter < 2) {
-                CliPrinter.stamp(", ");
+                CliPrinterTest4.stamp(", ");
             }
             counter++;
         }
@@ -681,37 +684,37 @@ public final class CliPrinter {
         CliSetUp.savePosition();
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(2);
-        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliPrinterTest4.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                 Messages:                                              ┃");
+        CliPrinterTest4.stamp("┃                                                 Messages:                                              ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinterTest4.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         CliSetUp.cursorLeft(100);
         CliSetUp.cursorUp(7);
         if (msg != null) {
@@ -739,15 +742,15 @@ public final class CliPrinter {
         }
         CliSetUp.cursorUp(45);
         CliSetUp.cursorLeft(23);
-        CliPrinter.stamp("GAME'S INFO");
+        CliPrinterTest4.stamp("GAME'S INFO");
         CliSetUp.cursorDown(2);
         CliSetUp.cursorLeft(20);
         CliSetUp.savePosition();
-        CliPrinter.stamp("Total skulls: " + lightGameVersion.getTotalSkulls());
+        CliPrinterTest4.stamp("Total skulls: " + lightGameVersion.getTotalSkulls());
         CliSetUp.restorePosition();
         CliSetUp.cursorDown(1);
         CliSetUp.savePosition();
-        CliPrinter.stamp("Number of skulls: " + lightGameVersion.getSkullsNum());
+        CliPrinterTest4.stamp("Number of skulls: " + lightGameVersion.getSkullsNum());
         CliSetUp.restorePosition();
         CliSetUp.cursorDown(1);
         CliSetUp.savePosition();
@@ -756,29 +759,29 @@ public final class CliPrinter {
 
         for (int i=0; i < charactersThatKilled.size(); i++) {
             if (charactersThatKilled.get(i).equals("BANSHEE")) {
-                CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+                CliPrinterTest4.stamp("▲", CliColor.TEXTBLUE);
                 if (quantityOfMarks.get(i) == 2)
-                    CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+                    CliPrinterTest4.stamp("▲", CliColor.TEXTBLUE);
             }
             if (charactersThatKilled.get(i).equals("SPROG")) {
-                CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+                CliPrinterTest4.stamp("▲", CliColor.TEXTGREEN);
                 if (quantityOfMarks.get(i) == 2)
-                    CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+                    CliPrinterTest4.stamp("▲", CliColor.TEXTGREEN);
             }
             if(charactersThatKilled.get(i).equals("DOZER")) {
-                CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+                CliPrinterTest4.stamp("▲", CliColor.TEXTWHITE);
                 if (quantityOfMarks.get(i) == 2)
-                    CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+                    CliPrinterTest4.stamp("▲", CliColor.TEXTWHITE);
             }
             if(charactersThatKilled.get(i).equals("VIOLET")) {
-                CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+                CliPrinterTest4.stamp("▲", CliColor.TEXTPURPLE);
                 if (quantityOfMarks.get(i) == 2)
-                    CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+                    CliPrinterTest4.stamp("▲", CliColor.TEXTPURPLE);
             }
             if(charactersThatKilled.get(i).equals("DISTRUCTOR")) {
-                CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+                CliPrinterTest4.stamp("▲", CliColor.TEXTYELLOW);
                 if (quantityOfMarks.get(i) == 2)
-                    CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+                    CliPrinterTest4.stamp("▲", CliColor.TEXTYELLOW);
             }
             CliSetUp.restorePosition();
             CliSetUp.cursorDown(1);
@@ -851,7 +854,7 @@ public final class CliPrinter {
         }
         CliSetUp.cursorUp(45);
         CliSetUp.cursorLeft(36);
-        CliPrinter.stamp("PLAYERS' INFO");
+        CliPrinterTest4.stamp("PLAYERS' INFO");
         CliSetUp.cursorDown(2);
         CliSetUp.cursorLeft(34);
         CliSetUp.savePosition(); // per poter scrivere sempre all'inizio del box, basta scendere di uno
@@ -865,7 +868,7 @@ public final class CliPrinter {
             if (bansheeRep != null) {
                 playerCounter++;
 
-                CliPrinter.stamp("BANSHEE:", CliColor.TEXTBLUE);
+                CliPrinterTest4.stamp("BANSHEE:", CliColor.TEXTBLUE);
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
 
@@ -880,59 +883,59 @@ public final class CliPrinter {
                 int yellowAmmos = bansheeAmmos.get("YELLOW");
 
                 CliSetUp.savePosition();
-                CliPrinter.stamp("damages: ");
+                CliPrinterTest4.stamp("damages: ");
                 for (String d: bansheeDamages) {
                     if (d.equals("BANSHEE"))
-                        CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTBLUE);
                     if (d.equals("SPROG"))
-                        CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTGREEN);
                     if(d.equals("DOZER"))
-                        CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTWHITE);
                     if(d.equals("VIOLET"))
-                        CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTPURPLE);
                     if(d.equals("DISTRUCTOR"))
-                        CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTYELLOW);
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("marks: ");
+                CliPrinterTest4.stamp("marks: ");
                 for (String d: bansheemarks) {
                     if (d.equals("BANSHEE"))
-                        CliPrinter.stamp("◀", CliColor.TEXTBLUE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTBLUE);
                     if (d.equals("SPROG"))
-                        CliPrinter.stamp("◀", CliColor.TEXTGREEN);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTGREEN);
                     if(d.equals("DOZER"))
-                        CliPrinter.stamp("◀", CliColor.TEXTWHITE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTWHITE);
                     if(d.equals("VIOLET"))
-                        CliPrinter.stamp("◀", CliColor.TEXTPURPLE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTPURPLE);
                     if(d.equals("DISTRUCTOR"))
-                        CliPrinter.stamp("◀", CliColor.TEXTYELLOW);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTYELLOW);
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("Ammos: ");
-                CliPrinter.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
-                CliPrinter.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
-                CliPrinter.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
+                CliPrinterTest4.stamp("Ammos: ");
+                CliPrinterTest4.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
+                CliPrinterTest4.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
+                CliPrinterTest4.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("powerups: ");
+                CliPrinterTest4.stamp("powerups: ");
                 for (CardRep c: bansheePowerUp) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinterTest4.stamp(c.getTitle() + ", ");
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("weapons: ");
+                CliPrinterTest4.stamp("weapons: ");
                 for (CardRep c: bansheeWeapons) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinterTest4.stamp(c.getTitle() + ", ");
                 }
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(2);
@@ -944,7 +947,7 @@ public final class CliPrinter {
             if(sprogRep != null) {
                 playerCounter++;
 
-                CliPrinter.stamp("SPROG:", CliColor.TEXTGREEN);
+                CliPrinterTest4.stamp("SPROG:", CliColor.TEXTGREEN);
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
 
@@ -959,59 +962,59 @@ public final class CliPrinter {
                 int yellowAmmos = sprogAmmos.get("YELLOW");
 
                 CliSetUp.savePosition();
-                CliPrinter.stamp("damages: ");
+                CliPrinterTest4.stamp("damages: ");
                 for (String d: sprogDamages) {
                     if (d.equals("BANSHEE"))
-                        CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTBLUE);
                     if (d.equals("SPROG"))
-                        CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTGREEN);
                     if(d.equals("DOZER"))
-                        CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTWHITE);
                     if(d.equals("VIOLET"))
-                        CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTPURPLE);
                     if(d.equals("DISTRUCTOR"))
-                        CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTYELLOW);
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("marks: ");
+                CliPrinterTest4.stamp("marks: ");
                 for (String d: sprogmarks) {
                     if (d.equals("BANSHEE"))
-                        CliPrinter.stamp("◀", CliColor.TEXTBLUE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTBLUE);
                     if (d.equals("SPROG"))
-                        CliPrinter.stamp("◀", CliColor.TEXTGREEN);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTGREEN);
                     if(d.equals("DOZER"))
-                        CliPrinter.stamp("◀", CliColor.TEXTWHITE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTWHITE);
                     if(d.equals("VIOLET"))
-                        CliPrinter.stamp("◀", CliColor.TEXTPURPLE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTPURPLE);
                     if(d.equals("DISTRUCTOR"))
-                        CliPrinter.stamp("◀", CliColor.TEXTYELLOW);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTYELLOW);
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("Ammos: ");
-                CliPrinter.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
-                CliPrinter.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
-                CliPrinter.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
+                CliPrinterTest4.stamp("Ammos: ");
+                CliPrinterTest4.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
+                CliPrinterTest4.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
+                CliPrinterTest4.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("powerups: ");
+                CliPrinterTest4.stamp("powerups: ");
                 for (CardRep c: sprogPowerUp) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinterTest4.stamp(c.getTitle() + ", ");
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("weapons: ");
+                CliPrinterTest4.stamp("weapons: ");
                 for (CardRep c: sprogWeapons) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinterTest4.stamp(c.getTitle() + ", ");
                 }
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(2);
@@ -1022,7 +1025,7 @@ public final class CliPrinter {
             if (dozerRep != null) {
                 playerCounter++;
 
-                CliPrinter.stamp("DOZER:", CliColor.TEXTWHITE);
+                CliPrinterTest4.stamp("DOZER:", CliColor.TEXTWHITE);
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
 
@@ -1037,59 +1040,59 @@ public final class CliPrinter {
                 int yellowAmmos = dozerAmmos.get("YELLOW");
 
                 CliSetUp.savePosition();
-                CliPrinter.stamp("damages: ");
+                CliPrinterTest4.stamp("damages: ");
                 for (String d: dozerDamages) {
                     if (d.equals("BANSHEE"))
-                        CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTBLUE);
                     if (d.equals("SPROG"))
-                        CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTGREEN);
                     if(d.equals("DOZER"))
-                        CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTWHITE);
                     if(d.equals("VIOLET"))
-                        CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTPURPLE);
                     if(d.equals("DISTRUCTOR"))
-                        CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTYELLOW);
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("marks: ");
+                CliPrinterTest4.stamp("marks: ");
                 for (String d: dozermarks) {
                     if (d.equals("BANSHEE"))
-                        CliPrinter.stamp("◀", CliColor.TEXTBLUE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTBLUE);
                     if (d.equals("SPROG"))
-                        CliPrinter.stamp("◀", CliColor.TEXTGREEN);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTGREEN);
                     if(d.equals("DOZER"))
-                        CliPrinter.stamp("◀", CliColor.TEXTWHITE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTWHITE);
                     if(d.equals("VIOLET"))
-                        CliPrinter.stamp("◀", CliColor.TEXTPURPLE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTPURPLE);
                     if(d.equals("DISTRUCTOR"))
-                        CliPrinter.stamp("◀", CliColor.TEXTYELLOW);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTYELLOW);
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("Ammos: ");
-                CliPrinter.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
-                CliPrinter.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
-                CliPrinter.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
+                CliPrinterTest4.stamp("Ammos: ");
+                CliPrinterTest4.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
+                CliPrinterTest4.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
+                CliPrinterTest4.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("powerups: ");
+                CliPrinterTest4.stamp("powerups: ");
                 for (CardRep c: dozerPowerUp) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinterTest4.stamp(c.getTitle() + ", ");
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("weapons: ");
+                CliPrinterTest4.stamp("weapons: ");
                 for (CardRep c: dozerWeapons) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinterTest4.stamp(c.getTitle() + ", ");
                 }
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(2);
@@ -1100,7 +1103,7 @@ public final class CliPrinter {
             if (violetRep != null) {
                 playerCounter++;
 
-                CliPrinter.stamp("VIOLET:", CliColor.TEXTPURPLE);
+                CliPrinterTest4.stamp("VIOLET:", CliColor.TEXTPURPLE);
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
 
@@ -1115,59 +1118,59 @@ public final class CliPrinter {
                 int yellowAmmos = violetAmmos.get("YELLOW");
 
                 CliSetUp.savePosition();
-                CliPrinter.stamp("damages: ");
+                CliPrinterTest4.stamp("damages: ");
                 for (String d: violetDamages) {
                     if (d.equals("BANSHEE"))
-                        CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTBLUE);
                     if (d.equals("SPROG"))
-                        CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTGREEN);
                     if(d.equals("DOZER"))
-                        CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTWHITE);
                     if(d.equals("VIOLET"))
-                        CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTPURPLE);
                     if(d.equals("DISTRUCTOR"))
-                        CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTYELLOW);
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("marks: ");
+                CliPrinterTest4.stamp("marks: ");
                 for (String d: violetmarks) {
                     if (d.equals("BANSHEE"))
-                        CliPrinter.stamp("◀", CliColor.TEXTBLUE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTBLUE);
                     if (d.equals("SPROG"))
-                        CliPrinter.stamp("◀", CliColor.TEXTGREEN);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTGREEN);
                     if(d.equals("DOZER"))
-                        CliPrinter.stamp("◀", CliColor.TEXTWHITE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTWHITE);
                     if(d.equals("VIOLET"))
-                        CliPrinter.stamp("◀", CliColor.TEXTPURPLE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTPURPLE);
                     if(d.equals("DISTRUCTOR"))
-                        CliPrinter.stamp("◀", CliColor.TEXTYELLOW);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTYELLOW);
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("Ammos: ");
-                CliPrinter.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
-                CliPrinter.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
-                CliPrinter.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
+                CliPrinterTest4.stamp("Ammos: ");
+                CliPrinterTest4.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
+                CliPrinterTest4.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
+                CliPrinterTest4.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("powerups: ");
+                CliPrinterTest4.stamp("powerups: ");
                 for (CardRep c: violetPowerUp) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinterTest4.stamp(c.getTitle() + ", ");
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("weapons: ");
+                CliPrinterTest4.stamp("weapons: ");
                 for (CardRep c: violetWeapons) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinterTest4.stamp(c.getTitle() + ", ");
                 }
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(2);
@@ -1178,7 +1181,7 @@ public final class CliPrinter {
             if (distructorRep != null) {
                 playerCounter++;
 
-                CliPrinter.stamp("DISTRUCTOR:", CliColor.TEXTYELLOW);
+                CliPrinterTest4.stamp("DISTRUCTOR:", CliColor.TEXTYELLOW);
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
 
@@ -1193,59 +1196,59 @@ public final class CliPrinter {
                 int yellowAmmos = distructorAmmos.get("YELLOW");
 
                 CliSetUp.savePosition();
-                CliPrinter.stamp("damages: ");
+                CliPrinterTest4.stamp("damages: ");
                 for (String d: distructorDamages) {
                     if (d.equals("BANSHEE"))
-                        CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTBLUE);
                     if (d.equals("SPROG"))
-                        CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTGREEN);
                     if(d.equals("DOZER"))
-                        CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTWHITE);
                     if(d.equals("VIOLET"))
-                        CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTPURPLE);
                     if(d.equals("DISTRUCTOR"))
-                        CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+                        CliPrinterTest4.stamp("▲", CliColor.TEXTYELLOW);
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("marks: ");
+                CliPrinterTest4.stamp("marks: ");
                 for (String d: distructormarks) {
                     if (d.equals("BANSHEE"))
-                        CliPrinter.stamp("◀", CliColor.TEXTBLUE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTBLUE);
                     if (d.equals("SPROG"))
-                        CliPrinter.stamp("◀", CliColor.TEXTGREEN);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTGREEN);
                     if(d.equals("DOZER"))
-                        CliPrinter.stamp("◀", CliColor.TEXTWHITE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTWHITE);
                     if(d.equals("VIOLET"))
-                        CliPrinter.stamp("◀", CliColor.TEXTPURPLE);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTPURPLE);
                     if(d.equals("DISTRUCTOR"))
-                        CliPrinter.stamp("◀", CliColor.TEXTYELLOW);
+                        CliPrinterTest4.stamp("◀", CliColor.TEXTYELLOW);
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("Ammos: ");
-                CliPrinter.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
-                CliPrinter.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
-                CliPrinter.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
+                CliPrinterTest4.stamp("Ammos: ");
+                CliPrinterTest4.stamp("■ x " + redAmmos + ", ",CliColor.TEXTRED);
+                CliPrinterTest4.stamp("■ x " + blueAmmos + ", ", CliColor.TEXTBLUE);
+                CliPrinterTest4.stamp("■ x "+ yellowAmmos, CliColor.TEXTYELLOW);
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("powerups: ");
+                CliPrinterTest4.stamp("powerups: ");
                 for (CardRep c: distructorPowerUp) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinterTest4.stamp(c.getTitle() + ", ");
                 }
 
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
-                CliPrinter.stamp("weapons: ");
+                CliPrinterTest4.stamp("weapons: ");
                 for (CardRep c: distructorWeapons) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinterTest4.stamp(c.getTitle() + ", ");
                 }
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(2);
@@ -1263,44 +1266,44 @@ public final class CliPrinter {
 
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliPrinterTest4.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                          Choose a weapon to discart:                                   ┃");
+        CliPrinterTest4.stamp("┃                                          Choose a weapon to discart:                                   ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinterTest4.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         CliSetUp.cursorLeft(78);
         CliSetUp.cursorUp(6);
         int counter = 0;
         for (CardRep c: myWeapons) {
-            CliPrinter.stamp(c.getTitle());
+            CliPrinterTest4.stamp(c.getTitle());
             if (counter <2) {
-                CliPrinter.stamp(", ");
+                CliPrinterTest4.stamp(", ");
             }
             counter++;
         }
@@ -1315,45 +1318,45 @@ public final class CliPrinter {
         CliSetUp.cursorUp(1);
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliPrinterTest4.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                          Choose a weapon to reload:                                    ┃");
+        CliPrinterTest4.stamp("┃                                          Choose a weapon to reload:                                    ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinterTest4.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         CliSetUp.cursorLeft(78);
         CliSetUp.cursorUp(6);
         int counter = 0;
         for (CardRep c: myWeapons) {
             if (weapons.contains(Integer.toString(c.getId()))) {
-                CliPrinter.stamp(c.getTitle());
+                CliPrinterTest4.stamp(c.getTitle());
                 if (counter < 2) {
-                    CliPrinter.stamp(", ");
+                    CliPrinterTest4.stamp(", ");
                 }
             }
             counter++;
@@ -1370,45 +1373,45 @@ public final class CliPrinter {
         CliSetUp.cursorRight(9);
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliPrinterTest4.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                               Choose a weapon:                                         ┃");
+        CliPrinterTest4.stamp("┃                                               Choose a weapon:                                         ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinterTest4.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         CliSetUp.cursorLeft(78);
         CliSetUp.cursorUp(6);
         int counter = 0;
         for (CardRep c: myWeapons) {
             if (weapons.contains(Integer.toString(c.getId()))) {
-                CliPrinter.stamp(c.getTitle());
+                CliPrinterTest4.stamp(c.getTitle());
                 if (counter < 2) {
-                    CliPrinter.stamp(", ");
+                    CliPrinterTest4.stamp(", ");
                 }
             }
             counter++;
@@ -1423,44 +1426,44 @@ public final class CliPrinter {
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
         CliSetUp.cursorDown(5);
-        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliPrinterTest4.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                               Choose a target:                                         ┃");
+        CliPrinterTest4.stamp("┃                                               Choose a target:                                         ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinterTest4.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         CliSetUp.cursorLeft(78);
         CliSetUp.cursorUp(6);
         int counter = 0;
         for (String s: targets) {
-            CliPrinter.stamp(s);
+            CliPrinterTest4.stamp(s);
             if (counter < 2) {
-                CliPrinter.stamp(", ");
+                CliPrinterTest4.stamp(", ");
             }
             counter++;
         }
@@ -1472,44 +1475,44 @@ public final class CliPrinter {
         CliSetUp.cursorRight(9);
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliPrinterTest4.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                              Choose an effect:                                         ┃");
+        CliPrinterTest4.stamp("┃                                              Choose an effect:                                         ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinterTest4.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         CliSetUp.cursorLeft(78);
         CliSetUp.cursorUp(6);
         int counter = 0;
         for (Integer s: effects) {
             HandyFunctions.printConsole(s.intValue());
             if (counter < 2) {
-                CliPrinter.stamp(", ");
+                CliPrinterTest4.stamp(", ");
             }
             counter++;
         }
@@ -1518,45 +1521,45 @@ public final class CliPrinter {
     }
 
     public static void printPlatformWeapons(LightGameVersion lightGameVersion) {
-        CliPrinter.weaponBox(CliColor.TEXTRED, lightGameVersion.getPlatformWeapons().get("1,0"));
-        CliPrinter.weaponBox(CliColor.TEXTBLUE,lightGameVersion.getPlatformWeapons().get("0,2"));
-        CliPrinter.weaponBox(CliColor.TEXTYELLOW,lightGameVersion.getPlatformWeapons().get("2,3"));
+        CliPrinterTest4.weaponBox(CliColor.TEXTRED, lightGameVersion.getPlatformWeapons().get("1,0"));
+        CliPrinterTest4.weaponBox(CliColor.TEXTBLUE,lightGameVersion.getPlatformWeapons().get("0,2"));
+        CliPrinterTest4.weaponBox(CliColor.TEXTYELLOW,lightGameVersion.getPlatformWeapons().get("2,3"));
     }
 
     public static void printPossiblePlatform(List<String> platforms) {
         CliSetUp.savePosition();
         CliSetUp.cursorRight(2);
-        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliPrinterTest4.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                             Choose a platform:                                         ┃");
+        CliPrinterTest4.stamp("┃                                             Choose a platform:                                         ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinterTest4.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         CliSetUp.cursorLeft(78);
         CliSetUp.cursorUp(6);
         for (String s: platforms) {
@@ -1576,47 +1579,47 @@ public final class CliPrinter {
         CliSetUp.cursorLeft(20);
         CliSetUp.cursorDown(1);
 
-        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliPrinterTest4.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                              Choose a weapon:                                          ┃");
+        CliPrinterTest4.stamp("┃                                              Choose a weapon:                                          ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinterTest4.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         CliSetUp.cursorLeft(78);
         CliSetUp.cursorUp(6);
         int counter = 0;
         for (CardRep c: plat1) {
             for (String w: weapons) {
                 if(c.getId() == Integer.parseInt(w)) {
-                    CliPrinter.stamp(c.getTitle());
+                    CliPrinterTest4.stamp(c.getTitle());
                     hashes.put(counter,c.getId());
                     if (counter < 2)
-                        CliPrinter.stamp(", ");
+                        CliPrinterTest4.stamp(", ");
                     counter ++;
                 }
             }
@@ -1624,10 +1627,10 @@ public final class CliPrinter {
         for (CardRep c: plat2) {
             for (String w: weapons) {
                 if(c.getId() == Integer.parseInt(w)) {
-                    CliPrinter.stamp(c.getTitle());
+                    CliPrinterTest4.stamp(c.getTitle());
                     hashes.put(counter,c.getId());
                     if (counter < 2)
-                        CliPrinter.stamp(", ");
+                        CliPrinterTest4.stamp(", ");
                     counter++;
                 }
             }
@@ -1635,10 +1638,10 @@ public final class CliPrinter {
         for (CardRep c: plat3) {
             for (String w: weapons) {
                 if(c.getId() == Integer.parseInt(w)) {
-                    CliPrinter.stamp(c.getTitle());
+                    CliPrinterTest4.stamp(c.getTitle());
                     hashes.put(counter,c.getId());
                     if (counter < 2)
-                        CliPrinter.stamp(", ");
+                        CliPrinterTest4.stamp(", ");
                     counter++;
                 }
             }
@@ -1650,40 +1653,40 @@ public final class CliPrinter {
     public static void binaryOptionMessage(String msg) {
         CliSetUp.cursorDown(1);
         CliSetUp.cursorLeft(20);
-        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliPrinterTest4.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                 Message:                                               ┃");
+        CliPrinterTest4.stamp("┃                                                 Message:                                               ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliPrinterTest4.stamp("┃                                                                                                        ┃");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
-        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliPrinterTest4.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         CliSetUp.cursorLeft(78);
         CliSetUp.cursorUp(6);
-        CliPrinter.stamp(msg + "<y/n>: ");
+        CliPrinterTest4.stamp(msg + "<y/n>: ");
     }
 
 
