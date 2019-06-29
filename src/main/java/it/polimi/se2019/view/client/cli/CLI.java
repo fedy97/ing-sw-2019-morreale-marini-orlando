@@ -124,7 +124,7 @@ public class CLI extends RemoteView {
 
         CliSetUp.cursorUp(34);
         CliSetUp.cursorRight(104);
-        CliPrinter.drawPlayersInfoBox(lightGameVersion);
+        CliPrinter.drawPlayersInfoBox(lightGameVersion, myCharEnumString);
         CliSetUp.cursorRight(59);
         CliSetUp.cursorUp(3);
         CliPrinter.drawGameInfoBox(lightGameVersion);
@@ -139,7 +139,7 @@ public class CLI extends RemoteView {
         CliSetUp.cursorUp(11);
         CliSetUp.cursorRight(10);
         currState = 2;
-        System.out.print(actionType);
+        //System.out.print(actionType);
     }
 
     private void getActionInput() {

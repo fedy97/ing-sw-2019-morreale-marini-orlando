@@ -579,7 +579,7 @@ public final class CliPrinter {
         weaponBox(CliColor.TEXTYELLOW, posWeapons.get("2,3"));
         CliSetUp.cursorRight(111);
         CliSetUp.cursorUp(24);
-        drawPlayersInfoBox(null);
+        drawPlayersInfoBox(null,null);
         CliSetUp.cursorDown(20);
     }
 
@@ -608,7 +608,7 @@ public final class CliPrinter {
         weaponBox(CliColor.TEXTYELLOW, posWeapons.get("2,3"));
         CliSetUp.cursorRight(111);
         CliSetUp.cursorUp(24);
-        drawPlayersInfoBox(null);
+        drawPlayersInfoBox(null,null);
         CliSetUp.cursorDown(20);
     }
 
@@ -636,7 +636,7 @@ public final class CliPrinter {
         weaponBox(CliColor.TEXTYELLOW, posWeapons.get("2,3"));
         CliSetUp.cursorRight(111);
         CliSetUp.cursorUp(24);
-        drawPlayersInfoBox(null);
+        drawPlayersInfoBox(null,null);
         CliSetUp.cursorDown(20);
     }
 
@@ -666,7 +666,7 @@ public final class CliPrinter {
         weaponBox(CliColor.TEXTYELLOW, posWeapons.get("2,3"));
         CliSetUp.cursorRight(111);
         CliSetUp.cursorUp(24);
-        drawPlayersInfoBox(null);
+        drawPlayersInfoBox(null, null);
         CliSetUp.cursorDown(20);
     }
 
@@ -924,7 +924,7 @@ public final class CliPrinter {
     }
 
 
-    public static void drawPlayersInfoBox(LightGameVersion lightGameVersion) {
+    public static void drawPlayersInfoBox(LightGameVersion lightGameVersion, String myChar) {
 
         int playerCounter = 0;
 
@@ -1059,10 +1059,11 @@ public final class CliPrinter {
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
                 CliPrinter.stamp("powerups: ");
-                for (CardRep c: bansheePowerUp) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                if (myChar.equals("BANSHEE")) {
+                    for (CardRep c : bansheePowerUp) {
+                        CliPrinter.stamp(c.getTitle() + ", ");
+                    }
                 }
-
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
@@ -1071,6 +1072,18 @@ public final class CliPrinter {
                     CliPrinter.stamp(c.getTitle() + ", ");
                 }
                 CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Points: ");
+                if (myChar.equals("BANSHEE")) {
+                    HandyFunctions.printConsole(bansheeRep.getPoints());
+                }
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Skulls: " + bansheeRep.getSkullsNum());
+                CliSetUp.restorePosition();
+
                 CliSetUp.cursorDown(2);
                 CliSetUp.savePosition();
 
@@ -1138,10 +1151,11 @@ public final class CliPrinter {
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
                 CliPrinter.stamp("powerups: ");
-                for (CardRep c: sprogPowerUp) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                if(myChar.equals("SPROG")) {
+                    for (CardRep c : sprogPowerUp) {
+                        CliPrinter.stamp(c.getTitle() + ", ");
+                    }
                 }
-
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
@@ -1150,6 +1164,18 @@ public final class CliPrinter {
                     CliPrinter.stamp(c.getTitle() + ", ");
                 }
                 CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Points: ");
+                if (myChar.equals("SPROG")) {
+                    HandyFunctions.printConsole(sprogRep.getPoints());
+                }
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Skulls: " + sprogRep.getSkullsNum());
+                CliSetUp.restorePosition();
+
                 CliSetUp.cursorDown(2);
                 CliSetUp.savePosition();
             }
@@ -1216,10 +1242,11 @@ public final class CliPrinter {
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
                 CliPrinter.stamp("powerups: ");
-                for (CardRep c: dozerPowerUp) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                if(myChar.equals("DOZER")) {
+                    for (CardRep c : dozerPowerUp) {
+                        CliPrinter.stamp(c.getTitle() + ", ");
+                    }
                 }
-
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
@@ -1228,6 +1255,18 @@ public final class CliPrinter {
                     CliPrinter.stamp(c.getTitle() + ", ");
                 }
                 CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Points: ");
+                if (myChar.equals("DOZER")) {
+                    HandyFunctions.printConsole(dozerRep.getPoints());
+                }
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Skulls: " + dozerRep.getSkullsNum());
+                CliSetUp.restorePosition();
+
                 CliSetUp.cursorDown(2);
                 CliSetUp.savePosition();
             }
@@ -1294,10 +1333,11 @@ public final class CliPrinter {
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
                 CliPrinter.stamp("powerups: ");
-                for (CardRep c: violetPowerUp) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                if(myChar.equals("VIOLET")) {
+                    for (CardRep c : violetPowerUp) {
+                        CliPrinter.stamp(c.getTitle() + ", ");
+                    }
                 }
-
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
@@ -1306,6 +1346,18 @@ public final class CliPrinter {
                     CliPrinter.stamp(c.getTitle() + ", ");
                 }
                 CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Points: ");
+                if (myChar.equals("VIOLET")) {
+                    HandyFunctions.printConsole(violetRep.getPoints());
+                }
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Skulls: " + violetRep.getSkullsNum());
+                CliSetUp.restorePosition();
+
                 CliSetUp.cursorDown(2);
                 CliSetUp.savePosition();
             }
@@ -1372,10 +1424,11 @@ public final class CliPrinter {
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
                 CliPrinter.stamp("powerups: ");
-                for (CardRep c: distructorPowerUp) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                if(myChar.equals("DISTRUCTOR")) {
+                    for (CardRep c : distructorPowerUp) {
+                        CliPrinter.stamp(c.getTitle() + ", ");
+                    }
                 }
-
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
@@ -1384,11 +1437,23 @@ public final class CliPrinter {
                     CliPrinter.stamp(c.getTitle() + ", ");
                 }
                 CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Points: ");
+                if (myChar.equals("DISTRUCTOR")) {
+                    HandyFunctions.printConsole(distructorRep.getPoints());
+                }
+                CliSetUp.restorePosition();
+                CliSetUp.cursorDown(1);
+                CliSetUp.savePosition();
+                CliPrinter.stamp("Skulls: " + distructorRep.getSkullsNum());
+                CliSetUp.restorePosition();
+
                 CliSetUp.cursorDown(2);
                 CliSetUp.savePosition();
             }
 
-            CliSetUp.cursorUp(7*playerCounter);
+            CliSetUp.cursorUp(9*playerCounter);
         }
     }
     public static List<String> discartAmmoMessage(LightGameVersion lightGameVersion, String myChar) {
