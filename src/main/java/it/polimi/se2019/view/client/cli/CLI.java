@@ -143,33 +143,95 @@ public class CLI extends RemoteView {
     }
 
     private void getActionInput() {
-        if (!isAsking && isMyTurn() && powerUpChosen && !isChoosingPowerUp && !isReloadedWeapons) {
-            new Thread(() -> {
-                isAsking = true;
-                Console c = System.console();
-                int choise;
-                choise = Character.getNumericValue((c.readPassword())[0]);
-                isAsking = false;
-                if (choise == 1 && actives[0])
-                    iWantToMove();
-                else if (choise == 2 && actives[1])
-                    iWantToGrab();
-                else if (choise == 3 && actives[2])
-                    iWantToShoot();
-                else if (choise == 4 && actives[3])
-                    iWantToReload();
-                else if (choise == 5 && actives[4])
-                    iWantToUsePowerUp();
-                else if (choise == 6 && actives[5])
-                    endTurn();
-                else if (choise == 7)
-                    iWantToConvertPowerUp();
-                else {
-                    updateAll(lightGameVersion);
-                    getActionInput();
+        if(actionType == 0 || actionType == 1 || actionType == 2) {
+            if (!isAsking && isMyTurn() && powerUpChosen && !isChoosingPowerUp && !isReloadedWeapons) {
+                new Thread(() -> {
+                    isAsking = true;
+                    Console c = System.console();
+                    int choise;
+                    choise = Character.getNumericValue((c.readPassword())[0]);
+                    isAsking = false;
+                    if (choise == 1 && actives[0])
+                        iWantToMove();
+                    else if (choise == 2 && actives[1])
+                        iWantToGrab();
+                    else if (choise == 3 && actives[2])
+                        iWantToShoot();
+                    else if (choise == 4 && actives[3])
+                        iWantToReload();
+                    else if (choise == 5 && actives[4])
+                        iWantToUsePowerUp();
+                    else if (choise == 6 && actives[5])
+                        endTurn();
+                    else if (choise == 7)
+                        iWantToConvertPowerUp();
+                    else {
+                        updateAll(lightGameVersion);
+                        getActionInput();
+                    }
+                    currState = 0;
+                }).start();
+            }
+        }
+        else {
+            if (actionType == 3) {
+                if (!isAsking && isMyTurn() && powerUpChosen && !isChoosingPowerUp && !isReloadedWeapons) {
+                    new Thread(() -> {
+                        isAsking = true;
+                        Console c = System.console();
+                        int choise;
+                        choise = Character.getNumericValue((c.readPassword())[0]);
+                        isAsking = false;
+                        if (choise == 1 && actives[0])
+                            iWantToShoot();
+                        else if (choise == 2 && actives[1])
+                            iWantToMove();
+                        else if (choise == 3 && actives[2])
+                            iWantToGrab();
+                        else if (choise == 4 && actives[3])
+                            iWantToReload();
+                        else if (choise == 5 && actives[4])
+                            iWantToUsePowerUp();
+                        else if (choise == 6 && actives[5])
+                            endTurn();
+                        else if (choise == 7)
+                            iWantToConvertPowerUp();
+                        else {
+                            updateAll(lightGameVersion);
+                            getActionInput();
+                        }
+                        currState = 0;
+                    }).start();
                 }
-                currState = 0;
-            }).start();
+            }
+            else {
+                if (!isAsking && isMyTurn() && powerUpChosen && !isChoosingPowerUp && !isReloadedWeapons) {
+                    new Thread(() -> {
+                        isAsking = true;
+                        Console c = System.console();
+                        int choise;
+                        choise = Character.getNumericValue((c.readPassword())[0]);
+                        isAsking = false;
+                        if (choise == 1 && actives[0])
+                            iWantToShoot();
+                        else if (choise == 2 && actives[1])
+                            iWantToGrab();
+                        else if (choise == 4 && actives[2])
+                            iWantToReload();
+                        else if (choise == 5 && actives[3])
+                            iWantToUsePowerUp();
+                        else if (choise == 6 && actives[4])
+                            endTurn();
+                        else if (choise == 7)
+                            iWantToConvertPowerUp();
+                        else {
+                            updateAll(lightGameVersion);
+                            getActionInput();
+                        }
+                        currState = 0;
+                    }).start();
+                }
+            }
         }
     }
 
