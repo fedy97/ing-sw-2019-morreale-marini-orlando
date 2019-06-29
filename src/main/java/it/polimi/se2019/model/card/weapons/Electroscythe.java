@@ -20,7 +20,10 @@ public final class Electroscythe extends WeaponAlternativeFire {
             @Override
             public void activateEffect(List<Character> chosenTargets, WeaponCard card) {
                 Map<Player, Integer> damages = new HashMap<>();
-                for (Character character : playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform())
+                List<Character> targets = new ArrayList<>();
+                targets.addAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
+                targets.remove(playerManager.getCurrentPlayer().getCharacter());
+                for (Character character : targets)
                     damages.put(game.getPlayer(character), 1);
                 playerManager.addDamage(damages);
 
@@ -31,19 +34,19 @@ public final class Electroscythe extends WeaponAlternativeFire {
 
             @Override
             public void setupTargets() {
-                List<Character> targets = new ArrayList<>();
-                targets.addAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
-                targets.remove(playerManager.getCurrentPlayer().getCharacter());
-                setPossibleTargets(targets);
+                setPossibleTargets(null);
             }
         };
 
         Effect eff2 = new Effect(new AmmoCube[]{AmmoCube.RED, AmmoCube.BLUE}) {
             @Override
-            public void activateEffect(List<Character> targets, WeaponCard card) {
+            public void activateEffect(List<Character> targetsChosen, WeaponCard card) {
                 Map<Player, Integer> damages = new HashMap<>();
-                for (Character character : playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform())
-                    damages.put(game.getPlayer(character), 1);
+                List<Character> targets = new ArrayList<>();
+                targets.addAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
+                targets.remove(playerManager.getCurrentPlayer().getCharacter());
+                for (Character character : targets)
+                    damages.put(game.getPlayer(character), 2);
                 playerManager.addDamage(damages);
 
                 usableEffects[0] = false;
@@ -53,10 +56,7 @@ public final class Electroscythe extends WeaponAlternativeFire {
 
             @Override
             public void setupTargets() {
-                List<Character> targets = new ArrayList<>();
-                targets.addAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
-                targets.remove(playerManager.getCurrentPlayer().getCharacter());
-                setPossibleTargets(targets);
+                setPossibleTargets(null);
             }
         };
 
