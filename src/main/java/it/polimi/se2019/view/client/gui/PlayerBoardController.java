@@ -120,6 +120,10 @@ public class PlayerBoardController {
     @FXML
     private ImageView life6;
     @FXML
+    private ImageView life7;
+    @FXML
+    private ImageView life8;
+    @FXML
     private ImageView mark1;
     @FXML
     private ImageView mark2;
@@ -231,6 +235,9 @@ public class PlayerBoardController {
             livesImages.add(life4);
             livesImages.add(life5);
             livesImages.add(life6);
+            livesImages.add(life7);
+            livesImages.add(life8);
+
             scorelabel.setFont(gui.getGrande());
         });
 
@@ -262,15 +269,15 @@ public class PlayerBoardController {
         if (!boardRep.isReverted()) {
             for (int i = 0; i < boardRep.getSkullsNum(); i++)
                 livesImages.get(i).setVisible(true);
-            for (int i = boardRep.getSkullsNum(); i < 6; i++)
+            for (int i = boardRep.getSkullsNum(); i < 8; i++)
                 livesImages.get(i).setVisible(false);
         } else {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 8; i++)
                 livesImages.get(i).setVisible(false);
             for (int i = 0; i < boardRep.getSkullsNum(); i++)
-                livesImages.get(i+1).setVisible(true);
-            for (int i = boardRep.getSkullsNum(); i < 5; i++)
-                livesImages.get(i+1).setVisible(false);
+                livesImages.get(i + 1).setVisible(true);
+            for (int i = boardRep.getSkullsNum(); i < 7; i++)
+                livesImages.get(i + 1).setVisible(false);
         }
 
     }

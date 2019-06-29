@@ -172,5 +172,15 @@
       <ImageView fx:id="mark6" fitHeight="44.0" fitWidth="37.0" layoutX="505.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="mark5" fitHeight="44.0" fitWidth="37.0" layoutX="481.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="mark4" fitHeight="44.0" fitWidth="37.0" layoutX="456.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="life7" fitHeight="68.0" fitWidth="53.0" layoutX="461.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="life8" fitHeight="68.0" fitWidth="53.0" layoutX="508.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@assets/boards/skull.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
