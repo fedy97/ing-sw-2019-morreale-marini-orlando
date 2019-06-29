@@ -776,16 +776,43 @@ public class CLI extends RemoteView {
 
     @Override
     public void showAmmoToDiscard() {
-
+        currState = 0;
+        List<String> ammoList = CliPrinter.discartAmmoMessage(lightGameVersion,myCharEnumString);
+        new Thread(() -> {
+            int choise;
+            Scanner s = new Scanner(System.in);
+            choise = s.nextInt();
+            if (choise < ammoList.size() && choise >= 0) {
+                ChosenAmmoMessage message = new ChosenAmmoMessage(ammoList.get(choise));
+                notifyController(message);
+            }
+            currState = 1;
+            isAsking = false;
+            isChoosingPowerUp = false;
+        }).start();
     }
 
     @Override
     public void showUsernameAlreadyInUse(String user) {
+        CliSetUp.cursorRight(60);
+        CliPrinter.stamp("Username not available!",CliColor.TEXTRED);
+        try {
+            Thread.sleep(1500);
+        }
+        catch (InterruptedException e) {
 
+        }
+        setUserName();
+        startConnection();
     }
 
     @Override
     public void showScoreboard(Map<String, Integer> scoreboard) {
-
+        CliSetUp.clear();
+        CliPrinter.stamp("CLASSIFICA: ", CliColor.TEXTGREEN);
+        CliPrinter.stamp("\n");
+        for (String s: scoreboard.keySet()) {
+            CliPrinter.stamp(s + ": " + scoreboard.get(s) + "\n");
+        }
     }
 }

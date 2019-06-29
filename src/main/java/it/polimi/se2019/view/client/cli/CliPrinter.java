@@ -1255,6 +1255,61 @@ public final class CliPrinter {
             CliSetUp.cursorUp(7*playerCounter);
         }
     }
+    public static List<String> discartAmmoMessage(LightGameVersion lightGameVersion, String myChar) {
+        BoardRep mine = lightGameVersion.getPlayerBoardRep().get(myChar);
+        List<String> ammoList = new ArrayList<>();
+        CliSetUp.cursorLeft(7);
+        CliSetUp.cursorDown(1);
+        CliSetUp.cursorLeft(10);
+        CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                             Choose ammo to discart:                                    ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┃                                                                                                        ┃");
+        CliSetUp.cursorLeft(106);
+        CliSetUp.cursorDown(1);
+        CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        CliSetUp.cursorLeft(78);
+        CliSetUp.cursorUp(6);
+
+        if (mine.getColorQtyAmmos().get("BLUE") > 0) {
+           stamp("BLUE,");
+           ammoList.add("BLUE");
+        }
+        if (mine.getColorQtyAmmos().get("RED") > 0) {
+            stamp("RED,");
+            ammoList.add("RED");
+        }
+        if (mine.getColorQtyAmmos().get("YELLOW") > 0) {
+            stamp("YELLOW,");
+            ammoList.add("YELLOW");
+        }
+        stamp(" <0,1,2>: ");
+        return ammoList;
+    }
 
     public static void discartWeaponMessage(LightGameVersion lightGameVersion, String myChar) {
         CliSetUp.savePosition();
@@ -1263,6 +1318,7 @@ public final class CliPrinter {
 
         CliSetUp.cursorLeft(7);
         CliSetUp.cursorDown(1);
+        CliSetUp.cursorLeft(10);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
