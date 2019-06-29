@@ -6,7 +6,6 @@ import it.polimi.se2019.controller.validator.UserValidActions;
 import it.polimi.se2019.controller.validator.Validator;
 import it.polimi.se2019.exceptions.InvalidActionException;
 import it.polimi.se2019.exceptions.InvalidCharacterException;
-import it.polimi.se2019.exceptions.InvalidPositionException;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.PointsCounter;
 import it.polimi.se2019.model.board.*;
@@ -26,7 +25,7 @@ import it.polimi.se2019.utils.*;
 import it.polimi.se2019.view.server.VirtualView;
 
 import java.awt.*;
-import java.io.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.BlockingDeque;
@@ -68,7 +67,6 @@ public class Controller implements Observer, Serializable {
     private boolean frenzyModeOn = false;
     private boolean wasRecharged;
     private boolean serverReloaded;
-
     private boolean[] validActions;
 
     private Controller() {
@@ -91,6 +89,7 @@ public class Controller implements Observer, Serializable {
         pingsList = new ArrayList<>();
         pingsWaitingList = new ArrayList<>();
         serverReloaded = false;
+        debug = false;
 
         validActions = UserValidActions.NO_SHOOT.getActions().clone();
     }
@@ -632,8 +631,10 @@ public class Controller implements Observer, Serializable {
                 //now I create a list of the characters in game to send to clients in order to display their board
                 List<String> arrChars = findCharactersInGame();
                 notifyAll(new ShowGameBoardMessage(firstUser, ammoReps, cardReps, game.getLightVersion().getPlatformWeapons(), arrChars));
-                turnController.notifyFirst();
-                startPinging();
+                if (!debug) {
+                    turnController.notifyFirst();
+                    startPinging();
+                }
 
             } catch (Exception e) {
                 CustomLogger.logException(getClass().getName(), e);
@@ -942,15 +943,19 @@ public class Controller implements Observer, Serializable {
         this.wasRecharged = wasRecharged;
     }
 
-    public void setGameIsActive(boolean gameIsActive) {
-        this.gameIsActive = gameIsActive;
-    }
-
     public void setServerReloaded(boolean serverReloaded) {
         this.serverReloaded = serverReloaded;
     }
 
     public boolean isGameIsActive() {
         return gameIsActive;
+    }
+
+    public void setGameIsActive(boolean gameIsActive) {
+        this.gameIsActive = gameIsActive;
+    }
+
+    public void setDebug(boolean debug) {
+        this.debug = debug;
     }
 }

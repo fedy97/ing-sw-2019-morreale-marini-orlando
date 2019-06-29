@@ -27,9 +27,15 @@ public class TestControllerChild {
     @Before
     public void initTest() throws IllegalAccessException, InvocationTargetException,NoSuchMethodException,InvalidImageException, InvalidNameException, InvalidCubeException, IOException, InvalidDeckException, InvalidCardException {
         c = Controller.getInstance();
+        c.setDebug(true);
         c.getTurnController().addUser("user1");
         c.getTurnController().addUser("user2");
         c.getTurnController().addUser("user3");
+
+        c.setSecondsLeftMap(0);
+        c.setSecondsLeftCharacter(0);
+
+        /*
         Method method = Controller.class.getDeclaredMethod("findWhichMapWon");
         method.setAccessible(true);
         int configMap = (int) method.invoke(c);
@@ -40,7 +46,7 @@ public class TestControllerChild {
         method3.setAccessible(true);
         method3.invoke(c);
         c.startGame();
-        c.getTurnController().start();
+        c.getTurnController().start();*/
 
     }
 
