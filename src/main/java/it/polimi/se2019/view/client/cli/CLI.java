@@ -378,16 +378,19 @@ public class CLI extends RemoteView {
                 if (choosenPowerUp < cards.size() && choosenPowerUp >= 0) {
                     arrayList.add(cards.get(choosenPowerUp).getId());
                     arrayList.add(cards.get(choosenPowerUp).getId());
+                    SendInitPowerUpMessage message = new SendInitPowerUpMessage(arrayList);
+                    message.setSender(userName);
+                    viewSetChanged();
+                    notifyObservers(message);
+                    CliSetUp.restorePosition();
+                    powerUpChosen = true;
+                    begin = 0;
+                    currState = 0;
+                    currentState = CliState.ACTIONSELECTION;
                 }
-                SendInitPowerUpMessage message = new SendInitPowerUpMessage(arrayList);
-                message.setSender(userName);
-                viewSetChanged();
-                notifyObservers(message);
-                CliSetUp.restorePosition();
-                powerUpChosen = true;
-                begin = 0;
-                currState = 0;
-                currentState = CliState.ACTIONSELECTION;
+                else {
+                    showChoosePowerup(cards);
+                }
             }).start();
         }
     }
