@@ -30,7 +30,8 @@ public class ActivateCardMessage extends ToServerMessage {
                 actor.processPowerUp(tagback);
             } else
                 actor.processPowerUp(powerUp);
-            actor.callView(new ShowActionMenuMessage(null), sender);
+            if (powerUp.getName().equals("raggio cinetico") || powerUp.getName().equals("teletrasporto"))
+                actor.callView(new ShowActionMenuMessage(null), sender);
         }
 
         if (Deserializer.getWeapon(id) != null) {
