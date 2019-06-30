@@ -281,7 +281,7 @@ public class CLI extends RemoteView {
     }
 
     public void iWantToReload() {
-        actionState = 0;
+        actionState = 1;
         isAsking = true;
         isReloadedWeapons = true;
         PerformActionMessage message = new PerformActionMessage("action4");
@@ -806,7 +806,7 @@ public class CLI extends RemoteView {
             CliSetUp.restorePosition();
             updateAll(lightGameVersion);
             //CliPrinter.stamp("\n");
-            currState = 1;
+            currState = 0;
             actionState = 0;
             //CliSetUp.cursorUp(5);
         }).start();
@@ -863,7 +863,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void updateTimerTurn(int seconds, String curr) {
-        /*
+
         CliSetUp.savePosition();
         if (currState == 0)
             CliSetUp.cursorUp(5);
@@ -871,16 +871,21 @@ public class CLI extends RemoteView {
             CliSetUp.cursorUp(1);
         else if (currState == 3)
             CliSetUp.cursorDown(1);
+        if (currentState == CliState.EFFECTSSHOWING)
+            CliSetUp.cursorUp(5);
+        if (currentState == CliState.OPTIONSHOWING)
+            CliSetUp.cursorUp(5);
         HandyFunctions.printConsole("\rTimer: " + seconds);
         CliSetUp.restorePosition();
 
-         */
+
     }
 
     @Override
     public void showReloadableWeapons(List<String> weapons) {
         currentState = CliState.WEAPONSRELOADING;
-        CliPrinter.stamp("\n");
+        if(actionState == 0)
+            CliPrinter.stamp("\n");
         CliSetUp.savePosition();
         if(weapons.size() == 0)
             return;
@@ -893,6 +898,7 @@ public class CLI extends RemoteView {
             isAsking = false;
             isReloadedWeapons = false;
             CliSetUp.restorePosition();
+            actionState = 0;
             updateAll(lightGameVersion);
             //CliPrinter.stamp("\n");
         }).start();
