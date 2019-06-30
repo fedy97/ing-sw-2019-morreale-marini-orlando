@@ -435,6 +435,7 @@ public class CLI extends RemoteView {
     @Override
     public void updateTimerCharacter(int count) {
         timeLeftForChar = count;
+        inputSeconds = count;
         showChooseCharacter(chosenBoard);
     }
 
@@ -472,6 +473,7 @@ public class CLI extends RemoteView {
                         notifyObservers(message);
                     }
                     else {
+                        firstTime = false;
                         showChooseCharacter(config);
                     }
                 } catch (NoInputException | IOException e) {
@@ -698,7 +700,6 @@ public class CLI extends RemoteView {
 
     @Override
     public void setValidActions(boolean[] actives) {
-        System.out.print("CHIAMATO");
         this.actives = actives;
         isAsking = false;
         begin = 0;
