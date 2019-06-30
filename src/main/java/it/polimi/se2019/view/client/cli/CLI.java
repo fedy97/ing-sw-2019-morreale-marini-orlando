@@ -92,15 +92,9 @@ public class CLI extends RemoteView {
 
     @Override
     public void updateAll(LightGameVersion lightGameVersion) {
-        /*
-        if (powerUpChosen)
-            currentState = CliState.ACTIONSELECTION;
-        else
-            currentState = CliState.POWERUPCHOOSING;
-            */
-
         this.lightGameVersion = lightGameVersion;
         actionType = lightGameVersion.getPlayerBoardRep().get(myCharEnumString).getActionType();
+        currentState = CliState.ACTIONSELECTION;
 
         CliSetUp.clear();
         CliSetUp.cursorToHome();
@@ -152,14 +146,14 @@ public class CLI extends RemoteView {
         CliSetUp.cursorUp(11);
         CliSetUp.cursorRight(10);
         currState = 2;
-        getActionInput();
     }
 
     private void getActionInput() {
         if(actionType == 0 || actionType == 1 || actionType == 2) {
-            if (!isAsking && isMyTurn() /*&& powerUpChosen && !isChoosingPowerUp && !isReloadedWeapons*/ && currentState == CliState.ACTIONSELECTION) {
+            if (!isAsking && isMyTurn() && currentState == CliState.ACTIONSELECTION) {
                 new Thread(() -> {
                     isAsking = true;
+                    Scanner flush = new Scanner(System.in);
                     Console c = System.console();
                     int choise;
                     choise = Character.getNumericValue((c.readPassword())[0]);
@@ -322,10 +316,9 @@ public class CLI extends RemoteView {
                 BuyWithPowerupsMessage message = new BuyWithPowerupsMessage(Integer.toString(hash));
                 notifyController(message);
                 isAsking = false;
-                //getActionInput(); OOOOOOOOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKK
                 CliSetUp.restorePosition();
-                updateAll(lightGameVersion);
-                CliPrinter.stamp("\n");
+                //updateAll(lightGameVersion);
+                //CliPrinter.stamp("\n");
             }
             else {
                 iWantToConvertPowerUp();
@@ -370,7 +363,7 @@ public class CLI extends RemoteView {
                 begin = 0;
                 currState = 0;
                 currentState = CliState.ACTIONSELECTION;
-                //getActionInput(); OOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKKKk
+                getActionInput();
             }).start();
         }
     }
@@ -378,6 +371,7 @@ public class CLI extends RemoteView {
     //TODO show the right player board given the arrChars, an arraylist of objects like "SPROG"
     @Override
     public void showGameBoard(List<AmmoRep> ammoReps, Map<String, List<CardRep>> posWeapons, List<String> arrChars) {
+        currentState = CliState.ACTIONSELECTION;
         currState = 3;
         CliPrinter.reset();
         CliSetUp.clear();
@@ -614,8 +608,8 @@ public class CLI extends RemoteView {
                 isAsking = false;
                 currState = 1;
                 CliSetUp.restorePosition();
-                updateAll(lightGameVersion);
-                CliPrinter.stamp("\n");
+                //updateAll(lightGameVersion);
+                //CliPrinter.stamp("\n");
             }
             else {
                 updateAll(lightGameVersion);
@@ -641,12 +635,12 @@ public class CLI extends RemoteView {
                 MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(platform);
                 notifyController(message);
                 CliSetUp.restorePosition();
-                updateAll(lightGameVersion);
-                CliPrinter.stamp("\n");
+                //updateAll(lightGameVersion);
+                //CliPrinter.stamp("\n");
                 if (!platform.equals("0,2") && !platform.equals("1,0") && !platform.equals("2,3")) {
                     isAsking = false;
-                    updateAll(lightGameVersion);
-                    CliPrinter.stamp("\n");
+                    //updateAll(lightGameVersion);
+                    //CliPrinter.stamp("\n");
                 }
             } else {
                 updateAll(lightGameVersion);
@@ -664,32 +658,17 @@ public class CLI extends RemoteView {
 
     @Override
     public void setValidActions(boolean[] actives) {
+        System.out.print("CHIAMATO");
         this.actives = actives;
         isAsking = false;
         begin = 0;
-        if (isMyTurn() && begin == 0) {
-            //getActionInput();
-            if (powerUpChosen) {
-                currentState = CliState.ACTIONSELECTION;
-                updateAll(lightGameVersion);
-                CliPrinter.stamp("CHIAMATOOOOOOOOOOOOo");
-            }
-            else
-                currentState = CliState.POWERUPCHOOSING;
+        if (isMyTurn() && begin == 0 && currentState == CliState.ACTIONSELECTION) {
+            getActionInput();
         }
     }
 
     @Override
     public void showMessage(String msg) {
-        /*
-        if(!(msg.equals(lastMsg) && msg.equals("You've finished your basic action! Now you can use your powerup, reload or pass the turn"))) {
-            CliSetUp.savePosition();
-            CliSetUp.cursorDown(15);
-            CliSetUp.cursorRight(5);
-            HandyFunctions.printConsole(msg);
-            CliSetUp.restorePosition();
-            lastMsg = msg;
-        }*/
         lastMsg = msg;
     }
 
@@ -718,8 +697,8 @@ public class CLI extends RemoteView {
             notifyController(message);
             CliSetUp.restorePosition();
             currState = 1;
-            updateAll(lightGameVersion);
-            CliPrinter.stamp("\n");
+            //updateAll(lightGameVersion);
+            //CliPrinter.stamp("\n");
         }).start();
     }
 
@@ -757,8 +736,8 @@ public class CLI extends RemoteView {
                 currState = 1;
                 isAsking = false;
                 CliSetUp.restorePosition();
-                updateAll(lightGameVersion);
-                CliPrinter.stamp("\n");
+                //updateAll(lightGameVersion);
+                //CliPrinter.stamp("\n");
             } else {
                 showTargets(targets);
             }
@@ -783,8 +762,8 @@ public class CLI extends RemoteView {
             ChosenEffectMessage message = new ChosenEffectMessage(choise);
             notifyController(message);
             CliSetUp.restorePosition();
-            updateAll(lightGameVersion);
-            CliPrinter.stamp("\n");
+            //updateAll(lightGameVersion);
+            //CliPrinter.stamp("\n");
             currState = 1;
             //CliSetUp.cursorUp(5);
         }).start();
@@ -812,8 +791,8 @@ public class CLI extends RemoteView {
             }
             currState = 1;
             CliSetUp.restorePosition();
-            updateAll(lightGameVersion);
-            CliPrinter.stamp("\n");
+            //updateAll(lightGameVersion);
+            //CliPrinter.stamp("\n");
         }).start();
     }
 
@@ -868,9 +847,8 @@ public class CLI extends RemoteView {
             isAsking = false;
             isReloadedWeapons = false;
             CliSetUp.restorePosition();
-            updateAll(lightGameVersion);
-            CliPrinter.stamp("\n");
-            //getActionInput(); OOOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKKk
+            //updateAll(lightGameVersion);
+            //CliPrinter.stamp("\n");
         }).start();
     }
 
@@ -888,8 +866,8 @@ public class CLI extends RemoteView {
             notifyController(message);
             currState = 1;
             CliSetUp.restorePosition();
-            updateAll(lightGameVersion);
-            CliPrinter.stamp("\n");
+            //updateAll(lightGameVersion);
+            //CliPrinter.stamp("\n");
         }).start();
     }
 
@@ -922,8 +900,8 @@ public class CLI extends RemoteView {
             isAsking = false;
             isChoosingPowerUp = false;
             CliSetUp.restorePosition();
-            updateAll(lightGameVersion);
-            CliPrinter.stamp("\n");
+            //updateAll(lightGameVersion);
+            //CliPrinter.stamp("\n");
         }).start();
     }
 
@@ -972,8 +950,8 @@ public class CLI extends RemoteView {
             isAsking = false;
             isChoosingPowerUp = false;
             CliSetUp.restorePosition();
-            updateAll(lightGameVersion);
-            CliPrinter.stamp("\n");
+            //updateAll(lightGameVersion);
+            //CliPrinter.stamp("\n");
         }).start();
     }
 
