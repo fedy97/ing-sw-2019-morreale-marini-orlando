@@ -219,6 +219,7 @@ public class Controller implements Observer, Serializable {
         }
 
         callView(new EnablePlayerActionsMessage(validActions), playerManager.getCurrentPlayer().getName());
+        callView(new ShowActionMenuMessage(null), playerManager.getCurrentPlayer().getName());
         setState(ControllerState.IDLE);
     }
 

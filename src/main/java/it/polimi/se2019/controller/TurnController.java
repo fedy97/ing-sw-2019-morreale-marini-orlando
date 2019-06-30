@@ -7,10 +7,7 @@ import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.rep.CardRep;
-import it.polimi.se2019.network.message.to_client.EnablePlayerActionsMessage;
-import it.polimi.se2019.network.message.to_client.ShowChoosePowerUpMessage;
-import it.polimi.se2019.network.message.to_client.ShowMessage;
-import it.polimi.se2019.network.message.to_client.StartTimerTurnMessage;
+import it.polimi.se2019.network.message.to_client.*;
 import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 
@@ -49,6 +46,7 @@ public class TurnController implements Serializable {
 
     public void notifyFirst() {
         c.callView(new EnablePlayerActionsMessage(UserValidActions.NO_SHOOT.getActions()), c.getPlayerManager().getCurrentPlayer().getName());
+        c.callView(new ShowActionMenuMessage(null), c.getPlayerManager().getCurrentPlayer().getName());
         c.callView(new ShowMessage("It's your turn!"), c.getPlayerManager().getCurrentPlayer().getName());
     }
 
@@ -146,7 +144,7 @@ public class TurnController implements Serializable {
                     c.callView(new EnablePlayerActionsMessage(UserValidActions.NO_SHOOT.getActions()), player.getName());
                 else
                     c.callView(new EnablePlayerActionsMessage(UserValidActions.ALL.getActions()), player.getName());
-
+                c.callView(new ShowActionMenuMessage(null), currPlayer.getName());
                 c.sendMessage("It's your turn!", player.getName());
 
                 if (currPlayer.getCurrentPlatform() == null) {
