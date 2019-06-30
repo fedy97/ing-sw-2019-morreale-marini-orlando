@@ -87,7 +87,7 @@ public class CLI extends RemoteView {
         actionType = 0;
         chosingmap = 0;
         currentState = CliState.POWERUPCHOOSING;
-        inputSeconds = 1;
+        inputSeconds = 10;
     }
 
     @Override
@@ -466,11 +466,14 @@ public class CLI extends RemoteView {
                     if (!charChosen.contains(myCharEnumString)) {
                         okChar = true;
                         myChar = temp;
+                        SendCharacterChosenMessage message = new SendCharacterChosenMessage(myCharEnumString);
+                        message.setSender(userName);
+                        viewSetChanged();
+                        notifyObservers(message);
                     }
-                    SendCharacterChosenMessage message = new SendCharacterChosenMessage(myCharEnumString);
-                    message.setSender(userName);
-                    viewSetChanged();
-                    notifyObservers(message);
+                    else {
+                        showChooseCharacter(config);
+                    }
                 } catch (NoInputException | IOException e) {
 
                 }
@@ -1015,5 +1018,10 @@ public class CLI extends RemoteView {
         for (String s: scoreboard.keySet()) {
             CliPrinter.stamp(s + ": " + scoreboard.get(s) + "\n");
         }
+    }
+
+    @Override
+    public void showActionMenu() {
+        // FOR CLI.
     }
 }

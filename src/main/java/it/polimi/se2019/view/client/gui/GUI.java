@@ -835,5 +835,10 @@ public class GUI extends RemoteView {
     public Font getGrande() {
         return grande;
     }
+
+    @Override
+    public void showActionMenu() {
+        // FOR CLI.
+    }
 }
 

@@ -201,4 +201,6 @@ public abstract class RemoteView extends View {
         viewSetChanged();
         notifyObservers(message);
     }
+
+    public abstract void showActionMenu();
 }
