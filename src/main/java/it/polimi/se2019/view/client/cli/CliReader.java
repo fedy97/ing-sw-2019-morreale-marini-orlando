@@ -51,7 +51,7 @@ public class CliReader {
         }
         else {
             stopReader();
-            System.out.print("ESCO");
+            //System.out.print("ESCO");
 
             throw new NoInputException("Time out for input!");
         }

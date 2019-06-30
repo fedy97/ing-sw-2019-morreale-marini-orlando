@@ -707,16 +707,11 @@ public final class CliPrinter {
     }
 
     public static void usePowerUpMessage(LightGameVersion lightGameVersion, String myChar, List<String> powerUps) {
-        CliSetUp.savePosition();
-        CliSetUp.cursorUp(1);
-        CliSetUp.cursorRight(9);
+
         Map<String, List<CardRep>> playerPowerUps = lightGameVersion.getPlayerPowerups();
         List<CardRep> myPowerUps = playerPowerUps.get(myChar);
 
-        CliSetUp.cursorLeft(7);
-        CliSetUp.cursorDown(1);
-        CliSetUp.cursorDown(2);
-        CliSetUp.cursorLeft(18);
+        CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
@@ -764,14 +759,11 @@ public final class CliPrinter {
     }
 
     public static void convertPowerUpMessage(LightGameVersion lightGameVersion, String myChar) {
-        CliSetUp.savePosition();
-        CliSetUp.cursorUp(1);
-        CliSetUp.cursorRight(9);
+
         Map<String, List<CardRep>> playerPowerUps = lightGameVersion.getPlayerPowerups();
         List<CardRep> myPowerUps = playerPowerUps.get(myChar);
 
-        CliSetUp.cursorLeft(7);
-        CliSetUp.cursorDown(1);
+        CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
@@ -1462,9 +1454,7 @@ public final class CliPrinter {
     public static List<String> discartAmmoMessage(LightGameVersion lightGameVersion, String myChar) {
         BoardRep mine = lightGameVersion.getPlayerBoardRep().get(myChar);
         List<String> ammoList = new ArrayList<>();
-        CliSetUp.cursorLeft(7);
-        CliSetUp.cursorDown(1);
-        CliSetUp.cursorLeft(10);
+        CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
@@ -1520,9 +1510,7 @@ public final class CliPrinter {
         Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
         List<CardRep> myWeapons = playerWeapons.get(myChar);
 
-        CliSetUp.cursorLeft(7);
-        CliSetUp.cursorDown(1);
-        CliSetUp.cursorLeft(10);
+        CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
@@ -1571,10 +1559,7 @@ public final class CliPrinter {
         CliSetUp.savePosition();
         Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
         List<CardRep> myWeapons = playerWeapons.get(myChar);
-        CliSetUp.cursorRight(9);
-        CliSetUp.cursorUp(1);
-        CliSetUp.cursorLeft(7);
-        CliSetUp.cursorDown(1);
+        CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
@@ -1622,14 +1607,10 @@ public final class CliPrinter {
     }
 
     public static void chooseWeaponMessage(LightGameVersion lightGameVersion, String myChar, List<String> weapons) {
-        CliSetUp.savePosition();
+
         Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
         List<CardRep> myWeapons = playerWeapons.get(myChar);
-        CliSetUp.savePosition();
-        CliSetUp.cursorUp(1);
-        CliSetUp.cursorRight(9);
-        CliSetUp.cursorLeft(7);
-        CliSetUp.cursorDown(1);
+        CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
@@ -1678,14 +1659,7 @@ public final class CliPrinter {
     }
 
     public static void showTargetMessage(LightGameVersion lightGameVersion, List<String> targets) {
-        CliSetUp.cursorUp(6);
-        CliSetUp.cursorRight(9);
-        CliSetUp.cursorLeft(7);
-        CliSetUp.cursorDown(1);
-        CliSetUp.cursorDown(5);
-        CliSetUp.cursorDown(5);
-        CliSetUp.cursorDown(1);
-        CliSetUp.cursorLeft(19);
+        CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
@@ -1731,12 +1705,7 @@ public final class CliPrinter {
     }
 
     public static void enlightenEffectsMessage(List<Integer> effects) {
-        CliSetUp.cursorUp(1);
-        CliSetUp.cursorRight(9);
-        CliSetUp.cursorLeft(7);
-        CliSetUp.cursorDown(1);
-        CliSetUp.cursorDown(1);
-        CliSetUp.cursorLeft(19);
+        CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
@@ -1913,8 +1882,7 @@ public final class CliPrinter {
     }
 
     public static void binaryOptionMessage(String msg) {
-        CliSetUp.cursorDown(1);
-        CliSetUp.cursorLeft(17);
+        CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
         CliSetUp.cursorDown(1);
