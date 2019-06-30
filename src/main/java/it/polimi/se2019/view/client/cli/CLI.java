@@ -376,21 +376,8 @@ public class CLI extends RemoteView {
                 choosenPowerUp = s.nextInt();
                 ArrayList<Integer> arrayList = new ArrayList<>();
                 if (choosenPowerUp < cards.size() && choosenPowerUp >= 0) {
-                    if (choosenPowerUp == 0) {
-                        arrayList.add(cards.get(0).getId());
-                        arrayList.add(cards.get(1).getId());
-                        arrayList.add(cards.get(2).getId());
-                    }
-                    else if(choosenPowerUp == 1) {
-                        arrayList.add(cards.get(1).getId());
-                        arrayList.add(cards.get(0).getId());
-                        arrayList.add(cards.get(2).getId());
-                    }
-                    else {
-                        arrayList.add(cards.get(2).getId());
-                        arrayList.add(cards.get(0).getId());
-                        arrayList.add(cards.get(1).getId());
-                    }
+                    arrayList.add(cards.get(choosenPowerUp).getId());
+                    arrayList.add(cards.get(choosenPowerUp).getId());
                 }
                 SendInitPowerUpMessage message = new SendInitPowerUpMessage(arrayList);
                 message.setSender(userName);
