@@ -197,6 +197,7 @@ public class Controller implements Observer, Serializable {
             else
                 processNormalAction(action);
             playerManager.useAction();
+            callView(new ShowActionMenuMessage(null), playerManager.getCurrentPlayer().getName());
         }
 
         if (action.equals("action4")) {
@@ -219,7 +220,6 @@ public class Controller implements Observer, Serializable {
         }
 
         callView(new EnablePlayerActionsMessage(validActions), playerManager.getCurrentPlayer().getName());
-        callView(new ShowActionMenuMessage(null), playerManager.getCurrentPlayer().getName());
         setState(ControllerState.IDLE);
     }
 

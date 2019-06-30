@@ -144,7 +144,6 @@ public class TurnController implements Serializable {
                     c.callView(new EnablePlayerActionsMessage(UserValidActions.NO_SHOOT.getActions()), player.getName());
                 else
                     c.callView(new EnablePlayerActionsMessage(UserValidActions.ALL.getActions()), player.getName());
-                c.callView(new ShowActionMenuMessage(null), currPlayer.getName());
                 c.sendMessage("It's your turn!", player.getName());
 
                 if (currPlayer.getCurrentPlatform() == null) {

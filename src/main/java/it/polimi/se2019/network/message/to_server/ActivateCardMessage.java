@@ -4,6 +4,7 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.powerups.TagbackGrenade;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
+import it.polimi.se2019.network.message.to_client.ShowActionMenuMessage;
 import it.polimi.se2019.utils.Deserializer;
 
 
@@ -29,6 +30,7 @@ public class ActivateCardMessage extends ToServerMessage {
                 actor.processPowerUp(tagback);
             } else
                 actor.processPowerUp(powerUp);
+            actor.callView(new ShowActionMenuMessage(null), sender);
         }
 
         if (Deserializer.getWeapon(id) != null) {

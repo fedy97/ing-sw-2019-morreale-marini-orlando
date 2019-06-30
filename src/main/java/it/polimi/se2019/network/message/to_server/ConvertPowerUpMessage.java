@@ -2,6 +2,7 @@ package it.polimi.se2019.network.message.to_server;
 
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
+import it.polimi.se2019.network.message.to_client.ShowActionMenuMessage;
 import it.polimi.se2019.utils.Deserializer;
 import it.polimi.se2019.utils.HandyFunctions;
 
@@ -21,5 +22,6 @@ public class ConvertPowerUpMessage extends ToServerMessage {
         } catch (Exception e) {
             HandyFunctions.LOGGER.log(Level.WARNING, e.getMessage());
         }
+        Controller.getInstance().callView(new ShowActionMenuMessage(null), sender);
     }
 }

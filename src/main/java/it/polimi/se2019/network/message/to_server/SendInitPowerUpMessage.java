@@ -6,6 +6,7 @@ import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.board.Room;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.message.to_client.ShowActionMenuMessage;
 import it.polimi.se2019.utils.Deserializer;
 import it.polimi.se2019.utils.HandyFunctions;
 
@@ -35,6 +36,7 @@ public class SendInitPowerUpMessage extends ToServerMessage {
                 if (r.hasGenerationSpot() && r.getGenSpot().getPlatformColor().equals(powerupColor))
                     curr.setCurrentPlatform(r.getGenSpot());
             }
+            c.callView(new ShowActionMenuMessage(null), sender);
             Game.getInstance().notifyChanges();
             //now the current player has to choose an action
         } catch (Exception e) {
