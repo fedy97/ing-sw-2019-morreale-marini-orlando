@@ -26,6 +26,7 @@ import java.util.logging.Level;
 public class CLI extends RemoteView {
 
     //private Timer timerTurn;
+    public static int ixx = 0;
     private CliState currentState;
     public static int counter;
     private CliReader reader;
@@ -150,7 +151,7 @@ public class CLI extends RemoteView {
 
     private void getActionInput() {
         if(actionType == 0 || actionType == 1 || actionType == 2) {
-            if (!isAsking && isMyTurn() && currentState == CliState.ACTIONSELECTION) {
+            if (!isAsking /*&& isMyTurn() && currentState == CliState.ACTIONSELECTION*/) {
                 new Thread(() -> {
                     isAsking = true;
                     Scanner flush = new Scanner(System.in);
@@ -182,7 +183,7 @@ public class CLI extends RemoteView {
         }
         else {
             if (actionType == 3) {
-                if (!isAsking && isMyTurn() && powerUpChosen && !isChoosingPowerUp && !isReloadedWeapons && currentState == CliState.ACTIONSELECTION) {
+                if (!isAsking /*&& isMyTurn() && powerUpChosen && !isChoosingPowerUp && !isReloadedWeapons && currentState == CliState.ACTIONSELECTION*/) {
                     new Thread(() -> {
                         isAsking = true;
                         Console c = System.console();
@@ -212,7 +213,7 @@ public class CLI extends RemoteView {
                 }
             }
             else {
-                if (!isAsking && isMyTurn() && powerUpChosen && !isChoosingPowerUp && !isReloadedWeapons && currentState == CliState.ACTIONSELECTION) {
+                if (!isAsking /*&& isMyTurn() && powerUpChosen && !isChoosingPowerUp && !isReloadedWeapons && currentState == CliState.ACTIONSELECTION*/) {
                     new Thread(() -> {
                         isAsking = true;
                         Console c = System.console();
@@ -364,7 +365,6 @@ public class CLI extends RemoteView {
                     begin = 0;
                     currState = 0;
                     currentState = CliState.ACTIONSELECTION;
-                    getActionInput();
                 }).start();
             }
         }
@@ -693,9 +693,6 @@ public class CLI extends RemoteView {
         this.actives = actives;
         isAsking = false;
         begin = 0;
-        if (isMyTurn() && begin == 0 && currentState == CliState.ACTIONSELECTION) {
-            getActionInput();
-        }
     }
 
     @Override
@@ -1013,6 +1010,10 @@ public class CLI extends RemoteView {
 
     @Override
     public void showActionMenu() {
-        // FOR CLI.
+
+        if (powerUpChosen) {
+            getActionInput();
+            System.out.print("ATTIVATO");
+        }
     }
 }

@@ -157,6 +157,9 @@ public class TurnController implements Serializable {
                     ShowChoosePowerUpMessage message = new ShowChoosePowerUpMessage(cardReps);
                     c.callView(message, currPlayer.getName());
                 }
+                else {
+                    c.callView(new ShowActionMenuMessage(null), currPlayer.getName());
+                }
 
             } else if (player.isConnected()) {
                 c.callView(new EnablePlayerActionsMessage(UserValidActions.NONE.getActions()), player.getName());
