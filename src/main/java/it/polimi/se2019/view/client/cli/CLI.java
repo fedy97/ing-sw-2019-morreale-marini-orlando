@@ -331,28 +331,66 @@ public class CLI extends RemoteView {
         currentState = CliState.POWERUPCHOOSING;
         CliSetUp.savePosition();
         powerUps = cards;
-        this.p1 = cards.get(0);
-        this.p2 = cards.get(1);
-        currState = 1;
-        CliPrinter.stamp("\n");
-        CliPrinter.choosePowerUpMessage(p1, p2);
-        CliSetUp.cursorRight(9);
-        CliPrinter.boxMessage(null);
-        CliSetUp.cursorUp(10);
-        CliSetUp.cursorLeft(10);
-        if (firstCallChoosePU) {
-            firstCallChoosePU = false;
+        if (cards.size() == 2) {
+            this.p1 = cards.get(0);
+            this.p2 = cards.get(1);
+            currState = 1;
+            CliPrinter.stamp("\n");
+            CliPrinter.choosePowerUpMessage(p1, p2);
+            CliSetUp.cursorRight(9);
+            CliPrinter.boxMessage(null);
+            CliSetUp.cursorUp(10);
+            CliSetUp.cursorLeft(10);
+            if (firstCallChoosePU) {
+                firstCallChoosePU = false;
+                new Thread(() -> {
+                    int choosenPowerUp;
+                    Console c = System.console();
+                    choosenPowerUp = Character.getNumericValue((c.readPassword())[0]);
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    if (choosenPowerUp == 1) {
+                        arrayList.add(p1.getId());
+                        arrayList.add(p2.getId());
+                    } else {
+                        arrayList.add(p2.getId());
+                        arrayList.add(p1.getId());
+                    }
+                    SendInitPowerUpMessage message = new SendInitPowerUpMessage(arrayList);
+                    message.setSender(userName);
+                    viewSetChanged();
+                    notifyObservers(message);
+                    CliSetUp.restorePosition();
+                    powerUpChosen = true;
+                    begin = 0;
+                    currState = 0;
+                    currentState = CliState.ACTIONSELECTION;
+                    getActionInput();
+                }).start();
+            }
+        }
+        else {
+            CliPrinter.choosePowerUpMessage2(cards);
             new Thread(() -> {
                 int choosenPowerUp;
-                Console c = System.console();
-                choosenPowerUp = Character.getNumericValue((c.readPassword())[0]);
+                Scanner s = new Scanner(System.in);
+                choosenPowerUp = s.nextInt();
                 ArrayList<Integer> arrayList = new ArrayList<>();
-                if (choosenPowerUp == 1) {
-                    arrayList.add(p1.getId());
-                    arrayList.add(p2.getId());
-                } else {
-                    arrayList.add(p2.getId());
-                    arrayList.add(p1.getId());
+                if (choosenPowerUp < cards.size() && choosenPowerUp >= 0) {
+                    if (choosenPowerUp == 0) {
+                        arrayList.add(cards.get(0).getId());
+                        arrayList.add(cards.get(1).getId());
+                        arrayList.add(cards.get(2).getId());
+                    }
+                    else if(choosenPowerUp == 1) {
+                        arrayList.add(cards.get(1).getId());
+                        arrayList.add(cards.get(0).getId());
+                        arrayList.add(cards.get(2).getId());
+                    }
+                    else {
+                        arrayList.add(cards.get(2).getId());
+                        arrayList.add(cards.get(0).getId());
+                        arrayList.add(cards.get(1).getId());
+                    }
                 }
                 SendInitPowerUpMessage message = new SendInitPowerUpMessage(arrayList);
                 message.setSender(userName);
@@ -363,7 +401,6 @@ public class CLI extends RemoteView {
                 begin = 0;
                 currState = 0;
                 currentState = CliState.ACTIONSELECTION;
-                getActionInput();
             }).start();
         }
     }
