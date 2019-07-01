@@ -2,6 +2,7 @@ package it.polimi.se2019.network.message.to_server;
 
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.Game;
+import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.to_client.ShowReconnectedGameBoard;
 
 
@@ -20,7 +21,11 @@ public class ReconnectedClientMessage extends ToServerMessage {
         actor.getGame().getPlayer(user).setConnected(true);
         actor.getPingsList().add(mychar);
         actor.getAlreadyNotified().remove(mychar);
-        if (actor.getPingsList().size() == 2) {
+        int n = 0;
+        for (Player p : actor.getGame().getPlayers()) {
+            if (p.isConnected()) n++;
+        }
+        if (n == 2) {
             actor.getTurnController().enablePlayers(Game.getInstance().getPlayer(actor.getTurnController().getTurnUser()));
         }
 
