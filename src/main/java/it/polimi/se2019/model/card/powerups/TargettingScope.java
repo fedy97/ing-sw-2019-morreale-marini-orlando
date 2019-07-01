@@ -7,7 +7,7 @@ import it.polimi.se2019.exceptions.InvalidNameException;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.network.message.to_client.ShowAmmoMessage;
+import it.polimi.se2019.network.message.toclient.ShowAmmoMessage;
 import it.polimi.se2019.utils.CustomLogger;
 
 import java.util.List;

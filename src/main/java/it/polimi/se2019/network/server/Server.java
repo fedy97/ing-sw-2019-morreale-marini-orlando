@@ -1,7 +1,7 @@
 package it.polimi.se2019.network.server;
 
-import it.polimi.se2019.network.message.to_client.ToClientMessage;
-import it.polimi.se2019.network.message.to_server.ToServerMessage;
+import it.polimi.se2019.network.message.toclient.ToClientMessage;
+import it.polimi.se2019.network.message.toserver.ToServerMessage;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

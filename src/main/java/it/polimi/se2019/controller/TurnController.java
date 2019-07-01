@@ -7,7 +7,7 @@ import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.rep.CardRep;
-import it.polimi.se2019.network.message.to_client.*;
+import it.polimi.se2019.network.message.toclient.*;
 import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 

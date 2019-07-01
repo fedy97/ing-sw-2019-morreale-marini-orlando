@@ -3,15 +3,13 @@ package it.polimi.se2019.view.client;
 import it.polimi.se2019.model.rep.AmmoRep;
 import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.model.rep.LightGameVersion;
-import it.polimi.se2019.network.message.to_server.ResponseToPingMessage;
-import it.polimi.se2019.network.message.to_server.ResponseToWaitingPingMessage;
-import it.polimi.se2019.network.message.to_server.ToServerMessage;
+import it.polimi.se2019.network.message.toserver.ResponseToPingMessage;
+import it.polimi.se2019.network.message.toserver.ResponseToWaitingPingMessage;
+import it.polimi.se2019.network.message.toserver.ToServerMessage;
 import it.polimi.se2019.view.View;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.LinkedBlockingDeque;
 
 public abstract class RemoteView extends View {
 
