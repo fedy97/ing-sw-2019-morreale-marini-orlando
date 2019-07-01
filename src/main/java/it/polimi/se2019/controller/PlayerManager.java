@@ -136,7 +136,7 @@ public class PlayerManager implements Serializable {
      * @param targetsMap containing the damage values for each player.
      *                   keys are the characters that have been shot
      */
-    public void addDamage(Map<Player, Integer> targetsMap) {
+    public synchronized void addDamage(Map<Player, Integer> targetsMap) {
         Iterator hmIterator = targetsMap.entrySet().iterator();
 
         if (!father.isDebug()) {
@@ -233,7 +233,7 @@ public class PlayerManager implements Serializable {
      * @throws MaxWeaponException when the player has already three weapons, he can choose to discard one
      *                            or not buying the current one
      */
-    public void buyWeapon(WeaponCard weapon) throws MaxWeaponException, InvalidGenerationSpotException {
+    public synchronized void buyWeapon(WeaponCard weapon) throws MaxWeaponException, InvalidGenerationSpotException {
         AmmoBox box = currentPlayer.getPlayerBoard().getAmmoBox();
         currentPlayer.addWeaponCard(weapon);
         currentPlayer.getCurrentPlatform().removeWeaponCard(weapon);

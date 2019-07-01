@@ -28,6 +28,5 @@ public class TestSkullsBoard {
         } catch (InvalidCharacterException | InvalidQuantityException e) {
 
         }
-
     }
 }

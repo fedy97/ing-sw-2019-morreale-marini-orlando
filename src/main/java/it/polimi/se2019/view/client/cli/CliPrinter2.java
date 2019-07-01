@@ -677,17 +677,17 @@ public final class CliPrinter2 {
         Map<String, List<CardRep>> playerWeapons;
         Map<String, BoardRep> playerBoardRep;
 
-        BoardRep bansheeRep;
-        BoardRep sprogRep;
-        BoardRep dozerRep;
-        BoardRep violetRep;
-        BoardRep distructorRep;
-
         List<String> bansheeDamages;
         List<String> bansheemarks;
         Map<String,Integer> bansheeAmmos;
         List<CardRep> bansheePowerUp;
         List<CardRep> bansheeWeapons;
+
+        BoardRep violetRep;
+        BoardRep distructorRep;
+        BoardRep bansheeRep;
+        BoardRep sprogRep;
+        BoardRep dozerRep;
 
         List<String> sprogDamages;
         List<String> sprogmarks;

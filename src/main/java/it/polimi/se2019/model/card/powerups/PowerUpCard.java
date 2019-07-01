@@ -48,11 +48,6 @@ public abstract class PowerUpCard extends Card {
     }
 
     /**
-     * Return if the player can use the power up or not
-     */
-    public abstract boolean isUsable(Player player);
-
-    /**
      * @return a collection of players that can be the target
      */
     public abstract List<Character> getPossibleTargets();

@@ -718,7 +718,7 @@ public class Controller implements Observer, Serializable {
 
                                         Color powerupColor = HandyFunctions.stringToColor(p.getAmmoCube().name());
                                         for (Room r : Game.getInstance().getGameField().getRooms()) {
-                                            if (r.hasGenerationSpot() && r.getGenSpot().getPlatformColor().equals(powerupColor))
+                                            if (r.getGenSpot().getPlatformColor().equals(powerupColor) && r.hasGenerationSpot() )
                                                 toDisconnect.setCurrentPlatform(r.getGenSpot());
                                         }
                                     }
@@ -987,7 +987,7 @@ public class Controller implements Observer, Serializable {
         return gameIsActive;
     }
 
-    boolean isDebug() {
+    public boolean isDebug() {
         return debug;
     }
 

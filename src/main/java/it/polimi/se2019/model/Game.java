@@ -165,7 +165,8 @@ public class Game extends Observable implements Serializable {
     public void notifyChanges() {
         setChanged();
         notifyObservers(getLightVersion());
-        saveServer();
+        if (!Controller.getInstance().isDebug())
+            saveServer();
     }
 
     /**

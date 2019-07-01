@@ -27,6 +27,7 @@ public class TestTurnController extends TestControllerChild {
     public void initTest() throws InvalidImageException, InvalidNameException, InvalidCubeException, IOException, InvalidDeckException, InvalidCardException {
         super.initTest();
         turnController = c.getTurnController();
+        assertTrue(turnController.isFirstTurn());
     }
 
     @Test
