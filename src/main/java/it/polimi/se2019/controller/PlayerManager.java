@@ -85,7 +85,7 @@ public class PlayerManager implements Serializable {
      */
     public void grabAmmoCard() {
         try {
-                AmmoCard ammo = currentPlayer.getCurrentPlatform().grabAmmoCard();
+            AmmoCard ammo = currentPlayer.getCurrentPlatform().grabAmmoCard();
             father.getDecksManager().addToFill(currentPlayer.getCurrentPlatform());
 
             if (ammo.hasPowerUp()) {
@@ -190,7 +190,7 @@ public class PlayerManager implements Serializable {
 
                     father.askFor(targettingScope, "powerups");
                     father.setState(ControllerState.PROCESSING_POWERUP);
-                    while (father.getState() != ControllerState.PROCESSING_ACTION_3)
+                    while (father.getState() == ControllerState.PROCESSING_POWERUP)
                         Thread.sleep(200);
                 } else
                     break;

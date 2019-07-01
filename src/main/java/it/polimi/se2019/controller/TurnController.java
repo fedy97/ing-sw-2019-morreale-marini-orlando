@@ -46,7 +46,6 @@ public class TurnController implements Serializable {
 
     public void notifyFirst() {
         c.callView(new EnablePlayerActionsMessage(UserValidActions.NO_SHOOT.getActions()), c.getPlayerManager().getCurrentPlayer().getName());
-        c.callView(new ShowActionMenuMessage(null), c.getPlayerManager().getCurrentPlayer().getName());
         c.callView(new ShowMessage("It's your turn!"), c.getPlayerManager().getCurrentPlayer().getName());
     }
 
@@ -207,8 +206,6 @@ public class TurnController implements Serializable {
         int kills = 0;
 
         for (Player player : c.getGame().getPlayers()) {
-            System.out.println(player.getName());
-            HandyFunctions.printList(player.getPlayerBoard().getDamageLine());
             if (player.isDead()) {
                 c.getGame().setScore(PointsCounter.getPoints(player));
                 player.addDeath();
