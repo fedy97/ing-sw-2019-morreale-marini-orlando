@@ -64,7 +64,7 @@ public final class TractorBeam extends WeaponAlternativeFire {
                 Player target = game.getPlayer(targets.get(0));
 
                 target.setCurrentPlatform(playerManager.getCurrentPlayer().getCurrentPlatform());
-                c.broadcastMessage(playerManager.getCurrentPlayer() + " moved " + target.getName() + " to his platform!");
+                c.broadcastMessage(playerManager.getCurrentPlayer().getName() + " moved " + target.getName() + " to his platform!");
 
                 damages.put(target, 3);
                 playerManager.addDamage(damages);
