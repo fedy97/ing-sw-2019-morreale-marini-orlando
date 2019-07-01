@@ -31,12 +31,10 @@ public class BuyWithPowerupController {
     private List<ImageView> powerupsImages;
     private LightGameVersion lightGameVersion;
     private List<Button> powerupsButtons;
-    private List<String> hashesToSend;
 
     public void initialize() {
         powerupsImages = new ArrayList<>();
         powerupsButtons = new ArrayList<>();
-        hashesToSend = new ArrayList<>();
         powerupsImages.add(powerup1image);
         powerupsImages.add(powerup2image);
         powerupsImages.add(powerup3image);
@@ -49,7 +47,7 @@ public class BuyWithPowerupController {
         this.gui = gui;
     }
 
-    protected void updateRightPowerups(LightGameVersion lightGameVersion) {
+    void updateRightPowerups(LightGameVersion lightGameVersion) {
         this.lightGameVersion = lightGameVersion;
 
         Map<String, List<CardRep>> charPowerupsReps = lightGameVersion.getPlayerPowerups();

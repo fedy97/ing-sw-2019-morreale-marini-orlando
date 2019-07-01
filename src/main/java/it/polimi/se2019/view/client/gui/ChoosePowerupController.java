@@ -66,7 +66,7 @@ public class ChoosePowerupController {
                 });
     }
 
-    protected void updateRightPowerups(List<CardRep> cards) {
+    void updateRightPowerups(List<CardRep> cards) {
         this.cardReps = cards;
         for (CardRep cardRep : cards) {
             if (cards.indexOf(cardRep) <= 2) {

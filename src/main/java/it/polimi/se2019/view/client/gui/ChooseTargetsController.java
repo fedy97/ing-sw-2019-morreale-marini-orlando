@@ -32,7 +32,7 @@ public class ChooseTargetsController {
     /**
      * here I need the reference to GUI in order to notify it for the click of a button
      *
-     * @param gui
+     * @param gui of the user
      */
     protected void passGUI(GUI gui) {
         this.gui = gui;
@@ -52,7 +52,7 @@ public class ChooseTargetsController {
     protected void enlightenRightTargets(List<String> targetsToEnlighten) {
         for (String target : targetsToEnlighten)
             HandyFunctions.enlightenToggleButton(buttons.get(target));
-        for (Map.Entry<String,ToggleButton> entry : buttons.entrySet()) {
+        for (Map.Entry<String, ToggleButton> entry : buttons.entrySet()) {
             if (!targetsToEnlighten.contains(entry.getKey()))
                 HandyFunctions.darkenToggleButton(entry.getValue());
             targets.remove(entry.getKey());
@@ -120,7 +120,7 @@ public class ChooseTargetsController {
     }
 
     private void checkFire() {
-        if (targets.size() > 0)
+        if (!targets.isEmpty())
             HandyFunctions.enlightenButton(firebutton);
         else
             HandyFunctions.darkenButton(firebutton);

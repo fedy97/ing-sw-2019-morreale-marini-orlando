@@ -7,9 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ChooseAmmosController {
     @FXML
     Button bluebutton;
@@ -30,7 +27,7 @@ public class ChooseAmmosController {
         this.gui = gui;
     }
 
-    protected void updateRightAmmos(LightGameVersion lightGameVersion){
+    void updateRightAmmos(LightGameVersion lightGameVersion) {
         BoardRep mine = lightGameVersion.getPlayerBoardRep().get(gui.getCharInString());
         if (mine.getColorQtyAmmos().get("BLUE") > 0) {
             HandyFunctions.enlightenButton(bluebutton);
@@ -46,13 +43,16 @@ public class ChooseAmmosController {
         }
 
     }
-    public void blueclick(){
+
+    public void blueclick() {
         gui.sendAmmo("BLUE");
     }
-    public void redclick(){
+
+    public void redclick() {
         gui.sendAmmo("RED");
     }
-    public void yellowclick(){
+
+    public void yellowclick() {
         gui.sendAmmo("YELLOW");
     }
 

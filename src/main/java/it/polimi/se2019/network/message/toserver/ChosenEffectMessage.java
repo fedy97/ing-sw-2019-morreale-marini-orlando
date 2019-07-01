@@ -11,6 +11,5 @@ public class ChosenEffectMessage extends ToServerMessage {
     @Override
     public void performAction() {
         Controller.getInstance().getChosenEffect().add((Integer) payload);
-        System.out.println("effetto scelto " + payload);
     }
 }

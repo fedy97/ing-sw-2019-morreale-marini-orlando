@@ -1,6 +1,7 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.exceptions.*;
+import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +27,7 @@ public class TestControllerChild {
         try {
             c.setCharacterChosen("user1", "DISTRUCTOR");
         } catch (InvalidCharacterException ex) {
+            CustomLogger.logException(this.getClass().getName(),ex);
         }
 
 
