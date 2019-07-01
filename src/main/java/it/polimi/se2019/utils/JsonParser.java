@@ -1,5 +1,6 @@
 package it.polimi.se2019.utils;
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.AmmoCard;
@@ -12,7 +13,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.awt.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -191,7 +195,7 @@ public class JsonParser {
      * @throws InvalidNameException .
      */
     public Deck<WeaponCard> buildWeaponCards() throws InvalidDeckException, InvalidNameException {
-        if (path.equals("/json/weaponsDebug.json")) {
+        if (path.equals("/json/weaponsDebug.json") || path.equals("/json/weapons.json")) {
             ArrayList<WeaponCard> weaponCards = new ArrayList<>();
             AmmoCube paidCost;
             String name;
@@ -211,8 +215,12 @@ public class JsonParser {
                     for (int j = 0; j < jArrExtraCost.length(); j++)
                         extraCost[j] = AmmoCube.valueOf((String) jArrExtraCost.get(j));
                 } else extraCost = null;
-                for (int j = 0; j < 21; j++)
+                if (Controller.getInstance().isWeaponsDebug()) {
+                    for (int j = 0; j < 21; j++)
+                        createWeapon(name, description, pathImg, paidCost, extraCost, weaponCards);
+                } else
                     createWeapon(name, description, pathImg, paidCost, extraCost, weaponCards);
+
             }
 
             Deck<WeaponCard> d = new Deck<>(21);
@@ -294,7 +302,6 @@ public class JsonParser {
     }
 
     /**
-     *
      * @return the num of skulls in the settingsServer json
      */
     public int numOfSkulls() {
@@ -304,7 +311,6 @@ public class JsonParser {
     }
 
     /**
-     *
      * @return the timer of the setup of the waiting lobby, choose map and choose character
      */
     public int getTimerSetup() {
@@ -314,7 +320,6 @@ public class JsonParser {
     }
 
     /**
-     *
      * @return the minimum number of players required to play
      */
     public int getMinimumPlayers() {
@@ -324,7 +329,6 @@ public class JsonParser {
     }
 
     /**
-     *
      * @return the socket server port
      */
     public int getSocketServerPort() {
@@ -334,7 +338,6 @@ public class JsonParser {
     }
 
     /**
-     *
      * @return the rmi server port
      */
     public int getRmiServerPort() {
@@ -344,7 +347,6 @@ public class JsonParser {
     }
 
     /**
-     *
      * @return the seconds of the timer of the turn
      */
     public int getTurnTimer() {

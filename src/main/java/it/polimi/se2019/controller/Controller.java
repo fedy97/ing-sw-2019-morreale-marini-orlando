@@ -68,6 +68,7 @@ public class Controller implements Observer, Serializable {
     private boolean wasRecharged;
     private boolean serverReloaded;
     private boolean[] validActions;
+    private boolean weaponsDebug = false;
 
     private Controller() {
         game = Game.getInstance();
@@ -410,7 +411,7 @@ public class Controller implements Observer, Serializable {
                             playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().hasAmmos(effect.getCost()))
                             && (effect.getPossibleTargets() == null ||
                             !effect.getPossibleTargets().isEmpty()))
-                        usableEffectsIndex.add(i);
+                         usableEffectsIndex.add(i);
 
                 }
             }
@@ -774,7 +775,11 @@ public class Controller implements Observer, Serializable {
             JsonParser parser = new JsonParser("/json/powerups.json");
             Deck<PowerUpCard> powerUpCardDeck = parser.buildPowerupCards();
             game.setPowerUpDeck(powerUpCardDeck);
-            JsonParser parserWeapons = new JsonParser("/json/weaponsDebug.json");
+            JsonParser parserWeapons;
+            if (weaponsDebug)
+                parserWeapons = new JsonParser("/json/weaponsDebug.json");
+            else
+                parserWeapons = new JsonParser("/json/weapons.json");
             game.setWeaponDeck(parserWeapons.buildWeaponCards());
             WeaponCard[] weaponCards = new WeaponCard[9];
             for (int i = 0; i < 9; i++)
@@ -985,5 +990,9 @@ public class Controller implements Observer, Serializable {
 
     public boolean[] getValidActions() {
         return validActions;
+    }
+
+    public boolean isWeaponsDebug() {
+        return weaponsDebug;
     }
 }
