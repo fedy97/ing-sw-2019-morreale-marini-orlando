@@ -103,60 +103,66 @@ public class CLI extends RemoteView {
     public void updateAll(LightGameVersion lightGameVersion) {
         this.lightGameVersion = lightGameVersion;
         actionType = lightGameVersion.getPlayerBoardRep().get(myCharEnumString).getActionType();
-        currentState = CliState.ACTIONSELECTION;
+        if(toReborn == 0) {
+            currentState = CliState.ACTIONSELECTION;
 
-        CliSetUp.clear();
-        CliSetUp.cursorToHome();
-        CliPrinter.welcomeMessage();
-        CliSetUp.cursorLeft(109);
-        CliSetUp.cursorDown(2);
-        CliPrinter.printPlatformWeapons(lightGameVersion);
-        CliSetUp.cursorRight(38);
-        CliSetUp.cursorUp(23);
-        CliPrinter.printMap(lightGameVersion, chosenBoard);
-        CliSetUp.cursorDown(9);
-        CliSetUp.cursorLeft(106);
-        if ((powerUpChosen || p1 == null || p2 == null) && toReborn==0) {
-            if (actionType == 0)
-                CliPrinter.standardActionsMessage();
-            else if(actionType == 1)
-                CliPrinter.actionMessage1();
-            else if(actionType == 2)
-                CliPrinter.actionMessage2();
-            else if(actionType == 3)
-                CliPrinter.actionMessage3();
-            else
-                CliPrinter.actionMessage4();
-            CliSetUp.savePosition();
-            CliSetUp.cursorLeft(99);
-            CliPrinter.boxMessage(null);
-            CliSetUp.restorePosition();
-        } else {
-            CliSetUp.cursorUp(1);
-            showChoosePowerup(powerUps);
-            CliSetUp.cursorRight(9);
-            CliSetUp.cursorDown(10);
+            CliSetUp.clear();
+            CliSetUp.cursorToHome();
+            CliPrinter.welcomeMessage();
+            CliSetUp.cursorLeft(109);
+            CliSetUp.cursorDown(2);
+            CliPrinter.printPlatformWeapons(lightGameVersion);
+            CliSetUp.cursorRight(38);
+            CliSetUp.cursorUp(23);
+            CliPrinter.printMap(lightGameVersion, chosenBoard);
+            CliSetUp.cursorDown(9);
+            CliSetUp.cursorLeft(106);
+            if ((powerUpChosen || p1 == null || p2 == null) && toReborn == 0) {
+                if (actionType == 0)
+                    CliPrinter.standardActionsMessage();
+                else if (actionType == 1) {
+                    CliPrinter.actionMessage1();
+                }
+                else if (actionType == 2) {
+                    CliPrinter.actionMessage2();
+                }
+                else if (actionType == 3) {
+                    CliPrinter.actionMessage3();
+                }
+                else {
+                    CliPrinter.actionMessage4();
+                }
+                CliSetUp.savePosition();
+                CliSetUp.cursorLeft(99);
+                CliPrinter.boxMessage(null);
+                CliSetUp.restorePosition();
+            } else {
+                CliSetUp.cursorUp(1);
+                showChoosePowerup(powerUps);
+                CliSetUp.cursorRight(9);
+                CliSetUp.cursorDown(10);
+            }
+
+            CliSetUp.cursorUp(34);
+            CliSetUp.cursorRight(104);
+            CliPrinter.drawPlayersInfoBox(lightGameVersion, myCharEnumString);
+            CliSetUp.cursorRight(59);
+            CliSetUp.cursorUp(3);
+            CliPrinter.drawGameInfoBox(lightGameVersion);
+            CliSetUp.cursorDown(20);
+            CliSetUp.cursorLeft(106);
+            //showMessage(lastMsg);
+            CliSetUp.cursorLeft(63);
+            CliSetUp.cursorDown(9);
+            CliPrinter.boxMessage(lastMsg);
+            //CliSetUp.cursorUp(2);
+            //CliSetUp.cursorLeft(50);
+            CliSetUp.cursorUp(11);
+            CliSetUp.cursorRight(10);
+            CliPrinter.stamp("Time left: " + timeLeft, CliColor.TEXTGREEN);
+            CliPrinter.stamp(" (<8> update timer)");
+            currState = 2;
         }
-
-        CliSetUp.cursorUp(34);
-        CliSetUp.cursorRight(104);
-        CliPrinter.drawPlayersInfoBox(lightGameVersion, myCharEnumString);
-        CliSetUp.cursorRight(59);
-        CliSetUp.cursorUp(3);
-        CliPrinter.drawGameInfoBox(lightGameVersion);
-        CliSetUp.cursorDown(20);
-        CliSetUp.cursorLeft(106);
-        //showMessage(lastMsg);
-        CliSetUp.cursorLeft(63);
-        CliSetUp.cursorDown(9);
-        CliPrinter.boxMessage(lastMsg);
-        //CliSetUp.cursorUp(2);
-        //CliSetUp.cursorLeft(50);
-        CliSetUp.cursorUp(11);
-        CliSetUp.cursorRight(10);
-        CliPrinter.stamp("Time left: " + timeLeft, CliColor.TEXTGREEN);
-        CliPrinter.stamp(" (<8> update timer)");
-        currState = 2;
     }
 
     private void getActionInput() {
@@ -307,6 +313,7 @@ public class CLI extends RemoteView {
     }
 
     public void endTurn() {
+        updateAll(lightGameVersion);
         actionState = 0;
         EndTurnMessage message = new EndTurnMessage(null);
         message.setSender(userName);
@@ -394,7 +401,7 @@ public class CLI extends RemoteView {
         }
         else {
             toReborn = 1;
-            updateAll(lightGameVersion);
+            //updateAll(lightGameVersion);
             CliPrinter.stamp("\n");
             CliPrinter.choosePowerUpMessage2(cards);
             new Thread(() -> {
@@ -430,7 +437,7 @@ public class CLI extends RemoteView {
     //TODO show the right player board given the arrChars, an arraylist of objects like "SPROG"
     @Override
     public void showGameBoard(List<AmmoRep> ammoReps, Map<String, List<CardRep>> posWeapons, List<String> arrChars) {
-        if (begin == 0) {
+        if (powerUpChosen) {
             updateAll(lightGameVersion);
             return;
         }
@@ -986,8 +993,9 @@ public class CLI extends RemoteView {
     @Override
     public void showUsablePowerups(List<String> powerups) {
         currentState = CliState.POWERUPSUSING;
-        //CliPrinter.stamp("\n");
+        CliPrinter.stamp("\n");
         CliSetUp.savePosition();
+        toReborn = 1;
         if(powerups.size() == 0)
             return;
         currState = 0;
@@ -997,6 +1005,10 @@ public class CLI extends RemoteView {
             Scanner s = new Scanner(System.in);
             try {
                 choise = s.nextInt();
+                if(choise == 99) {
+                    updateAll(lightGameVersion);
+                    return;
+                }
                 CliSetUp.restorePosition();
                 Map<String, List<CardRep>> playePowerUps = lightGameVersion.getPlayerPowerups();
                 List<CardRep> myPowerUps = playePowerUps.get(myCharEnumString);
@@ -1009,6 +1021,7 @@ public class CLI extends RemoteView {
 
                 ActivateCardMessage message = new ActivateCardMessage(Integer.toString(idCard));
                 notifyController(message);
+                toReborn = 0;
                 currState = 1;
                 isAsking = false;
                 isChoosingPowerUp = false;

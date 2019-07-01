@@ -930,38 +930,62 @@ public final class CliPrinter {
         CliSetUp.savePosition();
         List<String> charactersThatKilled = lightGameVersion.getCharactersThatKilled();
         List<Integer> quantityOfMarks = lightGameVersion.getQuantityOfMarks();
-
+        int counter = 0;
+        int flag = 0;
         for (int i=0; i < charactersThatKilled.size(); i++) {
             if (charactersThatKilled.get(i).equals("BANSHEE")) {
+                flag = 1;
                 CliPrinter.stamp("▲", CliColor.TEXTBLUE);
-                if (quantityOfMarks.get(i) == 2)
+                counter++;
+                if (quantityOfMarks.get(i) == 2) {
                     CliPrinter.stamp("▲", CliColor.TEXTBLUE);
+                    counter++;
+                }
             }
             if (charactersThatKilled.get(i).equals("SPROG")) {
+                flag = 1;
                 CliPrinter.stamp("▲", CliColor.TEXTGREEN);
-                if (quantityOfMarks.get(i) == 2)
+                counter++;
+                if (quantityOfMarks.get(i) == 2) {
                     CliPrinter.stamp("▲", CliColor.TEXTGREEN);
+                    counter++;
+                }
             }
             if(charactersThatKilled.get(i).equals("DOZER")) {
+                flag = 1;
                 CliPrinter.stamp("▲", CliColor.TEXTWHITE);
-                if (quantityOfMarks.get(i) == 2)
+                counter++;
+                if (quantityOfMarks.get(i) == 2) {
                     CliPrinter.stamp("▲", CliColor.TEXTWHITE);
+                    counter++;
+                }
             }
             if(charactersThatKilled.get(i).equals("VIOLET")) {
+                flag = 1;
                 CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
-                if (quantityOfMarks.get(i) == 2)
+                counter++;
+                if (quantityOfMarks.get(i) == 2) {
                     CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
+                    counter++;
+                }
             }
             if(charactersThatKilled.get(i).equals("DISTRUCTOR")) {
+                flag = 1;
                 CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
-                if (quantityOfMarks.get(i) == 2)
+                counter++;
+                if (quantityOfMarks.get(i) == 2) {
                     CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
+                    counter++;
+                }
             }
             CliSetUp.restorePosition();
             CliSetUp.cursorDown(1);
             CliSetUp.savePosition();
         }
-        CliSetUp.restorePosition();
+        if (flag ==0)
+            CliSetUp.restorePosition();
+        else
+            CliSetUp.cursorUp(counter);
     }
 
 
