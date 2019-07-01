@@ -65,6 +65,7 @@ public class CLI extends RemoteView {
     private int toReborn;
     private int timeLeft;
     private int oneTimeCall;
+    private boolean callPowerUpChosen;
 
     public CLI() {
         try {
@@ -99,13 +100,14 @@ public class CLI extends RemoteView {
         toReborn = 0;
         timeLeft = 0;
         oneTimeCall = 0;
+        callPowerUpChosen = false;
     }
 
     @Override
     public void updateAll(LightGameVersion lightGameVersion) {
         this.lightGameVersion = lightGameVersion;
         actionType = lightGameVersion.getPlayerBoardRep().get(myCharEnumString).getActionType();
-        if(toReborn == 0) {
+        if(toReborn == 0 && !callPowerUpChosen) {
             currentState = CliState.ACTIONSELECTION;
 
             CliSetUp.clear();
@@ -168,7 +170,7 @@ public class CLI extends RemoteView {
     }
 
     private void getActionInput() {
-        System.out.print(actionType);
+
         if(actionType == 0 || actionType == 1 || actionType == 2) {
             if (!isAsking /*&& isMyTurn() && currentState == CliState.ACTIONSELECTION*/) {
                 new Thread(() -> {
@@ -223,6 +225,7 @@ public class CLI extends RemoteView {
                         else if (choise == 7)
                             iWantToConvertPowerUp();
                         else {
+                            isAsking = false;
                             updateAll(lightGameVersion);
                             getActionInput();
                         }
@@ -251,6 +254,7 @@ public class CLI extends RemoteView {
                         else if (choise == 7)
                             iWantToConvertPowerUp();
                         else {
+                            isAsking = false;
                             updateAll(lightGameVersion);
                             getActionInput();
                         }
@@ -364,6 +368,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void showChoosePowerup(List<CardRep> cards) {
+        callPowerUpChosen = true;
         currentState = CliState.POWERUPCHOOSING;
         CliSetUp.savePosition();
         powerUps = cards;
@@ -396,6 +401,7 @@ public class CLI extends RemoteView {
                     viewSetChanged();
                     notifyObservers(message);
                     CliSetUp.restorePosition();
+                    callPowerUpChosen = false;
                     powerUpChosen = true;
                     begin = 0;
                     currState = 0;
@@ -421,6 +427,7 @@ public class CLI extends RemoteView {
                         message.setSender(userName);
                         viewSetChanged();
                         notifyObservers(message);
+                        callPowerUpChosen = false;
                         currState = 0;
                         toReborn = 0;
                         currentState = CliState.ACTIONSELECTION;
@@ -1011,8 +1018,13 @@ public class CLI extends RemoteView {
         CliPrinter.stamp("\n");
         CliSetUp.savePosition();
         toReborn = 1;
-        if(powerups.size() == 0)
+        if(powerups.size() == 0) {
+            toReborn = 0;
+            updateAll(lightGameVersion);
+            isAsking = false;
+            getActionInput();
             return;
+        }
         currState = 0;
         CliPrinter.usePowerUpMessage(lightGameVersion, myCharEnumString, powerups);
         new Thread(() -> {
@@ -1175,7 +1187,7 @@ public class CLI extends RemoteView {
         if (powerUpChosen && toReborn == 0) {
             getActionInput();
             actionState = 1;
-            System.out.print("ATTIVATO");
+            //System.out.print("ATTIVATO");
         }
     }
 }
