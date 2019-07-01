@@ -939,7 +939,6 @@ public final class CliPrinter {
                 counter++;
                 if (quantityOfMarks.get(i) == 2) {
                     CliPrinter.stamp("▲", CliColor.TEXTBLUE);
-                    counter++;
                 }
             }
             if (charactersThatKilled.get(i).equals("SPROG")) {
@@ -948,7 +947,6 @@ public final class CliPrinter {
                 counter++;
                 if (quantityOfMarks.get(i) == 2) {
                     CliPrinter.stamp("▲", CliColor.TEXTGREEN);
-                    counter++;
                 }
             }
             if(charactersThatKilled.get(i).equals("DOZER")) {
@@ -957,7 +955,6 @@ public final class CliPrinter {
                 counter++;
                 if (quantityOfMarks.get(i) == 2) {
                     CliPrinter.stamp("▲", CliColor.TEXTWHITE);
-                    counter++;
                 }
             }
             if(charactersThatKilled.get(i).equals("VIOLET")) {
@@ -966,7 +963,6 @@ public final class CliPrinter {
                 counter++;
                 if (quantityOfMarks.get(i) == 2) {
                     CliPrinter.stamp("▲", CliColor.TEXTPURPLE);
-                    counter++;
                 }
             }
             if(charactersThatKilled.get(i).equals("DISTRUCTOR")) {
@@ -975,7 +971,6 @@ public final class CliPrinter {
                 counter++;
                 if (quantityOfMarks.get(i) == 2) {
                     CliPrinter.stamp("▲", CliColor.TEXTYELLOW);
-                    counter++;
                 }
             }
             CliSetUp.restorePosition();
