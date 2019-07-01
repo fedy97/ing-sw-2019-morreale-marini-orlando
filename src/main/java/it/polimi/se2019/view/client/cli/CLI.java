@@ -61,6 +61,7 @@ public class CLI extends RemoteView {
     private int inputSeconds;
     private int actionState;
     private int toReborn;
+    private int timeLeft;
 
     public CLI() {
         try {
@@ -93,6 +94,7 @@ public class CLI extends RemoteView {
         currentState = CliState.POWERUPCHOOSING;
         inputSeconds = 10;
         toReborn = 0;
+        timeLeft = 0;
     }
 
     @Override
@@ -150,6 +152,8 @@ public class CLI extends RemoteView {
         //CliSetUp.cursorLeft(50);
         CliSetUp.cursorUp(11);
         CliSetUp.cursorRight(10);
+        CliPrinter.stamp("Time left: " + timeLeft, CliColor.TEXTGREEN);
+        CliPrinter.stamp(" (<8> update timer)");
         currState = 2;
     }
 
@@ -902,6 +906,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void updateTimerTurn(int seconds, String curr) {
+        timeLeft = seconds;
         /*
         CliSetUp.savePosition();
         if (currState == 0)
