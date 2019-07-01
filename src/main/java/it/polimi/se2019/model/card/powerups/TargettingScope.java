@@ -54,7 +54,10 @@ public final class TargettingScope extends PowerUpCard {
             CustomLogger.logException(this.getClass().getName(), e);
         }
 
-        c.setState(ControllerState.PROCESSING_ACTION_3);
+        if (c.isFrenzyModeOn())
+            c.setState(ControllerState.PROCESSING_ACTION_1);
+        else
+            c.setState(ControllerState.PROCESSING_ACTION_3);
     }
 
 }

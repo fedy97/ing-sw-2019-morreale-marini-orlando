@@ -254,7 +254,7 @@ public class Controller implements Observer, Serializable {
                 }
                 askFor(getValidator().getUsableWeapons(), "weaponsToUse");
 
-                while (getState() == ControllerState.PROCESSING_ACTION_1)
+                while (getState() == ControllerState.PROCESSING_ACTION_1 || getState() == ControllerState.PROCESSING_POWERUP)
                     Thread.sleep(200);
             }
 
@@ -311,7 +311,7 @@ public class Controller implements Observer, Serializable {
                 }
 
                 askFor(getValidator().getUsableWeapons(), "weaponsToUse");
-                while (getState() == ControllerState.PROCESSING_ACTION_3)
+                while (getState() == ControllerState.PROCESSING_ACTION_3 || getState() == ControllerState.PROCESSING_POWERUP)
                     Thread.sleep(200);
 
             }
