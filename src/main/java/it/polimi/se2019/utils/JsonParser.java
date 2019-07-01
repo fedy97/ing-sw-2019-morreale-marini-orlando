@@ -25,24 +25,35 @@ public class JsonParser {
     private JSONObject jsonObj;
 
     public JsonParser(String path) {
-        try {
-            this.path = path;
-            InputStream is;
-            if (path.equals("settingsServer.json") || path.equals("settingsClient.json"))
-                is = new FileInputStream(path);
-            else
-                is = getClass().getResourceAsStream(path);
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            StringBuilder ris = new StringBuilder();
 
-            for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
-                ris.append(line).append("\n");
+        this.path = path;
+
+        if (path.equals("settingsServer.json") || path.equals("settingsClient.json"))
+            try (InputStream is = new FileInputStream(path);
+                 InputStreamReader isr = new InputStreamReader(is);
+                 BufferedReader bufferedReader = new BufferedReader(isr)) {
+                StringBuilder ris = new StringBuilder();
+
+                for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
+                    ris.append(line).append("\n");
+                }
+                jsonObj = new JSONObject(ris.toString());
+            } catch (Exception ex) {
+                CustomLogger.logException(this.getClass().getName(), ex);
             }
-            jsonObj = new JSONObject(ris.toString());
-        } catch (Exception ex) {
-            CustomLogger.logException(this.getClass().getName(), ex);
-        }
+        else
+            try (InputStream is = getClass().getResourceAsStream(path);
+                 InputStreamReader isr = new InputStreamReader(is);
+                 BufferedReader bufferedReader = new BufferedReader(isr)) {
+                StringBuilder ris = new StringBuilder();
+
+                for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
+                    ris.append(line).append("\n");
+                }
+                jsonObj = new JSONObject(ris.toString());
+            } catch (Exception ex) {
+                CustomLogger.logException(this.getClass().getName(), ex);
+            }
 
     }
 
