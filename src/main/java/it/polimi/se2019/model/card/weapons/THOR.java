@@ -50,8 +50,8 @@ public final class THOR extends WeaponTwoAddingEffect {
 
                 usableEffects[1] = false;
                 playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
-
                 getEffects().get(2).getLastEffectTargets().add(targets.get(0));
+                game.notifyChanges();
             }
 
             @Override
@@ -72,6 +72,7 @@ public final class THOR extends WeaponTwoAddingEffect {
 
                 usableEffects[2] = false;
                 playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
+                game.notifyChanges();
             }
 
             @Override
