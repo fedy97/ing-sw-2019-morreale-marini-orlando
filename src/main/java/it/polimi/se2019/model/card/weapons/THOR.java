@@ -6,6 +6,7 @@ import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +56,10 @@ public final class THOR extends WeaponTwoAddingEffect {
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(game.getGameField().getVisiblePlayers(game.getPlayer(this.getLastEffectTargets().get(0)).getCurrentPlatform()));
+                List<Character> targets = new ArrayList<>();
+                targets.addAll(game.getGameField().getVisiblePlayers(game.getPlayer(this.getLastEffectTargets().get(0)).getCurrentPlatform()));
+                targets.remove(getLastEffectTargets().get(0));
+                this.setPossibleTargets(targets);
             }
         };
 
@@ -72,7 +76,11 @@ public final class THOR extends WeaponTwoAddingEffect {
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(game.getGameField().getVisiblePlayers(game.getPlayer(this.getLastEffectTargets().get(0)).getCurrentPlatform()));
+                List<Character> targets = new ArrayList<>();
+                targets.addAll(game.getGameField().getVisiblePlayers(game.getPlayer(this.getLastEffectTargets().get(1)).getCurrentPlatform()));
+                targets.remove(getLastEffectTargets().get(0));
+                targets.remove(getLastEffectTargets().get(1));
+                this.setPossibleTargets(targets);
             }
         };
 
