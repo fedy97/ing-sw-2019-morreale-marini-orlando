@@ -114,10 +114,18 @@ public class Controller implements Observer, Serializable {
         return instance;
     }
 
+    /**
+     * used by persistency
+     * @param instance of the controller loaded from file
+     */
     public static void setInstance(Controller instance) {
         Controller.instance = instance;
     }
 
+    /**
+     * as soon as the server starts the ping starts too, if someone disconnects from the lobby,
+     * will be deleted from the virtual views and all clients already connected will be notified
+     */
     public void startWaitingLobbyPing() {
         Set<String> users = userView.keySet();
 
@@ -543,11 +551,21 @@ public class Controller implements Observer, Serializable {
         }
     }
 
+    /**
+     *
+     * @param voteMapChosen by the user
+     */
     public void setVoteMapChosen(int voteMapChosen) {
         mapChosen.put(voteMapChosen, mapChosen.get(voteMapChosen) + 1);
         notifyAll(new UpdateVotesMapChosenMessage(mapChosen));
     }
 
+    /**
+     *
+     * @param name of the user
+     * @param characterChosen by the user
+     * @throws InvalidCharacterException if does not exists
+     */
     public void setCharacterChosen(String name, String characterChosen) throws
             InvalidCharacterException {
         Player player = new Player(name, Character.valueOf(characterChosen), null);

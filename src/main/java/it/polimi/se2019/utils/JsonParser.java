@@ -145,10 +145,9 @@ public class JsonParser {
 
     /**
      * @return a deck of 24 powerups
-     * @throws InvalidDeckException
-     * @throws IOException
-     * @throws InvalidCubeException
-     * @throws InvalidNameException
+     * @throws InvalidDeckException .
+     * @throws InvalidCubeException .
+     * @throws InvalidNameException .
      */
     public Deck<PowerUpCard> buildPowerupCards() throws InvalidDeckException,
             InvalidCubeException, InvalidNameException {
@@ -186,6 +185,11 @@ public class JsonParser {
         return null;
     }
 
+    /**
+     * @return a deck of 21 weapons
+     * @throws InvalidDeckException .
+     * @throws InvalidNameException .
+     */
     public Deck<WeaponCard> buildWeaponCards() throws InvalidDeckException, InvalidNameException {
         if (path.equals("/json/weaponsDebug.json")) {
             ArrayList<WeaponCard> weaponCards = new ArrayList<>();
@@ -289,36 +293,60 @@ public class JsonParser {
         weaponCards.add(weaponCard);
     }
 
+    /**
+     *
+     * @return the num of skulls in the settingsServer json
+     */
     public int numOfSkulls() {
         JSONArray settingsObj = jsonObj.getJSONArray("settings");
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("skulls");
     }
 
+    /**
+     *
+     * @return the timer of the setup of the waiting lobby, choose map and choose character
+     */
     public int getTimerSetup() {
         JSONArray settingsObj = jsonObj.getJSONArray("settings");
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("timerSetup");
     }
 
+    /**
+     *
+     * @return the minimum number of players required to play
+     */
     public int getMinimumPlayers() {
         JSONArray settingsObj = jsonObj.getJSONArray("settings");
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("minPlayers");
     }
 
+    /**
+     *
+     * @return the socket server port
+     */
     public int getSocketServerPort() {
         JSONArray settingsObj = jsonObj.getJSONArray("settings");
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("socketServerPort");
     }
 
+    /**
+     *
+     * @return the rmi server port
+     */
     public int getRmiServerPort() {
         JSONArray settingsObj = jsonObj.getJSONArray("settings");
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("rmiServerPort");
     }
 
+    /**
+     *
+     * @return the seconds of the timer of the turn
+     */
     public int getTurnTimer() {
         JSONArray settingsObj = jsonObj.getJSONArray("settings");
         JSONObject obj = settingsObj.getJSONObject(0);

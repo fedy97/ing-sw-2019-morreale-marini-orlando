@@ -44,6 +44,9 @@ public class TurnController implements Serializable {
         c.notifyAll(new StartTimerTurnMessage(seconds, getTurnUser()));
     }
 
+    /**
+     * first user will be notified, and all actions will be enabled
+     */
     public void notifyFirst() {
         c.callView(new EnablePlayerActionsMessage(UserValidActions.NO_SHOOT.getActions()), c.getPlayerManager().getCurrentPlayer().getName());
         c.callView(new ShowMessage("It's your turn!"), c.getPlayerManager().getCurrentPlayer().getName());

@@ -159,6 +159,11 @@ public abstract class RemoteView extends View {
      */
     public abstract void startTimerTurn(int count, String curr);
 
+    /**
+     *
+     * @param seconds left
+     * @param curr player to disconnect if seconds == 0
+     */
     public abstract void updateTimerTurn(int seconds, String curr);
 
     /**
@@ -176,8 +181,16 @@ public abstract class RemoteView extends View {
      */
     public abstract void showUsablePowerups(List<String> powerups);
 
+    /**
+     *
+     * @param user to display that is already in use
+     */
     public abstract void showUsernameAlreadyInUse(String user);
 
+    /**
+     *
+     * @param scoreboard map to display at the end, the key is the user, value is the score
+     */
     public abstract void showScoreboard(Map<String, Integer> scoreboard);
 
     /**
@@ -196,11 +209,19 @@ public abstract class RemoteView extends View {
         notifyController(message);
     }
 
+    /**
+     *
+     * @param message to be sent to the controller from the client
+     */
+
     public void notifyController(ToServerMessage message) {
         message.setSender(userName);
         viewSetChanged();
         notifyObservers(message);
     }
 
+    /**
+     * only for CLI
+     */
     public abstract void showActionMenu();
 }

@@ -29,7 +29,6 @@ public class GameField implements Serializable {
      * @param skullsBoard the board that manages the killings
      * @param scoreBoard  the board that manages the assignable points
      * @param field       where the 10, 11 or 12 platforms are located
-     * @throws InvalidNumOfRoomsException        if the rooms are not 5 or 6
      * @throws InvalidFieldException             if there is more than 1 platform equal to null or the matrix is not 3x4
      * @throws InvalidAdjacentPlatformsException if the adjacency list has more than 2 nulls
      */
@@ -332,7 +331,10 @@ public class GameField implements Serializable {
         return null;
     }
 
-    //TODO test
+    /**
+     * @param platform to get the light version
+     * @return a string like 0,0
+     */
     public String getPlatformPosLight(Platform platform) {
         if (platform != null)
             return platform.getPlatformPosition()[0] + "," + platform.getPlatformPosition()[1];

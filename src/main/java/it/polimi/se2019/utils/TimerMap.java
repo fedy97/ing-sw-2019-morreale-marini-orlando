@@ -2,7 +2,10 @@ package it.polimi.se2019.utils;
 
 import it.polimi.se2019.controller.Controller;
 
-
+/**
+ * this class is used to create the timer in map page, each second
+ * will be called setSecondsLeftMap
+ */
 public class TimerMap extends Thread {
     private int seconds;
 

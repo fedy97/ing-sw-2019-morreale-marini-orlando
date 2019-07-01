@@ -16,10 +16,6 @@ import java.util.logging.Level;
 
 public class Lobby {
     private static final String LOCALHOST = "127.0.0.1";
-    /**
-     * Turn controller should be enough
-     * private static List<String> users = new ArrayList<>();
-     */
     private static RMIServer rmiServer = new RMIServer(HandyFunctions.parserSettings.getRmiServerPort());
     private static SocketServer socketServer = new SocketServer(HandyFunctions.parserSettings.getSocketServerPort());
     private static Controller controller = Controller.getInstance();
