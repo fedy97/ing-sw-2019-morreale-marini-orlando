@@ -1144,7 +1144,7 @@ public final class CliPrinter {
                 CliPrinter.stamp("Skulls: " + bansheeRep.getSkullsNum());
                 CliSetUp.restorePosition();
 
-                CliSetUp.cursorDown(2);
+                CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
 
             }
@@ -1236,7 +1236,7 @@ public final class CliPrinter {
                 CliPrinter.stamp("Skulls: " + sprogRep.getSkullsNum());
                 CliSetUp.restorePosition();
 
-                CliSetUp.cursorDown(2);
+                CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
             }
 
@@ -1327,7 +1327,7 @@ public final class CliPrinter {
                 CliPrinter.stamp("Skulls: " + dozerRep.getSkullsNum());
                 CliSetUp.restorePosition();
 
-                CliSetUp.cursorDown(2);
+                CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
             }
 
@@ -1418,7 +1418,7 @@ public final class CliPrinter {
                 CliPrinter.stamp("Skulls: " + violetRep.getSkullsNum());
                 CliSetUp.restorePosition();
 
-                CliSetUp.cursorDown(2);
+                CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
             }
 
@@ -1509,11 +1509,11 @@ public final class CliPrinter {
                 CliPrinter.stamp("Skulls: " + distructorRep.getSkullsNum());
                 CliSetUp.restorePosition();
 
-                CliSetUp.cursorDown(2);
+                CliSetUp.cursorDown(1);
                 CliSetUp.savePosition();
             }
 
-            CliSetUp.cursorUp(9*playerCounter);
+            CliSetUp.cursorUp(8*playerCounter);
         }
     }
     public static List<String> discartAmmoMessage(LightGameVersion lightGameVersion, String myChar) {

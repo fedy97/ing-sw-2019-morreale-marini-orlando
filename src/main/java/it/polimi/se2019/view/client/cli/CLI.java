@@ -900,6 +900,7 @@ public class CLI extends RemoteView {
         chosenBoard = Integer.toString(configMap);
         myCharEnumString = myChar;
         updateAll(lightGameVersion);
+        //getActionInput();
     }
 
 
