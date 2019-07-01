@@ -868,7 +868,7 @@ public class CLI extends RemoteView {
                 notifyController(message);
                 CliSetUp.restorePosition();
                 updateAll(lightGameVersion);
-                //CliPrinter.stamp("\n");
+                CliPrinter.stamp("\n");
                 currState = 0;
                 actionState = 0;
                 //CliSetUp.cursorUp(5);
