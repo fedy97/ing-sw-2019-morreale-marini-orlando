@@ -166,6 +166,7 @@ public class CLI extends RemoteView {
     }
 
     private void getActionInput() {
+        System.out.print(actionType);
         if(actionType == 0 || actionType == 1 || actionType == 2) {
             if (!isAsking /*&& isMyTurn() && currentState == CliState.ACTIONSELECTION*/) {
                 new Thread(() -> {
@@ -790,6 +791,7 @@ public class CLI extends RemoteView {
     @Override
     public void showTargets(List<String> targets) {
         currentState = CliState.TARGETSHOWING;
+        updateAll(lightGameVersion);
         CliPrinter.stamp("\n");
         CliSetUp.savePosition();
         if(targets.size() == 0)
@@ -834,8 +836,8 @@ public class CLI extends RemoteView {
     @Override
     public void enlightenEffects(List<Integer> effects) {
         currentState = CliState.EFFECTSSHOWING;
-        if(actionState == 0)
-            CliPrinter.stamp("\n");
+        updateAll(lightGameVersion);
+        CliPrinter.stamp("\n");
         CliSetUp.savePosition();
         if(effects.size() == 0)
             return;
@@ -1005,36 +1007,68 @@ public class CLI extends RemoteView {
             int choise;
             Scanner s = new Scanner(System.in);
             try {
-                choise = s.nextInt();
-                if(choise == 99) {
-                    updateAll(lightGameVersion);
-                    return;
-                }
-                CliSetUp.restorePosition();
-                Map<String, List<CardRep>> playePowerUps = lightGameVersion.getPlayerPowerups();
-                List<CardRep> myPowerUps = playePowerUps.get(myCharEnumString);
-                int idCard;
-                if (choise < powerups.size()) {
-                    idCard = myPowerUps.get(choise).getId();
-                } else {
-                    idCard = myPowerUps.get(0).getId();
-                }
+                if (!isMyTurn()) {
+                    CliReader reader = new CliReader(7);
+                    try {
+                        choise = reader.getTimedInt();
+                        if (choise != 99) {
+                            Map<String, List<CardRep>> playePowerUps = lightGameVersion.getPlayerPowerups();
+                            List<CardRep> myPowerUps = playePowerUps.get(myCharEnumString);
+                            int idCard;
+                            if (choise < powerups.size()) {
+                                idCard = myPowerUps.get(choise).getId();
+                            } else {
+                                idCard = myPowerUps.get(0).getId();
+                            }
 
-                ActivateCardMessage message = new ActivateCardMessage(Integer.toString(idCard));
-                notifyController(message);
-                toReborn = 0;
-                currState = 1;
-                isAsking = false;
-                isChoosingPowerUp = false;
-                CliSetUp.restorePosition();
-                updateAll(lightGameVersion);
-                CliPrinter.stamp("\n");
+                            ActivateCardMessage message = new ActivateCardMessage(Integer.toString(idCard));
+                            notifyController(message);
+                            toReborn = 0;
+                            currState = 1;
+                            isAsking = false;
+                            isChoosingPowerUp = false;
+                            CliSetUp.restorePosition();
+                            updateAll(lightGameVersion);
+                            CliPrinter.stamp("\n");
+                        } else {
+                            toReborn = 0;
+                            updateAll(lightGameVersion);
+                        }
+                    } catch (NoInputException e) {
+                        toReborn = 0;
+                        updateAll(lightGameVersion);
+                    } catch (IOException e) {
+                        toReborn = 0;
+                        updateAll(lightGameVersion);
+                    }
+                } else {
+                    choise = s.nextInt();
+                    CliSetUp.restorePosition();
+                    Map<String, List<CardRep>> playePowerUps = lightGameVersion.getPlayerPowerups();
+                    List<CardRep> myPowerUps = playePowerUps.get(myCharEnumString);
+                    int idCard;
+                    if (choise < powerups.size()) {
+                        idCard = myPowerUps.get(choise).getId();
+                    } else {
+                        idCard = myPowerUps.get(0).getId();
+                    }
+
+                    ActivateCardMessage message = new ActivateCardMessage(Integer.toString(idCard));
+                    notifyController(message);
+                    toReborn = 0;
+                    currState = 1;
+                    isAsking = false;
+                    isChoosingPowerUp = false;
+                    CliSetUp.restorePosition();
+                    updateAll(lightGameVersion);
+                    CliPrinter.stamp("\n");
+                }
             }
-            catch (InputMismatchException e) {
-                updateAll(lightGameVersion);
-                CliPrinter.stamp("\n");
-                showUsablePowerups(powerups);
-            }
+            catch(InputMismatchException e){
+                    updateAll(lightGameVersion);
+                    CliPrinter.stamp("\n");
+                    showUsablePowerups(powerups);
+                }
         }).start();
     }
 
