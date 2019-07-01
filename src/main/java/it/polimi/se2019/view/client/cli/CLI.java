@@ -942,6 +942,10 @@ public class CLI extends RemoteView {
 
     @Override
     public void showReloadableWeapons(List<String> weapons) {
+        if(weapons.size() == 0) {
+            updateAll(lightGameVersion);
+            getActionInput();
+        }
         currentState = CliState.WEAPONSRELOADING;
         if(actionState == 0)
             CliPrinter.stamp("\n");
