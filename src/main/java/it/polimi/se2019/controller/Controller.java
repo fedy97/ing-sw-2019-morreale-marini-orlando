@@ -447,6 +447,7 @@ public class Controller implements Observer, Serializable {
                             break;
                     }
                     weapon.activateEffect(effectIndex, targets);
+                    game.notifyChanges();
                     CustomLogger.logInfo(getClass().getName(), "Action performed!");
                 } else {
                     weapon.activateEffect(effectIndex, null);
