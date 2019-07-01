@@ -8,6 +8,7 @@ import it.polimi.se2019.view.client.cli.CliPrinter;
 import it.polimi.se2019.view.client.cli.CliSetUp;
 import it.polimi.se2019.view.client.gui.LoginPage;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //import it.polimi.se2019.utils.Track;
@@ -32,17 +33,20 @@ public class MainClient {
         CliPrinter.welcomeMessage();
         HandyFunctions.printConsole("\n\n");
         CliPrinter.boxInterfaceMessage();
-        choice = in.nextInt();
-        CliSetUp.clear();
-        CliSetUp.cursorToHome();
-        if (choice == 1) {
-            RemoteView myView = new CLI();
-            myView.start();
+        try {
+            choice = in.nextInt();
+            CliSetUp.clear();
+            CliSetUp.cursorToHome();
+            if (choice == 1) {
+                RemoteView myView = new CLI();
+                myView.start();
+            } else {
+                LoginPage.startLoginPage();
+            }
         }
-        else {
-            LoginPage.startLoginPage();
+        catch (InputMismatchException e) {
+            System.exit(-1);
         }
-
 
     }
 }
