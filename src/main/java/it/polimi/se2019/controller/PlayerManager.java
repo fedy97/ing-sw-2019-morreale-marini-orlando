@@ -145,7 +145,9 @@ public class PlayerManager implements Serializable {
         }
 
         Player p;
+        StringBuilder targetsDamaged = new StringBuilder();
         while (hmIterator.hasNext()) {
+
             Map.Entry mapElement = (Map.Entry) hmIterator.next();
             int damage = ((int) mapElement.getValue());
             p = (Player) mapElement.getKey();
@@ -160,11 +162,14 @@ public class PlayerManager implements Serializable {
                 }
 
                 p.getPlayerBoard().addDamage(currentPlayer.getCharacter(), damage);
+                targetsDamaged.append(p.getName());
+                targetsDamaged.append(", ");
             } catch (InvalidCharacterException e) {
                 CustomLogger.logException(this.getClass().getName(), e);
             }
         }
-
+        targetsDamaged.append("damaged");
+        father.broadcastMessage(targetsDamaged.toString());
         father.getGame().notifyChanges();
     }
 
