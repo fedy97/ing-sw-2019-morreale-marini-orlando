@@ -1182,6 +1182,7 @@ public class CLI extends RemoteView {
         for (String s: scoreboard.keySet()) {
             CliPrinter.stamp(s + ": " + scoreboard.get(s) + "\n");
         }
+        System.exit(0);
     }
 
     @Override
