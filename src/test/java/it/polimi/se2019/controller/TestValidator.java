@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -38,13 +39,23 @@ public class TestValidator extends TestControllerChild {
         } catch (Exception e) {
             fail();
         }
+
+        currPlayer.removePowerUps();
+        currPlayer.removeWeapons();
+        currPlayer.getPlayerBoard().getAmmoBox().clear();
     }
 
     @Test
     public void getGrabaleWeapons() {
         try {
             List<WeaponCard> grabable = validator.getGrabableWeapons();
-            assertEquals(0, grabable.size());
+            List<WeaponCard> expected = new ArrayList<>();
+            for(WeaponCard weaponCard: currPlayer.getCurrentPlatform().getWeapons())
+                if(currPlayer.getPlayerBoard().getAmmoBox().hasAmmos(weaponCard.getExtraCost()))
+                    expected.add(weaponCard);
+
+            assertTrue(grabable.containsAll(expected));
+            assertEquals(grabable.size(), expected.size());
         } catch (Exception e) {
             fail();
         }

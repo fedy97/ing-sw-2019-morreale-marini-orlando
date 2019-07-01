@@ -36,11 +36,11 @@ public class WeaponCard extends Card {
     /**
      * constructor for json parser
      *
-     * @param name
-     * @param descr
-     * @param img
-     * @param paidCost
-     * @param extraCost
+     * @param name of the weapon
+     * @param descr description of the weapon
+     * @param img path to the weapon's image
+     * @param paidCost in addition to extraCost define the reload cost
+     * @param extraCost paid when grabbing the weapon
      * @throws InvalidNameException
      */
     public WeaponCard(String name, String descr, String img, AmmoCube paidCost, AmmoCube[] extraCost) throws InvalidNameException {
@@ -58,7 +58,6 @@ public class WeaponCard extends Card {
     /**
      * Reload the weapon
      */
-
     public void reload() {
         cleanCache();
         usableEffects[0] = true;
@@ -102,17 +101,8 @@ public class WeaponCard extends Card {
         return loaded;
     }
 
-
-    public void activateBasicEffect() {
-        // TODO
-    }
-
     public List<Effect> getEffects() {
         return effects;
-    }
-
-    public void setEffects(List<Effect> basicEffect) {
-        this.effects = basicEffect;
     }
 
     public boolean[] getUsableEffects() {

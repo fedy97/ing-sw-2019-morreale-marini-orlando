@@ -27,6 +27,11 @@ public class TestPlayerManager extends TestControllerChild {
     public void initTest() throws InvalidImageException, InvalidNameException, InvalidCubeException, IOException, InvalidDeckException, InvalidCardException {
         super.initTest();
         playerManager = c.getPlayerManager();
+        playerManager.getCurrentPlayer().removeWeapons();
+        playerManager.getCurrentPlayer().removePowerUps();
+        playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().clear();
+        playerManager.getCurrentPlayer().getPlayerBoard().getDamageLine().clear();
+        playerManager.getCurrentPlayer().getPlayerBoard().getRevengeMarks().clear();
     }
 
     @Test
@@ -55,7 +60,7 @@ public class TestPlayerManager extends TestControllerChild {
 
     @Test
     public void testMove() {
-        Platform destination = c.getGame().getGameField().getPlatforms().get(0);
+        Platform destination = c.getGame().getGameField().getPlatforms().get(3);
         playerManager.move(destination);
         assertEquals(destination, playerManager.getCurrentPlayer().getCurrentPlatform());
     }
@@ -103,7 +108,7 @@ public class TestPlayerManager extends TestControllerChild {
 
         try {
             playerManager.move(destination);
-            playerManager.buyWeapon(destination.getWeapons().get(1));
+            playerManager.buyWeapon(destination.getWeapons().get(0));
         } catch (Exception e) {
             fail();
         }
