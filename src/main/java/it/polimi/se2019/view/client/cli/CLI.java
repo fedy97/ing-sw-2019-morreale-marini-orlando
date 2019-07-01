@@ -207,11 +207,11 @@ public class CLI extends RemoteView {
                         choise = Character.getNumericValue((c.readPassword())[0]);
                         isAsking = false;
                         if (choise == 1 && actives[0])
-                            iWantToShoot();
-                        else if (choise == 2 && actives[1])
                             iWantToMove();
-                        else if (choise == 3 && actives[2])
+                        else if (choise == 2 && actives[1])
                             iWantToGrab();
+                        else if (choise == 3 && actives[2])
+                            iWantToShoot();
                         else if (choise == 4 && actives[3])
                             iWantToReload();
                         else if (choise == 5 && actives[4])
@@ -237,7 +237,7 @@ public class CLI extends RemoteView {
                         choise = Character.getNumericValue((c.readPassword())[0]);
                         isAsking = false;
                         if (choise == 1 && actives[0])
-                            iWantToShoot();
+                            iWantToMove();
                         else if (choise == 2 && actives[1])
                             iWantToGrab();
                         else if (choise == 4 && actives[2])
@@ -900,7 +900,8 @@ public class CLI extends RemoteView {
         chosenBoard = Integer.toString(configMap);
         myCharEnumString = myChar;
         updateAll(lightGameVersion);
-        //getActionInput();
+        toReborn = 0;
+        powerUpChosen = true;
     }
 
 
