@@ -335,7 +335,13 @@ public class CLI extends RemoteView {
         CliSetUp.savePosition();
         isAsking = true;
         //CliPrinter.stamp("\n");
-        CliPrinter.convertPowerUpMessage(lightGameVersion,myCharEnumString);
+        int returnValue = CliPrinter.convertPowerUpMessage(lightGameVersion,myCharEnumString);
+        if(returnValue == -1) {
+            isAsking = false;
+            updateAll(lightGameVersion);
+            getActionInput();
+            return;
+        }
         new Thread(() -> {
             int choise;
             Scanner s = new Scanner(System.in);

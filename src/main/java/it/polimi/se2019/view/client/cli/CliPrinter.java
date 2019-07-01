@@ -804,10 +804,12 @@ public final class CliPrinter {
         stamp(" <0,1,2>: ");
     }
 
-    public static void convertPowerUpMessage(LightGameVersion lightGameVersion, String myChar) {
+    public static int convertPowerUpMessage(LightGameVersion lightGameVersion, String myChar) {
 
         Map<String, List<CardRep>> playerPowerUps = lightGameVersion.getPlayerPowerups();
         List<CardRep> myPowerUps = playerPowerUps.get(myChar);
+        if(myPowerUps.size() == 0)
+            return -1;
 
         CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
@@ -852,6 +854,7 @@ public final class CliPrinter {
             counter++;
         }
         stamp(" <0,1,2>: ");
+        return 0;
     }
 
     public static void boxMessage(String msg) {
