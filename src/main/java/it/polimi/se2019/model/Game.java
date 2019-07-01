@@ -24,7 +24,7 @@ import java.util.*;
 import java.util.logging.Level;
 
 /**
- * @author Federico Morreale
+ * model class of the game
  */
 public class Game extends Observable implements Serializable {
 
@@ -168,6 +168,10 @@ public class Game extends Observable implements Serializable {
         saveServer();
     }
 
+    /**
+     * when the model changes, the server will be saved in order to be reloaded later
+     * if required
+     */
     public void saveServer() {
         try (FileOutputStream f = new FileOutputStream(new File("server.txt"));
              ObjectOutputStream o = new ObjectOutputStream(f)) {

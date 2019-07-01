@@ -155,6 +155,9 @@ public class Platform implements Serializable {
         playersOnThePlatform.add(character);
     }
 
+    /**
+     * @param character to remove from the platform if it moves
+     */
     public void removePlayerOnPlatform(Character character) {
         playersOnThePlatform.remove(character);
     }
@@ -180,7 +183,7 @@ public class Platform implements Serializable {
     }
 
     /**
-     *
+     * at the end of the turn a new weapon card will be placed
      */
     public void addWeaponCard(WeaponCard weaponCard) throws InvalidGenerationSpotException {
         if (!this.isGenerationSpot())
@@ -198,6 +201,11 @@ public class Platform implements Serializable {
         weapons.remove(weaponCard);
     }
 
+    /**
+     *
+     * @return the ammocard on the platform
+     * @throws InvalidCardException .
+     */
     public AmmoCard grabAmmoCard() throws InvalidCardException {
         if (hasAmmoCard) {
             AmmoCard res = platformAmmoCard;

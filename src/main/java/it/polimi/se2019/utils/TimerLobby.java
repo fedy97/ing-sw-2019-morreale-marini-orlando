@@ -2,6 +2,10 @@ package it.polimi.se2019.utils;
 
 import it.polimi.se2019.controller.Controller;
 
+/**
+ * this class is used to create the timer in waiting lobby, each second
+ * will be called setSecondsLeftLobby
+ */
 public class TimerLobby extends Thread {
     private int seconds;
 

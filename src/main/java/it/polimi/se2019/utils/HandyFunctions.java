@@ -111,12 +111,21 @@ public class HandyFunctions {
         return (Color) Color.class.getField(color).get(null);
     }
 
+    /**
+     *
+     * @param list to be printed
+     * @param <T> is the generic type
+     */
     public static <T> void printList(List<T> list) {
         for (T el : list) {
             printConsole(el.toString());
         }
     }
 
+    /**
+     *
+     * @param button to light
+     */
     public static void enlightenButton(Button button) {
         button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
         button.setStyle(ENLIGHTED_BUTTON_STYLE);
@@ -125,6 +134,10 @@ public class HandyFunctions {
         button.setDisable(false);
     }
 
+    /**
+     *
+     * @param button to light
+     */
     public static void enlightenToggleButton(ToggleButton button) {
         button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
         button.setSelected(false);
@@ -134,6 +147,9 @@ public class HandyFunctions {
         button.setDisable(false);
     }
 
+    /**
+     * @param button to force the light in choosing targets
+     */
     public static void forceLightToggleButton(ToggleButton button) {
         button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
         button.setStyle(HOVERED_BUTTON_STYLE);
@@ -142,6 +158,10 @@ public class HandyFunctions {
         button.setDisable(false);
     }
 
+    /**
+     *
+     * @param button to force the light in gameboard controller
+     */
     public static void forceLightButton(Button button) {
         button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
         button.setStyle(HOVERED_BUTTON_STYLE);
@@ -150,6 +170,10 @@ public class HandyFunctions {
         button.setDisable(false);
     }
 
+    /**
+     *
+     * @param button to dark
+     */
     public static void darkenButton(Button button) {
         button.setStyle(DARKED_BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.DARKED_BUTTON_STYLE));
@@ -157,6 +181,10 @@ public class HandyFunctions {
         button.setDisable(true);
     }
 
+    /**
+     *
+     * @param button to dark
+     */
     public static void darkenToggleButton(ToggleButton button) {
         button.setStyle(DARKED_BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.DARKED_BUTTON_STYLE));

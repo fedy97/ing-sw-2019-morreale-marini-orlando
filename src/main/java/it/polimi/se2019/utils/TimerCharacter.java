@@ -2,6 +2,10 @@ package it.polimi.se2019.utils;
 
 import it.polimi.se2019.controller.Controller;
 
+/**
+ * this class is used to create the timer in characters page, each second
+ * will be called setSecondsLeftCharacter
+ */
 public class TimerCharacter extends Thread {
     private int seconds;
 
