@@ -23,7 +23,7 @@ public final class MachineGun extends WeaponTwoAddingEffect {
 
                 //Chose one or two targets you can see and deal 1 damage to each
                 for (Character character : chosenTargets)
-                    damages.put(game.getPlayer(character), 10);
+                    damages.put(game.getPlayer(character), 1);
                 playerManager.addDamage(damages);
 
                 usableEffects[0] = false;
