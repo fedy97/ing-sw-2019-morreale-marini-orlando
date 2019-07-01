@@ -621,8 +621,10 @@ public class Controller implements Observer, Serializable {
                 int config = findWhichMapWon();
                 createAssets(config);
                 notifyAll(new ShowChooseCharacterMessage(Integer.toString(config)));
-                TimerCharacter t = new TimerCharacter(timerSetup);
-                t.start();
+                if (!debug) {
+                    TimerCharacter t = new TimerCharacter(timerSetup);
+                    t.start();
+                }
             } catch (Exception e) {
                 CustomLogger.logException(getClass().getName(), e);
             }
