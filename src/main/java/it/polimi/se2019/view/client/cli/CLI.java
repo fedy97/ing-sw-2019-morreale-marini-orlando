@@ -303,6 +303,7 @@ public class CLI extends RemoteView {
     }
 
     public void iWantToUsePowerUp() {
+        updateAll(lightGameVersion);
         actionState = 1;
         isAsking = true;
         isChoosingPowerUp = true;
