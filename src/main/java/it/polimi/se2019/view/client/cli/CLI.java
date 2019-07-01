@@ -917,6 +917,9 @@ public class CLI extends RemoteView {
     @Override
     public void updateTimerTurn(int seconds, String curr) {
         timeLeft = seconds;
+        if (seconds == 0 && isMyTurn()) {
+            System.exit(0);
+        }
         /*
         CliSetUp.savePosition();
         if (currState == 0)
