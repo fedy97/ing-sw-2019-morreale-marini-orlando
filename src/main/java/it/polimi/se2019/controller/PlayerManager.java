@@ -9,8 +9,8 @@ import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.network.message.to_client.SendBinaryOption;
-import it.polimi.se2019.network.message.to_client.ShowUsablePowerupsMessage;
+import it.polimi.se2019.network.message.toclient.SendBinaryOption;
+import it.polimi.se2019.network.message.toclient.ShowUsablePowerupsMessage;
 import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 
@@ -117,7 +117,7 @@ public class PlayerManager implements Serializable {
                 currentPlayer.addWeaponCard(weaponCard);
                 currentPlayer.getCurrentPlatform().removeWeaponCard(weaponCard);
             } catch (MaxWeaponException e) {
-                /** TODO
+                /**
                  WeaponCard choice = father.askForDiscard(currentPlayer.getWeaponCards());
 
                  if (choice != null) {

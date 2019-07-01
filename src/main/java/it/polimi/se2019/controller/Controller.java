@@ -22,8 +22,8 @@ import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.rep.AmmoRep;
 import it.polimi.se2019.model.rep.CardRep;
-import it.polimi.se2019.network.message.to_client.*;
-import it.polimi.se2019.network.message.to_server.ToServerMessage;
+import it.polimi.se2019.network.message.toclient.*;
+import it.polimi.se2019.network.message.toserver.ToServerMessage;
 import it.polimi.se2019.utils.*;
 import it.polimi.se2019.view.server.VirtualView;
 
@@ -43,6 +43,7 @@ public class Controller implements Observer, Serializable {
     private static final String RECHARGE = "recharge";
     private static final String TARGETS = "targets";
     private static final String WEAPONS = "weaponsToUse";
+    private static final String POSITION = "position";
     private static final String MOVE = "action1";
     private static final String GRAB = "action2";
     private static final String SHOOT = "action3";
@@ -252,7 +253,7 @@ public class Controller implements Observer, Serializable {
                 destinations = validator.getValidMoves(Action.SHOOT);
 
                 //send the possible destinations
-                askFor(destinations, "position");
+                askFor(destinations, POSITION);
                 playerManager.move(getChosenDestination().take());
 
                 if (!validator.getReloadableWeapons().isEmpty()) {
@@ -286,7 +287,7 @@ public class Controller implements Observer, Serializable {
 
                 destinations = validator.getValidMoves(Action.MOVE);
                 //send the possible destinations
-                askFor(destinations, "position");
+                askFor(destinations, POSITION);
                 playerManager.move(getChosenDestination().take());
             }
 
@@ -306,7 +307,7 @@ public class Controller implements Observer, Serializable {
                 destinations = validator.getValidMoves(Action.MOVE);
 
                 //send the possible destinations
-                askFor(destinations, "position");
+                askFor(destinations, POSITION);
                 playerManager.move(getChosenDestination().take());
 
             } else if (action.equals(GRAB)) {
@@ -322,7 +323,7 @@ public class Controller implements Observer, Serializable {
 
                 try {
                     destinations = validator.getValidMoves(Action.SHOOT);
-                    askFor(destinations, "position");
+                    askFor(destinations, POSITION);
                     getPlayerManager().move(getChosenDestination().take());
                 } catch (InvalidActionException e) {
                     CustomLogger.logInfo(this.getClass().getName(), "You cannot move before shooting!");
@@ -343,7 +344,7 @@ public class Controller implements Observer, Serializable {
         List<Platform> destinations = validator.getValidMoves(Action.GRAB);
 
         //ask where to move before grabbing
-        askFor(destinations, "position");
+        askFor(destinations, POSITION);
         Platform dest = getChosenDestination().take();
         getPlayerManager().move(dest);
 
@@ -525,7 +526,7 @@ public class Controller implements Observer, Serializable {
             case WEAPONS:
                 msg = new ShowUsableWeaponsMessage(lightVersion);
                 break;
-            case "position":
+            case POSITION:
                 msg = new ShowPlatformMessage(lightVersion);
                 break;
             case TARGETS:

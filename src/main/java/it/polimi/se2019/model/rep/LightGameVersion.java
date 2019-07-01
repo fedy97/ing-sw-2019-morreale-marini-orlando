@@ -1,6 +1,6 @@
 package it.polimi.se2019.model.rep;
 
-import it.polimi.se2019.network.message.to_client.ToClientMessage;
+import it.polimi.se2019.network.message.toclient.ToClientMessage;
 import it.polimi.se2019.view.client.RemoteView;
 
 import java.io.Serializable;

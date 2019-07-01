@@ -3,7 +3,7 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.controller.validator.UserValidActions;
 import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.enumeration.Character;
-import it.polimi.se2019.network.message.to_client.SendBinaryOption;
+import it.polimi.se2019.network.message.toclient.SendBinaryOption;
 import org.junit.Before;
 import org.junit.Test;
 

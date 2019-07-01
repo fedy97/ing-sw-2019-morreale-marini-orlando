@@ -5,8 +5,7 @@ import it.polimi.se2019.Lobby;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.network.message.to_client.ToClientMessage;
-import it.polimi.se2019.network.server.Server;
+import it.polimi.se2019.network.message.toclient.ToClientMessage;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.View;
 

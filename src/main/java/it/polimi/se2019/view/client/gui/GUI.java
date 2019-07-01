@@ -3,7 +3,7 @@ package it.polimi.se2019.view.client.gui;
 import it.polimi.se2019.model.rep.AmmoRep;
 import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.model.rep.LightGameVersion;
-import it.polimi.se2019.network.message.to_server.*;
+import it.polimi.se2019.network.message.toserver.*;
 import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.utils.TimerTurn;

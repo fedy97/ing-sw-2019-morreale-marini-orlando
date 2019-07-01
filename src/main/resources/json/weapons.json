@@ -2,7 +2,7 @@
   "weapons": [
     {
       "name": "distruttore",
-      "description": "effetto base: Dai 2 danni e 1 marchio a 1 bersaglio che puoi\nvedere. modalità base: Dai 1 danno a ogni altro giocatore presente\nnel quadrato in cui ti trovi.\nsecondo aggancio: Dai 1 marchio a un altro bersaglio che\npuoi vedere.",
+      "description": "effetto base: Dai 2 danni e 1 marchio a 1 bersaglio che puoi vedere.\nsecondo aggancio: Dai 1 marchio a un altro bersaglio che\npuoi vedere.",
       "paidCost": "BLUE",
       "extraCost": ["BLUE"]
     },

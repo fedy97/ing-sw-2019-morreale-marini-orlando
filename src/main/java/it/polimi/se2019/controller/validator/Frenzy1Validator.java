@@ -2,13 +2,11 @@ package it.polimi.se2019.controller.validator;
 
 import it.polimi.se2019.Action;
 import it.polimi.se2019.controller.Controller;
-import it.polimi.se2019.exceptions.InvalidActionException;
 import it.polimi.se2019.model.board.GameField;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.utils.CustomLogger;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * @author Gabriel Raul Marini

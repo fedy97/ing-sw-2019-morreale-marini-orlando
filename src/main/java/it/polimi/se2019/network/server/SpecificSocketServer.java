@@ -1,6 +1,6 @@
 package it.polimi.se2019.network.server;
 
-import it.polimi.se2019.network.message.to_server.ToServerMessage;
+import it.polimi.se2019.network.message.toserver.ToServerMessage;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.view.server.VirtualView;
 

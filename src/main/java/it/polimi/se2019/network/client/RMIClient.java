@@ -1,8 +1,8 @@
 package it.polimi.se2019.network.client;
 
-import it.polimi.se2019.network.message.to_client.ToClientMessage;
-import it.polimi.se2019.network.message.to_client.UsernameAlreadyInUseMessage;
-import it.polimi.se2019.network.message.to_server.ToServerMessage;
+import it.polimi.se2019.network.message.toclient.ToClientMessage;
+import it.polimi.se2019.network.message.toclient.UsernameAlreadyInUseMessage;
+import it.polimi.se2019.network.message.toserver.ToServerMessage;
 import it.polimi.se2019.network.server.Server;
 import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.view.client.RemoteView;
