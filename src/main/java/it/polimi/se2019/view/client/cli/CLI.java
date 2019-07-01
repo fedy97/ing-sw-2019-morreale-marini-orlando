@@ -824,7 +824,7 @@ public class CLI extends RemoteView {
                 isAsking = false;
                 CliSetUp.restorePosition();
                 updateAll(lightGameVersion);
-                //CliPrinter.stamp("\n");
+                CliPrinter.stamp("\n");
             } else {
                 updateAll(lightGameVersion);
                 showTargets(targets);
