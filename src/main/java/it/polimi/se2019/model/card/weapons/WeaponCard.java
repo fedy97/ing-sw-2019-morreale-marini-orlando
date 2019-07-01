@@ -129,13 +129,16 @@ public class WeaponCard extends Card {
 
     public void discard() {
         loaded = false;
+        cleanCache();
     }
 
     /**
      * Clean the last action memory once the card was used
      */
     protected void cleanCache() {
-        for (Effect effect : effects)
+        for (Effect effect : effects) {
             effect.getLastEffectTargets().clear();
+            effect.getPossibleTargets().clear();
+        }
     }
 }

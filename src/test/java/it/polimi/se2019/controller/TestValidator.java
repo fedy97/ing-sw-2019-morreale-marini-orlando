@@ -110,7 +110,7 @@ public class TestValidator extends TestControllerChild {
 
     @After
     public void finisTest() {
-        currPlayer.getWeaponCards().clear();
-        currPlayer.getPowerUpCards().clear();
+        currPlayer.removePowerUps();
+        currPlayer.removeWeapons();
     }
 }

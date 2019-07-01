@@ -66,7 +66,9 @@ public class TurnController implements Serializable {
      */
     public void endTurn() {
         Player previousPlayer = c.getPlayerManager().getCurrentPlayer();
+        HandyFunctions.printList(previousPlayer.getWeaponCards());
         previousPlayer.getPlayerBoard().getAmmoBox().getOptionals().clear();
+
 
         checkDeadPlayers();
 

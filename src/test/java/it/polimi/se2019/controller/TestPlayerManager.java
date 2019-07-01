@@ -139,4 +139,13 @@ public class TestPlayerManager extends TestControllerChild {
             fail();
         }
     }
+
+    @After
+    public void finishTest(){
+        playerManager.getCurrentPlayer().removePowerUps();
+        playerManager.getCurrentPlayer().removeWeapons();
+        playerManager.getCurrentPlayer().getPlayerBoard().getRevengeMarks().clear();
+        playerManager.getCurrentPlayer().getPlayerBoard().getDamageLine().clear();
+        playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().clear();
+    }
 }

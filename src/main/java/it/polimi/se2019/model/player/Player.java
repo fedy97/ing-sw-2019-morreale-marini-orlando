@@ -137,7 +137,7 @@ public class Player implements Serializable {
      * @return List containing the player's power up cards
      */
     public List<PowerUpCard> getPowerUpCards() {
-        return powerUpCards;
+        return new ArrayList<>(powerUpCards);
     }
 
     /**
@@ -146,7 +146,21 @@ public class Player implements Serializable {
      * @return List containing the player's weapon cards
      */
     public List<WeaponCard> getWeaponCards() {
-        return weaponCards;
+        return new ArrayList<>(weaponCards);
+    }
+
+    /**
+     * Remove all the powerups
+     */
+    public void removePowerUps(){
+        powerUpCards.clear();
+    }
+
+    /**
+     * Remove all the weapons
+     */
+    public void removeWeapons(){
+        weaponCards.clear();
     }
 
     /**
