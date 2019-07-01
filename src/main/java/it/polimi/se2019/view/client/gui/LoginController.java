@@ -29,6 +29,7 @@ public class LoginController {
     private String selection;
     private Font normale;
     private Font grande;
+    private static final String LOCALHOST = "127.0.0.1";
 
     public void initialize() {
         grande = Font.loadFont(
@@ -89,7 +90,7 @@ public class LoginController {
     }
 
     private String getIp() {
-        if (ipTextField.getText().equals("")) return "127.0.0.1";
+        if (ipTextField.getText().equals("")) return LOCALHOST;
         return ipTextField.getText();
     }
 
