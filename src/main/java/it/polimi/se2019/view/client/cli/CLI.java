@@ -14,8 +14,10 @@ import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.client.RemoteView;
 
 import javax.sound.sampled.Clip;
+import java.io.BufferedReader;
 import java.io.Console;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
@@ -162,7 +164,6 @@ public class CLI extends RemoteView {
             if (!isAsking /*&& isMyTurn() && currentState == CliState.ACTIONSELECTION*/) {
                 new Thread(() -> {
                     isAsking = true;
-                    Scanner flush = new Scanner(System.in);
                     Console c = System.console();
                     int choise;
                     choise = Character.getNumericValue((c.readPassword())[0]);
@@ -718,8 +719,7 @@ public class CLI extends RemoteView {
                 }
             } else {
                 updateAll(lightGameVersion);
-                CliSetUp.cursorDown(1);
-                CliSetUp.cursorLeft(22);
+                CliPrinter.stamp("\n");
                 lightPlatforms(platforms);
             }
         }).start();
