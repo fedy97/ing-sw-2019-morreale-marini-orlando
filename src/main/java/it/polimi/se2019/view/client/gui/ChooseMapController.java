@@ -81,7 +81,7 @@ public class ChooseMapController {
     /**
      * here I need the reference to GUI in order to notify it for the click of a button
      *
-     * @param gui
+     * @param gui of the user
      */
     protected void passGUI(GUI gui) {
         this.gui = gui;
@@ -118,7 +118,7 @@ public class ChooseMapController {
         HandyFunctions.darkenToggleButton(map4button);
     }
 
-    public void updateVotes(Map<Integer, Integer> map) {
+    void updateVotes(Map<Integer, Integer> map) {
         int n = 1;
         for (Label l : voteLabels) {
             l.setText("Votes: " + map.get(n).toString());
@@ -126,7 +126,7 @@ public class ChooseMapController {
         }
     }
 
-    public void updateTimer(int count) {
+    void updateTimer(int count) {
         timer.setText("Timer: " + count);
     }
 

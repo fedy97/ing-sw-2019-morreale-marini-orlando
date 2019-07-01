@@ -329,7 +329,7 @@ public class GameBoardController {
         this.gui = gui;
     }
 
-    protected void setAmmoReps(List<AmmoRep> ammoReps) {
+    void setAmmoReps(List<AmmoRep> ammoReps) {
         this.ammoReps = ammoReps;
     }
 
@@ -642,15 +642,15 @@ public class GameBoardController {
         timer.setFont(gui.getGrande());
     }
 
-    protected void setConfig(String config) {
+    void setConfig(String config) {
         this.config = config;
     }
 
-    protected void setPosWeaponsReps(Map<String, List<CardRep>> posWeaponsReps) {
+    void setPosWeaponsReps(Map<String, List<CardRep>> posWeaponsReps) {
         this.posWeaponsReps = posWeaponsReps;
     }
 
-    protected void updateAll(LightGameVersion lightGameVersion) {
+    void updateAll(LightGameVersion lightGameVersion) {
         this.lightGameVersion = lightGameVersion;
         try {
             //update position of players
@@ -818,13 +818,13 @@ public class GameBoardController {
         }
     }
 
-    protected void enlightenPlatforms(List<String> plats) {
+    void enlightenPlatforms(List<String> plats) {
         for (String pl : plats)
             HandyFunctions.enlightenButton(posPlatform.get(pl));
 
     }
 
-    protected void enlightenWeapons(List<String> hashes) {
+    void enlightenWeapons(List<String> hashes) {
         for (Map.Entry<Button, String> entry : buttonsHashes.entrySet()) {
             Button currButt = entry.getKey();
             String currHash = entry.getValue();
@@ -834,7 +834,7 @@ public class GameBoardController {
         }
     }
 
-    protected void showMessage(String message) {
+    void showMessage(String message) {
         messageLabel.setText(message);
     }
 
@@ -854,7 +854,7 @@ public class GameBoardController {
         }
     }
 
-    protected void showBinaryMessage(String message) {
+    void showBinaryMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Choose an option");
         alert.setHeaderText(message);
@@ -876,7 +876,7 @@ public class GameBoardController {
         }
     }
 
-    protected void updateTurnTimer(int count) {
+    void updateTurnTimer(int count) {
         timer.setText("Timer : " + count);
     }
 
@@ -1068,7 +1068,6 @@ public class GameBoardController {
         darkenAllPlatforms();
         gui.sendPlatformChosen("2,3");
     }
-
     public void in10_1click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("1,0").get(0));
     }
@@ -1116,7 +1115,7 @@ public class GameBoardController {
         }
     }
 
-    protected void setActiveButtons(boolean[] actives) {
+    void setActiveButtons(boolean[] actives) {
         if (actives[0]) HandyFunctions.enlightenButton(movebutton);
         else HandyFunctions.darkenButton(movebutton);
         if (actives[1]) HandyFunctions.enlightenButton(grabbutton);
@@ -1133,7 +1132,7 @@ public class GameBoardController {
         else HandyFunctions.darkenButton(convertbutton);
     }
 
-    public void setReconnected(boolean reconnected) {
+    void setReconnected(boolean reconnected) {
         this.reconnected = reconnected;
         firstSetupReconnected = true;
     }

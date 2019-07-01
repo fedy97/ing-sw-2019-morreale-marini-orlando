@@ -24,7 +24,6 @@ public class TimerMap extends Thread {
             }
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
-        } catch (Exception ex) {
         }
 
     }

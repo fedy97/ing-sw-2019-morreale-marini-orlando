@@ -40,7 +40,7 @@ public class ChooseCharacterController {
     /**
      * here I need the reference to GUI in order to notify it for the click of a button
      *
-     * @param gui
+     * @param gui of the user
      */
     protected void passGUI(GUI gui) {
         this.gui = gui;
@@ -107,11 +107,11 @@ public class ChooseCharacterController {
         HandyFunctions.darkenToggleButton(bluebutton);
     }
 
-    public void updateTimer(int count) {
+    void updateTimer(int count) {
         timer.setText("Game will start in: " + count);
     }
 
-    public void updateCharacters(String c) {
+    void updateCharacters(String c) {
         HandyFunctions.darkenToggleButton(buttons.get(c));
     }
 
