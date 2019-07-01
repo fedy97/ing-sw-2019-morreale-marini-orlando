@@ -23,6 +23,7 @@ public class ShowReconnectedGameBoard extends ToClientMessage {
     public void performAction(RemoteView remoteView) {
         int config = (int) payload;
         remoteView.showReconnectedGameBoard(config, lightGameVersion, arrChars, myChar);
+        remoteView.showActionMenu();
     }
 
 }
