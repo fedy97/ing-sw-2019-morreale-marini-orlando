@@ -64,6 +64,7 @@ public class CLI extends RemoteView {
     private int actionState;
     private int toReborn;
     private int timeLeft;
+    private int oneTimeCall;
 
     public CLI() {
         try {
@@ -97,6 +98,7 @@ public class CLI extends RemoteView {
         inputSeconds = 10;
         toReborn = 0;
         timeLeft = 0;
+        oneTimeCall = 0;
     }
 
     @Override
@@ -902,6 +904,7 @@ public class CLI extends RemoteView {
         updateAll(lightGameVersion);
         toReborn = 0;
         powerUpChosen = true;
+        oneTimeCall = 1;
     }
 
 
