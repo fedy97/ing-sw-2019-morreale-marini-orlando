@@ -56,6 +56,7 @@ public class CLI extends RemoteView {
     private int toReborn;
     private int timeLeft;
     private boolean callPowerUpChosen;
+    private boolean myTurn;
 
     public CLI() {
         try {
@@ -87,6 +88,7 @@ public class CLI extends RemoteView {
         toReborn = 0;
         timeLeft = 0;
         callPowerUpChosen = false;
+        myTurn = false;
     }
 
     @Override
@@ -328,6 +330,7 @@ public class CLI extends RemoteView {
         viewSetChanged();
         notifyObservers(message);
         updateAll(lightGameVersion);
+        myTurn = false;
     }
 
     /**
@@ -906,6 +909,8 @@ public class CLI extends RemoteView {
     @Override
     public void updateTimerTurn(int seconds, String curr) {
         timeLeft = seconds;
+        if(!myTurn && powerUpChosen)
+            updateAll(lightGameVersion);
         if (seconds == 0 && isMyTurn()) {
             System.exit(0);
         }
@@ -1137,6 +1142,7 @@ public class CLI extends RemoteView {
 
         if (powerUpChosen && toReborn == 0) {
             getActionInput();
+            myTurn = true;
             actionState = 1;
         }
     }
