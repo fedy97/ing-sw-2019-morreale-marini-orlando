@@ -6,7 +6,6 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.toclient.ToClientMessage;
-import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.View;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public class VirtualView extends View {
 
     /**
      * @param virtualServer either RMIServer or SocketServer
-     * @param user
+     * @param user          .
      */
     public VirtualView(String user) {
         this.user = user;
@@ -47,53 +46,49 @@ public class VirtualView extends View {
 
     @Override
     public void start() {
+        //
 
     }
 
     public void startGame() {
-
+//
     }
 
     @Override
     public void setCommunicationType() {
-        //TODO
+        //
     }
 
     @Override
     public void startConnection() {
-        //TODO
+        //
     }
 
     @Override
     public void setUserName() {
-        //TODO
+        //
     }
 
     @Override
     public void waitGameStart() {
-        //TODO
+        //
     }
 
     public void getCurrentPlayer() {
-        //TODO
-    }
-
-    @Override
-    public void setState(State newState) {
-        //TODO
+        //
     }
 
     /**
      * @param targets players to show as targets
      */
     public void lightPlayers(List<Player> targets) {
-        //TODO
+        //
     }
 
     /**
      * Common method across RMI and Socket to send requests to client
      *
-     * @param msg  to the destination client, the virtual view know his own user
+     * @param msg to the destination client, the virtual view know his own user
      */
     public void callView(ToClientMessage msg) {
         if (Lobby.getRmiServer().isConnected(user))

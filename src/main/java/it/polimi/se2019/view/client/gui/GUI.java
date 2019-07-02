@@ -6,7 +6,6 @@ import it.polimi.se2019.model.rep.LightGameVersion;
 import it.polimi.se2019.network.message.toserver.*;
 import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.TimerTurn;
-import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.client.RemoteView;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -622,12 +621,6 @@ public class GUI extends RemoteView {
     public void lightPlatforms(List<String> platforms) {
         Platform.runLater(
                 () -> gameBoardController.enlightenPlatforms(platforms));
-    }
-
-
-    @Override
-    public void setState(State newState) {
-        //useless
     }
 
     @Override

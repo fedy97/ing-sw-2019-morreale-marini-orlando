@@ -10,7 +10,6 @@ import it.polimi.se2019.network.message.toserver.*;
 import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.utils.TimerTurn;
-import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.client.RemoteView;
 
 import java.io.Console;
@@ -657,11 +656,6 @@ public class CLI extends RemoteView {
         CliPrinter.welcomeMessage();
         HandyFunctions.printConsole("\n\n");
         CliPrinter.boxWaitingMessage();
-    }
-
-    @Override
-    public void setState(State newState) {
-        state = newState;
     }
 
     @Override

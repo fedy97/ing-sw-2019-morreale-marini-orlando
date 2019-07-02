@@ -3,7 +3,6 @@ package it.polimi.se2019.view;
 import it.polimi.se2019.Action;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,13 +11,17 @@ import java.util.Observer;
  */
 public abstract class View extends Observable implements Observer, Serializable {
 
-    protected State state;
     protected Action chosenAction;
     protected String userName;
-    public void viewSetChanged(){
+
+    public void viewSetChanged() {
         this.setChanged();
     }
-    public String getUserName() {return userName;}
+
+    public String getUserName() {
+        return userName;
+    }
+
     public abstract void start();
 
     public abstract void setCommunicationType();
@@ -28,8 +31,6 @@ public abstract class View extends Observable implements Observer, Serializable 
     public abstract void setUserName();
 
     public abstract void waitGameStart();
-
-    public abstract void setState(State newState);
 
     public abstract void startGame();
 
