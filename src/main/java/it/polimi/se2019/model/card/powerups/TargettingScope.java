@@ -21,13 +21,6 @@ public final class TargettingScope extends PowerUpCard {
     }
 
     /**
-     * Return if the player in his current state can use the power up or not
-     */
-    public boolean isUsable(Player player) {
-        return true;
-    }
-
-    /**
      * @return a collection of players that can be the target
      */
     @Override

@@ -29,10 +29,6 @@ public class HandyFunctions {
         System.out.print(message);
     }
 
-    public static void printLineConsole(String message) {
-        System.out.println(message);
-    }
-
     public static void printConsole(int value) {
         System.out.print(value);
     }
@@ -51,7 +47,7 @@ public class HandyFunctions {
 
     /**
      * @param position of the platform
-     * @return true if the posiiton is in the 3x4 matrix
+     * @return true if the position is in the 3x4 matrix
      */
     public static boolean isValidPosition(int[] position) {
         boolean isOk = true;
@@ -142,8 +138,8 @@ public class HandyFunctions {
         button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
         button.setSelected(false);
         button.setStyle(ENLIGHTED_BUTTON_STYLE);
-        button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
         button.setOnMouseExited(e -> button.setStyle(HandyFunctions.ENLIGHTED_BUTTON_STYLE));
+        button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
         button.setDisable(false);
     }
 
@@ -165,8 +161,8 @@ public class HandyFunctions {
     public static void forceLightButton(Button button) {
         button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
         button.setStyle(HOVERED_BUTTON_STYLE);
-        button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
         button.setOnMouseExited(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
+        button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
         button.setDisable(false);
     }
 
@@ -186,9 +182,9 @@ public class HandyFunctions {
      * @param button to dark
      */
     public static void darkenToggleButton(ToggleButton button) {
-        button.setStyle(DARKED_BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.DARKED_BUTTON_STYLE));
         button.setOnMouseExited(e -> button.setStyle(HandyFunctions.DARKED_BUTTON_STYLE));
+        button.setStyle(DARKED_BUTTON_STYLE);
         button.setDisable(true);
     }
 }

@@ -29,7 +29,6 @@ public final class Electroscythe extends WeaponAlternativeFire {
 
                 usableEffects[0] = false;
                 usableEffects[1] = false;
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
             @Override

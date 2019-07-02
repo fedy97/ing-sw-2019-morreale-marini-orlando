@@ -15,6 +15,7 @@ public enum Character {
     BANSHEE(Color.blue),
     VIOLET(Color.pink);
 
+
     private final Color color;
 
     /**

@@ -150,34 +150,4 @@ public class TestDeck {
        deck2.addCards(new ArrayList<>());
     }
 
-    /**
-     * Test the behavior of mix() verifying if the deck is mixed properly
-     */
-    /*@Test
-    public void testMixDeck() {
-        Deck deck = new Deck(4);
-
-        Teleporter t1 = new Teleporter(AmmoCube.YELLOW);
-        Teleporter t2 = new Teleporter(AmmoCube.YELLOW);
-        Teleporter t3 = new Teleporter(AmmoCube.YELLOW);
-        Teleporter t4 = new Teleporter(AmmoCube.YELLOW);
-
-        try {
-            deck.addCard(t1);
-            deck.addCard(t2);
-            deck.addCard(t3);
-            deck.addCard(t4);
-        } catch (InvalidDeckException e) {
-            fail();
-        }
-
-        deck.mix();
-
-        try {
-            assertNotEquals(t4, deck.drawCard());
-        } catch (NoCardException e) {
-            fail();
-        }
-    }*/
-
 }

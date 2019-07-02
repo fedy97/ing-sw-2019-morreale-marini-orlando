@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
@@ -37,7 +38,38 @@ public class TestController extends TestControllerChild {
     }
 
     @Test
-    public void testActivaFrenzyMode() {
+    public void testStartGame() {
+        c.startGame();
+        assertEquals(ControllerState.IDLE, c.getState());
+    }
+
+    @Test
+    public void testAskFor() {
+        try {
+            c.askFor(new ArrayList<>(), "weapons");
+            c.askFor(new ArrayList<>(), "weaponsToUse");
+            c.askFor(new ArrayList<>(), "position");
+            c.askFor(new ArrayList<>(), "targets");
+            c.askFor(new ArrayList<>(), "discard");
+            c.askFor(new ArrayList<>(), "cube");
+            c.askFor(new ArrayList<>(), "recharge");
+            c.askFor(new ArrayList<>(), "powerups");
+            c.askFor(new ArrayList<>(), "no choice");
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testSetTimerStarted() {
+        c.setTimerStarted(true);
+        assertTrue(c.isTimerStarted());
+        c.setTimerStarted(false);
+        assertFalse(c.isTimerStarted());
+    }
+
+    @Test
+    public void testActivateFrenzyMode() {
         assertFalse(c.isFrenzyModeOn());
         c.activateFrenzyMode();
         assertTrue(c.isFrenzyModeOn());
@@ -48,7 +80,17 @@ public class TestController extends TestControllerChild {
     public void testNotifyAll() {
         try {
             c.notifyAll(new SendBinaryOption("test"));
+        } catch (Exception e) {
+            fail();
+        }
+    }
 
+
+    @Test
+    public void testSetCharacterChosen() {
+        try {
+            c.setCharacterChosen("user2", Character.VIOLET.toString());
+            assertEquals(Character.VIOLET, c.getGame().getPlayer("user2").getCharacter());
         } catch (Exception e) {
             fail();
         }
@@ -60,5 +102,12 @@ public class TestController extends TestControllerChild {
         for (String charName : characterList) {
             assertNotNull(c.getGame().getPlayer(Character.valueOf(charName)));
         }
+    }
+
+    @Test
+    public void testSetState(){
+        c.setState(ControllerState.PROCESSING_POWERUP);
+        assertEquals(ControllerState.PROCESSING_POWERUP, c.getState());
+        c.setState(ControllerState.IDLE);
     }
 }
