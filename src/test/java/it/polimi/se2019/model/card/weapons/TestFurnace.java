@@ -26,6 +26,7 @@ public class TestFurnace extends TestWeaponFather {
 
     @Test
     public void testEffect1() {
+        furnace.getEffects().get(0).setupTargets();
         c.getChosenDestination().add(game.getGameField().getPlatforms().get(2));
         assertNull(furnace.getEffects().get(0).getPossibleTargets());
         furnace.activateEffect(0, null);
@@ -42,6 +43,7 @@ public class TestFurnace extends TestWeaponFather {
 
     @Test
     public void testEffect2() {
+        furnace.getEffects().get(1).setupTargets();
         c.getChosenDestination().add(game.getGameField().getPlatforms().get(2));
         assertNull(furnace.getEffects().get(1).getPossibleTargets());
         furnace.activateEffect(1, null);
@@ -59,6 +61,7 @@ public class TestFurnace extends TestWeaponFather {
     @After
     public void finishTest(){
         super.finishTest();
+        furnace.reload();
     }
 
 }

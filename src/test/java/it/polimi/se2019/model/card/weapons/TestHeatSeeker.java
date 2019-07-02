@@ -34,11 +34,13 @@ public class TestHeatSeeker extends TestWeaponFather {
         List<Character> violet = new ArrayList<>();
         violet.add(Character.VIOLET);
         heatSeeker.activateEffect(0, violet);
+        assertTrue(game.getPlayer(Character.VIOLET).getPlayerBoard().getDamageLine().size() == 3);
         assertTrue(game.getPlayer(Character.VIOLET).getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
     }
 
     @After
     public void finishTest(){
         super.finishTest();
+        heatSeeker.reload();
     }
 }
