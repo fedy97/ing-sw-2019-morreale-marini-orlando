@@ -108,9 +108,8 @@ public class HandyFunctions {
     }
 
     /**
-     *
      * @param list to be printed
-     * @param <T> is the generic type
+     * @param <T>  is the generic type
      */
     public static <T> void printList(List<T> list) {
         for (T el : list) {
@@ -119,27 +118,25 @@ public class HandyFunctions {
     }
 
     /**
-     *
-     * @param button to light
-     */
-    public static void enlightenButton(Button button) {
-        button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
-        button.setStyle(ENLIGHTED_BUTTON_STYLE);
-        button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
-        button.setOnMouseExited(e -> button.setStyle(HandyFunctions.ENLIGHTED_BUTTON_STYLE));
-        button.setDisable(false);
-    }
-
-    /**
-     *
      * @param button to light
      */
     public static void enlightenToggleButton(ToggleButton button) {
         button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
         button.setSelected(false);
         button.setStyle(ENLIGHTED_BUTTON_STYLE);
-        button.setOnMouseExited(e -> button.setStyle(HandyFunctions.ENLIGHTED_BUTTON_STYLE));
-        button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
+        button.setOnMouseExited(e -> button.setStyle(ENLIGHTED_BUTTON_STYLE));
+        button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
+        button.setDisable(false);
+    }
+
+    /**
+     * @param button to light
+     */
+    public static void enlightenButton(Button button) {
+        button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
+        button.setStyle(ENLIGHTED_BUTTON_STYLE);
+        button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
+        button.setOnMouseExited(e -> button.setStyle(ENLIGHTED_BUTTON_STYLE));
         button.setDisable(false);
     }
 
@@ -149,42 +146,41 @@ public class HandyFunctions {
     public static void forceLightToggleButton(ToggleButton button) {
         button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
         button.setStyle(HOVERED_BUTTON_STYLE);
-        button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
-        button.setOnMouseExited(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
+        button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
+        button.setOnMouseExited(e -> button.setStyle(HOVERED_BUTTON_STYLE));
         button.setDisable(false);
     }
 
     /**
-     *
      * @param button to force the light in gameboard controller
      */
     public static void forceLightButton(Button button) {
         button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
         button.setStyle(HOVERED_BUTTON_STYLE);
-        button.setOnMouseExited(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
-        button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.HOVERED_BUTTON_STYLE));
+        button.setOnMouseExited(e -> button.setStyle(HOVERED_BUTTON_STYLE));
+        button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
         button.setDisable(false);
     }
 
     /**
-     *
      * @param button to dark
      */
     public static void darkenButton(Button button) {
         button.setStyle(DARKED_BUTTON_STYLE);
-        button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.DARKED_BUTTON_STYLE));
-        button.setOnMouseExited(e -> button.setStyle(HandyFunctions.DARKED_BUTTON_STYLE));
+        button.setOnMouseEntered(e -> button.setStyle(DARKED_BUTTON_STYLE));
+        button.setOnMouseExited(e -> button.setStyle(DARKED_BUTTON_STYLE));
         button.setDisable(true);
     }
 
     /**
-     *
      * @param button to dark
      */
     public static void darkenToggleButton(ToggleButton button) {
-        button.setOnMouseEntered(e -> button.setStyle(HandyFunctions.DARKED_BUTTON_STYLE));
-        button.setOnMouseExited(e -> button.setStyle(HandyFunctions.DARKED_BUTTON_STYLE));
+        button.setOnMouseEntered(e -> button.setStyle(DARKED_BUTTON_STYLE));
+        button.setOnMouseExited(e -> button.setStyle(DARKED_BUTTON_STYLE));
         button.setStyle(DARKED_BUTTON_STYLE);
         button.setDisable(true);
     }
+
+
 }

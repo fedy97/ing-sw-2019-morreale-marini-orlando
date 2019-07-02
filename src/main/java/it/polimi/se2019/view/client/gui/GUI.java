@@ -5,7 +5,6 @@ import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.model.rep.LightGameVersion;
 import it.polimi.se2019.network.message.toserver.*;
 import it.polimi.se2019.utils.CustomLogger;
-import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.utils.TimerTurn;
 import it.polimi.se2019.view.State;
 import it.polimi.se2019.view.client.RemoteView;
@@ -23,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.logging.Level;
+
+import static it.polimi.se2019.utils.HandyFunctions.LOGGER;
 
 public class GUI extends RemoteView {
 
@@ -180,7 +181,7 @@ public class GUI extends RemoteView {
             sceneUseWeapon = new Scene(root);
             useWeaponController = loader.getController();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing use weapon");
+            LOGGER.log(Level.SEVERE, "error initializing use weapon");
         }
     }
 
@@ -195,7 +196,7 @@ public class GUI extends RemoteView {
             sceneUsePowerup = new Scene(root);
             usePowerupController = loader.getController();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing use powerup");
+            LOGGER.log(Level.SEVERE, "error initializing use powerup");
         }
     }
 
@@ -208,7 +209,7 @@ public class GUI extends RemoteView {
             sceneChooseTargets = new Scene(root);
             chooseTargetsController = loader.getController();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose targets");
+            LOGGER.log(Level.SEVERE, "error initializing choose targets");
         }
     }
 
@@ -221,7 +222,7 @@ public class GUI extends RemoteView {
             sceneScoreboard = new Scene(root);
             scoreBoardController = loader.getController();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing score board");
+            LOGGER.log(Level.SEVERE, "error initializing score board");
         }
     }
 
@@ -234,7 +235,7 @@ public class GUI extends RemoteView {
             sceneChooseAmmos = new Scene(root);
             chooseAmmosController = loader.getController();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose ammos");
+            LOGGER.log(Level.SEVERE, "error initializing choose ammos");
         }
     }
 
@@ -249,7 +250,7 @@ public class GUI extends RemoteView {
             sceneBuyWithPowerups = new Scene(root);
             buyWithPowerupController = loader.getController();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing buy with powerups");
+            LOGGER.log(Level.SEVERE, "error initializing buy with powerups");
         }
     }
 
@@ -265,7 +266,7 @@ public class GUI extends RemoteView {
             switchWeaponController = loader.getController();
             switchWeaponStage.setOnCloseRequest(event -> sendWeaponToSwitch("null"));
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing switch weapon");
+            LOGGER.log(Level.SEVERE, "error initializing switch weapon");
         }
     }
 
@@ -281,7 +282,7 @@ public class GUI extends RemoteView {
             reloadWeaponsController = loader.getController();
             reloadWeaponsStage.setOnCloseRequest(event -> sendWeaponToReload("null"));
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing reload weapon");
+            LOGGER.log(Level.SEVERE, "error initializing reload weapon");
         }
     }
 
@@ -297,7 +298,7 @@ public class GUI extends RemoteView {
             playerBoardController = loader.getController();
             playerBoardStage.setOnCloseRequest(event -> playerBoardController.setCurrPlayerDisplay(null));
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing player board");
+            LOGGER.log(Level.SEVERE, "error initializing player board");
         }
     }
 
@@ -309,7 +310,7 @@ public class GUI extends RemoteView {
             sceneChooseCharacter = new Scene(root);
             chooseCharacterController = loader.getController();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose character");
+            LOGGER.log(Level.SEVERE, "error initializing choose character");
         }
     }
 
@@ -321,7 +322,7 @@ public class GUI extends RemoteView {
             sceneWaitingLobby = new Scene(root);
             waitingLobbyController = loader.getController();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing waiting lobby");
+            LOGGER.log(Level.SEVERE, "error initializing waiting lobby");
         }
     }
 
@@ -333,7 +334,7 @@ public class GUI extends RemoteView {
             sceneChooseMap = new Scene(root);
             chooseMapController = loader.getController();
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose map");
+            LOGGER.log(Level.SEVERE, "error initializing choose map");
         }
     }
 
@@ -347,7 +348,7 @@ public class GUI extends RemoteView {
             this.config = config;
             gameBoardController.setConfig(config);
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing reconnected game board");
+            LOGGER.log(Level.SEVERE, "error initializing reconnected game board");
         }
     }
 
@@ -362,7 +363,7 @@ public class GUI extends RemoteView {
             gameBoardController.setAmmoReps(ammoReps);
             gameBoardController.setPosWeaponsReps(posWeapons);
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing game board");
+            LOGGER.log(Level.SEVERE, "error initializing game board");
         }
     }
 
@@ -381,7 +382,7 @@ public class GUI extends RemoteView {
             ));
 
         } catch (IOException e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, "error initializing choose power up");
+            LOGGER.log(Level.SEVERE, "error initializing choose power up");
             CustomLogger.logException(this.getClass().getName(), e);
         }
 
@@ -840,5 +841,6 @@ public class GUI extends RemoteView {
     public void showActionMenu() {
         // FOR CLI.
     }
+
 }
 
