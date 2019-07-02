@@ -9,6 +9,7 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.toclient.SendBinaryOption;
 import it.polimi.se2019.utils.CustomLogger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public final class RocketLauncher extends WeaponTwoAddingEffect {
                 try {
                     if (c.getChosenBinaryOption().take()) {
                         //Calculating the possible platform destinations
-                        List<Platform> possibleDestinations = game.getGameField().getAvailablePlatforms(game.getPlayer(chosenTargets.get(0)).getCurrentPlatform(), 1);
+                        List<Platform> possibleDestinations = new ArrayList<>(game.getGameField().getAvailablePlatforms(game.getPlayer(chosenTargets.get(0)).getCurrentPlatform(), 1));
                         c.askFor(possibleDestinations, "position");
 
                         Platform destination = c.getChosenDestination().take();
@@ -53,7 +54,7 @@ public final class RocketLauncher extends WeaponTwoAddingEffect {
 
             @Override
             public void setupTargets() {
-                List<Character> targets = game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform());
+                List<Character> targets = new ArrayList<>(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform()));
                 targets.removeAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
                 this.setPossibleTargets(targets);
             }

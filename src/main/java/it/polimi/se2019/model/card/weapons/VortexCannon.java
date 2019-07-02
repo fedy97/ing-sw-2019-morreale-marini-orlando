@@ -24,7 +24,7 @@ public final class VortexCannon extends WeaponOneAddingEffect {
         Effect eff1 = new Effect(new AmmoCube[]{}) {
             @Override
             public void activateEffect(List<Character> chosenTargets, WeaponCard card) {
-                List<Platform> possibleVortexs = game.getGameField().getVisiblePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform());
+                List<Platform> possibleVortexs = new ArrayList<>(game.getGameField().getVisiblePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform()));
                 possibleVortexs.remove(playerManager.getCurrentPlayer().getCurrentPlatform());
 
                 c.sendMessage("Where do you want to open the vortex?", playerManager.getCurrentPlayer().getName());
@@ -88,7 +88,7 @@ public final class VortexCannon extends WeaponOneAddingEffect {
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(getLastEffectTargets());
+                this.setPossibleTargets(new ArrayList<>(getLastEffectTargets()));
             }
         };
 

@@ -79,7 +79,7 @@ public class TestGameField {
         try {
             int[] pos = {1, 1};
             Room r = gf.getRoom(pos);
-            assertEquals(null, r.getGenSpot());
+            assertNull(null, r.getGenSpot());
             assertEquals(-20561, r.getRoomColor().getRGB());
         } catch (InvalidPositionException e) {
             fail();
@@ -89,26 +89,33 @@ public class TestGameField {
 
     @Test
     public void testGetVisiblePlayers() throws InvalidCardException, NoSuchFieldException, IllegalAccessException, InvalidRoomException {
-
+        try {
+            Platform p = gf.getPlatform(gf.getField()[0][1].getPlatformPosition());
+            gf.getVisiblePlayers(p);
+        } catch (Exception ex) {
+            fail();
+        }
     }
 
     @Test
     public void testGetVisiblePlatforms() {
-
+        try {
+            Platform p = gf.getPlatform(gf.getField()[0][1].getPlatformPosition());
+            gf.getVisiblePlatforms(p);
+        } catch (Exception ex) {
+            fail();
+        }
     }
-
     @Test
-    public void testGetVisiblePlayers2() {
+    public void testGetPlatform2() {
+        try {
+            Platform p = gf.getPlatform(gf.getField()[0][1].getPlatformPosition());
+            gf.getPlatform(Integer.toString(p.hashCode()));
+            gf.getPlatform("ciao");
+        } catch (Exception ex) {
+            fail();
+        }
 
-    }
-
-    @Test
-    public void testGetPlatformPosLight() {
-
-    }
-
-    @Test
-    public void testgetPlatformDir() {
 
     }
 }

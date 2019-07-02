@@ -728,7 +728,7 @@ public class Controller implements Observer, Serializable {
                             }
                         }
                     }
-                    Thread.sleep(500);
+                    Thread.sleep(100);
                 }
             } catch (Exception ex) {
                 CustomLogger.logException(this.getClass().getName(), ex);

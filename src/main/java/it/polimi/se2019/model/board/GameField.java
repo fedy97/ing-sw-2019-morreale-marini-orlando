@@ -289,24 +289,6 @@ public class GameField implements Serializable {
     }
 
     /**
-     * @param platform whre the current player stands
-     * @param dirXY    is equal to "x" if the player wants to target every player in his "x" position,
-     *                 otherwise every target in "y" postion will be targeted
-     * @return an arraylist of players visible given the direction, this method is used by specific weapons
-     */
-    public List<Character> getVisiblePlayers(Platform platform, String dirXY) {
-        List<Character> characterArrayList = new ArrayList<>();
-        if (dirXY.equals("x")) {
-            for (int i = 0; i < 4; i++)
-                characterArrayList.addAll(field[platform.getPlatformPosition()[0]][i].getPlayersOnThePlatform());
-        } else {
-            for (int i = 0; i < 3; i++)
-                characterArrayList.addAll(field[i][platform.getPlatformPosition()[1]].getPlayersOnThePlatform());
-        }
-        return characterArrayList;
-    }
-
-    /**
      * @return an arraylist of every platform in the field
      */
     public List<Platform> getPlatforms() {

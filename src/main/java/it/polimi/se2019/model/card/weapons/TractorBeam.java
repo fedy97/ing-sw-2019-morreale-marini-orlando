@@ -22,8 +22,8 @@ public final class TractorBeam extends WeaponAlternativeFire {
             @Override
             public void activateEffect(List<Character> chosenTargets, WeaponCard card) {
                 Player target = game.getPlayer(chosenTargets.get(0));
-                List<Platform> destinations = game.getGameField().getAvailablePlatforms(target.getCurrentPlatform(),
-                        2);
+                List<Platform> destinations = new ArrayList<>(game.getGameField().getAvailablePlatforms(target.getCurrentPlatform(),
+                        2));
                 List<Platform> notVisible = new ArrayList<>();
                 for (Platform platform : destinations) {
                     if (!game.getGameField().getVisiblePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform()).contains(platform))
@@ -53,7 +53,7 @@ public final class TractorBeam extends WeaponAlternativeFire {
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform()));
+                this.setPossibleTargets(new ArrayList<>(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform())));
             }
         };
 
@@ -77,10 +77,8 @@ public final class TractorBeam extends WeaponAlternativeFire {
             @Override
             public void setupTargets() {
                 List<Character> possibleTargets = new ArrayList<>();
-
                 for (Platform p : game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 2))
                     possibleTargets.addAll(p.getPlayersOnThePlatform());
-
                 this.setPossibleTargets(possibleTargets);
             }
         };

@@ -8,6 +8,7 @@ import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.utils.CustomLogger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ public final class PlasmaGun extends WeaponTwoAddingEffect {
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform()));
+                this.setPossibleTargets(new ArrayList<>(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform())));
             }
         };
 

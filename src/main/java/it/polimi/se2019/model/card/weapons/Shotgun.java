@@ -8,7 +8,6 @@ import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.message.toclient.SendBinaryOption;
 import it.polimi.se2019.utils.CustomLogger;
-import it.polimi.se2019.utils.HandyFunctions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +31,7 @@ public final class Shotgun extends WeaponAlternativeFire {
                 try {
                     c.callView(new SendBinaryOption("Do you want to move the target 1 square away?"), playerManager.getCurrentPlayer().getName());
                     if (c.getChosenBinaryOption().take()) {
-                        List<Platform> destinations = game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 1);
+                        List<Platform> destinations = new ArrayList<>(game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 1));
                         c.sendMessage("Where do you want to move your target?", playerManager.getCurrentPlayer().getName());
                         c.askFor(destinations, "position");
                         target.setCurrentPlatform(c.getChosenDestination().take());
@@ -51,7 +50,6 @@ public final class Shotgun extends WeaponAlternativeFire {
             public void setupTargets() {
                 List<Character> targets = new ArrayList<>();
                 targets.addAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
-                HandyFunctions.printList(targets);
                 targets.remove(playerManager.getCurrentPlayer().getCharacter());
                 this.setPossibleTargets(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
             }
