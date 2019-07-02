@@ -1259,7 +1259,7 @@ public final class CliPrinter {
                 CliPrinter.stamp("powerups: ");
                 if (myChar.equals("BANSHEE")) {
                     for (CardRep c : bansheePowerUp) {
-                        CliPrinter.stamp(c.getTitle() + ", ");
+                        CliPrinter.stamp(c.getTitle() + ",");
                     }
                 }
                 CliSetUp.restorePosition();
@@ -1267,7 +1267,7 @@ public final class CliPrinter {
                 CliSetUp.savePosition();
                 CliPrinter.stamp("weapons: ");
                 for (CardRep c: bansheeWeapons) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinter.stamp(c.getTitle() + ",");
                 }
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
@@ -1351,7 +1351,7 @@ public final class CliPrinter {
                 CliPrinter.stamp("powerups: ");
                 if(myChar.equals("SPROG")) {
                     for (CardRep c : sprogPowerUp) {
-                        CliPrinter.stamp(c.getTitle() + ", ");
+                        CliPrinter.stamp(c.getTitle() + ",");
                     }
                 }
                 CliSetUp.restorePosition();
@@ -1359,7 +1359,7 @@ public final class CliPrinter {
                 CliSetUp.savePosition();
                 CliPrinter.stamp("weapons: ");
                 for (CardRep c: sprogWeapons) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinter.stamp(c.getTitle() + ",");
                 }
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
@@ -1442,7 +1442,7 @@ public final class CliPrinter {
                 CliPrinter.stamp("powerups: ");
                 if(myChar.equals("DOZER")) {
                     for (CardRep c : dozerPowerUp) {
-                        CliPrinter.stamp(c.getTitle() + ", ");
+                        CliPrinter.stamp(c.getTitle() + ",");
                     }
                 }
                 CliSetUp.restorePosition();
@@ -1450,7 +1450,7 @@ public final class CliPrinter {
                 CliSetUp.savePosition();
                 CliPrinter.stamp("weapons: ");
                 for (CardRep c: dozerWeapons) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinter.stamp(c.getTitle() + ",");
                 }
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
@@ -1533,7 +1533,7 @@ public final class CliPrinter {
                 CliPrinter.stamp("powerups: ");
                 if(myChar.equals("VIOLET")) {
                     for (CardRep c : violetPowerUp) {
-                        CliPrinter.stamp(c.getTitle() + ", ");
+                        CliPrinter.stamp(c.getTitle() + ",");
                     }
                 }
                 CliSetUp.restorePosition();
@@ -1541,7 +1541,7 @@ public final class CliPrinter {
                 CliSetUp.savePosition();
                 CliPrinter.stamp("weapons: ");
                 for (CardRep c: violetWeapons) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinter.stamp(c.getTitle() + ",");
                 }
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);
@@ -1624,7 +1624,7 @@ public final class CliPrinter {
                 CliPrinter.stamp("powerups: ");
                 if(myChar.equals("DISTRUCTOR")) {
                     for (CardRep c : distructorPowerUp) {
-                        CliPrinter.stamp(c.getTitle() + ", ");
+                        CliPrinter.stamp(c.getTitle() + ",");
                     }
                 }
                 CliSetUp.restorePosition();
@@ -1632,7 +1632,7 @@ public final class CliPrinter {
                 CliSetUp.savePosition();
                 CliPrinter.stamp("weapons: ");
                 for (CardRep c: distructorWeapons) {
-                    CliPrinter.stamp(c.getTitle() + ", ");
+                    CliPrinter.stamp(c.getTitle() + ",");
                 }
                 CliSetUp.restorePosition();
                 CliSetUp.cursorDown(1);

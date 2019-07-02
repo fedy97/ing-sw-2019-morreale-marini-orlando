@@ -504,6 +504,8 @@ public class CLI extends RemoteView {
                         myCharEnumString = "DISTRUCTOR";
                     }
                     if (!charChosen.contains(myCharEnumString)) {
+                        if(temp >= 6)
+                            temp = 5;
                         myChar = temp;
                         SendCharacterChosenMessage message = new SendCharacterChosenMessage(myCharEnumString);
                         message.setSender(userName);
