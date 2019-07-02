@@ -22,6 +22,7 @@ public class TestThor extends TestWeaponFather {
     public void initTest() throws InvalidImageException, InvalidNameException, InvalidCubeException, IOException, InvalidDeckException, InvalidCardException {
         super.initTest();
         thor = new THOR("thor", "desc", "img", AmmoCube.BLUE, new AmmoCube[]{});
+        currPlayer.setCurrentPlatform(game.getGameField().getPlatforms().get(3));
     }
 
     @Test

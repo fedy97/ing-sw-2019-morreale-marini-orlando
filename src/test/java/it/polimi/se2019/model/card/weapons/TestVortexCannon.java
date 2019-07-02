@@ -28,6 +28,7 @@ public class TestVortexCannon extends TestWeaponFather {
     @Test
     public void testEffect1() {
         vortexCannon.getEffects().get(0).setupTargets();
+        currPlayer.setCurrentPlatform(game.getGameField().getPlatforms().get(3));
         Platform vortex = game.getGameField().getPlatforms().get(7);
         Player target = game.getPlayer(Character.BANSHEE);
         target.setCurrentPlatform(vortex);
