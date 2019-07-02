@@ -61,7 +61,7 @@ public final class MachineGun extends WeaponTwoAddingEffect {
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(this.getLastEffectTargets());
+                this.setPossibleTargets(new ArrayList<>(this.getLastEffectTargets()));
             }
         };
 
@@ -78,7 +78,7 @@ public final class MachineGun extends WeaponTwoAddingEffect {
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(this.getLastEffectTargets());
+                this.setPossibleTargets(new ArrayList<>(this.getLastEffectTargets()));
             }
         };
 

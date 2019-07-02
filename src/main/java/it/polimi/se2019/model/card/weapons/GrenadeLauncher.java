@@ -56,7 +56,7 @@ public final class GrenadeLauncher extends WeaponOneAddingEffect {
             public void activateEffect(List<Character> targets, WeaponCard card) {
                 Map<Player, Integer> damages = new HashMap<>();
 
-                List<Platform> destinations = game.getGameField().getVisiblePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform());
+                List<Platform> destinations = new ArrayList<>(game.getGameField().getVisiblePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform()));
 
                 c.sendMessage("What platform do you want to burn?", playerManager.getCurrentPlayer().getName());
                 c.askFor(destinations, "position");

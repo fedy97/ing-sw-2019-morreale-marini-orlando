@@ -48,7 +48,8 @@ public final class LockRifle extends WeaponOneAddingEffect {
             @Override
             public void setupTargets() {
                 this.setPossibleTargets(new ArrayList<>(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform())));
-                this.getPossibleTargets().remove(this.getLastEffectTargets().get(0));
+                if (!getPossibleTargets().isEmpty())
+                    this.getPossibleTargets().remove(this.getLastEffectTargets().get(0));
             }
         };
 

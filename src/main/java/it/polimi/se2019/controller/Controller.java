@@ -35,6 +35,8 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 /**
+ * Complete manager of the game logic
+ *
  * @author Gabriel Raul Marini
  */
 public class Controller implements Observer, Serializable {
@@ -347,6 +349,7 @@ public class Controller implements Observer, Serializable {
 
     /**
      * Used to perform grab action
+     *
      * @throws InvalidActionException
      * @throws InterruptedException
      */
@@ -729,7 +732,7 @@ public class Controller implements Observer, Serializable {
 
                                         Color powerupColor = HandyFunctions.stringToColor(p.getAmmoCube().name());
                                         for (Room r : Game.getInstance().getGameField().getRooms()) {
-                                            if (r.getGenSpot().getPlatformColor().equals(powerupColor) && r.hasGenerationSpot() )
+                                            if (r.getGenSpot().getPlatformColor().equals(powerupColor) && r.hasGenerationSpot())
                                                 toDisconnect.setCurrentPlatform(r.getGenSpot());
                                         }
                                     }

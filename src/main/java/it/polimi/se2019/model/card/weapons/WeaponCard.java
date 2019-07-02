@@ -127,8 +127,9 @@ public class WeaponCard extends Card {
      */
     protected void cleanCache() {
         for (Effect effect : effects) {
+            if(effect.getPossibleTargets() != null)
+                effect.getPossibleTargets().clear();
             effect.getLastEffectTargets().clear();
-            effect.getPossibleTargets().clear();
         }
     }
 }
