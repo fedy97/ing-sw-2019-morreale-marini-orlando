@@ -60,7 +60,6 @@ public class Controller implements Observer, Serializable {
     private boolean debug;
     private BlockingDeque<Character> currentTargets;
     private BlockingDeque<WeaponCard> chosenWeapons;
-    private BlockingDeque<PowerUpCard> chosenPowerUps;
     private BlockingDeque<Platform> chosenDestination;
     private BlockingDeque<Integer> chosenEffect;
     private BlockingDeque<Boolean> chosenBinaryOption;
@@ -87,7 +86,6 @@ public class Controller implements Observer, Serializable {
 
         currentTargets = new LinkedBlockingDeque<>();
         chosenWeapons = new LinkedBlockingDeque<>();
-        chosenPowerUps = new LinkedBlockingDeque<>();
         chosenBinaryOption = new LinkedBlockingDeque<>();
         chosenDestination = new LinkedBlockingDeque<>();
         chosenEffect = new LinkedBlockingDeque<>();
@@ -667,17 +665,8 @@ public class Controller implements Observer, Serializable {
                 cardReps.add(new CardRep(p1));
                 cardReps.add(new CardRep(p2));
 
-                List<AmmoRep> ammoReps = new ArrayList<>();
                 //set for each platform an ammocard, than add it to the array of ammoreps
-                for (int i = 0; i < game.getGameField().getField().length; i++) {
-                    for (int j = 0; j < game.getGameField().getField()[0].length; j++) {
-                        Platform p = game.getGameField().getField()[i][j];
-                        if (p != null && p.hasAmmoCard()) {
-                            AmmoCard ammoCard = p.getPlatformAmmoCard();
-                            ammoReps.add(new AmmoRep(HandyFunctions.getSystemAddress(ammoCard), ammoCard.toString()));
-                        } else ammoReps.add(null);
-                    }
-                }
+                List<AmmoRep> ammoReps = createAmmoReps();
                 //now I create a list of the characters in game to send to clients in order to display their board
                 List<String> arrChars = findCharactersInGame();
                 notifyAll(new ShowGameBoardMessage(firstUser, ammoReps, cardReps, game.getLightVersion().getPlatformWeapons(), arrChars));
@@ -690,6 +679,20 @@ public class Controller implements Observer, Serializable {
                 CustomLogger.logException(getClass().getName(), e);
             }
         }
+    }
+
+    private List<AmmoRep> createAmmoReps() {
+        List<AmmoRep> ammoReps = new ArrayList<>();
+        for (int i = 0; i < game.getGameField().getField().length; i++) {
+            for (int j = 0; j < game.getGameField().getField()[0].length; j++) {
+                Platform p = game.getGameField().getField()[i][j];
+                if (p != null && p.hasAmmoCard()) {
+                    AmmoCard ammoCard = p.getPlatformAmmoCard();
+                    ammoReps.add(new AmmoRep(HandyFunctions.getSystemAddress(ammoCard), ammoCard.toString()));
+                } else ammoReps.add(null);
+            }
+        }
+        return ammoReps;
     }
 
     /**
@@ -742,7 +745,7 @@ public class Controller implements Observer, Serializable {
                             }
                         }
                     }
-                    Thread.sleep(100);
+                    Thread.sleep(500);
                 }
             } catch (Exception ex) {
                 CustomLogger.logException(this.getClass().getName(), ex);

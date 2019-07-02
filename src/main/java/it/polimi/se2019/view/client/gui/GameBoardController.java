@@ -308,16 +308,14 @@ public class GameBoardController {
     private boolean reconnected = false;
     private Map<Button, String> buttonsHashes;
     private List<AmmoRep> ammoReps;
-    private List<Button> infoButtons;
+
     private Map<String, ImageView> posAmmo;
-    private Map<String, ImageView> charImageBoardChar;
     private Map<String, Button> posPlatform;
     private Map<String, List<CardRep>> posWeaponsReps;
     private Map<ImageView, AmmoRep> ammoRepImageViewMap;
     private Map<String, ArrayList<ImageView>> playerImages;
     private Map<String, ArrayList<ImageView>> posImages;
     private Map<String, ArrayList<ImageView>> posWeaponsImages;
-    private Map<String, Button> playersButtonBoards;
     private List<ImageView> skullsImages;
     private boolean firstSetup = true;
     private boolean firstSetupReconnected = false;
@@ -351,6 +349,9 @@ public class GameBoardController {
     }
 
     private void initButtons() {
+        Map<String, Button> playersButtonBoards;
+        Map<String, ImageView> charImageBoardChar;
+        List<Button> infoButtons;
         posWeaponsImages = new HashMap<>();
         ArrayList<ImageView> weapons10 = new ArrayList<>();
         ArrayList<ImageView> weapons23 = new ArrayList<>();
