@@ -682,7 +682,7 @@ public class CLI extends RemoteView {
             try {
                 choise = s.nextInt();
                 if (choise < weapons.size() && choise >= 0) {
-                    ChosenWeaponMessage message = new ChosenWeaponMessage(Integer.toString(hashes.get(choise).intValue()));
+                    ChosenWeaponMessage message = new ChosenWeaponMessage(Integer.toString(hashes.get(choise)));
                     notifyController(message);
                     isAsking = false;
                     CliSetUp.restorePosition();
@@ -836,7 +836,7 @@ public class CLI extends RemoteView {
             try {
                 choise = s.nextInt();
                 if (!effects.contains(choise))
-                    choise = effects.get(0).intValue();
+                    choise = effects.get(0);
                 ChosenEffectMessage message = new ChosenEffectMessage(choise);
                 notifyController(message);
                 CliSetUp.restorePosition();
