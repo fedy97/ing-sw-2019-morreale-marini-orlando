@@ -28,12 +28,12 @@
         <!--sonar.login>admin</sonar.login>
         <sonar.password>admin</sonar.password-->
 
-        <!-- <sonar.coverage.exclusions>**/polimi/se2019/view/client/gui/*.*,
+         <sonar.coverage.exclusions>**/polimi/se2019/view/client/gui/*.*,
             **/polimi/se2019/view/client/cli/*.*,
             **/polimi/se2019/view/client/*.*,
             **/polimi/se2019/network/client/*.*,
             **/polimi/se2019/network/server/*.*
-        </sonar.coverage.exclusions> -->
+        </sonar.coverage.exclusions> 
     </properties>
 
     <dependencies>

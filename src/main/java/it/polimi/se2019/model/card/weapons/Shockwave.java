@@ -44,7 +44,7 @@ public final class Shockwave extends WeaponAlternativeFire {
             @Override
             public void setupTargets() {
                 List<Character> targets = new ArrayList<>();
-                List<Platform> destinations = game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 1);
+                List<Platform> destinations = new ArrayList<>(game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 1));
                 destinations.remove(playerManager.getCurrentPlayer().getCurrentPlatform());
                 for (Platform p : destinations) {
                     for (Character character : p.getPlayersOnThePlatform()) {
@@ -60,7 +60,7 @@ public final class Shockwave extends WeaponAlternativeFire {
             public void activateEffect(List<Character> targets, WeaponCard card) {
                 Map<Player, Integer> damages = new HashMap<>();
 
-                List<Platform> destinations = game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 1);
+                List<Platform> destinations = new ArrayList<>(game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 1));
                 destinations.remove(playerManager.getCurrentPlayer().getCurrentPlatform());
 
                 for (Platform p : destinations) {

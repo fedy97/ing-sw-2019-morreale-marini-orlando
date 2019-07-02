@@ -82,11 +82,9 @@ public final class Cyberblade extends WeaponTwoAddingEffect {
 
             @Override
             public void setupTargets() {
-                List<Character> targets;
-                targets = playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform();
+                List<Character> targets = new ArrayList<>();
+                targets.addAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
                 targets.removeAll(getLastEffectTargets());
-                targets.remove(playerManager.getCurrentPlayer().getCharacter());
-
                 this.setPossibleTargets(targets);
             }
         };

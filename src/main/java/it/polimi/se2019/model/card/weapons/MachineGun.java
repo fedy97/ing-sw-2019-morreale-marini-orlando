@@ -30,13 +30,13 @@ public final class MachineGun extends WeaponTwoAddingEffect {
                 usableEffects[1] = true;
                 usableEffects[2] = true;
                 //setting targets for the next additional effect
-                getEffects().get(1).getLastEffectTargets().addAll(chosenTargets);
+                getEffects().get(1).getLastEffectTargets().addAll(new ArrayList<>(chosenTargets));
             }
 
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform()));
+                this.setPossibleTargets(new ArrayList<>(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform())));
             }
         };
 

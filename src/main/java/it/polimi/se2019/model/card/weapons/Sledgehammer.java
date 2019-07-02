@@ -52,7 +52,7 @@ public final class Sledgehammer extends WeaponAlternativeFire {
                 try {
                     c.callView(new SendBinaryOption("Do you want to move the target away?"), playerManager.getCurrentPlayer().getName());
                     if (c.getChosenBinaryOption().take()) {
-                        List<Platform> destinations = game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 2);
+                        List<Platform> destinations = new ArrayList<>(game.getGameField().getAvailablePlatforms(playerManager.getCurrentPlayer().getCurrentPlatform(), 2));
                         int[] pos = playerManager.getCurrentPlayer().getCurrentPlatform().getPlatformPosition();
                         int myX = pos[0];
                         int myY = pos[1];
@@ -81,9 +81,6 @@ public final class Sledgehammer extends WeaponAlternativeFire {
             @Override
             public void setupTargets() {
                 List<Character> possibleTargets = new ArrayList<>(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
-                HandyFunctions.printList(possibleTargets);
-                possibleTargets.remove(playerManager.getCurrentPlayer().getCharacter());
-                HandyFunctions.printList(possibleTargets);
                 this.setPossibleTargets(possibleTargets);
             }
         };

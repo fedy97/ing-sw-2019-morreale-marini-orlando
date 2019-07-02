@@ -6,6 +6,7 @@ import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,7 @@ public final class LockRifle extends WeaponOneAddingEffect {
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform()));
+                this.setPossibleTargets(new ArrayList<>(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform())));
             }
         };
 
@@ -46,7 +47,7 @@ public final class LockRifle extends WeaponOneAddingEffect {
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform()));
+                this.setPossibleTargets(new ArrayList<>(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform())));
                 this.getPossibleTargets().remove(this.getLastEffectTargets().get(0));
             }
         };

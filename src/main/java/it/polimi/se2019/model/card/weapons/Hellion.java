@@ -6,6 +6,7 @@ import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public final class Hellion extends WeaponAlternativeFire {
 
             @Override
             public void setupTargets() {
-                List<Character> targets = game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform());
+                List<Character> targets = new ArrayList<>(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform()));
                 targets.removeAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
                 this.setPossibleTargets(targets);
             }
@@ -61,7 +62,7 @@ public final class Hellion extends WeaponAlternativeFire {
 
             @Override
             public void setupTargets() {
-                List<Character> targets = game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform());
+                List<Character> targets = new ArrayList<>(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform()));
                 targets.removeAll(playerManager.getCurrentPlayer().getCurrentPlatform().getPlayersOnThePlatform());
                 this.setPossibleTargets(targets);
             }

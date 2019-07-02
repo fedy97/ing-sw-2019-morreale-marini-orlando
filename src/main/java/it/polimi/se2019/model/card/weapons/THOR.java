@@ -30,12 +30,13 @@ public final class THOR extends WeaponTwoAddingEffect {
 
                 //setting targets for the next additional effect
                 getEffects().get(1).getLastEffectTargets().add(chosenTargets.get(0));
+                getEffects().get(2).getLastEffectTargets().add(chosenTargets.get(0));
             }
 
 
             @Override
             public void setupTargets() {
-                this.setPossibleTargets(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform()));
+                this.setPossibleTargets(new ArrayList<>(game.getGameField().getVisiblePlayers(playerManager.getCurrentPlayer().getCurrentPlatform())));
             }
         };
 
