@@ -1,12 +1,20 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.exceptions.*;
+import it.polimi.se2019.model.card.Deck;
+import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.HandyFunctions;
+import it.polimi.se2019.utils.JsonParser;
+import it.polimi.se2019.view.server.VirtualView;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Super test class used to verify controller children's behaviour
@@ -41,7 +49,23 @@ public class TestControllerChild {
 
     @Test
     public void test1() {
-        //test
+        c.getGame().getCharacters(c.getGame().getPlayers());
+        Deck deck = c.getGame().getGarbageDeck();
+        c.getGame().saveServer();
+        c.getGame().getPlayer("lol");
+        Map<Character,Integer> map = new HashMap<>();
+        map.put(Character.DISTRUCTOR, 1);
+        c.getGame().setScore(map);
+        c.getGame().getFinalScore();
+    }
+
+    @Test
+    public void test2() {
+        HandyFunctions.parserSettings.getMinimumPlayers();
+        HandyFunctions.parserSettings.getSocketServerPort();
+        HandyFunctions.parserSettings.getRmiServerPort();
+        VirtualView virtualView = new VirtualView("user1");
+        HandyFunctions.checkForAtLeast2Players(virtualView);
     }
 }
 
