@@ -17,6 +17,7 @@ public class HandyFunctions {
     public static final Logger LOGGER = Logger.getLogger(Class.class.getName());
     public static final JsonParser parserSettings = new JsonParser("settingsServer.json");
     public static final JsonParser parserClientSettings = new JsonParser("settingsClient.json");
+    private static final String WHITE = "WHITE";
     private static final String HOVERED_BUTTON_STYLE = "-fx-border-color: #f7ff00; -fx-border-width: 4px; -fx-background-color: transparent; -fx-border-radius: 15;";
     private static final String ENLIGHTED_BUTTON_STYLE = "-fx-border-color: #ff0000; -fx-border-width: 2px; -fx-background-color: transparent;-fx-border-radius: 15;";
     private static final String DARKED_BUTTON_STYLE = "-fx-border-width: 0px; -fx-background-color: transparent;";
@@ -121,19 +122,20 @@ public class HandyFunctions {
      * @param button to light
      */
     public static void enlightenToggleButton(ToggleButton button) {
-        button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
+        button.setTextFill(javafx.scene.paint.Paint.valueOf(WHITE));
         button.setSelected(false);
         button.setStyle(ENLIGHTED_BUTTON_STYLE);
         button.setOnMouseExited(e -> button.setStyle(ENLIGHTED_BUTTON_STYLE));
-        button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
         button.setDisable(false);
+        button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
+
     }
 
     /**
      * @param button to light
      */
     public static void enlightenButton(Button button) {
-        button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
+        button.setTextFill(javafx.scene.paint.Paint.valueOf(WHITE));
         button.setStyle(ENLIGHTED_BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
         button.setOnMouseExited(e -> button.setStyle(ENLIGHTED_BUTTON_STYLE));
@@ -144,22 +146,24 @@ public class HandyFunctions {
      * @param button to force the light in choosing targets
      */
     public static void forceLightToggleButton(ToggleButton button) {
-        button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
+        button.setTextFill(javafx.scene.paint.Paint.valueOf(WHITE));
         button.setStyle(HOVERED_BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
-        button.setOnMouseExited(e -> button.setStyle(HOVERED_BUTTON_STYLE));
         button.setDisable(false);
+        button.setOnMouseExited(e -> button.setStyle(HOVERED_BUTTON_STYLE));
+
     }
 
     /**
      * @param button to force the light in gameboard controller
      */
     public static void forceLightButton(Button button) {
-        button.setTextFill(javafx.scene.paint.Paint.valueOf("WHITE"));
+        button.setDisable(false);
+        button.setTextFill(javafx.scene.paint.Paint.valueOf(WHITE));
         button.setStyle(HOVERED_BUTTON_STYLE);
         button.setOnMouseExited(e -> button.setStyle(HOVERED_BUTTON_STYLE));
         button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
-        button.setDisable(false);
+
     }
 
     /**

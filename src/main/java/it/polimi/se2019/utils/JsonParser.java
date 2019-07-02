@@ -24,7 +24,7 @@ import java.util.ArrayList;
  */
 
 public class JsonParser {
-
+    private static final String SETTINGS = "settings";
     private String path;
     private JSONObject jsonObj;
 
@@ -144,7 +144,7 @@ public class JsonParser {
             }
             return field;
         }
-        return null;
+        return new Platform[2][];
     }
 
     /**
@@ -305,7 +305,7 @@ public class JsonParser {
      * @return the num of skulls in the settingsServer json
      */
     public int numOfSkulls() {
-        JSONArray settingsObj = jsonObj.getJSONArray("settings");
+        JSONArray settingsObj = jsonObj.getJSONArray(SETTINGS);
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("skulls");
     }
@@ -314,7 +314,7 @@ public class JsonParser {
      * @return the timer of the setup of the waiting lobby, choose map and choose character
      */
     public int getTimerSetup() {
-        JSONArray settingsObj = jsonObj.getJSONArray("settings");
+        JSONArray settingsObj = jsonObj.getJSONArray(SETTINGS);
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("timerSetup");
     }
@@ -323,7 +323,7 @@ public class JsonParser {
      * @return the minimum number of players required to play
      */
     public int getMinimumPlayers() {
-        JSONArray settingsObj = jsonObj.getJSONArray("settings");
+        JSONArray settingsObj = jsonObj.getJSONArray(SETTINGS);
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("minPlayers");
     }
@@ -332,7 +332,7 @@ public class JsonParser {
      * @return the socket server port
      */
     public int getSocketServerPort() {
-        JSONArray settingsObj = jsonObj.getJSONArray("settings");
+        JSONArray settingsObj = jsonObj.getJSONArray(SETTINGS);
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("socketServerPort");
     }
@@ -341,7 +341,7 @@ public class JsonParser {
      * @return the rmi server port
      */
     public int getRmiServerPort() {
-        JSONArray settingsObj = jsonObj.getJSONArray("settings");
+        JSONArray settingsObj = jsonObj.getJSONArray(SETTINGS);
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("rmiServerPort");
     }
@@ -350,7 +350,7 @@ public class JsonParser {
      * @return the seconds of the timer of the turn
      */
     public int getTurnTimer() {
-        JSONArray settingsObj = jsonObj.getJSONArray("settings");
+        JSONArray settingsObj = jsonObj.getJSONArray(SETTINGS);
         JSONObject obj = settingsObj.getJSONObject(0);
         return obj.getInt("timerTurn");
     }

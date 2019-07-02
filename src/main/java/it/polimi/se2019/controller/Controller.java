@@ -348,8 +348,8 @@ public class Controller implements Observer, Serializable {
     /**
      * Used to perform grab action
      *
-     * @throws InvalidActionException
-     * @throws InterruptedException
+     * @throws InvalidActionException .
+     * @throws InterruptedException .
      */
     private void grabRoutine() throws InvalidActionException, InterruptedException {
         setState(ControllerState.PROCESSING_ACTION_2);
