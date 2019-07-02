@@ -27,6 +27,7 @@ public class TestElectroscythe extends TestWeaponFather {
 
     @Test
     public void testEffect1() {
+        electroscythe.getEffects().get(0).setupTargets();
         assertNull(electroscythe.getEffects().get(0).getPossibleTargets());
         electroscythe.activateEffect(0, null);
         for (Player player : game.getPlayers()) {
@@ -42,6 +43,7 @@ public class TestElectroscythe extends TestWeaponFather {
 
     @Test
     public void testEffect2() {
+        electroscythe.getEffects().get(1).setupTargets();
         assertNull(electroscythe.getEffects().get(1).getPossibleTargets());
         electroscythe.activateEffect(1, null);
         for (Player player : game.getPlayers()) {
@@ -57,6 +59,7 @@ public class TestElectroscythe extends TestWeaponFather {
 
     @After
     public void finishTest(){
+        electroscythe.reload();
         super.finishTest();
     }
 }
