@@ -125,7 +125,7 @@ public class Controller implements Observer, Serializable {
     }
 
     /**
-     * used by persistency
+     * used for persistence
      *
      * @param instance of the controller loaded from file
      */
@@ -242,6 +242,9 @@ public class Controller implements Observer, Serializable {
         setState(ControllerState.IDLE);
     }
 
+    /**
+     * @param action called in frenzy mode
+     */
     private void processFrenzyAction(String action) {
         List<Platform> destinations;
 
@@ -298,6 +301,9 @@ public class Controller implements Observer, Serializable {
         }
     }
 
+    /**
+     * @param action called in normal mode
+     */
     private void processNormalAction(String action) {
         List<Platform> destinations;
         try {
@@ -339,6 +345,11 @@ public class Controller implements Observer, Serializable {
         }
     }
 
+    /**
+     * Used to perform grab action
+     * @throws InvalidActionException
+     * @throws InterruptedException
+     */
     private void grabRoutine() throws InvalidActionException, InterruptedException {
         setState(ControllerState.PROCESSING_ACTION_2);
         List<Platform> destinations = validator.getValidMoves(Action.GRAB);

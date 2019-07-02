@@ -44,6 +44,9 @@ public final class AmmoCard extends Card implements Serializable {
     }
 
 
+    /**
+     * @return the ammo in the format color1 color2 color3 (color 3 optional)
+     */
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
