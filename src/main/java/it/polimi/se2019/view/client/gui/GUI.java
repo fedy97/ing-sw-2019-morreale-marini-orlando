@@ -363,6 +363,7 @@ public class GUI extends RemoteView {
             gameBoardController.setAmmoReps(ammoReps);
             gameBoardController.setPosWeaponsReps(posWeapons);
         } catch (IOException e) {
+            CustomLogger.logException(this.getClass().getName(), e);
             LOGGER.log(Level.SEVERE, "error initializing game board");
         }
     }

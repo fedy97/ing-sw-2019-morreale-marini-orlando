@@ -213,23 +213,23 @@ public class GameBoardController {
     @FXML
     private ImageView violetboardimage;
     @FXML
-    private ImageView weapon10_1;
+    private ImageView weapon101;
     @FXML
-    private ImageView weapon10_2;
+    private ImageView weapon102;
     @FXML
-    private ImageView weapon10_3;
+    private ImageView weapon103;
     @FXML
-    private ImageView weapon23_1;
+    private ImageView weapon231;
     @FXML
-    private ImageView weapon23_2;
+    private ImageView weapon232;
     @FXML
-    private ImageView weapon23_3;
+    private ImageView weapon233;
     @FXML
-    private ImageView weapon02_1;
+    private ImageView weapon021;
     @FXML
-    private ImageView weapon02_2;
+    private ImageView weapon022;
     @FXML
-    private ImageView weapon02_3;
+    private ImageView weapon023;
     @FXML
     private ImageView skull1;
     @FXML
@@ -247,41 +247,41 @@ public class GameBoardController {
     @FXML
     private ImageView skull8;
     @FXML
-    private Button info10_1;
+    private Button info101;
     @FXML
-    private Button info10_2;
+    private Button info102;
     @FXML
-    private Button info10_3;
+    private Button info103;
     @FXML
-    private Button info23_1;
+    private Button info231;
     @FXML
-    private Button info23_2;
+    private Button info232;
     @FXML
-    private Button info23_3;
+    private Button info233;
     @FXML
-    private Button info02_1;
+    private Button info021;
     @FXML
-    private Button info02_2;
+    private Button info022;
     @FXML
-    private Button info02_3;
+    private Button info023;
     @FXML
-    private Button w02_3;
+    private Button w023;
     @FXML
-    private Button w02_2;
+    private Button w022;
     @FXML
-    private Button w02_1;
+    private Button w021;
     @FXML
-    private Button w10_1;
+    private Button w101;
     @FXML
-    private Button w10_2;
+    private Button w102;
     @FXML
-    private Button w10_3;
+    private Button w103;
     @FXML
-    private Button w23_1;
+    private Button w231;
     @FXML
-    private Button w23_2;
+    private Button w232;
     @FXML
-    private Button w23_3;
+    private Button w233;
     @FXML
     private Button movebutton;
     @FXML
@@ -355,29 +355,29 @@ public class GameBoardController {
         ArrayList<ImageView> weapons10 = new ArrayList<>();
         ArrayList<ImageView> weapons23 = new ArrayList<>();
         ArrayList<ImageView> weapons02 = new ArrayList<>();
-        weapons10.add(weapon10_1);
-        weapons10.add(weapon10_2);
-        weapons10.add(weapon10_3);
-        weapons23.add(weapon23_1);
-        weapons23.add(weapon23_2);
-        weapons23.add(weapon23_3);
-        weapons02.add(weapon02_1);
-        weapons02.add(weapon02_2);
-        weapons02.add(weapon02_3);
+        weapons10.add(weapon101);
+        weapons10.add(weapon102);
+        weapons10.add(weapon103);
+        weapons23.add(weapon231);
+        weapons23.add(weapon232);
+        weapons23.add(weapon233);
+        weapons02.add(weapon021);
+        weapons02.add(weapon022);
+        weapons02.add(weapon023);
         posWeaponsImages.put("1,0", weapons10);
         posWeaponsImages.put("2,3", weapons23);
         posWeaponsImages.put("0,2", weapons02);
 
         infoButtons = new ArrayList<>();
-        infoButtons.add(info02_1);
-        infoButtons.add(info02_2);
-        infoButtons.add(info02_3);
-        infoButtons.add(info10_1);
-        infoButtons.add(info10_2);
-        infoButtons.add(info10_3);
-        infoButtons.add(info23_1);
-        infoButtons.add(info23_2);
-        infoButtons.add(info23_3);
+        infoButtons.add(info021);
+        infoButtons.add(info022);
+        infoButtons.add(info023);
+        infoButtons.add(info101);
+        infoButtons.add(info102);
+        infoButtons.add(info103);
+        infoButtons.add(info231);
+        infoButtons.add(info232);
+        infoButtons.add(info233);
 
         for (Button button : infoButtons)
             HandyFunctions.enlightenButton(button);
@@ -393,15 +393,15 @@ public class GameBoardController {
         skullsImages.add(skull1);
 
         buttonsHashes = new HashMap<>();
-        buttonsHashes.put(w10_1, "");
-        buttonsHashes.put(w10_2, "");
-        buttonsHashes.put(w10_3, "");
-        buttonsHashes.put(w02_1, "");
-        buttonsHashes.put(w02_2, "");
-        buttonsHashes.put(w02_3, "");
-        buttonsHashes.put(w23_1, "");
-        buttonsHashes.put(w23_2, "");
-        buttonsHashes.put(w23_3, "");
+        buttonsHashes.put(w101, "");
+        buttonsHashes.put(w102, "");
+        buttonsHashes.put(w103, "");
+        buttonsHashes.put(w021, "");
+        buttonsHashes.put(w022, "");
+        buttonsHashes.put(w023, "");
+        buttonsHashes.put(w231, "");
+        buttonsHashes.put(w232, "");
+        buttonsHashes.put(w233, "");
 
         posPlatform = new HashMap<>();
         posPlatform.put("0,0", zerozero);
@@ -767,15 +767,15 @@ public class GameBoardController {
         if (lightGameVersion != null) {
             //associate buttons to hashcodes
             posWeaponsReps = lightGameVersion.getPlatformWeapons();
-            buttonsHashes.put(w10_1, Integer.toString(posWeaponsReps.get("1,0").get(0).getId()));
-            buttonsHashes.put(w10_2, Integer.toString(posWeaponsReps.get("1,0").get(1).getId()));
-            buttonsHashes.put(w10_3, Integer.toString(posWeaponsReps.get("1,0").get(2).getId()));
-            buttonsHashes.put(w23_1, Integer.toString(posWeaponsReps.get("2,3").get(0).getId()));
-            buttonsHashes.put(w23_2, Integer.toString(posWeaponsReps.get("2,3").get(1).getId()));
-            buttonsHashes.put(w23_3, Integer.toString(posWeaponsReps.get("2,3").get(2).getId()));
-            buttonsHashes.put(w02_1, Integer.toString(posWeaponsReps.get("0,2").get(0).getId()));
-            buttonsHashes.put(w02_2, Integer.toString(posWeaponsReps.get("0,2").get(1).getId()));
-            buttonsHashes.put(w02_3, Integer.toString(posWeaponsReps.get("0,2").get(2).getId()));
+            buttonsHashes.put(w101, Integer.toString(posWeaponsReps.get("1,0").get(0).getId()));
+            buttonsHashes.put(w102, Integer.toString(posWeaponsReps.get("1,0").get(1).getId()));
+            buttonsHashes.put(w103, Integer.toString(posWeaponsReps.get("1,0").get(2).getId()));
+            buttonsHashes.put(w231, Integer.toString(posWeaponsReps.get("2,3").get(0).getId()));
+            buttonsHashes.put(w232, Integer.toString(posWeaponsReps.get("2,3").get(1).getId()));
+            buttonsHashes.put(w233, Integer.toString(posWeaponsReps.get("2,3").get(2).getId()));
+            buttonsHashes.put(w021, Integer.toString(posWeaponsReps.get("0,2").get(0).getId()));
+            buttonsHashes.put(w022, Integer.toString(posWeaponsReps.get("0,2").get(1).getId()));
+            buttonsHashes.put(w023, Integer.toString(posWeaponsReps.get("0,2").get(2).getId()));
         }
         for (Map.Entry<String, ArrayList<ImageView>> entry : posWeaponsImages.entrySet()) {
             String pos = entry.getKey();
@@ -964,49 +964,49 @@ public class GameBoardController {
                 });
     }
 
-    public void w02_1Click() {
+    public void w021Click() {
         darkenAllWeapons();
-        gui.sendWeaponGrabbed(buttonsHashes.get(w02_1));
+        gui.sendWeaponGrabbed(buttonsHashes.get(w021));
     }
 
-    public void w02_2Click() {
+    public void w022Click() {
         darkenAllWeapons();
-        gui.sendWeaponGrabbed(buttonsHashes.get(w02_2));
+        gui.sendWeaponGrabbed(buttonsHashes.get(w022));
     }
 
-    public void w02_3Click() {
+    public void w023Click() {
         darkenAllWeapons();
-        gui.sendWeaponGrabbed(buttonsHashes.get(w02_3));
+        gui.sendWeaponGrabbed(buttonsHashes.get(w023));
     }
 
-    public void w10_1Click() {
+    public void w101Click() {
         darkenAllWeapons();
-        gui.sendWeaponGrabbed(buttonsHashes.get(w10_1));
+        gui.sendWeaponGrabbed(buttonsHashes.get(w101));
     }
 
-    public void w10_2Click() {
+    public void w102Click() {
         darkenAllWeapons();
-        gui.sendWeaponGrabbed(buttonsHashes.get(w10_2));
+        gui.sendWeaponGrabbed(buttonsHashes.get(w102));
     }
 
-    public void w10_3Click() {
+    public void w103Click() {
         darkenAllWeapons();
-        gui.sendWeaponGrabbed(buttonsHashes.get(w10_3));
+        gui.sendWeaponGrabbed(buttonsHashes.get(w103));
     }
 
-    public void w23_1Click() {
+    public void w231Click() {
         darkenAllWeapons();
-        gui.sendWeaponGrabbed(buttonsHashes.get(w23_1));
+        gui.sendWeaponGrabbed(buttonsHashes.get(w231));
     }
 
-    public void w23_2Click() {
+    public void w232Click() {
         darkenAllWeapons();
-        gui.sendWeaponGrabbed(buttonsHashes.get(w23_2));
+        gui.sendWeaponGrabbed(buttonsHashes.get(w232));
     }
 
-    public void w23_3Click() {
+    public void w233Click() {
         darkenAllWeapons();
-        gui.sendWeaponGrabbed(buttonsHashes.get(w23_3));
+        gui.sendWeaponGrabbed(buttonsHashes.get(w233));
     }
 
     public void zerozeroClick() {
@@ -1068,39 +1068,39 @@ public class GameBoardController {
         darkenAllPlatforms();
         gui.sendPlatformChosen("2,3");
     }
-    public void in10_1click() {
+    public void in101click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("1,0").get(0));
     }
 
-    public void in10_2click() {
+    public void in102click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("1,0").get(1));
     }
 
-    public void in10_3click() {
+    public void in103click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("1,0").get(2));
     }
 
-    public void in02_1click() {
+    public void in021click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("0,2").get(0));
     }
 
-    public void in02_2click() {
+    public void in022click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("0,2").get(1));
     }
 
-    public void in02_3click() {
+    public void in023click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("0,2").get(2));
     }
 
-    public void in23_1click() {
+    public void in231click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("2,3").get(0));
     }
 
-    public void in23_2click() {
+    public void in232click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("2,3").get(1));
     }
 
-    public void in23_3click() {
+    public void in233click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("2,3").get(2));
     }
 
