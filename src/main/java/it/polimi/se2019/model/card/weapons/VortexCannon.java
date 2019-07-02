@@ -41,22 +41,24 @@ public final class VortexCannon extends WeaponOneAddingEffect {
                             if (c != playerManager.getCurrentPlayer().getCharacter())
                                 targets.add(c);
                     }
-                    c.askFor(targets, "targets");
 
-                    target = c.getCurrentTargets().take();
-                    c.getCurrentTargets().clear();
+                    if (!targets.isEmpty()) {
+                        c.askFor(targets, "targets");
 
-                    if (game.getPlayer(target).getCurrentPlatform() != vortex)
-                        game.getPlayer(target).setCurrentPlatform(vortex);
-                    Map<Player, Integer> damage = new HashMap<>();
-                    damage.put(game.getPlayer(target), 2);
-                    playerManager.addDamage(damage);
+                        target = c.getCurrentTargets().take();
+                        c.getCurrentTargets().clear();
+
+                        if (game.getPlayer(target).getCurrentPlatform() != vortex)
+                            game.getPlayer(target).setCurrentPlatform(vortex);
+                        Map<Player, Integer> damage = new HashMap<>();
+                        damage.put(game.getPlayer(target), 2);
+                        playerManager.addDamage(damage);
+                        targets.remove(target);
+                    }
                 } catch (Exception e) {
                     CustomLogger.logException(this.getClass().getName(), e);
                 }
-
                 //setting targets for the adding effect
-                targets.remove(target);
                 getEffects().get(1).getLastEffectTargets().addAll(targets);
 
                 usableEffects[0] = false;
