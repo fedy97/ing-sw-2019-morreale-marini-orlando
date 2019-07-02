@@ -1,5 +1,9 @@
 package it.polimi.se2019.view.client.cli;
 
+/**
+ * Class that contains all the information on map 2 and that allows you to print it on a terminal
+ * @author Simone Orlando
+ */
 public class CliMap2 {
     public CliPlatform plat1;
     public CliPlatform plat2;
@@ -13,6 +17,9 @@ public class CliMap2 {
     public CliPlatform plat10;
     public CliPlatform plat11;
 
+    /**
+     * Initialize all the platforms so as to build the map 2
+     */
     public CliMap2() {
         plat1 = new CliPlatform(CliColor.TEXTCYAN, false, true, false, true);
         plat2 = new CliPlatform(CliColor.TEXTCYAN, false, false, true, true);
@@ -27,6 +34,9 @@ public class CliMap2 {
         plat11 = new CliPlatform(CliColor.TEXTYELLOW, true, false, true, false);
     }
 
+    /**
+     * Print the map 2 on the terminal
+     */
     public void stamp() {
         plat1.print();
         plat2.print();

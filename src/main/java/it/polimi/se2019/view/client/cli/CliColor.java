@@ -1,6 +1,7 @@
 package it.polimi.se2019.view.client.cli;
 
 /**
+ * Class that contains the escape sequences to color the writing and the background on the terminal
  * @author Simone Orlando
  */
 public enum CliColor {
@@ -25,11 +26,18 @@ public enum CliColor {
 
     private String code;
 
+    /**
+     * Initialize the color
+     * @param code of the color chosen
+     */
     private CliColor(String code)
     {
         this.code = code;
     }
 
+    /**
+      * @return the code of the color chosen
+     */
     public String getCode()
     {
         return code;

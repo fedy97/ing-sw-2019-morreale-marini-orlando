@@ -21,12 +21,11 @@ import java.util.*;
 import java.util.logging.Level;
 
 /**
+ * Class that manages the interaction with the controller through a CLI view
  * @author Simone Orlando
  */
 public class CLI extends RemoteView {
 
-    //private Timer timerTurn;
-    public static int ixx = 0;
     private CliState currentState;
     public static int counter;
     private CliReader reader;
@@ -166,6 +165,9 @@ public class CLI extends RemoteView {
         }
     }
 
+    /**
+     * Enable the input stream in CLI to get the action chosen
+     */
     private void getActionInput() {
 
         if(actionType == 0 || actionType == 1 || actionType == 2) {
@@ -262,6 +264,10 @@ public class CLI extends RemoteView {
         }
     }
 
+    /**
+     * Check if is your turn
+     * @return true if is the player's turn
+     */
     public boolean isMyTurn() {
         for (int i = 0; i < 6; i++) {
             if (actives[i] == true)
@@ -270,6 +276,9 @@ public class CLI extends RemoteView {
         return false;
     }
 
+    /**
+     * Send to server the action1 message
+     */
     public void iWantToMove() {
         actionState = 0;
         PerformActionMessage message = new PerformActionMessage("action1");
@@ -278,6 +287,9 @@ public class CLI extends RemoteView {
         notifyObservers(message);
     }
 
+    /**
+     * Send to server the action2 message
+     */
     public void iWantToGrab() {
         actionState = 0;
         isAsking = true;
@@ -287,6 +299,9 @@ public class CLI extends RemoteView {
         notifyObservers(message);
     }
 
+    /**
+     * Send to server the action3 message
+     */
     public void iWantToShoot() {
         actionState = 1;
         isAsking = true;
@@ -296,6 +311,9 @@ public class CLI extends RemoteView {
         notifyObservers(message);
     }
 
+    /**
+     * Send to server the action4 message
+     */
     public void iWantToReload() {
         actionState = 1;
         isAsking = true;
@@ -306,6 +324,9 @@ public class CLI extends RemoteView {
         notifyObservers(message);
     }
 
+    /**
+     * Send to server the action5 message
+     */
     public void iWantToUsePowerUp() {
         updateAll(lightGameVersion);
         actionState = 1;
@@ -317,6 +338,9 @@ public class CLI extends RemoteView {
         notifyObservers(message);
     }
 
+    /**
+     * Send to server the endTurn message
+     */
     public void endTurn() {
         updateAll(lightGameVersion);
         actionState = 0;
@@ -327,6 +351,9 @@ public class CLI extends RemoteView {
         updateAll(lightGameVersion);
     }
 
+    /**
+     * Send to server the BuyWithPowerups message
+     */
     public void iWantToConvertPowerUp() {
         currentState = CliState.POWERUPCONVERTING;
         CliSetUp.savePosition();
@@ -448,7 +475,6 @@ public class CLI extends RemoteView {
         }
     }
 
-    //TODO show the right player board given the arrChars, an arraylist of objects like "SPROG"
     @Override
     public void showGameBoard(List<AmmoRep> ammoReps, Map<String, List<CardRep>> posWeapons, List<String> arrChars) {
         if (powerUpChosen) {
@@ -1105,6 +1131,11 @@ public class CLI extends RemoteView {
 
     }
 
+    /**
+     * Get the weapon chosen
+     * @param weapons all possible weapons
+     * @return -1 if weapons.size() == 0, else 0
+     */
     private int showWeapons(List<String> weapons) {
         if(weapons.size() == 0)
             return -1;

@@ -11,49 +11,85 @@ import java.net.InetAddress;
 import java.util.*;
 
 /**
+ * Class used to draw all the graphic elements of the CLI interface
  * @author Simone Orlando
  */
 public final class CliPrinter {
 
     private static final String RESET = "\u001B[0m";
 
-
+    /**
+     * Print a message on the terminal, resetting the color to default
+     * @param msg to print
+     */
     public static void stamp(String msg) {
         HandyFunctions.printConsole(msg + RESET);
     }
 
+    /**
+     * Print a message on the terminal
+     * @param msg to print
+     * @param textColor of the message
+     * @param backColor of the message
+     */
     public static void noResetStamp(String msg, CliColor textColor, CliColor backColor) {
         String out;
         out = backColor.getCode() + msg;
         noResetStamp(out,textColor);
     }
 
+    /**
+     * Print a message on the terminal
+     * @param msg to print
+     * @param textColor of the message
+     */
     public static void noResetStamp(String msg, CliColor textColor) {
         String out;
         out = textColor.getCode() + msg;
         noResetStamp(out);
     }
 
+    /**
+     * Print a message on the terminal
+     * @param msg to print
+     */
     public static void noResetStamp(String msg) {
         HandyFunctions.printConsole(msg);
     }
 
+    /**
+     * Reset the color to default
+     */
     public static void reset() {
         HandyFunctions.printConsole(RESET);
     }
 
+    /**
+     * Print a message on the terminal, resetting the color to default
+     * @param msg to print
+     * @param textColor of the message
+     */
     public static void stamp(String msg, CliColor textColor) {
         String out;
         out = textColor.getCode() + msg;
         stamp(out);
     }
 
+    /**
+     * Print a message on the terminal, resetting the color to default
+     * @param msg to print
+     * @param textColor of the message
+     * @param backColor of the message
+     */
     public static void stamp(String msg, CliColor textColor, CliColor backColor) {
         String out;
         out = backColor.getCode() + msg;
         stamp(out,textColor);
     }
 
+    /**
+     * Print the game logo
+     */
     public static void welcomeMessage() {
 
         stamp("\n" + " \t\t\t\t █████╗ ██████╗ ██████╗ ███████╗███╗   ██╗ █████╗ ██╗     ██╗███╗   ██╗███████╗\n" +
@@ -64,22 +100,9 @@ public final class CliPrinter {
                 "\t\t\t\t╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝", CliColor.TEXTRED);
     }
 
-    public static void errorMessage(String msg) {
-        stamp("[ERR] "+msg+"\n");
-    }
-
-    public static void successMessage(String msg) {
-        stamp("[OK] "+msg+"\n");
-    }
-
-    public static void waitMessage(String msg) {
-        stamp("[WAIT] "+msg+"\n");
-    }
-
-    public static void warningMessage(String msg) {
-        stamp("[WARNING] "+msg+"\n");
-    }
-
+    /**
+     * Print the graphic interface selection box
+     */
     public static void boxInterfaceMessage() {
         CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
         CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
@@ -94,6 +117,9 @@ public final class CliPrinter {
         CliSetUp.restorePosition();
     }
 
+    /**
+     * Print the connection type selection box
+     */
     public static void boxConnectionMessage() {
         CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
         CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
@@ -108,6 +134,9 @@ public final class CliPrinter {
         CliSetUp.restorePosition();
     }
 
+    /**
+     * Print the username selection box
+     */
     public static void boxUsernameMessage() {
         CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
         CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
@@ -122,6 +151,10 @@ public final class CliPrinter {
         CliSetUp.restorePosition();
     }
 
+    /**
+     *  Print the ip selection box
+     * @param usename chosen by the player
+     */
     public static void boxIpMessage(String usename) {
         CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
         CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
@@ -140,6 +173,9 @@ public final class CliPrinter {
         CliSetUp.restorePosition();
     }
 
+    /**
+     * Print the waiting box
+     */
     public static void boxWaitingMessage() {
         CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
         CliPrinter.stamp("\t\t\t\t\t ┃                                                          ┃\n");
@@ -151,6 +187,10 @@ public final class CliPrinter {
         CliPrinter.stamp("\t\t\t\t\t ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
     }
 
+    /**
+     * Print the lobby box
+     * @param users in the lobby
+     */
     public static void boxLobbyMessage(List<String> users) {
         if (users.size() == 1) {
             CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
@@ -264,10 +304,19 @@ public final class CliPrinter {
         }
     }
 
+    /**
+     * Print the countdown for the start of the game
+     * @param count the remaining seconds
+     */
     public static void timerMessage(int count) {
         HandyFunctions.printConsole("\r\t\t\t\t\t                  The game will start in: "+count);
     }
 
+    /**
+     * Print the maps selection box
+     * @param timer the remaing seconds
+     * @param vote array containing the votes for each map
+     */
     public static void possibleMapsMessage(int timer, int[] vote) {
         CliPrinter.stamp("\t\t\t\t\t ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
         CliPrinter.stamp("\t\t\t\t\t ┃                      Choose the map                      ┃\n");
@@ -286,6 +335,9 @@ public final class CliPrinter {
         CliSetUp.cursorLeft(1);
     }
 
+    /**
+     * Print the standard action selection box
+     */
     public static void standardActionsMessage() {
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
@@ -320,6 +372,9 @@ public final class CliPrinter {
         CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
     }
 
+    /**
+     * Print the damaged action selection box
+     */
     public static void actionMessage1() {
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
@@ -354,6 +409,9 @@ public final class CliPrinter {
         CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
     }
 
+    /**
+     * Print the very damaged action selection box
+     */
     public static void actionMessage2() {
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
@@ -388,6 +446,9 @@ public final class CliPrinter {
         CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
     }
 
+    /**
+     * Print the frenzy mode 1 action selection box
+     */
     public static void actionMessage3() {
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
@@ -422,6 +483,9 @@ public final class CliPrinter {
         CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
     }
 
+    /**
+     * Print the frenzy mode 2 action selection box
+     */
     public static void actionMessage4() {
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
@@ -456,6 +520,12 @@ public final class CliPrinter {
         CliPrinter.stamp("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
     }
 
+    /**
+     * Print the character selection box
+     * @param timer the remaining seconds
+     * @param chosen the characters already chosen
+     * @param myChoice the character chosen by the current player
+     */
     public static void possibleCharMessage(int timer, ArrayList<String> chosen, int myChoice) {
 
         char cBan = ' ';
@@ -511,6 +581,11 @@ public final class CliPrinter {
         CliSetUp.cursorLeft(1);
     }
 
+    /**
+     * Print weapons to buy box
+     * @param color of the box
+     * @param powWeapons all the box weapons
+     */
     public static void weaponBox(CliColor color, List<CardRep> powWeapons) {
         CliSetUp.savePosition();
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓", color);
@@ -555,6 +630,12 @@ public final class CliPrinter {
 
     }
 
+    /**
+     * Print the map 1
+     * @param map the two-dimensional array that represents the map
+     * @param ammoReps the ammunitions in platforms
+     * @param posWeapons the weapons for weaponBox
+     */
     public static void printMap1(int[][] map, List<AmmoRep> ammoReps, Map<String,List<CardRep>> posWeapons) {
 
         CliMap1 map1 = new CliMap1();
@@ -584,6 +665,12 @@ public final class CliPrinter {
         CliSetUp.cursorDown(20);
     }
 
+    /**
+     * Print the map 2
+     * @param map the two-dimensional array that represents the map
+     * @param ammoReps the ammunitions in platforms
+     * @param posWeapons the weapons for weaponBox
+     */
     public static void printMap2(int[][] map, List<AmmoRep> ammoReps, Map<String,List<CardRep>> posWeapons) {
 
         CliMap2 map2 = new CliMap2();
@@ -613,6 +700,12 @@ public final class CliPrinter {
         CliSetUp.cursorDown(20);
     }
 
+    /**
+     * Print the map 3
+     * @param map the two-dimensional array that represents the map
+     * @param ammoReps the ammunitions in platforms
+     * @param posWeapons the weapons for weaponBox
+     */
     public static void printMap3(int[][] map, List<AmmoRep> ammoReps, Map<String,List<CardRep>> posWeapons) {
 
         CliMap3 map3 = new CliMap3();
@@ -641,6 +734,12 @@ public final class CliPrinter {
         CliSetUp.cursorDown(20);
     }
 
+    /**
+     * Print the map 4
+     * @param map the two-dimensional array that represents the map
+     * @param ammoReps the ammunitions in platforms
+     * @param posWeapons the weapons for weaponBox
+     */
     public static void printMap4(int[][] map, List<AmmoRep> ammoReps, Map<String,List<CardRep>> posWeapons) {
 
         CliMap4 map4 = new CliMap4();
@@ -671,7 +770,11 @@ public final class CliPrinter {
         CliSetUp.cursorDown(20);
     }
 
-
+    /**
+     * Print the power up selection box
+     * @param p1 the first powerup
+     * @param p2 the second powerup
+     */
     public static void choosePowerUpMessage(CardRep p1, CardRep p2) {
         CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
@@ -706,6 +809,10 @@ public final class CliPrinter {
         CliSetUp.cursorUp(1);
     }
 
+    /**
+     * Print the power up selection box
+     * @param powerUps arrayList of the possibile powerups
+     */
     public static void choosePowerUpMessage2(List<CardRep> powerUps) {
         CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
@@ -752,6 +859,12 @@ public final class CliPrinter {
         stamp(" <0,1,2>: ");
     }
 
+    /**
+     * Print the use powerUp selection box
+     * @param lightGameVersion all game information
+     * @param myChar the character chosen
+     * @param powerUps all the powerups
+     */
     public static void usePowerUpMessage(LightGameVersion lightGameVersion, String myChar, List<String> powerUps) {
 
         Map<String, List<CardRep>> playerPowerUps = lightGameVersion.getPlayerPowerups();
@@ -804,6 +917,12 @@ public final class CliPrinter {
         stamp(" <0,1,2>: ");
     }
 
+    /**
+     * Print the convert powerUp selection box
+     * @param lightGameVersion all game information
+     * @param myChar the character chosen
+     * @return -1, if myPowerUps.size() == 0, else 0
+     */
     public static int convertPowerUpMessage(LightGameVersion lightGameVersion, String myChar) {
 
         Map<String, List<CardRep>> playerPowerUps = lightGameVersion.getPlayerPowerups();
@@ -857,6 +976,10 @@ public final class CliPrinter {
         return 0;
     }
 
+    /**
+     * Print message box
+     * @param msg the message to print
+     */
     public static void boxMessage(String msg) {
         CliSetUp.savePosition();
         CliSetUp.cursorLeft(7);
@@ -900,6 +1023,10 @@ public final class CliPrinter {
         CliSetUp.restorePosition();
     }
 
+    /**
+     * Draws game information
+     * @param lightGameVersion all game information
+     */
     public static void drawGameInfoBox(LightGameVersion lightGameVersion) {
         stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(61 - 25);
@@ -986,7 +1113,11 @@ public final class CliPrinter {
             CliSetUp.cursorUp(counter);
     }
 
-
+    /**
+     * Draw all player information
+     * @param lightGameVersion all game information
+     * @param myChar the character chosen
+     */
     public static void drawPlayersInfoBox(LightGameVersion lightGameVersion, String myChar) {
 
         int playerCounter = 0;
@@ -1519,6 +1650,13 @@ public final class CliPrinter {
             CliSetUp.cursorUp(8*playerCounter);
         }
     }
+
+    /**
+     * Print the discart ammo box
+     * @param lightGameVersion all game information
+     * @param myChar the character chosen
+     * @return a list of possible ammos to discart
+     */
     public static List<String> discartAmmoMessage(LightGameVersion lightGameVersion, String myChar) {
         BoardRep mine = lightGameVersion.getPlayerBoardRep().get(myChar);
         List<String> ammoList = new ArrayList<>();
@@ -1573,6 +1711,11 @@ public final class CliPrinter {
         return ammoList;
     }
 
+    /**
+     * Draw the discart weapon box
+     * @param lightGameVersion all game information
+     * @param myChar the character chosen
+     */
     public static void discartWeaponMessage(LightGameVersion lightGameVersion, String myChar) {
         CliSetUp.savePosition();
         Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
@@ -1623,6 +1766,12 @@ public final class CliPrinter {
         stamp(" <0,1,2>: ");
     }
 
+    /**
+     * Draw the reload weapon box
+     * @param lightGameVersion all game information
+     * @param myChar the character chosen
+     * @param weapons the possible weapons
+     */
     public static void reloadWeaponMessage(LightGameVersion lightGameVersion, String myChar, List<String> weapons) {
         CliSetUp.savePosition();
         Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
@@ -1674,6 +1823,12 @@ public final class CliPrinter {
         stamp(" <0,1,2>: ");
     }
 
+    /**
+     * Draw the choose weapon box
+     * @param lightGameVersion all game information
+     * @param myChar the character chosen
+     * @param weapons the possible weapons
+     */
     public static void chooseWeaponMessage(LightGameVersion lightGameVersion, String myChar, List<String> weapons) {
 
         Map<String, List<CardRep>> playerWeapons = lightGameVersion.getPlayerWeapons();
@@ -1726,6 +1881,11 @@ public final class CliPrinter {
 
     }
 
+    /**
+     * Draw the possible target box
+     * @param lightGameVersion  all game information
+     * @param targets the possible targets
+     */
     public static void showTargetMessage(LightGameVersion lightGameVersion, List<String> targets) {
         CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
@@ -1772,6 +1932,10 @@ public final class CliPrinter {
         stamp(" <0,1,2,3,4>: ");
     }
 
+    /**
+     * Draw the possible effects box
+     * @param effects all the possible effects
+     */
     public static void enlightenEffectsMessage(List<Integer> effects) {
         CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
@@ -1819,12 +1983,20 @@ public final class CliPrinter {
 
     }
 
+    /**
+     * Print the weapon Box
+     * @param lightGameVersion all game informations
+     */
     public static void printPlatformWeapons(LightGameVersion lightGameVersion) {
         CliPrinter.weaponBox(CliColor.TEXTRED, lightGameVersion.getPlatformWeapons().get("1,0"));
         CliPrinter.weaponBox(CliColor.TEXTBLUE,lightGameVersion.getPlatformWeapons().get("0,2"));
         CliPrinter.weaponBox(CliColor.TEXTYELLOW,lightGameVersion.getPlatformWeapons().get("2,3"));
     }
 
+    /**
+     * Print the possible platforms box
+     * @param platforms all the possible platforms
+     */
     public static void printPossiblePlatform(List<String> platforms) {
         //CliSetUp.savePosition();
         CliSetUp.cursorRight(2);
@@ -1867,6 +2039,12 @@ public final class CliPrinter {
         stamp(": ");
     }
 
+    /**
+     * Print the possible weapons box
+     * @param lightGameVersion all game informations
+     * @param weapons the possible weapons
+     * @return a map with hashes of weapons
+     */
     public static Map<Integer, Integer> printPossibleWeapon(LightGameVersion lightGameVersion, List<String> weapons) {
         Map<String, List<CardRep>> platformWeapons = lightGameVersion.getPlatformWeapons();
         List<CardRep> plat1 = platformWeapons.get("0,2");
@@ -1949,6 +2127,10 @@ public final class CliPrinter {
         return hashes;
     }
 
+    /**
+     * Draw binary options box
+     * @param msg the message to draw
+     */
     public static void binaryOptionMessage(String msg) {
         CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
@@ -1987,7 +2169,11 @@ public final class CliPrinter {
         CliPrinter.stamp(msg + "<y/n>: ");
     }
 
-
+    /**
+     * Draw the map chosen
+     * @param lightGameVersion all game informations
+     * @param choosenBoard the map chosen
+     */
     public static void printMap(LightGameVersion lightGameVersion, String choosenBoard) {
         if(choosenBoard.equals("1"))
             printLightMap1(lightGameVersion);
@@ -1999,6 +2185,10 @@ public final class CliPrinter {
             printLightMap4(lightGameVersion);
     }
 
+    /**
+     * Print the map 1
+     * @param lightGameVersion all game informations
+     */
     public static void printLightMap1(LightGameVersion lightGameVersion) {
         CliMap1 map1 = new CliMap1();
         Map<String, AmmoRep> platformAmmoTile = lightGameVersion.getPlatformAmmoTile();
@@ -2311,6 +2501,10 @@ public final class CliPrinter {
         map1.stamp();
     }
 
+    /**
+     * Print the map 2
+     * @param lightGameVersion all game informations
+     */
     public static void printLightMap2(LightGameVersion lightGameVersion) {
         CliMap2 map2 = new CliMap2();
         Map<String, AmmoRep> platformAmmoTile = lightGameVersion.getPlatformAmmoTile();
@@ -2623,6 +2817,10 @@ public final class CliPrinter {
         map2.stamp();
     }
 
+    /**
+     * Print map 3
+     * @param lightGameVersion all game informatins
+     */
     public static void printLightMap3(LightGameVersion lightGameVersion) {
         CliMap3 map3 = new CliMap3();
         Map<String, AmmoRep> platformAmmoTile = lightGameVersion.getPlatformAmmoTile();
@@ -2909,6 +3107,10 @@ public final class CliPrinter {
         map3.stamp();
     }
 
+    /**
+     * Print the map 4
+     * @param lightGameVersion all game informations
+     */
     public static void printLightMap4(LightGameVersion lightGameVersion) {
         CliMap4 map4 = new CliMap4();
         Map<String, AmmoRep> platformAmmoTile = lightGameVersion.getPlatformAmmoTile();
@@ -3246,14 +3448,6 @@ public final class CliPrinter {
 
         map4.stamp();
     }
-
-
-
-
-
-
-
-
 
 
 }

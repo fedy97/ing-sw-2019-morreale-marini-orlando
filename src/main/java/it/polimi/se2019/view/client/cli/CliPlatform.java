@@ -1,6 +1,9 @@
 package it.polimi.se2019.view.client.cli;
 
-
+/**
+ * Class used to print on the terminal a single platform of the playing field
+ * @author Simone Orlando
+ */
 public class CliPlatform {
 
     private CliColor platformColor;
@@ -15,6 +18,14 @@ public class CliPlatform {
     private String distructor;
     private String ammo;
 
+    /**
+     * Class constructor that initializes the parameters of the platform
+     * @param color of the platform
+     * @param doorUp true if there is a door in the upper side
+     * @param doorDown true if there is a door in the lower side
+     * @param doorLeft true if there is a door in the left side
+     * @param doorRight true if there is a door in the right side
+     */
     public CliPlatform(CliColor color, boolean doorUp, boolean doorDown, boolean doorLeft, boolean doorRight ) {
         platformColor = color;
         this.doorUp = doorUp;
@@ -29,52 +40,90 @@ public class CliPlatform {
         ammo = "   ";
     }
 
+    /**
+     * Set the ammunition present in the platform
+     * @param ammo in the platform
+     */
     public void setAmmo(String ammo) {
         if (ammo == null || ammo.equals("null"))
             ammo = "   ";
         this.ammo = ammo;
     }
 
+    /**
+     * Sets that Banshee is on this platform
+     */
     public void setBansheeInside() {
         banshee = "●";
     }
 
+    /**
+     * Sets that Sprog is on this platform
+     */
     public void setSprogInside() {
         sprog = "●";
     }
 
+    /**
+     * Sets that Dozer is on this platform
+     */
     public void setDozerInside() {
         dozer = "●";
     }
 
+    /**
+     * Sets that Violet is on this platform
+     */
     public void setVioletInside() {
         violet = "●";
     }
 
+    /**
+     * Sets that Distructor is on this platform
+     */
     public void setDistructorInside() {
         distructor = "●";
     }
 
+    /**
+     * Sets that Banshee is not on this platform
+     */
     public void noBansheeInside() {
         banshee = " ";
     }
 
+    /**
+     * Sets that Sprog is not on this platform
+     */
     public void noSprogInside() {
         sprog = " ";
     }
 
+    /**
+     * Sets that Dozer is not on this platform
+     */
     public void noDozerInside() {
         dozer = " ";
     }
 
+    /**
+     * Sets that Violet is not on this platform
+     */
     public void noVioletInside() {
         violet = " ";
     }
 
+    /**
+     * Sets that Distructor is not on this platform
+     */
     public void noDistructorInside() {
         distructor = " ";
     }
 
+    /**
+     * Print the ammunition set inside the platform
+     * @param ammo in the platform
+     */
     private void printAmmo(String ammo) {
         if (ammo == null) {
             ammo = "   ";
@@ -112,6 +161,9 @@ public class CliPlatform {
         }
     }
 
+    /**
+     * Prints the complete platform on the terminal
+     */
     public void print() {
         if (doorUp) {
             CliPrinter.stamp("┏━━━━━┛   ┗━━━━━┓", platformColor);

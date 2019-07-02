@@ -219,7 +219,7 @@ public abstract class RemoteView extends View {
     }
 
     /**
-     * only for CLI
+     * Enable the input stream in CLI
      */
     public abstract void showActionMenu();
 }
