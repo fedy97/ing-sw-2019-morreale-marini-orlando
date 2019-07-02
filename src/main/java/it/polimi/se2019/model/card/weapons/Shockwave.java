@@ -24,7 +24,7 @@ public final class Shockwave extends WeaponAlternativeFire {
 
                 if (chosenTargets.size() > 1)
                     for (int i = 0; i < chosenTargets.size() - 1; i++) {
-                        for (int j = i + 1; i < chosenTargets.size(); j++)
+                        for (int j = i + 1; j < chosenTargets.size(); j++)
                             if (game.getPlayer(chosenTargets.get(i)).getCurrentPlatform() == game.getPlayer(chosenTargets.get(j)).getCurrentPlatform())
                                 samePlatform = true;
                     }

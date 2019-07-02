@@ -21,9 +21,9 @@ public final class Whisper extends WeaponCard {
             @Override
             public void activateEffect(List<Character> chosenTargets, WeaponCard card) {
                 Map<Player, Integer> damages = new HashMap<>();
-                playerManager.mark(game.getPlayer(chosenTargets.get(0)), 1);
                 damages.put(game.getPlayer(chosenTargets.get(0)), 3);
                 playerManager.addDamage(damages);
+                playerManager.mark(game.getPlayer(chosenTargets.get(0)), 1);
 
                 usableEffects[0] = false;
             }

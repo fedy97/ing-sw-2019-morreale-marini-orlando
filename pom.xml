@@ -32,7 +32,9 @@
             **/polimi/se2019/view/client/cli/*.*,
             **/polimi/se2019/view/client/*.*,
             **/polimi/se2019/network/client/*.*,
-            **/polimi/se2019/network/server/*.*
+            **/polimi/se2019/network/server/*.* ,
+             **/polimi/se2019/network/message/toserver/*.*,
+             **/polimi/se2019/network/message/toclient/*.*
         </sonar.coverage.exclusions> 
     </properties>
 
