@@ -7,7 +7,6 @@ import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.card.Card;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
-import it.polimi.se2019.model.player.Player;
 
 import java.util.List;
 

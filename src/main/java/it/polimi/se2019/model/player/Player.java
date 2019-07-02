@@ -152,14 +152,14 @@ public class Player implements Serializable {
     /**
      * Remove all the powerups
      */
-    public void removePowerUps(){
+    public void removePowerUps() {
         powerUpCards.clear();
     }
 
     /**
      * Remove all the weapons
      */
-    public void removeWeapons(){
+    public void removeWeapons() {
         weaponCards.clear();
     }
 
@@ -255,7 +255,7 @@ public class Player implements Serializable {
     /**
      * @return if the player has no damage marks on his board
      */
-    public boolean hasNoDamage(){
+    public boolean hasNoDamage() {
         return playerBoard.getDamageLine().isEmpty();
     }
 

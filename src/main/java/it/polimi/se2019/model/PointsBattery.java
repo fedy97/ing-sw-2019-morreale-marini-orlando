@@ -11,7 +11,8 @@ public final class PointsBattery {
 
     private static int[] maknyKillsPointsValue = new int[]{1, 1, 1, 1};
 
-    private PointsBattery() {}
+    private PointsBattery() {
+    }
 
     public static int[] getPointsValue(int killNum) {
         int[] res = null;

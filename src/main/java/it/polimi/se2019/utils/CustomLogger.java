@@ -10,11 +10,13 @@ import java.util.logging.Logger;
  */
 public final class CustomLogger {
 
-    private CustomLogger(){}
+    private CustomLogger() {
+    }
 
     public static void logInfo(String className, String msg) {
+        String message = "Logged id " + className + " " + msg;
         Logger logger = Logger.getLogger(className);
-        logger.log(Level.INFO, "Logged id " + className + " " + msg);
+        logger.log(Level.INFO, message);
     }
 
     public static void logException(String className, Exception e) {
