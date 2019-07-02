@@ -39,7 +39,7 @@ public class CliReader {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         long startTime = System.currentTimeMillis();
         while ((System.currentTimeMillis() - startTime) < seconds * 1000 && !in.ready()) {
-                //TODO
+
         }
         if (in.ready()) {
             return in.readLine();
@@ -59,7 +59,7 @@ public class CliReader {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         long startTime = System.currentTimeMillis();
         while ((System.currentTimeMillis() - startTime) < seconds * 1000 && !in.ready() && !stop) {
-            //TODO
+
         }
         if (in.ready()) {
             String temp = in.readLine();

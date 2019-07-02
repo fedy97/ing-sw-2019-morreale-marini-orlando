@@ -26,8 +26,6 @@ import java.util.logging.Level;
  */
 public class CLI extends RemoteView {
 
-    private CliState currentState;
-    public static int counter;
     private CliReader reader;
     private int connectionChosen;
     private String ip;
@@ -44,15 +42,12 @@ public class CLI extends RemoteView {
     private boolean isAsking;
     private LightGameVersion lightGameVersion;
     private boolean[] actives;
-    private int begin;
-    private int currState;
     private String lastMsg;
     private boolean powerUpChosen;
-    private CardRep p1, p2;
+    private CardRep p1;
+    private CardRep p2;
     private boolean firstCallChoosePU;
     private TimerTurn timerTurn;
-    private boolean isChoosingPowerUp;
-    private boolean isReloadedWeapons;
     private List<CardRep> powerUps;
     private int actionType;
     private int chosingmap;
@@ -60,7 +55,6 @@ public class CLI extends RemoteView {
     private int actionState;
     private int toReborn;
     private int timeLeft;
-    private int oneTimeCall;
     private boolean callPowerUpChosen;
 
     public CLI() {
@@ -81,21 +75,17 @@ public class CLI extends RemoteView {
         actives = new boolean[6];
         for (int i = 0; i < 6; i++)
             actives[i] = false;
-        begin = 1;
         lastMsg = "";
         powerUpChosen = false;
         p1 = null;
         p2 = null;
         firstCallChoosePU = true;
-        isChoosingPowerUp = false;
-        isReloadedWeapons = false;
         actionType = 0;
         chosingmap = 0;
-        currentState = CliState.POWERUPCHOOSING;
+
         inputSeconds = 10;
         toReborn = 0;
         timeLeft = 0;
-        oneTimeCall = 0;
         callPowerUpChosen = false;
     }
 
@@ -104,7 +94,7 @@ public class CLI extends RemoteView {
         this.lightGameVersion = lightGameVersion;
         actionType = lightGameVersion.getPlayerBoardRep().get(myCharEnumString).getActionType();
         if(toReborn == 0 && !callPowerUpChosen) {
-            currentState = CliState.ACTIONSELECTION;
+
 
             CliSetUp.clear();
             CliSetUp.cursorToHome();
@@ -117,7 +107,7 @@ public class CLI extends RemoteView {
             CliPrinter.printMap(lightGameVersion, chosenBoard);
             CliSetUp.cursorDown(9);
             CliSetUp.cursorLeft(106);
-            if ((powerUpChosen || p1 == null || p2 == null) && toReborn == 0) {
+            if ((powerUpChosen || p1 == null || p2 == null)) {
                 if (actionType == 0)
                     CliPrinter.standardActionsMessage();
                 else if (actionType == 1) {
@@ -151,17 +141,13 @@ public class CLI extends RemoteView {
             CliPrinter.drawGameInfoBox(lightGameVersion);
             CliSetUp.cursorDown(20);
             CliSetUp.cursorLeft(106);
-            //showMessage(lastMsg);
             CliSetUp.cursorLeft(63);
             CliSetUp.cursorDown(9);
             CliPrinter.boxMessage(lastMsg);
-            //CliSetUp.cursorUp(2);
-            //CliSetUp.cursorLeft(50);
             CliSetUp.cursorUp(11);
             CliSetUp.cursorRight(10);
             CliPrinter.stamp("Time left: " + timeLeft, CliColor.TEXTGREEN);
             CliPrinter.stamp(" (<8> update timer)");
-            currState = 2;
         }
     }
 
@@ -171,7 +157,7 @@ public class CLI extends RemoteView {
     private void getActionInput() {
 
         if(actionType == 0 || actionType == 1 || actionType == 2) {
-            if (!isAsking /*&& isMyTurn() && currentState == CliState.ACTIONSELECTION*/) {
+            if (!isAsking) {
                 new Thread(() -> {
                     isAsking = true;
                     Console c = System.console();
@@ -196,13 +182,12 @@ public class CLI extends RemoteView {
                         updateAll(lightGameVersion);
                         getActionInput();
                     }
-                    currState = 0;
                 }).start();
             }
         }
         else {
             if (actionType == 3) {
-                if (!isAsking /*&& isMyTurn() && powerUpChosen && !isChoosingPowerUp && !isReloadedWeapons && currentState == CliState.ACTIONSELECTION*/) {
+                if (!isAsking) {
                     new Thread(() -> {
                         isAsking = true;
                         Console c = System.console();
@@ -224,16 +209,14 @@ public class CLI extends RemoteView {
                         else if (choise == 7)
                             iWantToConvertPowerUp();
                         else {
-                            isAsking = false;
                             updateAll(lightGameVersion);
                             getActionInput();
                         }
-                        currState = 0;
                     }).start();
                 }
             }
             else {
-                if (!isAsking /*&& isMyTurn() && powerUpChosen && !isChoosingPowerUp && !isReloadedWeapons && currentState == CliState.ACTIONSELECTION*/) {
+                if (!isAsking) {
                     new Thread(() -> {
                         isAsking = true;
                         Console c = System.console();
@@ -253,11 +236,9 @@ public class CLI extends RemoteView {
                         else if (choise == 7)
                             iWantToConvertPowerUp();
                         else {
-                            isAsking = false;
                             updateAll(lightGameVersion);
                             getActionInput();
                         }
-                        currState = 0;
                     }).start();
                 }
             }
@@ -268,9 +249,9 @@ public class CLI extends RemoteView {
      * Check if is your turn
      * @return true if is the player's turn
      */
-    public boolean isMyTurn() {
+    private boolean isMyTurn() {
         for (int i = 0; i < 6; i++) {
-            if (actives[i] == true)
+            if (actives[i])
                 return true;
         }
         return false;
@@ -279,7 +260,7 @@ public class CLI extends RemoteView {
     /**
      * Send to server the action1 message
      */
-    public void iWantToMove() {
+    private void iWantToMove() {
         actionState = 0;
         PerformActionMessage message = new PerformActionMessage("action1");
         message.setSender(userName);
@@ -290,7 +271,7 @@ public class CLI extends RemoteView {
     /**
      * Send to server the action2 message
      */
-    public void iWantToGrab() {
+    private void iWantToGrab() {
         actionState = 0;
         isAsking = true;
         PerformActionMessage message = new PerformActionMessage("action2");
@@ -302,7 +283,7 @@ public class CLI extends RemoteView {
     /**
      * Send to server the action3 message
      */
-    public void iWantToShoot() {
+    private void iWantToShoot() {
         actionState = 1;
         isAsking = true;
         PerformActionMessage message = new PerformActionMessage("action3");
@@ -314,10 +295,9 @@ public class CLI extends RemoteView {
     /**
      * Send to server the action4 message
      */
-    public void iWantToReload() {
+    private void iWantToReload() {
         actionState = 1;
         isAsking = true;
-        isReloadedWeapons = true;
         PerformActionMessage message = new PerformActionMessage("action4");
         message.setSender(userName);
         viewSetChanged();
@@ -327,11 +307,10 @@ public class CLI extends RemoteView {
     /**
      * Send to server the action5 message
      */
-    public void iWantToUsePowerUp() {
+    private void iWantToUsePowerUp() {
         updateAll(lightGameVersion);
         actionState = 1;
         isAsking = true;
-        isChoosingPowerUp = true;
         PerformActionMessage message = new PerformActionMessage("action5");
         message.setSender(userName);
         viewSetChanged();
@@ -354,11 +333,10 @@ public class CLI extends RemoteView {
     /**
      * Send to server the BuyWithPowerups message
      */
-    public void iWantToConvertPowerUp() {
-        currentState = CliState.POWERUPCONVERTING;
+    private void iWantToConvertPowerUp() {
+
         CliSetUp.savePosition();
         isAsking = true;
-        //CliPrinter.stamp("\n");
         int returnValue = CliPrinter.convertPowerUpMessage(lightGameVersion,myCharEnumString);
         if(returnValue == -1) {
             isAsking = false;
@@ -381,7 +359,6 @@ public class CLI extends RemoteView {
                     CliSetUp.restorePosition();
                     updateAll(lightGameVersion);
                     showActionMenu();
-                    //CliPrinter.stamp("\n");
                 } else {
                     updateAll(lightGameVersion);
                     CliPrinter.stamp("\n");
@@ -399,13 +376,12 @@ public class CLI extends RemoteView {
     @Override
     public void showChoosePowerup(List<CardRep> cards) {
         callPowerUpChosen = true;
-        currentState = CliState.POWERUPCHOOSING;
+
         CliSetUp.savePosition();
         powerUps = cards;
-        if (powerUpChosen == false) {
+        if (!powerUpChosen) {
             this.p1 = cards.get(0);
             this.p2 = cards.get(1);
-            currState = 1;
             CliPrinter.stamp("\n");
             CliPrinter.choosePowerUpMessage(p1, p2);
             CliSetUp.cursorRight(9);
@@ -433,15 +409,12 @@ public class CLI extends RemoteView {
                     CliSetUp.restorePosition();
                     callPowerUpChosen = false;
                     powerUpChosen = true;
-                    begin = 0;
-                    currState = 0;
-                    currentState = CliState.ACTIONSELECTION;
+
                 }).start();
             }
         }
         else {
             toReborn = 1;
-            //updateAll(lightGameVersion);
             CliPrinter.stamp("\n");
             CliPrinter.choosePowerUpMessage2(cards);
             new Thread(() -> {
@@ -458,9 +431,8 @@ public class CLI extends RemoteView {
                         viewSetChanged();
                         notifyObservers(message);
                         callPowerUpChosen = false;
-                        currState = 0;
                         toReborn = 0;
-                        currentState = CliState.ACTIONSELECTION;
+
                     } else {
                         updateAll(lightGameVersion);
                         showChoosePowerup(cards);
@@ -481,8 +453,6 @@ public class CLI extends RemoteView {
             updateAll(lightGameVersion);
             return;
         }
-        currentState = CliState.ACTIONSELECTION;
-        currState = 3;
         CliPrinter.reset();
         CliSetUp.clear();
         CliSetUp.cursorToHome();
@@ -518,12 +488,8 @@ public class CLI extends RemoteView {
         chosenBoard = config;
         if (!firstTime) {
             new Thread(() -> {
-                boolean okChar = false;
-                //Console c = System.console();
                 CliReader reader2 = new CliReader(inputSeconds);
-                //while (!okChar) {
                 int temp;
-                //temp = Character.getNumericValue((c.readPassword())[0]);
                 try {
                     temp = reader2.getTimedInt();
                     if (temp == 1) {
@@ -538,7 +504,6 @@ public class CLI extends RemoteView {
                         myCharEnumString = "DISTRUCTOR";
                     }
                     if (!charChosen.contains(myCharEnumString)) {
-                        okChar = true;
                         myChar = temp;
                         SendCharacterChosenMessage message = new SendCharacterChosenMessage(myCharEnumString);
                         message.setSender(userName);
@@ -550,10 +515,8 @@ public class CLI extends RemoteView {
                         showChooseCharacter(config);
                     }
                 } catch (NoInputException | IOException e) {
-
+                    CliPrinter.stamp("");
                 }
-                //}
-
             }).start();
             firstTime = true;
         }
@@ -589,8 +552,6 @@ public class CLI extends RemoteView {
         CliPrinter.possibleMapsMessage(timeLeftForMaps, vote);
         if (firstTime) {
             new Thread(() -> {
-                //Console c = System.console();
-                //mapChosen = Character.getNumericValue((c.readPassword())[0]);
                 CliReader reader1 = new CliReader(inputSeconds);
                 try {
                     mapChosen = reader1.getTimedInt();
@@ -607,7 +568,7 @@ public class CLI extends RemoteView {
                         notifyObservers(message);
                     }
                 } catch (NoInputException | IOException e) {
-
+                    CliPrinter.stamp("");
                 }
             }).start();
             firstTime = false;
@@ -700,19 +661,20 @@ public class CLI extends RemoteView {
 
     @Override
     public void update(Observable obs, Object obj) {
-        //TODO
+        /*
+            Not used in CLI.
+         */
     }
 
     @Override
     public void lightWeapons(List<String> weapons) {
         if(actionState == 0)
             CliPrinter.stamp("\n");
-        currentState = CliState.WEAPONSCHOOSING;
+
         CliSetUp.savePosition();
-        if(weapons.size() == 0)
+        if(weapons.isEmpty())
             return;
         Map<Integer, Integer> hashes;
-        currState = 0;
         hashes = CliPrinter.printPossibleWeapon(lightGameVersion, weapons);
         new Thread(() -> {
             int choise;
@@ -723,13 +685,10 @@ public class CLI extends RemoteView {
                     ChosenWeaponMessage message = new ChosenWeaponMessage(Integer.toString(hashes.get(choise).intValue()));
                     notifyController(message);
                     isAsking = false;
-                    currState = 1;
                     CliSetUp.restorePosition();
                     updateAll(lightGameVersion);
-                    //CliPrinter.stamp("\n");
                 } else {
                     updateAll(lightGameVersion);
-                    //CliSetUp.cursorLeft(22);
                     lightWeapons(weapons);
                 }
             }
@@ -742,11 +701,9 @@ public class CLI extends RemoteView {
 
     @Override
     public void lightPlatforms(List<String> platforms) {
-        //CliPrinter.stamp("\n");
 
-        currentState = CliState.PLATFORMSCHOOSING;
         CliSetUp.savePosition();
-        if(platforms.size() == 0)
+        if(platforms.isEmpty())
             return;
         CliPrinter.printPossiblePlatform(platforms);
         new Thread(() -> {
@@ -757,8 +714,6 @@ public class CLI extends RemoteView {
                 MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(platform);
                 notifyController(message);
                 CliSetUp.restorePosition();
-                //updateAll(lightGameVersion);
-                //CliPrinter.stamp("\n");
                 if (!platform.equals("0,2") && !platform.equals("1,0") && !platform.equals("2,3")) {
                     isAsking = false;
                     updateAll(lightGameVersion);
@@ -781,7 +736,6 @@ public class CLI extends RemoteView {
     public void setValidActions(boolean[] actives) {
         this.actives = actives;
         isAsking = false;
-        begin = 0;
     }
 
     @Override
@@ -791,11 +745,10 @@ public class CLI extends RemoteView {
 
     @Override
     public void switchWeapon() {
-        currentState = CliState.WEAPONSWITCHING;
+
         CliPrinter.stamp("\n");
         CliSetUp.savePosition();
         CliPrinter.discartWeaponMessage(lightGameVersion, myCharEnumString);
-        currState = 0;
         new Thread(() -> {
             Scanner s = new Scanner(System.in);
             int choice;
@@ -814,7 +767,6 @@ public class CLI extends RemoteView {
                 DiscardWeaponMessage message = new DiscardWeaponMessage(Integer.toString(idCard));
                 notifyController(message);
                 CliSetUp.restorePosition();
-                currState = 1;
                 updateAll(lightGameVersion);
             }
             catch (InputMismatchException e) {
@@ -822,17 +774,16 @@ public class CLI extends RemoteView {
                 CliPrinter.stamp("\n");
                 switchWeapon();
             }
-            //CliPrinter.stamp("\n");
         }).start();
     }
 
     @Override
     public void showTargets(List<String> targets) {
-        currentState = CliState.TARGETSHOWING;
+
         updateAll(lightGameVersion);
         CliPrinter.stamp("\n");
         CliSetUp.savePosition();
-        if(targets.size() == 0)
+        if(targets.isEmpty())
             return;
         CliPrinter.showTargetMessage(lightGameVersion, targets);
         List<String> toSend = new ArrayList<>();
@@ -846,7 +797,7 @@ public class CLI extends RemoteView {
                     toSend.add(targets.get(Character.getNumericValue(choise.charAt(i))));
                 }
             }
-            if (toSend.size() == 0)
+            if (toSend.isEmpty())
                 isOk = false;
             else {
                 for (String str : toSend) {
@@ -858,7 +809,6 @@ public class CLI extends RemoteView {
             if (isOk) {
                 SendTargetsMessage message = new SendTargetsMessage(toSend);
                 notifyController(message);
-                currState = 1;
                 isAsking = false;
                 CliSetUp.restorePosition();
                 updateAll(lightGameVersion);
@@ -873,11 +823,11 @@ public class CLI extends RemoteView {
 
     @Override
     public void enlightenEffects(List<Integer> effects) {
-        currentState = CliState.EFFECTSSHOWING;
+
         updateAll(lightGameVersion);
         CliPrinter.stamp("\n");
         CliSetUp.savePosition();
-        if(effects.size() == 0)
+        if(effects.isEmpty())
             return;
         CliPrinter.enlightenEffectsMessage(effects);
         new Thread(() -> {
@@ -892,9 +842,7 @@ public class CLI extends RemoteView {
                 CliSetUp.restorePosition();
                 updateAll(lightGameVersion);
                 CliPrinter.stamp("\n");
-                currState = 0;
                 actionState = 0;
-                //CliSetUp.cursorUp(5);
             }
             catch (InputMismatchException e) {
                 updateAll(lightGameVersion);
@@ -905,7 +853,7 @@ public class CLI extends RemoteView {
 
     @Override
     public void showBinaryOption(String message) {
-        currentState = CliState.OPTIONSHOWING;
+
         CliPrinter.stamp("\n");
         CliSetUp.savePosition();
         CliPrinter.binaryOptionMessage(message);
@@ -926,7 +874,6 @@ public class CLI extends RemoteView {
             if (message.equals("Do you want to use another effect?")) {
                 actionState = 1;
             }
-            currState = 1;
             CliSetUp.restorePosition();
             updateAll(lightGameVersion);
             CliPrinter.stamp("\n");
@@ -940,7 +887,6 @@ public class CLI extends RemoteView {
         updateAll(lightGameVersion);
         toReborn = 0;
         powerUpChosen = true;
-        oneTimeCall = 1;
     }
 
 
@@ -961,49 +907,29 @@ public class CLI extends RemoteView {
         if (seconds == 0 && isMyTurn()) {
             System.exit(0);
         }
-        /*
-        CliSetUp.savePosition();
-        if (currState == 0)
-            CliSetUp.cursorUp(5);
-        else if (currState == 1)
-            CliSetUp.cursorUp(1);
-        else if (currState == 3)
-            CliSetUp.cursorDown(1);
-        if (currentState == CliState.EFFECTSSHOWING)
-            CliSetUp.cursorUp(5);
-        if (currentState == CliState.OPTIONSHOWING)
-            CliSetUp.cursorUp(5);
-        HandyFunctions.printConsole("\rTimer: " + seconds);
-        CliSetUp.restorePosition();
-        */
-
     }
 
     @Override
     public void showReloadableWeapons(List<String> weapons) {
-        if(weapons.size() == 0) {
+        if(weapons.isEmpty()) {
             updateAll(lightGameVersion);
             getActionInput();
         }
-        currentState = CliState.WEAPONSRELOADING;
+
         if(actionState == 0)
             CliPrinter.stamp("\n");
         CliSetUp.savePosition();
-        if(weapons.size() == 0)
+        if(weapons.isEmpty())
             return;
-        currState = 0;
         CliPrinter.reloadWeaponMessage(lightGameVersion, myCharEnumString, weapons);
         new Thread(() -> {
             try {
                 ReloadWeaponsMessage message = new ReloadWeaponsMessage(Integer.toString(showWeapons(weapons)));
                 notifyController(message);
-                currState = 1;
                 isAsking = false;
-                isReloadedWeapons = false;
                 CliSetUp.restorePosition();
                 actionState = 0;
                 updateAll(lightGameVersion);
-                //CliPrinter.stamp("\n");
             }
             catch (InputMismatchException e) {
                 updateAll(lightGameVersion);
@@ -1015,23 +941,20 @@ public class CLI extends RemoteView {
 
     @Override
     public void showUsableWeapons(List<String> weapons) {
-        currentState = CliState.WEAPONSUSING;
+
         if (actionState == 0)
             CliPrinter.stamp("\n");
         CliSetUp.savePosition();
-        if(weapons.size() == 0)
+        if(weapons.isEmpty())
             return;
         CliPrinter.chooseWeaponMessage(lightGameVersion, myCharEnumString, weapons);
-        currState = 0;
         new Thread(() -> {
             try {
                 ActivateCardMessage message = new ActivateCardMessage(Integer.toString(showWeapons(weapons)));
                 notifyController(message);
-                currState = 1;
                 CliSetUp.restorePosition();
                 updateAll(lightGameVersion);
                 actionState = 0;
-                //CliPrinter.stamp("\n");
             }
             catch (InputMismatchException e) {
                 updateAll(lightGameVersion);
@@ -1043,27 +966,26 @@ public class CLI extends RemoteView {
 
     @Override
     public void showUsablePowerups(List<String> powerups) {
-        currentState = CliState.POWERUPSUSING;
+
         CliPrinter.stamp("\n");
         CliSetUp.savePosition();
         toReborn = 1;
-        if(powerups.size() == 0) {
+        if(powerups.isEmpty()) {
             toReborn = 0;
             updateAll(lightGameVersion);
             isAsking = false;
             getActionInput();
             return;
         }
-        currState = 0;
         CliPrinter.usePowerUpMessage(lightGameVersion, myCharEnumString, powerups);
         new Thread(() -> {
             int choise;
             Scanner s = new Scanner(System.in);
             try {
                 if (!isMyTurn()) {
-                    CliReader reader = new CliReader(7);
+                    CliReader reader3 = new CliReader(7);
                     try {
-                        choise = reader.getTimedInt();
+                        choise = reader3.getTimedInt();
                         if (choise != 99) {
                             Map<String, List<CardRep>> playePowerUps = lightGameVersion.getPlayerPowerups();
                             List<CardRep> myPowerUps = playePowerUps.get(myCharEnumString);
@@ -1077,9 +999,7 @@ public class CLI extends RemoteView {
                             ActivateCardMessage message = new ActivateCardMessage(Integer.toString(idCard));
                             notifyController(message);
                             toReborn = 0;
-                            currState = 1;
                             isAsking = false;
-                            isChoosingPowerUp = false;
                             CliSetUp.restorePosition();
                             updateAll(lightGameVersion);
                             CliPrinter.stamp("\n");
@@ -1087,10 +1007,7 @@ public class CLI extends RemoteView {
                             toReborn = 0;
                             updateAll(lightGameVersion);
                         }
-                    } catch (NoInputException e) {
-                        toReborn = 0;
-                        updateAll(lightGameVersion);
-                    } catch (IOException e) {
+                    } catch (NoInputException|IOException e) {
                         toReborn = 0;
                         updateAll(lightGameVersion);
                     }
@@ -1109,9 +1026,7 @@ public class CLI extends RemoteView {
                     ActivateCardMessage message = new ActivateCardMessage(Integer.toString(idCard));
                     notifyController(message);
                     toReborn = 0;
-                    currState = 1;
                     isAsking = false;
-                    isChoosingPowerUp = false;
                     CliSetUp.restorePosition();
                     updateAll(lightGameVersion);
                     CliPrinter.stamp("\n");
@@ -1128,7 +1043,9 @@ public class CLI extends RemoteView {
 
     @Override
     public void resetTimer() {
-
+        /*
+            Not used in CLI.
+         */
     }
 
     /**
@@ -1137,7 +1054,7 @@ public class CLI extends RemoteView {
      * @return -1 if weapons.size() == 0, else 0
      */
     private int showWeapons(List<String> weapons) {
-        if(weapons.size() == 0)
+        if(weapons.isEmpty())
             return -1;
         int choise;
 
@@ -1162,10 +1079,9 @@ public class CLI extends RemoteView {
 
     @Override
     public void showAmmoToDiscard() {
-        currentState = CliState.AMMODISCARTING;
+
         CliPrinter.stamp("\n");
         CliSetUp.savePosition();
-        currState = 0;
         List<String> ammoList = CliPrinter.discartAmmoMessage(lightGameVersion,myCharEnumString);
         new Thread(() -> {
             int choise;
@@ -1176,12 +1092,9 @@ public class CLI extends RemoteView {
                     ChosenAmmoMessage message = new ChosenAmmoMessage(ammoList.get(choise));
                     notifyController(message);
                 }
-                currState = 1;
                 isAsking = false;
-                isChoosingPowerUp = false;
                 CliSetUp.restorePosition();
                 updateAll(lightGameVersion);
-                //CliPrinter.stamp("\n");
             }
             catch (InputMismatchException e) {
                 updateAll(lightGameVersion);
@@ -1198,7 +1111,8 @@ public class CLI extends RemoteView {
             Thread.sleep(1500);
         }
         catch (InterruptedException e) {
-
+            HandyFunctions.LOGGER.log(Level.SEVERE,"Interrupted!");
+            Thread.currentThread().interrupt();
         }
         setUserName();
         startConnection();
@@ -1222,7 +1136,6 @@ public class CLI extends RemoteView {
         if (powerUpChosen && toReborn == 0) {
             getActionInput();
             actionState = 1;
-            //System.out.print("ATTIVATO");
         }
     }
 }

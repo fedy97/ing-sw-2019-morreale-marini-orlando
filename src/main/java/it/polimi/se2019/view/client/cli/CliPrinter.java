@@ -16,6 +16,12 @@ import java.util.*;
  */
 public final class CliPrinter {
 
+    public CliPrinter() {
+        /*
+            Not necessary configuration
+         */
+    }
+
     private static final String RESET = "\u001B[0m";
 
     /**
@@ -1998,7 +2004,6 @@ public final class CliPrinter {
      * @param platforms all the possible platforms
      */
     public static void printPossiblePlatform(List<String> platforms) {
-        //CliSetUp.savePosition();
         CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);
@@ -2051,10 +2056,7 @@ public final class CliPrinter {
         List<CardRep> plat2 = platformWeapons.get("1,0");
         List<CardRep> plat3 = platformWeapons.get("2,3");
         Map<Integer, Integer> hashes = new HashMap<>();
-
-
-        //CliSetUp.cursorLeft(17);
-        //CliSetUp.cursorDown(1);
+        
         CliSetUp.cursorRight(2);
         CliPrinter.stamp("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
         CliSetUp.cursorLeft(106);

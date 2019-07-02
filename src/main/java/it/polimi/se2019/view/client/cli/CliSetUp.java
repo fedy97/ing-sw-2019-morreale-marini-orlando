@@ -15,6 +15,9 @@ public final class CliSetUp {
     private static final String SAVE = "s";
     private static final String RESTORE = "u";
 
+    public CliSetUp() {
+        //Not necessary configuration
+    }
     /**
      * Cleans the terminal eliminating all the writings
      */
