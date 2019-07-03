@@ -354,7 +354,7 @@ public class CLI extends RemoteView {
                 Map<String, List<CardRep>> playerPowerUps = lightGameVersion.getPlayerPowerups();
                 List<CardRep> myPowerUps = playerPowerUps.get(myCharEnumString);
                 if (choise < myPowerUps.size()) {
-                    int hash = myPowerUps.get(0).getId();
+                    int hash = myPowerUps.get(choise).getId();
                     BuyWithPowerupsMessage message = new BuyWithPowerupsMessage(Integer.toString(hash));
                     notifyController(message);
                     isAsking = false;
@@ -791,6 +791,7 @@ public class CLI extends RemoteView {
             String choise;
             Scanner s = new Scanner(System.in);
             choise = s.next();
+            //TODO
             for (int i = 0; i < choise.length(); i++) {
                 if (choise.charAt(i) != ',' && Character.getNumericValue(choise.charAt(i)) < targets.size()) {
                     toSend.add(targets.get(Character.getNumericValue(choise.charAt(i))));
@@ -903,8 +904,14 @@ public class CLI extends RemoteView {
     @Override
     public void updateTimerTurn(int seconds, String curr) {
         timeLeft = seconds;
-        if(!myTurn && powerUpChosen)
-            updateAll(lightGameVersion);
+        if(!myTurn && powerUpChosen) {
+            try {
+                updateAll(lightGameVersion);
+            }
+            catch (NullPointerException e) {
+                CustomLogger.logException(this.getClass().getName(), e);
+            }
+        }
         if (seconds == 0 && isMyTurn()) {
             System.exit(0);
         }
@@ -992,9 +999,11 @@ public class CLI extends RemoteView {
                             List<CardRep> myPowerUps = playePowerUps.get(myCharEnumString);
                             int idCard;
                             if (choise < powerups.size()) {
-                                idCard = myPowerUps.get(choise).getId();
+                                idCard = Integer.parseInt(powerups.get(choise));
+                                //idCard = myPowerUps.get(choise).getId();
                             } else {
-                                idCard = myPowerUps.get(0).getId();
+                                idCard = Integer.parseInt(powerups.get(0));
+                                //idCard = myPowerUps.get(0).getId();
                             }
 
                             ActivateCardMessage message = new ActivateCardMessage(Integer.toString(idCard));
@@ -1019,9 +1028,11 @@ public class CLI extends RemoteView {
                     List<CardRep> myPowerUps = playePowerUps.get(myCharEnumString);
                     int idCard;
                     if (choise < powerups.size()) {
-                        idCard = myPowerUps.get(choise).getId();
+                        idCard = Integer.parseInt(powerups.get(choise));
+                        //idCard = myPowerUps.get(choise).getId();
                     } else {
-                        idCard = myPowerUps.get(0).getId();
+                        idCard = Integer.parseInt(powerups.get(0));
+                        //idCard = myPowerUps.get(0).getId();
                     }
 
                     ActivateCardMessage message = new ActivateCardMessage(Integer.toString(idCard));
@@ -1125,8 +1136,8 @@ public class CLI extends RemoteView {
         CliSetUp.cursorToHome();
         CliPrinter.stamp("CLASSIFICA: ", CliColor.TEXTGREEN);
         CliPrinter.stamp("\n");
-        for (String s: scoreboard.keySet()) {
-            CliPrinter.stamp(s + ": " + scoreboard.get(s) + "\n");
+        for (Map.Entry<String, Integer> s: scoreboard.entrySet()) {
+            CliPrinter.stamp(s + ": " + scoreboard.get(s.getKey()) + "\n");
         }
         System.exit(0);
     }

@@ -61,8 +61,6 @@ public abstract class RemoteView extends View {
      * the 2 powerups drawed from the deck by the controller
      * p1 and p2 are the serialized reps of the PowerUpCard Objects
      *
-     * @param p1
-     * @param p2
      */
     public abstract void showChoosePowerup(List<CardRep> cards);
 
