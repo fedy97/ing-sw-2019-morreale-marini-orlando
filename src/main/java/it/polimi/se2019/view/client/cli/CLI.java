@@ -791,9 +791,9 @@ public class CLI extends RemoteView {
             String choise;
             Scanner s = new Scanner(System.in);
             choise = s.next();
-            //TODO
+
             for (int i = 0; i < choise.length(); i++) {
-                if (choise.charAt(i) != ',' && Character.getNumericValue(choise.charAt(i)) < targets.size()) {
+                if (choise.charAt(i) != ',' && Character.getNumericValue(choise.charAt(i)) != -1 && Character.getNumericValue(choise.charAt(i)) < targets.size()) {
                     toSend.add(targets.get(Character.getNumericValue(choise.charAt(i))));
                 }
             }
