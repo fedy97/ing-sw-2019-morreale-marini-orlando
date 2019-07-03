@@ -39,12 +39,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <scope>provided</scope>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>12.0.1</version>
-        </dependency>
         <!-- JUnit provides unit testing for Java applications -->
         <dependency>
             <groupId>junit</groupId>
