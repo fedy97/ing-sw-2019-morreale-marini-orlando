@@ -77,7 +77,7 @@ public class Controller implements Observer, Serializable {
     private boolean wasRecharged;
     private boolean serverReloaded;
     private boolean[] validActions;
-    private boolean weaponsDebug = false;
+    private boolean weaponsDebug = true;
 
 
     private Controller() {
@@ -103,7 +103,7 @@ public class Controller implements Observer, Serializable {
 
         validActions = UserValidActions.NO_SHOOT.getActions().clone();
 
-        startWaitingLobbyPing();
+        // startWaitingLobbyPing();
 
         mapChosen = new HashMap<>();
         mapChosen.put(1, 0);
@@ -233,12 +233,15 @@ public class Controller implements Observer, Serializable {
                 Thread.sleep(200);
         }
 
+        if (frenzyModeOn && playerManager.getCurrentPlayer().getFrenzyModeType() == 2)
+            updateValidActions(UserValidActions.NO_SHOOT.getActions());
+
         if (playerManager.getActionsLeft() == 0) {
             updateValidActions(UserValidActions.NO_BASIC.getActions());
             sendMessage("You've finished your basic action! Now you can use your powerups, reload or pass the turn",
                     playerManager.getCurrentPlayer().getName());
         }
-
+        wasRecharged = false;
         callView(new EnablePlayerActionsMessage(validActions), playerManager.getCurrentPlayer().getName());
         setState(ControllerState.IDLE);
     }
@@ -266,7 +269,6 @@ public class Controller implements Observer, Serializable {
                         askFor(validator.getReloadableWeapons(), RECHARGE);
                         while (!wasRecharged)
                             Thread.sleep(500);
-                        wasRecharged = false;
                     }
                 }
 
@@ -350,7 +352,7 @@ public class Controller implements Observer, Serializable {
      * Used to perform grab action
      *
      * @throws InvalidActionException .
-     * @throws InterruptedException .
+     * @throws InterruptedException   .
      */
     private void grabRoutine() throws InvalidActionException, InterruptedException {
         setState(ControllerState.PROCESSING_ACTION_2);
@@ -387,7 +389,7 @@ public class Controller implements Observer, Serializable {
     }
 
     /**
-     * Launch a power up execution
+     * Launch the power up execution
      *
      * @param powerUp chosen by the player
      */

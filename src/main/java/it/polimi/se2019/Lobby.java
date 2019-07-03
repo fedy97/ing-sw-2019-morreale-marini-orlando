@@ -31,7 +31,7 @@ public class Lobby {
             rmiServer.start();
             socketServer.start();
         }
-        controller.startWaitingLobbyPing();
+     //   controller.startWaitingLobbyPing();
 
     }
 
@@ -50,7 +50,7 @@ public class Lobby {
             Controller.getInstance().setServerReloaded(true);
             Game.setInstance(gameInstance);
             controller = Controller.getInstance();
-            CustomLogger.logInfo(Lobby.class.getName(), "Server was reloaded succesfully");
+            CustomLogger.logInfo(Lobby.class.getName(), "Server was reloaded successfully");
             Controller.getInstance().startPinging();
         } catch (FileNotFoundException ex3) {
             CustomLogger.logInfo(Lobby.class.getName(), "no loadable file found, starting new game...");

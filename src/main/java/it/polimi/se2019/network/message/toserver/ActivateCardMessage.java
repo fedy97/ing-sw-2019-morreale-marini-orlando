@@ -19,14 +19,13 @@ public class ActivateCardMessage extends ToServerMessage {
     public void performAction() {
         Controller actor = Controller.getInstance();
         String id = (String) payload;
-        //TODO
+
         if (Deserializer.getPowerUp(Integer.parseInt(id), sender) != null) {
             PowerUpCard powerUp = Deserializer.getPowerUp(Integer.parseInt(id), sender);
 
             if (powerUp.getName().equals("granata venom")) {
                 TagbackGrenade tagback = (TagbackGrenade) powerUp;
                 tagback.setUserTarget(sender);
-                System.out.println(sender);
                 actor.processPowerUp(tagback);
             } else
                 actor.processPowerUp(powerUp);

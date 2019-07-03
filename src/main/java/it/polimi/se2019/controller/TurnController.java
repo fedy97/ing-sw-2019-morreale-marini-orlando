@@ -160,8 +160,7 @@ public class TurnController implements Serializable {
                     cardReps.add(new CardRep(p2));
                     ShowChoosePowerUpMessage message = new ShowChoosePowerUpMessage(cardReps);
                     c.callView(message, currPlayer.getName());
-                }
-                else {
+                } else {
                     c.callView(new ShowActionMenuMessage(null), currPlayer.getName());
                 }
 

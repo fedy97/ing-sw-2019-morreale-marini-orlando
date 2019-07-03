@@ -30,7 +30,7 @@ public class SkullsBoard implements Serializable {
      */
     public SkullsBoard(int totalSkulls) throws InvalidQuantityException {
         this.killMarks = new EnumMap<>(Character.class);
-        if (totalSkulls > 8 || totalSkulls < 1)
+        if (totalSkulls > 8 || totalSkulls < 0)
             throw new InvalidQuantityException("number of skulls must be between 1 and 8");
         this.totalSkulls = totalSkulls;
         this.currentSkulls = totalSkulls;

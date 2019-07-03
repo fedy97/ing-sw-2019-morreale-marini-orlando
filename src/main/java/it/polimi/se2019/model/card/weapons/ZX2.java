@@ -29,7 +29,7 @@ public final class ZX2 extends WeaponAlternativeFire {
                 Player target = game.getPlayer(chosenTargets.get(0));
 
                 Map<Player, Integer> damages = new HashMap<>();
-                damages.put(target, 1);
+                damages.put(target, 11);
                 playerManager.addDamage(damages);
                 playerManager.mark(target, 2);
 

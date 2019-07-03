@@ -24,14 +24,14 @@ public class ReloadWeaponsMessage extends ToServerMessage {
         if (!light.equals("null")) {
             WeaponCard weapon = Deserializer.getWeapon(light);
             PlayerManager manager = Controller.getInstance().getPlayerManager();
-            c.setWasRecharged(true);
             try {
                 manager.reload(weapon);
             } catch (Exception e) {
                 CustomLogger.logException(this.getClass().getName(), e);
             }
-            c.setState(ControllerState.IDLE);
+            c.setWasRecharged(true);
         }
-        c.callView(new ShowActionMenuMessage(null), sender);
+        if (c.getState() != ControllerState.PROCESSING_ACTION_1)
+            c.callView(new ShowActionMenuMessage(null), sender);
     }
 }
