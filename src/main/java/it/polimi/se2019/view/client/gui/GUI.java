@@ -388,9 +388,6 @@ public class GUI extends RemoteView {
 
     }
 
-    /**
-     * @param users to display on the view(GUI)
-     */
     @Override
     public void updatePlayersOnWaitingList(List<String> users) {
         Platform.runLater(
@@ -428,18 +425,18 @@ public class GUI extends RemoteView {
                 });
     }
 
-    protected void sendMapChosenByPlayer(int config) {
+    void sendMapChosenByPlayer(int config) {
         SendMapChosenMessage message = new SendMapChosenMessage(config);
         notifyController(message);
     }
 
-    protected void sendCharacterChosenByPlayer(String characterEnuminString) {
+    void sendCharacterChosenByPlayer(String characterEnuminString) {
         charInString = characterEnuminString;
         SendCharacterChosenMessage message = new SendCharacterChosenMessage(characterEnuminString);
         notifyController(message);
     }
 
-    protected void sendInitPowerupChosen(int hashCodeChosen, int hashCodeGarbage) {
+    void sendInitPowerupChosen(int hashCodeChosen, int hashCodeGarbage) {
         ArrayList<Integer> arrayList = new ArrayList<>();
         arrayList.add(hashCodeChosen);
         arrayList.add(hashCodeGarbage);
@@ -447,51 +444,51 @@ public class GUI extends RemoteView {
         notifyController(message);
     }
 
-    protected void sendPlatformChosen(String pos) {
+    void sendPlatformChosen(String pos) {
         MoveCurrPlayerMessage message = new MoveCurrPlayerMessage(pos);
         notifyController(message);
     }
 
-    protected void sendWeaponGrabbed(String hashWeapon) {
+    void sendWeaponGrabbed(String hashWeapon) {
         ChosenWeaponMessage message = new ChosenWeaponMessage(hashWeapon);
         notifyController(message);
     }
 
-    protected void sendWeaponToSwitch(String hashWeapon) {
+    void sendWeaponToSwitch(String hashWeapon) {
         DiscardWeaponMessage message = new DiscardWeaponMessage(hashWeapon);
         notifyController(message);
         switchWeaponStage.close();
     }
 
-    protected void sendPowerupsToBuyWith(String hash) {
+    void sendPowerupsToBuyWith(String hash) {
         BuyWithPowerupsMessage message = new BuyWithPowerupsMessage(hash);
         notifyController(message);
         buyWithPowerupsStage.close();
     }
 
-    protected void sendTargets(List<String> targets) {
+    void sendTargets(List<String> targets) {
         SendTargetsMessage message = new SendTargetsMessage(targets);
         notifyController(message);
         chooseTargetsStage.close();
     }
 
-    protected void sendEndMyTurn() {
+    void sendEndMyTurn() {
         EndTurnMessage message = new EndTurnMessage(null);
         notifyController(message);
     }
 
-    protected void sendAmmo(String ammo) {
+    void sendAmmo(String ammo) {
         ChosenAmmoMessage message = new ChosenAmmoMessage(ammo);
         notifyController(message);
         chooseAmmosStage.close();
     }
 
-    protected void sendBinaryAnswer(boolean answer) {
+    void sendBinaryAnswer(boolean answer) {
         ResponseToBinaryOption message = new ResponseToBinaryOption(answer);
         notifyController(message);
     }
 
-    protected void sendPowerupToDiscardThenSpawn(int hash) {
+    void sendPowerupToDiscardThenSpawn(int hash) {
         List<Integer> hashes = new ArrayList<>();
         hashes.add(hash);
         hashes.add(hash);
@@ -499,29 +496,29 @@ public class GUI extends RemoteView {
         notifyController(message);
     }
 
-    protected void iWantToDoSomething(String action) {
+    void iWantToDoSomething(String action) {
         PerformActionMessage message = new PerformActionMessage(action);
         notifyController(message);
     }
 
-    protected void usePowerup(String hashPowerup) {
+    void usePowerup(String hashPowerup) {
         usePowerupStage.close();
         ActivateCardMessage message = new ActivateCardMessage(hashPowerup);
         notifyController(message);
     }
 
-    protected void useWeapon(String hashWeapon) {
+    void useWeapon(String hashWeapon) {
         ActivateCardMessage message = new ActivateCardMessage(hashWeapon);
         notifyController(message);
     }
 
-    protected void sendEffectChosen(int effect) {
+    void sendEffectChosen(int effect) {
         ChosenEffectMessage message = new ChosenEffectMessage(effect);
         notifyController(message);
         useWeaponStage.close();
     }
 
-    protected void sendWeaponToReload(String hash) {
+    void sendWeaponToReload(String hash) {
         ReloadWeaponsMessage message = new ReloadWeaponsMessage(hash);
         notifyController(message);
         reloadWeaponsStage.close();
@@ -767,67 +764,67 @@ public class GUI extends RemoteView {
                 });
     }
 
-    public String getCharInString() {
+    String getCharInString() {
         return charInString;
     }
 
-    public Scene getScenePlayerBoard() {
+    Scene getScenePlayerBoard() {
         return scenePlayerBoard;
     }
 
-    public Stage getPlayerBoardStage() {
+    Stage getPlayerBoardStage() {
         return playerBoardStage;
     }
 
-    public PlayerBoardController getPlayerBoardController() {
+    PlayerBoardController getPlayerBoardController() {
         return playerBoardController;
     }
 
-    public List<String> getCharsInGame() {
+    List<String> getCharsInGame() {
         return charsInGame;
     }
 
-    public Scene getSceneUsePowerup() {
+    private Scene getSceneUsePowerup() {
         return sceneUsePowerup;
     }
 
-    public Stage getUsePowerupStage() {
+    private Stage getUsePowerupStage() {
         return usePowerupStage;
     }
 
-    public UsePowerupController getUsePowerupController() {
+    private UsePowerupController getUsePowerupController() {
         return usePowerupController;
     }
 
-    public UseWeaponController getUseWeaponController() {
+    private UseWeaponController getUseWeaponController() {
         return useWeaponController;
     }
 
-    public Scene getSceneUseWeapon() {
+    private Scene getSceneUseWeapon() {
         return sceneUseWeapon;
     }
 
-    public Stage getUseWeaponStage() {
+    Stage getUseWeaponStage() {
         return useWeaponStage;
     }
 
-    public Scene getSceneBuyWithPowerups() {
+    Scene getSceneBuyWithPowerups() {
         return sceneBuyWithPowerups;
     }
 
-    public Stage getBuyWithPowerupsStage() {
+    Stage getBuyWithPowerupsStage() {
         return buyWithPowerupsStage;
     }
 
-    public BuyWithPowerupController getBuyWithPowerupController() {
+    BuyWithPowerupController getBuyWithPowerupController() {
         return buyWithPowerupController;
     }
 
-    public Font getNormale() {
+    Font getNormale() {
         return normale;
     }
 
-    public Font getGrande() {
+    Font getGrande() {
         return grande;
     }
 

@@ -50,6 +50,10 @@ public class LoginController {
         rmiButton.setFont(normale);
     }
 
+    /**
+     * called if login button is pressed
+     * @throws RemoteException in rmi
+     */
     @FXML
     public void login() throws RemoteException {
         try {
@@ -81,6 +85,9 @@ public class LoginController {
         }
     }
 
+    /**
+     * @param gui to pass
+     */
     private void showWaitingLobby(GUI gui) {
         gui.start();
     }
@@ -106,7 +113,11 @@ public class LoginController {
         selection = rmiButton.getText();
     }
 
-    protected void notifyAlreadyInUse(String user) {
+    /**
+     *
+     * @param user already existent
+     */
+    void notifyAlreadyInUse(String user) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Error");
         alert.setHeaderText(user + " is already in use");

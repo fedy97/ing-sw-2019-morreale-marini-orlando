@@ -5,13 +5,18 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
+/**
+ * login page loaded if 2 is pressed
+ */
 public class LoginPage extends Application {
 
+    public static void startLoginPage() {
+        launch();
+    }
+
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
         primaryStage.setTitle("Adrenaline");
         Scene scene = new Scene(root, 612, 318);
@@ -23,9 +28,5 @@ public class LoginPage extends Application {
             System.exit(0);
         });
 
-    }
-
-    public static void startLoginPage(){
-        launch();
     }
 }

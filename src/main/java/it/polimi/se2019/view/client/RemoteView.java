@@ -46,14 +46,14 @@ public abstract class RemoteView extends View {
     public abstract void showChooseMap();
 
     /**
-     * @param config
+     * @param config of the map chosen
      */
     public abstract void showChooseCharacter(String config);
 
     /**
-     * @param ammoReps
-     * @param posWeapons
-     * @param arrChars
+     * @param ammoReps .
+     * @param posWeapons .
+     * @param arrChars .
      */
     public abstract void showGameBoard(List<AmmoRep> ammoReps, Map<String, List<CardRep>> posWeapons, List<String> arrChars);
 
@@ -139,9 +139,9 @@ public abstract class RemoteView extends View {
      * in order to set up everything again in the right way
      *
      * @param config           map
-     * @param lightGameVersion
+     * @param lightGameVersion of the game
      * @param arr              of the characters in game
-     * @param myChar
+     * @param myChar in string
      */
     public abstract void showReconnectedGameBoard(int config, LightGameVersion lightGameVersion, List<String> arr, String myChar);
 
@@ -210,7 +210,7 @@ public abstract class RemoteView extends View {
      * @param message to be sent to the controller from the client
      */
 
-    public void notifyController(ToServerMessage message) {
+    protected void notifyController(ToServerMessage message) {
         message.setSender(userName);
         viewSetChanged();
         notifyObservers(message);
