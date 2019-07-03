@@ -103,8 +103,6 @@ public class Controller implements Observer, Serializable {
 
         validActions = UserValidActions.NO_SHOOT.getActions().clone();
 
-        // startWaitingLobbyPing();
-
         mapChosen = new HashMap<>();
         mapChosen.put(1, 0);
         mapChosen.put(2, 0);
