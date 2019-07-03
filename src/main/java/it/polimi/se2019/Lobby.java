@@ -30,8 +30,9 @@ public class Lobby {
         } else {
             rmiServer.start();
             socketServer.start();
+            controller.startWaitingLobbyPing();
         }
-        controller.startWaitingLobbyPing();
+
 
     }
 
