@@ -146,7 +146,7 @@ public class Controller implements Observer, Serializable {
 
                     pingsWaitingList.clear();
                     notifyAll(new PingWaitingClientsMessage(null));
-                    Thread.sleep(1500);
+                    Thread.sleep(1000);
                     List<String> toRemove = new ArrayList<>();
 
                     boolean toReset = false;
@@ -166,6 +166,7 @@ public class Controller implements Observer, Serializable {
 
                     if (toReset && !timerStarted) notifyAll(new ResetTimerMessage(null));
                     notifyAll(new NewConnectionMessage(pingsWaitingList));
+                    Thread.sleep(500);
                 }
             } catch (Exception ex) {
                 CustomLogger.logException(this.getClass().getName(), ex);

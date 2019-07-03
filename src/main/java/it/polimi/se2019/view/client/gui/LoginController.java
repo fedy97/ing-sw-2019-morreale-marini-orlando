@@ -29,7 +29,7 @@ public class LoginController {
     private String selection;
     private Font normale;
     private Font grande;
-    private static final String LOCALHOST = "127.0.0.1";
+    private static final String LOCALHOST = System.getProperty("myapplication.ip");
 
     public void initialize() {
         grande = Font.loadFont(
