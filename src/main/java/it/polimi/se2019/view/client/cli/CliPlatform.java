@@ -26,7 +26,7 @@ public class CliPlatform {
      * @param doorLeft true if there is a door in the left side
      * @param doorRight true if there is a door in the right side
      */
-    public CliPlatform(CliColor color, boolean doorUp, boolean doorDown, boolean doorLeft, boolean doorRight ) {
+    CliPlatform(CliColor color, boolean doorUp, boolean doorDown, boolean doorLeft, boolean doorRight ) {
         platformColor = color;
         this.doorUp = doorUp;
         this.doorDown = doorDown;
@@ -53,70 +53,70 @@ public class CliPlatform {
     /**
      * Sets that Banshee is on this platform
      */
-    public void setBansheeInside() {
+    void setBansheeInside() {
         banshee = "●";
     }
 
     /**
      * Sets that Sprog is on this platform
      */
-    public void setSprogInside() {
+    void setSprogInside() {
         sprog = "●";
     }
 
     /**
      * Sets that Dozer is on this platform
      */
-    public void setDozerInside() {
+    void setDozerInside() {
         dozer = "●";
     }
 
     /**
      * Sets that Violet is on this platform
      */
-    public void setVioletInside() {
+    void setVioletInside() {
         violet = "●";
     }
 
     /**
      * Sets that Distructor is on this platform
      */
-    public void setDistructorInside() {
+    void setDistructorInside() {
         distructor = "●";
     }
 
     /**
      * Sets that Banshee is not on this platform
      */
-    public void noBansheeInside() {
+    void noBansheeInside() {
         banshee = " ";
     }
 
     /**
      * Sets that Sprog is not on this platform
      */
-    public void noSprogInside() {
+    void noSprogInside() {
         sprog = " ";
     }
 
     /**
      * Sets that Dozer is not on this platform
      */
-    public void noDozerInside() {
+    void noDozerInside() {
         dozer = " ";
     }
 
     /**
      * Sets that Violet is not on this platform
      */
-    public void noVioletInside() {
+    void noVioletInside() {
         violet = " ";
     }
 
     /**
      * Sets that Distructor is not on this platform
      */
-    public void noDistructorInside() {
+    void noDistructorInside() {
         distructor = " ";
     }
 
@@ -164,7 +164,7 @@ public class CliPlatform {
     /**
      * Prints the complete platform on the terminal
      */
-    public void print() {
+    void print() {
         if (doorUp) {
             CliPrinter.stamp("┏━━━━━┛   ┗━━━━━┓", platformColor);
         }
