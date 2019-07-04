@@ -18,6 +18,7 @@ public class TestTurnController extends TestInitializer {
         super.initTest();
         turnController = c.getTurnController();
         assertTrue(turnController.isFirstTurn());
+        turnController.notifyFirst();
     }
 
     /**

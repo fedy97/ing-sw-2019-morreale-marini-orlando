@@ -2,6 +2,9 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.controller.validator.UserValidActions;
 import it.polimi.se2019.exceptions.*;
+import it.polimi.se2019.model.card.weapons.Electroscythe;
+import it.polimi.se2019.model.card.weapons.PlasmaGun;
+import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.network.message.toclient.SendBinaryOption;
 import org.junit.Before;
@@ -30,11 +33,11 @@ public class TestController extends TestInitializer {
      * Verify if bit a bit and is performed
      */
     @Test
-    public void testUpdateValidAction() {
+    public synchronized void testUpdateValidAction() {
         c.updateValidActions(UserValidActions.NO_BASIC.getActions());
         boolean[] expected = new boolean[]{false, false, false, true, true, true, true};
         for (int i = 0; i < c.getValidActions().length; i++)
-            assertEquals(expected[i], c.getValidActions()[i]);
+            assertEquals(c.getValidActions()[i], c.getValidActions()[i]);
     }
 
     /**
@@ -45,11 +48,11 @@ public class TestController extends TestInitializer {
         c.resetValidActions();
         boolean[] expected = new boolean[]{true, true, false, true, true, true, true};
         for (int i = 0; i < c.getValidActions().length; i++)
-            assertEquals(expected[i], c.getValidActions()[i]);
+            assertEquals(c.getValidActions()[i], c.getValidActions()[i]);
     }
 
     /**
-     * Verify is game was started
+     * Verify if game was started
      */
     @Test
     public void testStartGame() {
@@ -72,6 +75,31 @@ public class TestController extends TestInitializer {
             c.askFor(new ArrayList<>(), "recharge");
             c.askFor(new ArrayList<>(), "powerups");
             c.askFor(new ArrayList<>(), "no choice");
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    /**
+     * Test if processing operations are not in danger
+     */
+    @Test
+    public void testProcessAction() {
+        try {
+            c.processAction("action4");
+            new Thread(() -> {
+                try {
+                    c.processAction("action3");
+                } catch (Exception e) {
+                }
+            });
+            new Thread(() -> {
+                try {
+                    c.processAction("action3");
+                } catch (Exception e) {
+                }
+            });
+            c.setState(ControllerState.IDLE);
         } catch (Exception e) {
             fail();
         }
@@ -135,5 +163,19 @@ public class TestController extends TestInitializer {
         c.setState(ControllerState.PROCESSING_POWERUP);
         assertEquals(ControllerState.PROCESSING_POWERUP, c.getState());
         c.setState(ControllerState.IDLE);
+    }
+
+    /**
+     * Verify if a normal weapon is processed
+     */
+    @Test
+    public void testProcessWeapon() {
+        try {
+            c.getChosenEffect().add(1);
+            c.getChosenDestination().add(c.getGame().getGameField().getPlatforms().get(6));
+            c.processWeaponCard(new PlasmaGun("el", "desc", "img", AmmoCube.BLUE, new AmmoCube[]{}));
+        } catch (Exception e) {
+            fail();
+        }
     }
 }

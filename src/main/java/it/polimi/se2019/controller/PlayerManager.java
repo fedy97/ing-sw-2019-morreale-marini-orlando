@@ -108,31 +108,6 @@ public class PlayerManager implements Serializable {
     }
 
     /**
-     * @param weapons that can be grabbed by the player according to his ammos
-     */
-    public void grab(List<WeaponCard> weapons) {
-        for (WeaponCard weaponCard : weapons) {
-
-            try {
-                currentPlayer.addWeaponCard(weaponCard);
-                currentPlayer.getCurrentPlatform().removeWeaponCard(weaponCard);
-            } catch (MaxWeaponException e) {
-                /**
-                 WeaponCard choice = father.askForDiscard(currentPlayer.getWeaponCards());
-
-                 if (choice != null) {
-                 currentPlayer.removeWeaponCard(choice);
-                 currentPlayer.addWeaponCard(weaponCard);
-                 }*/
-
-            } catch (InvalidGenerationSpotException e) {
-                CustomLogger.logException(this.getClass().getName(), e);
-            }
-        }
-        father.getGame().notifyChanges();
-    }
-
-    /**
      * @param targetsMap containing the damage values for each player.
      *                   keys are the characters that have been shot
      */

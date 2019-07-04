@@ -474,12 +474,11 @@ public class Controller implements Observer, Serializable {
                         if (currentTargets.isEmpty())
                             break;
                     }
+                    currentTargets.clear();
                     weapon.activateEffect(effectIndex, targets);
                     game.notifyChanges();
-                    CustomLogger.logInfo(getClass().getName(), "Action performed!");
                 } else {
                     weapon.activateEffect(effectIndex, null);
-                    CustomLogger.logInfo(getClass().getName(), "Action performed with null!");
                 }
 
             } catch (Exception e) {

@@ -9,7 +9,6 @@ import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.player.Player;
 
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * Class providing service methods to match the server objects' with the corresponding
@@ -33,7 +32,7 @@ public final class Deserializer {
             pos[1] = Integer.parseInt(light.substring(2, 3));
             return Controller.getInstance().getGame().getGameField().getPlatform(pos);
         } catch (Exception e) {
-            HandyFunctions.LOGGER.log(Level.SEVERE, e.getMessage());
+            CustomLogger.logException(Deserializer.class.getName(), e);
             return null;
         }
     }

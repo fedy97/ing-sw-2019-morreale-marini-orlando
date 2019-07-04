@@ -91,6 +91,7 @@ public class TestPlayerManager extends TestInitializer {
                 destination = p;
 
         playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().clear();
+        playerManager.getTempPlayers();
 
         try {
             playerManager.move(destination);
