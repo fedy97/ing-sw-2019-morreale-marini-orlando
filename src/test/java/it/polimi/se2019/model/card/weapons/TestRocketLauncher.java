@@ -15,6 +15,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * RocketLauncher test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestRocketLauncher extends TestWeaponFather {
     private RocketLauncher rocketLauncher;
 
@@ -37,6 +42,7 @@ public class TestRocketLauncher extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(Character.BANSHEE);
 
+        //test damages of the first effect and verify if target was moved
         rocketLauncher.activateEffect(0, targets);
         assertTrue(target.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(2, target.getPlayerBoard().getDamageLine().size());
@@ -51,6 +57,7 @@ public class TestRocketLauncher extends TestWeaponFather {
         Platform destination = game.getGameField().getPlatforms().get(3);
         c.getChosenDestination().add(destination);
 
+        //Verify if the current player moved
         rocketLauncher.activateEffect(1, null);
         assertTrue(currPlayer.getCurrentPlatform().equals(destination));
     }
@@ -61,6 +68,7 @@ public class TestRocketLauncher extends TestWeaponFather {
         assertNull(rocketLauncher.getEffects().get(2).getPossibleTargets());
         rocketLauncher.getEffects().get(2).getLastEffectTargets().add(Character.BANSHEE);
 
+        //test damages of additional effect
         rocketLauncher.activateEffect(2, null);
     }
 

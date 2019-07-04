@@ -14,6 +14,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * MachineGun test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestMachineGun extends TestWeaponFather {
     private MachineGun machineGun;
 
@@ -35,6 +40,7 @@ public class TestMachineGun extends TestWeaponFather {
 
         machineGun.activateEffect(0, targets);
 
+        //verify if damages and marks are added to the target
         assertTrue(game.getPlayer(Character.BANSHEE).getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertTrue(game.getPlayer(Character.VIOLET).getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(1, game.getPlayer(Character.BANSHEE).getPlayerBoard().getDamageLine().size());
@@ -45,7 +51,7 @@ public class TestMachineGun extends TestWeaponFather {
 
     @Test
     public void testEffect2() {
-       machineGun.getEffects().get(1).getLastEffectTargets().add(Character.BANSHEE);
+        machineGun.getEffects().get(1).getLastEffectTargets().add(Character.BANSHEE);
         machineGun.getEffects().get(1).setupTargets();
 
         Player target = game.getPlayer(Character.BANSHEE);
@@ -53,6 +59,7 @@ public class TestMachineGun extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(target.getCharacter());
 
+        //verify additional damage
         machineGun.activateEffect(1, targets);
         assertEquals(1, target.getPlayerBoard().getDamageLine().size());
         target.getPlayerBoard().resetDamageLine();
@@ -68,6 +75,7 @@ public class TestMachineGun extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(target.getCharacter());
 
+        //verify third effect damages to the target
         machineGun.activateEffect(2, targets);
         assertEquals(1, target.getPlayerBoard().getDamageLine().size());
         target.getPlayerBoard().resetDamageLine();

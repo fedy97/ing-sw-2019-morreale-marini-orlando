@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -20,7 +19,7 @@ import static org.junit.Assert.fail;
  *
  * @author Gabriel Raul Marini
  */
-public class TestCriticalDamagedValidator extends TestControllerChild {
+public class TestCriticalDamagedValidator extends TestInitializer {
     private Validator validator;
     private Player currPlayer;
 
@@ -32,6 +31,10 @@ public class TestCriticalDamagedValidator extends TestControllerChild {
         currPlayer.setCurrentPlatform(c.getGame().getGameField().getPlatforms().get(0));
     }
 
+
+    /**
+     * Test the valid moves for the selected action
+     */
     @Test
     public void getValidMoves() {
         try {
@@ -40,7 +43,6 @@ public class TestCriticalDamagedValidator extends TestControllerChild {
             assertTrue(!validator.getValidMoves(Action.SHOOT).isEmpty());
         } catch (Exception e) {
             fail();
-
         }
     }
 

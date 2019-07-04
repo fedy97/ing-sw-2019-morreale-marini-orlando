@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
  *
  * @author Gabriel Raul Marini
  */
-public class TestValidator extends TestControllerChild {
+public class TestValidator extends TestInitializer {
     private Validator validator;
     private Player currPlayer;
 
@@ -45,13 +45,16 @@ public class TestValidator extends TestControllerChild {
         currPlayer.getPlayerBoard().getAmmoBox().clear();
     }
 
+    /**
+     * Verify if only affordable weapons are returned by the validator
+     */
     @Test
     public void getGrabaleWeapons() {
         try {
             List<WeaponCard> grabable = validator.getGrabableWeapons();
             List<WeaponCard> expected = new ArrayList<>();
-            for(WeaponCard weaponCard: currPlayer.getCurrentPlatform().getWeapons())
-                if(currPlayer.getPlayerBoard().getAmmoBox().hasAmmos(weaponCard.getExtraCost()))
+            for (WeaponCard weaponCard : currPlayer.getCurrentPlatform().getWeapons())
+                if (currPlayer.getPlayerBoard().getAmmoBox().hasAmmos(weaponCard.getExtraCost()))
                     expected.add(weaponCard);
 
             assertTrue(grabable.containsAll(expected));
@@ -61,6 +64,9 @@ public class TestValidator extends TestControllerChild {
         }
     }
 
+    /**
+     * Verify if only reloadable weapons are returned in order to test if players hve enough ammos
+     */
     @Test
     public void getReloadableWeapons() {
         assertTrue(currPlayer.getWeaponCards().isEmpty());
@@ -89,6 +95,9 @@ public class TestValidator extends TestControllerChild {
         }
     }
 
+    /**
+     * Verify if only usable powerups are returned according to the current state of the game
+     */
     @Test
     public void getUsablePowerUps() {
         currPlayer.getPowerUpCards().clear();

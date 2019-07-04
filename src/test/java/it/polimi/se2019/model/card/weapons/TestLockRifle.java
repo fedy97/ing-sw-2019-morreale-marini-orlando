@@ -14,6 +14,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * LockRifle test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestLockRifle extends TestWeaponFather {
     private LockRifle lockRifle;
 
@@ -33,6 +38,7 @@ public class TestLockRifle extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(target.getCharacter());
 
+        //verify if damages and marks are added to the target
         lockRifle.activateEffect(0, targets);
         assertTrue(target.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(2, target.getPlayerBoard().getDamageLine().size());
@@ -51,6 +57,7 @@ public class TestLockRifle extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(target.getCharacter());
 
+        //verify if mark is added to the target
         lockRifle.activateEffect(1, targets);
         assertEquals(1, target.getPlayerBoard().getRevengeMarks().size());
         target.getPlayerBoard().clearMarks();

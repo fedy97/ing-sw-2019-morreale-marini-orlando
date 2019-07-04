@@ -26,7 +26,7 @@ public class TestHandyFunctions {
     }
 
     @Test
-    public void testRandoIntegerBewtween() {
+    public void testRandomIntegerBetween() {
         try {
             HandyFunctions.randomIntegerBetWeen(4, 2);
             fail();

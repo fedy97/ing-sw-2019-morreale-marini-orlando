@@ -1,6 +1,6 @@
 package it.polimi.se2019.model.card.weapons;
 
-import it.polimi.se2019.controller.TestControllerChild;
+import it.polimi.se2019.controller.TestInitializer;
 import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.player.Player;
@@ -8,7 +8,12 @@ import org.junit.Before;
 
 import java.io.IOException;
 
-public class TestWeaponFather extends TestControllerChild {
+/**
+ * General class used to test weapons
+ *
+ * @author Gabriel Raul Marini
+ */
+public class TestWeaponFather extends TestInitializer {
     protected Game game;
     protected Player currPlayer;
 

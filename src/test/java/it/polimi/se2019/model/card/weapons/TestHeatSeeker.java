@@ -12,8 +12,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
+/**
+ * HeatSeeker test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestHeatSeeker extends TestWeaponFather {
     private HeatSeeker heatSeeker;
 
@@ -33,13 +38,15 @@ public class TestHeatSeeker extends TestWeaponFather {
         assertTrue(heatSeeker.getEffects().get(0).getPossibleTargets().isEmpty());
         List<Character> violet = new ArrayList<>();
         violet.add(Character.VIOLET);
+
+        //verify if damages are properly added to the target
         heatSeeker.activateEffect(0, violet);
         assertTrue(game.getPlayer(Character.VIOLET).getPlayerBoard().getDamageLine().size() == 3);
         assertTrue(game.getPlayer(Character.VIOLET).getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
     }
 
     @After
-    public void finishTest(){
+    public void finishTest() {
         super.finishTest();
         heatSeeker.reload();
     }

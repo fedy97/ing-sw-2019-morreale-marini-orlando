@@ -9,6 +9,7 @@ import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.enumeration.Orientation;
+import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.utils.JsonParser;
 import org.junit.Before;
 import org.junit.Test;
@@ -105,12 +106,14 @@ public class TestPlatform {
             p1.setPlayerOnPlatform(c1);
         } catch (InvalidCardException ex) {
         } catch (InvalidCharacterException ex) {
+            CustomLogger.logException(this.getClass().getName(), ex);
         } catch (NullPointerException ex) {
+            CustomLogger.logException(this.getClass().getName(), ex);
         }
     }
 
     @Test
-    public void testGetWeapons() throws InvalidNameException{
+    public void testGetWeapons(){
 
         try {
             AmmoCube[] cubes = new AmmoCube[3];

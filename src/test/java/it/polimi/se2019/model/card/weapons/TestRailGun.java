@@ -15,6 +15,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * RailGun test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestRailGun extends TestWeaponFather {
     private RailGun railGun;
 
@@ -34,6 +39,7 @@ public class TestRailGun extends TestWeaponFather {
 
         railGun.activateEffect(0, targets);
 
+        //test damages of the first effect
         assertTrue(target.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(3, target.getPlayerBoard().getDamageLine().size());
         target.getPlayerBoard().resetDamageLine();
@@ -49,6 +55,7 @@ public class TestRailGun extends TestWeaponFather {
 
         railGun.activateEffect(1, targets);
 
+        //test damages for the targets of the second effect
         assertTrue(game.getPlayer(Character.VIOLET).getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertTrue(game.getPlayer(Character.BANSHEE).getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(2, game.getPlayer(Character.BANSHEE).getPlayerBoard().getDamageLine().size());

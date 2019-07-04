@@ -16,6 +16,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Shotgun test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestShotGun extends TestWeaponFather {
     private Shotgun shotgun;
 
@@ -38,6 +43,7 @@ public class TestShotGun extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(Character.BANSHEE);
 
+        //verify if target was damaged and moved
         shotgun.activateEffect(0, targets);
         assertTrue(target.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(3, target.getPlayerBoard().getDamageLine().size());
@@ -53,6 +59,7 @@ public class TestShotGun extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(Character.BANSHEE);
 
+        //verify if target was properly damaged
         shotgun.activateEffect(1, targets);
         assertTrue(target.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(2, target.getPlayerBoard().getDamageLine().size());

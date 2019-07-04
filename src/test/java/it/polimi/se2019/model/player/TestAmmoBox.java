@@ -27,7 +27,6 @@ public class TestAmmoBox {
         /*
             Test of the standard addition
          */
-
         myAmmoBox.addAmmos(AmmoCube.RED, redNum);
         myAmmoBox.addAmmos(AmmoCube.YELLOW, yellowNum);
         myAmmoBox.addAmmos(AmmoCube.BLUE, blueNum);
@@ -156,8 +155,10 @@ public class TestAmmoBox {
          * By default a new AmmoBox has 1 cube of each color
          */
         AmmoBox ammoBox = new AmmoBox();
-        AmmoCube[] ammoCubes = {AmmoCube.BLUE, AmmoCube.BLUE, AmmoCube.YELLOW};
+        AmmoCube[] ammoCubes = {AmmoCube.BLUE, AmmoCube.RED, AmmoCube.YELLOW};
+        assertTrue(ammoBox.hasAmmos(ammoCubes));
 
+        ammoCubes = new AmmoCube[]{AmmoCube.BLUE, AmmoCube.BLUE, AmmoCube.YELLOW};
         /*
          * The ammoBox has enough cubes, expected value to be true
          */

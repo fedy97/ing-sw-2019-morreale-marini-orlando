@@ -15,6 +15,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * GrenadeLauncher test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestGrenadeLauncher extends TestWeaponFather {
     private GrenadeLauncher grenadeLauncher;
 
@@ -34,6 +39,7 @@ public class TestGrenadeLauncher extends TestWeaponFather {
         c.getChosenBinaryOption().add(true);
         c.getChosenDestination().add(destination);
 
+        // verify if target is damaged and moved
         List<Character> targets = new ArrayList<>();
         targets.add(Character.BANSHEE);
         grenadeLauncher.activateEffect(0, targets);
@@ -52,7 +58,7 @@ public class TestGrenadeLauncher extends TestWeaponFather {
 
         for (Player target : game.getPlayers())
             target.setCurrentPlatform(toBurn);
-
+        //test damages
         grenadeLauncher.activateEffect(1, null);
         assertTrue(currPlayer.getPlayerBoard().getDamageLine().isEmpty());
     }

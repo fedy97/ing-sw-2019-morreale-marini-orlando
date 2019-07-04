@@ -14,6 +14,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Shockwave test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestShockWave extends TestWeaponFather {
     private Shockwave shockwave;
 
@@ -38,6 +43,7 @@ public class TestShockWave extends TestWeaponFather {
 
         shockwave.activateEffect(0, targets);
 
+        //verify damages assigned to the targets
         assertTrue(target1.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(1, target1.getPlayerBoard().getDamageLine().size());
         assertTrue(target2.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));

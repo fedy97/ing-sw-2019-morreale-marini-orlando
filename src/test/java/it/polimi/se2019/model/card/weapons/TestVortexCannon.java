@@ -16,6 +16,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * VortexCannon test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestVortexCannon extends TestWeaponFather {
     private VortexCannon vortexCannon;
 
@@ -38,6 +43,7 @@ public class TestVortexCannon extends TestWeaponFather {
 
         vortexCannon.activateEffect(0, null);
 
+        //verifying vortex damages effect
         assertTrue(target.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(2, target.getPlayerBoard().getDamageLine().size());
         target.getPlayerBoard().resetDamageLine();
@@ -53,6 +59,7 @@ public class TestVortexCannon extends TestWeaponFather {
 
         vortexCannon.activateEffect(1, targets);
 
+        //verifying vortex damages effect
         assertTrue(game.getPlayer(Character.VIOLET).getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertTrue(game.getPlayer(Character.BANSHEE).getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(1, game.getPlayer(Character.BANSHEE).getPlayerBoard().getDamageLine().size());

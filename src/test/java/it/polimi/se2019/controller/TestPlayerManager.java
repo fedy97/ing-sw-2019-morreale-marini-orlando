@@ -20,7 +20,12 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class TestPlayerManager extends TestControllerChild {
+/**
+ * Test class used to verify if operations on players work properly
+ *
+ * @author Gabriel Raul Marini
+ */
+public class TestPlayerManager extends TestInitializer {
     PlayerManager playerManager;
 
     @Before
@@ -34,6 +39,9 @@ public class TestPlayerManager extends TestControllerChild {
         playerManager.getCurrentPlayer().getPlayerBoard().getRevengeMarks().clear();
     }
 
+    /**
+     * Verify if actions of the player are decreased and increased
+     */
     @Test
     public void testActionsLeft() {
         assertEquals(2, playerManager.getActionsLeft());
@@ -45,6 +53,9 @@ public class TestPlayerManager extends TestControllerChild {
         assertEquals(0, playerManager.getActionsLeft());
     }
 
+    /**
+     * Verify if marks are added to the player
+     */
     @Test
     public void testMark() {
         playerManager.mark(c.getGame().getPlayer("user2"), 3);
@@ -58,6 +69,9 @@ public class TestPlayerManager extends TestControllerChild {
         board.getRevengeMarks().clear();
     }
 
+    /**
+     * Verify if player move
+     */
     @Test
     public void testMove() {
         Platform destination = c.getGame().getGameField().getPlatforms().get(3);
@@ -66,6 +80,9 @@ public class TestPlayerManager extends TestControllerChild {
     }
 
 
+    /**
+     * Verify if the grab operation is correctly done
+     */
     @Test
     public void testGrabAmmoCard() {
         Platform destination = null;
@@ -85,7 +102,9 @@ public class TestPlayerManager extends TestControllerChild {
         }
     }
 
-
+    /**
+     * Verify if damages are added properly
+     */
     @Test
     public void testAddDamage() {
         Map<Player, Integer> damages = new HashMap<>();
@@ -99,6 +118,9 @@ public class TestPlayerManager extends TestControllerChild {
             assertEquals(playerManager.getCurrentPlayer().getCharacter(), character);
     }
 
+    /**
+     * Verify if weapon is added to the player and if ammos are scaled
+     */
     @Test
     public void testBuyWeapon() {
         Platform destination = null;
@@ -114,6 +136,9 @@ public class TestPlayerManager extends TestControllerChild {
         }
     }
 
+    /**
+     * Used to convert power up to ammo
+     */
     @Test
     public void testConvertPowerUpToAmmo() {
         AmmoBox box = playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox();
@@ -128,6 +153,9 @@ public class TestPlayerManager extends TestControllerChild {
         }
     }
 
+    /**
+     * Verify if the reload operation works properly
+     */
     @Test
     public void testReload() {
         AmmoBox box = playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox();
@@ -146,7 +174,7 @@ public class TestPlayerManager extends TestControllerChild {
     }
 
     @After
-    public void finishTest(){
+    public void finishTest() {
         playerManager.getCurrentPlayer().removePowerUps();
         playerManager.getCurrentPlayer().removeWeapons();
         playerManager.getCurrentPlayer().getPlayerBoard().getRevengeMarks().clear();

@@ -1,10 +1,8 @@
 package it.polimi.se2019.model.card.weapons;
 
 import it.polimi.se2019.exceptions.*;
-import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
-import it.polimi.se2019.model.player.Player;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +13,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Thor test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestThor extends TestWeaponFather {
     private THOR thor;
 
@@ -33,6 +36,7 @@ public class TestThor extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(Character.BANSHEE);
 
+        //testing the first effect damages
         thor.activateEffect(0, targets);
         assertTrue(game.getPlayer(Character.BANSHEE).getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(2, game.getPlayer(Character.BANSHEE).getPlayerBoard().getDamageLine().size());
@@ -48,6 +52,7 @@ public class TestThor extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(Character.VIOLET);
 
+        //testing the additional damages of the second effect
         thor.activateEffect(1, targets);
         assertTrue(game.getPlayer(Character.VIOLET).getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(1, game.getPlayer(Character.VIOLET).getPlayerBoard().getDamageLine().size());
@@ -64,6 +69,7 @@ public class TestThor extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(Character.BANSHEE);
 
+        //testing the additional damages of the third effect
         thor.activateEffect(2, targets);
         assertTrue(game.getPlayer(Character.BANSHEE).getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(2, game.getPlayer(Character.BANSHEE).getPlayerBoard().getDamageLine().size());

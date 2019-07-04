@@ -16,6 +16,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * TractorBeam test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestTractorBeam extends TestWeaponFather {
     private TractorBeam tractorBeam;
 
@@ -37,6 +42,7 @@ public class TestTractorBeam extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(Character.BANSHEE);
 
+        //testing the  damages of the first effect and verifying if target was moved
         tractorBeam.activateEffect(0, targets);
         assertTrue(target.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(1, target.getPlayerBoard().getDamageLine().size());
@@ -52,6 +58,7 @@ public class TestTractorBeam extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(Character.VIOLET);
 
+        //testing the  damages of the second effect and verifying if currPlayer and target are now on the same platform
         tractorBeam.activateEffect(1, targets);
         assertTrue(target.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(3, target.getPlayerBoard().getDamageLine().size());

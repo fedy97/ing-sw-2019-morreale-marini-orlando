@@ -18,7 +18,7 @@ import static org.junit.Assert.fail;
  *
  * @author Gabriel Raul Marini
  */
-public class TestHealtyValidator extends TestControllerChild {
+public class TestHealthyValidator extends TestInitializer {
     private Validator validator;
     private Player currPlayer;
 
@@ -31,19 +31,21 @@ public class TestHealtyValidator extends TestControllerChild {
     }
 
 
+    /**
+     * Test the valid moves for the selected action
+     */
     @Test
     public void getValidMoves() {
         try {
             assertTrue(!validator.getValidMoves(Action.GRAB).isEmpty());
             assertTrue(!validator.getValidMoves(Action.MOVE).isEmpty());
         } catch (Exception e) {
-            //fail();
-
+            fail();
         }
 
         try {
             validator.getValidMoves(Action.SHOOT);
-            //fail();
+            fail();
         } catch (Exception e) {
         }
     }

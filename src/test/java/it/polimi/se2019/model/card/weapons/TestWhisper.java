@@ -15,6 +15,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Whisper test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestWhisper extends TestWeaponFather {
     private Whisper whisper;
 
@@ -31,6 +36,8 @@ public class TestWhisper extends TestWeaponFather {
         violet.add(Character.VIOLET);
         game.getPlayer(Character.VIOLET).getPlayerBoard().resetDamageLine();
         whisper.activateEffect(0, violet);
+
+        //testing if damages and marks are added
         assertEquals(3, game.getPlayer(Character.VIOLET).getPlayerBoard().getDamageLine().size());
         assertEquals(1, game.getPlayer(Character.VIOLET).getPlayerBoard().getRevengeMarks().size());
         assertTrue(game.getPlayer(Character.VIOLET).getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));

@@ -12,6 +12,11 @@ import java.io.IOException;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
+/**
+ * Electroscythe test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestElectroscythe extends TestWeaponFather {
     private Electroscythe electroscythe;
 

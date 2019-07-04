@@ -15,11 +15,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
- * Test class used to verify if the DamagedValidator works properly
+ * Test class used to verify if the Frenzy1Validator works properly
  *
  * @author Gabriel Raul Marini
  */
-public class TestFrenzy1Validator extends TestControllerChild {
+public class TestFrenzy1Validator extends TestInitializer {
     private Validator validator;
     private Player currPlayer;
 
@@ -31,6 +31,9 @@ public class TestFrenzy1Validator extends TestControllerChild {
         currPlayer.setCurrentPlatform(c.getGame().getGameField().getPlatforms().get(0));
     }
 
+    /**
+     * Test the valid moves for the selected action
+     */
     @Test
     public void getValidMoves() {
         try {

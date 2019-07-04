@@ -1,7 +1,6 @@
 package it.polimi.se2019.model.card.weapons;
 
 import it.polimi.se2019.exceptions.*;
-import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
@@ -15,6 +14,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Hellion test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestHellion extends TestWeaponFather {
     private Hellion hellion;
 
@@ -34,6 +38,7 @@ public class TestHellion extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(target.getCharacter());
 
+        //verify if targets are damaged
         hellion.activateEffect(0, targets);
         assertTrue(target.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(1, target.getPlayerBoard().getDamageLine().size());
@@ -50,6 +55,7 @@ public class TestHellion extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(target.getCharacter());
 
+        //verify if targets are damaged
         hellion.activateEffect(1, targets);
         assertTrue(target.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(1, target.getPlayerBoard().getDamageLine().size());

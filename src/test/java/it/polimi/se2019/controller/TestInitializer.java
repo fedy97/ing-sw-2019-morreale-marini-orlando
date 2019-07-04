@@ -17,11 +17,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Super test class used to verify controller children's behaviour
+ * General purpose class to initialize tests
  *
  * @author Gabriel Raul Marini
  */
-public class TestControllerChild {
+public class TestInitializer {
     protected Controller c;
 
     @Before

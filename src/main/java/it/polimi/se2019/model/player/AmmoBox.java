@@ -55,14 +55,6 @@ public class AmmoBox implements Serializable {
         return yellowAmmos;
     }
 
-    /**
-     * @return the total number of AmmoCubes of the box
-     */
-    public int getTotal() {
-        return redAmmos + blueAmmos + yellowAmmos;
-    }
-
-
     public void addAmmos(AmmoCube[] ammos) {
         for (AmmoCube cube : ammos)
             addAmmos(cube, 1);

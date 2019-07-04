@@ -16,6 +16,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * ZX2 test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestZX2 extends TestWeaponFather {
     private ZX2 zx2;
 
@@ -51,6 +56,7 @@ public class TestZX2 extends TestWeaponFather {
         targets.add(Character.VIOLET);
         targets.add(Character.BANSHEE);
 
+        //verifying if marks are added to the targets
         zx2.activateEffect(1, targets);
         assertTrue(target1.getPlayerBoard().getRevengeMarks().contains(currPlayer.getCharacter()));
         assertTrue(target2.getPlayerBoard().getRevengeMarks().contains(currPlayer.getCharacter()));

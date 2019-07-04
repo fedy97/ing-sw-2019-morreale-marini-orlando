@@ -3,12 +3,9 @@ package it.polimi.se2019.model.card;
 
 import it.polimi.se2019.exceptions.InvalidCardException;
 import it.polimi.se2019.exceptions.InvalidDeckException;
-import it.polimi.se2019.exceptions.InvalidImageException;
 import it.polimi.se2019.exceptions.NoCardException;
 import it.polimi.se2019.utils.JsonParser;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -24,7 +21,7 @@ public class TestAmmoCard {
      * AmmoCard
      */
     @Test
-    public void TestAmmoCard() throws InvalidImageException, IOException, InvalidDeckException, NoCardException {
+    public void TestAmmoCard() throws InvalidDeckException, NoCardException {
 
         try {
             JsonParser parser = new JsonParser("/json/ammocards.json");

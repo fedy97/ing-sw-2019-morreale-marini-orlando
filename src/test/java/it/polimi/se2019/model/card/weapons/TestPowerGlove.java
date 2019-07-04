@@ -15,6 +15,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * PowerGlove test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestPowerGlove extends TestWeaponFather {
     private PowerGlove powerGlove;
 
@@ -35,6 +40,7 @@ public class TestPowerGlove extends TestWeaponFather {
 
         powerGlove.activateEffect(0, targets);
 
+        //verify if damages and marks are added to the targets
         assertTrue(target.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertTrue(target.getPlayerBoard().getRevengeMarks().contains(currPlayer.getCharacter()));
         assertEquals(1, target.getPlayerBoard().getDamageLine().size());
@@ -58,6 +64,7 @@ public class TestPowerGlove extends TestWeaponFather {
 
         powerGlove.activateEffect(1, targets);
 
+        //verify additional damage
         assertEquals(2, target.getPlayerBoard().getDamageLine().size());
     }
 

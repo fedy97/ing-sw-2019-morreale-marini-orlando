@@ -14,13 +14,21 @@ import java.util.List;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.*;
 
-public class TestController extends TestControllerChild {
+/**
+ * Test class for Controller. Only methods with no network interaction are tested
+ *
+ * @author Gabriel Raul Marini
+ */
+public class TestController extends TestInitializer {
 
     @Before
     public void initTest() throws InvalidImageException, InvalidNameException, InvalidCubeException, IOException, InvalidDeckException, InvalidCardException {
         super.initTest();
     }
 
+    /**
+     * Verify if bit a bit and is performed
+     */
     @Test
     public void testUpdateValidAction() {
         c.updateValidActions(UserValidActions.NO_BASIC.getActions());
@@ -29,6 +37,9 @@ public class TestController extends TestControllerChild {
             assertEquals(expected[i], c.getValidActions()[i]);
     }
 
+    /**
+     * Test if valid actions are properly initialized
+     */
     @Test
     public void testResetValidAction() {
         c.resetValidActions();
@@ -37,12 +48,18 @@ public class TestController extends TestControllerChild {
             assertEquals(expected[i], c.getValidActions()[i]);
     }
 
+    /**
+     * Verify is game was started
+     */
     @Test
     public void testStartGame() {
         c.startGame();
         assertEquals(ControllerState.IDLE, c.getState());
     }
 
+    /**
+     * Test if askFor operation works properly
+     */
     @Test
     public void testAskFor() {
         try {
@@ -86,6 +103,9 @@ public class TestController extends TestControllerChild {
     }
 
 
+    /**
+     * verify if the character is correctly assigned to the player
+     */
     @Test
     public void testSetCharacterChosen() {
         try {
@@ -96,6 +116,9 @@ public class TestController extends TestControllerChild {
         }
     }
 
+    /**
+     * Verify if all the character in game are retrieved
+     */
     @Test
     public void testFindCharactersInGame() {
         List<String> characterList = c.findCharactersInGame();
@@ -104,8 +127,11 @@ public class TestController extends TestControllerChild {
         }
     }
 
+    /**
+     * Verify if controller states are correctly assigned
+     */
     @Test
-    public void testSetState(){
+    public void testSetState() {
         c.setState(ControllerState.PROCESSING_POWERUP);
         assertEquals(ControllerState.PROCESSING_POWERUP, c.getState());
         c.setState(ControllerState.IDLE);

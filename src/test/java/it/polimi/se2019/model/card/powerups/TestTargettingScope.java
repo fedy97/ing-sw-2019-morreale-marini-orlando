@@ -1,6 +1,6 @@
 package it.polimi.se2019.model.card.powerups;
 
-import it.polimi.se2019.controller.TestControllerChild;
+import it.polimi.se2019.controller.TestInitializer;
 import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
@@ -12,7 +12,12 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertTrue;
 
-public class TestTargettingScope extends TestControllerChild {
+/**
+ * Class used to test TargettingScope powerup
+ *
+ * @author Gabriel Raul Marini
+ */
+public class TestTargettingScope extends TestInitializer {
     private TargettingScope targettingScope;
 
     @Before
@@ -23,6 +28,9 @@ public class TestTargettingScope extends TestControllerChild {
         c.getGame().getPlayer(Character.VIOLET).getPlayerBoard().resetDamageLine();
     }
 
+    /**
+     * Verify if additional damage is added
+     */
     @Test
     public void testActivate(){
         targettingScope.activate(Character.VIOLET);

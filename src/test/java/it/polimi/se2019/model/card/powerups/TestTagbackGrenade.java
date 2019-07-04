@@ -1,6 +1,6 @@
 package it.polimi.se2019.model.card.powerups;
 
-import it.polimi.se2019.controller.TestControllerChild;
+import it.polimi.se2019.controller.TestInitializer;
 import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
@@ -12,7 +12,12 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertTrue;
 
-public class TestTagbackGrenade extends TestControllerChild {
+/**
+ * Class used to test TagbackGrenade powerup
+ *
+ * @author Gabriel Raul Marini
+ */
+public class TestTagbackGrenade extends TestInitializer {
     private TagbackGrenade tagback;
 
     @Before
@@ -23,14 +28,17 @@ public class TestTagbackGrenade extends TestControllerChild {
         c.getPlayerManager().getCurrentPlayer().getPlayerBoard().clearMarks();
     }
 
+    /**
+     * Test if marks is added to the target
+     */
     @Test
-    public void testActivate(){
+    public void testActivate() {
         tagback.activate(Character.VIOLET);
         assertTrue(c.getPlayerManager().getCurrentPlayer().getPlayerBoard().getRevengeMarks().contains(c.getGame().getPlayer("user2").getCharacter()));
     }
 
     @After
-    public void finishTest(){
+    public void finishTest() {
         c.getPlayerManager().getCurrentPlayer().getPlayerBoard().clearMarks();
     }
 }

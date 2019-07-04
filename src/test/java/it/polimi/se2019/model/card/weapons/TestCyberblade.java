@@ -14,6 +14,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Cyberblade test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestCyberblade extends TestWeaponFather {
     private Cyberblade cyberblade;
 
@@ -31,6 +36,7 @@ public class TestCyberblade extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(Character.BANSHEE);
 
+        //verify if damages are correctly assigned
         cyberblade.activateEffect(0, targets);
         assertTrue(game.getPlayer(Character.BANSHEE).getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(2, game.getPlayer(Character.BANSHEE).getPlayerBoard().getDamageLine().size());
@@ -44,6 +50,7 @@ public class TestCyberblade extends TestWeaponFather {
         Platform destination = game.getGameField().getPlatforms().get(3);
         c.getChosenDestination().add(destination);
 
+        //verify if player was moved
         cyberblade.activateEffect(1, null);
         assertTrue(currPlayer.getCurrentPlatform().equals(destination));
     }
@@ -55,6 +62,7 @@ public class TestCyberblade extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(Character.VIOLET);
 
+        //verify if damages of the effect are assigned in the right way
         cyberblade.activateEffect(2, targets);
         assertTrue(game.getPlayer(Character.VIOLET).getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(2, game.getPlayer(Character.VIOLET).getPlayerBoard().getDamageLine().size());

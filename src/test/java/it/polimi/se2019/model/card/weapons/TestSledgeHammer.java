@@ -16,6 +16,12 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+
+/**
+ * Sledgehammer test
+ *
+ * @author Gabriel Raul Marini
+ */
 public class TestSledgeHammer extends TestWeaponFather {
     private Sledgehammer sledgehammer;
 
@@ -34,6 +40,7 @@ public class TestSledgeHammer extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(Character.BANSHEE);
 
+        //testing damages of th effect
         sledgehammer.activateEffect(0, targets);
         assertTrue(target.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(2, target.getPlayerBoard().getDamageLine().size());
@@ -53,6 +60,7 @@ public class TestSledgeHammer extends TestWeaponFather {
         List<Character> targets = new ArrayList<>();
         targets.add(Character.BANSHEE);
 
+        //testing if target was damaged and moved
         sledgehammer.activateEffect(1, targets);
         assertTrue(target.getPlayerBoard().getDamageLine().contains(currPlayer.getCharacter()));
         assertEquals(3, target.getPlayerBoard().getDamageLine().size());

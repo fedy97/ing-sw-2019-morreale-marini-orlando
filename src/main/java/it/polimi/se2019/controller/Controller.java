@@ -197,6 +197,7 @@ public class Controller implements Observer, Serializable {
 
     /**
      * Method used to update the valid actions of the player
+     *
      * @param newValidActions array containing the new valid actions of the game
      */
     void updateValidActions(boolean[] newValidActions) {

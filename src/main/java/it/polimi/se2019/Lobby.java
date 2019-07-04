@@ -11,12 +11,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.util.Enumeration;
 import java.util.Scanner;
 import java.util.logging.Level;
 
+/**
+ * Main class used to launch the servers and manage the players' connection
+ */
 public class Lobby {
     private static RMIServer rmiServer = new RMIServer(HandyFunctions.parserSettings.getRmiServerPort());
     private static SocketServer socketServer = new SocketServer(HandyFunctions.parserSettings.getSocketServerPort());
@@ -37,6 +37,9 @@ public class Lobby {
         }
     }
 
+    /**
+     * Used when loading an old game
+     */
     private static void loadController() {
 
         try (FileInputStream fi = new FileInputStream(new File("server.txt"));
@@ -63,14 +66,23 @@ public class Lobby {
 
     }
 
+    /**
+     * @param user added after the connection
+     */
     public static void addUser(String user) {
         controller.getTurnController().addUser(user);
     }
 
+    /**
+     * @return the RMI server instance
+     */
     public static RMIServer getRmiServer() {
         return rmiServer;
     }
 
+    /**
+     * @return the Socket server instance
+     */
     public static SocketServer getSocketServer() {
         return socketServer;
     }

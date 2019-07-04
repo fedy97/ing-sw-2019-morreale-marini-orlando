@@ -1,6 +1,6 @@
 package it.polimi.se2019.model.card.powerups;
 
-import it.polimi.se2019.controller.TestControllerChild;
+import it.polimi.se2019.controller.TestInitializer;
 import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
@@ -11,9 +11,15 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-public class TestNewton extends TestControllerChild {
+/**
+ * Class used to test Newton powerup
+ *
+ * @author Gabriel Raul Marini
+ */
+public class TestNewton extends TestInitializer {
     private Newton newton;
     private Player target;
 
@@ -26,12 +32,18 @@ public class TestNewton extends TestControllerChild {
         c.getChosenDestination().add(c.getGame().getGameField().getPlatforms().get(4));
     }
 
+    /**
+     * Verify if target player was moved
+     */
     @Test
     public void testActivate() {
         newton.activate(Character.VIOLET);
         assertEquals(c.getGame().getPlayer(Character.VIOLET).getCurrentPlatform(), c.getGame().getGameField().getPlatforms().get(4));
     }
 
+    /**
+     * Returns all the players except the current one
+     */
     @Test
     public void testGetPossibleTargets() {
         assertTrue(newton.getPossibleTargets().size() == (c.getGame().getPlayers().size() - 1));

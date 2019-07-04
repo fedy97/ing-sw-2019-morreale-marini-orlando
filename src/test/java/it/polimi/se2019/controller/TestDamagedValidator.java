@@ -19,7 +19,7 @@ import static org.junit.Assert.fail;
  *
  * @author Gabriel Raul Marini
  */
-public class TestDamagedValidator extends TestControllerChild {
+public class TestDamagedValidator extends TestInitializer {
     private Validator validator;
     private Player currPlayer;
 
@@ -31,6 +31,9 @@ public class TestDamagedValidator extends TestControllerChild {
         currPlayer.setCurrentPlatform(c.getGame().getGameField().getPlatforms().get(0));
     }
 
+    /**
+     * Test the valid moves for the selected action
+     */
     @Test
     public void getValidMoves() {
         try {

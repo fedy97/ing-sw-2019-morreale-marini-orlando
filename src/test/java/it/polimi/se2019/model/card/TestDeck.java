@@ -2,10 +2,7 @@ package it.polimi.se2019.model.card;
 
 
 import it.polimi.se2019.exceptions.*;
-import it.polimi.se2019.model.card.Card;
-import it.polimi.se2019.model.card.Deck;
-import it.polimi.se2019.model.card.powerups.*;
-import it.polimi.se2019.model.enumeration.AmmoCube;
+import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.utils.JsonParser;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +19,7 @@ public class TestDeck {
     Deck<PowerUpCard> deck;
 
     @Before
-    public void initTest() throws InvalidCubeException, InvalidNameException, InvalidImageException,InvalidDeckException, IOException {
+    public void initTest() throws InvalidCubeException, InvalidNameException, InvalidImageException, InvalidDeckException, IOException {
         JsonParser parser = new JsonParser("/json/powerups.json");
         deck = parser.buildPowerupCards();
         deck.mix();
@@ -74,7 +71,7 @@ public class TestDeck {
      * @throws InvalidDeckException id trying to add cards to a full deck
      */
     @Test(expected = InvalidDeckException.class)
-    public void testAddCard() throws InvalidDeckException,NoCardException {
+    public void testAddCard() throws InvalidDeckException, NoCardException {
         Deck deck2 = new Deck(1);
         PowerUpCard p = null;
 
@@ -114,7 +111,7 @@ public class TestDeck {
      *                              or if the adding deck is empty
      */
     @Test(expected = InvalidDeckException.class)
-    public void testAddCards() throws InvalidDeckException,NoCardException {
+    public void testAddCards() throws InvalidDeckException, NoCardException {
         Deck deck2 = new Deck(5);
         PowerUpCard p = null;
 
@@ -142,12 +139,13 @@ public class TestDeck {
         try {
             deck2.addCards(cards);
             fail();
-        } catch (InvalidDeckException e) {}
+        } catch (InvalidDeckException e) {
+        }
 
         /*
             Test if InvalidDeckException is thrown when trying to add no cards
          */
-       deck2.addCards(new ArrayList<>());
+        deck2.addCards(new ArrayList<>());
     }
 
 }
