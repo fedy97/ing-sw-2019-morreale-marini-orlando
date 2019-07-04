@@ -8,9 +8,11 @@ import it.polimi.se2019.utils.CustomLogger;
 import it.polimi.se2019.view.client.RemoteView;
 
 import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Enumeration;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -33,7 +35,6 @@ public class RMIClient implements Client, Observer {
         this.user = user;
 
         try {
-            System.setProperty("java.rmi.server.hostname", InetAddress.getLocalHost().getHostAddress());
             registry = LocateRegistry.createRegistry(port);
         } catch (Exception e) {
             CustomLogger.logException(this.getClass().getName(), e);
@@ -60,7 +61,7 @@ public class RMIClient implements Client, Observer {
         exportRemoteObject();
 
         try {
-            stub.registerClient(InetAddress.getLocalHost().getHostAddress(), this.port, user);
+            stub.registerClient(getLocalIp(), this.port, user);
             if (!stub.isUsed()) {
                 connected = true;
                 CustomLogger.logInfo(this.getClass().getName(), "Client is connected!");
@@ -85,6 +86,9 @@ public class RMIClient implements Client, Observer {
         }
     }
 
+    /**
+     * Disconnect from RMI server, unbind the local registry
+     */
     public void disconnect() {
         stub = null;
         try {
@@ -102,6 +106,9 @@ public class RMIClient implements Client, Observer {
         return connected;
     }
 
+    /**
+     * @param msg to be interpreted
+     */
     @Override
     public void interpretMessage(ToClientMessage msg) {
         try {
@@ -121,6 +128,31 @@ public class RMIClient implements Client, Observer {
         } catch (Exception e) {
             CustomLogger.logException(this.getClass().getName(), e);
         }
+    }
+
+    /**
+     * Useful method created because InetAddress always return  127.0.0.1
+     *
+     * @return the local ip address
+     */
+    private String getLocalIp() {
+        String rightIp = "127.0.0.1";
+
+        try {
+            Enumeration<NetworkInterface> n = NetworkInterface.getNetworkInterfaces();
+            while (n.hasMoreElements()) {
+                NetworkInterface e = n.nextElement();
+                Enumeration<InetAddress> a = e.getInetAddresses();
+                while (a.hasMoreElements()) {
+                    InetAddress addr = a.nextElement();
+                    if (addr.getHostAddress().contains("192.168."))
+                        rightIp = addr.getHostAddress();
+                }
+            }
+        } catch (Exception e) {
+            CustomLogger.logException(this.getClass().getName(), e);
+        }
+        return rightIp;
     }
 
     /**

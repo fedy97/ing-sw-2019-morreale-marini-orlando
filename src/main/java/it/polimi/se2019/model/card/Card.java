@@ -19,7 +19,6 @@ public abstract class Card implements Serializable {
 
     /***
      * Instantiate an anonymous card
-     *
      */
     public Card() {
     }
@@ -68,10 +67,6 @@ public abstract class Card implements Serializable {
 
     public String getImgPath() {
         return imgPath;
-    }
-
-    public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
     }
 
     @Override

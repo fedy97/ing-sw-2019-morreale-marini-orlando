@@ -36,10 +36,10 @@ public class WeaponCard extends Card {
     /**
      * constructor for json parser
      *
-     * @param name of the weapon
-     * @param descr description of the weapon
-     * @param img path to the weapon's image
-     * @param paidCost in addition to extraCost define the reload cost
+     * @param name      of the weapon
+     * @param descr     description of the weapon
+     * @param img       path to the weapon's image
+     * @param paidCost  in addition to extraCost define the reload cost
      * @param extraCost paid when grabbing the weapon
      * @throws InvalidNameException
      */
@@ -113,10 +113,17 @@ public class WeaponCard extends Card {
         this.usableEffects = usableEffects;
     }
 
+    /**
+     * @param index   of the effect to use
+     * @param targets list of the chosen targets
+     */
     public void activateEffect(int index, List<Character> targets) {
         effects.get(index).activateEffect(targets, this);
     }
 
+    /**
+     * Called when the weapon was used and has to be disabled
+     */
     public void discard() {
         loaded = false;
         cleanCache();

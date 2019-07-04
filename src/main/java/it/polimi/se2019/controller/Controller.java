@@ -195,6 +195,10 @@ public class Controller implements Observer, Serializable {
         }
     }
 
+    /**
+     * Method used to update the valid actions of the player
+     * @param newValidActions array containing the new valid actions of the game
+     */
     void updateValidActions(boolean[] newValidActions) {
         for (int i = 0; i < validActions.length; i++) {
             validActions[i] = validActions[i] && newValidActions[i];
@@ -349,8 +353,8 @@ public class Controller implements Observer, Serializable {
     /**
      * Used to perform grab action
      *
-     * @throws InvalidActionException .
-     * @throws InterruptedException   .
+     * @throws InvalidActionException
+     * @throws InterruptedException
      */
     private void grabRoutine() throws InvalidActionException, InterruptedException {
         setState(ControllerState.PROCESSING_ACTION_2);
@@ -597,6 +601,9 @@ public class Controller implements Observer, Serializable {
         notifyAll(new UpdateVotesCharacterChosenMessage(characterChosen));
     }
 
+    /**
+     * Called to reset the user's valid action according to the game state
+     */
     void resetValidActions() {
         if (turnController.isFirstTurn() || playerManager.getCurrentPlayer().getFrenzyModeType() == 2)
             validActions = UserValidActions.NO_SHOOT.getActions().clone();
@@ -756,6 +763,9 @@ public class Controller implements Observer, Serializable {
         t.start();
     }
 
+    /**
+     * @retur a collection of the characters present in the game
+     */
     public List<String> findCharactersInGame() {
         List<String> arrChars = new ArrayList<>();
         for (Map.Entry<Character, Player> entry : game.getCharacterPlayers().entrySet()) {

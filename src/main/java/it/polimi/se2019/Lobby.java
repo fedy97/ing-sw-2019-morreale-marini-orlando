@@ -11,6 +11,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 import java.util.Scanner;
 import java.util.logging.Level;
 
@@ -19,7 +22,7 @@ public class Lobby {
     private static SocketServer socketServer = new SocketServer(HandyFunctions.parserSettings.getSocketServerPort());
     private static Controller controller = Controller.getInstance();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         HandyFunctions.printConsole("press 1 to load server from file, something else otherwise: ");
         Scanner in = new Scanner(System.in);
         String s = in.nextLine();
@@ -32,8 +35,6 @@ public class Lobby {
             socketServer.start();
             controller.startWaitingLobbyPing();
         }
-
-
     }
 
     private static void loadController() {

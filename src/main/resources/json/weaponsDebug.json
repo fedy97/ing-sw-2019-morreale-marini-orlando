@@ -1,9 +1,9 @@
 {
   "weapons": [
     {
-      "name": "torpedine",
-      "description": "effetto base: Dai 2 danni a 1 bersaglio che puoi vedere.\nreazione a catena: Dai 1 danno a un secondo bersaglio che\nil tuo primo bersaglio può vedere.\nalta tensione: Dai 2 danni a un terzo bersaglio che il tuo\nsecondo bersaglio può vedere. Non puoi usare questo\neffetto se prima non hai usato reazione a catena.\nNota: Questa carta limita l'ordine in cui puoi utilizzare i suoi\neffetti. (Molte carte non lo fanno.) Inoltre ogni bersaglio\ndeve essere un giocatore differente.",
-      "paidCost": "BLUE",
+      "name": "zx-2",
+      "description": "modalità base: Dai 1 danno e 2 marchi\na 1 bersaglio che puoi vedere.\nmodalità scanner: Scegli fino a 3 bersagli\nche puoi vedere e dai 1 marchio a ciascuno.\nNota: Ricorda che i 3 bersagli possono anche\nessere in 3 stanze diverse.",
+      "paidCost": "YELLOW",
       "extraCost": ["RED"]
     }
   ]

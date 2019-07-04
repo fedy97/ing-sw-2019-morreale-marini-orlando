@@ -4,6 +4,8 @@ import it.polimi.se2019.exceptions.InvalidNameException;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 
 /**
+ * Weapon with one adding effect
+ *
  * @author Gabriel Raul Marini
  */
 public class WeaponOneAddingEffect extends WeaponCard {

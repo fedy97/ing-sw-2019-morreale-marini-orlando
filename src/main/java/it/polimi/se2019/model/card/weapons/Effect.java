@@ -29,6 +29,9 @@ public abstract class Effect implements Serializable {
      */
     public abstract void activateEffect(List<Character> targets, WeaponCard card);
 
+    /**
+     * @return the possible targets of the effect in the current state of the game
+     */
     public List<Character> getPossibleTargets() {
         if (possibleTargets != null) {
             Character character = Controller.getInstance().getPlayerManager().getCurrentPlayer().getCharacter();
@@ -52,10 +55,6 @@ public abstract class Effect implements Serializable {
 
     public AmmoCube[] getCost() {
         return cost;
-    }
-
-    public void setCost(AmmoCube[] cost) {
-        this.cost = cost;
     }
 
     public abstract void setupTargets();
