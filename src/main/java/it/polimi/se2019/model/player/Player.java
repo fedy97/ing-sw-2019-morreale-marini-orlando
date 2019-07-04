@@ -33,9 +33,7 @@ public class Player implements Serializable {
     private ArrayList<PowerUpCard> powerUpCards;
     private ArrayList<WeaponCard> weaponCards;
     private int frenzyModeType;
-    private boolean underAttack;
     private List<Player> currentTargets;
-    private boolean attacking;
     private boolean isConnected;
 
     /**
@@ -44,7 +42,6 @@ public class Player implements Serializable {
      *
      * @param character Character chosen by the player at the start of the game
      * @throws InvalidCharacterException if character is null
-     * @throws InvalidPositionException  if startPlatform is null
      */
     public Player(String name, Character character, Platform startPlatform) throws InvalidCharacterException {
         if (character == null)
@@ -55,8 +52,6 @@ public class Player implements Serializable {
         playerBoard = new PlayerBoard();
         powerUpCards = new ArrayList<>();
         weaponCards = new ArrayList<>();
-        underAttack = false;
-        attacking = false;
         isConnected = true;
         currentTargets = new ArrayList<>();
     }
@@ -287,42 +282,34 @@ public class Player implements Serializable {
         return playerBoard.getDamageLine().size() > 11;
     }
 
-    public void setUnderAttack() {
-        underAttack = true;
-    }
-
-    public void resetUnderAttack() {
-        underAttack = false;
-    }
-
-    public boolean isUnderAttack() {
-        return underAttack;
-    }
-
-    public List<Player> getCurrentTargets() {
+    /**
+     *
+     * @return current targets
+     */
+    List<Player> getCurrentTargets() {
         return currentTargets;
     }
 
-    public void addTarget(Player currentTarget) {
+    /**
+     *
+     * @param currentTarget the target to be add
+     */
+    void addTarget(Player currentTarget) {
         this.currentTargets.add(currentTarget);
     }
 
-    public void beginAttack() {
-        attacking = true;
-    }
-
-    public void terminateAttack() {
-        attacking = false;
-    }
-
-    public boolean isAttacking() {
-        return attacking;
-    }
-
+    /**
+     *
+     * @return if is connected
+     */
     public boolean isConnected() {
         return isConnected;
     }
 
+    /**
+     *
+     * @param connected the value for isConnected
+     */
     public void setConnected(boolean connected) {
         isConnected = connected;
     }
