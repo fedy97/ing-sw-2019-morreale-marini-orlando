@@ -127,10 +127,18 @@ public class PlayerBoard implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return the value of reverted
+     */
     public boolean isReverted() {
         return reverted;
     }
 
+    /**
+     *
+     * @param reverted the value for reverted 
+     */
     public void setReverted(boolean reverted) {
         this.reverted = reverted;
     }
