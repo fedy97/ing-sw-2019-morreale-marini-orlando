@@ -12,8 +12,7 @@ import it.polimi.se2019.utils.HandyFunctions;
 import it.polimi.se2019.utils.TimerTurn;
 import it.polimi.se2019.view.client.RemoteView;
 
-import java.io.Console;
-import java.io.IOException;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
@@ -995,15 +994,11 @@ public class CLI extends RemoteView {
                     try {
                         choise = reader3.getTimedInt();
                         if (choise != 99) {
-                            Map<String, List<CardRep>> playePowerUps = lightGameVersion.getPlayerPowerups();
-                            List<CardRep> myPowerUps = playePowerUps.get(myCharEnumString);
                             int idCard;
                             if (choise < powerups.size()) {
                                 idCard = Integer.parseInt(powerups.get(choise));
-                                //idCard = myPowerUps.get(choise).getId();
                             } else {
                                 idCard = Integer.parseInt(powerups.get(0));
-                                //idCard = myPowerUps.get(0).getId();
                             }
 
                             ActivateCardMessage message = new ActivateCardMessage(Integer.toString(idCard));
@@ -1024,15 +1019,11 @@ public class CLI extends RemoteView {
                 } else {
                     choise = s.nextInt();
                     CliSetUp.restorePosition();
-                    Map<String, List<CardRep>> playePowerUps = lightGameVersion.getPlayerPowerups();
-                    List<CardRep> myPowerUps = playePowerUps.get(myCharEnumString);
                     int idCard;
                     if (choise < powerups.size()) {
                         idCard = Integer.parseInt(powerups.get(choise));
-                        //idCard = myPowerUps.get(choise).getId();
                     } else {
                         idCard = Integer.parseInt(powerups.get(0));
-                        //idCard = myPowerUps.get(0).getId();
                     }
 
                     ActivateCardMessage message = new ActivateCardMessage(Integer.toString(idCard));
