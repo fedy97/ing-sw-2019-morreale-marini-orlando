@@ -61,8 +61,4 @@ public class SpecificSocketServer extends Thread {
     public ObjectOutputStream getOutput() {
         return output;
     }
-
-    public ObjectInputStream getInput() {
-        return input;
-    }
 }

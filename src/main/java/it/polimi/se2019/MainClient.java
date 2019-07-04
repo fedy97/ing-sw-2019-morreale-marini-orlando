@@ -11,20 +11,9 @@ import it.polimi.se2019.view.client.gui.LoginPage;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-//import it.polimi.se2019.utils.Track;
-
-//I duplicated this one to run 2 different clients on intellij
 public class MainClient {
 
     public static void main(String[] args) {
-
-        //Path path = Paths.get(URI.create(ClassLoader.getSystemResource("soundtrack.wav").toString()));
-
-        //Thread track = new Thread(new Track(path.toString()));
-        /*
-        la lascio commentata per ora cosi non parte sempre
-        track.start();
-         */
 
         int choice;
         Scanner in = new Scanner(System.in);
@@ -43,8 +32,7 @@ public class MainClient {
             } else {
                 LoginPage.startLoginPage();
             }
-        }
-        catch (InputMismatchException e) {
+        } catch (InputMismatchException e) {
             System.exit(-1);
         }
 
