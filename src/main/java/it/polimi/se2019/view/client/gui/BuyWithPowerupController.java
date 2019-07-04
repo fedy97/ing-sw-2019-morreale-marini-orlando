@@ -2,7 +2,6 @@ package it.polimi.se2019.view.client.gui;
 
 import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.model.rep.LightGameVersion;
-import it.polimi.se2019.utils.HandyFunctions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -54,11 +53,11 @@ public class BuyWithPowerupController {
         List<CardRep> myPowerupsReps = charPowerupsReps.get(gui.getCharInString());
         for (CardRep myPowerup : myPowerupsReps) {
             powerupsImages.get(myPowerupsReps.indexOf(myPowerup)).setImage(new Image(myPowerup.getPath()));
-            HandyFunctions.enlightenButton(powerupsButtons.get(myPowerupsReps.indexOf(myPowerup)));
+            LoginController.enlightenButton(powerupsButtons.get(myPowerupsReps.indexOf(myPowerup)));
         }
         for (int j = myPowerupsReps.size(); j < 3; j++) {
             powerupsImages.get(j).setImage(new Image("/assets/powerups/AD_powerups_IT_02.jpg"));
-            HandyFunctions.darkenButton(powerupsButtons.get(j));
+            LoginController.darkenButton(powerupsButtons.get(j));
         }
 
     }

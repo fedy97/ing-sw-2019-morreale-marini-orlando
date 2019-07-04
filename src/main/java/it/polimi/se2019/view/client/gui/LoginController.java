@@ -16,6 +16,11 @@ import java.rmi.RemoteException;
 
 public class LoginController {
 
+    private static final String LOCALHOST = System.getProperty("myapplication.ip");
+    private static final String WHITE = "WHITE";
+    private static final String HOVERED_BUTTON_STYLE = "-fx-border-color: #f7ff00; -fx-border-width: 4px; -fx-background-color: transparent; -fx-border-radius: 15;";
+    private static final String ENLIGHTED_BUTTON_STYLE = "-fx-border-color: #ff0000; -fx-border-width: 2px; -fx-background-color: transparent;-fx-border-radius: 15;";
+    private static final String DARKED_BUTTON_STYLE = "-fx-border-width: 0px; -fx-background-color: transparent;";
     @FXML
     private TextField userTextField;
     @FXML
@@ -29,7 +34,74 @@ public class LoginController {
     private String selection;
     private Font normale;
     private Font grande;
-    private static final String LOCALHOST = System.getProperty("myapplication.ip");
+
+    /**
+     * @param button to light
+     */
+    static void enlightenToggleButton(ToggleButton button) {
+        button.setTextFill(javafx.scene.paint.Paint.valueOf(WHITE));
+        button.setSelected(false);
+        button.setStyle(ENLIGHTED_BUTTON_STYLE);
+        button.setOnMouseExited(e -> button.setStyle(ENLIGHTED_BUTTON_STYLE));
+        button.setDisable(false);
+        button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
+
+    }
+
+    /**
+     * @param button to light
+     */
+    static void enlightenButton(Button button) {
+        button.setTextFill(javafx.scene.paint.Paint.valueOf(WHITE));
+        button.setStyle(ENLIGHTED_BUTTON_STYLE);
+        button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
+        button.setOnMouseExited(e -> button.setStyle(ENLIGHTED_BUTTON_STYLE));
+        button.setDisable(false);
+    }
+
+    /**
+     * @param button to force the light in choosing targets
+     */
+    static void forceLightToggleButton(ToggleButton button) {
+        button.setTextFill(javafx.scene.paint.Paint.valueOf(WHITE));
+        button.setStyle(HOVERED_BUTTON_STYLE);
+        button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
+        button.setDisable(false);
+        button.setOnMouseExited(e -> button.setStyle(HOVERED_BUTTON_STYLE));
+
+    }
+
+    /**
+     * @param button to force the light in gameboard controller
+     */
+    static void forceLightButton(Button button) {
+        button.setDisable(false);
+        button.setTextFill(javafx.scene.paint.Paint.valueOf(WHITE));
+        button.setStyle(HOVERED_BUTTON_STYLE);
+        button.setOnMouseExited(e -> button.setStyle(HOVERED_BUTTON_STYLE));
+        button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
+
+    }
+
+    /**
+     * @param button to dark
+     */
+    static void darkenButton(Button button) {
+        button.setStyle(DARKED_BUTTON_STYLE);
+        button.setOnMouseEntered(e -> button.setStyle(DARKED_BUTTON_STYLE));
+        button.setOnMouseExited(e -> button.setStyle(DARKED_BUTTON_STYLE));
+        button.setDisable(true);
+    }
+
+    /**
+     * @param button to dark
+     */
+    static void darkenToggleButton(ToggleButton button) {
+        button.setOnMouseEntered(e -> button.setStyle(DARKED_BUTTON_STYLE));
+        button.setOnMouseExited(e -> button.setStyle(DARKED_BUTTON_STYLE));
+        button.setStyle(DARKED_BUTTON_STYLE);
+        button.setDisable(true);
+    }
 
     public void initialize() {
         grande = Font.loadFont(
@@ -41,10 +113,10 @@ public class LoginController {
                 10
         );
         socketButton.setSelected(true);
-        HandyFunctions.forceLightToggleButton(socketButton);
-        HandyFunctions.enlightenToggleButton(rmiButton);
+        forceLightToggleButton(socketButton);
+        enlightenToggleButton(rmiButton);
         selection = socketButton.getText();
-        HandyFunctions.enlightenButton(loginButton);
+        enlightenButton(loginButton);
         loginButton.setFont(grande);
         socketButton.setFont(normale);
         rmiButton.setFont(normale);
@@ -52,6 +124,7 @@ public class LoginController {
 
     /**
      * called if login button is pressed
+     *
      * @throws RemoteException in rmi
      */
     @FXML
@@ -74,10 +147,7 @@ public class LoginController {
                     client.connect(getIp(), HandyFunctions.parserClientSettings.getSocketServerPort());
                     gui.addObserver(client);
                 }
-                try {
-                    showWaitingLobby(gui);
-                } catch (Exception e) {
-                }
+                showWaitingLobby(gui);
 
             }
         } catch (Exception ex) {
@@ -102,19 +172,18 @@ public class LoginController {
     }
 
     public void socketClick() {
-        HandyFunctions.enlightenToggleButton(rmiButton);
-        HandyFunctions.forceLightToggleButton(socketButton);
+        enlightenToggleButton(rmiButton);
+        forceLightToggleButton(socketButton);
         selection = socketButton.getText();
     }
 
     public void rmiClick() {
-        HandyFunctions.enlightenToggleButton(socketButton);
-        HandyFunctions.forceLightToggleButton(rmiButton);
+        enlightenToggleButton(socketButton);
+        forceLightToggleButton(rmiButton);
         selection = rmiButton.getText();
     }
 
     /**
-     *
      * @param user already existent
      */
     void notifyAlreadyInUse(String user) {

@@ -3,7 +3,6 @@ package it.polimi.se2019.view.client.gui;
 import it.polimi.se2019.model.rep.AmmoRep;
 import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.model.rep.LightGameVersion;
-import it.polimi.se2019.utils.HandyFunctions;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -381,7 +380,7 @@ public class GameBoardController {
         infoButtons.add(info233);
 
         for (Button button : infoButtons)
-            HandyFunctions.enlightenButton(button);
+            LoginController.enlightenButton(button);
 
         skullsImages = new ArrayList<>();
         skullsImages.add(skull8);
@@ -620,8 +619,8 @@ public class GameBoardController {
         playersButtonBoards.put("SPROG", sprogstats);
         playersButtonBoards.put("BANSHEE", bansheestats);
         for (String player : gui.getCharsInGame()) {
-            if (!player.equals(gui.getCharInString())) HandyFunctions.enlightenButton(playersButtonBoards.get(player));
-            else HandyFunctions.forceLightButton(playersButtonBoards.get(player));
+            if (!player.equals(gui.getCharInString())) LoginController.enlightenButton(playersButtonBoards.get(player));
+            else LoginController.forceLightButton(playersButtonBoards.get(player));
             charImageBoardChar.get(player).setVisible(true);
         }
 
@@ -673,7 +672,7 @@ public class GameBoardController {
     private void updateActionButtons() {
         int actionType = lightGameVersion.getPlayerBoardRep().get(gui.getCharInString()).getActionType();
         if (actionType != oldActionType) {
-            oldActionType=actionType;
+            oldActionType = actionType;
             switch (actionType) {
                 case 0:
                     moveimage.setImage(new Image("/assets/boards/move1.png"));
@@ -821,7 +820,7 @@ public class GameBoardController {
 
     void enlightenPlatforms(List<String> plats) {
         for (String pl : plats)
-            HandyFunctions.enlightenButton(posPlatform.get(pl));
+            LoginController.enlightenButton(posPlatform.get(pl));
 
     }
 
@@ -830,7 +829,7 @@ public class GameBoardController {
             Button currButt = entry.getKey();
             String currHash = entry.getValue();
             if (hashes.contains(currHash)) {
-                HandyFunctions.enlightenButton(currButt);
+                LoginController.enlightenButton(currButt);
             }
         }
     }
@@ -1069,6 +1068,7 @@ public class GameBoardController {
         darkenAllPlatforms();
         gui.sendPlatformChosen("2,3");
     }
+
     public void in101click() {
         showInstruction(lightGameVersion.getPlatformWeapons().get("1,0").get(0));
     }
@@ -1107,30 +1107,30 @@ public class GameBoardController {
 
     private void darkenAllPlatforms() {
         for (Map.Entry<String, Button> entry : posPlatform.entrySet())
-            HandyFunctions.darkenButton(entry.getValue());
+            LoginController.darkenButton(entry.getValue());
     }
 
     private void darkenAllWeapons() {
         for (Map.Entry<Button, String> entry : buttonsHashes.entrySet()) {
-            HandyFunctions.darkenButton(entry.getKey());
+            LoginController.darkenButton(entry.getKey());
         }
     }
 
     void setActiveButtons(boolean[] actives) {
-        if (actives[0]) HandyFunctions.enlightenButton(movebutton);
-        else HandyFunctions.darkenButton(movebutton);
-        if (actives[1]) HandyFunctions.enlightenButton(grabbutton);
-        else HandyFunctions.darkenButton(grabbutton);
-        if (actives[2]) HandyFunctions.enlightenButton(shootbutton);
-        else HandyFunctions.darkenButton(shootbutton);
-        if (actives[3]) HandyFunctions.enlightenButton(reloadbutton);
-        else HandyFunctions.darkenButton(reloadbutton);
-        if (actives[4]) HandyFunctions.enlightenButton(endturnbutton);
-        else HandyFunctions.darkenButton(endturnbutton);
-        if (actives[5]) HandyFunctions.enlightenButton(powerupsbutton);
-        else HandyFunctions.darkenButton(powerupsbutton);
-        if (actives[6]) HandyFunctions.enlightenButton(convertbutton);
-        else HandyFunctions.darkenButton(convertbutton);
+        if (actives[0]) LoginController.enlightenButton(movebutton);
+        else LoginController.darkenButton(movebutton);
+        if (actives[1]) LoginController.enlightenButton(grabbutton);
+        else LoginController.darkenButton(grabbutton);
+        if (actives[2]) LoginController.enlightenButton(shootbutton);
+        else LoginController.darkenButton(shootbutton);
+        if (actives[3]) LoginController.enlightenButton(reloadbutton);
+        else LoginController.darkenButton(reloadbutton);
+        if (actives[4]) LoginController.enlightenButton(endturnbutton);
+        else LoginController.darkenButton(endturnbutton);
+        if (actives[5]) LoginController.enlightenButton(powerupsbutton);
+        else LoginController.darkenButton(powerupsbutton);
+        if (actives[6]) LoginController.enlightenButton(convertbutton);
+        else LoginController.darkenButton(convertbutton);
     }
 
     void setReconnected(boolean reconnected) {

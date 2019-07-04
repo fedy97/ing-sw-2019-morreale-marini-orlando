@@ -2,7 +2,6 @@ package it.polimi.se2019.view.client.gui;
 
 import it.polimi.se2019.model.rep.BoardRep;
 import it.polimi.se2019.model.rep.LightGameVersion;
-import it.polimi.se2019.utils.HandyFunctions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -30,15 +29,15 @@ public class ChooseAmmosController {
     void updateRightAmmos(LightGameVersion lightGameVersion) {
         BoardRep mine = lightGameVersion.getPlayerBoardRep().get(gui.getCharInString());
         if (mine.getColorQtyAmmos().get("BLUE") > 0) {
-            HandyFunctions.enlightenButton(bluebutton);
+            LoginController.enlightenButton(bluebutton);
             blueimage.setVisible(true);
         }
         if (mine.getColorQtyAmmos().get("RED") > 0) {
-            HandyFunctions.enlightenButton(redbutton);
+            LoginController.enlightenButton(redbutton);
             redimage.setVisible(true);
         }
         if (mine.getColorQtyAmmos().get("YELLOW") > 0) {
-            HandyFunctions.enlightenButton(yellowbutton);
+            LoginController.enlightenButton(yellowbutton);
             yellowimage.setVisible(true);
         }
 

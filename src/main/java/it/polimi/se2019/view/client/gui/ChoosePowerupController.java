@@ -1,7 +1,6 @@
 package it.polimi.se2019.view.client.gui;
 
 import it.polimi.se2019.model.rep.CardRep;
-import it.polimi.se2019.utils.HandyFunctions;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -59,10 +58,10 @@ public class ChoosePowerupController {
                     buttons.add(powerup1);
                     buttons.add(powerup2);
                     buttons.add(powerup3);
-                    HandyFunctions.enlightenButton(info1button);
-                    HandyFunctions.enlightenButton(info2button);
-                    HandyFunctions.enlightenButton(powerup1);
-                    HandyFunctions.enlightenButton(powerup2);
+                    LoginController.enlightenButton(info1button);
+                    LoginController.enlightenButton(info2button);
+                    LoginController.enlightenButton(powerup1);
+                    LoginController.enlightenButton(powerup2);
                 });
     }
 
@@ -71,14 +70,14 @@ public class ChoosePowerupController {
         for (CardRep cardRep : cards) {
             if (cards.indexOf(cardRep) <= 2) {
                 imageViews.get(cards.indexOf(cardRep)).setImage(new Image(cardRep.getPath()));
-                HandyFunctions.enlightenButton(buttons.get(cards.indexOf(cardRep)));
-                HandyFunctions.enlightenButton(infoButtons.get(cards.indexOf(cardRep)));
+                LoginController.enlightenButton(buttons.get(cards.indexOf(cardRep)));
+                LoginController.enlightenButton(infoButtons.get(cards.indexOf(cardRep)));
             }
         }
         for (int i = cardReps.size(); i < 3; i++) {
             imageViews.get(i).setImage(new Image("/assets/powerups/AD_powerups_IT_02.jpg"));
-            HandyFunctions.darkenButton(buttons.get(i));
-            HandyFunctions.darkenButton(infoButtons.get(i));
+            LoginController.darkenButton(buttons.get(i));
+            LoginController.darkenButton(infoButtons.get(i));
         }
 
     }

@@ -2,7 +2,6 @@ package it.polimi.se2019.view.client.gui;
 
 import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.model.rep.LightGameVersion;
-import it.polimi.se2019.utils.HandyFunctions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -51,13 +50,13 @@ public class ReloadWeaponsController {
 
         for (int j = 0; j < 3; j++) {
             weaponsImages.get(j).setImage(new Image("/assets/weapons/back.png"));
-            HandyFunctions.darkenButton(weaponsButtons.get(j));
+            LoginController.darkenButton(weaponsButtons.get(j));
         }
         List<CardRep> myWeaponsReps = lightGameVersion.getPlayerWeapons().get(gui.getCharInString());
         for (CardRep myWeapon : myWeaponsReps) {
             weaponsImages.get(myWeaponsReps.indexOf(myWeapon)).setImage(new Image(myWeapon.getPath()));
             if (hashes.contains(Integer.toString(myWeapon.getId())))
-                HandyFunctions.enlightenButton(weaponsButtons.get(myWeaponsReps.indexOf(myWeapon)));
+                LoginController.enlightenButton(weaponsButtons.get(myWeaponsReps.indexOf(myWeapon)));
         }
 
 

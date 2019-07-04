@@ -1,6 +1,5 @@
 package it.polimi.se2019.view.client.gui;
 
-import it.polimi.se2019.utils.HandyFunctions;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -59,11 +58,11 @@ public class ChooseCharacterController {
             buttons.put("SPROG", greenbutton);
             buttons.put("BANSHEE", bluebutton);
             buttons.put("VIOLET", violetbutton);
-            HandyFunctions.enlightenToggleButton(greybutton);
-            HandyFunctions.enlightenToggleButton(greenbutton);
-            HandyFunctions.enlightenToggleButton(yellowbutton);
-            HandyFunctions.enlightenToggleButton(violetbutton);
-            HandyFunctions.enlightenToggleButton(bluebutton);
+            LoginController.enlightenToggleButton(greybutton);
+            LoginController.enlightenToggleButton(greenbutton);
+            LoginController.enlightenToggleButton(yellowbutton);
+            LoginController.enlightenToggleButton(violetbutton);
+            LoginController.enlightenToggleButton(bluebutton);
             labelcharacter.setFont(normale);
             timer.setFont(normale);
         });
@@ -100,11 +99,11 @@ public class ChooseCharacterController {
     }
 
     private void disableButtons() {
-        HandyFunctions.darkenToggleButton(violetbutton);
-        HandyFunctions.darkenToggleButton(greenbutton);
-        HandyFunctions.darkenToggleButton(greybutton);
-        HandyFunctions.darkenToggleButton(yellowbutton);
-        HandyFunctions.darkenToggleButton(bluebutton);
+        LoginController.darkenToggleButton(violetbutton);
+        LoginController.darkenToggleButton(greenbutton);
+        LoginController.darkenToggleButton(greybutton);
+        LoginController.darkenToggleButton(yellowbutton);
+        LoginController.darkenToggleButton(bluebutton);
     }
 
     void updateTimer(int count) {
@@ -112,7 +111,7 @@ public class ChooseCharacterController {
     }
 
     void updateCharacters(String c) {
-        HandyFunctions.darkenToggleButton(buttons.get(c));
+        LoginController.darkenToggleButton(buttons.get(c));
     }
 
     private void setEffectToButton(ToggleButton toggleButton) {
