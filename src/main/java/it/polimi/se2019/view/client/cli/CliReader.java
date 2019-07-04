@@ -22,7 +22,7 @@ public class CliReader {
     /**
      * @param seconds of waiting input for timer readings
      */
-    public CliReader(int seconds) {
+    CliReader(int seconds) {
         this.seconds = seconds;
         scanner = new Scanner(System.in);
         stop = false;
@@ -55,7 +55,7 @@ public class CliReader {
      * @throws IOException in case of reading problems
      * @throws NoInputException if the input is not entered in the time provided
      */
-    public int getTimedInt() throws IOException, NoInputException {
+    int getTimedInt() throws IOException, NoInputException {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         long startTime = System.currentTimeMillis();
         while ((System.currentTimeMillis() - startTime) < seconds * 1000 && !in.ready() && !stop) {
@@ -98,7 +98,7 @@ public class CliReader {
     /**
      * Stop waiting for input forcefully
      */
-    public void stopReader() {
+    private void stopReader() {
         this.stop = true;
     }
 

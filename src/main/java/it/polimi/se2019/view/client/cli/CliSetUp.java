@@ -15,7 +15,7 @@ public final class CliSetUp {
     private static final String SAVE = "s";
     private static final String RESTORE = "u";
 
-    public CliSetUp() {
+    CliSetUp() {
         //Not necessary configuration
     }
     /**
@@ -35,14 +35,14 @@ public final class CliSetUp {
     /**
      * Stores the current cursor's position in the terminal
      */
-    public static void savePosition() {
+    static void savePosition() {
         HandyFunctions.printConsole(ESC+SAVE);
     }
 
     /**
      * Place the cursor in the last saved position
      */
-    public static void restorePosition() {
+    static void restorePosition() {
         HandyFunctions.printConsole(ESC+RESTORE);
     }
 
@@ -50,7 +50,7 @@ public final class CliSetUp {
      * Move the cursor down
      * @param numOfLine the number of lines to move the cursor
      */
-    public static void cursorDown(int numOfLine)
+    static void cursorDown(int numOfLine)
     {
         HandyFunctions.printConsole(ESC + numOfLine + "B");
     }
@@ -59,7 +59,7 @@ public final class CliSetUp {
      * Move the cursor up
      * @param numOfLine the number of lines to move the cursor
      */
-    public static void cursorUp(int numOfLine)
+    static void cursorUp(int numOfLine)
     {
         HandyFunctions.printConsole(ESC + numOfLine + "A");
     }
@@ -68,7 +68,7 @@ public final class CliSetUp {
      * Move the cursor right
      * @param numOfCol the number of columns to move the cursor
      */
-    public static void cursorRight(int numOfCol)
+    static void cursorRight(int numOfCol)
     {
         HandyFunctions.printConsole(ESC + numOfCol + "C");
     }
@@ -77,7 +77,7 @@ public final class CliSetUp {
      * Move the cursor left
      * @param numOfCol the number of columns to move the cursor
      */
-    public static void cursorLeft(int numOfCol)
+    static void cursorLeft(int numOfCol)
     {
         HandyFunctions.printConsole(ESC + numOfCol + "D");
     }
