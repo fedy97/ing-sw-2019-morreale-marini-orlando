@@ -10,7 +10,6 @@ public class TestTimers {
         Controller.getInstance().setTimerStarted(true);
         TimerLobby timerLobby = new TimerLobby(5);
         timerLobby.start();
-        timerLobby.interrupt();
 
     }
 
@@ -18,13 +17,20 @@ public class TestTimers {
     public void testMapTimer() {
         TimerMap timerMap = new TimerMap(5);
         timerMap.start();
-        timerMap.interrupt();
     }
 
     @Test
     public void testCharacterTimer() {
         TimerCharacter timerCharacter = new TimerCharacter(5);
         timerCharacter.start();
-        timerCharacter.interrupt();
+    }
+    @Test
+    public void testTurnTimer(){
+        TimerTurn timerTurn = new TimerTurn(5,null,"BANSHEE");
+        try {
+            timerTurn.start();
+        } catch (Exception e){
+            timerTurn.interrupt();
+        }
     }
 }

@@ -1,6 +1,6 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.Action;
+import it.polimi.se2019.model.enumeration.Action;
 import it.polimi.se2019.controller.validator.HealthyValidator;
 import it.polimi.se2019.controller.validator.UserValidActions;
 import it.polimi.se2019.controller.validator.Validator;
@@ -190,8 +190,8 @@ public class Controller implements Observer, Serializable {
                 ((ToServerMessage) message).performAction();
             }
         } else {
-            new Thread(() ->
-                    ((ToServerMessage) message).performAction()).start();
+            new Thread(
+                    ((ToServerMessage) message)::performAction).start();
         }
     }
 
@@ -354,8 +354,8 @@ public class Controller implements Observer, Serializable {
     /**
      * Used to perform grab action
      *
-     * @throws InvalidActionException
-     * @throws InterruptedException
+     * @throws InvalidActionException .
+     * @throws InterruptedException   .
      */
     private void grabRoutine() throws InvalidActionException, InterruptedException {
         setState(ControllerState.PROCESSING_ACTION_2);
@@ -548,12 +548,6 @@ public class Controller implements Observer, Serializable {
                 break;
             case TARGETS:
                 msg = new ShowPossibleTargetsMessage(lightVersion);
-                break;
-            case "discard":
-                msg = new AskForCubeMessage(lightVersion);
-                break;
-            case "cube":
-                msg = new AskForCubeMessage(lightVersion);
                 break;
             case RECHARGE:
                 msg = new ShowReloadableWeaponsMessage(lightVersion);

@@ -1,6 +1,6 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.Action;
+import it.polimi.se2019.model.enumeration.Action;
 import it.polimi.se2019.controller.validator.DamagedValidator;
 import it.polimi.se2019.controller.validator.Validator;
 import it.polimi.se2019.exceptions.*;
