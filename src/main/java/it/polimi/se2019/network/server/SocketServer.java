@@ -127,6 +127,7 @@ public class SocketServer implements Server {
             if (!connections.get(user).getSocket().isClosed()) {
                 ObjectOutputStream outStream = connections.get(user).getOutput();
                 outStream.writeObject(msg);
+                outStream.flush();
                 outStream.reset();
             }
         } catch (Exception e) {
