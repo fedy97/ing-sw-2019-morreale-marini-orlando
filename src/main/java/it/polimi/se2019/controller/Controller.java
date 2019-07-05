@@ -29,6 +29,7 @@ import it.polimi.se2019.view.server.VirtualView;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.rmi.ConnectException;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.BlockingDeque;
@@ -747,8 +748,10 @@ public class Controller implements Observer, Serializable {
                     }
                     Thread.sleep(500);
                 }
-            } catch (Exception ex) {
-                CustomLogger.logException(this.getClass().getName(), ex);
+
+            }
+            catch (Exception ex) {
+             
             }
 
         });
