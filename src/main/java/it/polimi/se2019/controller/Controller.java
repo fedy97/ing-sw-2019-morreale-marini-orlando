@@ -77,7 +77,7 @@ public class Controller implements Observer, Serializable {
     private boolean wasRecharged;
     private boolean serverReloaded;
     private boolean[] validActions;
-    private boolean weaponsDebug = true;
+    private boolean weaponsDebug = false;
 
 
     private Controller() {
