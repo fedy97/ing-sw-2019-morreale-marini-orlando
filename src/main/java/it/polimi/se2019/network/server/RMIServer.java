@@ -4,6 +4,7 @@ import it.polimi.se2019.Lobby;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.ControllerState;
 import it.polimi.se2019.model.Game;
+import it.polimi.se2019.network.IpFinder;
 import it.polimi.se2019.network.client.Client;
 import it.polimi.se2019.network.message.toclient.ToClientMessage;
 import it.polimi.se2019.network.message.toserver.NewClientConnectedMessage;
@@ -46,6 +47,7 @@ public class RMIServer implements Server {
      */
     public void start() {
         try {
+            System.setProperty("java.rmi.server.hostname", IpFinder.getLocalIp());
             exportRemoteObject();
         } catch (Exception e) {
             CustomLogger.logException(this.getClass().getName(), e);

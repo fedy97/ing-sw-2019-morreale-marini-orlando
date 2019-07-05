@@ -1,5 +1,6 @@
 package it.polimi.se2019.network.client;
 
+import it.polimi.se2019.network.IpFinder;
 import it.polimi.se2019.network.message.toclient.ToClientMessage;
 import it.polimi.se2019.network.message.toclient.UsernameAlreadyInUseMessage;
 import it.polimi.se2019.network.message.toserver.ToServerMessage;
@@ -34,6 +35,7 @@ public class RMIClient implements Client, Observer {
         this.port = port;
         this.user = user;
 
+        System.setProperty("java.rmi.server.hostname", IpFinder.getLocalIp());
         try {
             registry = LocateRegistry.createRegistry(port);
         } catch (Exception e) {
@@ -59,9 +61,8 @@ public class RMIClient implements Client, Observer {
         }
 
         exportRemoteObject();
-
         try {
-            stub.registerClient(getLocalIp(), this.port, user);
+            stub.registerClient(IpFinder.getLocalIp(), this.port, user);
             if (!stub.isUsed()) {
                 connected = true;
                 CustomLogger.logInfo(this.getClass().getName(), "Client is connected!");
@@ -128,31 +129,6 @@ public class RMIClient implements Client, Observer {
         } catch (Exception e) {
             CustomLogger.logException(this.getClass().getName(), e);
         }
-    }
-
-    /**
-     * Useful method created because InetAddress always return  127.0.0.1
-     *
-     * @return the local ip address
-     */
-    private String getLocalIp() {
-        String rightIp = "192.168.43.74";
-
-        try {
-            Enumeration<NetworkInterface> n = NetworkInterface.getNetworkInterfaces();
-            while (n.hasMoreElements()) {
-                NetworkInterface e = n.nextElement();
-                Enumeration<InetAddress> a = e.getInetAddresses();
-                while (a.hasMoreElements()) {
-                    InetAddress addr = a.nextElement();
-                    if (addr.getHostAddress().contains("192.168."))
-                        rightIp = addr.getHostAddress();
-                }
-            }
-        } catch (Exception e) {
-            CustomLogger.logException(this.getClass().getName(), e);
-        }
-        return rightIp;
     }
 
     /**
