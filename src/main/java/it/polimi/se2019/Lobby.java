@@ -22,7 +22,7 @@ public class Lobby {
     private static SocketServer socketServer = new SocketServer(HandyFunctions.parserSettings.getSocketServerPort());
     private static Controller controller = Controller.getInstance();
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         HandyFunctions.printConsole("press 1 to load server from file, something else otherwise: ");
         Scanner in = new Scanner(System.in);
         String s = in.nextLine();

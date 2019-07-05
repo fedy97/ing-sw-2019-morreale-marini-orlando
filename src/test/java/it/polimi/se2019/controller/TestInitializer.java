@@ -51,7 +51,7 @@ public class TestInitializer {
     public void test1() {
         c.getGame().getCharacters(c.getGame().getPlayers());
         Deck deck = c.getGame().getGarbageDeck();
-        c.getGame().saveServer();
+        //c.getGame().saveServer();
         c.getGame().getPlayer("lol");
         Map<Character,Integer> map = new HashMap<>();
         map.put(Character.DISTRUCTOR, 1);
