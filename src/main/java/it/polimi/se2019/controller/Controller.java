@@ -77,7 +77,7 @@ public class Controller implements Observer, Serializable {
     private boolean wasRecharged;
     private boolean serverReloaded;
     private boolean[] validActions;
-    private boolean weaponsDebug = true;
+    private boolean weaponsDebug = false;
 
 
     private Controller() {
@@ -190,8 +190,8 @@ public class Controller implements Observer, Serializable {
                 ((ToServerMessage) message).performAction();
             }
         } else {
-            new Thread(() ->
-                    ((ToServerMessage) message).performAction()).start();
+            new Thread(
+                    ((ToServerMessage) message)::performAction).start();
         }
     }
 
@@ -354,8 +354,8 @@ public class Controller implements Observer, Serializable {
     /**
      * Used to perform grab action
      *
-     * @throws InvalidActionException
-     * @throws InterruptedException
+     * @throws InvalidActionException .
+     * @throws InterruptedException .
      */
     private void grabRoutine() throws InvalidActionException, InterruptedException {
         setState(ControllerState.PROCESSING_ACTION_2);
