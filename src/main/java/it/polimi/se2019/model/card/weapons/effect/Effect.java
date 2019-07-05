@@ -15,6 +15,7 @@ import java.util.List;
  * @author Gabriel Raul Marini
  */
 public abstract class Effect implements Serializable {
+    protected Controller c;
     private AmmoCube[] cost;
     private List<Character> possibleTargets;
     private List<Character> lastEffectTargets;
@@ -64,6 +65,4 @@ public abstract class Effect implements Serializable {
     public List<Character> getLastEffectTargets() {
         return lastEffectTargets;
     }
-
-    protected Controller c;
 }

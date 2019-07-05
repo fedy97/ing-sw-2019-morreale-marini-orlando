@@ -145,7 +145,7 @@ public class RMIClient implements Client, Observer {
                 Enumeration<InetAddress> a = e.getInetAddresses();
                 while (a.hasMoreElements()) {
                     InetAddress addr = a.nextElement();
-                    if (addr.getHostAddress().contains("192.168."))
+                    if (addr.getHostAddress().contains("192.168.") || addr.getHostAddress().contains("10."))
                         rightIp = addr.getHostAddress();
                 }
             }
