@@ -136,7 +136,7 @@ public class RMIClient implements Client, Observer {
      * @return the local ip address
      */
     private String getLocalIp() {
-        String rightIp = "";
+        String rightIp = "192.168.43.74";
 
         try {
             Enumeration<NetworkInterface> n = NetworkInterface.getNetworkInterfaces();
@@ -145,7 +145,7 @@ public class RMIClient implements Client, Observer {
                 Enumeration<InetAddress> a = e.getInetAddresses();
                 while (a.hasMoreElements()) {
                     InetAddress addr = a.nextElement();
-                    if (addr.getHostAddress().contains("192.168.") || addr.getHostAddress().contains("10."))
+                    if (addr.getHostAddress().contains("192.168."))
                         rightIp = addr.getHostAddress();
                 }
             }
@@ -156,7 +156,7 @@ public class RMIClient implements Client, Observer {
     }
 
     /**
-     * it recives the updates from GUI or CLI
+     * It receives the updates from GUI or CLI
      *
      * @param o   GUI/CLI
      * @param arg the message sent from gui or cli

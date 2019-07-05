@@ -46,7 +46,6 @@ public class RMIServer implements Server {
      */
     public void start() {
         try {
-            System.setProperty("java.rmi.server.hostname", InetAddress.getLocalHost().getHostAddress());
             exportRemoteObject();
         } catch (Exception e) {
             CustomLogger.logException(this.getClass().getName(), e);
