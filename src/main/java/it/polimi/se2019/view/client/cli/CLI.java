@@ -622,12 +622,12 @@ public class CLI extends RemoteView {
         final int SOCKET = 1;
         if (connectionChosen == SOCKET) {
             SocketClient client = new SocketClient(this, userName);
-            client.connect(ip, 1100);
+            client.connect(ip, HandyFunctions.parserClientSettings.getSocketServerPort());
             this.addObserver(client);
         } else {
 
             RMIClient client = new RMIClient(this, HandyFunctions.randomIntegerBetWeen(1500, 2000), userName);
-            client.connect(ip, 1099);
+            client.connect(ip, HandyFunctions.parserClientSettings.getRmiServerPort());
             this.addObserver(client);
         }
     }
