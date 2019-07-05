@@ -29,6 +29,7 @@ public abstract class Effect implements Serializable {
 
     /**
      * @param targets selected targets to apply the effect
+     * @param card to activate
      */
     public abstract void activateEffect(List<Character> targets, WeaponCard card);
 

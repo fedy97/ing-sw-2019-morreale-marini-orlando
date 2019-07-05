@@ -1,16 +1,17 @@
 package it.polimi.se2019.model.board;
 
-import java.awt.*;
-import java.io.Serializable;
-import java.util.*;
-import java.util.List;
-
 import it.polimi.se2019.exceptions.*;
 import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.enumeration.Orientation;
 import it.polimi.se2019.utils.HandyFunctions;
+
+import java.awt.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Platform containing info about doors, walls, players, generation spot and ammos card
@@ -36,6 +37,7 @@ public class Platform implements Serializable {
      * @param isGenerationSpot indicates if the platform is a generation spot
      * @param platformAmmoCard the ammunition card located on the platform
      * @param platformColor    this four params will be parsed from json
+     * @param doors            .
      * @throws InvalidCardException if the starting ammos card of the platform is null
      */
     public Platform(int[] platformPosition, boolean isGenerationSpot, AmmoCard platformAmmoCard, Color platformColor, List<Orientation> doors)
@@ -84,8 +86,33 @@ public class Platform implements Serializable {
         return platformAmmoCard;
     }
 
+    /**
+     * @param platformAmmoCard to be set on the platform, when a AmmoCard is grabbed
+     * @throws InvalidCardException if a ammocard is set to a generation spot or the ammocard is null
+     */
+    public void setPlatformAmmoCard(AmmoCard platformAmmoCard) throws InvalidCardException {
+        if (platformAmmoCard == null)
+            throw new InvalidCardException("the ammocard to be set cannot be null");
+        if (isGenerationSpot)
+            throw new InvalidCardException("cannot set a ammos card on a generation spot");
+        if (hasAmmoCard())
+            throw new InvalidCardException("this platform already got an ammocard");
+        this.platformAmmoCard = platformAmmoCard;
+        this.hasAmmoCard = true;
+    }
+
     public Room getPlatformRoom() {
         return platformRoom;
+    }
+
+    /**
+     * @param platformRoom to link to this platform
+     * @throws InvalidRoomException if the room is null
+     */
+    public void setPlatformRoom(Room platformRoom) throws InvalidRoomException {
+        if (platformRoom == null)
+            throw new InvalidRoomException();
+        this.platformRoom = platformRoom;
     }
 
     public Color getPlatformColor() {
@@ -97,6 +124,16 @@ public class Platform implements Serializable {
      */
     public Map<Orientation, Platform> getAdjacentPlatforms() {
         return adjacentPlatforms;
+    }
+
+    /**
+     * @param adjacentPlatforms to link to this platform
+     * @throws InvalidAdjacentPlatformsException if adjacentPlatforms is null
+     */
+    public void setAdjacentPlatforms(Map<Orientation, Platform> adjacentPlatforms) throws InvalidAdjacentPlatformsException {
+        if (adjacentPlatforms == null)
+            throw new InvalidAdjacentPlatformsException();
+        this.adjacentPlatforms = adjacentPlatforms;
     }
 
     /**
@@ -121,28 +158,13 @@ public class Platform implements Serializable {
     }
 
     /**
-     * @param platformRoom to link to this platform
-     * @throws InvalidRoomException if the room is null
+     * @param weapons to set to the generation spot
+     * @throws InvalidGenerationSpotException if the current platform is not a generation spot
      */
-    public void setPlatformRoom(Room platformRoom) throws InvalidRoomException {
-        if (platformRoom == null)
-            throw new InvalidRoomException();
-        this.platformRoom = platformRoom;
-    }
-
-    /**
-     * @param platformAmmoCard to be set on the platform, when a AmmoCard is grabbed
-     * @throws InvalidCardException if a ammocard is set to a generation spot or the ammocard is null
-     */
-    public void setPlatformAmmoCard(AmmoCard platformAmmoCard) throws InvalidCardException {
-        if (platformAmmoCard == null)
-            throw new InvalidCardException("the ammocard to be set cannot be null");
-        if (isGenerationSpot)
-            throw new InvalidCardException("cannot set a ammos card on a generation spot");
-        if (hasAmmoCard())
-            throw new InvalidCardException("this platform already got an ammocard");
-        this.platformAmmoCard = platformAmmoCard;
-        this.hasAmmoCard = true;
+    public void setWeapons(List<WeaponCard> weapons) throws InvalidGenerationSpotException {
+        if (!this.isGenerationSpot())
+            throw new InvalidGenerationSpotException();
+        this.weapons = (ArrayList<WeaponCard>) weapons;
     }
 
     /**
@@ -163,27 +185,9 @@ public class Platform implements Serializable {
     }
 
     /**
-     * @param adjacentPlatforms to link to this platform
-     * @throws InvalidAdjacentPlatformsException if adjacentPlatforms is null
-     */
-    public void setAdjacentPlatforms(Map<Orientation, Platform> adjacentPlatforms) throws InvalidAdjacentPlatformsException {
-        if (adjacentPlatforms == null)
-            throw new InvalidAdjacentPlatformsException();
-        this.adjacentPlatforms = adjacentPlatforms;
-    }
-
-    /**
-     * @param weapons to set to the generation spot
-     * @throws InvalidGenerationSpotException if the current platform is not a generation spot
-     */
-    public void setWeapons(List<WeaponCard> weapons) throws InvalidGenerationSpotException {
-        if (!this.isGenerationSpot())
-            throw new InvalidGenerationSpotException();
-        this.weapons = (ArrayList<WeaponCard>) weapons;
-    }
-
-    /**
      * at the end of the turn a new weapon card will be placed
+     * @param weaponCard .
+     * @throws InvalidGenerationSpotException .
      */
     public void addWeaponCard(WeaponCard weaponCard) throws InvalidGenerationSpotException {
         if (!this.isGenerationSpot())
@@ -202,7 +206,6 @@ public class Platform implements Serializable {
     }
 
     /**
-     *
      * @return the ammocard on the platform
      * @throws InvalidCardException .
      */

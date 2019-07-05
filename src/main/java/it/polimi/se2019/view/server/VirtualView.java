@@ -17,7 +17,6 @@ public class VirtualView extends View {
     private String user;
 
     /**
-     * @param virtualServer either RMIServer or SocketServer
      * @param user          .
      */
     public VirtualView(String user) {

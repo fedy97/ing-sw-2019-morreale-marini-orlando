@@ -21,6 +21,7 @@ public class Room implements Serializable {
 
     /**
      * @param platformsInRoom All the platforms that make up the room
+     * @param roomColor awt
      * @throws InvalidRoomException if there is no platform in the room
      */
     public Room(List<Platform> platformsInRoom, Color roomColor) throws InvalidRoomException {

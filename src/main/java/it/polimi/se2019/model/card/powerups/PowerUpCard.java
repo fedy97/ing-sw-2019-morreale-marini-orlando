@@ -26,6 +26,11 @@ public abstract class PowerUpCard extends Card {
      *
      * @param ammoCube the type of cube the player can use instead of using the
      *                 PowerUp effect
+     * @param name of the powerup
+     * @param description of the powerup
+     * @param img of the powerup
+     * @throws InvalidNameException .
+     * @throws InvalidCubeException .
      */
     public PowerUpCard(AmmoCube ammoCube, String name, String description, String img) throws InvalidNameException, InvalidCubeException {
         super(name, description, img);

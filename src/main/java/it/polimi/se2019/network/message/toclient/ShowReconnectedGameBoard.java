@@ -9,8 +9,13 @@ public class ShowReconnectedGameBoard extends ToClientMessage {
     private LightGameVersion lightGameVersion;
     private List<String> arrChars;
     private String myChar;
+
     /**
-     * @param payload list of clients' username
+     *
+     * @param payload .
+     * @param lightGameVersion .
+     * @param arrChars of all chars
+     * @param myChar .
      */
     public ShowReconnectedGameBoard(Object payload, LightGameVersion lightGameVersion, List<String> arrChars, String myChar){
         super(payload);

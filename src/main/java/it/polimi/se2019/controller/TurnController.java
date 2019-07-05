@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Manager of the turning logic
+ *
  * @author Gabriel Raul Marini
  */
 public class TurnController implements Serializable {
@@ -114,7 +116,7 @@ public class TurnController implements Serializable {
     /**
      * Set the right validator according to the player health state
      *
-     * @param currPlayer
+     * @param currPlayer .
      */
     private void setRightValidator(Player currPlayer) {
         if (c.isFrenzyModeOn()) {
@@ -138,7 +140,7 @@ public class TurnController implements Serializable {
     /**
      * Set the allowed action to every player
      *
-     * @param currPlayer
+     * @param currPlayer .
      */
     public void enablePlayers(Player currPlayer) {
         for (Player player : c.getGame().getPlayers()) {

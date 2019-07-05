@@ -26,7 +26,7 @@ public class SkullsBoard implements Serializable {
      * @param totalSkulls is the number set at the beginning of a game,
      *                    depending on how much the players want to game to last,
      *                    it has to be in the [1,8] range
-     * @throws InvalidQuantityException if the skulls set is < 1 or > 8
+     * @throws InvalidQuantityException if the skulls set is minor than 1 or greater than 8
      */
     public SkullsBoard(int totalSkulls) throws InvalidQuantityException {
         this.killMarks = new EnumMap<>(Character.class);

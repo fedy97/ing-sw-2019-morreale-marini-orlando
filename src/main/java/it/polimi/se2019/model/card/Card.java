@@ -34,6 +34,11 @@ public abstract class Card implements Serializable {
 
     /**
      * Instantiate a card with a specified name and a given background image
+     *
+     * @param name of the card
+     * @param description of the card
+     * @param img of the card
+     * @throws InvalidNameException .
      */
     public Card(String name, String description, String img) throws InvalidNameException {
         if (name.equals("") || description.equals(""))

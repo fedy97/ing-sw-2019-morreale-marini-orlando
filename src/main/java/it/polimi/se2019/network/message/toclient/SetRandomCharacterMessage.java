@@ -7,6 +7,7 @@ public class SetRandomCharacterMessage extends ToClientMessage {
 
     /**
      * @param payload list of clients' username
+     * @param username to notify
      */
     public SetRandomCharacterMessage(Object payload, String username) {
         super(payload);

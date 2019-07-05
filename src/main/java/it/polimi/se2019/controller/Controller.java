@@ -525,6 +525,8 @@ public class Controller implements Observer, Serializable {
     }
 
     /**
+     * Called to notify the user the possible choices
+     *
      * @param possibleChoices collection of elements to show to the user
      * @param choice          type of info required by the controller to manage the current
      *                        state of the game
@@ -565,6 +567,7 @@ public class Controller implements Observer, Serializable {
      * Common method across RMI and Socket to send requests to client
      *
      * @param msg to the destination client
+     * @param user to notify
      */
     public void callView(ToClientMessage msg, String user) {
 
@@ -759,7 +762,7 @@ public class Controller implements Observer, Serializable {
     }
 
     /**
-     * @retur a collection of the characters present in the game
+     * @return a collection of the characters present in the game
      */
     public List<String> findCharactersInGame() {
         List<String> arrChars = new ArrayList<>();
@@ -799,6 +802,7 @@ public class Controller implements Observer, Serializable {
 
     /**
      * we can now build the field and the decks
+     * @param config of the map
      */
     private void createAssets(int config) {
         try {

@@ -27,10 +27,12 @@ public class GameField implements Serializable {
     /**
      * @param initWeapons an array of weapons ready to be grabbed, each weapon will be linked to its platform
      * @param skullsBoard the board that manages the killings
-     * @param scoreBoard  the board that manages the assignable points
      * @param field       where the 10, 11 or 12 platforms are located
      * @throws InvalidFieldException             if there is more than 1 platform equal to null or the matrix is not 3x4
      * @throws InvalidAdjacentPlatformsException if the adjacency list has more than 2 nulls
+     * @throws InvalidRoomException .
+     * @throws InvalidDeckException .
+     * @throws InvalidGenerationSpotException .
      */
     public GameField(Platform[][] field, WeaponCard[] initWeapons,
                      SkullsBoard skullsBoard) throws InvalidFieldException, InvalidRoomException,
@@ -182,6 +184,7 @@ public class GameField implements Serializable {
      * it creates the array list of rooms
      * firstly it creates the arraylists of platform having the same color,
      * then those arraylists will be added to rooms arraylist
+     * @throws InvalidRoomException .
      */
     private void buildRooms() throws InvalidRoomException {
         int numOfRooms;

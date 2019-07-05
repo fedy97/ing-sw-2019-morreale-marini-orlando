@@ -55,6 +55,7 @@ public class DecksManager implements Serializable {
      *
      * @param oldAmmoCard picked by the player on the platform
      * @throws NoCardException if previous operations were wrong
+     * @return ammo card
      */
     public AmmoCard getNewAmmoCard(AmmoCard oldAmmoCard) throws NoCardException {
         ammoDeck.add(oldAmmoCard);

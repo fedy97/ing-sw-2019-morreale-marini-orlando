@@ -66,7 +66,7 @@ public class WeaponCard extends Card {
     }
 
     /**
-     * @retun the paid cost of the weapon
+     * @return the paid cost of the weapon
      */
     public AmmoCube getPaidCost() {
         return paidCost;

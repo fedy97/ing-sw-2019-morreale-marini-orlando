@@ -207,6 +207,7 @@ public class PlayerManager implements Serializable {
      * @param weapon to be bought
      * @throws MaxWeaponException when the player has already three weapons, he can choose to discard one
      *                            or not buying the current one
+     * @throws InvalidGenerationSpotException .
      */
     public synchronized void buyWeapon(WeaponCard weapon) throws MaxWeaponException, InvalidGenerationSpotException {
         AmmoBox box = currentPlayer.getPlayerBoard().getAmmoBox();

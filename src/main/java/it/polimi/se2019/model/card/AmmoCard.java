@@ -19,6 +19,8 @@ public final class AmmoCard extends Card implements Serializable {
      *
      * @param cubes      the number of cubes the player can grab
      * @param hasPowerUp true if the player can draw a PowerUp card, false otherwise
+     * @param img of the ammo
+     * @throws InvalidCardException .
      */
     public AmmoCard(AmmoCube[] cubes, boolean hasPowerUp, String img) throws InvalidCardException {
         super(img);

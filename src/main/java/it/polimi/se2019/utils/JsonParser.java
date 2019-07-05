@@ -64,6 +64,7 @@ public class JsonParser {
     /**
      * @return a deck of 36 ammos
      * @throws InvalidCardException .
+     * @throws InvalidDeckException .
      */
     public Deck<AmmoCard> buildAmmoCards() throws InvalidCardException, InvalidDeckException {
         if (path.equals("/json/ammocards.json")) {
@@ -104,8 +105,10 @@ public class JsonParser {
      * @param numConfig there are 4 configurations of the field in json file
      * @param deck      of the ammocards, it has to be full
      * @return the matrix 3x4 of the platforms
-     * @throws NoCardException
-     * @throws InvalidCardException
+     * @throws NoCardException .
+     * @throws InvalidCardException .
+     * @throws NoSuchFieldException .
+     * @throws  IllegalAccessException .
      */
     public Platform[][] buildField(int numConfig, Deck<AmmoCard> deck) throws InvalidCardException,
             NoSuchFieldException, IllegalAccessException, NoCardException {
