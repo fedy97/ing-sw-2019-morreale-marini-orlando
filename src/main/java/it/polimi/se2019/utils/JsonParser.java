@@ -219,14 +219,14 @@ public class JsonParser {
                         extraCost[j] = AmmoCube.valueOf((String) jArrExtraCost.get(j));
                 } else extraCost = null;
                 if (Controller.getInstance().isWeaponsDebug()) {
-                    for (int j = 0; j < 21; j++)
+                    for (int j = 0; j < 20; j++)
                         createWeapon(name, description, pathImg, paidCost, extraCost, weaponCards);
                 } else
                     createWeapon(name, description, pathImg, paidCost, extraCost, weaponCards);
 
             }
 
-            Deck<WeaponCard> d = new Deck<>(21);
+            Deck<WeaponCard> d = new Deck<>(20);
             d.addCards(weaponCards);
             d.mix();
             return d;
