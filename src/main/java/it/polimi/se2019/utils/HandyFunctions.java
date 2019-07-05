@@ -3,8 +3,6 @@ package it.polimi.se2019.utils;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.view.server.VirtualView;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,10 +15,7 @@ public class HandyFunctions {
     public static final Logger LOGGER = Logger.getLogger(Class.class.getName());
     public static final JsonParser parserSettings = new JsonParser("settingsServer.json");
     public static final JsonParser parserClientSettings = new JsonParser("settingsClient.json");
-    private static final String WHITE = "WHITE";
-    private static final String HOVERED_BUTTON_STYLE = "-fx-border-color: #f7ff00; -fx-border-width: 4px; -fx-background-color: transparent; -fx-border-radius: 15;";
-    private static final String ENLIGHTED_BUTTON_STYLE = "-fx-border-color: #ff0000; -fx-border-width: 2px; -fx-background-color: transparent;-fx-border-radius: 15;";
-    private static final String DARKED_BUTTON_STYLE = "-fx-border-width: 0px; -fx-background-color: transparent;";
+
     private static Random random = new Random();
 
     private HandyFunctions() {
@@ -116,74 +111,6 @@ public class HandyFunctions {
         for (T el : list) {
             printConsole(el.toString());
         }
-    }
-
-    /**
-     * @param button to light
-     */
-    public static void enlightenToggleButton(ToggleButton button) {
-        button.setTextFill(javafx.scene.paint.Paint.valueOf(WHITE));
-        button.setSelected(false);
-        button.setStyle(ENLIGHTED_BUTTON_STYLE);
-        button.setOnMouseExited(e -> button.setStyle(ENLIGHTED_BUTTON_STYLE));
-        button.setDisable(false);
-        button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
-
-    }
-
-    /**
-     * @param button to light
-     */
-    public static void enlightenButton(Button button) {
-        button.setTextFill(javafx.scene.paint.Paint.valueOf(WHITE));
-        button.setStyle(ENLIGHTED_BUTTON_STYLE);
-        button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
-        button.setOnMouseExited(e -> button.setStyle(ENLIGHTED_BUTTON_STYLE));
-        button.setDisable(false);
-    }
-
-    /**
-     * @param button to force the light in choosing targets
-     */
-    public static void forceLightToggleButton(ToggleButton button) {
-        button.setTextFill(javafx.scene.paint.Paint.valueOf(WHITE));
-        button.setStyle(HOVERED_BUTTON_STYLE);
-        button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
-        button.setDisable(false);
-        button.setOnMouseExited(e -> button.setStyle(HOVERED_BUTTON_STYLE));
-
-    }
-
-    /**
-     * @param button to force the light in gameboard controller
-     */
-    public static void forceLightButton(Button button) {
-        button.setDisable(false);
-        button.setTextFill(javafx.scene.paint.Paint.valueOf(WHITE));
-        button.setStyle(HOVERED_BUTTON_STYLE);
-        button.setOnMouseExited(e -> button.setStyle(HOVERED_BUTTON_STYLE));
-        button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
-
-    }
-
-    /**
-     * @param button to dark
-     */
-    public static void darkenButton(Button button) {
-        button.setStyle(DARKED_BUTTON_STYLE);
-        button.setOnMouseEntered(e -> button.setStyle(DARKED_BUTTON_STYLE));
-        button.setOnMouseExited(e -> button.setStyle(DARKED_BUTTON_STYLE));
-        button.setDisable(true);
-    }
-
-    /**
-     * @param button to dark
-     */
-    public static void darkenToggleButton(ToggleButton button) {
-        button.setOnMouseEntered(e -> button.setStyle(DARKED_BUTTON_STYLE));
-        button.setOnMouseExited(e -> button.setStyle(DARKED_BUTTON_STYLE));
-        button.setStyle(DARKED_BUTTON_STYLE);
-        button.setDisable(true);
     }
 
 

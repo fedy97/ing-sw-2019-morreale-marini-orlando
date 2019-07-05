@@ -3,7 +3,6 @@ package it.polimi.se2019.view.client.gui;
 import it.polimi.se2019.model.rep.BoardRep;
 import it.polimi.se2019.model.rep.CardRep;
 import it.polimi.se2019.model.rep.LightGameVersion;
-import it.polimi.se2019.utils.HandyFunctions;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -339,10 +338,10 @@ public class PlayerBoardController {
         List<CardRep> myWeaponsReps = charWeapons.get(currPlayerDisplay);
         for (CardRep myWeapon : myWeaponsReps) {
             weaponsImages.get(myWeaponsReps.indexOf(myWeapon)).setImage(new Image(myWeapon.getPath()));
-            HandyFunctions.enlightenButton(infoWeaponsButtons.get(myWeaponsReps.indexOf(myWeapon)));
+            LoginController.enlightenButton(infoWeaponsButtons.get(myWeaponsReps.indexOf(myWeapon)));
         }
         for (int j = myWeaponsReps.size(); j < 3; j++)
-            HandyFunctions.darkenButton(infoWeaponsButtons.get(j));
+            LoginController.darkenButton(infoWeaponsButtons.get(j));
     }
 
     private void updatePlayerPowerUps() {
@@ -351,14 +350,14 @@ public class PlayerBoardController {
         if (myChar.equals(currPlayerDisplay)) {
             for (CardRep myPowerup : myPowerupsReps) {
                 powerupsImages.get(myPowerupsReps.indexOf(myPowerup)).setImage(new Image(myPowerup.getPath()));
-                HandyFunctions.enlightenButton(infoPowerupsButtons.get(myPowerupsReps.indexOf(myPowerup)));
+                LoginController.enlightenButton(infoPowerupsButtons.get(myPowerupsReps.indexOf(myPowerup)));
             }
         } else
             for (CardRep myPowerup : myPowerupsReps)
-                HandyFunctions.darkenButton(infoPowerupsButtons.get(myPowerupsReps.indexOf(myPowerup)));
+                LoginController.darkenButton(infoPowerupsButtons.get(myPowerupsReps.indexOf(myPowerup)));
 
         for (int j = myPowerupsReps.size(); j < 3; j++)
-            HandyFunctions.darkenButton(infoPowerupsButtons.get(j));
+            LoginController.darkenButton(infoPowerupsButtons.get(j));
     }
 
     private void setRightBoard() {

@@ -1,6 +1,5 @@
 package it.polimi.se2019.view.client.gui;
 
-import it.polimi.se2019.utils.HandyFunctions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
@@ -51,10 +50,10 @@ public class ChooseTargetsController {
 
     protected void enlightenRightTargets(List<String> targetsToEnlighten) {
         for (String target : targetsToEnlighten)
-            HandyFunctions.enlightenToggleButton(buttons.get(target));
+            LoginController.enlightenToggleButton(buttons.get(target));
         for (Map.Entry<String, ToggleButton> entry : buttons.entrySet()) {
             if (!targetsToEnlighten.contains(entry.getKey()))
-                HandyFunctions.darkenToggleButton(entry.getValue());
+                LoginController.darkenToggleButton(entry.getValue());
             targets.remove(entry.getKey());
         }
         checkFire();
@@ -67,10 +66,10 @@ public class ChooseTargetsController {
     public void chooseBanshee() {
         if (bansheebutton.isSelected()) {
             targets.add("BANSHEE");
-            HandyFunctions.forceLightToggleButton(bansheebutton);
+            LoginController.forceLightToggleButton(bansheebutton);
         } else {
             targets.remove("BANSHEE");
-            HandyFunctions.enlightenToggleButton(bansheebutton);
+            LoginController.enlightenToggleButton(bansheebutton);
         }
         checkFire();
     }
@@ -78,10 +77,10 @@ public class ChooseTargetsController {
     public void chooseSprog() {
         if (sprogbutton.isSelected()) {
             targets.add("SPROG");
-            HandyFunctions.forceLightToggleButton(sprogbutton);
+            LoginController.forceLightToggleButton(sprogbutton);
         } else {
             targets.remove("SPROG");
-            HandyFunctions.enlightenToggleButton(sprogbutton);
+            LoginController.enlightenToggleButton(sprogbutton);
         }
         checkFire();
     }
@@ -89,10 +88,10 @@ public class ChooseTargetsController {
     public void chooseDozer() {
         if (dozerbutton.isSelected()) {
             targets.add("DOZER");
-            HandyFunctions.forceLightToggleButton(dozerbutton);
+            LoginController.forceLightToggleButton(dozerbutton);
         } else {
             targets.remove("DOZER");
-            HandyFunctions.enlightenToggleButton(dozerbutton);
+            LoginController.enlightenToggleButton(dozerbutton);
         }
         checkFire();
     }
@@ -100,10 +99,10 @@ public class ChooseTargetsController {
     public void chooseDistructor() {
         if (distructorbutton.isSelected()) {
             targets.add("DISTRUCTOR");
-            HandyFunctions.forceLightToggleButton(distructorbutton);
+            LoginController.forceLightToggleButton(distructorbutton);
         } else {
             targets.remove("DISTRUCTOR");
-            HandyFunctions.enlightenToggleButton(distructorbutton);
+            LoginController.enlightenToggleButton(distructorbutton);
         }
         checkFire();
     }
@@ -111,19 +110,19 @@ public class ChooseTargetsController {
     public void chooseViolet() {
         if (violetbutton.isSelected()) {
             targets.add("VIOLET");
-            HandyFunctions.forceLightToggleButton(violetbutton);
+            LoginController.forceLightToggleButton(violetbutton);
         } else {
             targets.remove("VIOLET");
-            HandyFunctions.enlightenToggleButton(violetbutton);
+            LoginController.enlightenToggleButton(violetbutton);
         }
         checkFire();
     }
 
     private void checkFire() {
         if (!targets.isEmpty())
-            HandyFunctions.enlightenButton(firebutton);
+            LoginController.enlightenButton(firebutton);
         else
-            HandyFunctions.darkenButton(firebutton);
+            LoginController.darkenButton(firebutton);
     }
 
 }

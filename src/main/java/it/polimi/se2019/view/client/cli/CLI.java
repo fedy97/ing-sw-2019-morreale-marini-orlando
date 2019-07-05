@@ -908,7 +908,7 @@ public class CLI extends RemoteView {
                 updateAll(lightGameVersion);
             }
             catch (NullPointerException e) {
-                CustomLogger.logException(this.getClass().getName(), e);
+                CliPrinter.stamp("");
             }
         }
         if (seconds == 0 && isMyTurn()) {
