@@ -984,8 +984,10 @@ public class Controller implements Observer, Serializable {
      */
     void activateFrenzyMode() {
         for (Player player : game.getPlayers())
-            if (player.hasNoDamage())
+            if (player.hasNoDamage()) {
                 player.getPlayerBoard().setReverted(true);
+                player.resetDeaths();
+            }
         frenzyModeOn = true;
     }
 

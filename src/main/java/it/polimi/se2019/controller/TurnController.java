@@ -216,9 +216,10 @@ public class TurnController implements Serializable {
 
                 try {
                     if (!c.isFrenzyModeOn()) {
-                        if (player.wasOverkilled())
+                        if (player.wasOverkilled()) {
                             c.getGame().getGameField().getSkullsBoard().addKillMarks(player.getPlayerBoard().getDamageLine().get(10), 2);
-                        else
+                            c.getPlayerManager().getCurrentPlayer().getPlayerBoard().addRevengeMark(player.getCharacter(), 1);
+                        } else
                             c.getGame().getGameField().getSkullsBoard().addKillMarks(player.getPlayerBoard().getDamageLine().get(10), 1);
                     }
                 } catch (Exception e) {
