@@ -63,7 +63,7 @@ public class JsonParser {
 
     /**
      * @return a deck of 36 ammos
-     * @throws InvalidCardException
+     * @throws InvalidCardException .
      */
     public Deck<AmmoCard> buildAmmoCards() throws InvalidCardException, InvalidDeckException {
         if (path.equals("/json/ammocards.json")) {

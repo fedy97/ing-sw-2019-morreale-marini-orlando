@@ -337,7 +337,8 @@ public class PlayerBoardController {
         Map<String, List<CardRep>> charWeapons = lightGameVersion.getPlayerWeapons();
         List<CardRep> myWeaponsReps = charWeapons.get(currPlayerDisplay);
         for (CardRep myWeapon : myWeaponsReps) {
-            weaponsImages.get(myWeaponsReps.indexOf(myWeapon)).setImage(new Image(myWeapon.getPath()));
+            if (myWeapon.isLoaded())
+                weaponsImages.get(myWeaponsReps.indexOf(myWeapon)).setImage(new Image(myWeapon.getPath()));
             LoginController.enlightenButton(infoWeaponsButtons.get(myWeaponsReps.indexOf(myWeapon)));
         }
         for (int j = myWeaponsReps.size(); j < 3; j++)
