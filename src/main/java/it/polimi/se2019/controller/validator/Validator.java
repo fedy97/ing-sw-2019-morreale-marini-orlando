@@ -6,7 +6,7 @@ import it.polimi.se2019.exceptions.InvalidActionException;
 import it.polimi.se2019.exceptions.InvalidGenerationSpotException;
 import it.polimi.se2019.model.board.Platform;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
-import it.polimi.se2019.model.card.weapons.Effect;
+import it.polimi.se2019.model.card.weapons.effect.Effect;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.player.AmmoBox;
 import it.polimi.se2019.model.player.Player;

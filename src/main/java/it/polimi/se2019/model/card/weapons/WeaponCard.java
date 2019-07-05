@@ -5,6 +5,7 @@ import it.polimi.se2019.controller.PlayerManager;
 import it.polimi.se2019.exceptions.InvalidNameException;
 import it.polimi.se2019.model.Game;
 import it.polimi.se2019.model.card.Card;
+import it.polimi.se2019.model.card.weapons.effect.Effect;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 

@@ -107,6 +107,7 @@ public class TestController extends TestInitializer {
             c.processAction("action1");
             c.getChosenDestination().add(c.getGame().getGameField().getPlatforms().get(5));
             c.processAction("action2");
+            c.processAction("action3");
         } catch (Exception e) {
             fail();
         }

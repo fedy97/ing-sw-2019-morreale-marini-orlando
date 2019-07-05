@@ -34,7 +34,9 @@
             **/polimi/se2019/network/client/*.*,
             **/polimi/se2019/network/server/*.* ,
              **/polimi/se2019/network/message/toserver/*.*,
-             **/polimi/se2019/network/message/toclient/*.*
+             **/polimi/se2019/network/message/toclient/*.*,
+            **/polimi/se2019/MainClient.java,
+            **/polimi/se2019/Lobby.java
         </sonar.coverage.exclusions>
     </properties>
 

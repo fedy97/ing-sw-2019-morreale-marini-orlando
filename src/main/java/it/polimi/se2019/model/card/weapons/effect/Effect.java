@@ -1,6 +1,7 @@
-package it.polimi.se2019.model.card.weapons;
+package it.polimi.se2019.model.card.weapons.effect;
 
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 
@@ -22,6 +23,7 @@ public abstract class Effect implements Serializable {
     public Effect(AmmoCube[] cost) {
         this.cost = cost;
         lastEffectTargets = new ArrayList<>();
+        c = Controller.getInstance();
     }
 
     /**
@@ -62,4 +64,6 @@ public abstract class Effect implements Serializable {
     public List<Character> getLastEffectTargets() {
         return lastEffectTargets;
     }
+
+    protected Controller c;
 }

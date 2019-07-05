@@ -16,7 +16,7 @@ import it.polimi.se2019.model.card.AmmoCard;
 import it.polimi.se2019.model.card.Deck;
 import it.polimi.se2019.model.card.powerups.PowerUpCard;
 import it.polimi.se2019.model.card.powerups.TagbackGrenade;
-import it.polimi.se2019.model.card.weapons.Effect;
+import it.polimi.se2019.model.card.weapons.effect.Effect;
 import it.polimi.se2019.model.card.weapons.WeaponCard;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.model.player.Player;
