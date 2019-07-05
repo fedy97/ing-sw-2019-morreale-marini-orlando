@@ -1,0 +1,12 @@
+{
+  "settings": [
+    {
+      "skulls": 1,
+      "timerSetup": 10,
+      "timerTurn": 200,
+      "minPlayers": 2,
+      "socketServerPort": 1100,
+      "rmiServerPort": 1099
+    }
+  ]
+}

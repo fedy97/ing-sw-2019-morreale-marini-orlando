@@ -1,0 +1,8 @@
+{
+  "settings": [
+    {
+      "socketServerPort": 1100,
+      "rmiServerPort": 1099
+    }
+  ]
+}
