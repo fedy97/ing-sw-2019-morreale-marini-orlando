@@ -27,7 +27,7 @@ public class ScoreBoardController {
     /**
      * here I need the reference to GUI in order to notify it for the click of a button
      *
-     * @param gui
+     * @param gui .
      */
     protected void passGUI(GUI gui) {
         this.gui = gui;
@@ -47,7 +47,7 @@ public class ScoreBoardController {
 
     }
 
-    protected void showScores(Map<String, Integer> scores) {
+    void showScores(Map<String, Integer> scores) {
         int n = 0;
         for (Map.Entry<String, Integer> entry : scores.entrySet()) {
             labels.get(n).setVisible(true);

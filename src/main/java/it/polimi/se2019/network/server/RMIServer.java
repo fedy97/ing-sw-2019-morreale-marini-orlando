@@ -156,8 +156,6 @@ public class RMIServer implements Server {
     public void sendToClient(ToClientMessage msg, String username) {
         try {
             skeletons.get(username).interpretMessage(msg);
-        } catch (ConnectException ex) {
-            CustomLogger.logInfo(this.getClass().getName(),"rmi client disconnected");
         } catch (Exception e) {
             CustomLogger.logException(this.getClass().getName(), e);
         }
