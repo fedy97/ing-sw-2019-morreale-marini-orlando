@@ -355,7 +355,7 @@ public class Controller implements Observer, Serializable {
      * Used to perform grab action
      *
      * @throws InvalidActionException .
-     * @throws InterruptedException .
+     * @throws InterruptedException   .
      */
     private void grabRoutine() throws InvalidActionException, InterruptedException {
         setState(ControllerState.PROCESSING_ACTION_2);
@@ -548,12 +548,6 @@ public class Controller implements Observer, Serializable {
                 break;
             case TARGETS:
                 msg = new ShowPossibleTargetsMessage(lightVersion);
-                break;
-            case "discard":
-                msg = new AskForCubeMessage(lightVersion);
-                break;
-            case "cube":
-                msg = new AskForCubeMessage(lightVersion);
                 break;
             case RECHARGE:
                 msg = new ShowReloadableWeaponsMessage(lightVersion);
