@@ -7,6 +7,7 @@ import it.polimi.se2019.model.enumeration.AmmoCube;
 import it.polimi.se2019.model.enumeration.Character;
 import it.polimi.se2019.network.message.toclient.SendBinaryOption;
 import it.polimi.se2019.utils.CustomLogger;
+import it.polimi.se2019.view.server.VirtualView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -102,6 +103,10 @@ public class TestController extends TestInitializer {
                 }
             });
             c.setState(ControllerState.IDLE);
+            c.getChosenDestination().add(c.getGame().getGameField().getPlatforms().get(2));
+            c.processAction("action1");
+            c.getChosenDestination().add(c.getGame().getGameField().getPlatforms().get(5));
+            c.processAction("action2");
         } catch (Exception e) {
             fail();
         }
@@ -172,13 +177,13 @@ public class TestController extends TestInitializer {
      */
     @Test
     public void testProcessWeapon() {
-        /*try {
+        try {
             c.getChosenEffect().add(1);
             c.getChosenDestination().add(c.getGame().getGameField().getPlatforms().get(6));
             c.processWeaponCard(new PlasmaGun("el", "desc", "img", AmmoCube.BLUE, new AmmoCube[]{}));
         } catch (Exception e) {
             fail();
-        }*/
+        }
     }
 
     @Test
@@ -198,6 +203,18 @@ public class TestController extends TestInitializer {
             c.startPinging();
             Thread.sleep(5000);
             c.setGameIsActive(false);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testUpdate() {
+        try {
+            c.setState(ControllerState.SETUP);
+            c.update(null, "we are at least 2");
+            c.update(null, "we are 5");
+            c.setState(ControllerState.IDLE);
         } catch (Exception e) {
             fail();
         }
