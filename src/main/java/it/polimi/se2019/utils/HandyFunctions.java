@@ -18,9 +18,6 @@ public class HandyFunctions {
 
     private static Random random = new Random();
 
-    private HandyFunctions() {
-    }
-
     public static void printConsole(String message) {
         System.out.print(message);
     }

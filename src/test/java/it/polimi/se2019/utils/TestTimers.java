@@ -27,6 +27,7 @@ public class TestTimers {
     @Test
     public void testTurnTimer(){
         TimerTurn timerTurn = new TimerTurn(5,null,"BANSHEE");
+        timerTurn.setSeconds(10);
         try {
             timerTurn.start();
         } catch (Exception e){
