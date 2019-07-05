@@ -35,8 +35,7 @@ public class TestInitializer {
         try {
             c.setCharacterChosen("user1", "DISTRUCTOR");
             c.setCharacterChosen("user2", "VIOLET");
-            c.setCharacterChosen("user3", "BANSHEE");
-        } catch (InvalidCharacterException ex) {
+          } catch (InvalidCharacterException ex) {
             CustomLogger.logException(this.getClass().getName(),ex);
         }
 
