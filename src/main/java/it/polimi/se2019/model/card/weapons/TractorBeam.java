@@ -32,7 +32,7 @@ public final class TractorBeam extends WeaponAlternativeFire {
 
                 destinations.removeAll(notVisible);
 
-                c.sendMessage("Where do you want to move you target?", playerManager.getCurrentPlayer().getName());
+                c.sendMessage("Where do you want to move your target?", playerManager.getCurrentPlayer().getName());
                 c.askFor(destinations, "position");
 
                 try {
@@ -46,9 +46,6 @@ public final class TractorBeam extends WeaponAlternativeFire {
                 damages.put(target, 1);
 
                 playerManager.addDamage(damages);
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override
@@ -68,10 +65,6 @@ public final class TractorBeam extends WeaponAlternativeFire {
 
                 damages.put(target, 3);
                 playerManager.addDamage(damages);
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
             @Override

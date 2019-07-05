@@ -32,9 +32,6 @@ public final class ZX2 extends WeaponAlternativeFire {
                 damages.put(target, 11);
                 playerManager.addDamage(damages);
                 playerManager.mark(target, 2);
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override
@@ -49,8 +46,6 @@ public final class ZX2 extends WeaponAlternativeFire {
                 for (Character character : chosenTargets) {
                     playerManager.mark(game.getPlayer(character), 1);
                 }
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override

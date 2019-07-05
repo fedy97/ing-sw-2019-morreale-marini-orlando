@@ -37,8 +37,6 @@ public final class Shockwave extends WeaponAlternativeFire {
                 } else {
                     c.sendMessage("You selection was wrong, two or more targets are on the same platform!", playerManager.getCurrentPlayer().getName());
                 }
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override
@@ -70,9 +68,6 @@ public final class Shockwave extends WeaponAlternativeFire {
                 }
 
                 playerManager.addDamage(damages);
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override

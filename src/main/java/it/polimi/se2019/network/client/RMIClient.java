@@ -136,7 +136,7 @@ public class RMIClient implements Client, Observer {
      * @return the local ip address
      */
     private String getLocalIp() {
-        String rightIp = "127.0.0.1";
+        String rightIp = "";
 
         try {
             Enumeration<NetworkInterface> n = NetworkInterface.getNetworkInterfaces();

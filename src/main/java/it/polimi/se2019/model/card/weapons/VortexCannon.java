@@ -60,8 +60,6 @@ public final class VortexCannon extends WeaponOneAddingEffect {
                 }
                 //setting targets for the adding effect
                 getEffects().get(1).getLastEffectTargets().addAll(targets);
-
-                usableEffects[0] = false;
                 usableEffects[1] = true;
             }
 
@@ -82,10 +80,6 @@ public final class VortexCannon extends WeaponOneAddingEffect {
                     damage.put(game.getPlayer(target), 1);
                 }
                 playerManager.addDamage(damage);
-
-
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
-                usableEffects[1] = false;
             }
 
             @Override

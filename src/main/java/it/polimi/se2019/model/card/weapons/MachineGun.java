@@ -26,7 +26,6 @@ public final class MachineGun extends WeaponTwoAddingEffect {
                     damages.put(game.getPlayer(character), 1);
                 playerManager.addDamage(damages);
 
-                usableEffects[0] = false;
                 usableEffects[1] = true;
                 usableEffects[2] = true;
                 //setting targets for the next additional effect
@@ -49,7 +48,6 @@ public final class MachineGun extends WeaponTwoAddingEffect {
                 damages.put(game.getPlayer(targets.get(0)), 1);
                 playerManager.addDamage(damages);
 
-                usableEffects[1] = false;
                 playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
 
                 //setting targets for the next additional effect
@@ -71,9 +69,6 @@ public final class MachineGun extends WeaponTwoAddingEffect {
                 Map<Player, Integer> damages = new HashMap<>();
                 damages.put(game.getPlayer(targets.get(0)), 1);
                 playerManager.addDamage(damages);
-
-                usableEffects[2] = false;
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
             @Override

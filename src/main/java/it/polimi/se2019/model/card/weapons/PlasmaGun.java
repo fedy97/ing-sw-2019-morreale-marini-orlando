@@ -27,7 +27,6 @@ public final class PlasmaGun extends WeaponTwoAddingEffect {
 
                 damages.put(game.getPlayer(chosenTargets.get(0)), 2);
                 playerManager.addDamage(damages);
-                usableEffects[0] = false;
                 usableEffects[2] = true;
 
                 //setting targets for the next additional effect
@@ -54,8 +53,6 @@ public final class PlasmaGun extends WeaponTwoAddingEffect {
                 } catch (Exception e) {
                     CustomLogger.logException(getClass().getName(), e);
                 }
-
-                usableEffects[1] = false;
             }
 
             @Override
@@ -72,9 +69,6 @@ public final class PlasmaGun extends WeaponTwoAddingEffect {
                 //Deal 1 additional damage to your target
                 damages.put(game.getPlayer(getLastEffectTargets().get(0)), 1);
                 playerManager.addDamage(damages);
-                usableEffects[2] = false;
-
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
             @Override

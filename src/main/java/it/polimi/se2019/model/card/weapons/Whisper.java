@@ -24,8 +24,6 @@ public final class Whisper extends WeaponCard {
                 damages.put(game.getPlayer(chosenTargets.get(0)), 3);
                 playerManager.addDamage(damages);
                 playerManager.mark(game.getPlayer(chosenTargets.get(0)), 1);
-
-                usableEffects[0] = false;
             }
 
             @Override

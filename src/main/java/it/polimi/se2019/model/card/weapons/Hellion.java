@@ -29,9 +29,6 @@ public final class Hellion extends WeaponAlternativeFire {
                 for (Character character : target.getCurrentPlatform().getPlayersOnThePlatform()) {
                     playerManager.mark(game.getPlayer(character), 1);
                 }
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override
@@ -54,10 +51,6 @@ public final class Hellion extends WeaponAlternativeFire {
                 for (Character character : target.getCurrentPlatform().getPlayersOnThePlatform()) {
                     playerManager.mark(game.getPlayer(character), 2);
                 }
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
             @Override

@@ -32,9 +32,6 @@ public final class PowerGlove extends WeaponAlternativeFire {
 
                 playerManager.getCurrentPlayer().setCurrentPlatform(target.getCurrentPlatform());
                 game.notifyChanges();
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override
@@ -83,9 +80,6 @@ public final class PowerGlove extends WeaponAlternativeFire {
                         CustomLogger.logException(this.getClass().getName(), e);
                     }
                 }
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override

@@ -24,14 +24,14 @@ public class Frenzy1Validator extends Validator {
      */
     @Override
     public List<Platform> getValidMoves(Action c) {
-        List<Platform> res = null;
         GameField gameField = father.getGame().getGameField();
         Player currentPlayer = father.getPlayerManager().getCurrentPlayer();
+        List<Platform> res = null;
 
-        if (c == Action.SHOOT)
-            res = gameField.getAvailablePlatforms(currentPlayer.getCurrentPlatform(), 1);
         if (c == Action.MOVE)
             res = gameField.getAvailablePlatforms(currentPlayer.getCurrentPlatform(), 4);
+        if (c == Action.SHOOT)
+            res = gameField.getAvailablePlatforms(currentPlayer.getCurrentPlatform(), 1);
         if (c == Action.GRAB)
             res = gameField.getAvailablePlatforms(currentPlayer.getCurrentPlatform(), 2);
 

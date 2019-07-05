@@ -22,8 +22,6 @@ public final class HeatSeeker extends WeaponCard {
                 Map<Player, Integer> damages = new HashMap<>();
                 damages.put(game.getPlayer(chosenTargets.get(0)), 3);
                 playerManager.addDamage(damages);
-
-                usableEffects[0] = false;
             }
 
             @Override

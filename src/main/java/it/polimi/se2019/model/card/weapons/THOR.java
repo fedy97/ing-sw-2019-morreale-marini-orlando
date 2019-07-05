@@ -25,7 +25,6 @@ public final class THOR extends WeaponTwoAddingEffect {
                 damages.put(game.getPlayer(chosenTargets.get(0)), 2);
                 playerManager.addDamage(damages);
 
-                usableEffects[0] = false;
                 usableEffects[1] = true;
 
                 //setting targets for the next additional effect
@@ -48,9 +47,8 @@ public final class THOR extends WeaponTwoAddingEffect {
                 //Deal 1 damage to a second target that your first target can see
                 damages.put(game.getPlayer(targets.get(0)), 1);
                 playerManager.addDamage(damages);
+                usableEffects[2] = true;
 
-                usableEffects[1] = false;
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
                 getEffects().get(2).getLastEffectTargets().add(targets.get(0));
             }
 
@@ -69,9 +67,6 @@ public final class THOR extends WeaponTwoAddingEffect {
                 Map<Player, Integer> damages = new HashMap<>();
                 damages.put(game.getPlayer(targets.get(0)), 2);
                 playerManager.addDamage(damages);
-
-                usableEffects[2] = false;
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
             @Override

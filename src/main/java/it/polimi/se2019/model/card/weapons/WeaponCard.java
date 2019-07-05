@@ -119,6 +119,8 @@ public class WeaponCard extends Card {
      */
     public void activateEffect(int index, List<Character> targets) {
         effects.get(index).activateEffect(targets, this);
+        usableEffects[index] = false;
+        playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(effects.get(index).getCost());
     }
 
     /**

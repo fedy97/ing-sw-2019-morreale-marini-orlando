@@ -41,8 +41,6 @@ public final class GrenadeLauncher extends WeaponOneAddingEffect {
                 } catch (Exception e) {
                     CustomLogger.logException(this.getClass().getName(), e);
                 }
-
-                usableEffects[0] = false;
             }
 
             @Override
@@ -72,9 +70,6 @@ public final class GrenadeLauncher extends WeaponOneAddingEffect {
                 }
 
                 playerManager.addDamage(damages);
-
-                usableEffects[1] = false;
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
             @Override

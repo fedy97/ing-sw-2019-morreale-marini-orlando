@@ -26,7 +26,6 @@ public final class Cyberblade extends WeaponTwoAddingEffect {
                 //"Deal 2 damage to 1 target on your square"
                 damages.put(game.getPlayer(chosenTargets.get(0)), 2);
                 playerManager.addDamage(damages);
-                usableEffects[0] = false;
                 usableEffects[2] = true;
 
                 //setting targets for the next additional effect
@@ -57,8 +56,6 @@ public final class Cyberblade extends WeaponTwoAddingEffect {
                 } catch (Exception e) {
                     CustomLogger.logException(getClass().getName(), e);
                 }
-
-                usableEffects[1] = false;
             }
 
             @Override
@@ -75,9 +72,6 @@ public final class Cyberblade extends WeaponTwoAddingEffect {
                 //"Deal 2 damage to a different target on your square"
                 damages.put(game.getPlayer(targets.get(0)), 2);
                 playerManager.addDamage(damages);
-                usableEffects[2] = false;
-
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
             @Override

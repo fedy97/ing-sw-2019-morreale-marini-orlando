@@ -44,7 +44,6 @@ public final class RocketLauncher extends WeaponTwoAddingEffect {
                 } catch (Exception e) {
                     CustomLogger.logException(this.getClass().getName(), e);
                 }
-                usableEffects[0] = false;
                 usableEffects[2] = true;
 
                 //setting targets for the next additional effect
@@ -73,9 +72,6 @@ public final class RocketLauncher extends WeaponTwoAddingEffect {
                 } catch (Exception e) {
                     CustomLogger.logException(getClass().getName(), e);
                 }
-
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
-                usableEffects[1] = false;
             }
 
             @Override
@@ -93,9 +89,6 @@ public final class RocketLauncher extends WeaponTwoAddingEffect {
                 for (Character target : this.getLastEffectTargets())
                     damages.put(game.getPlayer(target), 1);
                 playerManager.addDamage(damages);
-
-                usableEffects[2] = false;
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
             @Override

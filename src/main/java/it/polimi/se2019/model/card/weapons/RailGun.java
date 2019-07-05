@@ -26,9 +26,6 @@ public final class RailGun extends WeaponAlternativeFire {
                 damages.put(target, 3);
                 playerManager.addDamage(damages);
                 game.notifyChanges();
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override
@@ -58,9 +55,6 @@ public final class RailGun extends WeaponAlternativeFire {
                     damages.put(game.getPlayer(character), 2);
                 playerManager.addDamage(damages);
                 game.notifyChanges();
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override

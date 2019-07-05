@@ -46,9 +46,6 @@ public final class Furnace extends WeaponAlternativeFire {
                 }
 
                 playerManager.addDamage(damages);
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override
@@ -80,9 +77,6 @@ public final class Furnace extends WeaponAlternativeFire {
                 }
 
                 playerManager.addDamage(damages);
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override

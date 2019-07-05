@@ -180,4 +180,26 @@ public class TestController extends TestInitializer {
             fail();
         }*/
     }
+
+    @Test
+    public void testStartWaitingLobbyPing() {
+        try {
+            c.startWaitingLobbyPing();
+            Thread.sleep(5000);
+            c.setWaitingToPing(false);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testStartPing() {
+        try {
+            c.startPinging();
+            Thread.sleep(5000);
+            c.setGameIsActive(false);
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }

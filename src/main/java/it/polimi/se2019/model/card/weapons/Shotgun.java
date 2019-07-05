@@ -41,9 +41,6 @@ public final class Shotgun extends WeaponAlternativeFire {
                 } catch (Exception e) {
                     CustomLogger.logException(this.getClass().getName(), e);
                 }
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override
@@ -62,9 +59,6 @@ public final class Shotgun extends WeaponAlternativeFire {
 
                 damages.put(game.getPlayer(targets.get(0)), 2);
                 playerManager.addDamage(damages);
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override

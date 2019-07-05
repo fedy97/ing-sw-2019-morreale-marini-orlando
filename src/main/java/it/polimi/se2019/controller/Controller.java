@@ -1028,4 +1028,12 @@ public class Controller implements Observer, Serializable {
     public boolean isWeaponsDebug() {
         return weaponsDebug;
     }
+
+    public void setWaitingToPing(boolean waitingToPing) {
+        this.waitingToPing = waitingToPing;
+    }
+
+    public void setGameIsActive(boolean gameIsActive) {
+        this.gameIsActive = gameIsActive;
+    }
 }

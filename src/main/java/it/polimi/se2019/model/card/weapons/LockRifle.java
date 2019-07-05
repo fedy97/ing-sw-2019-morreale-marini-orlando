@@ -25,7 +25,6 @@ public final class LockRifle extends WeaponOneAddingEffect {
                 playerManager.addDamage(damages);
                 playerManager.mark(game.getPlayer(chosenTarget), 1);
 
-                usableEffects[0] = false;
                 usableEffects[1] = true;
                 getEffects().get(1).getLastEffectTargets().add(chosenTarget);
             }
@@ -40,9 +39,6 @@ public final class LockRifle extends WeaponOneAddingEffect {
             @Override
             public void activateEffect(List<Character> targets, WeaponCard card) {
                 playerManager.mark(game.getPlayer(targets.get(0)), 1);
-
-                usableEffects[1] = false;
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
             @Override

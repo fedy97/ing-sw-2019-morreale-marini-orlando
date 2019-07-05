@@ -26,9 +26,6 @@ public final class Electroscythe extends WeaponAlternativeFire {
                 for (Character character : targets)
                     damages.put(game.getPlayer(character), 1);
                 playerManager.addDamage(damages);
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
             }
 
             @Override
@@ -47,10 +44,6 @@ public final class Electroscythe extends WeaponAlternativeFire {
                 for (Character character : targets)
                     damages.put(game.getPlayer(character), 2);
                 playerManager.addDamage(damages);
-
-                usableEffects[0] = false;
-                usableEffects[1] = false;
-                playerManager.getCurrentPlayer().getPlayerBoard().getAmmoBox().removeAmmos(this.getCost());
             }
 
             @Override
