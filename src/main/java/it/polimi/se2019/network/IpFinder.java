@@ -33,8 +33,6 @@ public final class IpFinder {
         } catch (Exception e) {
             CustomLogger.logException(IpFinder.class.getName(), e);
         }
-
-        System.out.println("Right ip: "+ rightIp);
         return rightIp;
     }
 }
