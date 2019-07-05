@@ -1128,7 +1128,7 @@ public class CLI extends RemoteView {
         CliPrinter.stamp("CLASSIFICA: ", CliColor.TEXTGREEN);
         CliPrinter.stamp("\n");
         for (Map.Entry<String, Integer> s: scoreboard.entrySet()) {
-            CliPrinter.stamp(s + ": " + scoreboard.get(s.getKey()) + "\n");
+            CliPrinter.stamp(s.getValue() + ": " + scoreboard.get(s.getKey()) + "\n");
         }
         System.exit(0);
     }
