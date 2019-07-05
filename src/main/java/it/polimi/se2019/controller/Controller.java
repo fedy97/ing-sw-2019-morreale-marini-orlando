@@ -325,12 +325,6 @@ public class Controller implements Observer, Serializable {
             } else if (action.equals(GRAB)) {
                 grabRoutine();
             } else if (action.equals(SHOOT)) {
-
-                if (validator.getUsableWeapons().isEmpty()) {
-                    sendMessage("***** You have no usable weapons actually! ***", playerManager.getCurrentPlayer().getName());
-                    return;
-                }
-
                 setState(ControllerState.PROCESSING_ACTION_3);
 
                 try {
@@ -339,6 +333,11 @@ public class Controller implements Observer, Serializable {
                     getPlayerManager().move(getChosenDestination().take());
                 } catch (InvalidActionException e) {
                     CustomLogger.logInfo(this.getClass().getName(), "You cannot move before shooting!");
+                }
+
+                if (validator.getUsableWeapons().isEmpty()) {
+                    sendMessage("***** You have no usable weapons actually! ***", playerManager.getCurrentPlayer().getName());
+                    return;
                 }
 
                 askFor(getValidator().getUsableWeapons(), WEAPONS);
