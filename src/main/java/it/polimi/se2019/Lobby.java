@@ -33,7 +33,7 @@ public class Lobby {
         } else {
             rmiServer.start();
             socketServer.start();
-            controller.startWaitingLobbyPing();
+            //controller.startWaitingLobbyPing();
         }
     }
 
@@ -48,7 +48,7 @@ public class Lobby {
             Controller instance = (Controller) oi.readObject();
             if (!instance.isGameIsActive()) {
                 HandyFunctions.LOGGER.log(Level.INFO, "the game has ended! restarting...");
-                controller.startWaitingLobbyPing();
+                //controller.startWaitingLobbyPing();
                 return;
             }
             Game gameInstance = (Game) oi.readObject();
