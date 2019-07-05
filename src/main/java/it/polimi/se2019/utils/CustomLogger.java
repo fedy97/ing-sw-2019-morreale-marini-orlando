@@ -23,6 +23,5 @@ public final class CustomLogger {
         String msg = "Exception has occured in " + className + ". Message is :" + e.getMessage();
         Logger logger = Logger.getLogger(className);
         logger.log(Level.WARNING, msg);
-        e.printStackTrace();
     }
 }

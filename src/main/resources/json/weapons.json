@@ -67,12 +67,6 @@
       "extraCost": ["YELLOW"]
     },
     {
-      "name": "lanciafiamme",
-      "description": "modalità base: Scegli un quadrato distante 1 movimento e\npossibilmente un secondo quadrato distante ancora 1 movimento nella\nstessa direzione. In ogni quadrato puoi scegliere 1 bersaglio e dargli\n1 danno. \nmodalità barbecue: Scegli 2 quadrati come prima. Dai 2 danni\na chiunque sia nel primo quadrato e 1 danno a chiunque si trovi nel\nsecondo quadrato.\nNota: Quest'arma non può danneggiare nessuno nel tuo quadrato.\nTuttavia può a volte danneggiare un bersaglio che non vedi, le fiamme\nnon passano attraverso i muri ma passano attraverso le porte.\nImmaginatelo come una esplosione di fuoco in linea retta che si muove\ndi 2 quadrati in una direzione cardinale.",
-      "paidCost": "RED",
-      "extraCost": [""]
-    },
-    {
       "name": "zx-2",
       "description": "modalità base: Dai 1 danno e 2 marchi\na 1 bersaglio che puoi vedere.\nmodalità scanner: Scegli fino a 3 bersagli\nche puoi vedere e dai 1 marchio a ciascuno.\nNota: Ricorda che i 3 bersagli possono anche\nessere in 3 stanze diverse.",
       "paidCost": "YELLOW",
