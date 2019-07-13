@@ -2,6 +2,8 @@
 
 ***Morreale Marini Orlando***
 
+Score: 30L
+
 Instructions:
 
 Server:
