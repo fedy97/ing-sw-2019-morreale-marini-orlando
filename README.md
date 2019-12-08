@@ -2,17 +2,16 @@
 
 ***Morreale Marini Orlando***
 
-Score: 30L
 
-Instructions:
+##Instructions:
 
 Server:
 	
-		java -jar Server.jar
+		'java -jar Server.jar'
 
 Client:
 	
-		java -jar Client.jar
+		'java -jar Client.jar'
 
 
 NOTE: settingsClient.json/settingsServer.json must be in the same folder as the Client/Server jars
