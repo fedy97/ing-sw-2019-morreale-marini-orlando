@@ -2,19 +2,18 @@
 
 ***Morreale Marini Orlando***
 
+# Instructions:
 
-##Instructions:
+## Server:
 
-Server:
+		java -jar Server.jar
+
+## Client:
 	
-		'java -jar Server.jar'
-
-Client:
-	
-		'java -jar Client.jar'
+		java -jar Client.jar
 
 
-NOTE: settingsClient.json/settingsServer.json must be in the same folder as the Client/Server jars
+### NOTE: settingsClient.json/settingsServer.json must be in the same folder as the Client/Server jars
 
 features:
 
